@@ -7,7 +7,7 @@ from PyQt6.QtCore import QObject, QEvent
 from PyQt6.QtWidgets import (QMessageBox, QLineEdit, QTextEdit,
                              QPlainTextEdit, QWidget)
 
-class Base_controler(QObject):
+class BaseController(QObject):
     """ Controlador base """
     def __init__(self):
         """ Constructor de clase """

@@ -5,15 +5,15 @@ Controlador de la entidad tipo de filtro
 # Importaciones
 from PyQt6.QtWidgets import QWidget
 
-from Controllers.base_controller import Base_controler
-from Views.tipo_filtro_view import Tipo_filtro_view
+from Controllers.base_controller import BaseController
+from Views.tipofiltroview import TipoFiltroView
 
-class Tipo_filtro_controller(Base_controler):
+class Tipo_filtro_controller(BaseController):
     """ Controlador de la entidad tipo de filtro """
     def __init__(self):
         """ Constructor base """
         super().__init__() # Llamamos al constructor base
-        self.view = Tipo_filtro_view("TIPOS DE FILTRO") # Inicializamos la
+        self.view = TipoFiltroView("TIPOS DE FILTRO") # Inicializamos la
                                                         # vista
         self.Init_handlers()
 

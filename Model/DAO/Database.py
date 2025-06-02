@@ -6,7 +6,7 @@ import sqlite3
 from pathlib import Path
 
 class DatabaseManager():
-    """Singleton para manejar la base de datos"""
+    """ Singleton para manejar la conexión a la base de datos """
     _instance = None
 
     def __new__(cls):
@@ -25,7 +25,8 @@ class DatabaseManager():
         """Inicializa la instancia de la base de datos"""
         
         try:
-            file = Path(__file__).parent.parent / "MisAcuarios" / "MISACUARIOS.sqlite3"
+            file = (Path(__file__).parent.parent / "MisAcuarios" /
+                    "MISACUARIOS.sqlite3")
             if not Path.exists(file):
                 print("EL ARCHIVO NO EXISTE")
                 return None

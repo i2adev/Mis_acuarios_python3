@@ -14,7 +14,7 @@ from PyQt6.QtCore import Qt
 
 import Resources.image_rc
 
-class Tipo_filtro_view(QWidget):
+class TipoFiltroView(QWidget):
     """ Formulario de tipo de filtro """
 
     def __init__(self, w_title: str):
@@ -464,7 +464,7 @@ class Tipo_filtro_view(QWidget):
 if __name__ == "__main__":
     app = QApplication(sys.argv)
 
-    ventana = Tipo_filtro_view("TIPOS DE FILTRO")
+    ventana = TipoFiltroView("TIPOS DE FILTRO")
 
     # Cargar el archivo .qss
     with open("../Resources/Styles/main_style.qss", "r",
