@@ -1,0 +1,48 @@
+﻿/* Estilo de la ventana */
+QWidget {
+    background-color: black;
+	color: white;
+	font-family: "Roboto";
+    font-size: 12pt;
+}
+
+/* Estilo de los frames */
+QFrame {
+    background-color: #232323;
+    border: 0px solid gray;
+    border-radius: 8px;
+}
+
+/* Estilo de los cuadros de texto */
+QLineEdit, QTextEdit, QPlainTextEdit {
+    border: none;
+	background-color: transparent;
+    border-bottom: 1px solid #f5f5f5;
+    padding: 2px;
+}
+
+QLineEdit:focus, QTextEdit:focus, QPlainTextEdit:focus {
+    border-bottom: 1px solid #607dfc;
+}
+
+#edit_id{
+	border: none;
+	background-color: transparent;
+	padding: 2px;
+}
+
+/* Estilo de los botones */
+QPushButton {
+	 /* border: none; */
+	 background-color: #232323;
+}
+
+#button_tb_minimize, #button_bt_restore, #button_bt_maximize, #button_bt_close {
+    background-color: transparent;
+}
+
+/* Estilo de las etiquetas */
+QLabel {
+    font-weight: bold;
+	background-color: transparent;
+}
