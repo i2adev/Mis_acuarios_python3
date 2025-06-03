@@ -5,8 +5,8 @@ Controlador de la entidad tipo de filtro
 # Importaciones
 from PyQt6.QtWidgets import QWidget
 
-from Controllers.BaseController import BaseController
-from Views.TipoFiltroView import TipoFiltroView
+from Controllers.base_controller import BaseController
+from Views.tipo_filtro_view import TipoFiltroView
 
 class TipoFiltroController(BaseController):
     """ Controlador de la entidad tipo de filtro """

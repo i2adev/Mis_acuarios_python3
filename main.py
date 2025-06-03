@@ -4,7 +4,7 @@ Punto de entrada de la aplicación
 # Importaciones
 import sys
 from PyQt6.QtWidgets import QApplication
-from Controllers.TipoFiltroController import TipoFiltroController
+from Controllers.tipo_filtro_controller import TipoFiltroController
 
 # Entrada al programa
 def main():

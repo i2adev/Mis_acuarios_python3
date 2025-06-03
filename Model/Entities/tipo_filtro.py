@@ -2,7 +2,7 @@
 Entidad del tipo de fiultro
 '''
 from pathlib import Path
-from BaseEntity import BaseEntity
+from base_entity import BaseEntity
 
 class TipoFiltro(BaseEntity):
     '''Entidad del tipo de filtro'''
