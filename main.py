@@ -1,5 +1,10 @@
 """
-Punto de entrada de la aplicación
+Autor:      Inigo Iturriagaetxebarria
+Fecha:      02/06/2025
+Commentarios:
+    Fichero que contiene el método main(), que es la entrada al
+    programa. Este método da estilo a la aplicación y abre la ventana
+    principal.
 """
 # Importaciones
 import sys

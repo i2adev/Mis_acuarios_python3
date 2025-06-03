@@ -1,16 +1,20 @@
 """
-Modulo que contiene la clase 'DatabaseManager'.
+Autor:      Inigo Iturriagaetxebarria
+Fecha:      02/06/2025
+Commentarios:
+    Módulo que contien la clase que gestiona las connexiones a la base
+    de datos.
 """
 # Importaciones
 import sqlite3
 from pathlib import Path
 
-class DatabaseManager():
-    """ Singleton para manejar la conexión a la base de datos """
+class DatabaseManager:
+    """ Clase para gestionar la conexión a la base de datos. """
     _instance = None
 
     def __new__(cls):
-        """Crea una instancia de la base de datos"""
+        """ Crea una instancia de la base de datos. """
 
         # Si la instancia de la base de datos no esta inicializada...
         if cls._instance is None:
@@ -22,7 +26,7 @@ class DatabaseManager():
         return cls._instance
     
     def _initialize_db(self):
-        """Inicializa la instancia de la base de datos"""
+        """ Inicializa la instancia de la base de datos. """
         
         try:
             file = (Path(__file__).parent.parent / "MisAcuarios" /

@@ -1,5 +1,8 @@
 ﻿"""
-Formulario de tipo de filtro
+Autor:      Inigo Iturriagaetxebarria
+Fecha:      02/06/2025
+Commentarios:
+    Módulo que contien la vista de la entidad TIPO DE FILTRO.
 """
 
 # Importaciones
@@ -362,8 +365,7 @@ class TipoFiltroView(QWidget):
     def create_widgets(self):
         """ Crea los elementos del formulario"""
 
-
-        self.layout_main = QVBoxLayout() # Layout
+        self.layout_main = QVBoxLayout() # Layout principal
 
         # Controles de la barra de titulo
         self.frame_title_bar = QFrame()
