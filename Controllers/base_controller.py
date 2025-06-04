@@ -8,16 +8,19 @@ Commentarios:
 """
 
 # Importaciones
-from PyQt6.QtCore import QObject, QEvent
+from PyQt6.QtCore import Qt, QObject, QEvent
 from PyQt6.QtWidgets import (QMessageBox, QLineEdit, QTextEdit,
                              QPlainTextEdit, QWidget)
 
+from Views.base_view import BaseView
+
 class BaseController(QObject):
     """ Controlador base de la que hereda el resto de controladores. """
-    def __init__(self):
+    def __init__(self, view: QWidget):
         """ Constructor de clase """
         super().__init__()
-        self.text_widgets = (QLineEdit, QTextEdit, QPlainTextEdit)
+        self._view = view
+        self._text_widgets = (QLineEdit, QTextEdit, QPlainTextEdit)
 
     """
     ********************************************************************
@@ -34,24 +37,44 @@ class BaseController(QObject):
         """
 
         if isinstance(obj, QLineEdit):
-            if not obj.text():
+            if obj.text():
                 obj.setText(obj.text().strip().upper())
 
         if isinstance(obj, (QTextEdit, QPlainTextEdit)):
-            if not obj.toPlainText():
+            if obj.toPlainText():
                 obj.setPlainText(obj.toPlainText().strip().upper())
 
-    # Maneja los diferentes tipos de eventos comunes de las diustintas vistas
+    # Maneja los diferentes tipos de eventos comunes de las diustintas
+    # vistas
     def eventFilter(self, obj: QWidget, event):
         """ Maneja los eventos de la vista. """
 
-        # Gestiona los eventos de perdida de foco de los controles de texto para
-        # normalizar el texto
+        # Gestiona los eventos de perdida de foco de los controles de
+        # texto para normalizar el texto
         if event.type() == QEvent.Type.FocusOut:
-            if isinstance(obj, self.text_widgets):
+            if isinstance(obj, self._text_widgets):
                 self.text_normalize(obj, event)
                 return False # Dejamos que el widget maneje también su
                              # evento.
+
+        # Gestiona los eventos de pulsación de teclas en los controles
+        # de textp.
+        if event.type() == QEvent.Type.KeyPress:
+            if isinstance(obj, (QTextEdit, QPlainTextEdit)):
+
+                if event.key() == Qt.Key.Key_Tab and not event.modifiers():
+                    self._view.focusNextChild()
+                    return True
+                elif event.key() == Qt.Key.Key_Backtab:
+                    self._view.focusPreviousChild()
+                    return True
+                elif (event.key() == Qt.Key.Key_Tab and event.modifiers()
+                      == Qt.KeyboardModifier.ControlModifier):
+                    cursor = obj.textCursor()
+                    cursor.insertText("\t")
+                    return True
+                else:
+                    return False
 
         return super().eventFilter(obj, event)
 

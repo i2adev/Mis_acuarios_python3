@@ -10,8 +10,7 @@ import sys
 from PyQt6.QtWidgets import (QApplication, QWidget, QLabel, QLineEdit,
                              QTextEdit, QPushButton, QHBoxLayout, QVBoxLayout,
                              QSpacerItem, QComboBox, QSizePolicy, QFrame,
-                             QTableWidget, QTableView, QSizeGrip,
-                             QMessageBox)
+                             QTableView, QSizeGrip)
 from PyQt6.QtGui import QIcon, QPixmap, QCursor
 from PyQt6.QtCore import Qt
 
@@ -33,13 +32,28 @@ class TipoFiltroView(QWidget):
         self.window_title = w_title
         self.create_widgets()
         self.build_layout()
-        self.set_properties()
-        self.init_handlers()
+        self.set_tab_order()
+        self.init_basic_handlers()
 
         # Establece el foco inicial
         self.edit_tipo_filtro.setFocus()
 
-    def init_handlers(self):
+
+    def set_tab_order(self):
+        """ Establece el orden de tabulación de los controles. """
+
+        # Eliminar el focus de los widgets que no lo necesitan
+        for widget in self.findChildren(QWidget):
+            widget.setFocusPolicy(Qt.FocusPolicy.ClickFocus)
+
+        # Establecemos las politicas de focus
+        self.edit_tipo_filtro.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
+        self.text_observaciones.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
+
+        # Establecer el orden
+        self.setTabOrder(self.edit_tipo_filtro, self.text_observaciones)
+
+    def init_basic_handlers(self):
         """ Inicializamos los eventos de la ventana """
 
         # mover ventana
@@ -61,9 +75,9 @@ class TipoFiltroView(QWidget):
         self.setWindowFlags(Qt.WindowType.FramelessWindowHint)
 
         # Definimos los layouts
-        layout_main = QVBoxLayout() # Layout principal
-        self.layout_title_bar = QHBoxLayout() # Layout barra título
-        self.layout_title_bar.setContentsMargins(0, 0, 0, 0)
+        # layout_main = QVBoxLayout() # Layout principal
+        # self.layout_title_bar = QHBoxLayout() # Layout barra título
+        # self.layout_title_bar.setContentsMargins(0, 0, 0, 0)
 
         layout_form_data = QVBoxLayout()
         frame_form_data = QFrame() # Frame de la inserción de datos
@@ -151,64 +165,53 @@ class TipoFiltroView(QWidget):
         layout_footer.addWidget(self.button_close)
 
         # Cargamos los layout en la ventana
-        layout_main.addWidget(self.frame_title_bar)
-        layout_main.addWidget(frame_form_data)
-        layout_main.addLayout(layout_data)
-        layout_main.addLayout(layout_navigation)
-        layout_main.addLayout(layout_footer)
-        self.setLayout(layout_main)
+        self.layout_main.addWidget(self.frame_title_bar)
+        self.layout_main.addWidget(frame_form_data)
+        self.layout_main.addLayout(layout_data)
+        self.layout_main.addLayout(layout_navigation)
+        self.layout_main.addLayout(layout_footer)
+        self.setLayout(self.layout_main)
 
-    def set_properties(self):
-        """ Configura las propiedades de los widgets """
+    def create_widgets(self):
+        """ Crea los elementos del formulario"""
+        self.layout_main = QVBoxLayout() # Layout principal
+        self.layout_title_bar = QHBoxLayout() # Layout barra título
+        self.layout_title_bar.setContentsMargins(0, 0, 0, 0)
 
-        # Controles de la barra de
-        ## Frame de la barra de titulo
+        # Controles de la barra de titulo
+        ## Frame de la barra de título
+        self.frame_title_bar = QFrame()
         self.frame_title_bar.setLayout(self.layout_title_bar)
         self.frame_title_bar.setStyleSheet(
             """
                 QFrame {
                     background-color: transparent;
-                    border: 0px solid gray;
+                    border: 0px solid transparent;
                 }
             """
         )
-        ## Aumenta el espacio inferior a 20pix
         self.frame_title_bar.setContentsMargins(0, 0, 0, 10)
 
-        ## Propiedades del botón cerrar
+        ## Botón de cerrar
         icon = QIcon()
         icon.addPixmap(QPixmap(":/Images/close.png"), QIcon.Mode.Normal,
                        QIcon.State.On)
+        self.button_tb_close = QPushButton()
         self.button_tb_close.setIcon(icon)
+        self.button_tb_close.setObjectName("button_bt_close")
         self.button_tb_close.setFlat(True)
-        self.button_tb_close.setStyleSheet("""
-            QPushButton {
-                background-color: transparent;
-                border: none;
-            }
-            QPushButton:hover {
-                background-color: rgba(255, 0, 0, 30);
-            }
-            """)
         self.button_tb_close.setCursor(
             QCursor(Qt.CursorShape.PointingHandCursor)
         )
 
-        ## Propiedades del botón maximizar
+        ## Botón de maximizar
         icon2 = QIcon()
         icon2.addPixmap(QPixmap(":/Images/maximize.png"), QIcon.Mode.Normal,
                         QIcon.State.On)
+        self.button_tb_maximize = QPushButton()
         self.button_tb_maximize.setIcon(icon2)
+        self.button_tb_maximize.setObjectName("button_bt_maximize")
         self.button_tb_maximize.setFlat(True)
-        self.button_tb_maximize.setStyleSheet("""
-                QPushButton {
-                    background-color: transparent;
-                    border: none;  /* Opcional, para quitar el borde */
-                }
-                QPushButton:hover {
-                    background-color: rgba(255, 255, 255, 30); 
-                }
-                """)
         self.button_tb_maximize.setCursor(
             QCursor(Qt.CursorShape.PointingHandCursor)
         )
@@ -218,17 +221,10 @@ class TipoFiltroView(QWidget):
         icon3 = QIcon()
         icon3.addPixmap(QPixmap(":/Images/restore.png"), QIcon.Mode.Normal,
                         QIcon.State.On)
+        self.button_tb_restore = QPushButton()
         self.button_tb_restore.setIcon(icon3)
+        self.button_tb_restore.setObjectName("button_bt_restore")
         self.button_tb_restore.setFlat(True)
-        self.button_tb_restore.setStyleSheet("""
-                QPushButton {
-                    background-color: transparent;
-                    border: none;  /* Opcional, para quitar el borde */
-                }
-                QPushButton:hover {
-                    background-color: rgba(255, 255, 255, 30);
-                }
-                """)
         self.button_tb_restore.setCursor(
             QCursor(Qt.CursorShape.PointingHandCursor)
         )
@@ -238,188 +234,168 @@ class TipoFiltroView(QWidget):
         icon4 = QIcon()
         icon4.addPixmap(QPixmap(":/Images/minimize.png"), QIcon.Mode.Normal,
                         QIcon.State.On)
+        self.button_tb_minimize = QPushButton()
         self.button_tb_minimize.setIcon(icon4)
+        self.button_tb_minimize.setObjectName("button_tb_minimize")
         self.button_tb_minimize.setFlat(True)
-        self.button_tb_minimize.setStyleSheet("""
-                QPushButton {
-                    background-color: transparent;
-                    border: none;  /* Opcional, para quitar el borde */
-                }
-                QPushButton:hover {
-                    background-color: rgba(255, 255, 255, 30);
-                }
-                """)
         self.button_tb_minimize.setCursor(
             QCursor(Qt.CursorShape.PointingHandCursor)
         )
         self.button_tb_minimize.hide()
 
-        ## Propiedades del icono de la ventana
+        ### Espaciador
+        self.spacer_tb = QSpacerItem(400, 10, QSizePolicy.Policy.Expanding,
+                                     QSizePolicy.Policy.Minimum)
+
+        self.label_window_title = QLabel(self.window_title)
+
+        ## Icono de la ventana
+        self.label_icon = QLabel()
         icon5 = QPixmap(":/Images/Window_icon.png")
         self.label_icon.setPixmap(icon5)
 
-        # Controles del pie de formulario
-        ## Propiedades del botón aceptar
-        self.button_accept.setText("&ACEPTAR")
-        self.button_accept.setFlat(True)
-        self.button_accept.setCursor(
-            QCursor(Qt.CursorShape.PointingHandCursor)
-        )
-
-        ## Propiedades del botón cancelar
-        self.button_cancel.setText("&CANCELAR")
-        self.button_cancel.setFlat(True)
-        self.button_cancel.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-
-        ## Propiedades del botón cerrar
-        self.button_close.setText("C&ERRAR")
-        self.button_close.setFlat(True)
-        self.button_close.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-
         # Controles de inserción de datos
         ## Primera linea
+        ### Label ID
+        self.label_id = QLabel("ID")
         self.label_id.setMinimumWidth(50)
         self.label_id.setMaximumWidth(50)
+
+        ### Texbox ID
+        self.edit_id = QLineEdit()
+        self.edit_id.setObjectName("edit_id")
         self.edit_id.setMinimumWidth(50)
         self.edit_id.setMaximumWidth(50)
         self.edit_id.setEnabled(False)
 
-        ## Configurar el campo TIPO DE FILTRO sí es necesario
-        # self.edit_tipo_filtro.setMinimumWidth(240)
-        # self.edit_tipo_filtro.setMaximumWidth(240)
+        ### Label TIPO DE FILTRO
+        self.label_tipo_filtro = QLabel("TIPO DE FILTRO")
+
+        ### Textbox TIPO DE FILTRO
+        self.edit_tipo_filtro = QLineEdit()
+        self.edit_tipo_filtro.setObjectName("edit_tipo_filtro")
 
         ## Segunda línea
+        ### Label OBSERVACIONES
+        self.label_observaciones = QLabel("OBSERVACIONES")
+
+        ### Text OBSERVACIONES
+        self.text_observaciones = QTextEdit()
+        self.text_observaciones.setObjectName("text_observaciones")
         self.text_observaciones.setMinimumHeight(80)
         self.text_observaciones.setMaximumHeight(80)
 
-        # Controles del area de vrud y tabla
-        ## Configuración de tabla
-        # TODO: Realizar la configuración de modelo.
-        #       Configurar la carga de datos
+        ## Controles de tabla y CRUD
+        ### Tabla
+        self.data_table = QTableView()
 
-        ## Configurar botón INSERT
+        ### Botón INSERT
+        self.button_insert = QPushButton()
         self.button_insert.setText("&INSERTAR")
 
-        ## Configurar botón UPDATE
+        ### Botón UPDATE
+        self.button_update = QPushButton()
         self.button_update.setText("AC&TUALIZAR")
 
-        ## Configurar el botón DELETE
+        ### Botón DELETE
+        self.button_delete = QPushButton()
         self.button_delete.setText("&ELIMINAR")
 
-        ## Configurar el botón LOAD
+        ### Botón LOAD
+        self.button_load = QPushButton()
         self.button_load.setText("CAR&GAR")
 
-        ## Configurar el botón CLEAN
+        ### Botón CLEAN
+        self.button_clean = QPushButton()
         self.button_clean.setText("LIM&PIAR")
 
-        ## Configurar el botón SEARCH
+        ### Botón SEARCH
+        self.button_search = QPushButton()
         self.button_search.setText("&BUSCAR")
 
-        # Controles de la barra de navegación
-        ## Pripiedades del botón página inicial
-        self.button_first.setText("<<")
-        self.button_first.setMinimumWidth(30)
-        self.button_first.setMaximumWidth(30)
-        self.button_first.setFlat(True)
-        self.button_close.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        ### Espaciador
+        self.spacer_crud = QSpacerItem(40,10)
 
-        ## Propiedades del botón página previa
-        self.button_prev.setText("<")
-        self.button_prev.setMinimumWidth(30)
-        self.button_prev.setMaximumWidth(30)
-        self.button_prev.setFlat(True)
-        self.button_prev.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-
-        ## Propiedades del botón siguiente página
-        self.button_next.setText(">")
-        self.button_next.setMinimumWidth(30)
-        self.button_next.setMaximumWidth(30)
-        self.button_next.setFlat(True)
-        self.button_next.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-
-        ## Propiedades del botón última página
+        ## Controles de navegación
+        ### Botón última página
+        self.button_last = QPushButton()
         self.button_last.setText(">>")
         self.button_last.setMinimumWidth(30)
         self.button_last.setMaximumWidth(30)
         self.button_last.setFlat(True)
         self.button_last.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
 
-        ## Propiedades de etiqueta página
+        ### Botón siguiente página
+        self.button_next = QPushButton()
+        self.button_next.setText(">")
+        self.button_next.setMinimumWidth(30)
+        self.button_next.setMaximumWidth(30)
+        self.button_next.setFlat(True)
+        self.button_next.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+
+        ### Botón página previa
+        self.button_prev = QPushButton()
+        self.button_prev.setText("<")
+        self.button_prev.setMinimumWidth(30)
+        self.button_prev.setMaximumWidth(30)
+        self.button_prev.setFlat(True)
+        self.button_prev.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+
+        ### Botón página inicial
+        self.button_first = QPushButton()
+        self.button_first.setText("<<")
+        self.button_first.setMinimumWidth(30)
+        self.button_first.setMaximumWidth(30)
+        self.button_first.setFlat(True)
+        self.button_first.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+
+        ### Etiqueta página
+        self.label_page = QLabel()
         self.label_page.setText("PÁGINA")
         self.label_page.setMinimumWidth(50)
         self.label_page.setMaximumWidth(50)
 
-        ## Propiedades del combobox de selección de página
+        ### Combo selector de página
+        self.combo_select_page = QComboBox()
         self.combo_select_page.setMinimumWidth(50)
         self.combo_select_page.setMaximumWidth(50)
 
-        ## Propiedades de la eqtiqueta DE
+        ### Label DE
+        self.label_de = QLabel()
         self.label_de.setText("DE")
         self.label_de.setMinimumWidth(30)
         self.label_de.setMaximumWidth(30)
 
-        ## Propiedades de la etiqueta páginas totales
+        ### Label TOTAL PAGES
+        self.label_total_pages = QLabel()
         self.label_total_pages.setMinimumWidth(40)
         self.label_total_pages.setMaximumWidth(40)
 
-    def create_widgets(self):
-        """ Crea los elementos del formulario"""
-
-        self.layout_main = QVBoxLayout() # Layout principal
-
-        # Controles de la barra de titulo
-        self.frame_title_bar = QFrame()
-        self.button_tb_close = QPushButton()
-        self.button_tb_maximize = QPushButton()
-        self.button_tb_restore = QPushButton()
-        self.button_tb_minimize = QPushButton()
-
-        self.spacer_tb = QSpacerItem(400, 10, QSizePolicy.Policy.Expanding,
-                                     QSizePolicy.Policy.Minimum)
-
-        self.label_window_title = QLabel(self.window_title)
-        self.label_icon = QLabel()
-
-        # Controles de inserción de datos
-        # Primer linea
-        self.label_id = QLabel("ID")
-        self.edit_id = QLineEdit()
-        self.label_tipo_filtro = QLabel("TIPO DE FILTRO")
-        self.edit_tipo_filtro = QLineEdit()
-
-        # Segunda línea
-        self.label_observaciones = QLabel("OBSERVACIONES")
-        self.text_observaciones = QTextEdit()
-
-        # Controles de tabla y vrud
-        self.data_table = QTableView()
-
-        self.button_insert = QPushButton()
-        self.button_update = QPushButton()
-        self.button_load = QPushButton()
-        self.button_delete = QPushButton()
-        self.button_clean = QPushButton()
-        self.button_search = QPushButton()
-
-        self.spacer_crud = QSpacerItem(40,10)
-
-        # Controles de navegación
-        self.button_last = QPushButton()
-        self.button_next = QPushButton()
-        self.button_prev = QPushButton()
-        self.button_first = QPushButton()
-
-        self.label_page = QLabel()
-        self.combo_select_page = QComboBox()
-        self.label_de = QLabel()
-        self.label_total_pages = QLabel()
-
+        ### Espaciador
         self.spacer_navigation = QSpacerItem(400, 10)
 
         # Controles del pie de formulario
+        ## Botón aceptar
         self.button_accept = QPushButton()
+        self.button_accept.setText("&ACEPTAR")
+        self.button_accept.setFlat(True)
+        self.button_accept.setCursor(
+            QCursor(Qt.CursorShape.PointingHandCursor)
+        )
+
+        ## Botón cancelar
         self.button_cancel = QPushButton()
+        self.button_cancel.setText("&CANCELAR")
+        self.button_cancel.setFlat(True)
+        self.button_cancel.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+
+        ## Botón Cerrar
         self.button_close = QPushButton()
+        self.button_close.setText("C&ERRAR")
+        self.button_close.setFlat(True)
+        self.button_close.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+
+        ## Espaciador
         self.spacer_foot = QSpacerItem(400, 10)
 
     """

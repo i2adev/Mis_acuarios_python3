@@ -7,7 +7,7 @@ Commentarios:
 """
 
 # Importaciones
-from PyQt6.QtWidgets import QWidget
+from PyQt6.QtWidgets import QWidget, QTextEdit, QPlainTextEdit, QMessageBox
 
 from Controllers.base_controller import BaseController
 from Views.tipo_filtro_view import TipoFiltroView
@@ -18,19 +18,20 @@ class TipoFiltroController(BaseController):
     """ Controlador de la entidad tipo de filtro. """
     def __init__(self):
         """ Constructor base """
-        super().__init__()
+        # inicializamos la vista y pasamos al constructor padre
+        view = TipoFiltroView("TIPOS DE FILTRO")
+        super().__init__(view)
 
         # Inicializamos la vista, la entidad y el dao
-        self.view = TipoFiltroView("TIPOS DE FILTRO")
-        self.mod = TipoFiltroEntity()
-        self.dao = TipoFiltroDAO()
+        self.__mod = TipoFiltroEntity()
+        self.__dao = TipoFiltroDAO()
 
         # Inicializamos los eventos
         self.Init_handlers()
 
     def show(self):
         """ Abre la vista """
-        self.view.show()
+        self._view.show()
 
     def get_tipo_filtro_list(self):
         """ Obtiene el listado de tipos de filtro. """
@@ -42,7 +43,6 @@ class TipoFiltroController(BaseController):
         """
 
         # Inicializa los widgets de introducción de texto
-        for widget in self.view.findChildren(QWidget):
-            if isinstance(widget, self.text_widgets):
+        for widget in self._view.findChildren(QWidget):
+            if isinstance(widget, self._text_widgets):
                 widget.installEventFilter(self)
-

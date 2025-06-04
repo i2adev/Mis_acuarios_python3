@@ -6,10 +6,14 @@ Commentarios:
     programa. Este método da estilo a la aplicación y abre la ventana
     principal.
 """
+
 # Importaciones
 import sys
 from PyQt6.QtWidgets import QApplication
 from Controllers.tipo_filtro_controller import TipoFiltroController
+
+# Versión del programa
+__version = "0.0.1"
 
 # Entrada al programa
 def main():

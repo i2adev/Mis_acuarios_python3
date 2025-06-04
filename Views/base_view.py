@@ -15,7 +15,7 @@ import Resources.image_rc
 # TODO: Hacer esta vista como base de las otras vistas
 #       1.  Gestionar los eventos del formulario, tales como, mover el formulario, los botones de la barra de titulo,...
 
-class Tipo_filtro_view(QWidget):
+class BaseView(QWidget):
     """ Formulario de tipo de filtro """
 
     def __init__(self, w_title: str):

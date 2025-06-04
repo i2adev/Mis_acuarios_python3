@@ -1,0 +1,6 @@
+﻿CHANGELOG:
+================================================================================
+0.0.0   SE INICIA EL CONTEO DE LAS VERSIONES.
+0.0.1   REFACTORIZACIÓN:
+        SE MODIFICA LA VISTA TIPOFILTROVIEW. SE UNIFICAN LOS MÉTODOS DE CREACIÓN
+        Y CONFIGURACIÓN DE LOS WIDGETS.

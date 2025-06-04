@@ -10,4 +10,4 @@ Esta aplicación tiene los siguientes requerimientos:
 - Capacidad de almacenar los parámetros medidos sobre los acuarios.
 - Capacidad de gestionar planes de mantenimiento para cada uno de los 
   acuarios. Se implementara un scheduler con capacidades visuales para 
-  identificar facilmente las tareas de mantenimiento.~~~~
+  identificar facilmente las tareas de mantenimiento.

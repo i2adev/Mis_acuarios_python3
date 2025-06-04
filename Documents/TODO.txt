@@ -1,0 +1,19 @@
+﻿================================================================================
+FECHA		DESCRIPCIÓN
+----------  --------------------------------------------------------------------
+05/06/2025  SE CREA LA CLASE RESULT PARA APLICAR EL PATRÓN RESULTADO.       TODO
+
+            SE PROGRAMA LA CARGA DE LOS DATOS DE LA TABLA DESDE LA BASE DE DATOS
+                                                                            TODO
+
+04/06/2025  SE CONFIGURAN LOS CONTROLES QTEXTTEDIT Y QPLAINTEXTEDIT PARA QUE
+            CUANDO SE PULSA EL TABULADOR PASE AL SIGUIENTE CONTROL. PARA
+            INSERTAR UN TABULADOR EN LOS CONTROLES SE PULSA CTRL+TAB.       DONE
+
+            SE UNIFICAN LOS MÉTODOS DE CREAR WIDGETS Y EL DE CONFIGURAR WIDGETS
+            PARA UNA LECTURA MAS FACIL DEL CÓDIGO.                          DONE
+
+03/06/2025  MODIFICAR LOS ESTILOS DE LOS BOTONES DE LA BARRA DE TÍTULO DE DE LOS
+            FORMULARIOS:
+            -   EN VEZ DE USAR ESTILOS, COLOCARLE EL NOMBRE DEL OBJETO A LOS BO-
+                TONES PARA QUE SURTA EFECTO LA HOJA DE ESTILOS GENERAL.     DONE
