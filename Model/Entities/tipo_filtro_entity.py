@@ -10,6 +10,12 @@ from Model.Entities.base_entity import BaseEntity
 class TipoFiltroEntity(BaseEntity):
     """ Entidad del tipo de filtro. """
 
+    # Anotaciones de tipo (atributos con sus tipos esperados)
+    id_tf: int | None
+    num_tf: int | None
+    tipo_filtro: str | None
+    observaciones: str | None
+
     def __init__(self, id_tf: int = None, tipo_filtro: str = None,
                  observaciones: str = None):
         """
@@ -22,10 +28,7 @@ class TipoFiltroEntity(BaseEntity):
 
         # Inicializamos las variables
         self.id_tf = id_tf
+        self.num_tf = None
         self.tipo_filtro = tipo_filtro
         self.observaciones = observaciones
-
-    def get_type(self: BaseEntity) -> str:
-        """ Obtiene el nombre de la clase. """
-        return type(self).__name__
 

@@ -9,34 +9,45 @@ Commentarios:
 import sqlite3
 from pathlib import Path
 
-class DatabaseManager:
-    """ Clase para gestionar la conexión a la base de datos. """
-    _instance = None
+class DBManager:
+    """Clase para gestionar la conexión a la base de datos."""
 
-    def __new__(cls):
-        """ Crea una instancia de la base de datos. """
+    def __init__(self):
+        """Inicializa la conexión a la base de datos."""
+        self.conn = None
+        self.initialize_db()
 
-        # Si la instancia de la base de datos no esta inicializada...
-        if cls._instance is None:
-            # ...inicializa una nueva instancia
-            cls._instance = super().__new__(cls)
-            cls._instance._initialize_db()
-
-        # Devuelve la instancia
-        return cls._instance
-    
-    def _initialize_db(self):
-        """ Inicializa la instancia de la base de datos. """
-        
+    def initialize_db(self):
+        """Inicializa la conexión con la base de datos."""
         try:
-            file = (Path(__file__).parent.parent / "MisAcuarios" /
-                    "MISACUARIOS.sqlite3")
-            if not Path.exists(file):
+            file = (Path(__file__).resolve().parent.parent / "MisAcuarios" / "MISACUARIOS.sqlite3")
+            if not file.exists():
                 print("EL ARCHIVO NO EXISTE")
-                return None
+                return
+
             self.conn = sqlite3.connect(file)
             self.conn.execute("PRAGMA foreign_keys = ON")
-        except FileNotFoundError as e:
-            print("NO SE HA ENCONTRADO LA BASE DE DATOS.")
+
         except Exception as e:
-            print(f"ERROR INESPERADO.\n {e}")
+            print(f"ERROR INESPERADO.\n{e}")
+
+    def get_connection(self):
+        """Devuelve la conexión activa."""
+        return self.conn
+
+    def close_connection(self):
+        """Cierra la conexión."""
+        if self.conn:
+            self.conn.close()
+            self.conn = None
+
+    def is_opened(self) -> bool:
+        """
+        Indica si la conexión está abierta:
+        -   True: Si la conexión está abierta.
+        -   False: Si la conexión está cerrada.
+        """
+        if self.conn is not None:
+            return True
+        else:
+            return False

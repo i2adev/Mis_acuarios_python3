@@ -1,7 +1,9 @@
 ﻿================================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
-05/06/2025  SE CREA LA CLASE RESULT PARA APLICAR EL PATRÓN RESULTADO.       TODO
+05/06/2025  SE CREA LA CLASE RESULT PARA APLICAR EL PATRÓN RESULTADO.       DONE
+
+            SE CREA EL MODELO DEL TIPO DE FILTRO.                           DONE
 
             SE PROGRAMA LA CARGA DE LOS DATOS DE LA TABLA DESDE LA BASE DE DATOS
                                                                             TODO
