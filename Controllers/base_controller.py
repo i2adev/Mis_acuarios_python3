@@ -16,11 +16,14 @@ from Views.base_view import BaseView
 
 class BaseController(QObject):
     """ Controlador base de la que hereda el resto de controladores. """
+    # def __init__(self, view: QWidget):
     def __init__(self, view: QWidget):
         """ Constructor de clase """
+
         super().__init__()
         self._view = view
         self._text_widgets = (QLineEdit, QTextEdit, QPlainTextEdit)
+
 
     """
     ********************************************************************
@@ -31,9 +34,9 @@ class BaseController(QObject):
     def text_normalize(self, obj: QWidget, event):
         """
         Normaliza el texto del widjej, eliminando los espacios iniciales
-        y finales y pconvirtiendo el texto en mayúsculas:
-        -   Parametro OBJ: Widjet de texto a normalizar.
-        -   Parámetro EVENT: Evento generado por el widget.
+        y finales y convirtiendo el texto en mayúsculas:
+        - Parametro OBJ: Widjet de texto a normalizar.
+        - Parámetro EVENT: Evento generado por el widget.
         """
 
         if isinstance(obj, QLineEdit):

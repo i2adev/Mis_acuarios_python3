@@ -10,7 +10,7 @@ import sys
 from PyQt6.QtWidgets import (QApplication, QWidget, QLabel, QLineEdit,
                              QTextEdit, QPushButton, QHBoxLayout, QVBoxLayout,
                              QSpacerItem, QComboBox, QSizePolicy, QFrame,
-                             QTableView, QSizeGrip)
+                             QTableView, QSizeGrip, QAbstractItemView)
 from PyQt6.QtGui import QIcon, QPixmap, QCursor
 from PyQt6.QtCore import Qt
 
@@ -21,12 +21,16 @@ class TipoFiltroView(QWidget):
 
     def __init__(self, w_title: str):
         """ Constructor de clase """
+
         super().__init__()
 
         # SizeGrip
         self.gripSize = 10
         self.grip = QSizeGrip(self)
         self.grip.resize(self.gripSize, self.gripSize)
+
+        # Establecemos el controlador
+        self.ctrl = None
 
         # Configura el formulario
         self.window_title = w_title
@@ -37,6 +41,7 @@ class TipoFiltroView(QWidget):
 
         # Establece el foco inicial
         self.edit_tipo_filtro.setFocus()
+
 
 
     def set_tab_order(self):
@@ -85,8 +90,8 @@ class TipoFiltroView(QWidget):
                                       QSizePolicy.Policy.Fixed)
         frame_form_data.setLayout(layout_form_data)
 
-        layout_first_line = QHBoxLayout() # Primera linea del formulario
-        layout_second_line = QHBoxLayout() # Segunda línea del formularfio
+        layout_first_line = QHBoxLayout() # Primera línea del formulario
+        layout_second_line = QHBoxLayout() # Segunda línea del formulario
         layout_id = QVBoxLayout() # El campo ID
         layout_tipo_filtro = QVBoxLayout() # El campo TIPO DE FILTRO
         layout_observaciones = QVBoxLayout() # El campo OBSERVACIONES
@@ -178,7 +183,7 @@ class TipoFiltroView(QWidget):
         self.layout_title_bar = QHBoxLayout() # Layout barra título
         self.layout_title_bar.setContentsMargins(0, 0, 0, 0)
 
-        # Controles de la barra de titulo
+        # Controles de la barra de título
         ## Frame de la barra de título
         self.frame_title_bar = QFrame()
         self.frame_title_bar.setLayout(self.layout_title_bar)
@@ -255,7 +260,7 @@ class TipoFiltroView(QWidget):
         self.label_icon.setPixmap(icon5)
 
         # Controles de inserción de datos
-        ## Primera linea
+        ## Primera línea
         ### Label ID
         self.label_id = QLabel("ID")
         self.label_id.setMinimumWidth(50)
@@ -288,6 +293,11 @@ class TipoFiltroView(QWidget):
         ## Controles de tabla y CRUD
         ### Tabla
         self.data_table = QTableView()
+        self.data_table.verticalHeader().setVisible(False)
+        self.data_table.setSelectionBehavior(
+            QAbstractItemView.SelectionBehavior.SelectRows)
+        self.data_table.setSelectionMode(
+            QAbstractItemView.SelectionMode.SingleSelection)
 
         ### Botón INSERT
         self.button_insert = QPushButton()
@@ -437,6 +447,7 @@ class TipoFiltroView(QWidget):
 
         if self.drag_position.y() <= 20:
             self.showMaximized()
+
 
 # Entrada a la aplicación
 if __name__ == "__main__":

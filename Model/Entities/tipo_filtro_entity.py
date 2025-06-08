@@ -11,12 +11,13 @@ class TipoFiltroEntity(BaseEntity):
     """ Entidad del tipo de filtro. """
 
     # Anotaciones de tipo (atributos con sus tipos esperados)
-    id_tf: int | None
-    num_tf: int | None
+    id: int | None
+    num: int | None
     tipo_filtro: str | None
     observaciones: str | None
 
-    def __init__(self, id_tf: int = None, tipo_filtro: str = None,
+    def __init__(self, id_tf: int = None, num_tf: int = None, tipo_filtro:
+    str = None,
                  observaciones: str = None):
         """
         Constructor:
@@ -27,8 +28,17 @@ class TipoFiltroEntity(BaseEntity):
         super().__init__()
 
         # Inicializamos las variables
-        self.id_tf = id_tf
-        self.num_tf = None
+        self.id = id_tf
+        self.num = num_tf
         self.tipo_filtro = tipo_filtro
         self.observaciones = observaciones
 
+    def __str__(self):
+        """ Muestra información de la clase. """
+
+        return f"""
+            ID:             {self.id}
+            TIPO FILTRO:    {self.tipo_filtro}
+            OBSERVACIONES:  {self.observaciones:50}
+            ------------------------------------------------------------
+        """

@@ -6,7 +6,8 @@ FECHA		DESCRIPCIÓN
             SE CREA EL MODELO DEL TIPO DE FILTRO.                           DONE
 
             SE PROGRAMA LA CARGA DE LOS DATOS DE LA TABLA DESDE LA BASE DE DATOS
-                                                                            TODO
+            - SE CREA EL MODELO PERSONALIZADO DE LA TABLA.                  DONE
+            - SE ENLAZA EL MODELO AL CONTROLADOR.                           DONE
 
 04/06/2025  SE CONFIGURAN LOS CONTROLES QTEXTTEDIT Y QPLAINTEXTEDIT PARA QUE
             CUANDO SE PULSA EL TABULADOR PASE AL SIGUIENTE CONTROL. PARA

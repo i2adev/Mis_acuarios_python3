@@ -7,6 +7,8 @@ Commentarios:
 """
 import sqlite3
 
+from PyQt6.QtWidgets import QMessageBox
+
 # Importaciones
 from Services.Result.result import Result
 from Model.DAO.database import DBManager
@@ -23,13 +25,13 @@ class TipoFiltroDAO:
         self.db = DBManager()
         self.ent = None
 
-    def get_data(self):
+    def get_list(self):
         """ Obtiene el listado completo. """
 
         with self.db:
-            # Chequeamos que la base de datos está abierta
-            if not self.db.is_opened():
-                self.db.conn = self.db.initialize_db()
+            if not self.db.conn:
+                QMessageBox.information(None, "CONEXIÓN", "CONEXIÓN NO "
+                                                          "INICIALIZADA")
 
             # Obtenemos los datos
             sql = """
@@ -40,11 +42,11 @@ class TipoFiltroDAO:
                 FROM    TIPOS_FILTRO;
             """
             try:
-                self.db.conn.cursor = self.db.conn.cursor()
-                self.db.conn.cursor.execute(sql)
+                cursor = self.db.conn.cursor()
+                cursor.execute(sql)
                 value = [TipoFiltroEntity(f["ID"], f["NUM"], f["TIPO"],
                                          f["OBSERVACIONES"])
-                        for f in self.db.conn.cursor.fetchall()]
+                        for f in cursor.fetchall()]
 
                 # Devolvemos los datos
                 return Result.success(value)
@@ -60,13 +62,13 @@ class TipoFiltroDAO:
             finally:
                 self.db.close_connection()
 
-    def get_combo(self):
+    def get_list_combo(self):
         """ Obtiene el listado para el combo. """
 
         with self.db:
-            # Chequeamos que la base de datos está abierta
-            if not self.db.is_opened():
-                self.db.conn = self.db.initialize_db()
+            # # Chequeamos que la base de datos está abierta
+            # if not self.db.is_opened():
+            #     self.db.conn = self.db.initialize_db()
 
             # Obtenemos los datos
             sql = """
@@ -75,11 +77,11 @@ class TipoFiltroDAO:
                   FROM    TIPOS_FILTRO;
               """
             try:
-                self.db.conn.cursor = self.db.conn.cursor()
-                self.db.conn.cursor.execute(sql)
+                cursor = self.db.conn.cursor()
+                cursor.execute(sql)
                 value = [TipoFiltroEntity(None, None, f["TIPO"],
                                           f["OBSERVACIONES"])
-                         for f in self.db.conn.cursor.fetchall()]
+                         for f in cursor.fetchall()]
 
                 # Devolvemos los datos
                 return Result.success(value)
@@ -103,10 +105,6 @@ class TipoFiltroDAO:
         """
 
         with self.db:
-            # Chequeamos que la base de datos está abierta
-            if not self.db.is_opened():
-                self.db.conn = self.db.initialize_db()
-
             # Obtenemos los datos
             sql = """
                 INSERT INTO TIPOS_FILTRO
@@ -144,10 +142,6 @@ class TipoFiltroDAO:
         """
 
         with self.db:
-            # Chequeamos que la base de datos está abierta
-            if not self.db.is_opened():
-                self.db.conn = self.db.initialize_db()
-
             # Obtenemos los datos
             sql = """
                 UPDATE  TIPOS_FILTRO
@@ -158,14 +152,14 @@ class TipoFiltroDAO:
             try:
                 cursor = self.db.conn.cursor()
                 cursor.execute(sql, {
-                    "id": ent.id_tf,
+                    "id": ent.id,
                     "tipo": ent.tipo_filtro,
                     "observaciones": ent.observaciones
                 })
 
                 # Devolvemos los datos
                 self.db.conn.commit()
-                return Result.success(ent.id_tf)
+                return Result.success(ent.id)
 
             except self.db.conn.OperationalError as e:
                 return Result.failure(f"[ERROR OPERACIONAL]\n {e}")
@@ -182,14 +176,10 @@ class TipoFiltroDAO:
         """
         Elimina el registro de la base de datos.
         Parametros:
-        -   ID: Id del registro a aliminar.
+        - ID: Id del registro a aliminar.
         """
 
         with self.db:
-            # Chequeamos que la base de datos está abierta
-            if not self.db.is_opened():
-                self.db.conn = self.db.initialize_db()
-
             # Obtenemos los datos
             sql = """
                 DELETE FROM TIPOS_FILTRO

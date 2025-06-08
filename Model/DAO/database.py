@@ -9,6 +9,16 @@ Commentarios:
 import sqlite3
 from pathlib import Path
 
+"""
+Autor:      Inigo Iturriagaetxebarria
+Fecha:      02/06/2025
+Comentarios:
+    Módulo que contiene la clase que gestiona las conexiones a la base de datos.
+"""
+
+import sqlite3
+from pathlib import Path
+
 class DBManager:
     """Clase para gestionar la conexión a la base de datos."""
 
@@ -17,15 +27,25 @@ class DBManager:
         self.conn = None
         self.initialize_db()
 
+    def __enter__(self):
+        if not self.is_opened():
+            self.initialize_db()
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self.close_connection()
+
     def initialize_db(self):
         """Inicializa la conexión con la base de datos."""
         try:
-            file = (Path(__file__).resolve().parent.parent / "MisAcuarios" / "MISACUARIOS.sqlite3")
+            file = (Path(__file__).resolve().parent.parent.parent /
+                    "Services" / "Database" / "MISACUARIOS.sqlite3")
+            print(file)
             if not file.exists():
-                print("EL ARCHIVO NO EXISTE")
-                return
+                raise FileNotFoundError(f"No se encontró la base de datos en: {file}")
 
             self.conn = sqlite3.connect(file)
+            self.conn.row_factory = sqlite3.Row
             self.conn.execute("PRAGMA foreign_keys = ON")
 
         except Exception as e:
@@ -42,12 +62,6 @@ class DBManager:
             self.conn = None
 
     def is_opened(self) -> bool:
-        """
-        Indica si la conexión está abierta:
-        -   True: Si la conexión está abierta.
-        -   False: Si la conexión está cerrada.
-        """
-        if self.conn is not None:
-            return True
-        else:
-            return False
+        """Indica si la conexión está abierta."""
+        return self.conn is not None
+
