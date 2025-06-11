@@ -9,21 +9,11 @@ Commentarios:
 import sqlite3
 from pathlib import Path
 
-"""
-Autor:      Inigo Iturriagaetxebarria
-Fecha:      02/06/2025
-Comentarios:
-    Módulo que contiene la clase que gestiona las conexiones a la base de datos.
-"""
-
-import sqlite3
-from pathlib import Path
-
 class DBManager:
-    """Clase para gestionar la conexión a la base de datos."""
+    """ Clase para gestionar la conexión a la base de datos. """
 
     def __init__(self):
-        """Inicializa la conexión a la base de datos."""
+        """ Inicializa la conexión a la base de datos. """
         self.conn = None
         self.initialize_db()
 
@@ -36,11 +26,11 @@ class DBManager:
         self.close_connection()
 
     def initialize_db(self):
-        """Inicializa la conexión con la base de datos."""
+        """ Inicializa la conexión con la base de datos. """
         try:
             file = (Path(__file__).resolve().parent.parent.parent /
                     "Services" / "Database" / "MISACUARIOS.sqlite3")
-            print(file)
+
             if not file.exists():
                 raise FileNotFoundError(f"No se encontró la base de datos en: {file}")
 
@@ -52,16 +42,16 @@ class DBManager:
             print(f"ERROR INESPERADO.\n{e}")
 
     def get_connection(self):
-        """Devuelve la conexión activa."""
+        """ Devuelve la conexión activa. """
         return self.conn
 
     def close_connection(self):
-        """Cierra la conexión."""
+        """ Cierra la conexión. """
         if self.conn:
             self.conn.close()
             self.conn = None
 
     def is_opened(self) -> bool:
-        """Indica si la conexión está abierta."""
+        """ Indica si la conexión está abierta. """
         return self.conn is not None
 

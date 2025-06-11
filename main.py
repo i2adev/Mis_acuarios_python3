@@ -13,7 +13,7 @@ from PyQt6.QtWidgets import QApplication
 from Controllers.tipo_filtro_controller import TipoFiltroController
 
 # Versión del programa
-__version = "0.0.3"
+__version__ = "0.0.4"
 
 # Entrada al programa
 def main():

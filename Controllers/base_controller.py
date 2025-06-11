@@ -10,7 +10,8 @@ Commentarios:
 # Importaciones
 from PyQt6.QtCore import Qt, QObject, QEvent
 from PyQt6.QtWidgets import (QMessageBox, QLineEdit, QTextEdit,
-                             QPlainTextEdit, QWidget)
+                             QPlainTextEdit, QWidget, QTableView)
+import enchant  # Enchant es la librería de revisión orográfica
 
 from Views.base_view import BaseView
 
@@ -22,6 +23,7 @@ class BaseController(QObject):
 
         super().__init__()
         self._view = view
+        self._spell_dict = enchant.Dict("en_EN")
         self._text_widgets = (QLineEdit, QTextEdit, QPlainTextEdit)
 
 
@@ -31,7 +33,7 @@ class BaseController(QObject):
     ********************************************************************
     """
 
-    def text_normalize(self, obj: QWidget, event):
+    def __text_normalize(self, obj: QWidget, event):
         """
         Normaliza el texto del widjej, eliminando los espacios iniciales
         y finales y convirtiendo el texto en mayúsculas:
@@ -56,7 +58,7 @@ class BaseController(QObject):
         # texto para normalizar el texto
         if event.type() == QEvent.Type.FocusOut:
             if isinstance(obj, self._text_widgets):
-                self.text_normalize(obj, event)
+                self.__text_normalize(obj, event)
                 return False # Dejamos que el widget maneje también su
                              # evento.
 
@@ -81,3 +83,25 @@ class BaseController(QObject):
 
         return super().eventFilter(obj, event)
 
+    def _select_row_by_id(self, table: QTableView, id: int, column: int = 0):
+        """ Selecciona una fila por su ID. """
+
+        # Obtenemos el modelo de la tabla
+        model = table.model()
+
+        # Recorremos la tabla
+        for fila in range(model.rowCount()):
+            # Obtenemos el índice
+            index = model.index(fila, column)
+            if str(index.data()) == str(id):
+                # Si el ID coincide con el parámetro
+                table.selectRow(fila)
+                table.scrollTo(index)
+
+    def _clean_view(self):
+        """ Limpia los controles del formulario. """
+
+        # Limpia los widgets de texto
+        for widget in self._view.findChildren(QWidget):
+            if isinstance(widget, self._text_widgets):
+                widget.clear()

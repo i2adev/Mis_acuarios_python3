@@ -1,6 +1,19 @@
 ﻿================================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
+11/06/2025  SE IMPLEMENTA EL CRUD DE LA ENTIDAD TIPO DE FILTRO:
+            -   SE IMPLEMENTA LA LIMPIEZA DEL FORMULARIO.                   DONE
+            -   SE AÑADE EL VALIDADOR DE FORMULARIO.                        DONE
+            -   SE IMPLEMENTA LA INSERCIÓN.                                 DONE
+            -   SE IMPLEMENTA LA MODIFICACIÓN.                              DONE
+            -   SE IMPLEMENTA LA LECTURA.                                   DONE
+            -   SE IMPLEMENTA LA ELIMINACIÓN.                               DONE
+
+08/06/2025  SE CREA LA LÓGICA DE REVISIÓN ORTOGRÁFICA DE LOS WIDGETS DE
+            INSERCIÓN DE TEXTO.                                         POSPOSED
+                SE POSTERGA PORQUE NO SE HA PODIDO CARGAR EL CORRECTOR
+                ORTOGRÁFICO.
+
 05/06/2025  SE CREA LA CLASE RESULT PARA APLICAR EL PATRÓN RESULTADO.       DONE
 
             SE CREA EL MODELO DEL TIPO DE FILTRO.                           DONE
