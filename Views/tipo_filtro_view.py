@@ -298,6 +298,8 @@ class TipoFiltroView(QWidget):
             QAbstractItemView.SelectionBehavior.SelectRows)
         self.data_table.setSelectionMode(
             QAbstractItemView.SelectionMode.SingleSelection)
+        self.data_table.setContextMenuPolicy(
+            Qt.ContextMenuPolicy.CustomContextMenu)
 
         ### Botón INSERT
         self.button_insert = QPushButton()

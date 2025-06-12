@@ -25,7 +25,7 @@ class TipoFiltroDAO:
         self.db = DBManager()
         self.ent = None
 
-    def get_list(self):
+    def get_list(self) -> Result:
         """ Obtiene el listado completo. """
 
         with self.db:
@@ -79,12 +79,12 @@ class TipoFiltroDAO:
             try:
                 cursor = self.db.conn.cursor()
                 cursor.execute(sql)
-                value = [TipoFiltroEntity(None, None, f["TIPO"],
-                                          f["OBSERVACIONES"])
-                         for f in cursor.fetchall()]
+                values = [TipoFiltroEntity(None, None, f["TIPO"],
+                                           f["OBSERVACIONES"])
+                          for f in cursor.fetchall()]
 
                 # Devolvemos los datos
-                return Result.success(value)
+                return Result.success(values)
 
             except self.db.conn.OperationalError as e:
                 return Result.failure(f"[ERROR OPERACIONAL]\n {e}")
@@ -97,7 +97,7 @@ class TipoFiltroDAO:
             finally:
                 self.db.close_connection()
 
-    def insert(self, ent: TipoFiltroEntity):
+    def insert(self, ent: TipoFiltroEntity) -> Result:
         """
         Inserta un nuevo registro en la base de datos.
         Parametros:
@@ -134,7 +134,7 @@ class TipoFiltroDAO:
             finally:
                 self.db.close_connection()
 
-    def update(self, ent: TipoFiltroEntity):
+    def update(self, ent: TipoFiltroEntity) -> Result:
         """
         Actualiza el registro de la base de datos.
         Parametros:
@@ -172,7 +172,7 @@ class TipoFiltroDAO:
             finally:
                 self.db.close_connection()
 
-    def delete(self, id: int):
+    def delete(self, id: int) -> Result:
         """
         Elimina el registro de la base de datos.
         Parametros:
