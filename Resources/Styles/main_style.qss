@@ -46,3 +46,23 @@ QLabel {
     font-weight: bold;
 	background-color: transparent;
 }
+
+/* Estilo de tabla */
+QTableView::item:hover {
+    background-color: #264f78;
+    color: #ffffff;
+}
+
+QHeaderView::section {
+    text-align: left;
+    background-color: #3c3c3c;
+    color: #ffffff;
+    padding: 4px;
+    font-weight: bold;
+    border: 0px solid #2a2a2a;
+}
+
+QTableView::item:selected {
+    background-color: #264f78;  /* Color de fondo cuando se selecciona (azul ejemplo) */
+    color: white;               /* Color del texto al estar seleccionado */
+}

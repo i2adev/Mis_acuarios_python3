@@ -5,16 +5,16 @@ Commentarios:
     Módulo que contiene los métodos de acceso a la base de datos de la
     entidad TqIPO DE FILTRO.
 """
-import sqlite3
-
-from PyQt6.QtWidgets import QMessageBox
 
 # Importaciones
+import sqlite3
+from PyQt6.QtWidgets import QMessageBox
+from Model.DAO.base_dao import BaseDAO
 from Services.Result.result import Result
 from Model.DAO.database import DBManager
 from Model.Entities.tipo_filtro_entity import TipoFiltroEntity
 
-class TipoFiltroDAO:
+class TipoFiltroDAO (BaseDAO):
     """
     Clase que gestiona las operaciones en la base de datos de la entidad
     TipoFiltroEntity.
@@ -22,6 +22,7 @@ class TipoFiltroDAO:
 
     def __init__(self):
         """ Constructor de clase. """
+
         self.db = DBManager()
         self.ent = None
 
@@ -147,12 +148,12 @@ class TipoFiltroDAO:
                 UPDATE  TIPOS_FILTRO
                 SET     TIPO_FILTRO = :tipo,
                         OBSERVACIONES = :observaciones
-                WHERE   ID_TIPO = :id
+                WHERE   ID_TIPO = :id_parent
             """
             try:
                 cursor = self.db.conn.cursor()
                 cursor.execute(sql, {
-                    "id": ent.id,
+                    "id_parent": ent.id,
                     "tipo": ent.tipo_filtro,
                     "observaciones": ent.observaciones
                 })
@@ -183,11 +184,11 @@ class TipoFiltroDAO:
             # Obtenemos los datos
             sql = """
                 DELETE FROM TIPOS_FILTRO
-                WHERE ID_TIPO = :id;
+                WHERE ID_TIPO = :id_parent;
             """
             try:
                 cursor = self.db.conn.cursor()
-                cursor.execute(sql, {"id": id})
+                cursor.execute(sql, {"id_parent": id})
 
                 # Devolvemos los datos
                 self.db.conn.commit()

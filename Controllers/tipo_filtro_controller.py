@@ -5,11 +5,11 @@ Commentarios:
     Módulo que contiene la clase controladora de la entidad TIPO DE
     FILTRO.
 """
-from PyQt6.QtCore import qSetMessagePattern
-from PyQt6.QtGui import QAction
 # Importaciones
+from PyQt6.QtCore import qSetMessagePattern, Qt
+from PyQt6.QtGui import QAction
 from PyQt6.QtWidgets import QWidget, QTextEdit, QPlainTextEdit, QMessageBox, \
-    QTableView
+    QTableView, QHeaderView
 
 from Controllers.base_controller import BaseController
 from Services.Result.result import Result
@@ -47,6 +47,8 @@ class TipoFiltroController(BaseController):
 
         datos = self.__dao.get_list().value
         self.fill_tableview(self.__view.data_table, datos)
+
+        self._configure_table(self.__view.data_table)
 
 
     def show(self):
@@ -172,7 +174,7 @@ class TipoFiltroController(BaseController):
             )
             return
 
-        # Obtener el ID desde el cuadro de texto id
+        # Obtener el ID desde el cuadro de texto id_parent
         id_tipo = int(self.__view.edit_id.text())
 
         # Insertar el registro
@@ -246,11 +248,44 @@ class TipoFiltroController(BaseController):
         table.setColumnHidden(0, True)
         table.resizeColumnsToContents()
 
+    def _configure_table(self, table: QTableView):
+        """ Configura l atabla de datos. """
+
+        # Selecciona un afila entera
+        table.setSelectionBehavior(
+            QTableView.SelectionBehavior.SelectRows)
+
+        # Solo se puede seleccionar uan fila
+        table.setSelectionMode(
+            QTableView.SelectionMode.SingleSelection)
+
+        # Color de las filas alternadas
+        table.setAlternatingRowColors(True)
+
+        # Oculta las líneas de la tabla
+        table.setShowGrid(False)
+
+        # Elimina el tabulador
+        table.setFocusPolicy(Qt.FocusPolicy.NoFocus)
+
+        # Ocultar la columna ID (columna 0)
+        table.setColumnHidden(0, True)
+
+        # Hacer que la columna de observaciones (columna 3) use el espacio
+        # restante
+        header = table.horizontalHeader()
+        header.setSectionResizeMode(3, QHeaderView.ResizeMode.Stretch)
+
+        # Mostrar puntos suspensivos si el texto no cabe
+        table.setTextElideMode(Qt.TextElideMode.ElideRight)
+
     def spell_check(self):
-        QMessageBox.information(None, "...::OOOOPS::...", "Holaaaa...")
+        """ No aplicable. """
+        pass
 
     def entity_configuration(self) -> TipoFiltroEntity:
         """ Configura la entidad. """
+
         ent = TipoFiltroEntity()
 
         if self.__view.edit_id.text():

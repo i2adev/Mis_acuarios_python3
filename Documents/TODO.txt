@@ -1,6 +1,10 @@
 ﻿================================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
+16/06/2025  IMPLEMENTACIÓN DE LA PAGINACIÓN_
+            -   SE CREA LA CLASE PAGINATOR.                                 TODO
+            -   SE CREA LA CLASE BASE DE LOS DAOS.                          DONE
+
 12/06/2025  IMPLEMENTACIÓN DE MENÚ CONTEXTUAL DE LA TABLA DEL FORMULARIO  DE
             TIPO DE FILTRO:
             -   SE CREA UNA CLASE TABLECONTMENU.                            DONE
