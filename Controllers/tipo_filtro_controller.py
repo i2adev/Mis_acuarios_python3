@@ -106,9 +106,11 @@ class TipoFiltroController(BaseController):
 
         page = self.__view.combo_select_page.currentData()
 
-        # ---------- PROVISIONAL -------------------
-        print(f"PÁGINA: {page}")
+        # Condiciones de salida
+        if page is None:
+            return
 
+        # Configuración de salida
         self._pag.current_page = page
         self._pag.current_data = self._pag.get_paged_list(self._pag.current_page)
         self.load_tableview()
@@ -374,7 +376,7 @@ class TipoFiltroController(BaseController):
             )
 
         # Establecemos la página final
-        self.__view.combo_select_page.setCurrentIndex(1)
+        self.__view.combo_select_page.setCurrentIndex(-1)
         self.__view.combo_select_page.setCurrentIndex(
             self.__view.combo_select_page.count() - 1
         )

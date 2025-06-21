@@ -9,11 +9,18 @@ Commentarios:
 
 # Importaciones
 import sys
-from PyQt6.QtWidgets import QApplication
+from pathlib import Path
+
+from PyQt6.QtWidgets import QApplication, QMessageBox
 from Controllers.tipo_filtro_controller import TipoFiltroController
 
 # Versión del programa
 __version__ = "0.0.4"
+
+from Model.DAO.base_dao import BaseDAO
+
+from Model.DAO.database import DBManager
+
 
 # Entrada al programa
 def main():
@@ -25,6 +32,45 @@ def main():
               encoding="utf-8-sig") as f:
         testily = f.read()
         app.setStyleSheet(testily)
+
+    # Limpia la base de datos
+    # msg = BaseDAO.clean_database()
+    # if msg.is_success:
+    #     QMessageBox.information(
+    #         None,
+    #         "LIMPIEZA DE BASE DE DATOS",
+    #         msg.value
+    #     )
+    # else:
+    #     QMessageBox.warning(
+    #         None,
+    #         "LIMPIEZA DE BASE DE DATOS",
+    #         msg.error_msg
+    #     )
+
+    # Se implementa la copia de la base de datos a fiche sql
+    # origen = str(Path(__file__).resolve().parent /
+    #         "Services" / "Database" / "MISACUARIOS.sqlite3")
+    #
+    # destino = str(Path(__file__).resolve().parent /
+    #         "Services" / "Database" / "Backup.sql")
+    #
+    # if BaseDAO.export_db_sql(origen, destino):
+    #     QMessageBox.information(
+    #         None,
+    #         "BACKUP DE LA BASE DE DATOS",
+    #         f"""
+    #         SE HA COPIADO LA ESTRUCTURA Y LOS DATOS DE LA BASE DE DATOS:
+    #         - ORIGEN:   {origen}
+    #         - DESTINO:  {destino}
+    #         """
+    #     )
+    # else:
+    #     QMessageBox.warning(
+    #         None,
+    #         "BACKUP DE LA BASE DE DATOS",
+    #         "NO SE HA PODIDO REALIZAR EL BACKUP"
+    #     )
 
     ctrl = TipoFiltroController()
     ctrl.show()

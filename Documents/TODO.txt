@@ -1,6 +1,17 @@
 ﻿================================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
+21/06/2025  TESTEO DE LA LÓGICA DE TIPOS DE FILTRO:
+            -   SE COMPRUEBA EL FUNCIONAMIENTO CON LA TABLA TIPOS DE FILTRO SIN
+                NINGÚN REGISTRO.                                            DONE
+            -   SE COMPRUEBA LA ACTUALIZACIÓN DE REGISTROS.                 DONE
+            -   SE PRUEBA LA INSERCIÓN DE REGISTROS.                        DONE
+
+            SE CREA LA OPCIÓN DE EXPORTAR LA ESTRUCTURA Y LOS DATOS DE LA BASE
+            DE DATOS A UN ARCHIVO SQL:
+            -   SE CREA LA FUNCIÓN DE EXPORTACIÓN EN LA CLASE BASEDAO.      DONE
+            -   EN UN PRINCIPIO SE INTEGRA EN LA CLASE MAIN.                DONE
+
 18/06/2025  SE IMPLEMENTA LA PAGINACIÓN DE LA TABLA EN EL FORMULARIO TIPOS DE
             FILTRO:
             -   SE MODIFICA EL MODELO DE LA TABLA PARA QUE IMPLEMENTE LA

@@ -85,12 +85,12 @@ class Paginator:
     def page_index(self, new_index) -> None:
         """ Válida y asigna el índice de página. """
 
-        if not self.total_data:
-            raise ValueError(
-                """
-                CLASE NO CONFIGURADA. DEBES INICIALIZAR LA CLASE PRIMERO.
-                """
-            )
+        # if not self.total_data:
+        #     raise ValueError(
+        #         """
+        #         CLASE NO CONFIGURADA. DEBES INICIALIZAR LA CLASE PRIMERO.
+        #         """
+        #     )
 
         self._page_index = new_index
 
@@ -105,12 +105,12 @@ class Paginator:
     def end(self, new_end: int) -> None:
         """ Valida y asigna el número final de la página. """
 
-        if not self.total_data:
-            raise ValueError(
-                """
-                CLASE NO CONFIGURADA. DEBES INICIALIZAR LA CLASE PRIMERO.
-                """
-            )
+        # if not self.total_data:
+        #     raise ValueError(
+        #         """
+        #         CLASE NO CONFIGURADA. DEBES INICIALIZAR LA CLASE PRIMERO.
+        #         """
+        #     )
 
         self._end = new_end
 
@@ -125,12 +125,12 @@ class Paginator:
     def start(self, new_start: int) -> None:
         """ Valida y asigna el número inicial de la página. """
 
-        if not self.total_data:
-            raise ValueError(
-                """
-                CLASE NO CONFIGURADA. DEBES INICIALIZAR LA CLASE PRIMERO.
-                """
-            )
+        # if not self.total_data:
+        #     raise ValueError(
+        #         """
+        #         CLASE NO CONFIGURADA. DEBES INICIALIZAR LA CLASE PRIMERO.
+        #         """
+        #     )
 
         self._start = new_start
 
@@ -145,12 +145,12 @@ class Paginator:
     def current_page(self, new_page: int) -> None:
         """ Valida y asigna el número de página actual. """
 
-        if not self.total_data:
-            raise ValueError(
-                """
-                CLASE NO CONFIGURADA. DEBES INICIALIZAR LA CLASE PRIMERO.
-                """
-            )
+        # if not self.total_data:
+        #     raise ValueError(
+        #         """
+        #         CLASE NO CONFIGURADA. DEBES INICIALIZAR LA CLASE PRIMERO.
+        #         """
+        #     )
 
         if not new_page or new_page == 0:
             self.current_page = 1
@@ -193,17 +193,15 @@ class Paginator:
     def total_pages(self, new_pages: int) -> None:
         """ Valida y asigna el número total de páginas. """
 
-        if not self.total_data:
-            raise ValueError(
-                """
-                CLASE NO CONFIGURADA. DEBES INICIALIZAR LA CLASE PRIMERO.
-                """
-            )
+        # if not self.total_data:
+        #     raise ValueError(
+        #         """
+        #         CLASE NO CONFIGURADA. DEBES INICIALIZAR LA CLASE PRIMERO.
+        #         """
+        #     )
 
         if not new_pages or new_pages == 0:
-            raise ValueError(
-                "EL NÚMERO DE PÁGINAS NO PUEDE ESTAR VACíO NI SER 0. "
-            )
+            self.total_pages = 1
 
         self._total_pages = new_pages
 
@@ -259,23 +257,16 @@ class Paginator:
         """
 
         # Comprobamos los datos
-        if not self.total_data:
-            raise ValueError(
-                """
-                CLASE NO CONFIGURADA. DEBES INICIALIZAR LA CLASE PRIMERO.
-                """
-            )
+        # if not self.total_data:
+        #     raise ValueError(
+        #         """
+        #         CLASE NO CONFIGURADA. DEBES INICIALIZAR LA CLASE PRIMERO.
+        #         """
+        #     )
 
         # Comprueba que el número de página este dentro del rango
         if page < 1 or page > self.total_pages:
-            raise ValueError(
-                """
-                NÚMERO DE PA´GINA FUERA DE RANGO.
-                - EL NÚMERO DE PÁGINA DEBE SER COMO MINIMO 1.
-                - EL NÚMERO DE PÁGINA DEBE SER MENOR O IGUAL AL NÚMERO 
-                  TOTAL DE PÁGINAS.
-                """
-            )
+            self.total_pages = 1
 
         # Inicializamos las variables
         self.current_page = page
@@ -306,15 +297,15 @@ class Paginator:
         self.total_data = res.value
         self.records = len(self.total_data)
 
-        if page < 1 or page > self.total_pages:
-            QMessageBox.warning(
-                None,
-                "ERROR DE PAGINACIÓN",
-                f"""ERROR EN EL NÚMERO DE PÁGINA {page}
-                - EL NUMERO DE PÁGINA HA DE SER MAYOR QUE 0.
-                - EL NUMERO DE PÁGINA HA DE SER MENOR O IGUAL QUE {self.total_pages}"""
-            )
-            return
+        # if page < 1 or page > self.total_pages:
+        #     QMessageBox.warning(
+        #         None,
+        #         "ERROR DE PAGINACIÓN",
+        #         f"""ERROR EN EL NÚMERO DE PÁGINA {page}
+        #         - EL NUMERO DE PÁGINA HA DE SER MAYOR QUE 0.
+        #         - EL NUMERO DE PÁGINA HA DE SER MENOR O IGUAL QUE {self.total_pages}"""
+        #     )
+        #     return
 
         self.current_page = page
         self.current_data = self.get_paged_list(page)
