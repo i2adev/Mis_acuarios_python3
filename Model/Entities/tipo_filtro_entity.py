@@ -38,6 +38,7 @@ class TipoFiltroEntity(BaseEntity):
 
         return f"""
             ID:             {self.id}
+            NUM:            {self.num}
             TIPO FILTRO:    {self.tipo_filtro}
             OBSERVACIONES:  {self.observaciones:50}
             ------------------------------------------------------------

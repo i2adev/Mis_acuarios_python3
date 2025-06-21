@@ -6,12 +6,13 @@ Commentarios:
     FILTRO.
 """
 # Importaciones
-from PyQt6.QtCore import qSetMessagePattern, Qt
+from PyQt6.QtCore import qSetMessagePattern, Qt, QEvent
 from PyQt6.QtGui import QAction
 from PyQt6.QtWidgets import QWidget, QTextEdit, QPlainTextEdit, QMessageBox, \
     QTableView, QHeaderView
 
 from Controllers.base_controller import BaseController
+from Model.DAO.paginator import Paginator
 from Services.Result.result import Result
 from Views.tipo_filtro_view import TipoFiltroView
 from Views.table_menu_contextual import TableMenuContextual
@@ -33,11 +34,16 @@ class TipoFiltroController(BaseController):
         self.__mod = TipoFiltroEntity()
         self.__dao = TipoFiltroDAO()
 
+        # Inicializamos el paginador
+        self._pag = Paginator("VISTA_TIPOS_FILTRO", 5)
+        self._pag.initialize_paginator()
+
         # inicializamos la vista y pasamos al constructor padre
         super().__init__(self.__view)
 
         # Llenamos la tabla
         self.load_tableview()
+        self.configure_table_foot()
 
         # Inicializamos los eventos
         self.init_handlers()
@@ -45,11 +51,8 @@ class TipoFiltroController(BaseController):
     def load_tableview(self):
         """ Gestiona los datos para llenar la tabl. """
 
-        datos = self.__dao.get_list().value
-        self.fill_tableview(self.__view.data_table, datos)
-
+        self.fill_tableview(self.__view.data_table, self._pag.current_data)
         self._configure_table(self.__view.data_table)
-
 
     def show(self):
         """ Abre la vista """
@@ -81,10 +84,34 @@ class TipoFiltroController(BaseController):
         self.__view.button_delete.clicked.connect(self.button_delete_click)
         self.__view.button_clean.clicked.connect(lambda: self._clean_view())
 
+        self.__view.button_next.clicked.connect(self.next_page)
+        self.__view.button_prev.clicked.connect(self.previous_page)
+        self.__view.button_first.clicked.connect(self.first_page)
+        self.__view.button_last.clicked.connect(self.last_page)
+
+        # Inicializamos los combos
+        self.__view.combo_select_page.currentIndexChanged.connect(
+            self.combo_page_indexchanged
+        )
+
         # Eventos de la tabla
         self.__view.data_table.customContextMenuRequested.connect(
             self.show_context_menu
         )
+
+    def combo_page_indexchanged(self, event: QEvent):
+        """
+        Se ejecuta cuando el índice del combo de selección de página.
+        """
+
+        page = self.__view.combo_select_page.currentData()
+
+        # ---------- PROVISIONAL -------------------
+        print(f"PÁGINA: {page}")
+
+        self._pag.current_page = page
+        self._pag.current_data = self._pag.get_paged_list(self._pag.current_page)
+        self.load_tableview()
 
     def show_context_menu(self, position):
         """ Muestra el menú contextual de la tabla. """
@@ -141,6 +168,7 @@ class TipoFiltroController(BaseController):
 
         # Lee los datos del modelo
         id_tipo = modelo.index(fila, 0).data()
+        pagina_actual = self.__view.combo_select_page.currentData()
 
         res = self.delete(id_tipo)
 
@@ -152,6 +180,42 @@ class TipoFiltroController(BaseController):
             )
             return
 
+        # Configurar paginador
+        self._pag.initialize_paginator()
+
+        # Comprobamos si al añadir un registro se ha aumentado el número
+        # de páginas totales
+        if pagina_actual > self._pag.total_pages:
+
+            total = self.__view.combo_select_page.count()
+            index = self.__view.combo_select_page.currentIndex()
+
+            # Verifica si es el último ítem
+            if index == total - 1 and total > 1:
+                self.__view.combo_select_page.removeItem(index)
+                # Selecciona el nuevo último (el anterior al que se eliminó)
+                self.__view.combo_select_page.setCurrentIndex(
+                    self.__view.combo_select_page.count() - 1
+                )
+            elif index == total - 1 and total == 1:
+                # Sí es el único ítem, eliminarlo y limpiar la selección
+                self.__view.combo_select_page.removeItem(index)
+                self.__view.combo_select_page.setCurrentIndex(-1)
+
+        # Establecemos la página actual
+        if pagina_actual > self._pag.total_pages:
+            self.__view.combo_select_page.setCurrentIndex(
+                self._pag.total_pages - 1
+            )
+
+        if self._pag.total_pages == 1:
+            self.__view.combo_select_page.addItem("2", 2)
+            self.__view.combo_select_page.setCurrentIndex(1)
+            self.__view.combo_select_page.setCurrentIndex(0)
+            self.__view.combo_select_page.removeItem(1)
+        else:
+            self.__view.combo_select_page.setCurrentIndex(0)
+            self.__view.combo_select_page.setCurrentIndex(pagina_actual - 1)
 
 
     def action_cargar(self, event):
@@ -161,8 +225,6 @@ class TipoFiltroController(BaseController):
 
     def button_delete_click(self, event):
         """ Controla el clic en el botón eliminar. """
-
-        id_tipo = None
 
         # Sí tenemos un registro cargado
         if not self.__view.edit_id.text():
@@ -176,6 +238,7 @@ class TipoFiltroController(BaseController):
 
         # Obtener el ID desde el cuadro de texto id_parent
         id_tipo = int(self.__view.edit_id.text())
+        pagina_actual = self.__view.combo_select_page.currentData()
 
         # Insertar el registro
         res = self.delete(id_tipo)
@@ -187,6 +250,43 @@ class TipoFiltroController(BaseController):
                 res.error_msg
             )
 
+        # Configurar paginador
+        self._pag.initialize_paginator()
+
+        # Comprobamos si al añadir un registro se ha aumentado el número
+        # de páginas totales
+        if pagina_actual > self._pag.total_pages:
+
+            total = self.__view.combo_select_page.count()
+            index = self.__view.combo_select_page.currentIndex()
+
+            # Verifica si es el último ítem
+            if index == total - 1 and total > 1:
+                self.__view.combo_select_page.removeItem(index)
+                # Selecciona el nuevo último (el anterior al que se eliminó)
+                self.__view.combo_select_page.setCurrentIndex(
+                    self.__view.combo_select_page.count() - 1
+                )
+            elif index == total - 1 and total == 1:
+                # Sí es el único ítem, eliminarlo y limpiar la selección
+                self.__view.combo_select_page.removeItem(index)
+                self.__view.combo_select_page.setCurrentIndex(-1)
+
+        # Establecemos la página actual
+        if pagina_actual > self._pag.total_pages:
+            self.__view.combo_select_page.setCurrentIndex(
+                self._pag.total_pages - 1
+            )
+
+        if self._pag.total_pages == 1:
+            self.__view.combo_select_page.addItem("2", 2)
+            self.__view.combo_select_page.setCurrentIndex(1)
+            self.__view.combo_select_page.setCurrentIndex(0)
+            self.__view.combo_select_page.removeItem(1)
+        else:
+            self.__view.combo_select_page.setCurrentIndex(0)
+            self.__view.combo_select_page.setCurrentIndex(pagina_actual - 1)
+
     def button_load_click(self, event):
         """ Controla el clic del boton de cargar. """
 
@@ -195,6 +295,8 @@ class TipoFiltroController(BaseController):
 
     def button_update_click(self, event):
         """ Controla el clic del botón actualizar. """
+
+        pagina_actual = self.__view.combo_select_page.currentData()
 
         # Valida el formulario
         res = TipoFiltroValidator.ValidateTipoFiltro(
@@ -214,6 +316,22 @@ class TipoFiltroController(BaseController):
                 self.__view.window_title,
                 res.error_msg
             )
+
+        # Configuramos el paginador
+        self._pag.initialize_paginator()
+
+        # Establecemos la página actual
+        if self._pag.total_pages == 1:
+            self.__view.combo_select_page.addItem("2", 2)
+            self.__view.combo_select_page.setCurrentIndex(1)
+            self.__view.combo_select_page.setCurrentIndex(0)
+            self.__view.combo_select_page.removeItem(1)
+        else:
+            self.__view.combo_select_page.setCurrentIndex(0)
+            self.__view.combo_select_page.setCurrentIndex(pagina_actual - 1)
+
+
+        self._select_row_by_id(self.__view.data_table, res.value)
 
     def button_insert_click(self, event):
         """ Controla el clic del botón insertar. """
@@ -239,6 +357,29 @@ class TipoFiltroController(BaseController):
                 self.__view.window_title,
                 res.error_msg
             )
+            return
+
+        # Configura el paginador
+        self._pag.initialize_paginator()
+
+        # Comprobamos si al añadir un registro se ha aumentado el número
+        # de páginas totales
+        if self._pag.total_pages > self.__view.combo_select_page.count():
+            self.__view.combo_select_page.addItem(
+                str(self._pag.total_pages),
+                self._pag.total_pages
+            )
+            self.__view.label_total_pages.setText(
+                str(self.__view.combo_select_page.count())
+            )
+
+        # Establecemos la página final
+        self.__view.combo_select_page.setCurrentIndex(1)
+        self.__view.combo_select_page.setCurrentIndex(
+            self.__view.combo_select_page.count() - 1
+        )
+
+        self._select_row_by_id(self.__view.data_table, res.value)
 
     def fill_tableview(self, table: QTableView, data: list[TipoFiltroEntity]):
         """ Carga los datos en la tabla. """
@@ -309,10 +450,6 @@ class TipoFiltroController(BaseController):
 
         # Limpiamos el formulario
         self._clean_view()
-
-        # Configuramos la tabla
-        self.load_tableview()
-        self._select_row_by_id(self.__view.data_table, res.value)
 
         return Result.success(res.value)
 
@@ -424,3 +561,71 @@ class TipoFiltroController(BaseController):
         self.load_tableview()
 
         return Result.success(id)
+
+    def configure_table_foot(self):
+        """ Configura el pie de la tabla. """
+
+        self.__view.label_total_pages.setText(str(self._pag.total_pages))
+        self.fill_combo_page()    
+
+    def next_page(self, event: QEvent) -> None:
+        """ Pasa a la siguiente página de la tabla. """
+
+        page_to = self.__view.combo_select_page.currentData() + 1
+
+        if page_to > self._pag.total_pages:
+            QMessageBox.information(
+                self.__view,
+                self.__view.window_title,
+                "SE HA LLEGADO A LA ÚLTIMA PÁGINA"
+            )
+            return
+
+        self._pag.current_page = page_to
+        self.__view.combo_select_page.setCurrentIndex(self._pag.page_index)
+
+    def previous_page(self, event: QEvent) -> None:
+        """ Pasa a la anterior página de la tabla. """
+
+        page_to = self.__view.combo_select_page.currentData() - 1
+
+        if page_to < 1:
+            QMessageBox.information(
+                self.__view,
+                self.__view.window_title,
+                "SE HA LLEGADO A LA PRIMERA PÁGINA"
+            )
+            return
+
+        self._pag.current_page = page_to
+        self.__view.combo_select_page.setCurrentIndex(self._pag.page_index)
+
+    def first_page(self, event: QEvent) -> None:
+        """ Pasa a la primera página de la tabla. """
+
+        page_to = 1
+
+        if self._pag.current_page == 1:
+            return
+
+        self._pag.current_page = page_to
+        self.__view.combo_select_page.setCurrentIndex(self._pag.page_index)
+
+    def last_page(self, event: QEvent) -> None:
+        """ Pasa a la primera página de la tabla. """
+
+        page_to = self._pag.total_pages
+
+        if self._pag.current_page == self._pag.total_pages:
+            return
+
+        self._pag.current_page = page_to
+        self.__view.combo_select_page.setCurrentIndex(self._pag.page_index)
+
+    def fill_combo_page(self):
+        """ Rellena el combo de selección de página. """
+
+        self.__view.combo_select_page.clear()
+        for i in range(1, self._pag.total_pages + 1):
+            self.__view.combo_select_page.addItem(str(i), i)
+

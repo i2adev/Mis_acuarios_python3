@@ -10,6 +10,7 @@ from abc import ABC, abstractmethod
 from PyQt6.QtWidgets import QMessageBox
 from Model.DAO.database import DBManager
 from Model.Entities.base_entity import BaseEntity
+from Model.Entities.tipo_filtro_entity import TipoFiltroEntity
 from Services.Result.result import Result
 
 
@@ -153,8 +154,6 @@ class BaseDAO(ABC):
                     WHERE   {col_parent} = :id_parent;
                 """
 
-
-
             try:
                 cursor = db.conn.cursor()
 
@@ -166,7 +165,9 @@ class BaseDAO(ABC):
                 else:
                     cursor.execute(sql)
 
-                value = [fila[0] for fila in cursor.fetchall()]
+                value = [TipoFiltroEntity(f["ID"], f["NUM"], f["TIPO"],
+                                         f["OBSERVACIONES"])
+                        for f in cursor.fetchall()]
 
                 # Devolvemos los datos
                 return Result.success(value)

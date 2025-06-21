@@ -12,7 +12,8 @@ from Model.DAO.base_dao import BaseDAO
 class Paginator:
     """ Clase que gestiona la paginación del listado de entidades. """
 
-    def __init__(self, procedure: str, records_page: int, id_parent: int = None):
+    def __init__(self, procedure: str, records_page: int,
+                 id_parent: int = None):
         """ Constructor de la clase. """
 
         self._id = id_parent                # Id, por sí hay que obtener
@@ -85,7 +86,7 @@ class Paginator:
         """ Válida y asigna el índice de página. """
 
         if not self.total_data:
-            raise (
+            raise ValueError(
                 """
                 CLASE NO CONFIGURADA. DEBES INICIALIZAR LA CLASE PRIMERO.
                 """
@@ -105,7 +106,7 @@ class Paginator:
         """ Valida y asigna el número final de la página. """
 
         if not self.total_data:
-            raise (
+            raise ValueError(
                 """
                 CLASE NO CONFIGURADA. DEBES INICIALIZAR LA CLASE PRIMERO.
                 """
@@ -125,7 +126,7 @@ class Paginator:
         """ Valida y asigna el número inicial de la página. """
 
         if not self.total_data:
-            raise(
+            raise ValueError(
                 """
                 CLASE NO CONFIGURADA. DEBES INICIALIZAR LA CLASE PRIMERO.
                 """
@@ -144,21 +145,19 @@ class Paginator:
     def current_page(self, new_page: int) -> None:
         """ Valida y asigna el número de página actual. """
 
-        if not new_page or new_page == 0:
-            raise(
-                "EL NÚMERO DE PÁGINA NO PUEDE SER NULO NI 0."
-            )
-
         if not self.total_data:
-            raise(
+            raise ValueError(
                 """
                 CLASE NO CONFIGURADA. DEBES INICIALIZAR LA CLASE PRIMERO.
                 """
             )
 
-        self._current_page = new_page
-        self._page_index = new_page - 1
-
+        if not new_page or new_page == 0:
+            self.current_page = 1
+            self.page_index = 0
+        else:
+            self._current_page = new_page
+            self._page_index = new_page - 1
 
     # Número de registros
     @property
@@ -195,7 +194,7 @@ class Paginator:
         """ Valida y asigna el número total de páginas. """
 
         if not self.total_data:
-            raise (
+            raise ValueError(
                 """
                 CLASE NO CONFIGURADA. DEBES INICIALIZAR LA CLASE PRIMERO.
                 """
@@ -250,7 +249,7 @@ class Paginator:
         ****************************************************************
     """
 
-    def get_paged_list(self, page: int) -> list:
+    def get_paged_list(self, page: int = 1) -> list:
         """
         Obtiene los datos de la página pasada como parámetro.
 
@@ -283,28 +282,23 @@ class Paginator:
         self.page_index = page -1
         self.start = (self.current_page - 1) * self.records_page + 1
         self.end = self.current_page * self.records_page
+        paged_list = self.total_data[self.start - 1 : self.end]
 
-        self.current_data = self.total_data[self.start : self.end]
+        return paged_list
 
-        return self.current_data
-
-    def initialize_paginator(self, first_page: bool = True) -> None:
+    def initialize_paginator(self, page: int = 1) -> None:
         """
         Inicializa el paginador.
 
         Parámetros:
-        - FIRST_PAGE: Específica si se ha cargar la primera página
+        - PAGE: El número de página a mostrar
         """
-        # TODO: Inicializar el paginador:
-        #       - Inicializa los datos TOTAL_DATA.
-        #       - Inicializa TOTAL_PAGES
-        #       - Inicializa RECORDS.
 
         res = BaseDAO.get_total_data(self.procedure)
         if not res.is_success:
             QMessageBox.warning(
                 None,
-                "ERROR DE PAGINACION",
+                "ERROR DE PAGINACIÓN",
                 res.error_msg
             )
             return
@@ -312,12 +306,18 @@ class Paginator:
         self.total_data = res.value
         self.records = len(self.total_data)
 
-        if first_page:
-            self.current_page = 1
-        else:
-            self.current_page = self.total_pages
+        if page < 1 or page > self.total_pages:
+            QMessageBox.warning(
+                None,
+                "ERROR DE PAGINACIÓN",
+                f"""ERROR EN EL NÚMERO DE PÁGINA {page}
+                - EL NUMERO DE PÁGINA HA DE SER MAYOR QUE 0.
+                - EL NUMERO DE PÁGINA HA DE SER MENOR O IGUAL QUE {self.total_pages}"""
+            )
+            return
 
-        self.get_paged_list(self.current_page)
+        self.current_page = page
+        self.current_data = self.get_paged_list(page)
 
     def __str__(self):
         """ Muestra el objeto en forma de texto. """

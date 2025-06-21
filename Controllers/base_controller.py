@@ -13,6 +13,7 @@ from PyQt6.QtWidgets import (QMessageBox, QLineEdit, QTextEdit,
                              QPlainTextEdit, QWidget, QTableView)
 import enchant  # Enchant es la librería de revisión orográfica
 
+from Model.DAO.paginator import Paginator
 from Views.base_view import BaseView
 
 class BaseController(QObject):
@@ -83,7 +84,7 @@ class BaseController(QObject):
 
         return super().eventFilter(obj, event)
 
-    def _select_row_by_id(self, table: QTableView, id: int, column: int = 0):
+    def _select_row_by_id(self, table: QTableView, id_elem: int, column: int = 0):
         """ Selecciona una fila por su ID. """
 
         # Obtenemos el modelo de la tabla
@@ -93,7 +94,7 @@ class BaseController(QObject):
         for fila in range(model.rowCount()):
             # Obtenemos el índice
             index = model.index(fila, column)
-            if str(index.data()) == str(id):
+            if str(index.data()) == str(id_elem):
                 # Si el ID coincide con el parámetro
                 table.selectRow(fila)
                 table.scrollTo(index)
@@ -105,3 +106,4 @@ class BaseController(QObject):
         for widget in self._view.findChildren(QWidget):
             if isinstance(widget, self._text_widgets):
                 widget.clear()
+

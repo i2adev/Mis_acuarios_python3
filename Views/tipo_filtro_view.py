@@ -106,7 +106,7 @@ class TipoFiltroView(QWidget):
         layout_navigation = QHBoxLayout()
         layout_footer = QHBoxLayout() # Layout pie de formulario
 
-        # Configuramos la barra del titulo
+        # Configuramos la barra del título
         self.layout_title_bar.addWidget(self.label_icon)
         self.layout_title_bar.addWidget(self.label_window_title)
         self.layout_title_bar.addItem(self.spacer_tb)
@@ -154,8 +154,8 @@ class TipoFiltroView(QWidget):
 
         # Configuramos el layout de navegación
         layout_navigation.addWidget(self.button_first)
-        layout_navigation.addWidget(self.label_page)
         layout_navigation.addWidget(self.button_prev)
+        layout_navigation.addWidget(self.label_page)
         layout_navigation.addWidget(self.combo_select_page)
         layout_navigation.addWidget(self.label_de)
         layout_navigation.addWidget(self.label_total_pages)
@@ -364,8 +364,8 @@ class TipoFiltroView(QWidget):
         ### Etiqueta página
         self.label_page = QLabel()
         self.label_page.setText("PÁGINA")
-        self.label_page.setMinimumWidth(50)
-        self.label_page.setMaximumWidth(50)
+        self.label_page.setMinimumWidth(60)
+        self.label_page.setMaximumWidth(60)
 
         ### Combo selector de página
         self.combo_select_page = QComboBox()
@@ -380,8 +380,8 @@ class TipoFiltroView(QWidget):
 
         ### Label TOTAL PAGES
         self.label_total_pages = QLabel()
-        self.label_total_pages.setMinimumWidth(40)
-        self.label_total_pages.setMaximumWidth(40)
+        self.label_total_pages.setMinimumWidth(30)
+        self.label_total_pages.setMaximumWidth(30)
 
         ### Espaciador
         self.spacer_navigation = QSpacerItem(400, 10)

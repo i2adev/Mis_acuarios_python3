@@ -17,7 +17,7 @@ def test_configuracion():
 def test_configuracion_last_page():
     """ Primer test para saber que se ha configurado la última página. """
     pag = Paginator("VISTA_TIPOS_FILTRO", 5)
-    pag.initialize_paginator(False)
+    pag.initialize_paginator()
 
     print(pag)
 
@@ -31,3 +31,4 @@ if __name__ == "__main__":
     print(" Última página")
     print(" ----------------------------")
     test_configuracion_last_page()
+
