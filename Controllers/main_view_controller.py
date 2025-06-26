@@ -7,7 +7,7 @@ Commentarios:
 
 from Controllers.base_controller import BaseController
 from Controllers.tipo_filtro_controller import TipoFiltroController
-from Views.main_window import MainWindow
+from Views.main_view import MainView
 
 
 class MainViewController(BaseController):
@@ -19,7 +19,7 @@ class MainViewController(BaseController):
         """ Construtctor de clase. """
 
         # Inicializamos la vista, la entitdad y el DAO
-        self.__view = MainWindow("MIS ACIUARIOS")
+        self.__view = MainView("MIS ACIUARIOS")
         # TODO: Crear e inicializar el DAO que gestiona el dashboard.
 
         # Llamamos al constructor base
@@ -45,5 +45,5 @@ class MainViewController(BaseController):
 
     def show(self):
         """ Abre la vista """
-        self.__view.show()
+        self.__view.showMaximized()
 

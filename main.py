@@ -16,9 +16,9 @@ from Model.DAO.base_dao import BaseDAO
 from Model.DAO.database import DBManager
 
 # Versión del programa
-__version__ = "0.1.3"
+__version__ = "0.1.4"
 
-from Views.main_window import MainWindow
+from Views.main_view import MainView
 
 
 # Entrada al programa

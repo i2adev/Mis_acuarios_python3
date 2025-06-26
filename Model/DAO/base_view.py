@@ -1,6 +1,6 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
-Fecha:      02/06/2025
+Fecha:      26/06/2025
 Commentarios:
     Módulo que contiene los métodos de acceso a la base de datos de la
     entidad TIPO DE FILTRO.

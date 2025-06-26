@@ -17,7 +17,7 @@ from PyQt6.QtCore import Qt
 
 import Resources.image_rc
 
-class MainWindow(QWidget):
+class MainView(QWidget):
     """ Formulario de tipo de filtro """
 
     def __init__(self, w_title: str):
@@ -141,7 +141,7 @@ class MainWindow(QWidget):
         )
 
         self.frame_menu.setObjectName("frame_menu")
-        self.frame_menu.setFixedWidth(200)
+        self.frame_menu.setFixedWidth(250)
         self.frame_menu.setLayout(self.menu_layout)
 
         self.layout_title_bar = QHBoxLayout() # Layout barra título
@@ -514,7 +514,6 @@ class MainWindow(QWidget):
         self.button_tb_restore.setCursor(
             QCursor(Qt.CursorShape.PointingHandCursor)
         )
-        self.button_tb_restore.hide()
 
         ## Propiedades del botón minimizar
         icon4 = QIcon()
@@ -527,7 +526,6 @@ class MainWindow(QWidget):
         self.button_tb_minimize.setCursor(
             QCursor(Qt.CursorShape.PointingHandCursor)
         )
-        self.button_tb_minimize.hide()
 
         ### Espaciador
         self.spacer_tb = QSpacerItem(400, 10, QSizePolicy.Policy.Expanding,
@@ -540,52 +538,52 @@ class MainWindow(QWidget):
         icon5 = QPixmap(":/Images/Window_icon.png")
         self.label_icon.setPixmap(icon5)
 
-    # """
-    # El comportamiento básico de la barra de titulo que hemos creado
-    # """
-    # def control_bt_minimizar(self):
-    #     """ Minimiza la ventana """
-    #     self.showMinimized()
-    # def control_bt_maximizar(self):
-    #     """ Maximiza la ventana """
-    #     self.showMaximized()
-    #     self.button_tb_maximize.hide()
-    #     self.button_tb_restore.show()
-    #
-    # def control_bt_normal(self):
-    #     """ Establece el tamaño normal de la ventana """
-    #     self.showNormal()
-    #     self.button_tb_restore.hide()
-    #     self.button_tb_maximize.show()
-    #
-    # ## SizeGrip
-    # def resizeEvent(self, event):
-    #     rect = self.rect()
-    #     self.grip.move(rect.right() - self.gripSize, rect.bottom()
-    #                    - self.gripSize)
-    #
-    # ## mover ventana
-    # def mousePressEvent(self, event):
-    #     if event.button() == Qt.MouseButton.LeftButton:
-    #         self.drag_position = event.globalPosition().toPoint()
-    #
-    # def mover_ventana(self, event):
-    #     if not self.isMaximized():
-    #         if event.buttons() == Qt.MouseButton.LeftButton:
-    #             self.move(self.pos() + event.globalPosition().toPoint()
-    #                       - self.drag_position)
-    #             self.drag_position = event.globalPosition().toPoint()
-    #             event.accept()
-    #
-    #     if self.drag_position.y() <= 20:
-    #         self.showMaximized()
+    """
+    El comportamiento básico de la barra de titulo que hemos creado
+    """
+    def control_bt_minimizar(self):
+        """ Minimiza la ventana """
+        self.showMinimized()
+    def control_bt_maximizar(self):
+        """ Maximiza la ventana """
+        self.showMaximized()
+        self.button_tb_maximize.hide()
+        self.button_tb_restore.show()
+
+    def control_bt_normal(self):
+        """ Establece el tamaño normal de la ventana """
+        self.showNormal()
+        self.button_tb_restore.hide()
+        self.button_tb_maximize.show()
+
+    ## SizeGrip
+    def resizeEvent(self, event):
+        rect = self.rect()
+        self.grip.move(rect.right() - self.gripSize, rect.bottom()
+                       - self.gripSize)
+
+    ## mover ventana
+    def mousePressEvent(self, event):
+        if event.button() == Qt.MouseButton.LeftButton:
+            self.drag_position = event.globalPosition().toPoint()
+
+    def mover_ventana(self, event):
+        if not self.isMaximized():
+            if event.buttons() == Qt.MouseButton.LeftButton:
+                self.move(self.pos() + event.globalPosition().toPoint()
+                          - self.drag_position)
+                self.drag_position = event.globalPosition().toPoint()
+                event.accept()
+
+        if self.drag_position.y() <= 20:
+            self.showMaximized()
 
 
 # Entrada a la aplicación
 if __name__ == "__main__":
     app = QApplication(sys.argv)
 
-    ventana = MainWindow("M I S    1A C U A R I O S")
+    ventana = MainView("M I S    1A C U A R I O S")
 
     # Cargar el archivo .qss
     with open("../Resources/Styles/main_style.qss", "r",

@@ -1,5 +1,8 @@
 ﻿CHANGELOG:
 ================================================================================
+0.1.4   REFACTORIZACIÓN: SE MODIFICA EL FORMULARIO DE TIPO DE FILTRO PARA ADAP-
+        TARLO A LA CLASE BASE BASEVIEW.
+
 0.1.3   REFACTORIZACIÓN:
         -   SE MODIFICA LA LÓGICA DE LOS ESPACIADORES DEL FORMULARIO
             TIPO DE FILTRO.

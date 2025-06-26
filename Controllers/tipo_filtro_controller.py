@@ -88,6 +88,10 @@ class TipoFiltroController(BaseController):
         self.__view.button_first.clicked.connect(self.first_page)
         self.__view.button_last.clicked.connect(self.last_page)
 
+        self.__view.button_close.clicked.connect(
+            lambda: self.__view.close()
+        )
+
         # Inicializamos los combos
         self.__view.combo_select_page.currentIndexChanged.connect(
             self.combo_page_indexchanged

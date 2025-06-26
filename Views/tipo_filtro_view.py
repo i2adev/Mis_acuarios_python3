@@ -102,8 +102,6 @@ class TipoFiltroView(QWidget):
         self.layout_observaciones.addWidget(self.text_observaciones)
 
         # Datatable y crud
-        self.layout_table.addWidget(self.data_table)
-
         self.layout_crud.addWidget(self.button_insert)
         self.layout_crud.addWidget(self.button_update)
         self.layout_crud.addWidget(self.button_load)
@@ -115,6 +113,7 @@ class TipoFiltroView(QWidget):
             QSizePolicy.Policy.Expanding)
         )
 
+        self.layout_table.addWidget(self.data_table)
         self.layout_data.addWidget(self.frame_table)
         self.layout_data.addLayout(self.layout_crud)
 
@@ -140,7 +139,6 @@ class TipoFiltroView(QWidget):
             QSpacerItem(20, 20, QSizePolicy.Policy.Expanding,
             QSizePolicy.Policy.Minimum)
         )
-        # self.layout_navigation.addItem(self.spacer_navigation)
 
         # Configulamos el layout del pie de formulario
         # self.layout_footer.addItem(self.spacer_foot)
@@ -158,16 +156,42 @@ class TipoFiltroView(QWidget):
         self.layout_main.addLayout(self.layout_data)
         self.layout_main.addLayout(self.layout_navigation)
         self.layout_main.addLayout(self.layout_footer)
-        self.setLayout(self.layout_main)
+
+        # self.setLayout(self.layout_main)
+
+        # -------------- PROVISIONAL
+        layout_root = QVBoxLayout(self)
+        layout_root.setContentsMargins(0, 0, 0, 0)
+        layout_root.setSpacing(0)
+        layout_root.addWidget(self.frame_main)
+        # -------------- FIN PROVISIONAL
 
     def create_widgets(self):
         """ Crea los elementos del formulario"""
         self.layout_main = QVBoxLayout() # Layout principal
+
+        # ----------- PROVISIONAL
+        self.frame_main = QFrame()
+        self.frame_main.setObjectName("frame_main")
+        self.frame_main.setSizePolicy(QSizePolicy.Policy.Expanding,
+                                      QSizePolicy.Policy.Expanding)
+        self.frame_main.setLayout(self.layout_main)  # layout_main ya existe
+        self.frame_main.setStyleSheet("""
+            #frame_main {
+                border: 1px solid #4a4a4a;
+                border-radius: 0px;
+                background-color: transparent;
+            }
+        """)
+        # ------------- FIN PROVISIONAL
+
         self.layout_title_bar = QHBoxLayout() # Layout barra título
         self.layout_title_bar.setContentsMargins(0, 0, 0, 0)
-        self.layout_table = QHBoxLayout() # Contiene la tabla
+        self.layout_table = QHBoxLayout() # Layout del frame_table que contiene
+                                          # la tabla
         self.layout_data = QHBoxLayout() # Layout de datatable y crud
         self.frame_table = QFrame() # Frame que contiene el datatable
+        # self.frame_table.setLayout(self.layout_table)
         self.frame_table.setLayout(self.layout_table)
         self.frame_table.setMinimumHeight(210)
         self.layout_crud = QVBoxLayout()  # Layout donde se colocan los botones 
@@ -328,9 +352,6 @@ class TipoFiltroView(QWidget):
         self.button_search = QPushButton()
         self.button_search.setText("&BUSCAR")
 
-        ### Espaciador
-        # self.spacer_crud = QSpacerItem(40,10)
-
         ## Controles de navegación
         ### Botón última página
         self.button_last = QPushButton()
@@ -386,9 +407,6 @@ class TipoFiltroView(QWidget):
         self.label_total_pages.setMinimumWidth(30)
         self.label_total_pages.setMaximumWidth(30)
 
-        ### Espaciador
-        # self.spacer_navigation = QSpacerItem(400, 20)
-
         # Controles del pie de formulario
         ## Botón aceptar
         self.button_accept = QPushButton()
@@ -441,16 +459,30 @@ class TipoFiltroView(QWidget):
         if event.button() == Qt.MouseButton.LeftButton:
             self.drag_position = event.globalPosition().toPoint()
 
-    def mover_ventana(self, event):
-        if not self.isMaximized():
-            if event.buttons() == Qt.MouseButton.LeftButton:
-                self.move(self.pos() + event.globalPosition().toPoint()
-                          - self.drag_position)
-                self.drag_position = event.globalPosition().toPoint()
-                event.accept()
+    # def mover_ventana(self, event):
+    #     if not self.isMaximized():
+    #         if event.buttons() == Qt.MouseButton.LeftButton:
+    #             self.move(self.pos() + event.globalPosition().toPoint()
+    #                       - self.drag_position)
+    #             self.drag_position = event.globalPosition().toPoint()
+    #             event.accept()
+    #
+    #     if self.drag_position.y() <= 20:
+    #         self.showMaximized()
 
-        if self.drag_position.y() <= 20:
-            self.showMaximized()
+    def mover_ventana(self, event):
+        try:
+            if not self.isMaximized():
+                if event.buttons() == Qt.MouseButton.LeftButton:
+                    self.move(self.pos() + event.globalPosition().toPoint()
+                              - self.drag_position)
+                    self.drag_position = event.globalPosition().toPoint()
+                    event.accept()
+
+            if self.drag_position.y() <= 20:
+                self.showMaximized()
+        except Exception as e:
+            print(f"Error en mover_ventana: {e}")
 
 
 # Entrada a la aplicación
