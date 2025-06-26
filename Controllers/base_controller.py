@@ -18,7 +18,7 @@ from Views.base_view import BaseView
 
 class BaseController(QObject):
     """ Controlador base de la que hereda el resto de controladores. """
-    # def __init__(self, view: QWidget):
+
     def __init__(self, view: QWidget):
         """ Constructor de clase """
 
@@ -106,4 +106,3 @@ class BaseController(QObject):
         for widget in self._view.findChildren(QWidget):
             if isinstance(widget, self._text_widgets):
                 widget.clear()
-

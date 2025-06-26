@@ -10,16 +10,15 @@ Commentarios:
 # Importaciones
 import sys
 from pathlib import Path
-
 from PyQt6.QtWidgets import QApplication, QMessageBox
-from Controllers.tipo_filtro_controller import TipoFiltroController
+from Controllers.main_view_controller import MainViewController
+from Model.DAO.base_dao import BaseDAO
+from Model.DAO.database import DBManager
 
 # Versión del programa
-__version__ = "0.0.4"
+__version__ = "0.1.3"
 
-from Model.DAO.base_dao import BaseDAO
-
-from Model.DAO.database import DBManager
+from Views.main_window import MainWindow
 
 
 # Entrada al programa
@@ -72,7 +71,7 @@ def main():
     #         "NO SE HA PODIDO REALIZAR EL BACKUP"
     #     )
 
-    ctrl = TipoFiltroController()
+    ctrl = MainViewController()
     ctrl.show()
     sys.exit(app.exec())
 

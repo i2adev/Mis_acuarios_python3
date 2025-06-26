@@ -214,6 +214,46 @@ class BaseView(QWidget):
 
         self.spacer_navigation = QSpacerItem(400, 10)
 
+    """
+    El comportamiento básico de la barra de titulo que hemos creado
+    """
+    def control_bt_minimizar(self):
+        """ Minimiza la ventana """
+        self.showMinimized()
+    def control_bt_maximizar(self):
+        """ Maximiza la ventana """
+        self.showMaximized()
+        self.button_tb_maximize.hide()
+        self.button_tb_restore.show()
+
+    def control_bt_normal(self):
+        """ Establece el tamaño normal de la ventana """
+        self.showNormal()
+        self.button_tb_restore.hide()
+        self.button_tb_maximize.show()
+
+    ## SizeGrip
+    def resizeEvent(self, event):
+        rect = self.rect()
+        self.grip.move(rect.right() - self.gripSize, rect.bottom()
+                       - self.gripSize)
+
+    ## mover ventana
+    def mousePressEvent(self, event):
+        if event.button() == Qt.MouseButton.LeftButton:
+            self.drag_position = event.globalPosition().toPoint()
+
+    def mover_ventana(self, event):
+        if not self.isMaximized():
+            if event.buttons() == Qt.MouseButton.LeftButton:
+                self.move(self.pos() + event.globalPosition().toPoint()
+                          - self.drag_position)
+                self.drag_position = event.globalPosition().toPoint()
+                event.accept()
+
+        if self.drag_position.y() <= 20:
+            self.showMaximized()
+
 # Entrada a la aplicación
 if __name__ == "__main__":
     app = QApplication(sys.argv)

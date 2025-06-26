@@ -1,6 +1,19 @@
 ﻿================================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
+25/06/2025  REFACTORIZACIÓN:
+            -   SE MODIFICA LA LÓGICA DE LOS ESPACIADORES EN EL FORMULARIO DE
+                TIPO DE FILTRO.                                             DONE
+            -   SE ORGANIZA EL MÉTODO DE CREACIÓN DE FUNCIONES Y LA CONS-
+                TRUCCIÓN DEL LAYOUT DEL FORMULARIO.                         DONE
+            -   SE PASAN LAS FUNCIONES BÁSICAS DE VENTANA, COMO MOVER, REDIMEN-
+                SIONAR, ... AL CONTROLADOR BASE.                            POSP
+
+22/06/2025  SE CREA UNA VERSIÓN INICIAL DEL FORMULARIO PRINCIPAL:
+            -   SE CREA EL ESQUELETO DEL FORMULARIO.                        DONE
+            -   SE CREA LA CLASE CONTROLADORA DEL FORMULARIO PRINCIPAL.     DONE
+            -   SE LE AÑADE FUNCIONALIDAD BÁSICA AL FORMULARIO PRINCIPAL.   DONE
+
 21/06/2025  TESTEO DE LA LÓGICA DE TIPOS DE FILTRO:
             -   SE COMPRUEBA EL FUNCIONAMIENTO CON LA TABLA TIPOS DE FILTRO SIN
                 NINGÚN REGISTRO.                                            DONE

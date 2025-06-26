@@ -21,8 +21,6 @@ from Model.DAO.tipo_filtro_dao import TipoFiltroDAO
 from Model.TableModel.tipo_filtro_table_model import TipoFiltroTableModel
 from Services.Validators.tipo_filtro_validator import TipoFiltroValidator
 
-
-
 class TipoFiltroController(BaseController):
     """ Controlador de la entidad tipo de filtro. """
 
@@ -56,7 +54,8 @@ class TipoFiltroController(BaseController):
 
     def show(self):
         """ Abre la vista """
-
+        self.__view.button_accept.hide()
+        self.__view.button_cancel.hide()
         self.__view.show()
 
     def get_tipo_filtro_list(self):
@@ -74,8 +73,8 @@ class TipoFiltroController(BaseController):
             if isinstance(widget, self._text_widgets):
                 widget.installEventFilter(self)
 
-        self.__view.text_observaciones.textChanged.connect(lambda:
-                                                           self.spell_check)
+        # self.__view.text_observaciones.textChanged.connect(lambda:
+        #                                                    self.spell_check)
 
         # Inizializa los botones
         self.__view.button_insert.clicked.connect(self.button_insert_click)

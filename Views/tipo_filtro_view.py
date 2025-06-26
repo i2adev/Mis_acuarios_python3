@@ -29,9 +29,6 @@ class TipoFiltroView(QWidget):
         self.grip = QSizeGrip(self)
         self.grip.resize(self.gripSize, self.gripSize)
 
-        # Establecemos el controlador
-        self.ctrl = None
-
         # Configura el formulario
         self.window_title = w_title
         self.create_widgets()
@@ -41,8 +38,6 @@ class TipoFiltroView(QWidget):
 
         # Establece el foco inicial
         self.edit_tipo_filtro.setFocus()
-
-
 
     def set_tab_order(self):
         """ Establece el orden de tabulación de los controles. """
@@ -79,37 +74,13 @@ class TipoFiltroView(QWidget):
         # Ocultar barra de título
         self.setWindowFlags(Qt.WindowType.FramelessWindowHint)
 
-        # Definimos los layouts
-        # layout_main = QVBoxLayout() # Layout principal
-        # self.layout_title_bar = QHBoxLayout() # Layout barra título
-        # self.layout_title_bar.setContentsMargins(0, 0, 0, 0)
-
-        layout_form_data = QVBoxLayout()
-        frame_form_data = QFrame() # Frame de la inserción de datos
-        frame_form_data.setSizePolicy(QSizePolicy.Policy.Expanding,
-                                      QSizePolicy.Policy.Fixed)
-        frame_form_data.setLayout(layout_form_data)
-
-        layout_first_line = QHBoxLayout() # Primera línea del formulario
-        layout_second_line = QHBoxLayout() # Segunda línea del formulario
-        layout_id = QVBoxLayout() # El campo ID
-        layout_tipo_filtro = QVBoxLayout() # El campo TIPO DE FILTRO
-        layout_observaciones = QVBoxLayout() # El campo OBSERVACIONES
-
-        layout_table = QHBoxLayout() # Contiene la tabla
-        layout_data = QHBoxLayout() # Layout de datatable y crud
-        frame_table = QFrame() # Frame que contiene el datatable
-        frame_table.setLayout(layout_table)
-        # Layout donde se colocan los botones del crud
-        layout_crud = QVBoxLayout()
-        # Layout de la navegación entre páginas
-        layout_navigation = QHBoxLayout()
-        layout_footer = QHBoxLayout() # Layout pie de formulario
-
         # Configuramos la barra del título
         self.layout_title_bar.addWidget(self.label_icon)
         self.layout_title_bar.addWidget(self.label_window_title)
-        self.layout_title_bar.addItem(self.spacer_tb)
+        self.layout_title_bar.addSpacerItem(
+            QSpacerItem(20, 20, QSizePolicy.Policy.Expanding,
+            QSizePolicy.Policy.Minimum)
+        )
         self.layout_title_bar.addWidget(self.button_tb_minimize)
         self.layout_title_bar.addWidget(self.button_tb_restore)
         self.layout_title_bar.addWidget(self.button_tb_maximize)
@@ -118,63 +89,75 @@ class TipoFiltroView(QWidget):
         # Consfiguramos el layout de inserción de datos
         # Primera línea
         # ID
-        layout_id.addWidget(self.label_id)
-        layout_id.addWidget(self.edit_id)
+        self.layout_id.addWidget(self.label_id)
+        self.layout_id.addWidget(self.edit_id)
 
         # TIPO DE FILTRO
-        layout_tipo_filtro.addWidget(self.label_tipo_filtro)
-        layout_tipo_filtro.addWidget(self.edit_tipo_filtro)
+        self.layout_tipo_filtro.addWidget(self.label_tipo_filtro)
+        self.layout_tipo_filtro.addWidget(self.edit_tipo_filtro)
 
         # Segunda línea
         # OBSERVACIONES
-        layout_observaciones.addWidget(self.label_observaciones)
-        layout_observaciones.addWidget(self.text_observaciones)
+        self.layout_observaciones.addWidget(self.label_observaciones)
+        self.layout_observaciones.addWidget(self.text_observaciones)
 
         # Datatable y crud
-        layout_table.addWidget(self.data_table)
+        self.layout_table.addWidget(self.data_table)
 
-        layout_crud.addWidget(self.button_insert)
-        layout_crud.addWidget(self.button_update)
-        layout_crud.addWidget(self.button_load)
-        layout_crud.addWidget(self.button_delete)
-        layout_crud.addWidget(self.button_clean)
-        layout_crud.addWidget(self.button_search)
+        self.layout_crud.addWidget(self.button_insert)
+        self.layout_crud.addWidget(self.button_update)
+        self.layout_crud.addWidget(self.button_load)
+        self.layout_crud.addWidget(self.button_delete)
+        self.layout_crud.addWidget(self.button_clean)
+        self.layout_crud.addWidget(self.button_search)
+        self.layout_crud.addSpacerItem(
+            QSpacerItem(20, 20, QSizePolicy.Policy.Minimum,
+            QSizePolicy.Policy.Expanding)
+        )
 
-        layout_data.addWidget(frame_table)
-        layout_data.addLayout(layout_crud)
+        self.layout_data.addWidget(self.frame_table)
+        self.layout_data.addLayout(self.layout_crud)
 
         # Montamos los layouts
         # Layput inserción de datos
-        layout_first_line.addLayout(layout_id)
-        layout_first_line.addLayout(layout_tipo_filtro)
-        layout_second_line.addLayout(layout_observaciones)
+        self.layout_first_line.addLayout(self.layout_id)
+        self.layout_first_line.addLayout(self.layout_tipo_filtro)
+        self.layout_second_line.addLayout(self.layout_observaciones)
 
-        layout_form_data.addLayout(layout_first_line)
-        layout_form_data.addLayout(layout_second_line)
+        self.layout_form_data.addLayout(self.layout_first_line)
+        self.layout_form_data.addLayout(self.layout_second_line)
 
         # Configuramos el layout de navegación
-        layout_navigation.addWidget(self.button_first)
-        layout_navigation.addWidget(self.button_prev)
-        layout_navigation.addWidget(self.label_page)
-        layout_navigation.addWidget(self.combo_select_page)
-        layout_navigation.addWidget(self.label_de)
-        layout_navigation.addWidget(self.label_total_pages)
-        layout_navigation.addWidget(self.button_next)
-        layout_navigation.addWidget(self.button_last)
-        layout_navigation.addItem(self.spacer_navigation)
+        self.layout_navigation.addWidget(self.button_first)
+        self.layout_navigation.addWidget(self.button_prev)
+        self.layout_navigation.addWidget(self.label_page)
+        self.layout_navigation.addWidget(self.combo_select_page)
+        self.layout_navigation.addWidget(self.label_de)
+        self.layout_navigation.addWidget(self.label_total_pages)
+        self.layout_navigation.addWidget(self.button_next)
+        self.layout_navigation.addWidget(self.button_last)
+        self.layout_navigation.addSpacerItem(
+            QSpacerItem(20, 20, QSizePolicy.Policy.Expanding,
+            QSizePolicy.Policy.Minimum)
+        )
+        # self.layout_navigation.addItem(self.spacer_navigation)
 
         # Configulamos el layout del pie de formulario
-        layout_footer.addItem(self.spacer_foot)
-        layout_footer.addWidget(self.button_accept)
-        layout_footer.addWidget(self.button_cancel)
-        layout_footer.addWidget(self.button_close)
+        # self.layout_footer.addItem(self.spacer_foot)
+        self.layout_footer.addSpacerItem(
+            QSpacerItem(20, 20, QSizePolicy.Policy.Expanding,
+            QSizePolicy.Policy.Minimum)
+        )
+        self.layout_footer.addWidget(self.button_accept)
+        self.layout_footer.addWidget(self.button_cancel)
+        self.layout_footer.addWidget(self.button_close)
 
         # Cargamos los layout en la ventana
         self.layout_main.addWidget(self.frame_title_bar)
-        self.layout_main.addWidget(frame_form_data)
-        self.layout_main.addLayout(layout_data)
-        self.layout_main.addLayout(layout_navigation)
-        self.layout_main.addLayout(layout_footer)
+        self.layout_main.addWidget(self.frame_form_data)
+        self.layout_main.addLayout(self.layout_data)
+        self.layout_main.addLayout(self.layout_navigation)
+        self.layout_main.addLayout(self.layout_footer)
         self.setLayout(self.layout_main)
 
     def create_widgets(self):
@@ -182,6 +165,29 @@ class TipoFiltroView(QWidget):
         self.layout_main = QVBoxLayout() # Layout principal
         self.layout_title_bar = QHBoxLayout() # Layout barra título
         self.layout_title_bar.setContentsMargins(0, 0, 0, 0)
+        self.layout_table = QHBoxLayout() # Contiene la tabla
+        self.layout_data = QHBoxLayout() # Layout de datatable y crud
+        self.frame_table = QFrame() # Frame que contiene el datatable
+        self.frame_table.setLayout(self.layout_table)
+        self.frame_table.setMinimumHeight(210)
+        self.layout_crud = QVBoxLayout()  # Layout donde se colocan los botones 
+                                          # del CRUD
+        self.layout_form_data = QVBoxLayout() # Layout del frame que contiene
+                                              # los datos del formulario
+        self.frame_form_data = QFrame() # Frame de la inserción de datos
+        self.frame_form_data.setSizePolicy(QSizePolicy.Policy.Expanding,
+                                      QSizePolicy.Policy.Fixed)
+        self.frame_form_data.setLayout(self.layout_form_data)
+        
+        self.layout_first_line = QHBoxLayout() # Primera línea del formulario
+        self.layout_second_line = QHBoxLayout() # Segunda línea del formulario
+        self.layout_id = QVBoxLayout() # El campo ID
+        self.layout_tipo_filtro = QVBoxLayout() # El campo TIPO DE FILTRO
+        self.layout_observaciones = QVBoxLayout() # El campo OBSERVACIONES
+        
+        self.layout_navigation = QHBoxLayout()  # Layout de navegación de
+                                                # páginas
+        self.layout_footer = QHBoxLayout() # Layout pie de formulario
 
         # Controles de la barra de título
         ## Frame de la barra de título
@@ -248,10 +254,6 @@ class TipoFiltroView(QWidget):
         )
         self.button_tb_minimize.hide()
 
-        ### Espaciador
-        self.spacer_tb = QSpacerItem(400, 10, QSizePolicy.Policy.Expanding,
-                                     QSizePolicy.Policy.Minimum)
-
         self.label_window_title = QLabel(self.window_title)
 
         ## Icono de la ventana
@@ -293,6 +295,7 @@ class TipoFiltroView(QWidget):
         ## Controles de tabla y CRUD
         ### Tabla
         self.data_table = QTableView()
+        self.data_table.setMinimumWidth(600)
         self.data_table.verticalHeader().setVisible(False)
         self.data_table.setSelectionBehavior(
             QAbstractItemView.SelectionBehavior.SelectRows)
@@ -326,7 +329,7 @@ class TipoFiltroView(QWidget):
         self.button_search.setText("&BUSCAR")
 
         ### Espaciador
-        self.spacer_crud = QSpacerItem(40,10)
+        # self.spacer_crud = QSpacerItem(40,10)
 
         ## Controles de navegación
         ### Botón última página
@@ -384,7 +387,7 @@ class TipoFiltroView(QWidget):
         self.label_total_pages.setMaximumWidth(30)
 
         ### Espaciador
-        self.spacer_navigation = QSpacerItem(400, 10)
+        # self.spacer_navigation = QSpacerItem(400, 20)
 
         # Controles del pie de formulario
         ## Botón aceptar
@@ -407,8 +410,6 @@ class TipoFiltroView(QWidget):
         self.button_close.setFlat(True)
         self.button_close.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
 
-        ## Espaciador
-        self.spacer_foot = QSpacerItem(400, 10)
 
     """
     El comportamiento básico de la barra de titulo que hemos creado
@@ -416,6 +417,7 @@ class TipoFiltroView(QWidget):
     def control_bt_minimizar(self):
         """ Minimiza la ventana """
         self.showMinimized()
+
     def control_bt_maximizar(self):
         """ Maximiza la ventana """
         self.showMaximized()
