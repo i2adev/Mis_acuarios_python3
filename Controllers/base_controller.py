@@ -10,7 +10,7 @@ Commentarios:
 # Importaciones
 from PyQt6.QtCore import Qt, QObject, QEvent
 from PyQt6.QtWidgets import (QMessageBox, QLineEdit, QTextEdit,
-                             QPlainTextEdit, QWidget, QTableView)
+                             QPlainTextEdit, QWidget, QTableView, QSizeGrip)
 import enchant  # Enchant es la librería de revisión orográfica
 
 from Model.DAO.paginator import Paginator
@@ -23,6 +23,7 @@ class BaseController(QObject):
         """ Constructor de clase """
 
         super().__init__()
+
         self._view = view
         self._spell_dict = enchant.Dict("en_EN")
         self._text_widgets = (QLineEdit, QTextEdit, QPlainTextEdit)

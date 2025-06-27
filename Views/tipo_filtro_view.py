@@ -157,20 +157,15 @@ class TipoFiltroView(QWidget):
         self.layout_main.addLayout(self.layout_navigation)
         self.layout_main.addLayout(self.layout_footer)
 
-        # self.setLayout(self.layout_main)
-
-        # -------------- PROVISIONAL
         layout_root = QVBoxLayout(self)
         layout_root.setContentsMargins(0, 0, 0, 0)
         layout_root.setSpacing(0)
         layout_root.addWidget(self.frame_main)
-        # -------------- FIN PROVISIONAL
 
     def create_widgets(self):
         """ Crea los elementos del formulario"""
         self.layout_main = QVBoxLayout() # Layout principal
 
-        # ----------- PROVISIONAL
         self.frame_main = QFrame()
         self.frame_main.setObjectName("frame_main")
         self.frame_main.setSizePolicy(QSizePolicy.Policy.Expanding,
@@ -183,7 +178,6 @@ class TipoFiltroView(QWidget):
                 background-color: transparent;
             }
         """)
-        # ------------- FIN PROVISIONAL
 
         self.layout_title_bar = QHBoxLayout() # Layout barra título
         self.layout_title_bar.setContentsMargins(0, 0, 0, 0)
@@ -191,7 +185,6 @@ class TipoFiltroView(QWidget):
                                           # la tabla
         self.layout_data = QHBoxLayout() # Layout de datatable y crud
         self.frame_table = QFrame() # Frame que contiene el datatable
-        # self.frame_table.setLayout(self.layout_table)
         self.frame_table.setLayout(self.layout_table)
         self.frame_table.setMinimumHeight(210)
         self.layout_crud = QVBoxLayout()  # Layout donde se colocan los botones 
@@ -458,17 +451,6 @@ class TipoFiltroView(QWidget):
     def mousePressEvent(self, event):
         if event.button() == Qt.MouseButton.LeftButton:
             self.drag_position = event.globalPosition().toPoint()
-
-    # def mover_ventana(self, event):
-    #     if not self.isMaximized():
-    #         if event.buttons() == Qt.MouseButton.LeftButton:
-    #             self.move(self.pos() + event.globalPosition().toPoint()
-    #                       - self.drag_position)
-    #             self.drag_position = event.globalPosition().toPoint()
-    #             event.accept()
-    #
-    #     if self.drag_position.y() <= 20:
-    #         self.showMaximized()
 
     def mover_ventana(self, event):
         try:

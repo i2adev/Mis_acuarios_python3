@@ -63,8 +63,9 @@ class MainView(QWidget):
     def build_layout(self):
         """ Construye el layout de la ventana """
 
-        # Establece las dimensiones y la posición de la ventana
-        # self.setGeometry(300, 200, 850, 600)
+        # Establece las dimensiones minimas de la vista
+        self.setMinimumWidth(1500)
+        self.setMinimumHeight(900)
 
         # Ocultar barra de título
         self.setWindowFlags(Qt.WindowType.FramelessWindowHint)
@@ -436,7 +437,6 @@ class MainView(QWidget):
             QCursor(Qt.CursorShape.PointingHandCursor)
         )
 
-
         self.button_maestro_tipo_giltro = QPushButton("TIPOS DE FILTRO")
         self.button_maestro_tipo_giltro.setStyleSheet(
             """
@@ -461,8 +461,6 @@ class MainView(QWidget):
         self.button_menu_maestro.setCursor(
             QCursor(Qt.CursorShape.PointingHandCursor)
         )
-
-
 
         # Controles de la barra de título
         ## Frame de la barra de título
@@ -501,7 +499,6 @@ class MainView(QWidget):
         self.button_tb_maximize.setCursor(
             QCursor(Qt.CursorShape.PointingHandCursor)
         )
-        self.button_tb_maximize.hide()
 
         ## Pripiedades del botón restaurar
         icon3 = QIcon()
@@ -514,6 +511,7 @@ class MainView(QWidget):
         self.button_tb_restore.setCursor(
             QCursor(Qt.CursorShape.PointingHandCursor)
         )
+        self.button_tb_restore.hide()
 
         ## Propiedades del botón minimizar
         icon4 = QIcon()

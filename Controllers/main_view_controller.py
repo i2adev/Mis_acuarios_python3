@@ -45,5 +45,6 @@ class MainViewController(BaseController):
 
     def show(self):
         """ Abre la vista """
-        self.__view.showMaximized()
+        self.__view.show()
+        #self.__view.showMaximized()
 

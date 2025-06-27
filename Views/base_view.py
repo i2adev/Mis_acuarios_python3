@@ -1,8 +1,8 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
-Fecha:      26/06/2025
+Fecha:      02/06/2025
 Commentarios:
-    Módulo que contiene la clase base de los formularios
+    Módulo que contien la vista de la entidad TIPO DE FILTRO.
 """
 
 # Importaciones
@@ -35,6 +35,23 @@ class BaseView(QWidget):
         self.build_layout()
         # self.set_tab_order()
         self.init_basic_handlers()
+
+        # Establece el foco inicial
+        # self.edit_tipo_filtro.setFocus()
+
+    # def set_tab_order(self):
+    #     """ Establece el orden de tabulación de los controles. """
+    #
+    #     # Eliminar el focus de los widgets que no lo necesitan
+    #     for widget in self.findChildren(QWidget):
+    #         widget.setFocusPolicy(Qt.FocusPolicy.ClickFocus)
+    #
+    #     # Establecemos las politicas de focus
+    #     self.edit_tipo_filtro.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
+    #     self.text_observaciones.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
+    #
+    #     # Establecer el orden
+    #     self.setTabOrder(self.edit_tipo_filtro, self.text_observaciones)
 
     def init_basic_handlers(self):
         """ Inicializamos los eventos de la ventana """
@@ -85,8 +102,6 @@ class BaseView(QWidget):
         # self.layout_observaciones.addWidget(self.text_observaciones)
 
         # Datatable y crud
-        self.layout_table.addWidget(self.data_table)
-
         self.layout_crud.addWidget(self.button_insert)
         self.layout_crud.addWidget(self.button_update)
         self.layout_crud.addWidget(self.button_load)
@@ -98,11 +113,12 @@ class BaseView(QWidget):
             QSizePolicy.Policy.Expanding)
         )
 
+        self.layout_table.addWidget(self.data_table)
         self.layout_data.addWidget(self.frame_table)
         self.layout_data.addLayout(self.layout_crud)
 
-        # # Montamos los layouts
-        # # Layput inserción de datos
+        # Montamos los layouts
+        # Layput inserción de datos
         # self.layout_first_line.addLayout(self.layout_id)
         # self.layout_first_line.addLayout(self.layout_tipo_filtro)
         # self.layout_second_line.addLayout(self.layout_observaciones)
@@ -130,8 +146,8 @@ class BaseView(QWidget):
             QSpacerItem(20, 20, QSizePolicy.Policy.Expanding,
             QSizePolicy.Policy.Minimum)
         )
-        self.layout_footer.addWidget(self.button_accept)
-        self.layout_footer.addWidget(self.button_cancel)
+        # self.layout_footer.addWidget(self.button_accept)
+        # self.layout_footer.addWidget(self.button_cancel)
         self.layout_footer.addWidget(self.button_close)
 
         # Cargamos los layout en la ventana
@@ -140,23 +156,42 @@ class BaseView(QWidget):
         self.layout_main.addLayout(self.layout_data)
         self.layout_main.addLayout(self.layout_navigation)
         self.layout_main.addLayout(self.layout_footer)
-        self.setLayout(self.layout_main)
+
+        layout_root = QVBoxLayout(self)
+        layout_root.setContentsMargins(0, 0, 0, 0)
+        layout_root.setSpacing(0)
+        layout_root.addWidget(self.frame_main)
 
     def create_widgets(self):
         """ Crea los elementos del formulario"""
         self.layout_main = QVBoxLayout() # Layout principal
+
+        self.frame_main = QFrame()
+        self.frame_main.setObjectName("frame_main")
+        self.frame_main.setSizePolicy(QSizePolicy.Policy.Expanding,
+                                      QSizePolicy.Policy.Expanding)
+        self.frame_main.setLayout(self.layout_main)  # layout_main ya existe
+        self.frame_main.setStyleSheet("""
+            #frame_main {
+                border: 1px solid #4a4a4a;
+                border-radius: 0px;
+                background-color: transparent;
+            }
+        """)
+
         self.layout_title_bar = QHBoxLayout() # Layout barra título
         self.layout_title_bar.setContentsMargins(0, 0, 0, 0)
-        self.layout_table = QHBoxLayout() # Contiene la tabla
+        self.layout_table = QHBoxLayout() # Layout del frame_table que contiene
+                                          # la tabla
         self.layout_data = QHBoxLayout() # Layout de datatable y crud
         self.frame_table = QFrame() # Frame que contiene el datatable
         self.frame_table.setLayout(self.layout_table)
-        # self.frame_table.setMinimumHeight(210)
+        self.frame_table.setMinimumHeight(210)
         self.layout_crud = QVBoxLayout()  # Layout donde se colocan los botones 
                                           # del CRUD
-        self.layout_form_data = QVBoxLayout() # Layout del frame que contiene
-                                              # los datos del formulario
-        #self.frame_form_data = QFrame() # Frame de la inserción de datos
+        self.layout_form_data = QVBoxLayout() # Layout que contiene el frame con
+                                              # el formulario de datos
+        # self.frame_form_data = QFrame() # Frame de la inserción de datos
         # self.frame_form_data.setSizePolicy(QSizePolicy.Policy.Expanding,
         #                               QSizePolicy.Policy.Fixed)
         # self.frame_form_data.setLayout(self.layout_form_data)
@@ -243,36 +278,36 @@ class BaseView(QWidget):
         icon5 = QPixmap(":/Images/Window_icon.png")
         self.label_icon.setPixmap(icon5)
 
-        # # Controles de inserción de datos
-        # ## Primera línea
-        # ### Label ID
-        # self.label_id = QLabel("ID")
-        # self.label_id.setMinimumWidth(50)
-        # self.label_id.setMaximumWidth(50)
-        #
-        # ### Texbox ID
-        # self.edit_id = QLineEdit()
-        # self.edit_id.setObjectName("edit_id")
-        # self.edit_id.setMinimumWidth(50)
-        # self.edit_id.setMaximumWidth(50)
-        # self.edit_id.setEnabled(False)
+        # Controles de inserción de datos
+        ## Primera línea
+        ### Label ID
+        self.label_id = QLabel("ID")
+        self.label_id.setMinimumWidth(50)
+        self.label_id.setMaximumWidth(50)
 
-        # ### Label TIPO DE FILTRO
-        # self.label_tipo_filtro = QLabel("TIPO DE FILTRO")
-        #
-        # ### Textbox TIPO DE FILTRO
-        # self.edit_tipo_filtro = QLineEdit()
-        # self.edit_tipo_filtro.setObjectName("edit_tipo_filtro")
+        ### Texbox ID
+        self.edit_id = QLineEdit()
+        self.edit_id.setObjectName("edit_id")
+        self.edit_id.setMinimumWidth(50)
+        self.edit_id.setMaximumWidth(50)
+        self.edit_id.setEnabled(False)
 
-        # ## Segunda línea
-        # ### Label OBSERVACIONES
-        # self.label_observaciones = QLabel("OBSERVACIONES")
-        #
-        # ### Text OBSERVACIONES
-        # self.text_observaciones = QTextEdit()
-        # self.text_observaciones.setObjectName("text_observaciones")
-        # self.text_observaciones.setMinimumHeight(80)
-        # self.text_observaciones.setMaximumHeight(80)
+        ### Label TIPO DE FILTRO
+        self.label_tipo_filtro = QLabel("TIPO DE FILTRO")
+
+        ### Textbox TIPO DE FILTRO
+        self.edit_tipo_filtro = QLineEdit()
+        self.edit_tipo_filtro.setObjectName("edit_tipo_filtro")
+
+        ## Segunda línea
+        ### Label OBSERVACIONES
+        self.label_observaciones = QLabel("OBSERVACIONES")
+
+        ### Text OBSERVACIONES
+        self.text_observaciones = QTextEdit()
+        self.text_observaciones.setObjectName("text_observaciones")
+        self.text_observaciones.setMinimumHeight(80)
+        self.text_observaciones.setMaximumHeight(80)
 
         ## Controles de tabla y CRUD
         ### Tabla
@@ -309,9 +344,6 @@ class BaseView(QWidget):
         ### Botón SEARCH
         self.button_search = QPushButton()
         self.button_search.setText("&BUSCAR")
-
-        ### Espaciador
-        # self.spacer_crud = QSpacerItem(40,10)
 
         ## Controles de navegación
         ### Botón última página
@@ -369,19 +401,19 @@ class BaseView(QWidget):
         self.label_total_pages.setMaximumWidth(30)
 
         # Controles del pie de formulario
-        ## Botón aceptar
-        self.button_accept = QPushButton()
-        self.button_accept.setText("&ACEPTAR")
-        self.button_accept.setFlat(True)
-        self.button_accept.setCursor(
-            QCursor(Qt.CursorShape.PointingHandCursor)
-        )
-
-        ## Botón cancelar
-        self.button_cancel = QPushButton()
-        self.button_cancel.setText("&CANCELAR")
-        self.button_cancel.setFlat(True)
-        self.button_cancel.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        # ## Botón aceptar
+        # self.button_accept = QPushButton()
+        # self.button_accept.setText("&ACEPTAR")
+        # self.button_accept.setFlat(True)
+        # self.button_accept.setCursor(
+        #     QCursor(Qt.CursorShape.PointingHandCursor)
+        # )
+        #
+        # ## Botón cancelar
+        # self.button_cancel = QPushButton()
+        # self.button_cancel.setText("&CANCELAR")
+        # self.button_cancel.setFlat(True)
+        # self.button_cancel.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
 
         ## Botón Cerrar
         self.button_close = QPushButton()
@@ -421,22 +453,25 @@ class BaseView(QWidget):
             self.drag_position = event.globalPosition().toPoint()
 
     def mover_ventana(self, event):
-        if not self.isMaximized():
-            if event.buttons() == Qt.MouseButton.LeftButton:
-                self.move(self.pos() + event.globalPosition().toPoint()
-                          - self.drag_position)
-                self.drag_position = event.globalPosition().toPoint()
-                event.accept()
+        try:
+            if not self.isMaximized():
+                if event.buttons() == Qt.MouseButton.LeftButton:
+                    self.move(self.pos() + event.globalPosition().toPoint()
+                              - self.drag_position)
+                    self.drag_position = event.globalPosition().toPoint()
+                    event.accept()
 
-        if self.drag_position.y() <= 20:
-            self.showMaximized()
+            if self.drag_position.y() <= 20:
+                self.showMaximized()
+        except Exception as e:
+            print(f"Error en mover_ventana: {e}")
 
 
 # Entrada a la aplicación
 if __name__ == "__main__":
     app = QApplication(sys.argv)
 
-    ventana = BaseView("TIPOS DE FILTRO")
+    ventana = BaseView("BASE VIEW")
 
     # Cargar el archivo .qss
     with open("../Resources/Styles/main_style.qss", "r",
