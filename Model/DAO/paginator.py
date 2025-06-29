@@ -8,6 +8,9 @@ Commentarios:
 from PyQt6.QtWidgets import QMessageBox
 
 from Model.DAO.base_dao import BaseDAO
+from Model.Entities.tipo_acuario_entity import TipoAcuarioEntity
+from Model.Entities.tipo_filtro_entity import TipoFiltroEntity
+
 
 class Paginator:
     """ Clase que gestiona la paginación del listado de entidades. """
@@ -294,7 +297,17 @@ class Paginator:
             )
             return
 
-        self.total_data = res.value
+        # Configuramos la lista total
+        if self.procedure == "VISTA_TIPOS_FILTRO":
+            value = [TipoFiltroEntity(f["ID"], f["NUM"], f["TIPO"],
+                                     f["OBSERVACIONES"])
+                    for f in res.value]
+        elif self.procedure == "VISTA_TIPOS_ACUARIO":
+            value = [TipoAcuarioEntity(f["ID"], f["NUM"], f["TIPO"],
+                                     f["SUBTIPO"], f["OBSERVACIONES"])
+                    for f in res.value]
+
+        self.total_data = value
         self.records = len(self.total_data)
 
         # if page < 1 or page > self.total_pages:

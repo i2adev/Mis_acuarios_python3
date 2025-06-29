@@ -1,39 +1,38 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
-Fecha:      02/06/2025
+Fecha:      27/06/2025
 Commentarios:
     Módulo que contiene la clase controladora de la entidad TIPO DE
-    FILTRO.
+    ACUARIO.
 """
-# Importaciones
-from PyQt6.QtCore import qSetMessagePattern, Qt, QEvent
+from PyQt6.QtCore import QEvent, Qt
 from PyQt6.QtGui import QAction
-from PyQt6.QtWidgets import QWidget, QTextEdit, QPlainTextEdit, QMessageBox, \
-    QTableView, QHeaderView
+from PyQt6.QtWidgets import QWidget, QMessageBox, QTableView, QHeaderView
 
 from Controllers.base_controller import BaseController
 from Model.DAO.paginator import Paginator
+from Model.DAO.tipo_acuario_dao import TipoAcuarioDAO
+from Model.Entities.tipo_acuario_entity import TipoAcuarioEntity
+from Model.TableModel.tipo_acuario_table_model import TipoAcuarioTableModel
 from Services.Result.result import Result
-from Views.tipo_filtro_view import TipoFiltroView
+from Services.Validators.tipi_acuario_validator import TipoAcuarioValidator
 from Views.table_menu_contextual import TableMenuContextual
-from Model.Entities.tipo_filtro_entity import TipoFiltroEntity
-from Model.DAO.tipo_filtro_dao import TipoFiltroDAO
-from Model.TableModel.tipo_filtro_table_model import TipoFiltroTableModel
-from Services.Validators.tipo_filtro_validator import TipoFiltroValidator
+from Views.tipo_acuario_view import TipoAcuarioView
 
-class TipoFiltroController(BaseController):
-    """ Controlador de la entidad tipo de filtro. """
+
+class TipoAcuarioController(BaseController):
+    """ Controlador de la entidad tipo de acuario. """
 
     def __init__(self):
         """ Constructor base """
 
         # Inicializamos la vista, la entidad y el dao
-        self.__view = TipoFiltroView("TIPOS DE FILTRO")
-        self.__mod = TipoFiltroEntity()
-        self.__dao = TipoFiltroDAO()
+        self.__view = TipoAcuarioView("TIPOS DE ACUARIO")
+        self.__mod = TipoAcuarioEntity()
+        self.__dao = TipoAcuarioDAO()
 
         # Inicializamos el paginador
-        self._pag = Paginator("VISTA_TIPOS_FILTRO", 5)
+        self._pag = Paginator("VISTA_TIPOS_ACUARIO", 5)
         self._pag.initialize_paginator()
 
         # inicializamos la vista y pasamos al constructor padre
@@ -54,14 +53,9 @@ class TipoFiltroController(BaseController):
 
     def show(self):
         """ Abre la vista """
-        self.__view.button_accept.hide()
-        self.__view.button_cancel.hide()
+        # self.__view.button_accept.hide()
+        # self.__view.button_cancel.hide()
         self.__view.show()
-
-    def get_tipo_filtro_list(self):
-        """ Obtiene el listado de tipos de filtro. """
-
-        pass
 
     def init_handlers(self):
         """
@@ -151,8 +145,6 @@ class TipoFiltroController(BaseController):
     def action_eliminar(self, event):
         """ Elimina el registro desde el menú contextual"""
 
-        id_tipo = None
-
         # Carga el modelo de la fila seleccionada
         selection_model = self.__view.data_table.selectionModel()
 
@@ -214,6 +206,8 @@ class TipoFiltroController(BaseController):
             )
             pagina_actual -= 1
             self.__view.label_total_pages.setText( str(pagina_actual))
+            self.__view.label_total_pages.setText( str(pagina_actual))
+
 
         self.__view.combo_select_page.setCurrentIndex(-1)
         self.__view.combo_select_page.setCurrentIndex(pagina_actual - 1)
@@ -228,7 +222,7 @@ class TipoFiltroController(BaseController):
         """ Controla el clic en el botón eliminar. """
 
         # Sí tenemos un registro cargado
-        if not self.__view.edit_id.text():
+        if not self.__view.frame.edit_id.text():
             QMessageBox.warning(
                 self.__view,
                 self.__view.window_title,
@@ -238,7 +232,7 @@ class TipoFiltroController(BaseController):
             return
 
         # Obtener el ID desde el cuadro de texto id_parent
-        id_tipo = int(self.__view.edit_id.text())
+        id_tipo = int(self.__view.frame.edit_id.text())
         pagina_actual = self.__view.combo_select_page.currentData()
 
         # Insertar el registro
@@ -289,16 +283,13 @@ class TipoFiltroController(BaseController):
 
         self.load()
 
-
     def button_update_click(self, event):
         """ Controla el clic del botón actualizar. """
 
         pagina_actual = self.__view.combo_select_page.currentData()
 
         # Valida el formulario
-        res = TipoFiltroValidator.ValidateTipoFiltro(
-            self.__view.edit_tipo_filtro
-        )
+        res = self.view_validator()
 
         if not res.is_success:
             QMessageBox.information(self.__view, "ERROR", res.error_msg)
@@ -323,13 +314,34 @@ class TipoFiltroController(BaseController):
 
         self._select_row_by_id(self.__view.data_table, res.value)
 
+    def view_validator(self):
+        """ Valida el formulario. """
+
+        # Valida el tipo de acuario
+        res = TipoAcuarioValidator.ValidateTipoAcuario(
+            self.__view.frame.edit_tipo_acuario
+        )
+
+        if not res.is_success:
+            self.__view.frame.edit_tipo_acuario.setFocus()
+            return res
+
+        # Valida el subtipo de acuario
+        res = TipoAcuarioValidator.ValidateSubtipoAcuario(
+            self.__view.frame.edit_subtipo_acuario
+        )
+
+        if not res.is_success:
+            self.__view.frame.edit_subtipo_acuario.setFocus()
+            return res
+
+        return res
+
     def button_insert_click(self, event):
         """ Controla el clic del botón insertar. """
 
         # Valida el formulario
-        res = TipoFiltroValidator.ValidateTipoFiltro(
-            self.__view.edit_tipo_filtro
-        )
+        res = self.view_validator()
 
         if not res.is_success:
             QMessageBox.information(
@@ -371,10 +383,10 @@ class TipoFiltroController(BaseController):
 
         self._select_row_by_id(self.__view.data_table, res.value)
 
-    def fill_tableview(self, table: QTableView, data: list[TipoFiltroEntity]):
+    def fill_tableview(self, table: QTableView, data: list[TipoAcuarioEntity]):
         """ Carga los datos en la tabla. """
 
-        tv_model = TipoFiltroTableModel(data)
+        tv_model = TipoAcuarioTableModel(data)
         table.setModel(tv_model)
         table.setColumnHidden(0, True)
         table.resizeColumnsToContents()
@@ -402,10 +414,10 @@ class TipoFiltroController(BaseController):
         # Ocultar la columna ID (columna 0)
         table.setColumnHidden(0, True)
 
-        # Hacer que la columna de observaciones (columna 3) use el espacio
+        # Hacer que la columna de observaciones (columna 4) use el espacio
         # restante
         header = table.horizontalHeader()
-        header.setSectionResizeMode(3, QHeaderView.ResizeMode.Stretch)
+        header.setSectionResizeMode(4, QHeaderView.ResizeMode.Stretch)
 
         # Mostrar puntos suspensivos si el texto no cabe
         table.setTextElideMode(Qt.TextElideMode.ElideRight)
@@ -414,19 +426,19 @@ class TipoFiltroController(BaseController):
         """ No aplicable. """
         pass
 
-    def entity_configuration(self) -> TipoFiltroEntity:
+    def entity_configuration(self) -> TipoAcuarioEntity:
         """ Configura la entidad. """
 
-        ent = TipoFiltroEntity()
+        ent = TipoAcuarioEntity()
 
-        if self.__view.edit_id.text():
-            ent.id = int(self.__view.edit_id.text())
+        if self.__view.frame.edit_id.text():
+            ent.id = int(self.__view.frame.edit_id.text())
         else:
             ent.id = None
 
-        ent.tipo_filtro = self.__view.edit_tipo_filtro.text()
-        ent.observaciones = self.__view.text_observaciones.toPlainText()
-
+        ent.tipo_acuario = self.__view.frame.edit_tipo_acuario.text()
+        ent.subtipo_acuario = self.__view.frame.edit_subtipo_acuario.text()
+        ent.observaciones = self.__view.frame.text_observaciones.toPlainText()
         return ent
 
     def insert(self) -> Result:
@@ -483,18 +495,21 @@ class TipoFiltroController(BaseController):
 
         # Lee los datos del modelo
         id_tipo = modelo.index(fila, 0).data()
-        tipo_filtro = modelo.index(fila, 2).data()  # La columna 1 es el
-                                                    # númer correlativo.
-        observaciones = modelo.index(fila, 3).data()
+        tipo_acuario = modelo.index(fila, 2).data()
+        subtipo_acuario = modelo.index(fila, 3).data()
+        observaciones = modelo.index(fila, 4).data()
 
         # Cargamos los widgets
-        self.__view.edit_id.setText(
+        self.__view.frame.edit_id.setText(
             str(id_tipo) if id_tipo is not None else ""
         )
-        self.__view.edit_tipo_filtro.setText(
-            str(tipo_filtro) if tipo_filtro is not None else ""
+        self.__view.frame.edit_tipo_acuario.setText(
+            str(tipo_acuario) if tipo_acuario is not None else ""
         )
-        self.__view.text_observaciones.setPlainText(
+        self.__view.frame.edit_subtipo_acuario.setText(
+            str(subtipo_acuario) if subtipo_acuario is not None else ""
+        )
+        self.__view.frame.text_observaciones.setPlainText(
             str(observaciones) if observaciones is not None else ""
         )
 
@@ -556,7 +571,7 @@ class TipoFiltroController(BaseController):
         """ Configura el pie de la tabla. """
 
         self.__view.label_total_pages.setText(str(self._pag.total_pages))
-        self.fill_combo_page()    
+        self.fill_combo_page()
 
     def next_page(self, event: QEvent) -> None:
         """ Pasa a la siguiente página de la tabla. """
@@ -618,4 +633,3 @@ class TipoFiltroController(BaseController):
         self.__view.combo_select_page.clear()
         for i in range(1, self._pag.total_pages + 1):
             self.__view.combo_select_page.addItem(str(i), i)
-

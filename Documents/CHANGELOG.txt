@@ -1,5 +1,13 @@
 ﻿CHANGELOG:
 ================================================================================
+0.2.0   SE CREA LA LÓGICA DE TIPO DE ACUARIO:
+        -   SE CREA LA ENTIDAD.
+        -   SE CREA EL FORMULARIO.
+        -   SE CREA EL CONTROLADOR DEL FORMULARIO.
+        -   SE CREA EL DAO (DATA ACCESS OBJECT).
+        -   SE CREA EL MODELO DE TABLA.
+        -   SE DA FUNCIONALIDAD CRUD.
+
 0.1.4   REFACTORIZACIÓN: SE MODIFICA EL FORMULARIO DE TIPO DE FILTRO PARA ADAP-
         TARLO A LA CLASE BASE BASEVIEW.
 

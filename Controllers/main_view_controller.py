@@ -6,6 +6,7 @@ Commentarios:
 """
 
 from Controllers.base_controller import BaseController
+from Controllers.tipo_acuario_controller import TipoAcuarioController
 from Controllers.tipo_filtro_controller import TipoFiltroController
 from Views.main_view import MainView
 
@@ -34,6 +35,9 @@ class MainViewController(BaseController):
         self.__view.button_maestro_tipo_giltro.clicked.connect(
             self.tipo_filtro_clicked
         )
+        self.__view.button_maestro_tipo_acuario.clicked.connect(
+            self.tipo_acuario_clicked
+        )
 
     def tipo_filtro_clicked(self, event):
         """
@@ -43,8 +47,16 @@ class MainViewController(BaseController):
         ctrl = TipoFiltroController()
         ctrl.show()
 
+    def tipo_acuario_clicked(self, event):
+        """
+        Cuando se presiona en el maestro de tipo de acuario.
+        Acción: Abre el formulario de tipo de acuario
+        """
+
+        ctrl = TipoAcuarioController()
+        ctrl.show()
+
     def show(self):
         """ Abre la vista """
         self.__view.show()
         #self.__view.showMaximized()
-

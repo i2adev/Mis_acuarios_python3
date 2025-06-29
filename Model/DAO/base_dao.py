@@ -165,9 +165,12 @@ class BaseDAO(ABC):
                 else:
                     cursor.execute(sql)
 
-                value = [TipoFiltroEntity(f["ID"], f["NUM"], f["TIPO"],
-                                         f["OBSERVACIONES"])
-                        for f in cursor.fetchall()]
+                # TODO: DEBE DEVOLVER UNA LISTA DE VALORES GENERICA, QUE LUEGO
+                #       HAY QUE CASTEAR A UNA LISTA DE ENTIDADES QUE DESEEMOS.
+                # value = [TipoFiltroEntity(f["ID"], f["NUM"], f["TIPO"],
+                #                          f["OBSERVACIONES"])
+                #         for f in cursor.fetchall()]
+                value = cursor.fetchall()
 
                 # Devolvemos los datos
                 return Result.success(value)

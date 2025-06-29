@@ -1,6 +1,15 @@
 ﻿================================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
+27/06/2025  LÓGICA DE TIPO DE ACUARIO:
+            -   SE CREA LA ENTIDAD.                                         DONE
+            -   SE CREA EL FORMULARIO.                                      DONE
+            -   SE CREA EL FRAME CON LOS CONTROLES DEL FORMULARIO           DONE
+            -   SE CREA EL CONTROLADOR DEL FORMULARIO TIPO DE ACUARIO.      DONE
+            -   SE CREA EL DAO DE LA ENTIDAD.                               DONE
+            -   SE CEA EL MODELO DE TABLA.                                  DONE
+            -   SE DA FUNCIONALIDAD CRUD.                                   DONE
+
 25/06/2025  REFACTORIZACIÓN:
             -   SE MODIFICA LA LÓGICA DE LOS ESPACIADORES EN EL FORMULARIO DE
                 TIPO DE FILTRO.                                             DONE
