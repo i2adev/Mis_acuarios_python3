@@ -1,6 +1,38 @@
 ﻿================================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
+02/07/2025  SE AÑADE:
+            -   SE CREA LA ENTIDAD SUBCATEGORÍA DE ACUARIO.                 DONE
+            -   EL DAO DE LA SUBCATEGORÍA DE ACUARIO.                       DONE
+            -   SE CREA EL CONTROLADOR DE SUBCATEGORÍA DE ACUARIO.          DONE
+            -   SE CREA EL DIÁLOGO DE SUBCATEGORÍA DE ACUARIO.              DONE
+            -   SE CREA EL VALIDADOR DE SUBCATEGORÍA DE ACUARIO.            DONE
+
+01/07/2025  REFACTOR:
+            -   SE MODIFICA LA ESTRUCTURA DEL CONTROLADOR PARA SEPARAR EN EL
+                CONTROLADOR DEL DIALOGO Y EL CONTROLADOR DEL FORMULARIO MAESTRO.
+                                                                            DONE
+
+01/07/2025  SE AÑADE:
+            -   SE CREA EL VALIDADOR DE CATEGORÍA DE ACUARIO.               DONE
+            .   SE CREA EL CONTROLADOR DE CATEGORÍA DE ACUARIO.             DONE
+            -   SE INTEGRA EL DIALOGO DE CATEGORÍA DE ACUARIO CON EL FORMULARIO
+                DE TIPO DE ACUARIO.                                         DONE
+
+30/06/2025  SE AÑADE:
+            -   SE CREA LA ENTIDAD CATEGORÍA DE ACUARIO.                    DONE
+            -   SE CREA EL DAO DE CATEGORÍA DE ACUARIO.                     DONE
+            -   SE CREA LA BASE DE LOS CUADROS DE DIALOGO.                  DONE
+            -   SE CREA EL FRAME CON LOS CONTROLES DE DIÁLOGO DEL FORMULARIO DEL
+                FORMULARIO CATEGORÍA DE ACUARIO.                            DONE
+            .   SE CREA EL DAO DE LA ENTIDAD CATEGORÍA DE ACUARIO.          DONE
+            -   SE AÑADEN LOS METODOS PARA OBTENER LA LISTA DE CATEGORIAS DE
+                ACUARIO A LA CLASE TIPOACUARIODAO.                          DONE
+
+            REFACTORIZACIÓN:
+            -   SE CAMBIA LA ENTRADA DE LOS TIPOS DE ACUARIO Y SUBTIPOS DE ACUA-
+                RIO PARA ADECUARLOS A COMBOS.                               DONE
+
 27/06/2025  LÓGICA DE TIPO DE ACUARIO:
             -   SE CREA LA ENTIDAD.                                         DONE
             -   SE CREA EL FORMULARIO.                                      DONE

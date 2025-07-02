@@ -203,6 +203,7 @@ class BaseDAO(ABC):
             cursor = db.conn.cursor()
 
             # Obtener las tablas del usuario
+            cursor.execute("PRAGMA foreign_keys = OFF")
             cursor.execute("""
                 SELECT name FROM sqlite_master
                 WHERE type='table' AND name NOT LIKE 'sqlite_%';

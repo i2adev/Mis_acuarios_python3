@@ -8,6 +8,7 @@ Commentarios:
 from PyQt6.QtWidgets import QMessageBox
 
 from Model.DAO.base_dao import BaseDAO
+from Model.Entities.categoria_acuario_entity import CategoriaAcuarioEntity
 from Model.Entities.tipo_acuario_entity import TipoAcuarioEntity
 from Model.Entities.tipo_filtro_entity import TipoFiltroEntity
 
@@ -303,8 +304,12 @@ class Paginator:
                                      f["OBSERVACIONES"])
                     for f in res.value]
         elif self.procedure == "VISTA_TIPOS_ACUARIO":
-            value = [TipoAcuarioEntity(f["ID"], f["NUM"], f["TIPO"],
-                                     f["SUBTIPO"], f["OBSERVACIONES"])
+            value = [TipoAcuarioEntity(f["ID"], f["NUM"], f["CATEGORIA"],
+                                     f["SUBCATEGORIA"], f["OBSERVACIONES"])
+                    for f in res.value]
+        elif self.procedure == "VISTA_CATEGORIAS_ACUARIO":
+            value = [CategoriaAcuarioEntity(f["ID"], f["NUM"], f["CATEGORIA"],
+                                     f["OBSERVACIONES"])
                     for f in res.value]
 
         self.total_data = value

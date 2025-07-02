@@ -92,6 +92,8 @@ class TipoFiltroController(BaseController):
             lambda: self.__view.close()
         )
 
+
+
         # Inicializamos los combos
         self.__view.combo_select_page.currentIndexChanged.connect(
             self.combo_page_indexchanged

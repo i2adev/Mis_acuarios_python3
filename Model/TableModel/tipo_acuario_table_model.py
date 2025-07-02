@@ -51,9 +51,9 @@ class TipoAcuarioTableModel(QAbstractTableModel):
         elif columna == 1:
             return entidad.num
         elif columna == 2:
-            return entidad.tipo_acuario
+            return entidad.id_categoria_acuario
         elif columna == 3:
-            return entidad.subtipo_acuario
+            return entidad.id_subcategoria_acuario
         elif columna == 4:
             return entidad.observaciones
 

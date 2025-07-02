@@ -10,10 +10,12 @@ Commentarios:
 # Importaciones
 from PyQt6.QtCore import Qt, QObject, QEvent
 from PyQt6.QtWidgets import (QMessageBox, QLineEdit, QTextEdit,
-                             QPlainTextEdit, QWidget, QTableView, QSizeGrip)
+                             QPlainTextEdit, QWidget, QTableView, QSizeGrip,
+                             QComboBox)
 import enchant  # Enchant es la librería de revisión orográfica
 
 from Model.DAO.paginator import Paginator
+from Model.Entities.base_entity import BaseEntity
 from Views.base_view import BaseView
 
 class BaseController(QObject):
@@ -45,11 +47,13 @@ class BaseController(QObject):
 
         if isinstance(obj, QLineEdit):
             if obj.text():
-                obj.setText(obj.text().strip().upper())
+                # obj.setText(obj.text().strip().upper())
+                obj.setText(obj.text().strip())
 
         if isinstance(obj, (QTextEdit, QPlainTextEdit)):
             if obj.toPlainText():
-                obj.setPlainText(obj.toPlainText().strip().upper())
+                # obj.setPlainText(obj.toPlainText().strip().upper())
+                obj.setPlainText(obj.toPlainText().strip())
 
     # Maneja los diferentes tipos de eventos comunes de las diustintas
     # vistas
@@ -107,3 +111,25 @@ class BaseController(QObject):
         for widget in self._view.findChildren(QWidget):
             if isinstance(widget, self._text_widgets):
                 widget.clear()
+
+
+    def _fill_combo(self, combo: QComboBox, lista: list[BaseEntity], attr_text: str, attr_data: str):
+        """
+        Llena un QComboBox con una lista de entidades.
+
+        :param combo: El QComboBox que quieres llenar.
+        :param lista: Lista de entidades (pueden ser objetos o diccionarios).
+        :param attr_text: Nombre del atributo para el texto visible.
+        :param attr_data: Nombre del atributo para el valor (userData).
+        """
+        combo.clear()
+        for item in lista:
+            # Si es diccionario
+            if isinstance(item, dict):
+                texto = item.get(attr_text, "")
+                data = item.get(attr_data, None)
+            else:
+                texto = getattr(item, attr_text, "")
+                data = getattr(item, attr_data, None)
+
+            combo.addItem(texto, data)

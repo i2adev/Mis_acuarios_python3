@@ -1,23 +1,21 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
-Fecha:      28/06/2025
+Fecha:      03/07/2025
 Commentarios:
-    Módulo que contiene la vista de la entidad TIPO DE ACUARIO.
+    Módulo que contiene la vista de la entidad SUBCATEGORÍA DE ACUARIO.
 """
-import traceback
-
 from PyQt6.QtWidgets import QMessageBox
 
 from Model.DAO.base_dao import BaseDAO
 from Model.DAO.database import DBManager
-from Model.Entities.tipo_acuario_entity import TipoAcuarioEntity
+from Model.Entities.subcategoria_acuario_entity import SubcategoriaAcuarioEntity
 from Services.Result.result import Result
 
 
-class TipoAcuarioDAO(BaseDAO):
+class SubcategoriaAcuarioDAO(BaseDAO):
     """
     Clase que gestiona las operaciones en la base de datos de la entidad
-    TipoAcuarioEntity.
+    SubcategoriaAcuarioEntity.
     """
 
     def __init__(self):
@@ -39,25 +37,21 @@ class TipoAcuarioDAO(BaseDAO):
 
             # Obtenemos los datos
             sql = """
-            SELECT       TA.ID_TIPO AS ID,
-                         ROW_NUMBER() OVER(
-                             ORDER BY CA.CATEGORIA_ACUARIO, 
-                             SA.SUBCATEGORIA_ACUARIO
-                         ) AS NUM,
-                         CA.CATEGORIA_ACUARIO AS TIPO,
-                         SA.SUBCATEGORIA_ACUARIO AS SUBTIPO,
-                         TA.OBSERVACIONES
-            FROM         TIPOS_ACUARIO AS TA
-            LEFT JOIN    CATEGORIA_ACUARIO AS CA
-            ON           TA.ID_CATEGORIA_aCUARIO = CA.ID_CATEGORIA_ACUARIO
-            LEFT JOIN    SUBCATEGORIA_ACUARIO AS SA
-            ON           TA.ID_SUBCATEGORIA_ACUARIO = SA.ID_SUBCATEGORIA_ACUARIO;
+                SELECT    S.ID_SUBCATEGORIA_ACUARIO AS ID,
+                          ROW_NUMBER() OVER(ORDER BY S.SUBCATEGORIA_ACUARIO) AS NUM,
+                          C.CATEGORIA_ACUARIO AS CATEGORIA,
+                          S.SUBCATEGORIA_ACUARIO AS SUBCATEGORIA,
+                          S.OBSERVACIONES
+                FROM      SUBCATEGORIA_ACUARIO AS S
+                LEFT JOIN CATEGORIA_ACUARIO AS C
+                ON        S.ID_CATEGORIA_ACUARIO = C.ID_CATEGORIA_aCUARIO
+                ORDER BY  S.SUBCATEGORIA_aCUARIO;
             """
             try:
                 cursor = self.db.conn.cursor()
                 cursor.execute(sql)
-                value = [TipoAcuarioEntity(
-                    f["ID"], f["NUM"], f["TIPO"], f["SUBTIPO"],
+                value = [SubcategoriaAcuarioEntity(
+                    f["ID"], f["NUM"], f["CATEGORIA"], f["SUBCATEGORIA"],
                     f["OBSERVACIONES"]
                 ) for f in cursor.fetchall()]
 
@@ -75,7 +69,7 @@ class TipoAcuarioDAO(BaseDAO):
             finally:
                 self.db.close_connection()
 
-    def get_list_combo(self):
+    def get_list_combo(self) -> Result:
         """ Obtiene el listado para el combo. """
 
         with self.db:
@@ -85,21 +79,16 @@ class TipoAcuarioDAO(BaseDAO):
 
             # Obtenemos los datos
             sql = """
-            SELECT       TA.ID_TIPO AS ID,
-                         CA.CATEGORIA_ACUARIO || ' / ' 
-                         || SA.SUBCATEGORIA_ACUARIO AS VALUE
-            FROM         TIPOS_ACUARIO AS TA
-            LEFT JOIN    CATEGORIA_ACUARIO AS CA
-            ON           TA.ID_CATEGORIA_aCUARIO = CA.ID_CATEGORIA_ACUARIO
-            LEFT JOIN    SUBCATEGORIA_ACUARIO AS SA
-            ON           TA.ID_SUBCATEGORIA_ACUARIO = SA.ID_SUBCATEGORIA_ACUARIO;
+                SELECT    ID_SUBCATEGORIA_ACUARIO AS ID,
+                          SUBCATEGORIA_aCUARIO AS VALUE
+                FROM      SUBCATEGORIA_ACUARIO
+                ORDER BY  SUBCATEGORIA_ACUARIO;
               """
             try:
                 cursor = self.db.conn.cursor()
                 cursor.execute(sql)
-                values = [TipoAcuarioEntity(
-                    None, None, f["TIPO"], f["SUBTIPO"], None)
-                       for f in cursor.fetchall()]
+                values = [SubcategoriaAcuarioEntity(
+                    f["ID"], None, None, f["VALUE"]) for f in cursor.fetchall()]
 
                 # Devolvemos los datos
                 return Result.success(values)
@@ -115,62 +104,26 @@ class TipoAcuarioDAO(BaseDAO):
             finally:
                 self.db.close_connection()
 
-    def get_list_tipos_acuario(self) -> Result:
-        """ Obtiene el listado de los tipos de acuario """
-
-        with self.db:
-            # # Chequeamos que la base de datos está abierta
-            # if not self.db.is_opened():
-            #     self.db.conn = self.db.initialize_db()
-
-            # Obtenemos los datos
-            sql = """
-                SELECT    ID_CATEGORIA_ACUARIO AS ID,
-                          CATEGORIA_ACUARIO AS VALUE
-                FROM      CATEGORIA_ACUARIO;
-              """
-            try:
-                cursor = self.db.conn.cursor()
-                cursor.execute(sql)
-                values = [TipoAcuarioEntity(
-                    f["ID"], None, f["VALUE"], None, None)
-                       for f in cursor.fetchall()]
-
-                # Devolvemos los datos
-                return Result.success(values)
-
-            except self.db.conn.OperationalError as e:
-                return Result.failure(f"[ERROR OPERACIONAL]\n {e}")
-            except self.db.conn.ProgrammingError as e:
-                return Result.failure(f"[ERROR DE PROGRAMACIÓN]\n {e}")
-            except self.db.conn.DatabaseError as e:
-                return Result.failure(f"[ERROR DE BASE DE DATOS]\n {e}")
-            except self.db.conn.Error as e:
-                return Result.failure(f"[ERROR GENERAL SQLITE]\n {e}")
-            finally:
-                self.db.close_connection()
-
-    def insert(self, ent: TipoAcuarioEntity) -> Result:
+    def insert(self, ent: SubcategoriaAcuarioEntity) -> Result:
         """
         Inserta un nuevo registro en la base de datos.
 
         Parametros:
-        - ent: Entidad derivada de BaseEntity
+        :param ent: Entidad derivada de BaseEntity
         """
 
         with self.db:
             # Obtenemos los datos
             sql = """
-                INSERT INTO     TIPOS_ACUARIO
-                                (ID_CATEGORIA_ACUARIO, ID_SUBCATEGORIA_ACUARIO, 
-                                OBSERVACIONES)
-                VALUES          (:cat, :subcat, :observaciones)
+                INSERT INTO SUBCATEGORIA_ACUARIO 
+                (ID_CATEGORIA_ACUARIO, SUBCATEGORIA_ACUARIO, OBSERVACIONES)
+                VALUES (:id_cat, :subcat, :observaciones);
             """
             try:
                 cursor = self.db.conn.cursor()
                 cursor.execute(sql, {
-                    "cat": ent.id_categoria_acuario,
-                    "subcat": ent.id_subcategoria_acuario,
+                    "id_cat": ent.id_categoria,
+                    "subcat": ent.subcategoria,
                     "observaciones": ent.observaciones
                 })
 
@@ -180,7 +133,6 @@ class TipoAcuarioDAO(BaseDAO):
                 return Result.success(last_id)
 
             except self.db.conn.OperationalError as e:
-                traceback.print_exc()
                 return Result.failure(f"[ERROR OPERACIONAL]\n {e}")
             except self.db.conn.ProgrammingError as e:
                 return Result.failure(f"[ERROR DE PROGRAMACIÓN]\n {e}")
@@ -191,7 +143,7 @@ class TipoAcuarioDAO(BaseDAO):
             finally:
                 self.db.close_connection()
 
-    def update(self, ent: TipoAcuarioEntity) -> Result:
+    def update(self, ent: SubcategoriaAcuarioEntity) -> Result:
         """
         Actualiza el registro de la base de datos.
 
@@ -202,18 +154,18 @@ class TipoAcuarioDAO(BaseDAO):
         with self.db:
             # Obtenemos los datos
             sql = """
-                UPDATE  TIPOS_ACUARIO
-                SET     ID_CATEGORIA_ACUARIO = :cat,
-                        ID_SUBCATEGORIA_ACUARIO = :subcat,
-                        OBSERVACIONES = :observaciones
-                WHERE   ID_TIPO = :id_parent
+                UPDATE SUBCATEGORIA_ACUARIO
+                SET    ID_CATEGORIA_ACUARIO = :id_cat,
+                       SUBCATEGORIA_ACUARIO = :subcat,
+                       OBSERVACIONES = :observaciones
+                WHERE ID_SUBCATEGORIA_ACUARIO = :id;
             """
             try:
                 cursor = self.db.conn.cursor()
                 cursor.execute(sql, {
-                    "id_parent": ent.id,
-                    "cat": ent.id_categoria_acuario,
-                    # "subcat": ent.id_subcategoria_acuario,
+                    "id": ent.id,
+                    "id_cat": ent.id_categoria,
+                    "subcat": ent.subcategoria,
                     "observaciones": ent.observaciones
                 })
 
@@ -243,8 +195,8 @@ class TipoAcuarioDAO(BaseDAO):
         with self.db:
             # Obtenemos los datos
             sql = """
-                DELETE FROM TIPOS_ACUARIO
-                WHERE ID_TIPO = :id;
+                DELETE FROM SUBCATEGORIA_ACUARIO
+                WHERE       ID_SUBCATEGORIA_ACUARIO = :id;
             """
             try:
                 cursor = self.db.conn.cursor()
@@ -264,4 +216,3 @@ class TipoAcuarioDAO(BaseDAO):
                 return Result.failure(f"[ERROR GENERAL SQLITE]\n {e}")
             finally:
                 self.db.close_connection()
-

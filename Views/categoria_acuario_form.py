@@ -1,19 +1,19 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
-Fecha:      27/06/2025
+Fecha:      30/06/2025
 Commentarios:
-    Módulo que contiene los controles del formulario de la entidad TIPO DE
-    ACUARIO.
+    Módulo que contiene los controles del formulario de la entidad CATE-
+    GORÍA DE ACUARIO.
 """
 import sys
 
-from PyQt6.QtWidgets import QFrame, QLabel, QLineEdit, QPlainTextEdit, \
-    QVBoxLayout, QHBoxLayout, QApplication, QComboBox, QPushButton
+from PyQt6.QtWidgets import QFrame, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, \
+    QPlainTextEdit, QApplication
 
-
-class TipoAcuarioForm(QFrame):
+class CategoriaAcuarioForm(QFrame):
     """
-    Clase que contiene los controles de edición de la entidad tipo de acuario.
+    Clase que contiene los controles de edición de la entidad categoría
+    de acuario.
     """
 
     def __init__(self):
@@ -36,10 +36,10 @@ class TipoAcuarioForm(QFrame):
         self.layout_id = QVBoxLayout()
         ### Tipo acuario
         self.layout_tipo_acuario = QVBoxLayout()
-        self.layout_edit_tipo_acuario = QHBoxLayout()
+        # self.layout_edit_tipo_acuario = QHBoxLayout()
         ### Subtipo acuario
         self.layout_subtipo_acuario = QVBoxLayout()
-        self.layout_edit_subtipo_acuario = QHBoxLayout()
+        # self.layout_edit_subtipo_acuario = QHBoxLayout()
 
         ## Segunda linea
         # self.layout_second_line = QVBoxLayout()
@@ -50,7 +50,6 @@ class TipoAcuarioForm(QFrame):
         self.label_id = QLabel("ID")
         self.label_id.setFixedWidth(50)
         self.label_tipo_acuario = QLabel("TIPO ACUARIO")
-        self.label_subtipo_acuario = QLabel("SUBTIPO ACUARIO")
         self.label_observaciones = QLabel("OBSERVACIONES")
 
         # Textos
@@ -58,21 +57,10 @@ class TipoAcuarioForm(QFrame):
         self.edit_id.setObjectName("edit_id")
         self.edit_id.setFixedWidth(50)
         self.edit_id.setEnabled(False)
+        self.edit_categoria_acuario = QLineEdit()
+        self.edit_categoria_acuario.setObjectName("edit_categoria_acuario")
         self.text_observaciones = QPlainTextEdit()
         self.text_observaciones.setObjectName("text_observaciones")
-
-        # Combos
-        self.combo_tipo_acuario = QComboBox()
-        self.combo_tipo_acuario.setEditable(True)
-        self.button_insert_tipo_acuario = QPushButton("<")
-        self.button_insert_tipo_acuario.setFixedWidth(30)
-        self.combo_tipo_acuario.setObjectName("combo_tipo_acuario")
-
-        self.combo_subcategoria_acuario = QComboBox()
-        self.combo_subcategoria_acuario.setEditable(True)
-        self.button_insert_subtipo_acuario = QPushButton("<")
-        self.button_insert_subtipo_acuario.setFixedWidth(30)
-        self.combo_subcategoria_acuario.setObjectName("combo_subcategoria_acuario")
 
     def build_layout(self):
         """ Construye el layout del frame. """
@@ -83,25 +71,23 @@ class TipoAcuarioForm(QFrame):
         self.layout_id.addWidget(self.edit_id)
 
         ## Tipo de acuario
-        self.layout_edit_tipo_acuario.addWidget(self.combo_tipo_acuario)
-        self.layout_edit_tipo_acuario.addWidget(self.button_insert_tipo_acuario)
         self.layout_tipo_acuario.addWidget(self.label_tipo_acuario)
-        self.layout_tipo_acuario.addLayout(self.layout_edit_tipo_acuario)
+        self.layout_tipo_acuario.addWidget(self.edit_categoria_acuario)
 
-        ## Subtipo acuario
-        self.layout_edit_subtipo_acuario.addWidget(
-            self.combo_subcategoria_acuario
-        )
-        self.layout_edit_subtipo_acuario.addWidget(
-            self.button_insert_subtipo_acuario
-        )
-        self.layout_subtipo_acuario.addWidget(self.label_subtipo_acuario)
-        self.layout_subtipo_acuario.addLayout(self.layout_edit_subtipo_acuario)
+        # ## Subtipo acuario
+        # self.layout_edit_subtipo_acuario.addWidget(
+        #     self.combo_subcategoria_acuario
+        # )
+        # self.layout_edit_subtipo_acuario.addWidget(
+        #     self.button_insert_subtipo_acuario
+        # )
+        # self.layout_subtipo_acuario.addWidget(self.label_subtipo_acuario)
+        # self.layout_subtipo_acuario.addLayout(self.layout_edit_subtipo_acuario)
 
         ## Montamos la primera linea
         self.layout_first_line.addLayout(self.layout_id)
         self.layout_first_line.addLayout(self.layout_tipo_acuario)
-        self.layout_first_line.addLayout(self.layout_subtipo_acuario)
+        # self.layout_first_line.addLayout(self.layout_subtipo_acuario)
 
         # Segunda linea
         self.layout_observaciones.addWidget(self.label_observaciones)
@@ -116,7 +102,7 @@ class TipoAcuarioForm(QFrame):
 if __name__ == "__main__":
     app = QApplication(sys.argv)
 
-    ventana = TipoAcuarioForm()
+    ventana = CategoriaAcuarioForm()
     ventana.show()
 
     sys.exit(app.exec())

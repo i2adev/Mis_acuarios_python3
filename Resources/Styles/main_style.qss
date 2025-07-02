@@ -66,3 +66,15 @@ QTableView::item:selected {
     background-color: #264f78;  /* Color de fondo cuando se selecciona (azul ejemplo) */
     color: white;               /* Color del texto al estar seleccionado */
 }
+
+/* Estilo de los combos */
+QComboBox {
+    border: none;
+	background-color: transparent;
+    border-bottom: 1px solid #f5f5f5;
+    padding: 2px;
+}
+
+QComboBox:focus {
+    border-bottom: 1px solid #607dfc;
+}

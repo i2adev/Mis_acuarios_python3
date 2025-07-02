@@ -1,5 +1,10 @@
 ﻿CHANGELOG:
 ================================================================================
+0.2.1   REFACTORIZACIÓN:
+        -   LA CATEGORÍA DE ACUARIO Y LA SUBCATEGORÍA DE ACUARIO SE MIGRAN A
+            OTRA TABLA Y SE ENLAZAN A SUS COMBOS CORRESPONDIENDES EN EL FORMU-
+            LARIO TIPO DE ACUARIO.
+
 0.2.0   SE CREA LA LÓGICA DE TIPO DE ACUARIO:
         -   SE CREA LA ENTIDAD.
         -   SE CREA EL FORMULARIO.

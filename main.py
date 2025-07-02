@@ -32,7 +32,7 @@ def main():
         testily = f.read()
         app.setStyleSheet(testily)
 
-    # Limpia la base de datos
+    # # Limpia la base de datos
     # msg = BaseDAO.clean_database()
     # if msg.is_success:
     #     QMessageBox.information(
@@ -47,7 +47,7 @@ def main():
     #         msg.error_msg
     #     )
 
-    # Se implementa la copia de la base de datos a fiche sql
+    # # Se implementa la copia de la base de datos a fiche sql
     # origen = str(Path(__file__).resolve().parent /
     #         "Services" / "Database" / "MISACUARIOS.sqlite3")
     #

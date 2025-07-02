@@ -2,7 +2,7 @@
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      02/06/2025
 Commentarios:
-    Módulo que contien la vista de la entidad TIPO DE FILTRO.
+    Módulo que contiene la vista base de la que derivan los formularios.
 """
 
 # Importaciones
@@ -278,37 +278,6 @@ class BaseView(QWidget):
         icon5 = QPixmap(":/Images/Window_icon.png")
         self.label_icon.setPixmap(icon5)
 
-        # Controles de inserción de datos
-        ## Primera línea
-        ### Label ID
-        self.label_id = QLabel("ID")
-        self.label_id.setMinimumWidth(50)
-        self.label_id.setMaximumWidth(50)
-
-        ### Texbox ID
-        self.edit_id = QLineEdit()
-        self.edit_id.setObjectName("edit_id")
-        self.edit_id.setMinimumWidth(50)
-        self.edit_id.setMaximumWidth(50)
-        self.edit_id.setEnabled(False)
-
-        ### Label TIPO DE FILTRO
-        self.label_tipo_filtro = QLabel("TIPO DE FILTRO")
-
-        ### Textbox TIPO DE FILTRO
-        self.edit_tipo_filtro = QLineEdit()
-        self.edit_tipo_filtro.setObjectName("edit_tipo_filtro")
-
-        ## Segunda línea
-        ### Label OBSERVACIONES
-        self.label_observaciones = QLabel("OBSERVACIONES")
-
-        ### Text OBSERVACIONES
-        self.text_observaciones = QTextEdit()
-        self.text_observaciones.setObjectName("text_observaciones")
-        self.text_observaciones.setMinimumHeight(80)
-        self.text_observaciones.setMaximumHeight(80)
-
         ## Controles de tabla y CRUD
         ### Tabla
         self.data_table = QTableView()
@@ -399,21 +368,6 @@ class BaseView(QWidget):
         self.label_total_pages = QLabel()
         self.label_total_pages.setMinimumWidth(30)
         self.label_total_pages.setMaximumWidth(30)
-
-        # Controles del pie de formulario
-        # ## Botón aceptar
-        # self.button_accept = QPushButton()
-        # self.button_accept.setText("&ACEPTAR")
-        # self.button_accept.setFlat(True)
-        # self.button_accept.setCursor(
-        #     QCursor(Qt.CursorShape.PointingHandCursor)
-        # )
-        #
-        # ## Botón cancelar
-        # self.button_cancel = QPushButton()
-        # self.button_cancel.setText("&CANCELAR")
-        # self.button_cancel.setFlat(True)
-        # self.button_cancel.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
 
         ## Botón Cerrar
         self.button_close = QPushButton()
