@@ -27,7 +27,7 @@ class SubcategoriaAcuarioValidator:
         return Result.success(1)
 
     @staticmethod
-    def ValidateSubcategoriaAcuario(widget: QLineEdit):
+    def validate_subcategoria_acuario(widget: QLineEdit):
         """ Valida la subcategoría de acuario. """
 
         # Sí el texto esta vacio

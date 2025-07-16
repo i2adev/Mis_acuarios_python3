@@ -1,5 +1,8 @@
 ﻿CHANGELOG:
 ================================================================================
+0.2.2   SE AÑADE:
+        -   SE AÑADE EL MAESTRO DE LAS CATEGORÍAS DE ACUARIOS.
+
 0.2.1   REFACTORIZACIÓN:
         -   LA CATEGORÍA DE ACUARIO Y LA SUBCATEGORÍA DE ACUARIO SE MIGRAN A
             OTRA TABLA Y SE ENLAZAN A SUS COMBOS CORRESPONDIENDES EN EL FORMU-

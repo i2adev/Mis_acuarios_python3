@@ -22,26 +22,26 @@ from Model.Entities.tipo_acuario_entity import TipoAcuarioEntity
 from Model.TableModel.tipo_acuario_table_model import TipoAcuarioTableModel
 from Services.Result.result import Result
 from Services.Validators.tipo_acuario_validator import TipoAcuarioValidator
+from Views.categoria_acuario_dialog import CategoriaAcuarioDialog
 from Views.table_menu_contextual import TableMenuContextual
 from Views.tipo_acuario_view import TipoAcuarioView
 
 class TipoAcuarioController(BaseController):
     """ Controlador de la entidad tipo de acuario. """
 
-    def __init__(self):
+    def __init__(self, view: TipoAcuarioView):
         """ Constructor base """
 
         # Inicializamos la vista, la entidad y el dao
-        self.__view = TipoAcuarioView("TIPOS DE ACUARIO")
-        self.__mod = TipoAcuarioEntity()
-        self.__dao = TipoAcuarioDAO()
+        self._mod = TipoAcuarioEntity()
+        self._dao = TipoAcuarioDAO()
 
         # Inicializamos el paginador
         self._pag = Paginator("VISTA_TIPOS_ACUARIO", 5)
         self._pag.initialize_paginator()
 
         # inicializamos la vista y pasamos al constructor padre
-        super().__init__(self.__view)
+        super().__init__(view)
 
         # Llenamos la tabla
         self.load_tableview()
@@ -56,13 +56,13 @@ class TipoAcuarioController(BaseController):
     def load_tableview(self):
         """ Gestiona los datos para llenar la tabl. """
 
-        self.fill_tableview(self.__view.data_table, self._pag.current_data)
-        self._configure_table(self.__view.data_table)
+        self.fill_tableview(self._view.data_table, self._pag.current_data)
+        self._configure_table(self._view.data_table)
 
     def show(self):
         """ Abre la vista """
 
-        self.__view.show()
+        self._view.show()
 
     def init_handlers(self):
         """
@@ -70,43 +70,47 @@ class TipoAcuarioController(BaseController):
         """
 
         # Inicializa los widgets de introducción de texto
-        for widget in self.__view.findChildren(QWidget):
+        for widget in self._view.findChildren(QWidget):
             if isinstance(widget, self._text_widgets):
                 widget.installEventFilter(self)
 
-        # self.__view.text_observaciones.textChanged.connect(lambda:
+        # self._view.text_observaciones.textChanged.connect(lambda:
         #                                                    self.spell_check)
 
         # Inizializa los botones
-        self.__view.button_insert.clicked.connect(self.button_insert_click)
-        self.__view.button_update.clicked.connect(self.button_update_click)
-        self.__view.button_load.clicked.connect(self.button_load_click)
-        self.__view.button_delete.clicked.connect(self.button_delete_click)
-        self.__view.button_clean.clicked.connect(lambda: self._clean_view())
+        self._view.button_insert.clicked.connect(self.button_insert_click)
+        self._view.button_update.clicked.connect(self.button_update_click)
+        self._view.button_load.clicked.connect(self.button_load_click)
+        self._view.button_delete.clicked.connect(self.button_delete_click)
+        self._view.button_clean.clicked.connect(lambda: self._clean_view())
 
-        self.__view.button_next.clicked.connect(self.next_page)
-        self.__view.button_prev.clicked.connect(self.previous_page)
-        self.__view.button_first.clicked.connect(self.first_page)
-        self.__view.button_last.clicked.connect(self.last_page)
+        self._view.button_next.clicked.connect(self.next_page)
+        self._view.button_prev.clicked.connect(self.previous_page)
+        self._view.button_first.clicked.connect(self.first_page)
+        self._view.button_last.clicked.connect(self.last_page)
 
-        self.__view.button_close.clicked.connect(
-            lambda: self.__view.close()
+        self._view.button_close.clicked.connect(
+            lambda: self._view.close()
         )
 
-        self.__view.frame.button_insert_tipo_acuario.clicked.connect(
+        self._view.frame.button_insert_tipo_acuario.clicked.connect(
             self.open_categoria_acuario_dialog
         )
-        self.__view.frame.button_insert_subtipo_acuario.clicked.connect(
+        self._view.frame.button_insert_subtipo_acuario.clicked.connect(
             self.open_subcategoria_acuario_dialog
         )
 
         # Inicializamos los combos
-        self.__view.combo_select_page.currentIndexChanged.connect(
+        self._view.combo_select_page.currentIndexChanged.connect(
             self.combo_page_indexchanged
         )
 
+        self._view.frame.combo_categoria_acuario.currentIndexChanged.connect(
+            self.combo_categoria_indexchanged
+        )
+
         # Eventos de la tabla
-        self.__view.data_table.customContextMenuRequested.connect(
+        self._view.data_table.customContextMenuRequested.connect(
             self.show_context_menu
         )
 
@@ -115,7 +119,7 @@ class TipoAcuarioController(BaseController):
         Se ejecuta cuando el índice del combo de selección de página.
         """
 
-        page = self.__view.combo_select_page.currentData()
+        page = self._view.combo_select_page.currentData()
 
         # Condiciones de salida
         if page is None:
@@ -130,19 +134,19 @@ class TipoAcuarioController(BaseController):
         """ Muestra el menú contextual de la tabla. """
 
         # Obtiene el indice de la fila
-        index = self.__view.data_table.indexAt(position)
+        index = self._view.data_table.indexAt(position)
 
         # Si el índice no es valido
         if not index.isValid():
             QMessageBox.warning(
-                self.__view,
-                self.__view.window_title,
+                self._view,
+                self._view.window_title,
                 "DEBES PULSAR SOBRE UN REGISTRO DE LA TABLA."
             )
             return
 
         # Muestra el menú
-        menu = TableMenuContextual(self.__view.data_table)
+        menu = TableMenuContextual(self._view.data_table)
 
         # Creamos el menú
         action_cargar = QAction("CARGAR REGISTRO", self)
@@ -154,19 +158,19 @@ class TipoAcuarioController(BaseController):
         menu.addAction(action_cargar)
         menu.addAction(action_eliminar)
 
-        menu.exec(self.__view.data_table.viewport().mapToGlobal(position))
+        menu.exec(self._view.data_table.viewport().mapToGlobal(position))
 
     def action_eliminar(self, event):
         """ Elimina el registro desde el menú contextual"""
 
         # Carga el modelo de la fila seleccionada
-        selection_model = self.__view.data_table.selectionModel()
+        selection_model = self._view.data_table.selectionModel()
 
         # Chequea si se ha seleccionado una fila
         if not selection_model.hasSelection():
             QMessageBox.warning(
-                self.__view,
-                self.__view.window_title,
+                self._view,
+                self._view.window_title,
                 "ANTES DE CARGAR UN REGISTRO, DEBES DE "
                 "SELECCIONAR UN REGISTRO EN LA TABLA."
             )
@@ -175,18 +179,18 @@ class TipoAcuarioController(BaseController):
         # Configuramos la fila
         index = selection_model.currentIndex()
         fila = index.row()
-        modelo = self.__view.data_table.model()
+        modelo = self._view.data_table.model()
 
         # Lee los datos del modelo
         id_tipo = modelo.index(fila, 0).data()
-        pagina_actual = self.__view.combo_select_page.currentData()
+        pagina_actual = self._view.combo_select_page.currentData()
 
         res = self.delete(id_tipo)
 
         if not res.is_success:
             QMessageBox.warning(
-                self.__view,
-                self.__view.window_title,
+                self._view,
+                self._view.window_title,
                 res.error_msg
             )
             return
@@ -198,33 +202,33 @@ class TipoAcuarioController(BaseController):
         # de páginas totales
         if pagina_actual > self._pag.total_pages:
 
-            total = self.__view.combo_select_page.count()
-            index = self.__view.combo_select_page.currentIndex()
+            total = self._view.combo_select_page.count()
+            index = self._view.combo_select_page.currentIndex()
 
             # Verifica si es el último ítem
             if index == total - 1 and total > 1:
-                self.__view.combo_select_page.removeItem(index)
+                self._view.combo_select_page.removeItem(index)
                 # Selecciona el nuevo último (el anterior al que se eliminó)
-                self.__view.combo_select_page.setCurrentIndex(
-                    self.__view.combo_select_page.count() - 1
+                self._view.combo_select_page.setCurrentIndex(
+                    self._view.combo_select_page.count() - 1
                 )
             elif index == total - 1 and total == 1:
                 # Sí es el único ítem, eliminarlo y limpiar la selección
-                self.__view.combo_select_page.removeItem(index)
-                self.__view.combo_select_page.setCurrentIndex(-1)
+                self._view.combo_select_page.removeItem(index)
+                self._view.combo_select_page.setCurrentIndex(-1)
 
         # Establecemos la página actual
         if pagina_actual > self._pag.total_pages:
-            self.__view.combo_select_page.setCurrentIndex(
+            self._view.combo_select_page.setCurrentIndex(
                 self._pag.total_pages - 1
             )
             pagina_actual -= 1
-            self.__view.label_total_pages.setText( str(pagina_actual))
-            self.__view.label_total_pages.setText( str(pagina_actual))
+            self._view.label_total_pages.setText( str(pagina_actual))
+            self._view.label_total_pages.setText( str(pagina_actual))
 
 
-        self.__view.combo_select_page.setCurrentIndex(-1)
-        self.__view.combo_select_page.setCurrentIndex(pagina_actual - 1)
+        self._view.combo_select_page.setCurrentIndex(-1)
+        self._view.combo_select_page.setCurrentIndex(pagina_actual - 1)
 
 
     def action_cargar(self, event):
@@ -236,26 +240,26 @@ class TipoAcuarioController(BaseController):
         """ Controla el clic en el botón eliminar. """
 
         # Sí tenemos un registro cargado
-        if not self.__view.frame.edit_id.text():
+        if not self._view.frame.edit_id.text():
             QMessageBox.warning(
-                self.__view,
-                self.__view.window_title,
+                self._view,
+                self._view.window_title,
                 "DEBES SELECCIIONAR UN REGISTRO DE LA TABLA ANTES DE "
                 "ELIMINARLO."
             )
             return
 
         # Obtener el ID desde el cuadro de texto id_parent
-        id_tipo = int(self.__view.frame.edit_id.text())
-        pagina_actual = self.__view.combo_select_page.currentData()
+        id_tipo = int(self._view.frame.edit_id.text())
+        pagina_actual = self._view.combo_select_page.currentData()
 
         # Insertar el registro
         res = self.delete(id_tipo)
 
         if not res.is_success:
             QMessageBox.warning(
-                self.__view,
-                self.__view.window_title,
+                self._view,
+                self._view.window_title,
                 res.error_msg
             )
 
@@ -266,31 +270,31 @@ class TipoAcuarioController(BaseController):
         # de páginas totales
         if pagina_actual > self._pag.total_pages:
 
-            total = self.__view.combo_select_page.count()
-            index = self.__view.combo_select_page.currentIndex()
+            total = self._view.combo_select_page.count()
+            index = self._view.combo_select_page.currentIndex()
 
             # Verifica si es el último ítem
             if index == total - 1 and total > 1:
-                self.__view.combo_select_page.removeItem(index)
+                self._view.combo_select_page.removeItem(index)
                 # Selecciona el nuevo último (el anterior al que se eliminó)
-                self.__view.combo_select_page.setCurrentIndex(
-                    self.__view.combo_select_page.count() - 1
+                self._view.combo_select_page.setCurrentIndex(
+                    self._view.combo_select_page.count() - 1
                 )
             elif index == total - 1 and total == 1:
                 # Sí es el único ítem, eliminarlo y limpiar la selección
-                self.__view.combo_select_page.removeItem(index)
-                self.__view.combo_select_page.setCurrentIndex(-1)
+                self._view.combo_select_page.removeItem(index)
+                self._view.combo_select_page.setCurrentIndex(-1)
 
         # Establecemos la página actual
         if pagina_actual > self._pag.total_pages:
-            self.__view.combo_select_page.setCurrentIndex(
+            self._view.combo_select_page.setCurrentIndex(
                 self._pag.total_pages - 1
             )
             pagina_actual -= 1
-            self.__view.label_total_pages.setText( str(pagina_actual))
+            self._view.label_total_pages.setText( str(pagina_actual))
 
-        self.__view.combo_select_page.setCurrentIndex(-1)
-        self.__view.combo_select_page.setCurrentIndex(pagina_actual - 1)
+        self._view.combo_select_page.setCurrentIndex(-1)
+        self._view.combo_select_page.setCurrentIndex(pagina_actual - 1)
 
     def button_load_click(self, event):
         """ Controla el clic del boton de cargar. """
@@ -300,13 +304,13 @@ class TipoAcuarioController(BaseController):
     def button_update_click(self, event):
         """ Controla el clic del botón actualizar. """
 
-        pagina_actual = self.__view.combo_select_page.currentData()
+        pagina_actual = self._view.combo_select_page.currentData()
 
         # Valida el formulario
         res = self.view_validator()
 
         if not res.is_success:
-            QMessageBox.information(self.__view, "ERROR", res.error_msg)
+            QMessageBox.information(self._view, "ERROR", res.error_msg)
             return
 
         # Actualiza el registro
@@ -314,8 +318,8 @@ class TipoAcuarioController(BaseController):
 
         if not res.is_success:
             QMessageBox.warning(
-                self.__view,
-                self.__view.window_title,
+                self._view,
+                self._view.window_title,
                 res.error_msg
             )
 
@@ -323,30 +327,30 @@ class TipoAcuarioController(BaseController):
         self._pag.initialize_paginator()
 
         # Establecemos la página actual
-        self.__view.combo_select_page.setCurrentIndex(-1)
-        self.__view.combo_select_page.setCurrentIndex(pagina_actual - 1)
+        self._view.combo_select_page.setCurrentIndex(-1)
+        self._view.combo_select_page.setCurrentIndex(pagina_actual - 1)
 
-        self._select_row_by_id(self.__view.data_table, res.value)
+        self._select_row_by_id(self._view.data_table, res.value)
 
     def view_validator(self):
         """ Valida el formulario. """
 
         # Valida el tipo de acuario
-        res = TipoAcuarioValidator.ValidateCategoriaAcuario(
-            self.__view.frame.combo_tipo_acuario
+        res = TipoAcuarioValidator.validate_categoria_acuario(
+            self._view.frame.combo_categoria_acuario
         )
 
         if not res.is_success:
-            self.__view.frame.edit_tipo_acuario.setFocus()
+            self._view.frame.combo_categoria_acuario.setFocus()
             return res
 
         # Valida el subtipo de acuario
         res = TipoAcuarioValidator.ValidateSubcategoriaAcuario(
-            self.__view.frame.combo_subcategoria_acuario
+            self._view.frame.combo_subcategoria_acuario
         )
 
         if not res.is_success:
-            self.__view.frame.combo_subcategoria_acuario.setFocus()
+            self._view.frame.combo_subcategoria_acuario.setFocus()
             return res
 
         return res
@@ -359,18 +363,19 @@ class TipoAcuarioController(BaseController):
 
         if not res.is_success:
             QMessageBox.information(
-                self.__view,
-                self.__view.window_title,
+                self._view,
+                self._view.window_title,
                 res.error_msg)
             return
+
 
         # Insertamos el registro
         res = self.insert()
 
         if not res.is_success:
             QMessageBox.warning(
-                self.__view,
-                self.__view.window_title,
+                self._view,
+                self._view.window_title,
                 res.error_msg
             )
             return
@@ -380,22 +385,22 @@ class TipoAcuarioController(BaseController):
 
         # Comprobamos si al añadir un registro se ha aumentado el número
         # de páginas totales
-        if self._pag.total_pages > self.__view.combo_select_page.count():
-            self.__view.combo_select_page.addItem(
+        if self._pag.total_pages > self._view.combo_select_page.count():
+            self._view.combo_select_page.addItem(
                 str(self._pag.total_pages),
                 self._pag.total_pages
             )
-            self.__view.label_total_pages.setText(
-                str(self.__view.combo_select_page.count())
+            self._view.label_total_pages.setText(
+                str(self._view.combo_select_page.count())
             )
 
         # Establecemos la página final
-        self.__view.combo_select_page.setCurrentIndex(-1)
-        self.__view.combo_select_page.setCurrentIndex(
-            self.__view.combo_select_page.count() - 1
+        self._view.combo_select_page.setCurrentIndex(-1)
+        self._view.combo_select_page.setCurrentIndex(
+            self._view.combo_select_page.count() - 1
         )
 
-        self._select_row_by_id(self.__view.data_table, res.value)
+        self._select_row_by_id(self._view.data_table, res.value)
 
     def fill_tableview(self, table: QTableView, data: list[TipoAcuarioEntity]):
         """ Carga los datos en la tabla. """
@@ -445,15 +450,15 @@ class TipoAcuarioController(BaseController):
 
         ent = TipoAcuarioEntity()
 
-        if self.__view.frame.edit_id.text():
-            ent.id = int(self.__view.frame.edit_id.text())
+        if self._view.frame.edit_id.text():
+            ent.id = int(self._view.frame.edit_id.text())
         else:
             ent.id = None
 
-        ent.id_categoria_acuario = self.__view.frame.combo_tipo_acuario.currentData()
-        ent.id_subcategoria_acuario = (self.__view.frame
+        ent.id_categoria_acuario = self._view.frame.combo_categoria_acuario.currentData()
+        ent.id_subcategoria_acuario = (self._view.frame
                                        .combo_subcategoria_acuario.currentData())
-        ent.observaciones = self.__view.frame.text_observaciones.toPlainText()
+        ent.observaciones = self._view.frame.text_observaciones.toPlainText()
         return ent
 
     def insert(self) -> Result:
@@ -461,7 +466,7 @@ class TipoAcuarioController(BaseController):
         ent = self.entity_configuration()
 
         # Inserta el registro
-        res = self.__dao.insert(ent)
+        res = self._dao.insert(ent)
         if not res.is_success:
             return Result.failure( res.error_msg)
 
@@ -477,7 +482,7 @@ class TipoAcuarioController(BaseController):
         ent = self.entity_configuration()
 
         # Inserta el registro
-        res = self.__dao.update(ent)
+        res = self._dao.update(ent)
         if not res.is_success:
             return Result.failure(res.error_msg)
 
@@ -486,7 +491,7 @@ class TipoAcuarioController(BaseController):
 
         # Configuramos la tabla
         self.load_tableview()
-        self._select_row_by_id(self.__view.data_table, res.value)
+        self._select_row_by_id(self._view.data_table, res.value)
 
         return Result.success(ent.id)
 
@@ -497,7 +502,7 @@ class TipoAcuarioController(BaseController):
         self._clean_view()
 
         # Carga el modelo de la fila seleccionada
-        selection_model = self.__view.data_table.selectionModel()
+        selection_model = self._view.data_table.selectionModel()
 
         # Chequea si se ha seleccionado una fila
         if not selection_model.hasSelection():
@@ -509,7 +514,7 @@ class TipoAcuarioController(BaseController):
         # Configuramos la fila
         index = selection_model.currentIndex()
         fila = index.row()
-        modelo = self.__view.data_table.model()
+        modelo = self._view.data_table.model()
 
         # Lee los datos del modelo
         id_tipo = modelo.index(fila, 0).data()
@@ -518,23 +523,23 @@ class TipoAcuarioController(BaseController):
         observaciones = modelo.index(fila, 4).data()
 
         # Cargamos los widgets
-        self.__view.frame.edit_id.setText(
+        self._view.frame.edit_id.setText(
             str(id_tipo) if id_tipo is not None else ""
         )
 
         if categoria_acuario:
-            indexCat = self.__view.frame.combo_tipo_acuario.findText(
+            indexCat = self._view.frame.combo_categoria_acuario.findText(
                 categoria_acuario
             )
-            self.__view.frame.combo_tipo_acuario.setCurrentIndex(indexCat)
+            self._view.frame.combo_categoria_acuario.setCurrentIndex(indexCat)
 
         if subcategoria_acuario:
-            indexSub = self.__view.frame.combo_subcategoria_acuario.findText(
+            indexSub = self._view.frame.combo_subcategoria_acuario.findText(
                 subcategoria_acuario
             )
-            self.__view.frame.combo_subcategoria_acuario.setCurrentIndex(indexSub)
+            self._view.frame.combo_subcategoria_acuario.setCurrentIndex(indexSub)
 
-        self.__view.frame.text_observaciones.setPlainText(
+        self._view.frame.text_observaciones.setPlainText(
             str(observaciones) if observaciones is not None else ""
         )
 
@@ -549,37 +554,37 @@ class TipoAcuarioController(BaseController):
 
         # Solicitamos doble confirmación
         res = QMessageBox.question(
-            self.__view,
-            self.__view.window_title,
+            self._view,
+            self._view.window_title,
             "¿ESTÁS SEGURO QUE DESEAS ELIMINAR EL REGISTRO?",
             QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
         )
 
         if res == QMessageBox.StandardButton.No:
             QMessageBox.information(
-                self.__view,
-                self.__view.window_title,
+                self._view,
+                self._view.window_title,
                 "NO SE ELIMINARÁ EL REGISTRO"
             )
             return Result.success(0)
 
         res = QMessageBox.question(
-            self.__view,
-            self.__view.window_title,
+            self._view,
+            self._view.window_title,
             "R E P I T O\n¿ESTÁS SEGURO QUE DESEAS ELIMINAR EL REGISTRO?",
             QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
         )
 
         if res == QMessageBox.StandardButton.No:
             QMessageBox.information(
-                self.__view,
-                self.__view.window_title,
+                self._view,
+                self._view.window_title,
                 "NO SE ELIMINARÁ EL REGISTRO"
             )
             return Result.success(0)
 
         # Elimina el registro
-        res = self.__dao.delete(id)
+        res = self._dao.delete(id)
 
         if not res.is_success:
             return Result.failure(res.error_msg)
@@ -595,40 +600,40 @@ class TipoAcuarioController(BaseController):
     def configure_table_foot(self):
         """ Configura el pie de la tabla. """
 
-        self.__view.label_total_pages.setText(str(self._pag.total_pages))
+        self._view.label_total_pages.setText(str(self._pag.total_pages))
         self.fill_combo_page()
 
     def next_page(self, event: QEvent) -> None:
         """ Pasa a la siguiente página de la tabla. """
 
-        page_to = self.__view.combo_select_page.currentData() + 1
+        page_to = self._view.combo_select_page.currentData() + 1
 
         if page_to > self._pag.total_pages:
             QMessageBox.information(
-                self.__view,
-                self.__view.window_title,
+                self._view,
+                self._view.window_title,
                 "SE HA LLEGADO A LA ÚLTIMA PÁGINA"
             )
             return
 
         self._pag.current_page = page_to
-        self.__view.combo_select_page.setCurrentIndex(self._pag.page_index)
+        self._view.combo_select_page.setCurrentIndex(self._pag.page_index)
 
     def previous_page(self, event: QEvent) -> None:
         """ Pasa a la anterior página de la tabla. """
 
-        page_to = self.__view.combo_select_page.currentData() - 1
+        page_to = self._view.combo_select_page.currentData() - 1
 
         if page_to < 1:
             QMessageBox.information(
-                self.__view,
-                self.__view.window_title,
+                self._view,
+                self._view.window_title,
                 "SE HA LLEGADO A LA PRIMERA PÁGINA"
             )
             return
 
         self._pag.current_page = page_to
-        self.__view.combo_select_page.setCurrentIndex(self._pag.page_index)
+        self._view.combo_select_page.setCurrentIndex(self._pag.page_index)
 
     def first_page(self, event: QEvent) -> None:
         """ Pasa a la primera página de la tabla. """
@@ -639,7 +644,7 @@ class TipoAcuarioController(BaseController):
             return
 
         self._pag.current_page = page_to
-        self.__view.combo_select_page.setCurrentIndex(self._pag.page_index)
+        self._view.combo_select_page.setCurrentIndex(self._pag.page_index)
 
     def last_page(self, event: QEvent) -> None:
         """ Pasa a la primera página de la tabla. """
@@ -650,30 +655,30 @@ class TipoAcuarioController(BaseController):
             return
 
         self._pag.current_page = page_to
-        self.__view.combo_select_page.setCurrentIndex(self._pag.page_index)
+        self._view.combo_select_page.setCurrentIndex(self._pag.page_index)
 
     def fill_combo_page(self):
         """ Rellena el combo de selección de página. """
 
-        self.__view.combo_select_page.clear()
+        self._view.combo_select_page.clear()
         for i in range(1, self._pag.total_pages + 1):
-            self.__view.combo_select_page.addItem(str(i), i)
+            self._view.combo_select_page.addItem(str(i), i)
 
     def fill_combos(self):
         """ Llena los combos del formulario"""
 
         self.fill_combo_categoria()
-        self.fill_combo_subcategoria()
+        # self.fill_combo_subcategoria()
 
-    def fill_combo_subcategoria(self):
+    def fill_combo_subcategoria(self, id_Cat: int):
         """ Llena el combo de subcategoría de acuario. """
 
         # Vaciamos el combo
-        self.__view.frame.combo_subcategoria_acuario.clear()
+        self._view.frame.combo_subcategoria_acuario.clear()
 
         # Obtenemos los datos
         dao = SubcategoriaAcuarioDAO()
-        lista = dao.get_list_combo()
+        lista = dao.get_list_combo_by_categoria(id_Cat)
         if not lista.is_success:
             return Result.failure(
                 "NO SE HAN PODIDO OBTENER LOS 'SUBCATEGORÍAS DE ACUARIO'."
@@ -681,19 +686,19 @@ class TipoAcuarioController(BaseController):
 
         # Llenamos el combo
         for ent in lista.value:
-            self.__view.frame.combo_subcategoria_acuario.addItem(ent.subcategoria, ent.id)
+            self._view.frame.combo_subcategoria_acuario.addItem(ent.subcategoria, ent.id)
 
         # Establecemos el autocompletado
-        self.set_autocomplete(self.__view.frame.combo_tipo_acuario)
+        self.set_autocomplete(self._view.frame.combo_categoria_acuario)
 
         # Deseleccionamos el valor
-        self.__view.frame.combo_subcategoria_acuario.setCurrentIndex(-1)
+        self._view.frame.combo_subcategoria_acuario.setCurrentIndex(-1)
 
     def fill_combo_categoria(self):
         """ Llena el combo de categoría de acuario. """
 
         # Vaciamos el combo
-        self.__view.frame.combo_tipo_acuario.clear()
+        self._view.frame.combo_categoria_acuario.clear()
 
         # Obtenemos los datos
         dao = CategoriaAcuarioDAO()
@@ -705,13 +710,13 @@ class TipoAcuarioController(BaseController):
 
         # Llenamos el combo
         for ent in lista.value:
-            self.__view.frame.combo_tipo_acuario.addItem(ent.categoria, ent.id)
+            self._view.frame.combo_categoria_acuario.addItem(ent.categoria, ent.id)
 
         # Establecemos el autocompletado
-        self.set_autocomplete(self.__view.frame.combo_tipo_acuario)
+        self.set_autocomplete(self._view.frame.combo_categoria_acuario)
 
         # Deseleccionamos el valor
-        self.__view.frame.combo_tipo_acuario.setCurrentIndex(-1)
+        self._view.frame.combo_categoria_acuario.setCurrentIndex(-1)
 
     def set_autocomplete(self, combo: QComboBox):
         """
@@ -730,32 +735,65 @@ class TipoAcuarioController(BaseController):
     def open_subcategoria_acuario_dialog(self):
         """ Abrimos el diálogo de subcategoria de acuario. """
 
-        ctrl = SubcategoriaAcuarioDialogController()
+        # Condiciones de salida
+        data = self._view.frame.combo_categoria_acuario.currentData()
+        if not data:
+            QMessageBox.information(
+                self._view,
+                self._view.window_title,
+                """
+                NO HAY NINGUNA CATEGORÍA SELECCIONADA.
+                SELECCIONE PRIMERO UNA CATEGFORÍA.
+                """
+            )
+            return
+
+        ix_cat = self._view.frame.combo_categoria_acuario.currentIndex()
+
+        ctrl = SubcategoriaAcuarioDialogController(ix_cat)
+
+        # idx = self._view.frame.combo_categoria_acuario.currentIndex()
         res = ctrl.show_modal()
 
         if not res.is_success:
             return
 
         # Configuramos el combo
-        combo = self.__view.frame.combo_tipo_acuario
+        combo = self._view.frame.combo_subcategoria_acuario
 
-        self.fill_combo_categoria()
+        self.fill_combo_subcategoria(data)
         for i in range(combo.count()):
             if combo.itemData(i) == res.value.id:
                 combo.setCurrentIndex(i)
 
     def open_categoria_acuario_dialog(self):
         """ Abrimos el diálogo de categoria de acuario. """
-        ctrl = CategoriaAcuarioDialogController()
+        view = CategoriaAcuarioDialog(
+            "INSERTAR CATEGORÍA DE ACUARIO"
+        )
+        ctrl = CategoriaAcuarioDialogController(view)
         res = ctrl.show_modal()
 
         if not res.is_success:
             return
 
         # Configuramos el combo
-        combo = self.__view.frame.combo_tipo_acuario
+        combo = self._view.frame.combo_categoria_acuario
 
         self.fill_combo_categoria()
         for i in range(combo.count()):
             if combo.itemData(i) == res.value.id:
                 combo.setCurrentIndex(i)
+
+    def combo_categoria_indexchanged(self):
+        """ Se ejecuta cuando el índice del combo cambia. """
+
+        # Condiciones de salida
+        if self._view.frame.combo_categoria_acuario.currentIndex() == -1:
+            return
+
+        # Obtenemos el dato a cargar
+        data = self._view.frame.combo_categoria_acuario.currentData()
+
+        # Cargamos el combo subcategoría
+        self.fill_combo_subcategoria(data)

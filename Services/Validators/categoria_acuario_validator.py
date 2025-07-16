@@ -13,7 +13,7 @@ class CategoriaAcuarioValidator:
     """ Valida el formulario de categoría de acuario. """
 
     @staticmethod
-    def ValidateCategoriaAcuario(widget: QLineEdit):
+    def validate_categoria_acuario(widget: QLineEdit):
         """ Valida la categoría de acuario. """
 
         # Sí el texto esta vacio

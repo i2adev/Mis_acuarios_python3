@@ -62,14 +62,14 @@ class TipoAcuarioForm(QFrame):
         self.text_observaciones.setObjectName("text_observaciones")
 
         # Combos
-        self.combo_tipo_acuario = QComboBox()
-        self.combo_tipo_acuario.setEditable(True)
+        self.combo_categoria_acuario = QComboBox()
+        # self.combo_categoria_acuario.setEditable(True)
         self.button_insert_tipo_acuario = QPushButton("<")
         self.button_insert_tipo_acuario.setFixedWidth(30)
-        self.combo_tipo_acuario.setObjectName("combo_tipo_acuario")
+        self.combo_categoria_acuario.setObjectName("combo_categoria_acuario")
 
         self.combo_subcategoria_acuario = QComboBox()
-        self.combo_subcategoria_acuario.setEditable(True)
+        # self.combo_subcategoria_acuario.setEditable(True)
         self.button_insert_subtipo_acuario = QPushButton("<")
         self.button_insert_subtipo_acuario.setFixedWidth(30)
         self.combo_subcategoria_acuario.setObjectName("combo_subcategoria_acuario")
@@ -83,7 +83,7 @@ class TipoAcuarioForm(QFrame):
         self.layout_id.addWidget(self.edit_id)
 
         ## Tipo de acuario
-        self.layout_edit_tipo_acuario.addWidget(self.combo_tipo_acuario)
+        self.layout_edit_tipo_acuario.addWidget(self.combo_categoria_acuario)
         self.layout_edit_tipo_acuario.addWidget(self.button_insert_tipo_acuario)
         self.layout_tipo_acuario.addWidget(self.label_tipo_acuario)
         self.layout_tipo_acuario.addLayout(self.layout_edit_tipo_acuario)

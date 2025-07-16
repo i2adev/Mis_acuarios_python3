@@ -13,7 +13,7 @@ class TipoFiltroValidator:
     """ Clase validadora del formulario de tipo de filtro. """
 
     @staticmethod
-    def ValidateTipoFiltro(widget: QLineEdit):
+    def validate_tipo_filtro(widget: QLineEdit):
         """ Valida el tipo de filtro. """
 
         # Si el texto está vacio

@@ -41,7 +41,7 @@ class CategoriaAcuarioDAO(BaseDAO):
                           ROW_NUMBER() OVER(ORDER BY CATEGORIA_ACUARIO) AS NUM,
                           CATEGORIA_ACUARIO AS CATEGORIA,
                           OBSERVACIONES
-                FROM      CATEGORIA_ACUARIO;
+                FROM      CATEGORIAS_ACUARIO;
             """
             try:
                 cursor = self.db.conn.cursor()
@@ -77,7 +77,7 @@ class CategoriaAcuarioDAO(BaseDAO):
             sql = """
                 SELECT    ID_CATEGORIA_ACUARIO AS ID,
                           CATEGORIA_ACUARIO AS VALUE
-                FROM      CATEGORIA_ACUARIO
+                FROM      CATEGORIAS_ACUARIO
                 ORDER BY  CATEGORIA_ACUARIO;
               """
             try:
@@ -111,7 +111,7 @@ class CategoriaAcuarioDAO(BaseDAO):
         with self.db:
             # Obtenemos los datos
             sql = """
-                INSERT INTO     CATEGORIA_ACUARIO
+                INSERT INTO     CATEGORIAS_ACUARIO
                                 (CATEGORIA_ACUARIO, OBSERVACIONES)
                 VALUES          (:cat, :observaciones);
             """
@@ -149,7 +149,7 @@ class CategoriaAcuarioDAO(BaseDAO):
         with self.db:
             # Obtenemos los datos
             sql = """
-                UPDATE  CATEGORIA_ACUARIO
+                UPDATE  CATEGORIAS_ACUARIO
                 SET     CATEGORIA_ACUARIO = :cat,
                         OBSERVACIONES = :observaciones
                 WHERE   ID_CATEGORIA_ACUARIO = :id
@@ -188,7 +188,7 @@ class CategoriaAcuarioDAO(BaseDAO):
         with self.db:
             # Obtenemos los datos
             sql = """
-                DELETE FROM CATEGORIA_ACUARIO
+                DELETE FROM CATEGORIAS_ACUARIO
                 WHERE ID_CATEGORIA_ACUARIO = :id;
             """
             try:

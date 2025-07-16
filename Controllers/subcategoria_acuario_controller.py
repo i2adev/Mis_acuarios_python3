@@ -34,8 +34,11 @@ from Services.Validators.tipo_filtro_validator import TipoFiltroValidator
 class SubcategoriaAcuarioDialogController(BaseController):
     """ Controlador del diálogo categoría de acuario. """
 
-    def __init__(self):
+    def __init__(self, ix_cat: int = None):
         """ Constructor base """
+
+        # Inicializamos las variables
+        self.ix_cat = ix_cat
 
         # Inicializamos la vista, la entidad y el dao
         self.__view = SubcategoriaAcuarioDialog(
@@ -53,13 +56,22 @@ class SubcategoriaAcuarioDialogController(BaseController):
         # Inicializamos los eventos
         self.init_handlers()
 
+        # Seleccionar el valor en el combo
+        if self.ix_cat != -1:
+            self.__view.frame.combo_categoria_acuario.setCurrentIndex(ix_cat)
+
     def show_modal(self) -> Result:
-        """ Abre la centava modal. """
+        """
+        Abre la centava modal.
+
+        Parámetros:
+        :param idx_cat: Id de la categoría de acuario.
+        """
 
         if self.__view.exec():
             # Obtenemos la categoría de acuario
-            categoria_acuario = self.get_subcategoria_Acuario()
-            return Result.success(categoria_acuario)
+            subcategoria_acuario = self.get_subcategoria_Acuario()
+            return Result.success(subcategoria_acuario)
         else:
             return Result.failure("NO SE HA PODIDO OBTENER LA ENTIDAD.")
 
@@ -172,7 +184,7 @@ class SubcategoriaAcuarioDialogController(BaseController):
             return res
 
         # Valida la subcategoría de acuario
-        res = SubcategoriaAcuarioValidator.ValidateSubcategoriaAcuario(
+        res = SubcategoriaAcuarioValidator.validate_subcategoria_acuario(
             self.__view.frame.edit_subcategoria_acuario
         )
 
@@ -186,9 +198,9 @@ class SubcategoriaAcuarioDialogController(BaseController):
     def fill_combos(self):
         """ Llena los combos del formulario"""
 
-        self.fill_combo_tipo()
+        self.fill_combo_categoria()
 
-    def fill_combo_tipo(self):
+    def fill_combo_categoria(self):
         """ Llena el combo de tipos de acuario. """
 
         # Vaciamos el combo
@@ -204,7 +216,8 @@ class SubcategoriaAcuarioDialogController(BaseController):
 
         # Llenamos el combo
         for ent in lista.value:
-            self.__view.frame.combo_categoria_acuario.addItem(ent.categoria, ent.id)
+            self.__view.frame.combo_categoria_acuario.addItem(ent.categoria,
+                                                              ent.id)
 
         # Establecemos el autocompletado
         self.set_autocomplete(self.__view.frame.combo_categoria_acuario)

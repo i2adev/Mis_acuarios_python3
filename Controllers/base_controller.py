@@ -107,21 +107,27 @@ class BaseController(QObject):
     def _clean_view(self):
         """ Limpia los controles del formulario. """
 
-        # Limpia los widgets de texto
+        # Limpia los controles del formulario
         for widget in self._view.findChildren(QWidget):
+            # En caso de que sean controles de edición de textgo
             if isinstance(widget, self._text_widgets):
                 widget.clear()
 
+            # En caso de que sean combos
+            if isinstance(widget, QComboBox):
+                widget.setCurrentIndex(-1)
 
     def _fill_combo(self, combo: QComboBox, lista: list[BaseEntity], attr_text: str, attr_data: str):
         """
         Llena un QComboBox con una lista de entidades.
 
+        Parámetros:
         :param combo: El QComboBox que quieres llenar.
         :param lista: Lista de entidades (pueden ser objetos o diccionarios).
         :param attr_text: Nombre del atributo para el texto visible.
         :param attr_data: Nombre del atributo para el valor (userData).
         """
+
         combo.clear()
         for item in lista:
             # Si es diccionario
