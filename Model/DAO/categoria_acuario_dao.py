@@ -41,7 +41,7 @@ class CategoriaAcuarioDAO(BaseDAO):
                           ROW_NUMBER() OVER(ORDER BY CATEGORIA_ACUARIO) AS NUM,
                           CATEGORIA_ACUARIO AS CATEGORIA,
                           OBSERVACIONES
-                FROM      CATEGORIA_ACUARIO;
+                FROM      CATEGORIAS_ACUARIO;
             """
             try:
                 cursor = self.db.conn.cursor()
@@ -65,6 +65,51 @@ class CategoriaAcuarioDAO(BaseDAO):
             finally:
                 self.db.close_connection()
 
+    def get_num_by_id(self, id_: int) -> Result:
+        """
+        Obtiene el valor NUM de la vista VISTA_CATEGORIAS_ACUARIO dado un ID.
+        """
+
+        with self.db:
+            if not self.db.conn:
+                QMessageBox.information(
+                    None,
+                    "CONEXIÓN",
+                    "CONEXIÓN NO INICIALIZADA"
+                )
+                # return Result.failure(
+                #     "NO SE HA PODIDO CONECTAR CON LA BASE DE DATOS."
+                # )
+
+            # Obtenemos el dato
+            sql = """
+                SELECT NUM
+                FROM   VISTA_CATEGORIAS_ACUARIO
+                WHERE  ID = :id;
+            """
+            try:
+                cursor = self.db.conn.cursor()
+                cursor.execute(sql, {"id": id_})
+                row = cursor.fetchone()
+
+                if row is not None:
+                    return Result.success(row["NUM"])
+                else:
+                    return Result.failure(
+                        f"NO SE ENCONTRÓ NINGÚN RESULTADO CON EL ID '{id_}'."
+                    )
+
+            except self.db.conn.OperationalError as e:
+                return Result.failure(f"[ERROR OPERACIONAL]\n{e}")
+            except self.db.conn.ProgrammingError as e:
+                return Result.failure(f"[ERROR DE PROGRAMACIÓN]\n{e}")
+            except self.db.conn.DatabaseError as e:
+                return Result.failure(f"[ERROR DE BASE DE DATOS]\n{e}")
+            except self.db.conn.Error as e:
+                return Result.failure(f"[ERROR GENERAL SQLITE]\n{e}")
+            finally:
+                self.db.close_connection()
+
     def get_list_combo(self):
         """ Obtiene el listado para el combo. """
 
@@ -77,7 +122,7 @@ class CategoriaAcuarioDAO(BaseDAO):
             sql = """
                 SELECT    ID_CATEGORIA_ACUARIO AS ID,
                           CATEGORIA_ACUARIO AS VALUE
-                FROM      CATEGORIA_ACUARIO
+                FROM      CATEGORIAS_ACUARIO
                 ORDER BY  CATEGORIA_ACUARIO;
               """
             try:
@@ -111,7 +156,7 @@ class CategoriaAcuarioDAO(BaseDAO):
         with self.db:
             # Obtenemos los datos
             sql = """
-                INSERT INTO     CATEGORIA_ACUARIO
+                INSERT INTO     CATEGORIAS_ACUARIO
                                 (CATEGORIA_ACUARIO, OBSERVACIONES)
                 VALUES          (:cat, :observaciones);
             """
@@ -149,7 +194,7 @@ class CategoriaAcuarioDAO(BaseDAO):
         with self.db:
             # Obtenemos los datos
             sql = """
-                UPDATE  CATEGORIA_ACUARIO
+                UPDATE  CATEGORIAS_ACUARIO
                 SET     CATEGORIA_ACUARIO = :cat,
                         OBSERVACIONES = :observaciones
                 WHERE   ID_CATEGORIA_ACUARIO = :id
@@ -188,7 +233,7 @@ class CategoriaAcuarioDAO(BaseDAO):
         with self.db:
             # Obtenemos los datos
             sql = """
-                DELETE FROM CATEGORIA_ACUARIO
+                DELETE FROM CATEGORIAS_ACUARIO
                 WHERE ID_CATEGORIA_ACUARIO = :id;
             """
             try:

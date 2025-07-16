@@ -1,31 +1,38 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
-Fecha:      27/06/2025
+Fecha:      14/07/2025
 Commentarios:
-    Módulo que contiene la vista de la entidad TIPO DE ACUARIO.
+    Módulo que contiene el formulario maestro de la categoría de
+    acuario.
 """
-
 import sys
 
 from PyQt6.QtCore import Qt
-from PyQt6.QtWidgets import QApplication, QFrame, QWidget
+from PyQt6.QtWidgets import QApplication, QSizePolicy, QSpacerItem, QWidget
 
 from Views.base_view import BaseView
-from Views.tipo_acuario_form import TipoAcuarioForm
+from Views.categoria_acuario_dialog import CategoriaAcuarioDialog
+from Views.categoria_acuario_form import CategoriaAcuarioForm
 
 
-class TipoAcuarioView(BaseView):
-    """ Formulario de tipo de acuario. """
+class CategoriaAcuarioView(BaseView):
+    """
+    Formulario maestro de la CATEGORÍA DE ACUARIO.
+    """
 
-    def  __init__(self, w_title: str):
+    def __init__(self, w_title: str):
         """ Constructor de clase. """
 
         super().__init__(w_title)
 
-        # Configura el formulario
-        self.frame = TipoAcuarioForm()
+        # Configuramos el formulario
+        self.frame = CategoriaAcuarioForm()
+        self.frame_main.setFixedWidth(550)
         self.layout_form_data.addWidget(self.frame)
         self.set_tab_order()
+
+        # Asigna atajos de teclado
+        self.button_insert.setShortcut("Ctrl+I")
 
     def set_tab_order(self):
         """ Establece el orden de tabulación de los controles. """
@@ -35,23 +42,19 @@ class TipoAcuarioView(BaseView):
             widget.setFocusPolicy(Qt.FocusPolicy.ClickFocus)
 
         # Establecemos las politicas de focus
-        self.frame.combo_categoria_acuario.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
-        self.frame.combo_subcategoria_acuario.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
+        self.frame.edit_categoria_acuario.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
         self.frame.text_observaciones.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
 
         # Establecer el orden
         self.setTabOrder(
-            self.frame.combo_categoria_acuario, self.frame.combo_subcategoria_acuario
-        )
-        self.setTabOrder(
-            self.frame.combo_subcategoria_acuario, self.frame.text_observaciones
+            self.frame.edit_categoria_acuario, self.frame.text_observaciones
         )
 
 # Entrada a la aplicación
 if __name__ == "__main__":
     app = QApplication(sys.argv)
 
-    ventana = TipoAcuarioView("...::OOO::....")
+    ventana = CategoriaAcuarioView("...::OOO::....")
 
     # Cargar el archivo .qss
     with open("../Resources/Styles/main_style.qss", "r",

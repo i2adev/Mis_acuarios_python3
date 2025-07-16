@@ -213,7 +213,7 @@ class TipoAcuarioDAO(BaseDAO):
                 cursor.execute(sql, {
                     "id_parent": ent.id,
                     "cat": ent.id_categoria_acuario,
-                    # "subcat": ent.id_subcategoria_acuario,
+                    "subcat": ent.id_subcategoria_acuario,
                     "observaciones": ent.observaciones
                 })
 

@@ -6,9 +6,18 @@ Commentarios:
 """
 
 from Controllers.base_controller import BaseController
+from Controllers.categoria_acuario_controller import CategoriaAcuarioController
 from Controllers.tipo_acuario_controller import TipoAcuarioController
 from Controllers.tipo_filtro_controller import TipoFiltroController
+from Model.DAO.categoria_acuario_dao import CategoriaAcuarioDAO
+from Model.DAO.tipo_acuario_dao import TipoAcuarioDAO
+from Model.DAO.tipo_filtro_dao import TipoFiltroDAO
+from Model.Entities.categoria_acuario_entity import CategoriaAcuarioEntity
+from Model.Entities.tipo_acuario_entity import TipoAcuarioEntity
+from Model.Entities.tipo_filtro_entity import TipoFiltroEntity
+from Views.categoria_acuario_view import CategoriaAcuarioView
 from Views.main_view import MainView
+from Views.tipo_acuario_view import TipoAcuarioView
 
 
 class MainViewController(BaseController):
@@ -24,7 +33,7 @@ class MainViewController(BaseController):
         # TODO: Crear e inicializar el DAO que gestiona el dashboard.
 
         # Llamamos al constructor base
-        super().__init__(self.__view)
+        super().__init__(self.__view, None, None)
 
         # Inicializamos los eventos
         self.init_handlers()
@@ -38,12 +47,20 @@ class MainViewController(BaseController):
         self.__view.button_maestro_tipo_acuario.clicked.connect(
             self.tipo_acuario_clicked
         )
+        self.__view.button_maestro_categoria_acuario.clicked.connect(
+            self.categoria_acuario_clicked
+        )
+
 
     def tipo_filtro_clicked(self, event):
         """
         Cuando se presiona en el maestro de tipo de filtro.
         Acción: Abre el formulario de tipo de filtro
         """
+
+        dao = TipoFiltroDAO()
+        mod = TipoFiltroEntity()
+
         ctrl = TipoFiltroController()
         ctrl.show()
 
@@ -52,11 +69,31 @@ class MainViewController(BaseController):
         Cuando se presiona en el maestro de tipo de acuario.
         Acción: Abre el formulario de tipo de acuario
         """
+        view = TipoAcuarioView(
+            "MAESTRO DE TIPOS DE ACUARIO"
+        )
+        dao = TipoAcuarioDAO()
+        mod = TipoAcuarioEntity()
 
-        ctrl = TipoAcuarioController()
+        ctrl = TipoAcuarioController(view)
+        ctrl.show()
+
+    def categoria_acuario_clicked(self, event):
+        """
+        Cuando se presiona en el maestro de tipo categoría de acuariode filtro.
+        Acción: Abre el formulario de categoría de acuario.
+        """
+
+        view = CategoriaAcuarioView(
+            "MAESTRO DE CATEGORÍAS DE ACUARIO"
+        )
+        dao = CategoriaAcuarioDAO()
+        mod = CategoriaAcuarioEntity()
+
+        ctrl = CategoriaAcuarioController(view, dao, mod)
         ctrl.show()
 
     def show(self):
         """ Abre la vista """
         self.__view.show()
-        #self.__view.showMaximized()
+        #self._view.showMaximized()

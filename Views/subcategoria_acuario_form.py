@@ -10,7 +10,6 @@ import sys
 from PyQt6.QtWidgets import QFrame, QLabel, QLineEdit, QPlainTextEdit, \
     QVBoxLayout, QHBoxLayout, QApplication, QComboBox, QPushButton
 
-
 class SubcategoriaAcuarioForm(QFrame):
     """
     Clase que contiene los controles de edición de la entidad tipo de acuario.
@@ -26,6 +25,7 @@ class SubcategoriaAcuarioForm(QFrame):
 
     def create_widgets(self):
         """ Se encarga de crear los controles del formulario. """
+
         # Layouts
         ## Layout principal
         self.layout_form = QVBoxLayout()
@@ -61,6 +61,7 @@ class SubcategoriaAcuarioForm(QFrame):
 
         # Combos
         self.combo_categoria_acuario = QComboBox()
+        self.combo_categoria_acuario.setMinimumWidth(200)
         self.combo_categoria_acuario.setEditable(True)
         self.button_insert_categoria_acuario = QPushButton("<")
         self.button_insert_categoria_acuario.setFixedWidth(30)
@@ -78,13 +79,22 @@ class SubcategoriaAcuarioForm(QFrame):
         self.layout_id.addWidget(self.edit_id)
 
         ## Tipo de acuario
-        self.layout_edit_categoria_acuario.addWidget(self.combo_categoria_acuario)
-        self.layout_edit_categoria_acuario.addWidget(self.button_insert_categoria_acuario)
+        self.layout_edit_categoria_acuario.addWidget(
+            self.combo_categoria_acuario
+        )
+        self.layout_edit_categoria_acuario.addWidget(
+            self.button_insert_categoria_acuario
+        )
         self.layout_categoria_acuario.addWidget(self.label_categoria_acuario)
-        self.layout_categoria_acuario.addLayout(self.layout_edit_categoria_acuario)
-
-        self.layout_subcategoria_acuario.addWidget(self.label_subcategoria_acuario)
-        self.layout_subcategoria_acuario.addWidget(self.edit_subcategoria_acuario)
+        self.layout_categoria_acuario.addLayout(
+            self.layout_edit_categoria_acuario
+        )
+        self.layout_subcategoria_acuario.addWidget(
+            self.label_subcategoria_acuario
+        )
+        self.layout_subcategoria_acuario.addWidget(
+            self.edit_subcategoria_acuario
+        )
 
         ## Montamos la primera linea
         self.layout_first_line.addLayout(self.layout_id)

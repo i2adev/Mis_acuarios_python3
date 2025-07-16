@@ -300,19 +300,19 @@ class Paginator:
 
         # Configuramos la lista total
         if self.procedure == "VISTA_TIPOS_FILTRO":
-            value = [TipoFiltroEntity(f["ID"], f["NUM"], f["TIPO"],
-                                     f["OBSERVACIONES"])
-                    for f in res.value]
+            data_list = [TipoFiltroEntity(f["ID"], f["NUM"], f["TIPO"],
+                                          f["OBSERVACIONES"])
+                         for f in res.value]
         elif self.procedure == "VISTA_TIPOS_ACUARIO":
-            value = [TipoAcuarioEntity(f["ID"], f["NUM"], f["CATEGORIA"],
-                                     f["SUBCATEGORIA"], f["OBSERVACIONES"])
-                    for f in res.value]
+            data_list = [TipoAcuarioEntity(f["ID"], f["NUM"], f["CATEGORIA"],
+                                           f["SUBCATEGORIA"], f["OBSERVACIONES"])
+                         for f in res.value]
         elif self.procedure == "VISTA_CATEGORIAS_ACUARIO":
-            value = [CategoriaAcuarioEntity(f["ID"], f["NUM"], f["CATEGORIA"],
-                                     f["OBSERVACIONES"])
-                    for f in res.value]
+            data_list = [CategoriaAcuarioEntity(f["ID"], f["NUM"], f["CATEGORIA"],
+                                                f["OBSERVACIONES"])
+                         for f in res.value]
 
-        self.total_data = value
+        self.total_data = data_list
         self.records = len(self.total_data)
 
         # if page < 1 or page > self.total_pages:
@@ -327,6 +327,25 @@ class Paginator:
 
         self.current_page = page
         self.current_data = self.get_paged_list(page)
+
+    def get_page_number_by_num(self, num: int) -> int:
+        """
+        Obtiene el número de página del paginator a partir del númerop de
+        resgistro.
+        """
+
+        # Obtenemos el número de página
+        page = num // self.records_page
+
+        # En caso de que la página sea 0
+        if page == 0:
+            return 1
+
+        # En caso de que la página no sea entera
+        if num % self.records_page > 0:
+            page += 1
+
+        return page
 
     def __str__(self):
         """ Muestra el objeto en forma de texto. """

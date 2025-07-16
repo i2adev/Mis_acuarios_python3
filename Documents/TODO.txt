@@ -1,6 +1,61 @@
 ﻿================================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
+17/07/2025  MODIFICACIÓN DE LA LÓGICA DE MAESTRO DE CATEGORÍA DE ACUARIO:
+            -   SE AÑADE EL MÉTODO DE OBTENER EL NÚMERO DE REGISTRO DE CATEGORÍA
+                DE ACUARIO DADO SU ID.                                      DONE
+            -   SE MODIFICA LA CLASE PARA QUE CUANDO SE INSERTE UN REGISTRO SE
+                SELECCIONES EL REGISTRO INSERTADO.                          DONE
+            -   SE MODIFICA LA CLASE PARA QUE CUANDO SE MODIFICA UN REGISTRO SE
+                MUESTRE EL REGISTRO MODIFICADO.                             TODO
+
+            MODIFICAR LA CLASE PAGINATOR:
+            -   SE AÑADE EL MÉTODO PARA OBTENER EL NÚMERO DE PÁGINA A PARTIR DE
+                UN NÚMERO DE REGISTRO.                                      DONE
+
+            MAESTRO DE SUBCATEGORÍA DE ACUARIO:
+            -   SE CREA EL FORMULARIO MAESTRO.                              TODO
+            -   CREAMOS EL MODELO DE LA TABLA.                              TODO
+            -   SE CREA EL CONTROLADOR.                                     TODO
+
+16/07/2025  REFACTORIZACIÓN:
+            -   SE SUBEN LOS ATRIBUTOS DAO A LA BASE DEL CONTROLADOR.       TODO
+            -   SE SUBEN LOS ATRIBUTOS ENTITY A LA BASE DEL CONTROLADOR.    TODO
+
+15/07/2025  MAESTRO DE CATEGORÍA DE ACUARIO:
+            BUGFIXES
+            -   CORREGIDO: SALTA ERROR DE VALIDACIÓN DE DATOS DESPUÉS DE IN-
+                SERTAR CATEGORÍA DE ACUARIO.                                DONE
+            -   CORREGIDO: EL LABEL DE PÁGINAS TOTALES NO SE ACTUALIZA CUANDO
+                    ELIMINAS UN REGISTRO Y SE BORRA LA ÚLTIMA PÁGINA.       DONE
+            -   CORREGIDO: EL LABEL DE LAS PÁGINAS TOTALES CUANDO SE INSERTA UN
+                NUEVO REGISTRO.                                             DONE
+
+09/07/2025  SE AÑADE EL MAESTRO DE CATEGORÍA DE ACUARIO:
+            -   SE CREA EL FORMULARIO MAESTRO.                              DONE
+            -   CREAMOS EL MODELO DE LA TABLA.                              DONE
+            -   SE CREA EL CONTROLADOR.                                     DONE
+
+            BUG FIXES:
+            -   SE CORRIGE LA LIMPIEZA DE FORMULARIO, LOS COMBOS NO SE LIMPIAN
+                CORRECTAMENTE.                                              DONE
+
+03/07/2025  SE CREA LA LÓGICA DEL MAESTRO DE TIPOS DE ACUARIO:
+            -   SE CREA EL MÉTODO PARA OBTENER SUNCATEGORÍAS A PARTIR DE UNA CA-
+                TEGORÍA.                                                    DONE
+            -   A LA HORA DE CARGAR EL DIÁLOGO DE SUBCATEGORÍA SE DEBE DE CARGAR
+                LA CATEGORÍA EN EN EL COMBO.                                DONE
+
+            BUGFIXES:
+            -   SE CORRIGE EL COMPORTAMIENTO DE INSERCIÓN DE SUBCATEGORÍA EN EL
+                DIALOGO DE TIPOS DE ACUARIO.                                DONE
+
+            REFACTOR:
+            -   SE MODIFICA EL COMPORTAMIENTO DEL COMBO DE SUBCATEGORÍA DE ACUA-
+                RIO PARA QUE MUESTRE SOLO LAS SUBCATEGORÍAS DE ACUARIOS CORRES-
+                PONDIENTES AL VALOR SELECCIONADO EN EL COMBO DE CATEGORÍA DE A-
+                CUARIO.                                                     DONE
+
 02/07/2025  SE AÑADE:
             -   SE CREA LA ENTIDAD SUBCATEGORÍA DE ACUARIO.                 DONE
             -   EL DAO DE LA SUBCATEGORÍA DE ACUARIO.                       DONE

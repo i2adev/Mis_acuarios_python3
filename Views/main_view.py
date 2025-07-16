@@ -103,6 +103,8 @@ class MainView(QWidget):
         self.maestro_layout.addWidget(self.button_maestro_marca)
         self.maestro_layout.addWidget(self.button_maestro_proyecto)
         self.maestro_layout.addWidget(self.button_maestro_tipo_acuario)
+        self.maestro_layout.addWidget(self.button_maestro_categoria_acuario)
+        self.maestro_layout.addWidget(self.button_maestro_subcategoria_acuario)
         self.maestro_layout.addWidget(self.button_maestro_tipo_giltro)
         self.maestro_layout.addWidget(self.button_maestro_tipo_incidencia)
 
@@ -411,6 +413,52 @@ class MainView(QWidget):
         )
         self.button_maestro_tipo_acuario.setFlat(True)
         self.button_maestro_tipo_acuario.setCursor(
+            QCursor(Qt.CursorShape.PointingHandCursor)
+        )
+
+        self.button_maestro_categoria_acuario = QPushButton(
+            "CATEGORÍAS DE ACUARIO"
+        )
+        self.button_maestro_categoria_acuario.setStyleSheet(
+            """
+            QPushButton {
+                background-color: transparent;
+                text-align: left;
+                margin-bottom: 0;
+                margin-left: 20;
+                font-family: 'Roboto'; 
+                font-size: 14px;
+            }
+            """
+        )
+        self.button_maestro_categoria_acuario.setObjectName(
+            "button_maestro_categoria_acuario"
+        )
+        self.button_maestro_categoria_acuario.setFlat(True)
+        self.button_maestro_categoria_acuario.setCursor(
+            QCursor(Qt.CursorShape.PointingHandCursor)
+        )
+
+        self.button_maestro_subcategoria_acuario = QPushButton(
+            "SUBCATEGORÍAS DE ACUARIO"
+        )
+        self.button_maestro_subcategoria_acuario.setStyleSheet(
+            """
+            QPushButton {
+                background-color: transparent;
+                text-align: left;
+                margin-bottom: 0;
+                margin-left: 20;
+                font-family: 'Roboto'; 
+                font-size: 14px;
+            }
+            """
+        )
+        self.button_maestro_subcategoria_acuario.setObjectName(
+            "button_maestro_subcategoria_acuario"
+        )
+        self.button_maestro_subcategoria_acuario.setFlat(True)
+        self.button_maestro_subcategoria_acuario.setCursor(
             QCursor(Qt.CursorShape.PointingHandCursor)
         )
 

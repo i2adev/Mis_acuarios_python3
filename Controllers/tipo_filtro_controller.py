@@ -73,7 +73,7 @@ class TipoFiltroController(BaseController):
             if isinstance(widget, self._text_widgets):
                 widget.installEventFilter(self)
 
-        # self.__view.text_observaciones.textChanged.connect(lambda:
+        # self._view.text_observaciones.textChanged.connect(lambda:
         #                                                    self.spell_check)
 
         # Inizializa los botones
@@ -298,7 +298,7 @@ class TipoFiltroController(BaseController):
         pagina_actual = self.__view.combo_select_page.currentData()
 
         # Valida el formulario
-        res = TipoFiltroValidator.ValidateTipoFiltro(
+        res = TipoFiltroValidator.validate_tipo_filtro(
             self.__view.edit_tipo_filtro
         )
 
@@ -329,7 +329,7 @@ class TipoFiltroController(BaseController):
         """ Controla el clic del botón insertar. """
 
         # Valida el formulario
-        res = TipoFiltroValidator.ValidateTipoFiltro(
+        res = TipoFiltroValidator.validate_tipo_filtro(
             self.__view.edit_tipo_filtro
         )
 

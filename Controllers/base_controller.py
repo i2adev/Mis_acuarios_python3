@@ -14,6 +14,7 @@ from PyQt6.QtWidgets import (QMessageBox, QLineEdit, QTextEdit,
                              QComboBox)
 import enchant  # Enchant es la librería de revisión orográfica
 
+from Model.DAO.base_dao import BaseDAO
 from Model.DAO.paginator import Paginator
 from Model.Entities.base_entity import BaseEntity
 from Views.base_view import BaseView
@@ -21,13 +22,24 @@ from Views.base_view import BaseView
 class BaseController(QObject):
     """ Controlador base de la que hereda el resto de controladores. """
 
-    def __init__(self, view: QWidget):
-        """ Constructor de clase """
+    def __init__(self, view: QWidget, dao: BaseDAO, mod: BaseEntity):
+        """
+        Constructor base
+
+        Parámetros:
+        :param view: Vista que hereda de BaseView
+        :param dao: DAO de la entidad que hereda de BaseDAO
+        :param mod: Modelo de la entidad que hereda de BaseEntity
+        """
 
         super().__init__()
 
         self._view = view
+        self._dao = dao
+        self._mod = mod
+
         self._spell_dict = enchant.Dict("en_EN")
+
         self._text_widgets = (QLineEdit, QTextEdit, QPlainTextEdit)
 
 
@@ -89,7 +101,8 @@ class BaseController(QObject):
 
         return super().eventFilter(obj, event)
 
-    def _select_row_by_id(self, table: QTableView, id_elem: int, column: int = 0):
+    def _select_row_by_id(self, table: QTableView, id_elem: int,
+                          column: int = 0):
         """ Selecciona una fila por su ID. """
 
         # Obtenemos el modelo de la tabla
@@ -107,21 +120,27 @@ class BaseController(QObject):
     def _clean_view(self):
         """ Limpia los controles del formulario. """
 
-        # Limpia los widgets de texto
+        # Limpia los controles del formulario
         for widget in self._view.findChildren(QWidget):
+            # En caso de que sean controles de edición de textgo
             if isinstance(widget, self._text_widgets):
                 widget.clear()
 
+            # En caso de que sean combos
+            if isinstance(widget, QComboBox):
+                widget.setCurrentIndex(-1)
 
     def _fill_combo(self, combo: QComboBox, lista: list[BaseEntity], attr_text: str, attr_data: str):
         """
         Llena un QComboBox con una lista de entidades.
 
+        Parámetros:
         :param combo: El QComboBox que quieres llenar.
         :param lista: Lista de entidades (pueden ser objetos o diccionarios).
         :param attr_text: Nombre del atributo para el texto visible.
         :param attr_data: Nombre del atributo para el valor (userData).
         """
+
         combo.clear()
         for item in lista:
             # Si es diccionario
