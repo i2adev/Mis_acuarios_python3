@@ -41,14 +41,14 @@ class SubcategoriaAcuarioDialogController(BaseController):
         self.ix_cat = ix_cat
 
         # Inicializamos la vista, la entidad y el dao
-        self.__view = SubcategoriaAcuarioDialog(
+        view = SubcategoriaAcuarioDialog(
             "INSERTAR SUBCATEGORÍA DE ACUARIO"
         )
-        self.__mod = SubcategoriaAcuarioEntity()
-        self.__dao = SubcategoriaAcuarioDAO()
+        mod = SubcategoriaAcuarioEntity()
+        dao = SubcategoriaAcuarioDAO()
 
         # inicializamos la vista y pasamos al constructor padre
-        super().__init__(self.__view)
+        super().__init__(view, dao, mod)
 
         # Llenar combos
         self.fill_combos()
@@ -58,7 +58,7 @@ class SubcategoriaAcuarioDialogController(BaseController):
 
         # Seleccionar el valor en el combo
         if self.ix_cat != -1:
-            self.__view.frame.combo_categoria_acuario.setCurrentIndex(ix_cat)
+            self._view.frame.combo_categoria_acuario.setCurrentIndex(ix_cat)
 
     def show_modal(self) -> Result:
         """
@@ -68,7 +68,7 @@ class SubcategoriaAcuarioDialogController(BaseController):
         :param idx_cat: Id de la categoría de acuario.
         """
 
-        if self.__view.exec():
+        if self._view.exec():
             # Obtenemos la categoría de acuario
             subcategoria_acuario = self.get_subcategoria_Acuario()
             return Result.success(subcategoria_acuario)
@@ -81,28 +81,28 @@ class SubcategoriaAcuarioDialogController(BaseController):
         """
 
         # Inicializa los widgets de introducción de texto
-        for widget in self.__view.findChildren(QWidget):
+        for widget in self._view.findChildren(QWidget):
             if isinstance(widget, self._text_widgets):
                 widget.installEventFilter(self)
 
         # Inizializa los botones
-        self.__view.button_accept.clicked.connect(self.dialog_accept)
-        self.__view.button_cancel.clicked.connect(self.dialog_cancel)
+        self._view.button_accept.clicked.connect(self.dialog_accept)
+        self._view.button_cancel.clicked.connect(self.dialog_cancel)
 
     def entity_configuration(self) -> SubcategoriaAcuarioEntity:
         """ Configura la entidad. """
 
         ent = SubcategoriaAcuarioEntity()
 
-        if self.__view.frame.edit_id.text():
-            ent.id = int(self.__view.frame.edit_id.text())
+        if self._view.frame.edit_id.text():
+            ent.id = int(self._view.frame.edit_id.text())
         else:
             ent.id = None
 
-        ent.id_categoria = (self.__view.frame.combo_categoria_acuario
+        ent.id_categoria = (self._view.frame.combo_categoria_acuario
                             .currentData())
-        ent.subcategoria = self.__view.frame.edit_subcategoria_acuario.text()
-        ent.observaciones = self.__view.frame.text_observaciones.toPlainText()
+        ent.subcategoria = self._view.frame.edit_subcategoria_acuario.text()
+        ent.observaciones = self._view.frame.text_observaciones.toPlainText()
 
         return ent
 
@@ -113,7 +113,7 @@ class SubcategoriaAcuarioDialogController(BaseController):
         ent = self.entity_configuration()
 
         # Inserta el registro
-        res = self.__dao.insert(ent)
+        res = self._dao.insert(ent)
 
         if not res.is_success:
             return Result.failure(res.error_msg)
@@ -131,8 +131,8 @@ class SubcategoriaAcuarioDialogController(BaseController):
 
         if not res.is_success:
             QMessageBox.warning(
-                self.__view,
-                self.__view.window_title,
+                self._view,
+                self._view.window_title,
                 res.error_msg
             )
             return
@@ -142,8 +142,8 @@ class SubcategoriaAcuarioDialogController(BaseController):
 
         if not res.is_success:
             QMessageBox.warning(
-                self.__view,
-                self.__view.window_title,
+                self._view,
+                self._view.window_title,
                 res.error_msg
             )
 
@@ -151,15 +151,15 @@ class SubcategoriaAcuarioDialogController(BaseController):
         self.subcategoria_acuario_result = SubcategoriaAcuarioEntity(
             id = res.value,
             num = None,
-            id_cat= self.__view.frame.combo_categoria_acuario.currentData(),
-            subcategoria = self.__view.frame.edit_subcategoria_acuario.text(),
-            observaciones = self.__view.frame.text_observaciones.toPlainText()
-                          if self.__view.frame.text_observaciones.toPlainText()
+            id_cat= self._view.frame.combo_categoria_acuario.currentData(),
+            subcategoria = self._view.frame.edit_subcategoria_acuario.text(),
+            observaciones = self._view.frame.text_observaciones.toPlainText()
+                          if self._view.frame.text_observaciones.toPlainText()
                           else None
         )
 
         # Aceptamos el diálogo
-        self.__view.accept()
+        self._view.accept()
 
     def get_subcategoria_Acuario(self):
         """ Devuelve la categoría de filtro resultante. """
@@ -169,27 +169,27 @@ class SubcategoriaAcuarioDialogController(BaseController):
     def dialog_cancel(self):
         """ Cancela el dialogo. """
 
-        self.__view.reject()
+        self._view.reject()
 
     def validate_view(self) -> Result:
         """ Valida el formulario. """
 
         # Valida la categoría de acuario
         res = SubcategoriaAcuarioValidator.ValidateCategoriaAcuario(
-            self.__view.frame.combo_categoria_acuario
+            self._view.frame.combo_categoria_acuario
         )
 
         if not res.is_success:
-            self.__view.frame.combo_categoria_acuario.setFocus()
+            self._view.frame.combo_categoria_acuario.setFocus()
             return res
 
         # Valida la subcategoría de acuario
         res = SubcategoriaAcuarioValidator.validate_subcategoria_acuario(
-            self.__view.frame.edit_subcategoria_acuario
+            self._view.frame.edit_subcategoria_acuario
         )
 
         if not res.is_success:
-            self.__view.frame.edit_subcategoria_acuario.setFocus()
+            self._view.frame.edit_subcategoria_acuario.setFocus()
             return res
 
         # En caso de no haber errores
@@ -204,7 +204,7 @@ class SubcategoriaAcuarioDialogController(BaseController):
         """ Llena el combo de tipos de acuario. """
 
         # Vaciamos el combo
-        self.__view.frame.combo_categoria_acuario.clear()
+        self._view.frame.combo_categoria_acuario.clear()
 
         # Obtenemos los datos
         dao = CategoriaAcuarioDAO()
@@ -216,14 +216,14 @@ class SubcategoriaAcuarioDialogController(BaseController):
 
         # Llenamos el combo
         for ent in lista.value:
-            self.__view.frame.combo_categoria_acuario.addItem(ent.categoria,
+            self._view.frame.combo_categoria_acuario.addItem(ent.categoria,
                                                               ent.id)
 
         # Establecemos el autocompletado
-        self.set_autocomplete(self.__view.frame.combo_categoria_acuario)
+        self.set_autocomplete(self._view.frame.combo_categoria_acuario)
 
         # Deseleccionamos el valor
-        self.__view.frame.combo_categoria_acuario.setCurrentIndex(-1)
+        self._view.frame.combo_categoria_acuario.setCurrentIndex(-1)
 
     def set_autocomplete(self, combo: QComboBox):
         """

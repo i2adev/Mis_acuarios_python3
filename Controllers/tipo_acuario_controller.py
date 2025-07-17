@@ -18,6 +18,7 @@ from Model.DAO.categoria_acuario_dao import CategoriaAcuarioDAO
 from Model.DAO.paginator import Paginator
 from Model.DAO.subcategoria_acuario_dao import SubcategoriaAcuarioDAO
 from Model.DAO.tipo_acuario_dao import TipoAcuarioDAO
+from Model.Entities.categoria_acuario_entity import CategoriaAcuarioEntity
 from Model.Entities.tipo_acuario_entity import TipoAcuarioEntity
 from Model.TableModel.tipo_acuario_table_model import TipoAcuarioTableModel
 from Services.Result.result import Result
@@ -33,15 +34,15 @@ class TipoAcuarioController(BaseController):
         """ Constructor base """
 
         # Inicializamos la vista, la entidad y el dao
-        self._mod = TipoAcuarioEntity()
-        self._dao = TipoAcuarioDAO()
+        mod = TipoAcuarioEntity()
+        dao = TipoAcuarioDAO()
 
         # Inicializamos el paginador
         self._pag = Paginator("VISTA_TIPOS_ACUARIO", 5)
         self._pag.initialize_paginator()
 
         # inicializamos la vista y pasamos al constructor padre
-        super().__init__(view)
+        super().__init__(view, dao, mod)
 
         # Llenamos la tabla
         self.load_tableview()
@@ -768,10 +769,14 @@ class TipoAcuarioController(BaseController):
 
     def open_categoria_acuario_dialog(self):
         """ Abrimos el diálogo de categoria de acuario. """
+
         view = CategoriaAcuarioDialog(
             "INSERTAR CATEGORÍA DE ACUARIO"
         )
-        ctrl = CategoriaAcuarioDialogController(view)
+        mod = CategoriaAcuarioEntity()
+        dao = CategoriaAcuarioDAO()
+
+        ctrl = CategoriaAcuarioDialogController(view, dao, mod)
         res = ctrl.show_modal()
 
         if not res.is_success:

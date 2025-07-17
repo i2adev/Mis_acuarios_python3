@@ -1,7 +1,8 @@
 ﻿CHANGELOG:
 ================================================================================
 0.2.3   SE AÑADE:
-        -   SE AÑADE EL MAESTRO DE SUBCATEGORÍAS DE ACUARIO.
+        -   SE VUELVE A LANZAR COMMIT DESPUÉS DE ARREGLAR EL DESAGUISADO QUE HE
+            GENERADO POR UN 'AMEND'.
 0.2.2   SE AÑADE:
         -   SE AÑADE EL MAESTRO DE LAS CATEGORÍAS DE ACUARIOS.
         -   SE MODIFICA EL COMPORTAMIENTO DE LA INSERCIÓN U ACTUALIZACIÓN DE
