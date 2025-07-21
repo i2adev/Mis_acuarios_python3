@@ -14,14 +14,14 @@ FECHA		DESCRIPCIÓN
 
             TESTEO:
             -   SE TESTEA EL COMPORTAMIENTO DEL DIALOGO DE CATEGORÍAS DE ACUARIO
-                                                                            TODO
+                                                                            DONE
             -   SE TESTEA EL COMPORTAMIENTO DEL MAESTRO DE CATEGORÍAS DE ACUARIO
-                                                                            TODO
+                                                                            DONE
             -   SE TESTEA EL COMPORTAMIENTO DEL DIALOGO DE SUBCATEGORÍAS DE
-                ACUARIO.                                                    TODO
+                ACUARIO.                                                    DONE
             -   SE TESTEA EL COMPORTAMIENTO DEL MAESTRO DE SUBCATEGORÍAS DE
-                ACUARIO.                                                    TODO
-            -   SE TESTEA EL COMPORTAMIENTO DEL MAESTRO DE TIPOS DE ACUARIO.TODO
+                ACUARIO.                                                    DONE
+            -   SE TESTEA EL COMPORTAMIENTO DEL MAESTRO DE TIPOS DE ACUARIO.DONE
 
 17/07/2025  MODIFICACIÓN DE LA LÓGICA DE MAESTRO DE CATEGORÍA DE ACUARIO:
             -   SE AÑADE EL MÉTODO DE OBTENER EL NÚMERO DE REGISTRO DE CATEGORÍA
