@@ -14,7 +14,7 @@ class SubcategoriaAcuarioValidator:
     """ Valida el formulario de categoría de acuario. """
 
     @staticmethod
-    def ValidateCategoriaAcuario(widget: QComboBox):
+    def validate_categoria_acuario(widget: QComboBox):
         """ Valida la categoría de acuario. """
 
         # Sí el texto esta vacio

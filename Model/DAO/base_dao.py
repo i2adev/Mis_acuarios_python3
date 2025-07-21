@@ -188,7 +188,7 @@ class BaseDAO(ABC):
                 del db
 
     @staticmethod
-    def clean_database():
+    def clean_database() -> Result:
         """
         Limpia la base de datos:
         - Elimina todos los registros.

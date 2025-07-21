@@ -65,7 +65,7 @@ class SubcategoriaAcuarioForm(QFrame):
         self.combo_categoria_acuario.setEditable(True)
         self.button_insert_categoria_acuario = QPushButton("<")
         self.button_insert_categoria_acuario.setFixedWidth(30)
-        self.combo_categoria_acuario.setObjectName("combo_categoria_acuario")
+        self.combo_categoria_acuario.setObjectName("combo_subcategoria_acuario")
 
         self.edit_subcategoria_acuario = QLineEdit()
         self.edit_subcategoria_acuario.setObjectName("edit_subcategoria_acuario")

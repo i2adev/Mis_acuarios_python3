@@ -2,7 +2,7 @@
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      30/06/2025
 Commentarios:
-    Módulo que contiene la entidad CATEGORÍA DE ACUARIO.
+    Módulo que contiene la entidad SUBCATEGORÍA DE ACUARIO.
 """
 from Model.Entities.base_entity import BaseEntity
 
@@ -43,4 +43,3 @@ class SubcategoriaAcuarioEntity(BaseEntity):
             SUBCATEGORIA:   {self.subcategoria}
             OBSERVACIONES:  {self.observaciones}
         """
-

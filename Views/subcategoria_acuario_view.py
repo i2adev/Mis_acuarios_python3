@@ -1,8 +1,8 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
-Fecha:      14/07/2025
+Fecha:      18/07/2025
 Commentarios:
-    Módulo que contiene el formulario maestro de la categoría de
+    Módulo que contiene el formulario maestro de la subcategoría de
     acuario.
 """
 import sys
@@ -12,11 +12,12 @@ from PyQt6.QtWidgets import QApplication, QWidget
 
 from Views.base_view import BaseView
 from Views.categoria_acuario_form import CategoriaAcuarioForm
+from Views.subcategoria_acuario_form import SubcategoriaAcuarioForm
 
 
-class CategoriaAcuarioView(BaseView):
+class SubcategoriaAcuarioView(BaseView):
     """
-    Formulario maestro de la CATEGORÍA DE ACUARIO.
+    Formulario maestro de la SUBCATEGORÍA DE ACUARIO.
     """
 
     def __init__(self, w_title: str):
@@ -25,8 +26,8 @@ class CategoriaAcuarioView(BaseView):
         super().__init__(w_title)
 
         # Configuramos el formulario
-        self.frame = CategoriaAcuarioForm()
-        self.frame_main.setFixedWidth(550)
+        self.frame = SubcategoriaAcuarioForm()
+        self.frame_main.setFixedWidth(650)
         self.layout_form_data.addWidget(self.frame)
         self.set_tab_order()
 
@@ -41,7 +42,10 @@ class CategoriaAcuarioView(BaseView):
             widget.setFocusPolicy(Qt.FocusPolicy.ClickFocus)
 
         # Establecemos las politicas de focus
-        self.frame.edit_categoria_acuario.setFocusPolicy(
+        self.frame.combo_categoria_acuario.setFocusPolicy(
+            Qt.FocusPolicy.StrongFocus
+        )
+        self.frame.edit_subcategoria_acuario.setFocusPolicy(
             Qt.FocusPolicy.StrongFocus
         )
         self.frame.text_observaciones.setFocusPolicy(
@@ -50,14 +54,19 @@ class CategoriaAcuarioView(BaseView):
 
         # Establecer el orden
         self.setTabOrder(
-            self.frame.edit_categoria_acuario, self.frame.text_observaciones
+            self.frame.combo_categoria_acuario,
+            self.frame.edit_subcategoria_acuario
+        )
+        self.setTabOrder(
+            self.frame.edit_subcategoria_acuario,
+            self.frame.text_observaciones
         )
 
 # Entrada a la aplicación
 if __name__ == "__main__":
     app = QApplication(sys.argv)
 
-    ventana = CategoriaAcuarioView("...::OOO::....")
+    ventana = SubcategoriaAcuarioView("...::OOO::....")
 
     # Cargar el archivo .qss
     with open("../Resources/Styles/main_style.qss", "r",

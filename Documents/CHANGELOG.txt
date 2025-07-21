@@ -1,5 +1,13 @@
 ﻿CHANGELOG:
 ================================================================================
+0.2.4   SE CREA LA LÓGICA DE SUBCATEGORIA DE ACUARIO:
+        -   SE CREA LA ENTIDAD.
+        -   SE CREA EL FORMULARIO.
+        -   SE CREA EL CONTROLADOR DEL FORMULARIO.
+        -   SE CREA EL DAO (DATA ACCESS OBJECT).
+        -   SE CREA EL MODELO DE TABLA.
+        -   SE DA FUNCIONALIDAD CRUD.
+
 0.2.3   SE AÑADE:
         -   SE VUELVE A LANZAR COMMIT DESPUÉS DE ARREGLAR EL DESAGUISADO QUE HE
             GENERADO POR UN 'AMEND'.

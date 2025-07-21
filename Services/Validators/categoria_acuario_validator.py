@@ -25,8 +25,8 @@ class CategoriaAcuarioValidator:
         # Si el texto contiene más de 32 carácteres
         if len(widget.text()) > 32:
             return Result.failure(
-                """EL CAMPO 'CATEGORÍA DE ACUARIO' NO PUEDE CONTENER 
-                MAS DE 32 CARACTERES"""
+                "EL CAMPO 'CATEGORÍA DE ACUARIO' NO PUEDE CONTENER MAS DE " 
+                "32 CARACTERES"
             )
 
         # Validación exitosa

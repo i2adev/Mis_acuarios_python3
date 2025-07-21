@@ -9,6 +9,7 @@ from PyQt6.QtWidgets import QMessageBox
 
 from Model.DAO.base_dao import BaseDAO
 from Model.Entities.categoria_acuario_entity import CategoriaAcuarioEntity
+from Model.Entities.subcategoria_acuario_entity import SubcategoriaAcuarioEntity
 from Model.Entities.tipo_acuario_entity import TipoAcuarioEntity
 from Model.Entities.tipo_filtro_entity import TipoFiltroEntity
 
@@ -89,13 +90,6 @@ class Paginator:
     def page_index(self, new_index) -> None:
         """ Válida y asigna el índice de página. """
 
-        # if not self.total_data:
-        #     raise ValueError(
-        #         """
-        #         CLASE NO CONFIGURADA. DEBES INICIALIZAR LA CLASE PRIMERO.
-        #         """
-        #     )
-
         self._page_index = new_index
 
     # Número final
@@ -108,13 +102,6 @@ class Paginator:
     @end.setter
     def end(self, new_end: int) -> None:
         """ Valida y asigna el número final de la página. """
-
-        # if not self.total_data:
-        #     raise ValueError(
-        #         """
-        #         CLASE NO CONFIGURADA. DEBES INICIALIZAR LA CLASE PRIMERO.
-        #         """
-        #     )
 
         self._end = new_end
 
@@ -129,13 +116,6 @@ class Paginator:
     def start(self, new_start: int) -> None:
         """ Valida y asigna el número inicial de la página. """
 
-        # if not self.total_data:
-        #     raise ValueError(
-        #         """
-        #         CLASE NO CONFIGURADA. DEBES INICIALIZAR LA CLASE PRIMERO.
-        #         """
-        #     )
-
         self._start = new_start
 
     # Página actual
@@ -148,13 +128,6 @@ class Paginator:
     @current_page.setter
     def current_page(self, new_page: int) -> None:
         """ Valida y asigna el número de página actual. """
-
-        # if not self.total_data:
-        #     raise ValueError(
-        #         """
-        #         CLASE NO CONFIGURADA. DEBES INICIALIZAR LA CLASE PRIMERO.
-        #         """
-        #     )
 
         if not new_page or new_page == 0:
             self.current_page = 1
@@ -196,13 +169,6 @@ class Paginator:
     @total_pages.setter
     def total_pages(self, new_pages: int) -> None:
         """ Valida y asigna el número total de páginas. """
-
-        # if not self.total_data:
-        #     raise ValueError(
-        #         """
-        #         CLASE NO CONFIGURADA. DEBES INICIALIZAR LA CLASE PRIMERO.
-        #         """
-        #     )
 
         if not new_pages or new_pages == 0:
             self.total_pages = 1
@@ -260,14 +226,6 @@ class Paginator:
         - ID: Id de la entidad a filtrar
         """
 
-        # Comprobamos los datos
-        # if not self.total_data:
-        #     raise ValueError(
-        #         """
-        #         CLASE NO CONFIGURADA. DEBES INICIALIZAR LA CLASE PRIMERO.
-        #         """
-        #     )
-
         # Comprueba que el número de página este dentro del rango
         if page < 1 or page > self.total_pages:
             self.total_pages = 1
@@ -308,23 +266,19 @@ class Paginator:
                                            f["SUBCATEGORIA"], f["OBSERVACIONES"])
                          for f in res.value]
         elif self.procedure == "VISTA_CATEGORIAS_ACUARIO":
-            data_list = [CategoriaAcuarioEntity(f["ID"], f["NUM"], f["CATEGORIA"],
+            data_list = [CategoriaAcuarioEntity(f["ID"], f["NUM"],
+                                                f["CATEGORIA"],
+                                                f["OBSERVACIONES"])
+                         for f in res.value]
+        elif self.procedure == "VISTA_SUBCATEGORIAS_ACUARIO":
+            data_list = [SubcategoriaAcuarioEntity(f["ID"], f["NUM"],
+                                                f["CATEGORIA"],
+                                                f["SUBCATEGORIA"],
                                                 f["OBSERVACIONES"])
                          for f in res.value]
 
         self.total_data = data_list
         self.records = len(self.total_data)
-
-        # if page < 1 or page > self.total_pages:
-        #     QMessageBox.warning(
-        #         None,
-        #         "ERROR DE PAGINACIÓN",
-        #         f"""ERROR EN EL NÚMERO DE PÁGINA {page}
-        #         - EL NUMERO DE PÁGINA HA DE SER MAYOR QUE 0.
-        #         - EL NUMERO DE PÁGINA HA DE SER MENOR O IGUAL QUE {self.total_pages}"""
-        #     )
-        #     return
-
         self.current_page = page
         self.current_data = self.get_paged_list(page)
 

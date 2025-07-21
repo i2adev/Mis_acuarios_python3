@@ -1,13 +1,35 @@
 ﻿================================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
+18/07/2025  MAESTRO DE SUBCATEGORÍA DE ACUARIO:
+            -   SE CREA EL MODELO DE TABLA DE LA ENTIDAD.                   DONE
+            -   SE MODIFICA EL PAGINADOR PARA ACEPTAR LA LÓGICA DE LA ENTIDAD.
+                                                                            DONE
+            -   SE CREA EL FORMULARIO MAESTRO.                              DONE
+            -   SE MODIFICA EL CONTROLADOR PARA ACEPTAR LAS ORDENES DEL MAESTRO.
+                                                                            DONE
+            -   SE CREA EL EL DIALOGO DE TIPO DE ACUARIO.                   DONE
+            -   SE MODIFICA EL CONTROLADOR DEL TIPO DE ACUARIO PARA ADECUARLO AL
+                DIALOGO Y AL MAESTRO.                                       DONE
+
+            TESTEO:
+            -   SE TESTEA EL COMPORTAMIENTO DEL DIALOGO DE CATEGORÍAS DE ACUARIO
+                                                                            TODO
+            -   SE TESTEA EL COMPORTAMIENTO DEL MAESTRO DE CATEGORÍAS DE ACUARIO
+                                                                            TODO
+            -   SE TESTEA EL COMPORTAMIENTO DEL DIALOGO DE SUBCATEGORÍAS DE
+                ACUARIO.                                                    TODO
+            -   SE TESTEA EL COMPORTAMIENTO DEL MAESTRO DE SUBCATEGORÍAS DE
+                ACUARIO.                                                    TODO
+            -   SE TESTEA EL COMPORTAMIENTO DEL MAESTRO DE TIPOS DE ACUARIO.TODO
+
 17/07/2025  MODIFICACIÓN DE LA LÓGICA DE MAESTRO DE CATEGORÍA DE ACUARIO:
             -   SE AÑADE EL MÉTODO DE OBTENER EL NÚMERO DE REGISTRO DE CATEGORÍA
                 DE ACUARIO DADO SU ID.                                      DONE
             -   SE MODIFICA LA CLASE PARA QUE CUANDO SE INSERTE UN REGISTRO SE
                 SELECCIONES EL REGISTRO INSERTADO.                          DONE
             -   SE MODIFICA LA CLASE PARA QUE CUANDO SE MODIFICA UN REGISTRO SE
-                MUESTRE EL REGISTRO MODIFICADO.                             TODO
+                MUESTRE EL REGISTRO MODIFICADO.                             DONE
 
             MODIFICAR LA CLASE PAGINATOR:
             -   SE AÑADE EL MÉTODO PARA OBTENER EL NÚMERO DE PÁGINA A PARTIR DE
