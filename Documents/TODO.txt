@@ -1,6 +1,13 @@
 ﻿================================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
+21/07/2025  FORMULARIO DE TIPO DE FILTRO:
+            -   SE CREA EL FRAME CON EL FORMULARIO.                         DONE
+            -   SE CREA EL DIALOGO DE TIPO DE FILTRO.                       DONE
+            -   SE CREA EL MAESTRO DEL TIPO DE FILTRO.                      DONE
+            -   SE ACTUALIZA EL CONTROLADOR PARA ADAPTAR AL NUEVO SISTEMA DE
+                CONTROLADORES.                                              DONE
+
 18/07/2025  MAESTRO DE SUBCATEGORÍA DE ACUARIO:
             -   SE CREA EL MODELO DE TABLA DE LA ENTIDAD.                   DONE
             -   SE MODIFICA EL PAGINADOR PARA ACEPTAR LA LÓGICA DE LA ENTIDAD.

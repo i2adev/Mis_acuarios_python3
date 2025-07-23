@@ -1,8 +1,8 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
-Fecha:      20/07/2025
+Fecha:      21/07/2025
 Commentarios:
-    Módulo que contiene el diálogo de la entidad TIPO DE ACUARIO.
+    Módulo que contiene el diálogo de la entidad TIPO DE FILTRO.
 """
 import sys
 
@@ -10,10 +10,10 @@ from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QApplication, QWidget
 
 from Views.base_dialog import BaseDialog
-from Views.tipo_acuario_form import TipoAcuarioForm
+from Views.tipo_filtro_form import TipoFiltroForm
 
 
-class TipoAcuarioDialog(BaseDialog):
+class TipoFiltroDialog(BaseDialog):
     """ Diálogo de categoría de acuario. """
 
     def __init__(self, w_title: str):
@@ -22,7 +22,7 @@ class TipoAcuarioDialog(BaseDialog):
         super().__init__(w_title)
 
         # Configura el formulario
-        self.frame = TipoAcuarioForm()
+        self.frame = TipoFiltroForm()
         self.frame.setFixedWidth(550)
         self.layout_form_data.addWidget(self.frame)
         self.set_tab_order()
@@ -34,25 +34,20 @@ class TipoAcuarioDialog(BaseDialog):
         for widget in self.findChildren(QWidget):
             widget.setFocusPolicy(Qt.FocusPolicy.ClickFocus)
 
-        # Establecemos las políticas de focus
-        self.frame.combo_categoria_acuario.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
-        self.frame.combo_subcategoria_acuario.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
+        # Establecemos las politicas de focus
+        self.frame.edit_tipo_filtro.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
         self.frame.text_observaciones.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
 
         # Establecer el orden
         self.setTabOrder(
-            self.frame.combo_categoria_acuario,
-            self.frame.combo_subcategoria_acuario
-        )
-        self.setTabOrder(
-            self.frame.combo_subcategoria_acuario, self.frame.text_observaciones
+            self.frame.edit_tipo_filtro, self.frame.text_observaciones
         )
 
 # Entrada a la aplicación
 if __name__ == "__main__":
     app = QApplication(sys.argv)
 
-    ventana = TipoAcuarioDialog("...::OOO::....")
+    ventana = TipoFiltroDialog("...::OOO::....")
 
     # Cargar el archivo .qss
     with open("../Resources/Styles/main_style.qss", "r",

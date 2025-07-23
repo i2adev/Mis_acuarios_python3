@@ -1,106 +1,249 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
-Fecha:      02/06/2025
+Fecha:      21/07/2025
 Commentarios:
-    Módulo que contiene la clase controladora de la entidad TIPO DE
-    FILTRO.
+    Módulo que contiene la clase controladora de la entidad TIPO DE FILTRO.
 """
+
+
 # Importaciones
-from PyQt6.QtCore import qSetMessagePattern, Qt, QEvent
+from PyQt6.QtCore import Qt, QEvent
 from PyQt6.QtGui import QAction
-from PyQt6.QtWidgets import QWidget, QTextEdit, QPlainTextEdit, QMessageBox, \
-    QTableView, QHeaderView
+from PyQt6.QtWidgets import (QWidget, QMessageBox, QTableView, QHeaderView,
+                             QCompleter, QComboBox)
 
 from Controllers.base_controller import BaseController
 from Model.DAO.paginator import Paginator
-from Services.Result.result import Result
-from Views.tipo_filtro_view import TipoFiltroView
-from Views.table_menu_contextual import TableMenuContextual
-from Model.Entities.tipo_filtro_entity import TipoFiltroEntity
 from Model.DAO.tipo_filtro_dao import TipoFiltroDAO
+from Model.Entities.categoria_acuario_entity import CategoriaAcuarioEntity
+from Model.Entities.tipo_filtro_entity import TipoFiltroEntity
 from Model.TableModel.tipo_filtro_table_model import TipoFiltroTableModel
+from Services.Result.result import Result
 from Services.Validators.tipo_filtro_validator import TipoFiltroValidator
+from Views.table_menu_contextual import TableMenuContextual
+from Views.tipo_filtro_dialog import TipoFiltroDialog
+from Views.tipo_filtro_view import TipoFiltroView
 
-class TipoFiltroController(BaseController):
-    """ Controlador de la entidad tipo de filtro. """
 
-    def __init__(self):
-        """ Constructor base """
+class TipoFiltroDialogController(BaseController):
+    """ Controlador del diálogo subcategoría de acuario. """
 
-        # Inicializamos la vista, la entidad y el dao
-        self.__view = TipoFiltroView("TIPOS DE FILTRO")
-        self.__mod = TipoFiltroEntity()
-        self.__dao = TipoFiltroDAO()
+    def __init__(self, view: TipoFiltroDialog, dao: TipoFiltroDAO,
+                 mod: TipoFiltroEntity):
+        """
+        Constructor base
+
+        Parámetros:
+        :param view: Vista tipo CategoríaAcuario
+        :param dao: DAO de la entidad TipoFiltroDAO
+        :param mod: Modelo de la entidad TipoFiltroEntity
+        """
+
+        # inicializamos la vista y pasamos al constructor padre
+        super().__init__(view, dao, mod)
+
+        # Inicializamos los eventos
+        self.init_basic_handlers()
+
+    def show_modal(self) -> Result:
+        """ Abre la centava modal. """
+
+        if self._view.exec():
+            # Obtenemos la subcategoría de acuario
+            tipo_filtro = self.get_tipo_filtro()
+            return Result.success(tipo_filtro)
+        else:
+            return Result.failure("NO SE HA PODIDO OBTENER LA ENTIDAD.")
+
+    def init_basic_handlers(self):
+        """
+        Inicializa los eventos de los widgets de la vista.
+        """
+        self.init_imput_handlers()
+
+        if isinstance(self._view, TipoFiltroDialog):
+            self.init_dialog_handlers()
+
+    def init_dialog_handlers(self):
+        """ Inicializa los controles del cuadro de diálogo. """
+
+        # Botones
+        self._view.button_accept.clicked.connect(self.dialog_accept)
+        self._view.button_cancel.clicked.connect(self.dialog_cancel)
+
+    def init_imput_handlers(self):
+        """ Inicializa los controles de entrada. """
+
+        # Controles de entrada de texto
+        for widget in self._view.findChildren(QWidget):
+            if isinstance(widget, self._text_widgets):
+                widget.installEventFilter(self)
+
+    def entity_configuration(self) -> TipoFiltroEntity:
+        """ Configura la entidad. """
+
+        ent = TipoFiltroEntity()
+
+        if self._view.frame.edit_id.text():
+            ent.id = int(self._view.frame.edit_id.text())
+        else:
+            ent.id = None
+
+        ent.tipo_filtro = self._view.frame.edit_tipo_filtro.text()
+        ent.observaciones = self._view.frame.text_observaciones.toPlainText()
+
+        return ent
+
+    def insert(self) -> Result:
+        """ Inserta un registro en la base de datos. """
+
+        # Validamos el formulario
+        val = self.validate_view()
+
+        if not val.is_success:
+            return val
+
+        # Configura la entidad
+        ent = self.entity_configuration()
+
+        # Inserta el registro
+        res = self._dao.insert(ent)
+        if not res.is_success:
+            return res
+
+        # Limpiamos el formulario
+        self._clean_view()
+
+        return Result.success(res.value)
+
+    def validate_view(self):
+        """ Valida el formulario. """
+
+        # Valida el tipo de filtro
+        res = TipoFiltroValidator.validate_tipo_filtro(
+            self._view.frame.edit_tipo_filtro
+        )
+
+        if not res.is_success:
+            self._view.frame.edit_tipo_filtro.setFocus()
+            return res
+
+        return Result.success(1)
+
+    def dialog_accept(self):
+        """ Se acepta el diálogo. """
+
+        # Insertamos el registro
+        res = self.insert()
+
+        if not res.is_success:
+            QMessageBox.warning(
+                self._view,
+                self._view.window_title,
+                res.error_msg
+            )
+            return
+
+        # Configuramos la entidad
+        self.tipo_filtro_result = TipoFiltroEntity(
+            id = res.value,
+            num = None,
+            tipo_filtro = self._view.frame.edit_tipo_filtro.text(),
+            observaciones = self._view.frame.text_observaciones.toPlainText()
+                          if self._view.frame.text_observaciones.toPlainText()
+                          else None
+        )
+
+        # Aceptamos el diálogo
+        self._view.accept()
+
+    def get_tipo_filtro(self):
+        """ Devuelve la categoría de filtro resultante. """
+
+        return self.tipo_filtro_result
+
+    def dialog_cancel(self):
+        """ Cancela el dialogo. """
+
+        self._view.reject()
+
+    def set_autocomplete(self, combo: QComboBox):
+        """
+        Configura el autocompletado del combo.
+
+        :param combo: El QCOmboBox al que se le aplica el autocomplete.
+        """
+
+        completer = QCompleter()
+        completer.setModel(combo.model())
+        completer.setCompletionMode(
+            QCompleter.CompletionMode.PopupCompletion)
+        completer.setCaseSensitivity(Qt.CaseSensitivity.CaseInsensitive)
+        combo.setCompleter(completer)
+
+class TipoFiltroController(TipoFiltroDialogController):
+    """ Controlador del formulario maestro de subcategoría de acuario. """
+
+    def __init__(self, view: TipoFiltroView, dao: TipoFiltroDAO,
+                 mod: TipoFiltroEntity):
+        """
+        Constructor base
+
+        Parámetros:
+        :param view: Vista tipo acuario
+        :param dao: DAO de la entidad tipo de acuario
+        :param mod: Modelo de la entidad tipo de acuario
+        """
+
+        # Constructor base
+        super().__init__(view, dao, mod)
 
         # Inicializamos el paginador
         self._pag = Paginator("VISTA_TIPOS_FILTRO", 5)
         self._pag.initialize_paginator()
-
-        # inicializamos la vista y pasamos al constructor padre
-        super().__init__(self.__view)
 
         # Llenamos la tabla
         self.load_tableview()
         self.configure_table_foot()
 
         # Inicializamos los eventos
-        self.init_handlers()
+        self.init_master_handlers()
 
     def load_tableview(self):
-        """ Gestiona los datos para llenar la tabl. """
+        """ Gestiona los datos para llenar la tabla. """
 
-        self.fill_tableview(self.__view.data_table, self._pag.current_data)
-        self._configure_table(self.__view.data_table)
+        self.fill_tableview(self._view.data_table, self._pag.current_data)
+        self._configure_table(self._view.data_table)
 
     def show(self):
         """ Abre la vista """
-        self.__view.button_accept.hide()
-        self.__view.button_cancel.hide()
-        self.__view.show()
 
-    def get_tipo_filtro_list(self):
-        """ Obtiene el listado de tipos de filtro. """
+        self._view.show()
 
-        pass
-
-    def init_handlers(self):
+    def init_master_handlers(self):
         """
-        Inicializa los eventos de los widgets de la vista.
+        Inicializa los eventos de los widgets del formulario maestro.
         """
-
-        # Inicializa los widgets de introducción de texto
-        for widget in self.__view.findChildren(QWidget):
-            if isinstance(widget, self._text_widgets):
-                widget.installEventFilter(self)
-
-        # self._view.text_observaciones.textChanged.connect(lambda:
-        #                                                    self.spell_check)
 
         # Inizializa los botones
-        self.__view.button_insert.clicked.connect(self.button_insert_click)
-        self.__view.button_update.clicked.connect(self.button_update_click)
-        self.__view.button_load.clicked.connect(self.button_load_click)
-        self.__view.button_delete.clicked.connect(self.button_delete_click)
-        self.__view.button_clean.clicked.connect(lambda: self._clean_view())
-
-        self.__view.button_next.clicked.connect(self.next_page)
-        self.__view.button_prev.clicked.connect(self.previous_page)
-        self.__view.button_first.clicked.connect(self.first_page)
-        self.__view.button_last.clicked.connect(self.last_page)
-
-        self.__view.button_close.clicked.connect(
-            lambda: self.__view.close()
+        self._view.button_insert.clicked.connect(self.button_insert_click)
+        self._view.button_update.clicked.connect(self.button_update_click)
+        self._view.button_load.clicked.connect(self.button_load_click)
+        self._view.button_delete.clicked.connect(self.button_delete_click)
+        self._view.button_clean.clicked.connect(lambda: self._clean_view())
+        self._view.button_next.clicked.connect(self.next_page)
+        self._view.button_prev.clicked.connect(self.previous_page)
+        self._view.button_first.clicked.connect(self.first_page)
+        self._view.button_last.clicked.connect(self.last_page)
+        self._view.button_close.clicked.connect(
+            lambda: self._view.close()
         )
-
-
-
         # Inicializamos los combos
-        self.__view.combo_select_page.currentIndexChanged.connect(
+        self._view.combo_select_page.currentIndexChanged.connect(
             self.combo_page_indexchanged
         )
-
         # Eventos de la tabla
-        self.__view.data_table.customContextMenuRequested.connect(
+        self._view.data_table.customContextMenuRequested.connect(
             self.show_context_menu
         )
 
@@ -109,7 +252,7 @@ class TipoFiltroController(BaseController):
         Se ejecuta cuando el índice del combo de selección de página.
         """
 
-        page = self.__view.combo_select_page.currentData()
+        page = self._view.combo_select_page.currentData()
 
         # Condiciones de salida
         if page is None:
@@ -124,19 +267,19 @@ class TipoFiltroController(BaseController):
         """ Muestra el menú contextual de la tabla. """
 
         # Obtiene el indice de la fila
-        index = self.__view.data_table.indexAt(position)
+        index = self._view.data_table.indexAt(position)
 
         # Si el índice no es valido
         if not index.isValid():
             QMessageBox.warning(
-                self.__view,
-                self.__view.window_title,
+                self._view,
+                self._view.window_title,
                 "DEBES PULSAR SOBRE UN REGISTRO DE LA TABLA."
             )
             return
 
         # Muestra el menú
-        menu = TableMenuContextual(self.__view.data_table)
+        menu = TableMenuContextual(self._view.data_table)
 
         # Creamos el menú
         action_cargar = QAction("CARGAR REGISTRO", self)
@@ -148,22 +291,20 @@ class TipoFiltroController(BaseController):
         menu.addAction(action_cargar)
         menu.addAction(action_eliminar)
 
-        menu.exec(self.__view.data_table.viewport().mapToGlobal(position))
+        menu.exec(self._view.data_table.viewport().mapToGlobal(position))
 
     def action_eliminar(self, event):
         """ Elimina el registro desde el menú contextual"""
 
-        id_tipo = None
-
         # Carga el modelo de la fila seleccionada
-        selection_model = self.__view.data_table.selectionModel()
+        selection_model = self._view.data_table.selectionModel()
 
         # Chequea si se ha seleccionado una fila
         if not selection_model.hasSelection():
             QMessageBox.warning(
-                self.__view,
-                self.__view.window_title,
-                "ANTES DE CARGAR UN REGISTRO, DEBES DE "
+                self._view,
+                self._view.window_title,
+                "ANTES DE ELIMINAR UN REGISTRO, DEBES "
                 "SELECCIONAR UN REGISTRO EN LA TABLA."
             )
             return
@@ -171,18 +312,20 @@ class TipoFiltroController(BaseController):
         # Configuramos la fila
         index = selection_model.currentIndex()
         fila = index.row()
-        modelo = self.__view.data_table.model()
+        modelo = self._view.data_table.model()
 
         # Lee los datos del modelo
         id_tipo = modelo.index(fila, 0).data()
-        pagina_actual = self.__view.combo_select_page.currentData()
+        pagina_actual = self._view.combo_select_page.currentData()
+        paginator_pages = self._pag.total_pages
 
+        # Elimina el registro
         res = self.delete(id_tipo)
 
         if not res.is_success:
             QMessageBox.warning(
-                self.__view,
-                self.__view.window_title,
+                self._view,
+                self._view.window_title,
                 res.error_msg
             )
             return
@@ -190,129 +333,107 @@ class TipoFiltroController(BaseController):
         # Configurar paginador
         self._pag.initialize_paginator()
 
-        # Comprobamos si al añadir un registro se ha aumentado el número
-        # de páginas totales
-        if pagina_actual > self._pag.total_pages:
-
-            total = self.__view.combo_select_page.count()
-            index = self.__view.combo_select_page.currentIndex()
-
-            # Verifica si es el último ítem
-            if index == total - 1 and total > 1:
-                self.__view.combo_select_page.removeItem(index)
-                # Selecciona el nuevo último (el anterior al que se eliminó)
-                self.__view.combo_select_page.setCurrentIndex(
-                    self.__view.combo_select_page.count() - 1
-                )
-            elif index == total - 1 and total == 1:
-                # Sí es el único ítem, eliminarlo y limpiar la selección
-                self.__view.combo_select_page.removeItem(index)
-                self.__view.combo_select_page.setCurrentIndex(-1)
+        # Configuramos el pie de tabla
+        if paginator_pages > self._pag.total_pages:
+            # Eliminamos la última página del combo de paginación
+            self._view.combo_select_page.removeItem(self._pag.total_pages)
+            self._view.label_total_pages.setText(str(self._pag.total_pages))
 
         # Establecemos la página actual
         if pagina_actual > self._pag.total_pages:
-            self.__view.combo_select_page.setCurrentIndex(
+            self._view.combo_select_page.setCurrentIndex(
                 self._pag.total_pages - 1
             )
             pagina_actual -= 1
-            self.__view.label_total_pages.setText( str(pagina_actual))
+        else:
+            self._view.combo_select_page.setCurrentIndex(pagina_actual - 1)
 
-        self.__view.combo_select_page.setCurrentIndex(-1)
-        self.__view.combo_select_page.setCurrentIndex(pagina_actual - 1)
-
+        self._view.combo_select_page.setCurrentIndex(-1)
+        self._view.combo_select_page.setCurrentIndex(pagina_actual - 1)
 
     def action_cargar(self, event):
         """ Carga un registro desde el menú contextual. """
 
-        self.load()
+        self.load_record()
 
     def button_delete_click(self, event):
         """ Controla el clic en el botón eliminar. """
 
         # Sí tenemos un registro cargado
-        if not self.__view.edit_id.text():
+        if not self._view.frame.edit_id.text():
             QMessageBox.warning(
-                self.__view,
-                self.__view.window_title,
-                "DEBES SELECCIIONAR UN REGISTRO DE LA TABLA ANTES DE "
-                "ELIMINARLO."
+                self._view,
+                self._view.window_title,
+                "DEBES SELECCIONAR UN REGISTRO DE LA "
+                "TABLA ANTES DE ELIMINARLO."
             )
             return
 
         # Obtener el ID desde el cuadro de texto id_parent
-        id_tipo = int(self.__view.edit_id.text())
-        pagina_actual = self.__view.combo_select_page.currentData()
+        id_row = int(self._view.frame.edit_id.text())
+        pagina_actual = self._view.combo_select_page.currentData()
+        paginator_pages = self._pag.total_pages
 
         # Insertar el registro
-        res = self.delete(id_tipo)
+        res = self.delete(id_row)
 
         if not res.is_success:
             QMessageBox.warning(
-                self.__view,
-                self.__view.window_title,
+                self._view,
+                self._view.window_title,
                 res.error_msg
             )
+            return
 
-        # Configurar paginador
+        # Configurar paginator
         self._pag.initialize_paginator()
 
-        # Comprobamos si al añadir un registro se ha aumentado el número
-        # de páginas totales
-        if pagina_actual > self._pag.total_pages:
-
-            total = self.__view.combo_select_page.count()
-            index = self.__view.combo_select_page.currentIndex()
-
-            # Verifica si es el último ítem
-            if index == total - 1 and total > 1:
-                self.__view.combo_select_page.removeItem(index)
-                # Selecciona el nuevo último (el anterior al que se eliminó)
-                self.__view.combo_select_page.setCurrentIndex(
-                    self.__view.combo_select_page.count() - 1
-                )
-            elif index == total - 1 and total == 1:
-                # Sí es el único ítem, eliminarlo y limpiar la selección
-                self.__view.combo_select_page.removeItem(index)
-                self.__view.combo_select_page.setCurrentIndex(-1)
+        # Configuramos el pie de tabla
+        if paginator_pages > self._pag.total_pages:
+            # Eliminamos la última página del combo de paginación
+            self._view.combo_select_page.removeItem(self._pag.total_pages)
+            self._view.label_total_pages.setText(str(self._pag.total_pages))
 
         # Establecemos la página actual
         if pagina_actual > self._pag.total_pages:
-            self.__view.combo_select_page.setCurrentIndex(
+            self._view.combo_select_page.setCurrentIndex(
                 self._pag.total_pages - 1
             )
             pagina_actual -= 1
-            self.__view.label_total_pages.setText( str(pagina_actual))
+        else:
+            self._view.combo_select_page.setCurrentIndex(pagina_actual - 1)
 
-        self.__view.combo_select_page.setCurrentIndex(-1)
-        self.__view.combo_select_page.setCurrentIndex(pagina_actual - 1)
+        self._view.combo_select_page.setCurrentIndex(-1)
+        self._view.combo_select_page.setCurrentIndex(pagina_actual - 1)
 
     def button_load_click(self, event):
         """ Controla el clic del boton de cargar. """
 
-        self.load()
-
+        self.load_record()
 
     def button_update_click(self, event):
         """ Controla el clic del botón actualizar. """
 
-        pagina_actual = self.__view.combo_select_page.currentData()
-
         # Valida el formulario
-        res = TipoFiltroValidator.validate_tipo_filtro(
-            self.__view.edit_tipo_filtro
-        )
+        val = self.validate_view()
 
-        if not res.is_success:
-            QMessageBox.information(self.__view, "ERROR", res.error_msg)
+        if not val.is_success:
+            QMessageBox.warning(
+                self._view,
+                self._view.window_title,
+                val.error_msg
+            )
+            self._view.frame.edit_categoria_acuario.setFocus()
             return
+
 
         # Actualiza el registro
         res = self.update()
 
         if not res.is_success:
             QMessageBox.warning(
-                self.__view,
-                self.__view.window_title,
+                self._view,
+                self._view.window_title,
                 res.error_msg
             )
 
@@ -320,60 +441,60 @@ class TipoFiltroController(BaseController):
         self._pag.initialize_paginator()
 
         # Establecemos la página actual
-        self.__view.combo_select_page.setCurrentIndex(-1)
-        self.__view.combo_select_page.setCurrentIndex(pagina_actual - 1)
+        self._view.combo_select_page.setCurrentIndex(-1)
 
-        self._select_row_by_id(self.__view.data_table, res.value)
+        # Seleccionamos el último registro utilizado
+        self.configure_table_after_crud(res.value)
+
+    def configure_table_after_crud(self, id_: int):
+        """
+        Configura la tabla tras una operación de crud, seleccionando el último
+        registro insertado, actualizado.
+        """
+
+        # Seleccionamos la página en la que se encuentra el registro
+        num_reg = next(x.num for x in self._pag.total_data if x.id == id_)
+        num_pag =  self._pag.get_page_number_by_num(num_reg)
+        self._view.combo_select_page.setCurrentIndex(num_pag - 1)
+
+        # Selecciona la última fila
+        self._select_row_by_id(self._view.data_table, id_)
 
     def button_insert_click(self, event):
         """ Controla el clic del botón insertar. """
-
-        # Valida el formulario
-        res = TipoFiltroValidator.validate_tipo_filtro(
-            self.__view.edit_tipo_filtro
-        )
-
-        if not res.is_success:
-            QMessageBox.information(
-                self.__view,
-                self.__view.window_title,
-                res.error_msg)
-            return
 
         # Insertamos el registro
         res = self.insert()
 
         if not res.is_success:
             QMessageBox.warning(
-                self.__view,
-                self.__view.window_title,
+                self._view,
+                self._view.window_title,
                 res.error_msg
             )
             return
+
+        # Obtenemos los datos de paginación actuales
+        pagitator_pages = self._pag.total_pages
 
         # Configura el paginador
         self._pag.initialize_paginator()
 
         # Comprobamos si al añadir un registro se ha aumentado el número
         # de páginas totales
-        if self._pag.total_pages > self.__view.combo_select_page.count():
-            self.__view.combo_select_page.addItem(
+        if self._pag.total_pages > pagitator_pages:
+            self._view.combo_select_page.addItem(
                 str(self._pag.total_pages),
                 self._pag.total_pages
             )
-            self.__view.label_total_pages.setText(
-                str(self.__view.combo_select_page.count())
+            self._view.label_total_pages.setText(
+                str(self._pag.total_pages)
             )
 
-        # Establecemos la página final
-        self.__view.combo_select_page.setCurrentIndex(-1)
-        self.__view.combo_select_page.setCurrentIndex(
-            self.__view.combo_select_page.count() - 1
-        )
+        self.configure_table_after_crud(res.value)
 
-        self._select_row_by_id(self.__view.data_table, res.value)
-
-    def fill_tableview(self, table: QTableView, data: list[TipoFiltroEntity]):
+    def fill_tableview(self, table: QTableView,
+                       data: list[CategoriaAcuarioEntity]):
         """ Carga los datos en la tabla. """
 
         tv_model = TipoFiltroTableModel(data)
@@ -416,43 +537,21 @@ class TipoFiltroController(BaseController):
         """ No aplicable. """
         pass
 
-    def entity_configuration(self) -> TipoFiltroEntity:
-        """ Configura la entidad. """
-
-        ent = TipoFiltroEntity()
-
-        if self.__view.edit_id.text():
-            ent.id = int(self.__view.edit_id.text())
-        else:
-            ent.id = None
-
-        ent.tipo_filtro = self.__view.edit_tipo_filtro.text()
-        ent.observaciones = self.__view.text_observaciones.toPlainText()
-
-        return ent
-
-    def insert(self) -> Result:
-        # Configura la entidad
-        ent = self.entity_configuration()
-
-        # Inserta el registro
-        res = self.__dao.insert(ent)
-        if not res.is_success:
-            return Result.failure( res.error_msg)
-
-        # Limpiamos el formulario
-        self._clean_view()
-
-        return Result.success(res.value)
-
     def update(self) -> Result:
         """ Actualiza el registro en la base de datos. """
+        # Valida el formulario
+        val = self.validate_view()
+
+        if not val.is_success:
+            self._view.frame.edit_categoria_acuario.setFocus()
+            return val
 
         # Configura la entidad
         ent = self.entity_configuration()
 
-        # Inserta el registro
-        res = self.__dao.update(ent)
+        # Actualiza el registro
+        res = self._dao.update(ent)
+
         if not res.is_success:
             return Result.failure(res.error_msg)
 
@@ -461,48 +560,50 @@ class TipoFiltroController(BaseController):
 
         # Configuramos la tabla
         self.load_tableview()
-        self._select_row_by_id(self.__view.data_table, res.value)
+        self.configure_table_after_crud(res.value)
 
         return Result.success(ent.id)
 
-    def load(self) -> Result:
+    def load_record(self) -> Result:
         """ Carga el registro en el formulario. """
 
         # Carga el modelo de la fila seleccionada
-        selection_model = self.__view.data_table.selectionModel()
+        selection_model = self._view.data_table.selectionModel()
 
         # Chequea si se ha seleccionado una fila
         if not selection_model.hasSelection():
             return Result.failure(
-                "ANTES DE CARGAR UN REGISTRO, DEBES DE "
+                "ANTES DE CARGAR UN REGISTRO, DEBES "
                 "SELECCIONAR UN REGISTRO EN LA TABLA."
             )
 
         # Configuramos la fila
         index = selection_model.currentIndex()
         fila = index.row()
-        modelo = self.__view.data_table.model()
+        modelo = self._view.data_table.model()
 
         # Lee los datos del modelo
-        id_tipo = modelo.index(fila, 0).data()
+        id_ta = modelo.index(fila, 0).data()
         tipo_filtro = modelo.index(fila, 2).data()  # La columna 1 es el
                                                     # númer correlativo.
         observaciones = modelo.index(fila, 3).data()
 
         # Cargamos los widgets
-        self.__view.edit_id.setText(
-            str(id_tipo) if id_tipo is not None else ""
-        )
-        self.__view.edit_tipo_filtro.setText(
-            str(tipo_filtro) if tipo_filtro is not None else ""
-        )
-        self.__view.text_observaciones.setPlainText(
-            str(observaciones) if observaciones is not None else ""
+        self._view.frame.edit_id.setText(
+            str(id_ta) if id_ta is not None else ""
         )
 
-        return Result.success(id_tipo)
+        self._view.frame.edit_tipo_filtro.setText(
+            str(tipo_filtro) if tipo_filtro else None
+        )
 
-    def delete(self, id: int) -> Result:
+        self._view.frame.text_observaciones.setPlainText(
+            str(observaciones) if observaciones is not None else None
+        )
+
+        return Result.success(id_ta)
+
+    def delete(self, id_: int) -> Result:
         """ Elimina un registro de la base de datos.
 
             Parámetros:
@@ -511,37 +612,37 @@ class TipoFiltroController(BaseController):
 
         # Solicitamos doble confirmación
         res = QMessageBox.question(
-            self.__view,
-            self.__view.window_title,
+            self._view,
+            self._view.window_title,
             "¿ESTÁS SEGURO QUE DESEAS ELIMINAR EL REGISTRO?",
             QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
         )
 
         if res == QMessageBox.StandardButton.No:
             QMessageBox.information(
-                self.__view,
-                self.__view.window_title,
+                self._view,
+                self._view.window_title,
                 "NO SE ELIMINARÁ EL REGISTRO"
             )
             return Result.success(0)
 
         res = QMessageBox.question(
-            self.__view,
-            self.__view.window_title,
+            self._view,
+            self._view.window_title,
             "R E P I T O\n¿ESTÁS SEGURO QUE DESEAS ELIMINAR EL REGISTRO?",
             QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
         )
 
         if res == QMessageBox.StandardButton.No:
             QMessageBox.information(
-                self.__view,
-                self.__view.window_title,
+                self._view,
+                self._view.window_title,
                 "NO SE ELIMINARÁ EL REGISTRO"
             )
             return Result.success(0)
 
         # Elimina el registro
-        res = self.__dao.delete(id)
+        res = self._dao.delete(id_)
 
         if not res.is_success:
             return Result.failure(res.error_msg)
@@ -552,45 +653,45 @@ class TipoFiltroController(BaseController):
         # Configuramos la tabla
         self.load_tableview()
 
-        return Result.success(id)
+        return Result.success(id_)
 
     def configure_table_foot(self):
         """ Configura el pie de la tabla. """
 
-        self.__view.label_total_pages.setText(str(self._pag.total_pages))
-        self.fill_combo_page()    
+        self._view.label_total_pages.setText(str(self._pag.total_pages))
+        self.fill_combo_page()
 
     def next_page(self, event: QEvent) -> None:
         """ Pasa a la siguiente página de la tabla. """
 
-        page_to = self.__view.combo_select_page.currentData() + 1
+        page_to = self._view.combo_select_page.currentData() + 1
 
         if page_to > self._pag.total_pages:
             QMessageBox.information(
-                self.__view,
-                self.__view.window_title,
+                self._view,
+                self._view.window_title,
                 "SE HA LLEGADO A LA ÚLTIMA PÁGINA"
             )
             return
 
         self._pag.current_page = page_to
-        self.__view.combo_select_page.setCurrentIndex(self._pag.page_index)
+        self._view.combo_select_page.setCurrentIndex(self._pag.page_index)
 
     def previous_page(self, event: QEvent) -> None:
         """ Pasa a la anterior página de la tabla. """
 
-        page_to = self.__view.combo_select_page.currentData() - 1
+        page_to = self._view.combo_select_page.currentData() - 1
 
         if page_to < 1:
             QMessageBox.information(
-                self.__view,
-                self.__view.window_title,
+                self._view,
+                self._view.window_title,
                 "SE HA LLEGADO A LA PRIMERA PÁGINA"
             )
             return
 
         self._pag.current_page = page_to
-        self.__view.combo_select_page.setCurrentIndex(self._pag.page_index)
+        self._view.combo_select_page.setCurrentIndex(self._pag.page_index)
 
     def first_page(self, event: QEvent) -> None:
         """ Pasa a la primera página de la tabla. """
@@ -601,7 +702,7 @@ class TipoFiltroController(BaseController):
             return
 
         self._pag.current_page = page_to
-        self.__view.combo_select_page.setCurrentIndex(self._pag.page_index)
+        self._view.combo_select_page.setCurrentIndex(self._pag.page_index)
 
     def last_page(self, event: QEvent) -> None:
         """ Pasa a la primera página de la tabla. """
@@ -612,12 +713,12 @@ class TipoFiltroController(BaseController):
             return
 
         self._pag.current_page = page_to
-        self.__view.combo_select_page.setCurrentIndex(self._pag.page_index)
+        self._view.combo_select_page.setCurrentIndex(self._pag.page_index)
 
     def fill_combo_page(self):
         """ Rellena el combo de selección de página. """
 
-        self.__view.combo_select_page.clear()
+        self._view.combo_select_page.clear()
         for i in range(1, self._pag.total_pages + 1):
-            self.__view.combo_select_page.addItem(str(i), i)
+            self._view.combo_select_page.addItem(str(i), i)
 

@@ -11,6 +11,7 @@ from Controllers.subcategoria_acuario_controller import \
     SubcategoriaAcuarioController
 from Controllers.tipo_acuario_controller import TipoAcuarioController
 from Controllers.tipo_filtro_controller import TipoFiltroController
+from Controllers.tipo_filtro_controller_old import TipoFiltroControllerOld
 from Model.DAO.categoria_acuario_dao import CategoriaAcuarioDAO
 from Model.DAO.subcategoria_acuario_dao import SubcategoriaAcuarioDAO
 from Model.DAO.tipo_acuario_dao import TipoAcuarioDAO
@@ -23,6 +24,8 @@ from Views.categoria_acuario_view import CategoriaAcuarioView
 from Views.main_view import MainView
 from Views.subcategoria_acuario_view import SubcategoriaAcuarioView
 from Views.tipo_acuario_view import TipoAcuarioView
+from Views.tipo_filtro_dialog import TipoFiltroDialog
+from Views.tipo_filtro_view import TipoFiltroView
 
 
 class MainViewController(BaseController):
@@ -66,11 +69,11 @@ class MainViewController(BaseController):
         Cuando se presiona en el maestro de tipo de filtro.
         Acción: Abre el formulario de tipo de filtro
         """
-
+        view = TipoFiltroView("MAESTRO DE TIPO DE FILTRO")
         dao = TipoFiltroDAO()
         mod = TipoFiltroEntity()
 
-        ctrl = TipoFiltroController()
+        ctrl = TipoFiltroController(view, dao, mod)
         ctrl.show()
 
     def tipo_acuario_clicked(self, event):
