@@ -502,36 +502,36 @@ class TipoFiltroController(TipoFiltroDialogController):
         table.setColumnHidden(0, True)
         table.resizeColumnsToContents()
 
-    def _configure_table(self, table: QTableView):
-        """ Configura l atabla de datos. """
-
-        # Selecciona un afila entera
-        table.setSelectionBehavior(
-            QTableView.SelectionBehavior.SelectRows)
-
-        # Solo se puede seleccionar uan fila
-        table.setSelectionMode(
-            QTableView.SelectionMode.SingleSelection)
-
-        # Color de las filas alternadas
-        table.setAlternatingRowColors(True)
-
-        # Oculta las líneas de la tabla
-        table.setShowGrid(False)
-
-        # Elimina el tabulador
-        table.setFocusPolicy(Qt.FocusPolicy.NoFocus)
-
-        # Ocultar la columna ID (columna 0)
-        table.setColumnHidden(0, True)
-
-        # Hacer que la columna de observaciones (columna 3) use el espacio
-        # restante
-        header = table.horizontalHeader()
-        header.setSectionResizeMode(3, QHeaderView.ResizeMode.Stretch)
-
-        # Mostrar puntos suspensivos si el texto no cabe
-        table.setTextElideMode(Qt.TextElideMode.ElideRight)
+    # def _configure_table(self, table: QTableView):
+    #     """ Configura l atabla de datos. """
+    #
+    #     # Selecciona un afila entera
+    #     table.setSelectionBehavior(
+    #         QTableView.SelectionBehavior.SelectRows)
+    #
+    #     # Solo se puede seleccionar uan fila
+    #     table.setSelectionMode(
+    #         QTableView.SelectionMode.SingleSelection)
+    #
+    #     # Color de las filas alternadas
+    #     table.setAlternatingRowColors(True)
+    #
+    #     # Oculta las líneas de la tabla
+    #     table.setShowGrid(False)
+    #
+    #     # Elimina el tabulador
+    #     table.setFocusPolicy(Qt.FocusPolicy.NoFocus)
+    #
+    #     # Ocultar la columna ID (columna 0)
+    #     table.setColumnHidden(0, True)
+    #
+    #     # Hacer que la columna de observaciones use el espaciorestante
+    #     last_column_ix = table.model().columnCount() - 1
+    #     header = table.horizontalHeader()
+    #     header.setSectionResizeMode(last_column_ix, QHeaderView.ResizeMode.Stretch)
+    #
+    #     # Mostrar puntos suspensivos si el texto no cabe
+    #     table.setTextElideMode(Qt.TextElideMode.ElideRight)
 
     def spell_check(self):
         """ No aplicable. """

@@ -12,46 +12,32 @@ from PyQt6.QtWidgets import (QApplication, QWidget, QLabel, QLineEdit,
                              QSpacerItem, QComboBox, QSizePolicy, QFrame,
                              QTableView, QSizeGrip, QAbstractItemView)
 from PyQt6.QtGui import QIcon, QPixmap, QCursor
-from PyQt6.QtCore import Qt
+from PyQt6.QtCore import Qt, QPoint, QRect
 
 import Resources.image_rc
 
 class BaseView(QWidget):
-    """ Formulario de tipo de filtro """
+    """ Formulario maestro base """
 
     def __init__(self, w_title: str):
         """ Constructor de clase """
 
         super().__init__()
 
-        # SizeGrip
-        self.gripSize = 10
-        self.grip = QSizeGrip(self)
-        self.grip.resize(self.gripSize, self.gripSize)
+        # Variables de redimensionamiento y movimiento de la ventana
+        self.setMouseTracking(True)
+        self._resize_margin = 6
+        self._resizing = False
+        self._resize_direction = None
+        self._start_pos = None
+        self._start_geom = None
 
         # Configura el formulario
         self.window_title = w_title
         self.create_widgets()
         self.build_layout()
-        # self.set_tab_order()
+
         self.init_basic_handlers()
-
-        # Establece el foco inicial
-        # self.edit_tipo_filtro.setFocus()
-
-    # def set_tab_order(self):
-    #     """ Establece el orden de tabulación de los controles. """
-    #
-    #     # Eliminar el focus de los widgets que no lo necesitan
-    #     for widget in self.findChildren(QWidget):
-    #         widget.setFocusPolicy(Qt.FocusPolicy.ClickFocus)
-    #
-    #     # Establecemos las politicas de focus
-    #     self.edit_tipo_filtro.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
-    #     self.text_observaciones.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
-    #
-    #     # Establecer el orden
-    #     self.setTabOrder(self.edit_tipo_filtro, self.text_observaciones)
 
     def init_basic_handlers(self):
         """ Inicializamos los eventos de la ventana """
@@ -68,9 +54,6 @@ class BaseView(QWidget):
     def build_layout(self):
         """ Construye el layout de la ventana """
 
-        # Establece las dimensiones y la posición de la ventana
-        # self.setGeometry(300, 200, 850, 600)
-
         # Ocultar barra de título
         self.setWindowFlags(Qt.WindowType.FramelessWindowHint)
 
@@ -85,21 +68,6 @@ class BaseView(QWidget):
         self.layout_title_bar.addWidget(self.button_tb_restore)
         self.layout_title_bar.addWidget(self.button_tb_maximize)
         self.layout_title_bar.addWidget(self.button_tb_close)
-
-        # # Consfiguramos el layout de inserción de datos
-        # # Primera línea
-        # # ID
-        # self.layout_id.addWidget(self.label_id)
-        # self.layout_id.addWidget(self.edit_id)
-        #
-        # # TIPO DE FILTRO
-        # self.layout_tipo_filtro.addWidget(self.label_tipo_filtro)
-        # self.layout_tipo_filtro.addWidget(self.edit_tipo_filtro)
-        #
-        # # Segunda línea
-        # # OBSERVACIONES
-        # self.layout_observaciones.addWidget(self.label_observaciones)
-        # self.layout_observaciones.addWidget(self.text_observaciones)
 
         # Datatable y crud
         self.layout_crud.addWidget(self.button_insert)
@@ -117,15 +85,6 @@ class BaseView(QWidget):
         self.layout_data.addWidget(self.frame_table)
         self.layout_data.addLayout(self.layout_crud)
 
-        # Montamos los layouts
-        # Layput inserción de datos
-        # self.layout_first_line.addLayout(self.layout_id)
-        # self.layout_first_line.addLayout(self.layout_tipo_filtro)
-        # self.layout_second_line.addLayout(self.layout_observaciones)
-
-        # self.layout_form_data.addLayout(self.layout_first_line)
-        # self.layout_form_data.addLayout(self.layout_second_line)
-
         # Configuramos el layout de navegación
         self.layout_navigation.addWidget(self.button_first)
         self.layout_navigation.addWidget(self.button_prev)
@@ -141,13 +100,10 @@ class BaseView(QWidget):
         )
 
         # Configulamos el layout del pie de formulario
-        # self.layout_footer.addItem(self.spacer_foot)
         self.layout_footer.addSpacerItem(
             QSpacerItem(20, 20, QSizePolicy.Policy.Expanding,
             QSizePolicy.Policy.Minimum)
         )
-        # self.layout_footer.addWidget(self.button_accept)
-        # self.layout_footer.addWidget(self.button_cancel)
         self.layout_footer.addWidget(self.button_close)
 
         # Cargamos los layout en la ventana
@@ -167,6 +123,7 @@ class BaseView(QWidget):
         self.layout_main = QVBoxLayout() # Layout principal
 
         self.frame_main = QFrame()
+        self.frame_main.setMouseTracking(True)
         self.frame_main.setObjectName("frame_main")
         self.frame_main.setSizePolicy(QSizePolicy.Policy.Expanding,
                                       QSizePolicy.Policy.Expanding)
@@ -191,17 +148,6 @@ class BaseView(QWidget):
                                           # del CRUD
         self.layout_form_data = QVBoxLayout() # Layout que contiene el frame con
                                               # el formulario de datos
-        # self.frame_form_data = QFrame() # Frame de la inserción de datos
-        # self.frame_form_data.setSizePolicy(QSizePolicy.Policy.Expanding,
-        #                               QSizePolicy.Policy.Fixed)
-        # self.frame_form_data.setLayout(self.layout_form_data)
-        
-        # self.layout_first_line = QHBoxLayout() # Primera línea del formulario
-        # self.layout_second_line = QHBoxLayout() # Segunda línea del formulario
-        # self.layout_id = QVBoxLayout() # El campo ID
-        # self.layout_tipo_filtro = QVBoxLayout() # El campo TIPO DE FILTRO
-        # self.layout_observaciones = QVBoxLayout() # El campo OBSERVACIONES
-        
         self.layout_navigation = QHBoxLayout()  # Layout de navegación de
                                                 # páginas
         self.layout_footer = QHBoxLayout() # Layout pie de formulario
@@ -395,16 +341,24 @@ class BaseView(QWidget):
         self.button_tb_restore.hide()
         self.button_tb_maximize.show()
 
-    ## SizeGrip
-    def resizeEvent(self, event):
-        rect = self.rect()
-        self.grip.move(rect.right() - self.gripSize, rect.bottom()
-                       - self.gripSize)
+    """
+    El comportamiento básico de la barra de titulo que hemos creado
+    """
+    def control_bt_minimizar(self):
+        """ Minimiza la ventana """
+        self.showMinimized()
 
-    ## mover ventana
-    def mousePressEvent(self, event):
-        if event.button() == Qt.MouseButton.LeftButton:
-            self.drag_position = event.globalPosition().toPoint()
+    def control_bt_maximizar(self):
+        """ Maximiza la ventana """
+        self.showMaximized()
+        self.button_tb_maximize.hide()
+        self.button_tb_restore.show()
+
+    def control_bt_normal(self):
+        """ Establece el tamaño normal de la ventana """
+        self.showNormal()
+        self.button_tb_restore.hide()
+        self.button_tb_maximize.show()
 
     def mover_ventana(self, event):
         try:
@@ -420,6 +374,94 @@ class BaseView(QWidget):
         except Exception as e:
             print(f"Error en mover_ventana: {e}")
 
+    """
+    El comportamiento del redimensionado de la ventana
+    """
+    def mousePressEvent(self, event):
+        if event.button() == Qt.MouseButton.LeftButton:
+            self._resize_direction = self._detect_resize_region(event.pos())
+            if self._resize_direction:
+                self._resizing = True
+                self._start_pos = event.globalPosition().toPoint()
+                self._start_geom = self.geometry()
+            else:
+                self._dragging = True
+                self.drag_position = event.globalPosition().toPoint()
+
+    def mouseMoveEvent(self, event):
+        if self._resizing and self._resize_direction:
+            self._perform_resize(event.globalPosition().toPoint())
+        else:
+            direction = self._detect_resize_region(event.pos())
+            self._update_cursor(direction)
+
+    def mouseReleaseEvent(self, event):
+        self._resizing = False
+        self._resize_direction = None
+
+    def leaveEvent(self, event):
+        self.unsetCursor()
+
+    def _detect_resize_region(self, pos):
+        rect = self.rect()
+        x, y, w, h = pos.x(), pos.y(), rect.width(), rect.height()
+        margin = self._resize_margin
+
+        vertical = None
+        horizontal = None
+        if y < margin:
+            vertical = 'top'
+        elif y > h - margin:
+            vertical = 'bottom'
+        if x < margin:
+            horizontal = 'left'
+        elif x > w - margin:
+            horizontal = 'right'
+
+        if vertical and horizontal:
+            return f"{vertical}-{horizontal}"
+        elif vertical:
+            return vertical
+        elif horizontal:
+            return horizontal
+        else:
+            return None
+
+    def _update_cursor(self, direction):
+        cursors = {
+            'left': Qt.CursorShape.SizeHorCursor,
+            'right': Qt.CursorShape.SizeHorCursor,
+            'top': Qt.CursorShape.SizeVerCursor,
+            'bottom': Qt.CursorShape.SizeVerCursor,
+            'top-left': Qt.CursorShape.SizeFDiagCursor,
+            'bottom-right': Qt.CursorShape.SizeFDiagCursor,
+            'top-right': Qt.CursorShape.SizeBDiagCursor,
+            'bottom-left': Qt.CursorShape.SizeBDiagCursor,
+        }
+        self.setCursor(cursors.get(direction, Qt.CursorShape.ArrowCursor))
+
+    def _perform_resize(self, current_pos):
+        dx = current_pos.x() - self._start_pos.x()
+        dy = current_pos.y() - self._start_pos.y()
+        geom = self._start_geom
+        new_rect = QRect(geom)
+
+        if 'left' in self._resize_direction:
+            new_rect.setLeft(geom.left() + dx)
+        if 'right' in self._resize_direction:
+            new_rect.setRight(geom.right() + dx)
+        if 'top' in self._resize_direction:
+            new_rect.setTop(geom.top() + dy)
+        if 'bottom' in self._resize_direction:
+            new_rect.setBottom(geom.bottom() + dy)
+
+        min_width, min_height = self.minimumWidth(), self.minimumHeight()
+        if new_rect.width() < min_width:
+            new_rect.setWidth(min_width)
+        if new_rect.height() < min_height:
+            new_rect.setHeight(min_height)
+
+        self.setGeometry(new_rect)
 
 # Entrada a la aplicación
 if __name__ == "__main__":

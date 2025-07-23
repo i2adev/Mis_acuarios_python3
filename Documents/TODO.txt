@@ -1,6 +1,11 @@
 ﻿================================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
+23/07/2025  MEJORAS:
+            -   SE MEJORA EL REDIMENSIONAMIENTO Y EL MOVIMIENTO DE LAS VENTANAS.
+                                                                            DONE
+            -   SE MEJORA EL TAMAÑO AUTOMÁTICO DE LAS VENTANAS.             DONE
+
 21/07/2025  FORMULARIO DE TIPO DE FILTRO:
             -   SE CREA EL FRAME CON EL FORMULARIO.                         DONE
             -   SE CREA EL DIALOGO DE TIPO DE FILTRO.                       DONE

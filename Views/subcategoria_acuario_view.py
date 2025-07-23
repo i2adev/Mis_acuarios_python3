@@ -27,7 +27,7 @@ class SubcategoriaAcuarioView(BaseView):
 
         # Configuramos el formulario
         self.frame = SubcategoriaAcuarioForm()
-        self.frame_main.setFixedWidth(650)
+        # self.frame_main.setFixedWidth(650)
         self.layout_form_data.addWidget(self.frame)
         self.set_tab_order()
 

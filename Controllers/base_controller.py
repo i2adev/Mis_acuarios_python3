@@ -9,15 +9,12 @@ Commentarios:
 
 # Importaciones
 from PyQt6.QtCore import Qt, QObject, QEvent
-from PyQt6.QtWidgets import (QMessageBox, QLineEdit, QTextEdit,
-                             QPlainTextEdit, QWidget, QTableView, QSizeGrip,
-                             QComboBox)
+from PyQt6.QtWidgets import (QLineEdit, QTextEdit, QPlainTextEdit, QWidget,
+                             QTableView, QComboBox, QHeaderView)
 import enchant  # Enchant es la librería de revisión orográfica
 
 from Model.DAO.base_dao import BaseDAO
-from Model.DAO.paginator import Paginator
 from Model.Entities.base_entity import BaseEntity
-from Views.base_view import BaseView
 
 class BaseController(QObject):
     """ Controlador base de la que hereda el resto de controladores. """
@@ -152,3 +149,34 @@ class BaseController(QObject):
                 data = getattr(item, attr_data, None)
 
             combo.addItem(texto, data)
+
+    def _configure_table(self, table: QTableView):
+        """ Configura l atabla de datos. """
+
+        # Selecciona un afila entera
+        table.setSelectionBehavior(
+            QTableView.SelectionBehavior.SelectRows)
+
+        # Solo se puede seleccionar uan fila
+        table.setSelectionMode(
+            QTableView.SelectionMode.SingleSelection)
+
+        # Color de las filas alternadas
+        table.setAlternatingRowColors(True)
+
+        # Oculta las líneas de la tabla
+        table.setShowGrid(False)
+
+        # Elimina el tabulador
+        table.setFocusPolicy(Qt.FocusPolicy.NoFocus)
+
+        # Ocultar la columna ID (columna 0)
+        table.setColumnHidden(0, True)
+
+        # Hacer que la columna de observaciones use el espaciorestante
+        last_column_ix = table.model().columnCount() - 1
+        header = table.horizontalHeader()
+        header.setSectionResizeMode(last_column_ix, QHeaderView.ResizeMode.Stretch)
+
+        # Mostrar puntos suspensivos si el texto no cabe
+        table.setTextElideMode(Qt.TextElideMode.ElideRight)

@@ -26,7 +26,7 @@ class CategoriaAcuarioView(BaseView):
 
         # Configuramos el formulario
         self.frame = CategoriaAcuarioForm()
-        self.frame_main.setFixedWidth(550)
+        # self.frame_main.setFixedWidth(550)
         self.layout_form_data.addWidget(self.frame)
         self.set_tab_order()
 
