@@ -1,5 +1,15 @@
 ﻿CHANGELOG:
 ================================================================================
+0.4.0   SE AÑADE LA LÓGICA DE LA CATEGORÍA DE LA INCIDENCIA:
+        -   SE CREA LA VISTA.
+        -   SE CREA LA ENTIDAD.
+        -   SE CREA EL DAO (DATA ACCESS OBJECT).
+        -   SE CREA EL MODELO DE TABLA.
+        -   SE CREA EL DIÁLOGO.
+        -   SE CREA EL MAESTRO.
+        -   SE CREA EL VALIDADOR DE FORMULARIO.
+        -   SE CREA EL CONTROLADOR DEL FORMULARIO.
+
 0.3.1   MEJORAS:
         -   SE AÑADE LA POSIBILIDAD DE REDIMENSIONAR LA VENTANA HORIZONTAL Y
             VERTICALMENTE.

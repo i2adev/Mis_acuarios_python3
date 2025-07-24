@@ -1,9 +1,9 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
-Fecha:      01/07/2025
+Fecha:      24/07/2025
 Commentarios:
     Módulo que contiene la clase controladora de la entidad CATEGORÍA DE
-    ACUARIO.
+    INCIDENCIA.
 """
 
 # Importaciones
@@ -13,29 +13,31 @@ from PyQt6.QtWidgets import (QWidget, QMessageBox, QTableView, QHeaderView)
 
 from Controllers.base_controller import BaseController
 from Model.DAO.categoria_acuario_dao import CategoriaAcuarioDAO
+from Model.DAO.categoria_incidencia_dao import CategoriaIncidenciaDAO
 from Model.DAO.paginator import Paginator
-from Model.Entities.categoria_acuario_entity import CategoriaAcuarioEntity
-from Model.TableModel.categoria_acuario_table_model import \
-    CategoriaAcuarioTableModel
+from Model.Entities.categoria_incidencia_entity import CategoriaIncidenciaEntity
+from Model.TableModel.categoria_incidencia_table_model import \
+    CategoriaIncidenciaTableModel
+
 from Services.Result.result import Result
-from Services.Validators.categoria_acuario_validator import \
-    CategoriaAcuarioValidator
+from Services.Validators.categoria_incidencia_validator import \
+    CategoriaIncidenciaValidator
 from Views.categoria_acuario_dialog import CategoriaAcuarioDialog
-from Views.categoria_acuario_view import CategoriaAcuarioView
+from Views.categoria_incidencia_view import CategoriaIncidenciaView
 from Views.table_menu_contextual import TableMenuContextual
 
-class CategoriaAcuarioDialogController(BaseController):
+class CategoriaIncidenciaDialogController(BaseController):
     """ Controlador del diálogo categoría de acuario. """
 
-    def __init__(self, view: QWidget, dao: CategoriaAcuarioDAO,
-                 mod: CategoriaAcuarioEntity):
+    def __init__(self, view: QWidget, dao: CategoriaIncidenciaDAO,
+                 mod: CategoriaIncidenciaEntity):
         """
         Constructor base
 
-        Parámetros:
-        :param view: Vista tipo CategoríaAcuario
-        :param dao: DAO de la entidad CategoriaaCUARIOeNTITY
-        :param mod: Modelo de la entidad CategoriaAcuarioEntity
+
+        :param view: Vista tipo CategoríaIncidencia
+        :param dao: DAO de la entidad CategoriaIncidenciaDAO
+        :param mod: Modelo de la entidad CategoriaIncidenciaEntity
         """
 
         # inicializamos la vista y pasamos al constructor padre
@@ -49,8 +51,8 @@ class CategoriaAcuarioDialogController(BaseController):
 
         if self._view.exec():
             # Obtenemos la categoría de acuario
-            categoria_acuario = self.get_categoria_Acuario()
-            return Result.success(categoria_acuario)
+            categoria_incidencia = self.get_categoria_incidencia()
+            return Result.success(categoria_incidencia)
         else:
             return Result.failure("NO SE HA PODIDO OBTENER LA ENTIDAD.")
 
@@ -77,17 +79,17 @@ class CategoriaAcuarioDialogController(BaseController):
             if isinstance(widget, self._text_widgets):
                 widget.installEventFilter(self)
 
-    def entity_configuration(self) -> CategoriaAcuarioEntity:
+    def entity_configuration(self) -> CategoriaIncidenciaEntity:
         """ Configura la entidad. """
 
-        ent = CategoriaAcuarioEntity()
+        ent = CategoriaIncidenciaEntity()
 
         if self._view.frame.edit_id.text():
             ent.id = int(self._view.frame.edit_id.text())
         else:
             ent.id = None
 
-        ent.categoria = self._view.frame.edit_categoria_acuario.text()
+        ent.categoria_incidencia = self._view.frame.edit_categoria_incidencia.text()
         ent.observaciones = self._view.frame.text_observaciones.toPlainText()
 
         return ent
@@ -99,7 +101,7 @@ class CategoriaAcuarioDialogController(BaseController):
         val = self.validate_view()
 
         if not val.is_success:
-            self._view.frame.edit_categoria_acuario.setFocus()
+            self._view.frame.edit_categoria_incidencia.setFocus()
             return val
 
         # Configura la entidad
@@ -122,8 +124,8 @@ class CategoriaAcuarioDialogController(BaseController):
 
     def validate_view(self):
         """ Valida el formulario. """
-        val = CategoriaAcuarioValidator.validate_categoria_acuario(
-            self._view.frame.edit_categoria_acuario
+        val = CategoriaIncidenciaValidator.validate_categoria_incidencia(
+            self._view.frame.edit_categoria_incidencia
         )
         return val
 
@@ -142,10 +144,11 @@ class CategoriaAcuarioDialogController(BaseController):
             return
 
         # Configuramos la entidad
-        self.categoria_acuario_result = CategoriaAcuarioEntity(
+        self.categoria_incidencia_result = CategoriaIncidenciaEntity(
             id = res.value,
             num = None,
-            categoria = self._view.frame.edit_categoria_acuario.text(),
+            categoria_incidencia = self._view.frame
+                                            .edit_categoria_incidencia.text(),
             observaciones = self._view.frame.text_observaciones.toPlainText()
                           if self._view.frame.text_observaciones.toPlainText()
                           else None
@@ -154,35 +157,35 @@ class CategoriaAcuarioDialogController(BaseController):
         # Aceptamos el diálogo
         self._view.accept()
 
-    def get_categoria_Acuario(self):
+    def get_categoria_incidencia(self):
         """ Devuelve la categoría de filtro resultante. """
 
-        return self.categoria_acuario_result
+        return self.categoria_incidencia_result
 
     def dialog_cancel(self):
         """ Cancela el dialogo. """
 
         self._view.reject()
 
-class CategoriaAcuarioController(CategoriaAcuarioDialogController):
+class CategoriaIncidenciaController(CategoriaIncidenciaDialogController):
     """ Controlador del formulario maestro de categoría de acuario. """
 
-    def __init__(self, view: CategoriaAcuarioView, dao: CategoriaAcuarioDAO,
-                 mod: CategoriaAcuarioEntity):
+    def __init__(self, view: CategoriaIncidenciaView, dao: CategoriaIncidenciaDAO,
+                 mod: CategoriaIncidenciaEntity):
         """
         Constructor base
 
         Parámetros:
-        :param view: Vista tipo CategoríaAcuario
-        :param dao: DAO de la entidad CategoriaaCUARIOeNTITY
-        :param mod: Modelo de la entidad CategoriaAcuarioEntity
+        :param view: Vista tipo CategoríaIncidencia
+        :param dao: DAO de la entidad CategoriaIncidenciaDAO
+        :param mod: Modelo de la entidad CategoriaIncidenciaEntity
         """
 
         # Constructor base
         super().__init__(view, dao, mod)
 
         # Inicializamos el paginador
-        self._pag = Paginator("VISTA_CATEGORIAS_ACUARIO", 5)
+        self._pag = Paginator("VISTA_CATEGORIAS_INCIDENCIA", 5)
         self._pag.initialize_paginator()
 
         # Llenamos la tabla
@@ -407,7 +410,7 @@ class CategoriaAcuarioController(CategoriaAcuarioDialogController):
                 self._view.window_title,
                 val.error_msg
             )
-            self._view.frame.edit_categoria_acuario.setFocus()
+            self._view.frame.edit_categoria_incidencia.setFocus()
             return
 
 
@@ -478,10 +481,10 @@ class CategoriaAcuarioController(CategoriaAcuarioDialogController):
         self.configure_table_after_crud(res.value)
 
     def fill_tableview(self, table: QTableView,
-                       data: list[CategoriaAcuarioEntity]):
+                       data: list[CategoriaIncidenciaEntity]):
         """ Carga los datos en la tabla. """
 
-        tv_model = CategoriaAcuarioTableModel(data)
+        tv_model = CategoriaIncidenciaTableModel(data)
         table.setModel(tv_model)
         table.setColumnHidden(0, True)
         table.resizeColumnsToContents()
@@ -496,7 +499,7 @@ class CategoriaAcuarioController(CategoriaAcuarioDialogController):
         val = self.validate_view()
 
         if not val.is_success:
-            self._view.frame.edit_categoria_acuario.setFocus()
+            self._view.frame.edit_categoria_incidencia.setFocus()
             return val
 
         # Configura la entidad
@@ -504,7 +507,6 @@ class CategoriaAcuarioController(CategoriaAcuarioDialogController):
 
         # Actualiza el registro
         res = self._dao.update(ent)
-        1
         if not res.is_success:
             return Result.failure(res.error_msg)
 
@@ -545,7 +547,7 @@ class CategoriaAcuarioController(CategoriaAcuarioDialogController):
         self._view.frame.edit_id.setText(
             str(id_cat) if id_cat is not None else ""
         )
-        self._view.frame.edit_categoria_acuario.setText(
+        self._view.frame.edit_categoria_incidencia.setText(
             str(categoria) if categoria is not None else ""
         )
         self._view.frame.text_observaciones.setPlainText(
@@ -557,8 +559,7 @@ class CategoriaAcuarioController(CategoriaAcuarioDialogController):
     def delete(self, id: int) -> Result:
         """ Elimina un registro de la base de datos.
 
-            Parámetros:
-            ID: Id del registro a eliminar.
+            :param id: Id del registro a eliminar.
         """
 
         # Solicitamos doble confirmación

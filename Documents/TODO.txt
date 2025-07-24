@@ -1,6 +1,17 @@
 ﻿================================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
+24/07/2025  SE AÑADE LA LÓGICA DE LA CATEGORÍA DE LA INCIDENCIA:
+            -   SE CREA LA VISTA.                                           DONE
+            -   SE CREA LA ENTIDAD.                                         DONE
+            -   SE CREA EL DAO (DATA ACCESS OBJECT).                        DONE
+            -   SE CREA EL MODELO DE TABLA.                                 DONE
+            -   SE CREA EL FORMULARIO.                                      DONE
+            -   SE CREA EL DIÁLOGO.                                         DONE
+            -   SE CREA EL MAESTRO.                                         DONE
+            -   SE CREA EL VALIDADOR DEL FORMULARIO.                        DONE
+            -   SE CREA EL CONTROLADOR DEL FORMULARIO.                      DONE
+
 23/07/2025  MEJORAS:
             -   SE MEJORA EL REDIMENSIONAMIENTO Y EL MOVIMIENTO DE LAS VENTANAS.
                                                                             DONE

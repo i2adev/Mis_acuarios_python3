@@ -99,6 +99,7 @@ class MainView(QWidget):
         self.maestro_layout.addWidget(self.button_maestro_filtro)
         self.maestro_layout.addWidget(self.button_maestro_incidencia)
         self.maestro_layout.addWidget(self.button_maestro_cat_incidencia)
+        self.maestro_layout.addWidget(self.button_maestro_cat_incidencia)
         self.maestro_layout.addWidget(self.button_maestro_subcat_incidencia)
         self.maestro_layout.addWidget(self.button_maestro_marca)
         self.maestro_layout.addWidget(self.button_maestro_proyecto)
@@ -106,7 +107,6 @@ class MainView(QWidget):
         self.maestro_layout.addWidget(self.button_maestro_categoria_acuario)
         self.maestro_layout.addWidget(self.button_maestro_subcategoria_acuario)
         self.maestro_layout.addWidget(self.button_maestro_tipo_giltro)
-        self.maestro_layout.addWidget(self.button_maestro_tipo_incidencia)
 
         # Cargamos los layout en la ventana
         self.layout_central.addWidget(self.frame_menu)
@@ -462,10 +462,10 @@ class MainView(QWidget):
             QCursor(Qt.CursorShape.PointingHandCursor)
         )
 
-        self.button_maestro_tipo_incidencia = QPushButton(
-            "TIPOS DE INCIDENCIA"
+        self.button_maestro_cat_incidencia = QPushButton(
+            "CATEGORÍAS DE INCIDENCIA"
         )
-        self.button_maestro_tipo_incidencia.setStyleSheet(
+        self.button_maestro_cat_incidencia.setStyleSheet(
             """
             QPushButton {
                 background-color: transparent;
@@ -477,11 +477,11 @@ class MainView(QWidget):
             }
             """
         )
-        self.button_maestro_tipo_incidencia.setObjectName(
-            "button_maestro_tipo_incidencia"
+        self.button_maestro_cat_incidencia.setObjectName(
+            "button_maestro_cat_incidencia"
         )
-        self.button_maestro_tipo_incidencia.setFlat(True)
-        self.button_maestro_tipo_incidencia.setCursor(
+        self.button_maestro_cat_incidencia.setFlat(True)
+        self.button_maestro_cat_incidencia.setCursor(
             QCursor(Qt.CursorShape.PointingHandCursor)
         )
 

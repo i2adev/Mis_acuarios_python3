@@ -7,24 +7,27 @@ Commentarios:
 
 from Controllers.base_controller import BaseController
 from Controllers.categoria_acuario_controller import CategoriaAcuarioController
+from Controllers.categoria_incidencia_controller import \
+    CategoriaIncidenciaController
 from Controllers.subcategoria_acuario_controller import \
     SubcategoriaAcuarioController
 from Controllers.tipo_acuario_controller import TipoAcuarioController
 from Controllers.tipo_filtro_controller import TipoFiltroController
-from Controllers.tipo_filtro_controller_old import TipoFiltroControllerOld
 from Model.DAO.categoria_acuario_dao import CategoriaAcuarioDAO
+from Model.DAO.categoria_incidencia_dao import CategoriaIncidenciaDAO
 from Model.DAO.subcategoria_acuario_dao import SubcategoriaAcuarioDAO
 from Model.DAO.tipo_acuario_dao import TipoAcuarioDAO
 from Model.DAO.tipo_filtro_dao import TipoFiltroDAO
 from Model.Entities.categoria_acuario_entity import CategoriaAcuarioEntity
+from Model.Entities.categoria_incidencia_entity import CategoriaIncidenciaEntity
 from Model.Entities.subcategoria_acuario_entity import SubcategoriaAcuarioEntity
 from Model.Entities.tipo_acuario_entity import TipoAcuarioEntity
 from Model.Entities.tipo_filtro_entity import TipoFiltroEntity
 from Views.categoria_acuario_view import CategoriaAcuarioView
+from Views.categoria_incidencia_view import CategoriaIncidenciaView
 from Views.main_view import MainView
 from Views.subcategoria_acuario_view import SubcategoriaAcuarioView
 from Views.tipo_acuario_view import TipoAcuarioView
-from Views.tipo_filtro_dialog import TipoFiltroDialog
 from Views.tipo_filtro_view import TipoFiltroView
 
 
@@ -63,6 +66,9 @@ class MainViewController(BaseController):
             self.subcategoria_Acuario_clicked
         )
 
+        self._view.button_maestro_cat_incidencia.clicked.connect(
+            self.categoria_incidencia_clicked
+        )
 
     def tipo_filtro_clicked(self, event):
         """
@@ -120,9 +126,23 @@ class MainViewController(BaseController):
         ctrl = SubcategoriaAcuarioController(view, dao, mod)
         ctrl.show()
 
+    def categoria_incidencia_clicked(self):
+        """
+        Cuando se presiona en el maestro de categoría de incidencia de filtro.
+        Acción: Abre el formulario de subcategoría de acuario.
+        """
+
+        view = CategoriaIncidenciaView("MAESTRO DE CATEGORÍAS DE INCIDENCIAS")
+        dao = CategoriaIncidenciaDAO()
+        mod = CategoriaIncidenciaEntity()
+
+        ctrl = CategoriaIncidenciaController(view, dao, mod)
+        ctrl.show()
+
     def show(self):
         """ Abre la vista """
         self._view.show()
         #self._view.showMaximized()
+
 
 
