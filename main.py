@@ -9,14 +9,11 @@ Commentarios:
 
 # Importaciones
 import sys
-from pathlib import Path
-from PyQt6.QtWidgets import QApplication, QMessageBox
+from PyQt6.QtWidgets import QApplication
 from Controllers.main_view_controller import MainViewController
-from Model.DAO.base_dao import BaseDAO
-from Model.DAO.database import DBManager
 
 # Versión del programa
-__version__ = "0.4.0"
+__version__ = "0.5.0"
 
 from Views.main_view import MainView
 

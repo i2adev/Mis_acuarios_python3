@@ -11,6 +11,7 @@ from Model.DAO.base_dao import BaseDAO
 from Model.Entities.categoria_acuario_entity import CategoriaAcuarioEntity
 from Model.Entities.categoria_incidencia_entity import CategoriaIncidenciaEntity
 from Model.Entities.subcategoria_acuario_entity import SubcategoriaAcuarioEntity
+from Model.Entities.subcategoria_incidencia import SubcategoriaIncidenciaEntity
 from Model.Entities.tipo_acuario_entity import TipoAcuarioEntity
 from Model.Entities.tipo_filtro_entity import TipoFiltroEntity
 
@@ -280,6 +281,12 @@ class Paginator:
         elif self.procedure == "VISTA_CATEGORIAS_INCIDENCIA":
             data_list = [CategoriaIncidenciaEntity(f["ID"], f["NUM"],
                                                    f["CATEGORIA"],
+                                                   f["OBSERVACIONES"])
+                         for f in res.value]
+        elif self.procedure == "VISTA_SUBCATEGORIAS_INCIDENCIA":
+            data_list = [SubcategoriaIncidenciaEntity(f["ID"], f["NUM"],
+                                                   f["CATEGORIA"],
+                                                   f["SUBCATEGORIA"],
                                                    f["OBSERVACIONES"])
                          for f in res.value]
 
