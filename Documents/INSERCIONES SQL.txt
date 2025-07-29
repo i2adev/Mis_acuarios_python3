@@ -1,64 +1,14 @@
-SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%';
-SELECT name FROM sqlite_master WHERE type='view';
-SELECT * FROM VISTA_TIPOS_FILTRO;
-DELETE FROM TIPOS_FILTRO;
-SELECT * FROM sqlite_sequence;
+-- Inserta los tipos de filtro
+INSERT INTO TIPOS_FILTRO (TIPO_FILTRO, OBSERVACIONES) VALUES ('Filtro de esponja', 'Ideal para acuarios pequeños o de cría. Funciona con aire, proporcionando filtración mecánica y biológica suave. Seguro para alevines y gambas.');
+INSERT INTO TIPOS_FILTRO (TIPO_FILTRO, OBSERVACIONES) VALUES ('Filtro interno', 'Se coloca dentro del acuario, combinando filtración mecánica y biológica. Fácil de instalar y mantener. Apto para acuarios de tamaño medio.');
+INSERT INTO TIPOS_FILTRO (TIPO_FILTRO, OBSERVACIONES) VALUES ('Filtro de cascada', 'Cuelga en el borde del acuario (HOB). Ofrece filtración completa (mecánica, química y biológica). Popular por su rendimiento y fácil acceso.');
+INSERT INTO TIPOS_FILTRO (TIPO_FILTRO, OBSERVACIONES) VALUES ('Filtro externo', 'Se sitúa fuera del acuario. Muy eficiente en acuarios grandes. Filtra grandes volúmenes con varios medios filtrantes. Silencioso y versátil.');
+INSERT INTO TIPOS_FILTRO (TIPO_FILTRO, OBSERVACIONES) VALUES ('Filtro de fondo', 'Instalado bajo el sustrato. Filtra el agua a través del fondo, favoreciendo la filtración biológica. Útil en acuarios con grava fina.');
+INSERT INTO TIPOS_FILTRO (TIPO_FILTRO, OBSERVACIONES) VALUES ('Filtro UV', 'Utiliza luz ultravioleta para eliminar algas en suspensión y microorganismos. Complementa la filtración principal. No afecta a las bacterias del filtro biológico.');
+INSERT INTO TIPOS_FILTRO (TIPO_FILTRO, OBSERVACIONES) VALUES ('Filtro de mochila', 'Compacto y colgable. Similar al de cascada, combina varios tipos de filtración. Fácil de instalar y mantener. Muy usado en acuarios medianos.');
+INSERT INTO TIPOS_FILTRO (TIPO_FILTRO, OBSERVACIONES) VALUES ('Sump', 'Sistema externo ubicado debajo del acuario, generalmente en acuarios marinos. Permite una filtración personalizada, mayor volumen de agua y ocultar el equipamiento. Mejora la estabilidad del sistema.');
 
--- Obtiene la secuencia de inserción de 
-SELECT 
-    'INSERT INTO TIPOS_FILTRO (TIPO_FILTRO, OBSERVACIONES) VALUES (''' || REPLACE(TIPO_FILTRO, '''', '''''') || ''', ''' ||
-    REPLACE(OBSERVACIONES, '''', '''''') || ''');'
-FROM TIPOS_FILTRO;
-
-VACUUM;
-
-CREATE TABLE IF NOT EXISTS INCIDENCIAS (
-    ID_INCIDENCIA      INTEGER PRIMARY KEY AUTOINCREMENT,
-    ID_ACUARIO         INTEGER,
-    FECHA              INTEGER,
-    ID_CATEGORIA       INTEGER,
-    ID_SUBCATEGORIA    INTEGER,
-    DESCRIPCION        TEXT(128),
-    RESUELTA           INTEGER DEFAULT 0,  -- 0 = No, 1 = Sí
-    FECHA_RESOLUCION   INTEGER,
-    OBSERVACIONES      TEXT,
-    CONSTRAINT FK_INCIDENCIA_ACUARIO FOREIGN KEY (ID_ACUARIO) 
-        REFERENCES ACUARIOS(ID_ACUARIO)
-        ON UPDATE CASCADE
-        ON DELETE SET NULL,
-    CONSTRAINT CATEGORIA_INCIDENCIA FOREIGN KEY (ID_CATEGORIA) 
-        REFERENCES ACUARIOS(ID_CATEGORIA)
-        ON UPDATE CASCADE
-        ON DELETE SET NULL,
-    CONSTRAINT CATEGORIA_INCIDENCIA FOREIGN KEY (ID_CATEGORIA) 
-        REFERENCES ACUARIOS(ID_CATEGORIA)
-        ON UPDATE CASCADE
-        ON DELETE SET NULL
-);
-
-CREATE TABLE CATEGORIA_INCIDENCIA (
-    ID_CATEGORIA INTEGER PRIMARY KEY AUTOINCREMENT,
-    NOMBRE_CATEGORIA TEX(64),
-    DESCRIPCION TEXT,
-    CONSTRAINT IX_CATEGORIA UNIQUE (NOMBRE_CATEGORIA)
-);
-
-CREATE TABLE SUBCATEGORIA_INCIDENCIA (
-    ID_SUBCATEGORIA INTEGER PRIMARY KEY AUTOINCREMENT,
-    ID_CATEGORIA INTEGER NOT NULL,
-    NOMBRE_SUBCATEGORIA TEXT(64) NOT NULL,
-    DESCRIPCION TEXT,
-    CONSTRAINT IX_SUBCATEGORIA UNIQUE (NOMBRE_SUBCATEGORIA)
-);
-
-CREATE VIEW VISTA_TIPOS_ACUARIO AS
-    SELECT   ID_TIPO AS ID,
-             ROW_NUMBER() OVER(ORDER BY TIPO_ACUARIO, SUBTIPO_ACUARIO) AS NUM,
-             TIPO_ACUARIO AS TIPO,
-             SUBTIPO_ACUARIO AS SUBTIPÒ,
-             DESCRIPCION
-    FROM     TIPOS_ACUARIO;
-
+-- Inserta los paises
 INSERT INTO PAISES (PAIS, CONTINENTE) VALUES
 ('Afganistán', 'Asia'),
 ('Albania', 'Europa'),
@@ -253,4 +203,3 @@ INSERT INTO PAISES (PAIS, CONTINENTE) VALUES
 ('Yibuti', 'África'),
 ('Zambia', 'África'),
 ('Zimbabue', 'África');
-

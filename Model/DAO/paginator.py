@@ -10,6 +10,7 @@ from PyQt6.QtWidgets import QMessageBox
 from Model.DAO.base_dao import BaseDAO
 from Model.Entities.categoria_acuario_entity import CategoriaAcuarioEntity
 from Model.Entities.categoria_incidencia_entity import CategoriaIncidenciaEntity
+from Model.Entities.marca_comercial_entity import MarcaComercialEntity
 from Model.Entities.subcategoria_acuario_entity import SubcategoriaAcuarioEntity
 from Model.Entities.subcategoria_incidencia import SubcategoriaIncidenciaEntity
 from Model.Entities.tipo_acuario_entity import TipoAcuarioEntity
@@ -289,6 +290,11 @@ class Paginator:
                                                    f["SUBCATEGORIA"],
                                                    f["OBSERVACIONES"])
                          for f in res.value]
+        elif self.procedure == "VISTA_MARCAS_COMERCIALES":
+            data_list = [MarcaComercialEntity(f["ID"], f["NUM"],
+                f["MARCA"], f["DIRECCION"], f["CODIGO_POSTAL"], f["POBLACION"],
+                f["PROVINCIA"], f["PAIS"], f["OBSERVACIONES"])
+                for f in res.value]
 
         self.total_data = data_list
         self.records = len(self.total_data)

@@ -1,5 +1,18 @@
 ﻿CHANGELOG:
 ================================================================================
+0.6.0   SE AÑADE LA LÓGICA DE LA MARCA:
+        -   SE CREA LA ENTIDAD.
+        -   SE CREA EL DAO (DATA ACCESS OBJECT).
+        -   SE CREA EL MODELO DE TABLA.
+        -   SE CREA EL DIÁLOGO.
+        -   SE CREA EL MAESTRO.
+        -   SE CREA EL VALIDADOR DE FORMULARIO.
+        -   SE CREA EL CONTROLADOR DEL FORMULARIO.
+
+        OTRAS:
+        -   SE CREA LA TABLA DE DETALLES DE INCIDENCIA EN LA BASE DE
+            DATOS.
+
 0.5.0   SE AÑADE LA LÓGICA DE LA SUBCATEGORÍA DE LA INCIDENCIA:
         -   SE CREA LA ENTIDAD.
         -   SE CREA EL DAO (DATA ACCESS OBJECT).

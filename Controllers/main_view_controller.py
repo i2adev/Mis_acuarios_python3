@@ -9,6 +9,7 @@ from Controllers.base_controller import BaseController
 from Controllers.categoria_acuario_controller import CategoriaAcuarioController
 from Controllers.categoria_incidencia_controller import \
     CategoriaIncidenciaController
+from Controllers.marca_comercial_controller import MarcaComercialController
 from Controllers.subcategoria_acuario_controller import \
     SubcategoriaAcuarioController
 from Controllers.subcategoria_incidencia_controller import \
@@ -17,12 +18,14 @@ from Controllers.tipo_acuario_controller import TipoAcuarioController
 from Controllers.tipo_filtro_controller import TipoFiltroController
 from Model.DAO.categoria_acuario_dao import CategoriaAcuarioDAO
 from Model.DAO.categoria_incidencia_dao import CategoriaIncidenciaDAO
+from Model.DAO.marca_comercial_dao import MarcaComercialDAO
 from Model.DAO.subcategoria_acuario_dao import SubcategoriaAcuarioDAO
 from Model.DAO.subcategoria_incidencia_dao import SubcategoriaIncidenciaDAO
 from Model.DAO.tipo_acuario_dao import TipoAcuarioDAO
 from Model.DAO.tipo_filtro_dao import TipoFiltroDAO
 from Model.Entities.categoria_acuario_entity import CategoriaAcuarioEntity
 from Model.Entities.categoria_incidencia_entity import CategoriaIncidenciaEntity
+from Model.Entities.marca_comercial_entity import MarcaComercialEntity
 from Model.Entities.subcategoria_acuario_entity import SubcategoriaAcuarioEntity
 from Model.Entities.subcategoria_incidencia import SubcategoriaIncidenciaEntity
 from Model.Entities.tipo_acuario_entity import TipoAcuarioEntity
@@ -30,6 +33,7 @@ from Model.Entities.tipo_filtro_entity import TipoFiltroEntity
 from Views.categoria_acuario_view import CategoriaAcuarioView
 from Views.categoria_incidencia_view import CategoriaIncidenciaView
 from Views.main_view import MainView
+from Views.marca_comercial_view import MarcaComercialView
 from Views.subcategoria_acuario_view import SubcategoriaAcuarioView
 from Views.subcategoria_incidencia_view import SubcategoriaIncidenciaView
 from Views.tipo_acuario_view import TipoAcuarioView
@@ -77,6 +81,10 @@ class MainViewController(BaseController):
 
         self._view.button_maestro_subcat_incidencia.clicked.connect(
             self.subcategoria_incidencia_clicked
+        )
+
+        self._view.button_maestro_marca.clicked.connect(
+            self.marca_comercial_clicked
         )
 
     def tipo_filtro_clicked(self, event):
@@ -162,6 +170,22 @@ class MainViewController(BaseController):
         mod = SubcategoriaIncidenciaEntity()
 
         ctrl = SubcategoriaIncidenciaController(view, dao, mod)
+        ctrl.show()
+
+
+    def marca_comercial_clicked(self):
+        """
+        Cuando se presiona en el maestro de marcas comerciales.
+        Acción: Abre el formulario de marcas comerciales.
+        """
+
+        view = MarcaComercialView(
+            "MAESTRO DE MARCAS COMERCIALES"
+        )
+        dao = MarcaComercialDAO()
+        mod = MarcaComercialEntity()
+
+        ctrl = MarcaComercialController(view, dao, mod)
         ctrl.show()
 
     def show(self):

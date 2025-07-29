@@ -1,6 +1,23 @@
 ﻿================================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
+25/07/2025  SE AÑADE LA LÓGICA DE LA MARCA:
+            -   SE CREA LA VISTA EN LA BASE DE DATOS.                       DONE
+            -   SE CREA LA ENTIDAD.                                         DONE
+            -   SE CREA EL DAO (DATA ACCESS OBJECT).                        DONE
+            -   SE CREA EL MODELO DE TABLA.                                 DONE
+            -   SE CREA EL FORMULARIO.                                      DONE
+            -   SE CREA EL DIÁLOGO.                                         DONE
+            -   SE CREA EL MAESTRO.                                         DONE
+            -   SE CREA EL VALIDADOR DEL FORMULARIO.                        DONE
+            -   SE CREA LA VISTA DE LOS PAISES EN LA BASE DE DATOS.         DONE
+            -   SE CREA LA ENTIDAD PAÍS.                                    DONE
+            -   SE CREA EL DAO DE LOS PAÍSES.                               DONE
+            -   SE CREA EL CONTROLADOR DEL FORMULARIO.                      DONE
+
+            OTROS:
+            -   SE CREA LA TABLA DETALLES DE INCIDENCIA EN LA BASE DE DATOS.DONE
+
 24/07/2025  SE AÑADE LA LÓGICA DE LA SUBCATEGORÍA DE LA INCIDENCIA:
             -   SE CREA LA VISTA EN LA BASE DE DATOS.                       DONE
             -   SE CREA LA ENTIDAD.                                         DONE
@@ -68,11 +85,6 @@ FECHA		DESCRIPCIÓN
             MODIFICAR LA CLASE PAGINATOR:
             -   SE AÑADE EL MÉTODO PARA OBTENER EL NÚMERO DE PÁGINA A PARTIR DE
                 UN NÚMERO DE REGISTRO.                                      DONE
-
-            MAESTRO DE SUBCATEGORÍA DE ACUARIO:
-            -   SE CREA EL FORMULARIO MAESTRO.                              TODO
-            -   CREAMOS EL MODELO DE LA TABLA.                              TODO
-            -   SE CREA EL CONTROLADOR.                                     TODO
 
 16/07/2025  REFACTORIZACIÓN:
             -   SE SUBEN LOS ATRIBUTOS DAO A LA BASE DEL CONTROLADOR.       TODO
