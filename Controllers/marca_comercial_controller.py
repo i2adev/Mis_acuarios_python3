@@ -288,12 +288,12 @@ class MarcaComercialController(MarcaComercialDialogController):
         super().__init__(view, dao, mod)
 
         # Inicializamos el paginador
-        self._pag = Paginator("VISTA_MARCAS_COMERCIALES", 15)
+        self._pag = Paginator("VISTA_MARCAS_COMERCIALES", 10)
         self._pag.initialize_paginator()
 
         # Llenamos la tabla
         self.load_tableview()
-        self.configure_table_foot()
+        self._configure_table_foot()
 
         # Inicializamos los eventos
         self.init_master_handlers()
@@ -319,11 +319,13 @@ class MarcaComercialController(MarcaComercialDialogController):
         self._view.button_update.clicked.connect(self.button_update_click)
         self._view.button_load.clicked.connect(self.button_load_click)
         self._view.button_delete.clicked.connect(self.button_delete_click)
-        self._view.button_clean.clicked.connect(lambda: self._clean_view())
-        self._view.button_next.clicked.connect(self.next_page)
-        self._view.button_prev.clicked.connect(self.previous_page)
-        self._view.button_first.clicked.connect(self.first_page)
-        self._view.button_last.clicked.connect(self.last_page)
+        self._view.button_clean.clicked.connect(lambda: self._clean_view(
+            self._view.frame.edit_marca
+        ))
+        self._view.button_next.clicked.connect(self._next_page)
+        self._view.button_prev.clicked.connect(self._previous_page)
+        self._view.button_first.clicked.connect(self._first_page)
+        self._view.button_last.clicked.connect(self._last_page)
         self._view.button_close.clicked.connect(
             lambda: self._view.close()
         )

@@ -13,7 +13,7 @@ from PyQt6.QtWidgets import QApplication
 from Controllers.main_view_controller import MainViewController
 
 # Versión del programa
-__version__ = "0.6.1"
+__version__ = "0.6.2"
 
 from Views.main_view import MainView
 

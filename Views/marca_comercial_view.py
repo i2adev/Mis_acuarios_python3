@@ -15,13 +15,15 @@ from Views.marca_comercial_form import MarcaComercialForm
 
 class MarcaComercialView(BaseView):
     """
-    Formulario maestro de la SUBCATEGORÍA DE INCIDENCIA.
+    Formulario maestro de la MARCA COMERCIAL.
     """
 
     def __init__(self, w_title: str):
         """ Constructor de clase. """
 
         super().__init__(w_title)
+
+        self.setMinimumSize(1400, 760)
 
         # Configuramos el formulario
         self.frame = MarcaComercialForm()

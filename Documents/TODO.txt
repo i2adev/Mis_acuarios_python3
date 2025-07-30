@@ -1,6 +1,10 @@
 ﻿================================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
+30/07/2025  -   SE RENOMBRAN LAS FUNCIONES DE MANEJO DE PÁGINAS.            DONE
+            -   SE MODIFICA EL TAMAÑO DEL DIALOGO Y MAESTRO DE LAS MARCAS
+                COMERCIALES.                                                DONE
+
 29/07/2025  CONTROLADORES DE LOS MAESTROS:
             -   SE MODIFICA LA LIMPIEZA DE FORMULARIO PARA QUE TRAS LA LIMPIEZA
                 SE MUEVA EL FOCO AL PRIMER CONTROL.                         DONE

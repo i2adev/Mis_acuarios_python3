@@ -256,7 +256,7 @@ class SubcategoriaIncidenciaController(SubcategoriaAcuarioDialogController):
 
         # Llenamos la tabla
         self.load_tableview()
-        self.configure_table_foot()
+        self._configure_table_foot()
 
         # Inicializamos los eventos
         self.init_master_handlers()
@@ -285,10 +285,10 @@ class SubcategoriaIncidenciaController(SubcategoriaAcuarioDialogController):
         self._view.button_clean.clicked.connect(lambda: self._clean_view(
             self._view.frame.combo_categoria_incidencia
         ))
-        self._view.button_next.clicked.connect(self.next_page)
-        self._view.button_prev.clicked.connect(self.previous_page)
-        self._view.button_first.clicked.connect(self.first_page)
-        self._view.button_last.clicked.connect(self.last_page)
+        self._view.button_next.clicked.connect(self._next_page)
+        self._view.button_prev.clicked.connect(self._previous_page)
+        self._view.button_first.clicked.connect(self._first_page)
+        self._view.button_last.clicked.connect(self._last_page)
         self._view.button_close.clicked.connect(
             lambda: self._view.close()
         )

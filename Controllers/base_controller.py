@@ -184,13 +184,13 @@ class BaseController(QObject):
         # Mostrar puntos suspensivos si el texto no cabe
         table.setTextElideMode(Qt.TextElideMode.ElideRight)
 
-    def configure_table_foot(self):
+    def _configure_table_foot(self):
         """ Configura el pie de la tabla. """
 
         self._view.label_total_pages.setText(str(self._pag.total_pages))
-        self.fill_combo_page()
+        self._fill_combo_page()
 
-    def next_page(self, event: QEvent) -> None:
+    def _next_page(self, event: QEvent) -> None:
         """ Pasa a la siguiente página de la tabla. """
 
         page_to = self._view.combo_select_page.currentData() + 1
@@ -206,7 +206,7 @@ class BaseController(QObject):
         self._pag.current_page = page_to
         self._view.combo_select_page.setCurrentIndex(self._pag.page_index)
 
-    def previous_page(self, event: QEvent) -> None:
+    def _previous_page(self, event: QEvent) -> None:
         """ Pasa a la anterior página de la tabla. """
 
         page_to = self._view.combo_select_page.currentData() - 1
@@ -222,7 +222,7 @@ class BaseController(QObject):
         self._pag.current_page = page_to
         self._view.combo_select_page.setCurrentIndex(self._pag.page_index)
 
-    def first_page(self, event: QEvent) -> None:
+    def _first_page(self, event: QEvent) -> None:
         """ Pasa a la primera página de la tabla. """
 
         page_to = 1
@@ -233,7 +233,7 @@ class BaseController(QObject):
         self._pag.current_page = page_to
         self._view.combo_select_page.setCurrentIndex(self._pag.page_index)
 
-    def last_page(self, event: QEvent) -> None:
+    def _last_page(self, event: QEvent) -> None:
         """ Pasa a la primera página de la tabla. """
 
         page_to = self._pag.total_pages
@@ -244,7 +244,7 @@ class BaseController(QObject):
         self._pag.current_page = page_to
         self._view.combo_select_page.setCurrentIndex(self._pag.page_index)
 
-    def fill_combo_page(self):
+    def _fill_combo_page(self):
         """ Rellena el combo de selección de página. """
 
         self._view.combo_select_page.clear()

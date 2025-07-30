@@ -21,7 +21,7 @@ class MarcaComercialForm(QFrame):
     def __init__(self):
         super().__init__()
 
-        self.setFixedHeight(400)
+        self.setFixedHeight(275)
 
         self.create_widgets()
         self.build_layout()
@@ -134,6 +134,10 @@ class MarcaComercialForm(QFrame):
         ## Monta la segunda línea
         self.layout_second_line.addLayout(self.layout_direccion)
         self.layout_second_line.addLayout(self.layout_cod_postal)
+        # self.layout_second_line.addSpacerItem(
+        #     QSpacerItem(0, 0, QSizePolicy.Policy.Expanding,
+        #                 QSizePolicy.Policy.Minimum)
+        # )
 
         # Tercera línea
         ## Población
@@ -154,10 +158,18 @@ class MarcaComercialForm(QFrame):
         self.layout_third_line.addLayout(self.layout_poblacion)
         self.layout_third_line.addLayout(self.layout_provincia)
         self.layout_third_line.addLayout(self.layout_pais)
+        # self.layout_third_line.addSpacerItem(
+        #     QSpacerItem(0, 0, QSizePolicy.Policy.Expanding,
+        #                 QSizePolicy.Policy.Minimum)
+        # )
 
         # Cuarta linea
         self.layout_observaciones.addWidget(self.label_observaciones)
         self.layout_observaciones.addWidget(self.text_observaciones)
+        # self.layout_observaciones.addSpacerItem(
+        #     QSpacerItem(0, 0, QSizePolicy.Policy.Expanding,
+        #                 QSizePolicy.Policy.Minimum)
+        # )
 
         # Montamos el frame
         self.layout_form.addLayout(self.layout_first_line)
