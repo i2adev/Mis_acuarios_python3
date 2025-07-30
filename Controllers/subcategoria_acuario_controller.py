@@ -133,7 +133,7 @@ class SubcategoriaAcuarioDialogController(BaseController):
             return res
 
         # Limpiamos el formulario
-        self._clean_view()
+        self._clean_view(self._view.frame.combo_categoria_acuario)
 
         return Result.success(res.value)
 
@@ -291,7 +291,9 @@ class SubcategoriaAcuarioController(SubcategoriaAcuarioDialogController):
         self._view.button_update.clicked.connect(self.button_update_click)
         self._view.button_load.clicked.connect(self.button_load_click)
         self._view.button_delete.clicked.connect(self.button_delete_click)
-        self._view.button_clean.clicked.connect(lambda: self._clean_view())
+        self._view.button_clean.clicked.connect(lambda: self._clean_view(
+            self._view.frame.combo_categoria_acuario
+        ))
         self._view.button_next.clicked.connect(self.next_page)
         self._view.button_prev.clicked.connect(self.previous_page)
         self._view.button_first.clicked.connect(self.first_page)
@@ -564,37 +566,6 @@ class SubcategoriaAcuarioController(SubcategoriaAcuarioDialogController):
         table.setColumnHidden(0, True)
         table.resizeColumnsToContents()
 
-    # def _configure_table(self, table: QTableView):
-    #     """ Configura l atabla de datos. """
-    #
-    #     # Selecciona un afila entera
-    #     table.setSelectionBehavior(
-    #         QTableView.SelectionBehavior.SelectRows)
-    #
-    #     # Solo se puede seleccionar uan fila
-    #     table.setSelectionMode(
-    #         QTableView.SelectionMode.SingleSelection)
-    #
-    #     # Color de las filas alternadas
-    #     table.setAlternatingRowColors(True)
-    #
-    #     # Oculta las líneas de la tabla
-    #     table.setShowGrid(False)
-    #
-    #     # Elimina el tabulador
-    #     table.setFocusPolicy(Qt.FocusPolicy.NoFocus)
-    #
-    #     # Ocultar la columna ID (columna 0)
-    #     table.setColumnHidden(0, True)
-    #
-    #     # Hacer que la columna de observaciones (columna 3) use el espacio
-    #     # restante
-    #     header = table.horizontalHeader()
-    #     header.setSectionResizeMode(3, QHeaderView.ResizeMode.Stretch)
-    #
-    #     # Mostrar puntos suspensivos si el texto no cabe
-    #     table.setTextElideMode(Qt.TextElideMode.ElideRight)
-
     def spell_check(self):
         """ No aplicable. """
         pass
@@ -618,7 +589,7 @@ class SubcategoriaAcuarioController(SubcategoriaAcuarioDialogController):
             return Result.failure(res.error_msg)
 
         # Limpiamos el formulario
-        self._clean_view()
+        self._clean_view(self._view.frame.combo_categoria_acuario)
 
         # Configuramos la tabla
         self.load_tableview()
@@ -714,77 +685,10 @@ class SubcategoriaAcuarioController(SubcategoriaAcuarioDialogController):
             return Result.failure(res.error_msg)
 
         # Limpiamos el formulario
-        self._clean_view()
+        self._view.frame.combo_categoria_acuario
 
         # Configuramos la tabla
         self.load_tableview()
 
         return Result.success(id_)
-
-    def configure_table_foot(self):
-        """ Configura el pie de la tabla. """
-
-        self._view.label_total_pages.setText(str(self._pag.total_pages))
-        self.fill_combo_page()
-
-    def next_page(self, event: QEvent) -> None:
-        """ Pasa a la siguiente página de la tabla. """
-
-        page_to = self._view.combo_select_page.currentData() + 1
-
-        if page_to > self._pag.total_pages:
-            QMessageBox.information(
-                self._view,
-                self._view.window_title,
-                "SE HA LLEGADO A LA ÚLTIMA PÁGINA"
-            )
-            return
-
-        self._pag.current_page = page_to
-        self._view.combo_select_page.setCurrentIndex(self._pag.page_index)
-
-    def previous_page(self, event: QEvent) -> None:
-        """ Pasa a la anterior página de la tabla. """
-
-        page_to = self._view.combo_select_page.currentData() - 1
-
-        if page_to < 1:
-            QMessageBox.information(
-                self._view,
-                self._view.window_title,
-                "SE HA LLEGADO A LA PRIMERA PÁGINA"
-            )
-            return
-
-        self._pag.current_page = page_to
-        self._view.combo_select_page.setCurrentIndex(self._pag.page_index)
-
-    def first_page(self, event: QEvent) -> None:
-        """ Pasa a la primera página de la tabla. """
-
-        page_to = 1
-
-        if self._pag.current_page == 1:
-            return
-
-        self._pag.current_page = page_to
-        self._view.combo_select_page.setCurrentIndex(self._pag.page_index)
-
-    def last_page(self, event: QEvent) -> None:
-        """ Pasa a la primera página de la tabla. """
-
-        page_to = self._pag.total_pages
-
-        if self._pag.current_page == self._pag.total_pages:
-            return
-
-        self._pag.current_page = page_to
-        self._view.combo_select_page.setCurrentIndex(self._pag.page_index)
-
-    def fill_combo_page(self):
-        """ Rellena el combo de selección de página. """
-
-        self._view.combo_select_page.clear()
-        for i in range(1, self._pag.total_pages + 1):
-            self._view.combo_select_page.addItem(str(i), i)
 

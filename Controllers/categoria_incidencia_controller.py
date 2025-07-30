@@ -12,7 +12,6 @@ from PyQt6.QtGui import QAction
 from PyQt6.QtWidgets import (QWidget, QMessageBox, QTableView, QHeaderView)
 
 from Controllers.base_controller import BaseController
-from Model.DAO.categoria_acuario_dao import CategoriaAcuarioDAO
 from Model.DAO.categoria_incidencia_dao import CategoriaIncidenciaDAO
 from Model.DAO.paginator import Paginator
 from Model.Entities.categoria_incidencia_entity import CategoriaIncidenciaEntity
@@ -118,7 +117,7 @@ class CategoriaIncidenciaDialogController(BaseController):
             return res
 
         # Limpiamos el formulario
-        self._clean_view()
+        self._clean_view(self._view.frame.edit_categoria_incidencia)
 
         return Result.success(res.value)
 
@@ -216,7 +215,9 @@ class CategoriaIncidenciaController(CategoriaIncidenciaDialogController):
         self._view.button_update.clicked.connect(self.button_update_click)
         self._view.button_load.clicked.connect(self.button_load_click)
         self._view.button_delete.clicked.connect(self.button_delete_click)
-        self._view.button_clean.clicked.connect(lambda: self._clean_view())
+        self._view.button_clean.clicked.connect(lambda: self._clean_view(
+            self._view.frame.edit_categoria_incidencia
+        ))
         self._view.button_next.clicked.connect(self.next_page)
         self._view.button_prev.clicked.connect(self.previous_page)
         self._view.button_first.clicked.connect(self.first_page)
@@ -511,7 +512,7 @@ class CategoriaIncidenciaController(CategoriaIncidenciaDialogController):
             return Result.failure(res.error_msg)
 
         # Limpiamos el formulario
-        self._clean_view()
+        self._clean_view(self._view.frame.edit_categoria_incidencia)
 
         # Configuramos la tabla
         self.load_tableview()
@@ -600,76 +601,10 @@ class CategoriaIncidenciaController(CategoriaIncidenciaDialogController):
             return Result.failure(res.error_msg)
 
         # Limpiamos el formulario
-        self._clean_view()
+        self._clean_view(self._view.frame.edit_categoria_incidencia)
 
         # Configuramos la tabla
         self.load_tableview()
 
         return Result.success(id)
 
-    def configure_table_foot(self):
-        """ Configura el pie de la tabla. """
-
-        self._view.label_total_pages.setText(str(self._pag.total_pages))
-        self.fill_combo_page()
-
-    def next_page(self, event: QEvent) -> None:
-        """ Pasa a la siguiente página de la tabla. """
-
-        page_to = self._view.combo_select_page.currentData() + 1
-
-        if page_to > self._pag.total_pages:
-            QMessageBox.information(
-                self._view,
-                self._view.window_title,
-                "SE HA LLEGADO A LA ÚLTIMA PÁGINA"
-            )
-            return
-
-        self._pag.current_page = page_to
-        self._view.combo_select_page.setCurrentIndex(self._pag.page_index)
-
-    def previous_page(self, event: QEvent) -> None:
-        """ Pasa a la anterior página de la tabla. """
-
-        page_to = self._view.combo_select_page.currentData() - 1
-
-        if page_to < 1:
-            QMessageBox.information(
-                self._view,
-                self._view.window_title,
-                "SE HA LLEGADO A LA PRIMERA PÁGINA"
-            )
-            return
-
-        self._pag.current_page = page_to
-        self._view.combo_select_page.setCurrentIndex(self._pag.page_index)
-
-    def first_page(self, event: QEvent) -> None:
-        """ Pasa a la primera página de la tabla. """
-
-        page_to = 1
-
-        if self._pag.current_page == 1:
-            return
-
-        self._pag.current_page = page_to
-        self._view.combo_select_page.setCurrentIndex(self._pag.page_index)
-
-    def last_page(self, event: QEvent) -> None:
-        """ Pasa a la primera página de la tabla. """
-
-        page_to = self._pag.total_pages
-
-        if self._pag.current_page == self._pag.total_pages:
-            return
-
-        self._pag.current_page = page_to
-        self._view.combo_select_page.setCurrentIndex(self._pag.page_index)
-
-    def fill_combo_page(self):
-        """ Rellena el combo de selección de página. """
-
-        self._view.combo_select_page.clear()
-        for i in range(1, self._pag.total_pages + 1):
-            self._view.combo_select_page.addItem(str(i), i)

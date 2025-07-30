@@ -1,6 +1,16 @@
 ﻿================================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
+29/07/2025  CONTROLADORES DE LOS MAESTROS:
+            -   SE MODIFICA LA LIMPIEZA DE FORMULARIO PARA QUE TRAS LA LIMPIEZA
+                SE MUEVA EL FOCO AL PRIMER CONTROL.                         DONE
+            -   PASAR TODOS LOS CONTROLES DE PAGINACIÓN Y FORMATEO DE TABLA AL
+                CONTROLADOR BASE.                                           DONE
+
+            BASE DE DATOS:
+            -   SE AÑADEN LAS TABLAS DE ILUMINACIÓN, TIPO DE ILUMINACIÓN Y TIPOS
+                DE CONTROL DE LA ILUMINACIÓN.                               DONE
+
 25/07/2025  SE AÑADE LA LÓGICA DE LA MARCA:
             -   SE CREA LA VISTA EN LA BASE DE DATOS.                       DONE
             -   SE CREA LA ENTIDAD.                                         DONE
