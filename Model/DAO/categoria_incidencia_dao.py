@@ -152,13 +152,13 @@ class CategoriaIncidenciaDAO(BaseDAO):
             sql = """
                 INSERT INTO CATEGORIAS_INCIDENCIA 
                             (NOMBRE_CATEGORIA, OBSERVACIONES)
-                VALUES      (:cat, :observaciones);
+                VALUES      (:cat, :descripcion);
             """
             try:
                 cursor = self.db.conn.cursor()
                 cursor.execute(sql, {
                     "cat": ent.categoria_incidencia,
-                    "observaciones": ent.observaciones
+                    "descripcion": ent.observaciones
                 })
 
                 # Devolvemos los datos
@@ -190,7 +190,7 @@ class CategoriaIncidenciaDAO(BaseDAO):
             sql = """
                 UPDATE  CATEGORIAS_INCIDENCIA
                 SET     NOMBRE_CATEGORIA = :cat,
-                        OBSERVACIONES = :observaciones
+                        OBSERVACIONES = :descripcion
                 WHERE   ID_CATEGORIA = :id;
             """
             try:
@@ -198,7 +198,7 @@ class CategoriaIncidenciaDAO(BaseDAO):
                 cursor.execute(sql, {
                     "id": ent.id,
                     "cat": ent.categoria_incidencia,
-                    "observaciones": ent.observaciones
+                    "descripcion": ent.observaciones
                 })
 
                 # Devolvemos los datos

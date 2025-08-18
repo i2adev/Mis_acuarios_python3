@@ -16,6 +16,7 @@ from Controllers.subcategoria_incidencia_controller import \
     SubcategoriaIncidenciaController
 from Controllers.tipo_acuario_controller import TipoAcuarioController
 from Controllers.tipo_filtro_controller import TipoFiltroController
+from Controllers.urna_controller import UrnaController
 from Model.DAO.categoria_acuario_dao import CategoriaAcuarioDAO
 from Model.DAO.categoria_incidencia_dao import CategoriaIncidenciaDAO
 from Model.DAO.marca_comercial_dao import MarcaComercialDAO
@@ -23,6 +24,7 @@ from Model.DAO.subcategoria_acuario_dao import SubcategoriaAcuarioDAO
 from Model.DAO.subcategoria_incidencia_dao import SubcategoriaIncidenciaDAO
 from Model.DAO.tipo_acuario_dao import TipoAcuarioDAO
 from Model.DAO.tipo_filtro_dao import TipoFiltroDAO
+from Model.DAO.urna_dao import UrnaDAO
 from Model.Entities.categoria_acuario_entity import CategoriaAcuarioEntity
 from Model.Entities.categoria_incidencia_entity import CategoriaIncidenciaEntity
 from Model.Entities.marca_comercial_entity import MarcaComercialEntity
@@ -30,14 +32,16 @@ from Model.Entities.subcategoria_acuario_entity import SubcategoriaAcuarioEntity
 from Model.Entities.subcategoria_incidencia import SubcategoriaIncidenciaEntity
 from Model.Entities.tipo_acuario_entity import TipoAcuarioEntity
 from Model.Entities.tipo_filtro_entity import TipoFiltroEntity
-from Views.categoria_acuario_view import CategoriaAcuarioView
-from Views.categoria_incidencia_view import CategoriaIncidenciaView
+from Model.Entities.urna_entity import UrnaEntity
+from Views.Masters.categoria_acuario_view import CategoriaAcuarioView
+from Views.Masters.categoria_incidencia_view import CategoriaIncidenciaView
+from Views.Masters.urna_view import UrnaView
 from Views.main_view import MainView
-from Views.marca_comercial_view import MarcaComercialView
-from Views.subcategoria_acuario_view import SubcategoriaAcuarioView
-from Views.subcategoria_incidencia_view import SubcategoriaIncidenciaView
-from Views.tipo_acuario_view import TipoAcuarioView
-from Views.tipo_filtro_view import TipoFiltroView
+from Views.Masters.marca_comercial_view import MarcaComercialView
+from Views.Masters.subcategoria_acuario_view import SubcategoriaAcuarioView
+from Views.Masters.subcategoria_incidencia_view import SubcategoriaIncidenciaView
+from Views.Masters.tipo_acuario_view import TipoAcuarioView
+from Views.Masters.tipo_filtro_view import TipoFiltroView
 
 
 class MainViewController(BaseController):
@@ -61,7 +65,7 @@ class MainViewController(BaseController):
     def init_handlers(self):
         """ Inicializa los handlers. """
         # Inicializamos los botones
-        self._view.button_maestro_tipo_giltro.clicked.connect(
+        self._view.button_maestro_tipo_filtro.clicked.connect(
             self.tipo_filtro_clicked
         )
         self._view.button_maestro_tipo_acuario.clicked.connect(
@@ -86,6 +90,23 @@ class MainViewController(BaseController):
         self._view.button_maestro_marca.clicked.connect(
             self.marca_comercial_clicked
         )
+
+        self._view.button_maestro_urna.clicked.connect(
+            self.urna_clicked
+        )
+
+
+    def urna_clicked(self):
+        """
+        Cuando se presiona en el maestro de urna.
+        Acción: Abre el formulario de urna
+        """
+        view = UrnaView("MAESTRO DE URNA")
+        dao = UrnaDAO()
+        mod = UrnaEntity()
+
+        ctrl = UrnaController(view, dao, mod)
+        ctrl.show()
 
     def tipo_filtro_clicked(self, event):
         """
@@ -192,4 +213,5 @@ class MainViewController(BaseController):
         """ Abre la vista """
         self._view.show()
         #self._view.showMaximized()
+
 

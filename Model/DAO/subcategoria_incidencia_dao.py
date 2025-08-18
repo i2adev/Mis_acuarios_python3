@@ -146,14 +146,14 @@ class SubcategoriaIncidenciaDAO(BaseDAO):
             sql = """
                 INSERT INTO SUBCATEGORIAS_INCIDENCIA 
                 (ID_CATEGORIA, NOMBRE_SUBCATEGORIA, DESCRIPCION)
-                VALUES (:id_cat, :subcat, :observaciones);
+                VALUES (:id_cat, :subcat, :descripcion);
             """
             try:
                 cursor = self.db.conn.cursor()
                 cursor.execute(sql, {
                     "id_cat": ent.id_categoria,
                     "subcat": ent.subcategoria,
-                    "observaciones": ent.observaciones
+                    "descripcion": ent.observaciones
                 })
 
                 # Devolvemos los datos
@@ -186,7 +186,7 @@ class SubcategoriaIncidenciaDAO(BaseDAO):
                 UPDATE  SUBCATEGORIAS_INCIDENCIA
                 SET     ID_CATEGORIA = :id_cat,
                         NOMBRE_SUBCATEGORIA = :subcat,
-                        DESCRIPCION = :observaciones
+                        DESCRIPCION = :descripcion
                 WHERE   ID_SUBCATEGORIA = :id
             """
             try:
@@ -195,7 +195,7 @@ class SubcategoriaIncidenciaDAO(BaseDAO):
                     "id": ent.id,
                     "id_cat": ent.id_categoria,
                     "subcat": ent.subcategoria,
-                    "observaciones": ent.observaciones
+                    "descripcion": ent.observaciones
                 })
 
                 # Devolvemos los datos

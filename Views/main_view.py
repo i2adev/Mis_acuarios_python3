@@ -106,7 +106,8 @@ class MainView(QWidget):
         self.maestro_layout.addWidget(self.button_maestro_tipo_acuario)
         self.maestro_layout.addWidget(self.button_maestro_categoria_acuario)
         self.maestro_layout.addWidget(self.button_maestro_subcategoria_acuario)
-        self.maestro_layout.addWidget(self.button_maestro_tipo_giltro)
+        self.maestro_layout.addWidget(self.button_maestro_tipo_filtro)
+        self.maestro_layout.addWidget(self.button_maestro_urna)
 
         # Cargamos los layout en la ventana
         self.layout_central.addWidget(self.frame_menu)
@@ -179,7 +180,7 @@ class MainView(QWidget):
             """
         )
         self.button_maestro_acuario.setObjectName(
-            "button_maestro_tipo_giltro"
+            "button_maestro_tipo_filtro"
         )
         self.button_maestro_acuario.setFlat(True)
         self.button_maestro_acuario.setCursor(
@@ -485,8 +486,8 @@ class MainView(QWidget):
             QCursor(Qt.CursorShape.PointingHandCursor)
         )
 
-        self.button_maestro_tipo_giltro = QPushButton("TIPOS DE FILTRO")
-        self.button_maestro_tipo_giltro.setStyleSheet(
+        self.button_maestro_tipo_filtro = QPushButton("TIPOS DE FILTRO")
+        self.button_maestro_tipo_filtro.setStyleSheet(
             """
             QPushButton {
                 background-color: transparent;
@@ -498,11 +499,32 @@ class MainView(QWidget):
             }
             """
         )
-        self.button_maestro_tipo_giltro.setObjectName(
-            "button_maestro_tipo_giltro"
+        self.button_maestro_tipo_filtro.setObjectName(
+            "button_maestro_tipo_filtro"
         )
-        self.button_maestro_tipo_giltro.setFlat(True)
-        self.button_maestro_tipo_giltro.setCursor(
+        self.button_maestro_tipo_filtro.setFlat(True)
+        self.button_maestro_tipo_filtro.setCursor(
+            QCursor(Qt.CursorShape.PointingHandCursor)
+        )
+
+        self.button_maestro_urna = QPushButton("URNAS")
+        self.button_maestro_urna.setStyleSheet(
+            """
+            QPushButton {
+                background-color: transparent;
+                text-align: left;
+                margin-bottom: 0;
+                margin-left: 20;
+                font-family: 'Roboto'; 
+                font-size: 14px;
+            }
+            """
+        )
+        self.button_maestro_urna.setObjectName(
+            "button_maestro_urna"
+        )
+        self.button_maestro_urna.setFlat(True)
+        self.button_maestro_urna.setCursor(
             QCursor(Qt.CursorShape.PointingHandCursor)
         )
 

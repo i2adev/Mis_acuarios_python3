@@ -110,13 +110,13 @@ class TipoFiltroDAO (BaseDAO):
             sql = """
                 INSERT INTO TIPOS_FILTRO
                     (TIPO_FILTRO, OBSERVACIONES)
-                VALUES (:tipo, :observaciones);
+                VALUES (:tipo, :descripcion);
             """
             try:
                 cursor = self.db.conn.cursor()
                 cursor.execute(sql, {
                     "tipo": ent.tipo_filtro,
-                    "observaciones": ent.observaciones
+                    "descripcion": ent.observaciones
                 })
 
                 # Devolvemos los datos
@@ -147,7 +147,7 @@ class TipoFiltroDAO (BaseDAO):
             sql = """
                 UPDATE  TIPOS_FILTRO
                 SET     TIPO_FILTRO = :tipo,
-                        OBSERVACIONES = :observaciones
+                        OBSERVACIONES = :descripcion
                 WHERE   ID_TIPO = :id_parent
             """
             try:
@@ -155,7 +155,7 @@ class TipoFiltroDAO (BaseDAO):
                 cursor.execute(sql, {
                     "id_parent": ent.id,
                     "tipo": ent.tipo_filtro,
-                    "observaciones": ent.observaciones
+                    "descripcion": ent.observaciones
                 })
 
                 # Devolvemos los datos

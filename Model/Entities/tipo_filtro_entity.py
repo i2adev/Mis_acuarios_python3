@@ -23,7 +23,7 @@ class TipoFiltroEntity(BaseEntity):
             - Parámetro id_tf: Id del tipo de filtro
             - Parámetro num_tf: Número correlativo del tipo de filtro
             - Parámetro tipo_filtro: Cadena con el tipo de filtro.
-            - Parámetro observaciones: Cadena con las observaciones
+            - Parámetro descripcion: Cadena con las descripcion
               sobre el tipo de filtro.
         """
         super().__init__()

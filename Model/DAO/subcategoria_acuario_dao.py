@@ -208,14 +208,14 @@ class SubcategoriaAcuarioDAO(BaseDAO):
             sql = """
                 INSERT INTO SUBCATEGORIAS_ACUARIO 
                 (ID_CATEGORIA_ACUARIO, SUBCATEGORIA_ACUARIO, OBSERVACIONES)
-                VALUES (:id_cat, :subcat, :observaciones);
+                VALUES (:id_cat, :subcat, :descripcion);
             """
             try:
                 cursor = self.db.conn.cursor()
                 cursor.execute(sql, {
                     "id_cat": ent.id_categoria,
                     "subcat": ent.subcategoria,
-                    "observaciones": ent.observaciones
+                    "descripcion": ent.observaciones
                 })
 
                 # Devolvemos los datos
@@ -248,7 +248,7 @@ class SubcategoriaAcuarioDAO(BaseDAO):
                 UPDATE SUBCATEGORIAS_ACUARIO
                 SET    ID_CATEGORIA_ACUARIO = :id_cat,
                        SUBCATEGORIA_ACUARIO = :subcat,
-                       OBSERVACIONES = :observaciones
+                       OBSERVACIONES = :descripcion
                 WHERE ID_SUBCATEGORIA_ACUARIO = :id;
             """
             try:
@@ -257,7 +257,7 @@ class SubcategoriaAcuarioDAO(BaseDAO):
                     "id": ent.id,
                     "id_cat": ent.id_categoria,
                     "subcat": ent.subcategoria,
-                    "observaciones": ent.observaciones
+                    "descripcion": ent.observaciones
                 })
 
                 # Devolvemos los datos

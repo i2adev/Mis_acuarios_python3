@@ -8,8 +8,7 @@ Commentarios:
 # Importaciones
 from PyQt6.QtCore import Qt, QEvent
 from PyQt6.QtGui import QAction
-from PyQt6.QtWidgets import (QWidget, QMessageBox, QTableView, QHeaderView,
-                             QCompleter, QComboBox)
+from PyQt6.QtWidgets import (QWidget, QMessageBox, QTableView, QCompleter, QComboBox)
 
 from Controllers.base_controller import BaseController
 from Model.DAO.marca_comercial_dao import MarcaComercialDAO
@@ -21,8 +20,8 @@ from Model.TableModel.marcas_comercial_table_model import \
 from Services.Result.result import Result
 from Services.Validators.marca_comercial_validator import \
     MarcaComercialValidator
-from Views.marca_comercial_dialog import MarcaComercialDialog
-from Views.marca_comercial_view import MarcaComercialView
+from Views.Dialogs.marca_comercial_dialog import MarcaComercialDialog
+from Views.Masters.marca_comercial_view import MarcaComercialView
 from Views.table_menu_contextual import TableMenuContextual
 
 class MarcaComercialDialogController(BaseController):

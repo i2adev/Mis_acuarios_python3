@@ -8,6 +8,7 @@ Commentarios:
 from PyQt6.QtWidgets import QMessageBox
 
 from Model.DAO.base_dao import BaseDAO
+from Model.Entities.urna_entity import UrnaEntity
 from Model.Entities.categoria_acuario_entity import CategoriaAcuarioEntity
 from Model.Entities.categoria_incidencia_entity import CategoriaIncidenciaEntity
 from Model.Entities.marca_comercial_entity import MarcaComercialEntity
@@ -15,6 +16,7 @@ from Model.Entities.subcategoria_acuario_entity import SubcategoriaAcuarioEntity
 from Model.Entities.subcategoria_incidencia import SubcategoriaIncidenciaEntity
 from Model.Entities.tipo_acuario_entity import TipoAcuarioEntity
 from Model.Entities.tipo_filtro_entity import TipoFiltroEntity
+from Model.TableModel.urna_table_model import UrnaTableModel
 
 
 class Paginator:
@@ -295,6 +297,12 @@ class Paginator:
                 f["MARCA"], f["DIRECCION"], f["CODIGO_POSTAL"], f["POBLACION"],
                 f["PROVINCIA"], f["PAIS"], f["OBSERVACIONES"])
                 for f in res.value]
+        elif self.procedure == "VISTA_URNAS":
+            data_list = [UrnaEntity(f["ID"], f["NUM"],f["MARCA"], f["MODELO"],
+                                    f["ANCHURA"], f["PROFUNDIDAD"], f["ALTURA"],
+                                    f["GROSOR"], f["VOLUMEN_BRUTO"],
+                                    f["MATERIAL"], f["DESCRIPCION"])
+                         for f in res.value]
 
         self.total_data = data_list
         self.records = len(self.total_data)

@@ -9,9 +9,8 @@ import sys
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QDialog, QApplication, QMessageBox, QWidget
 
-from Views.base_dialog import BaseDialog
-from Views.categoria_acuario_form import CategoriaAcuarioForm
-
+from Views.Dialogs.base_dialog import BaseDialog
+from Views.Forms.categoria_acuario_form import CategoriaAcuarioForm
 
 class CategoriaAcuarioDialog(BaseDialog):
     """ Diálogo de categoría de acuario. """
@@ -50,7 +49,7 @@ if __name__ == "__main__":
     ventana = CategoriaAcuarioDialog("...::OOO::....")
 
     # Cargar el archivo .qss
-    with open("../Resources/Styles/main_style.qss", "r",
+    with open("../../Resources/Styles/main_style.qss", "r",
               encoding="utf-8-sig") as f:
         estilo = f.read()
         app.setStyleSheet(estilo)

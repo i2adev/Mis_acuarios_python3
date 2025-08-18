@@ -146,7 +146,7 @@ class BaseView(QWidget):
         self.frame_table.setMinimumHeight(210)
         self.layout_crud = QVBoxLayout()  # Layout donde se colocan los botones 
                                           # del CRUD
-        self.layout_form_data = QVBoxLayout() # Layout que contiene el frame con
+        self.layout_form_data = QHBoxLayout() # Layout que contiene el frame con
                                               # el formulario de datos
         self.layout_navigation = QHBoxLayout()  # Layout de navegación de
                                                 # páginas
@@ -470,7 +470,7 @@ if __name__ == "__main__":
     ventana = BaseView("BASE VIEW")
 
     # Cargar el archivo .qss
-    with open("../Resources/Styles/main_style.qss", "r",
+    with open("../../Resources/Styles/main_style.qss", "r",
               encoding="utf-8-sig") as f:
         estilo = f.read()
         app.setStyleSheet(estilo)

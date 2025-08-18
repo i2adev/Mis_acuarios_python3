@@ -9,8 +9,8 @@ import sys
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QApplication, QWidget
 
-from Views.base_view import BaseView
-from Views.categoria_incidencia_form import CategoriaIncidenciaForm
+from Views.Masters.base_view import BaseView
+from Views.Forms.categoria_incidencia_form import CategoriaIncidenciaForm
 
 
 class CategoriaIncidenciaView(BaseView):
@@ -58,7 +58,7 @@ if __name__ == "__main__":
     ventana = CategoriaIncidenciaView("...::OOO::....")
 
     # Cargar el archivo .qss
-    with open("../Resources/Styles/main_style.qss", "r",
+    with open("../../Resources/Styles/main_style.qss", "r",
               encoding="utf-8-sig") as f:
         estilo = f.read()
         app.setStyleSheet(estilo)

@@ -9,8 +9,7 @@ Commentarios:
 # Importaciones
 from PyQt6.QtCore import Qt, QEvent
 from PyQt6.QtGui import QAction
-from PyQt6.QtWidgets import (QWidget, QMessageBox, QTableView, QHeaderView,
-                             QCompleter, QComboBox)
+from PyQt6.QtWidgets import (QWidget, QMessageBox, QTableView, QCompleter, QComboBox)
 
 from Controllers.base_controller import BaseController
 from Controllers.categoria_acuario_controller import \
@@ -26,11 +25,11 @@ from Model.Entities.tipo_acuario_entity import TipoAcuarioEntity
 from Model.TableModel.tipo_acuario_table_model import TipoAcuarioTableModel
 from Services.Result.result import Result
 from Services.Validators.tipo_acuario_validator import TipoAcuarioValidator
-from Views.categoria_acuario_dialog import CategoriaAcuarioDialog
-from Views.subcategoria_Acuario_dialog import SubcategoriaAcuarioDialog
+from Views.Dialogs.categoria_acuario_dialog import CategoriaAcuarioDialog
+from Views.Dialogs.subcategoria_Acuario_dialog import SubcategoriaAcuarioDialog
 from Views.table_menu_contextual import TableMenuContextual
-from Views.tipo_acuario_dialog import TipoAcuarioDialog
-from Views.tipo_acuario_view import TipoAcuarioView
+from Views.Dialogs.tipo_acuario_dialog import TipoAcuarioDialog
+from Views.Masters.tipo_acuario_view import TipoAcuarioView
 
 
 class TipoAcuarioDialogController(BaseController):

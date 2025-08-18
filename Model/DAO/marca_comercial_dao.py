@@ -49,7 +49,7 @@ class MarcaComercialDAO(BaseDAO):
                           M.PROVINCIA AS PROVINCIA,
                           P.PAIS AS PAIS,
                           M.OBSERVACIONES
-                FROM      MARCAS_PRODUCTO M
+                FROM      MARCAS_COMERCIALES M
                 LEFT JOIN PAISES P
                 ON        M.ID_PAIS = P.ID_PAIS;
             """
@@ -84,15 +84,14 @@ class MarcaComercialDAO(BaseDAO):
             sql = """
                 SELECT    ID_MARCA AS ID,
                           MARCA AS VALUE
-                FROM      MARCAS_PRODUCTO
+                FROM      MARCAS_COMERCIALES
                 ORDER BY  MARCA;
               """
             try:
                 cursor = self.db.conn.cursor()
                 cursor.execute(sql)
                 values = [MarcaComercialEntity(
-                    f["ID"], None, f["VALUE"], None, None,
-                    None, None, None, None
+                    f["ID"], None, f["VALUE"]
                 ) for f in cursor.fetchall()]
 
                 # Devolvemos los datos
@@ -123,7 +122,7 @@ class MarcaComercialDAO(BaseDAO):
                             (MARCA, DIRECCION, COD_POSTAL, POBLACION, PROVINCIA, 
                             ID_PAIS, OBSERVACIONES)
                 VALUES      (:marca, :direccion, :codp, :poblacion, :provincia, 
-                            :idp, :observaciones);
+                            :idp, :descripcion);
             """
             try:
                 cursor = self.db.conn.cursor()
@@ -134,7 +133,7 @@ class MarcaComercialDAO(BaseDAO):
                     "poblacion": ent.poblacion,
                     "provincia": ent.provincia,
                     "idp": ent.id_pais,
-                    "observaciones": ent.observaciones
+                    "descripcion": ent.observaciones
                 })
 
                 # Devolvemos los datos
@@ -171,7 +170,7 @@ class MarcaComercialDAO(BaseDAO):
                         POBLACION = :poblacion,
                         PROVINCIA = :provincia,
                         ID_PAIS = :idp,
-                        OBSERVACIONES = :observaciones
+                        OBSERVACIONES = :descripcion
                 WHERE   ID_MARCA = :id;
             """
             try:
@@ -184,7 +183,7 @@ class MarcaComercialDAO(BaseDAO):
                     "poblacion": ent.poblacion,
                     "provincia": ent.provincia,
                     "idp": ent.id_pais,
-                    "observaciones": ent.observaciones
+                    "descripcion": ent.observaciones
                 })
 
                 # Devolvemos los datos

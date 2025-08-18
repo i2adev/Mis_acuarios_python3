@@ -1,9 +1,60 @@
 ﻿================================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
-30/07/2025  -   SE RENOMBRAN LAS FUNCIONES DE MANEJO DE PÁGINAS.            DONE
+30/07/2025  SE CREA LA LÓGICA BÁSICA DE URNAS:
+            -   SE CREA LA VISTA EN LA BASE DE DATOS.                       DONE
+            -   SE CREA LA ENTIDAD.                                         DONE
+            -   SE CREA EL DAO (DATA ACCESS OBJECT).                        DONE
+            -   SE CREA EL MODELO DE TABLA.                                 DONE
+                NOTA:
+                EL FORMATO DE LA TABLA NO COINCIDE CON LOS ATRIBUTOS DE LA CLASE,
+                PUESTO QUE LAS DIMENSIONES SE UNEN EN LA TABLA.
+            -   SE CREA EL FORMULARIO.                                      DONE
+            -   SE CREA EL FORMULARIO DE INSERCIÓN DE IMAGEN.               DONE
+            -   SE CREA EL DIÁLOGO.                                         DONE
+            -   SE CREA EL MAESTRO.                                         DONE
+            -   SE CREA EL VALIDADOR DEL FORMULARIO.                        DONE
+            -   SE CREA LA ENTIDAD.                                         DONE
+            -   SE CREA EL DAO.                                             DONE
+            -   SE CREA EL CONTROLADOR DEL FORMULARIO.                      DONE
+                -   SE CREA LA ENTIDAD MATERIAL DE URNA.                    DONE
+                -   SE CREA EL DAO DE LA ENTIDAD MATERIAL DE URNA.          DONE
+
+            BASE DE DATOS:
+            -   SE CREA LA VISTA DE LOS ACUARIOS EN LA BASE DE DATOS.       DONE
+            -   SE MODIFICA LA ESTRUCTURA DE LA BASE DE DATOS PARA QUE UN
+                PROYECTO PERMITA MAS DE UN ACUARIO, Y UN ACUARIO PUEDA PERTENE-
+                CER A MAS DE UN PROYECTO (SIEMPRE QUE SOLO UNO ESTE EN ACTIVO).
+                                                                            DONE
+            -   SE CREA LA TABLA ESPECIES ANIMALES.                         DONE
+            -   SE CREA LA TABLA ESPECIES_VEGETALES.                        DONE
+            -   SE CREA LA TABLA FAUNA_ACUARIO.                             DONE
+            -   SE CREA LA TABLA FLORA_ACUARIO.                             DONE
+            -   SE CREA LA TABLA GRUPOS_TAXONÓMICOS.                        DONE
+            -   SE CREA LA TABLA POSICIONES_ACUARIO.                        DONE
+            -   SE CREA LA TABLA REQUERIMIENTOS_ILUMINACIÓN.                DONE
+            -   SE CREA LA TABLA REQUERIMIENTOS_CO2.                        DONE
+            -   SE CREA LA TABLA TASAS_CRECIMIENTO.                         DONE
+            -   SE CREA LA TABLA MATERIAL_URNA.                             DONE
+            -   SE CREA LA TABLA EQUIPAMIENTOS.                             DONE
+            -   SE CREA LA TABLA CATEGORIAS_EQUIPAMIENTO.                   DONE
+            -   SE CREA LA VISTA DE MATERIALES DE URNA                      DONE
+            -   SE CREA LA TABLA PROYECTOS_ILUMINACIONES.                  DONE
+            -   SE CREA LA TABLA COMPORTAMIENTO_FAUNA.                      DONE
+            -   SE CREA LA TABLA DIETA_FAUNA.                               DONE
+            -   SE CREA LA TABLA NIVEL_NADO.                                DONE
+            -   SE CREA LA TABLA PROYECTOS_EQUIPAMIENTO.                    DONE
+
+30/07/2025  CONTROLADORES:
+            -   SE RENOMBRAN LAS FUNCIONES DE MANEJO DE PÁGINAS.            DONE
+
+            VISTAS DE MARCAS COMERCIALES:
             -   SE MODIFICA EL TAMAÑO DEL DIALOGO Y MAESTRO DE LAS MARCAS
                 COMERCIALES.                                                DONE
+
+            BASE DE DATOS:
+            -   SE MODIFICAN LAS TABLAS DE PROYECTOS Y ACUARIOS PARA PERMITIR
+                QUE UN PROYECTO PUEDA CONTENER MAS DE UN ACUARIO.           DONE
 
 29/07/2025  CONTROLADORES DE LOS MAESTROS:
             -   SE MODIFICA LA LIMPIEZA DE FORMULARIO PARA QUE TRAS LA LIMPIEZA
@@ -236,7 +287,6 @@ FECHA		DESCRIPCIÓN
                 ORTOGRÁFICO.
 
 05/06/2025  SE CREA LA CLASE RESULT PARA APLICAR EL PATRÓN RESULTADO.       DONE
-
             SE CREA EL MODELO DEL TIPO DE FILTRO.                           DONE
 
             SE PROGRAMA LA CARGA DE LOS DATOS DE LA TABLA DESDE LA BASE DE DATOS

@@ -9,11 +9,13 @@ Commentarios:
 
 # Importaciones
 import sys
-from PyQt6.QtWidgets import QApplication
+from PyQt6.QtWidgets import QApplication, QMessageBox
 from Controllers.main_view_controller import MainViewController
 
 # Versión del programa
-__version__ = "0.6.2"
+__version__ = "0.7.0"
+
+from Model.DAO.base_dao import BaseDAO
 
 from Views.main_view import MainView
 

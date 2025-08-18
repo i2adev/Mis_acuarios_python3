@@ -9,29 +9,23 @@ import sys
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QApplication, QWidget
 
-from Views.base_view import BaseView
-from Views.marca_comercial_form import MarcaComercialForm
+from Views.Dialogs.base_dialog import BaseDialog
+from Views.Forms.marca_comercial_form import MarcaComercialForm
 
 
-class MarcaComercialView(BaseView):
-    """
-    Formulario maestro de la MARCA COMERCIAL.
-    """
+class MarcaComercialDialog(BaseDialog):
+    """ Diálogo de categoría de acuario. """
 
     def __init__(self, w_title: str):
         """ Constructor de clase. """
 
         super().__init__(w_title)
 
-        self.setMinimumSize(1400, 760)
-
-        # Configuramos el formulario
+        # Configura el formulario
         self.frame = MarcaComercialForm()
+        self.frame.setFixedWidth(550)
         self.layout_form_data.addWidget(self.frame)
         self.set_tab_order()
-
-        # Asigna atajos de teclado
-        self.button_insert.setShortcut("Ctrl+I")
 
     def set_tab_order(self):
         """ Establece el orden de tabulación de los controles. """
@@ -73,13 +67,15 @@ class MarcaComercialView(BaseView):
 if __name__ == "__main__":
     app = QApplication(sys.argv)
 
-    ventana = MarcaComercialView("...::OOO::....")
+    ventana = MarcaComercialDialog("...::OOO::....")
+    # ventana.frame.setFixedSize(800, 400)
 
     # Cargar el archivo .qss
-    with open("../Resources/Styles/main_style.qss", "r",
+    with open("../../Resources/Styles/main_style.qss", "r",
               encoding="utf-8-sig") as f:
         estilo = f.read()
         app.setStyleSheet(estilo)
 
     ventana.show()
     sys.exit(app.exec())
+

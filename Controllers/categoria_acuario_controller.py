@@ -7,9 +7,9 @@ Commentarios:
 """
 
 # Importaciones
-from PyQt6.QtCore import Qt, QEvent
+from PyQt6.QtCore import QEvent
 from PyQt6.QtGui import QAction
-from PyQt6.QtWidgets import (QWidget, QMessageBox, QTableView, QHeaderView)
+from PyQt6.QtWidgets import (QWidget, QMessageBox, QTableView)
 
 from Controllers.base_controller import BaseController
 from Model.DAO.categoria_acuario_dao import CategoriaAcuarioDAO
@@ -20,8 +20,8 @@ from Model.TableModel.categoria_acuario_table_model import \
 from Services.Result.result import Result
 from Services.Validators.categoria_acuario_validator import \
     CategoriaAcuarioValidator
-from Views.categoria_acuario_dialog import CategoriaAcuarioDialog
-from Views.categoria_acuario_view import CategoriaAcuarioView
+from Views.Masters.categoria_acuario_view import CategoriaAcuarioView
+from Views.Dialogs.categoria_acuario_dialog import CategoriaAcuarioDialog
 from Views.table_menu_contextual import TableMenuContextual
 
 class CategoriaAcuarioDialogController(BaseController):

@@ -1,46 +1,49 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
-Fecha:      24/07/2025
+Fecha:      11/08/2025
 Commentarios:
-    Módulo que contiene la clase controladora de la entidad CATEGORÍA DE
-    INCIDENCIA.
+    Módulo que contiene la clase controladora de la entidad ACUARIO.
 """
 
+
 # Importaciones
-from PyQt6.QtCore import QEvent
+from PyQt6.QtCore import Qt, QEvent
 from PyQt6.QtGui import QAction
-from PyQt6.QtWidgets import (QWidget, QMessageBox, QTableView)
+from PyQt6.QtWidgets import (QWidget, QMessageBox, QTableView, QCompleter, QComboBox)
 
 from Controllers.base_controller import BaseController
-from Model.DAO.categoria_incidencia_dao import CategoriaIncidenciaDAO
+from Model.DAO.marca_comercial_dao import MarcaComercialDAO
+from Model.DAO.material_urna_dao import MaterialUrnaDAO
 from Model.DAO.paginator import Paginator
-from Model.Entities.categoria_incidencia_entity import CategoriaIncidenciaEntity
-from Model.TableModel.categoria_incidencia_table_model import \
-    CategoriaIncidenciaTableModel
-
+from Model.DAO.urna_dao import UrnaDAO
+from Model.Entities.urna_entity import UrnaEntity
+from Model.TableModel.urna_table_model import UrnaTableModel
 from Services.Result.result import Result
-from Services.Validators.categoria_incidencia_validator import \
-    CategoriaIncidenciaValidator
-from Views.Dialogs.categoria_acuario_dialog import CategoriaAcuarioDialog
-from Views.Masters.categoria_incidencia_view import CategoriaIncidenciaView
+from Services.Validators.urna_validator import UrnaValidator
+from Views.Dialogs.urna_dialog import UrnaDialog
+from Views.Masters.urna_view import UrnaView
 from Views.table_menu_contextual import TableMenuContextual
 
-class CategoriaIncidenciaDialogController(BaseController):
-    """ Controlador del diálogo categoría de acuario. """
 
-    def __init__(self, view: QWidget, dao: CategoriaIncidenciaDAO,
-                 mod: CategoriaIncidenciaEntity):
+class UrnaDialogController(BaseController):
+    """ Controlador del diálogo de acuario. """
+
+    def __init__(self, view: UrnaDialog, dao: UrnaDAO,
+                 mod: UrnaEntity):
         """
         Constructor base
 
-
-        :param view: Vista tipo CategoríaIncidencia
-        :param dao: DAO de la entidad CategoriaIncidenciaDAO
-        :param mod: Modelo de la entidad CategoriaIncidenciaEntity
+        Parámetros:
+        :param view: Vista tipo Acuario
+        :param dao: DAO de la entidad UrnaDAO
+        :param mod: Modelo de la entidad UrnaEntity
         """
 
         # inicializamos la vista y pasamos al constructor padre
         super().__init__(view, dao, mod)
+
+        # Llenamo los combos
+        self.fill_combos()
 
         # Inicializamos los eventos
         self.init_basic_handlers()
@@ -49,9 +52,11 @@ class CategoriaIncidenciaDialogController(BaseController):
         """ Abre la centava modal. """
 
         if self._view.exec():
-            # Obtenemos la categoría de acuario
-            categoria_incidencia = self.get_categoria_incidencia()
-            return Result.success(categoria_incidencia)
+            # self._view.frame.combo_categoria_acuario.setCurrentIndex(self.ix_ta)
+
+            # Obtenemos la subcategoría de acuario
+            acuario = self.get_urna()
+            return Result.success(acuario)
         else:
             return Result.failure("NO SE HA PODIDO OBTENER LA ENTIDAD.")
 
@@ -59,9 +64,10 @@ class CategoriaIncidenciaDialogController(BaseController):
         """
         Inicializa los eventos de los widgets de la vista.
         """
+
         self.init_imput_handlers()
 
-        if isinstance(self._view, CategoriaAcuarioDialog):
+        if isinstance(self._view, UrnaDialog):
             self.init_dialog_handlers()
 
     def init_dialog_handlers(self):
@@ -74,22 +80,44 @@ class CategoriaIncidenciaDialogController(BaseController):
     def init_imput_handlers(self):
         """ Inicializa los controles de entrada. """
 
+        # Controles de entrada de texto
         for widget in self._view.findChildren(QWidget):
             if isinstance(widget, self._text_widgets):
                 widget.installEventFilter(self)
 
-    def entity_configuration(self) -> CategoriaIncidenciaEntity:
+        # Comboboxes
+        # self._view.frame.combo_categoria_acuario.currentIndexChanged.connect(
+        #     self.combo_categoria_indexchanged
+        # )
+
+        # Botones
+        # self._view.frame.button_insert_tipo_acuario.clicked.connect(
+        #     self.open_categoria_acuario_dialog
+        # )
+        # self._view.frame.button_insert_subtipo_acuario.clicked.connect(
+        #     self.open_subcategoria_acuario_dialog
+        # )
+
+    #   TODO:   CONTINUAR EN LA CONFIGURACIÓN DE LA ENTIDAD
+    def entity_configuration(self) -> UrnaEntity:
         """ Configura la entidad. """
 
-        ent = CategoriaIncidenciaEntity()
+        ent = UrnaEntity()
 
         if self._view.frame.edit_id.text():
             ent.id = int(self._view.frame.edit_id.text())
         else:
             ent.id = None
 
-        ent.categoria_incidencia = self._view.frame.edit_categoria_incidencia.text()
-        ent.observaciones = self._view.frame.text_observaciones.toPlainText()
+        ent.id_marca = self._view.frame.combo_marca.currentData()
+        ent.modelo = self._view.frame.edit_modelo.text()
+        ent.anchura = self._view.frame.edit_ancho.text()
+        ent.profundidad = self._view.frame.edit_profundo.text()
+        ent.altura = self._view.frame.edit_alto.text()
+        ent.grosor_cristal = self._view.frame.edit_grosor.text()
+        ent.volumen_tanque = self._view.frame.edit_volumen.text()
+        ent.id_material = (self._view.frame.combo_material.currentData())
+        ent.descripcion = self._view.frame.text_descripcion.toPlainText()
 
         return ent
 
@@ -100,7 +128,6 @@ class CategoriaIncidenciaDialogController(BaseController):
         val = self.validate_view()
 
         if not val.is_success:
-            self._view.frame.edit_categoria_incidencia.setFocus()
             return val
 
         # Configura la entidad
@@ -109,24 +136,89 @@ class CategoriaIncidenciaDialogController(BaseController):
         # Inserta el registro
         res = self._dao.insert(ent)
         if not res.is_success:
-            QMessageBox.warning(
-                self._view,
-                self._view.window_title,
-                res.error_msg
-            )
             return res
 
         # Limpiamos el formulario
-        self._clean_view(self._view.frame.edit_categoria_incidencia)
+        self._clean_view(self._view.frame.combo_marca)
 
         return Result.success(res.value)
 
     def validate_view(self):
         """ Valida el formulario. """
-        val = CategoriaIncidenciaValidator.validate_categoria_incidencia(
-            self._view.frame.edit_categoria_incidencia
+
+        # Valida la marca
+        res = UrnaValidator.validate_marca(
+            self._view.frame.combo_marca
         )
-        return val
+
+        if not res.is_success:
+            self._view.frame.combo_marca.setFocus()
+            return res
+
+        # Valida el modelo de la urna
+        res = UrnaValidator.validate_modelo_urna(
+            self._view.frame.edit_modelo
+        )
+
+        if not res.is_success:
+            self._view.frame.edit_modelo.setFocus()
+            return res
+
+        # Valida la anchura de la urna
+        res = UrnaValidator.validate_anchura(
+            self._view.frame.edit_ancho
+        )
+
+        if not res.is_success:
+            self._view.frame.combo_subcategoria_acuario.setFocus()
+            return res
+
+        # Valida la profundidad de la urna
+        res = UrnaValidator.validate_profundidad(
+            self._view.frame.edit_profundo
+        )
+
+        if not res.is_success:
+            self._view.frame.edit_profundo.setFocus()
+            return res
+
+        # Valida la altura de la urna
+        res = UrnaValidator.validate_altura(
+            self._view.frame.edit_alto
+        )
+
+        if not res.is_success:
+            self._view.frame.edit_alto.setFocus()
+            return res
+
+        # Válida el grosor del cristal
+        res = UrnaValidator.validate_grosor(
+            self._view.frame.edit_grosor
+        )
+
+        if not res.is_success:
+            self._view.frame.edit_grosor.setFocus()
+            return res
+
+        # Válida el volumen del tanque
+        res = UrnaValidator.validate_volumen(
+            self._view.frame.edit_volumen
+        )
+
+        if not res.is_success:
+            self._view.frame.edit_volumen.setFocus()
+            return res
+
+        # Válida el volumen del tanque
+        res = UrnaValidator.validate_volumen(
+            self._view.frame.edit_volumen
+        )
+
+        if not res.is_success:
+            self._view.frame.edit_volumen.setFocus()
+            return res
+
+        return Result.success(1)
 
     def dialog_accept(self):
         """ Se acepta el diálogo. """
@@ -143,48 +235,204 @@ class CategoriaIncidenciaDialogController(BaseController):
             return
 
         # Configuramos la entidad
-        self.categoria_incidencia_result = CategoriaIncidenciaEntity(
+        self.urna_result = UrnaEntity(
             id = res.value,
             num = None,
-            categoria_incidencia = self._view.frame
-                                            .edit_categoria_incidencia.text(),
-            observaciones = self._view.frame.text_observaciones.toPlainText()
-                          if self._view.frame.text_observaciones.toPlainText()
+            id_marca = self._view.frame.combo_marca.currentData(),
+            modelo = self._view.frame.edit_modelo.text(),
+            anchura = self._view.frame.edit_ancho.text(),
+            profundidad = self._view.frame.edit_profundo.text(),
+            altura = self._view.frame.edit_alto.text(),
+            grosor_cristal = self._view.frame.edit_grosor.tect(),
+            volumen_tanque = self._view.frame.edit_volumen.text(),
+            id_material = self._view.frame.combo_material.currentData(),
+            descripcion = self._view.frame.text_descripcion.toPlainText()
+                          if self._view.frame.text_descripcion.toPlainText()
                           else None
         )
 
         # Aceptamos el diálogo
         self._view.accept()
 
-    def get_categoria_incidencia(self):
+    def get_urna(self):
         """ Devuelve la categoría de filtro resultante. """
 
-        return self.categoria_incidencia_result
+        return self.urna_result
 
     def dialog_cancel(self):
         """ Cancela el dialogo. """
 
         self._view.reject()
 
-class CategoriaIncidenciaController(CategoriaIncidenciaDialogController):
-    """ Controlador del formulario maestro de categoría de acuario. """
+    def fill_combos(self):
+        """ Llena los combos del formulario"""
 
-    def __init__(self, view: CategoriaIncidenciaView, dao: CategoriaIncidenciaDAO,
-                 mod: CategoriaIncidenciaEntity):
+        self.fill_combo_marca()
+        self.fill_combo_material()
+
+    def fill_combo_marca(self):
+        """ Llena el combo de tipos de acuario. """
+
+        # Vaciamos el combo
+        self._view.frame.combo_marca.clear()
+
+        # Obtenemos los datos
+        dao = MarcaComercialDAO()
+        lista = dao.get_list_combo()
+
+        if not lista.is_success:
+            return Result.failure(
+                "NO SE HAN PODIDO OBTENER LAS 'MARCAS COMERCIALES'."
+            )
+
+        # Llenamos el combo
+        for ent in lista.value:
+            self._view.frame.combo_marca.addItem(ent.nombre_marca, ent.id)
+
+        # Establecemos el autocompletado
+        self.set_autocomplete(self._view.frame.combo_marca)
+
+        # Deseleccionamos el valor
+        self._view.frame.combo_marca.setCurrentIndex(-1)
+
+    def fill_combo_material(self):
+        """ Llena el combo del material de acuario. """
+
+        # Vaciamos el combo
+        self._view.frame.combo_material.clear()
+
+        # Condiciones de salida
+        # if id_row == -1:
+        #     return
+
+        # Obtenemos los datos
+        dao = MaterialUrnaDAO()
+        lista = dao.get_list_combo()
+        if not lista.is_success:
+            return Result.failure(
+                "NO SE HAN PODIDO OBTENER LOS 'MATERIALES DE URNA'."
+            )
+
+        # Llenamos el combo
+        for ent in lista.value:
+            self._view.frame.combo_material.addItem(ent.material, ent.id)
+
+        # Establecemos el autocompletado
+        self.set_autocomplete(self._view.frame.combo_material)
+
+        # Deseleccionamos el valor
+        self._view.frame.combo_material.setCurrentIndex(-1)
+
+
+
+    def set_autocomplete(self, combo: QComboBox):
+        """
+        Configura el autocompletado del combo.
+
+        :param combo: El QCOmboBox al que se le aplica el autocomplete.
+        """
+
+        completer = QCompleter()
+        completer.setModel(combo.model())
+        completer.setCompletionMode(
+            QCompleter.CompletionMode.PopupCompletion)
+        completer.setCaseSensitivity(Qt.CaseSensitivity.CaseInsensitive)
+        combo.setCompleter(completer)
+
+    # def combo_categoria_indexchanged(self):
+    #     """ Se ejecuta cuando el índice del combo cambia. """
+    #
+    #     # Cuando en el combo categoría se limpia, se limpia a su vez el combo de
+    #     # subcategoría
+    #     if self._view.frame.combo_categoria_acuario.currentIndex() == -1:
+    #         self._view.frame.combo_subcategoria_acuario.clear()
+    #         return
+    #
+    #     # Obtenemos el dato a cargar
+    #     data = self._view.frame.combo_categoria_acuario.currentData()
+    #
+    #     # Cargamos el combo subcategoría
+    #     self.fill_combo_subcategoria(data)
+
+    # def open_subcategoria_acuario_dialog(self):
+    #     """ Abrimos el diálogo de subcategoria de acuario. """
+    # 
+    #     # Condiciones de salida
+    #     data = self._view.frame.combo_categoria_acuario.currentData()
+    #     if not data:
+    #         QMessageBox.information(
+    #             self._view,
+    #             self._view.window_title,
+    #             """
+    #             NO HAY NINGUNA CATEGORÍA SELECCIONADA.
+    #             SELECCIONE PRIMERO UNA CATEGFORÍA.
+    #             """
+    #         )
+    #         return
+    # 
+    #     # Configuramos el CONTROLADOR
+    #     ix_cat = self._view.frame.combo_categoria_acuario.currentIndex()
+    #     view = SubcategoriaAcuarioDialog("INSERTAR SUBCATEGORÍA")
+    #     dao = SubcategoriaMaterialUrnaDAO()
+    #     mod = UrnaEntity()
+    # 
+    #     ctrl = SubcategoriaAcuarioDialogController(view, dao, mod, ix_cat)
+    # 
+    #     # Muestra el diálogo
+    #     res = ctrl.show_modal()
+    #     if not res.is_success:
+    #         return
+    # 
+    #     # Configuramos el combo
+    #     combo = self._view.frame.combo_subcategoria_acuario
+    # 
+    #     self.fill_combo_subcategoria(data)
+    #     for i in range(combo.count()):
+    #         if combo.itemData(i) == res.value.id:
+    #             combo.setCurrentIndex(i)
+
+    # def open_categoria_acuario_dialog(self):
+    #     """ Abrimos el diálogo de categoria de acuario. """
+    # 
+    #     view = CategoriaAcuarioDialog(
+    #         "INSERTAR CATEGORÍA DE ACUARIO"
+    #     )
+    #     mod = CategoriaAcuarioEntity()
+    #     dao = CategoriaMaterialUrnaDAO()
+    # 
+    #     ctrl = CategoriaAcuarioDialogController(view, dao, mod)
+    #     res = ctrl.show_modal()
+    # 
+    #     if not res.is_success:
+    #         return
+    # 
+    #     # Configuramos el combo
+    #     combo = self._view.frame.combo_categoria_acuario
+    # 
+    #     self.fill_combo_categoria()
+    #     for i in range(combo.count()):
+    #         if combo.itemData(i) == res.value.id:
+    #             combo.setCurrentIndex(i)
+
+class UrnaController(UrnaDialogController):
+    """ Controlador del formulario maestro de subcategoría de acuario. """
+
+    def __init__(self, view: UrnaView, dao: MaterialUrnaDAO,
+                 mod: UrnaEntity):
         """
         Constructor base
 
         Parámetros:
-        :param view: Vista tipo CategoríaIncidencia
-        :param dao: DAO de la entidad CategoriaIncidenciaDAO
-        :param mod: Modelo de la entidad CategoriaIncidenciaEntity
+        :param view: Vista urna
+        :param dao: DAO de la entidad urna
+        :param mod: Modelo de la entidad urna
         """
 
         # Constructor base
         super().__init__(view, dao, mod)
 
         # Inicializamos el paginador
-        self._pag = Paginator("VISTA_CATEGORIAS_INCIDENCIA", 5)
+        self._pag = Paginator("VISTA_URNAS", 5)
         self._pag.initialize_paginator()
 
         # Llenamos la tabla
@@ -216,7 +464,7 @@ class CategoriaIncidenciaController(CategoriaIncidenciaDialogController):
         self._view.button_load.clicked.connect(self.button_load_click)
         self._view.button_delete.clicked.connect(self.button_delete_click)
         self._view.button_clean.clicked.connect(lambda: self._clean_view(
-            self._view.frame.edit_categoria_incidencia
+            self._view.frame.combo_marca
         ))
         self._view.button_next.clicked.connect(self._next_page)
         self._view.button_prev.clicked.connect(self._previous_page)
@@ -291,7 +539,7 @@ class CategoriaIncidenciaController(CategoriaIncidenciaDialogController):
             QMessageBox.warning(
                 self._view,
                 self._view.window_title,
-                "ANTES DE CARGAR UN REGISTRO, DEBES DE "
+                "ANTES DE ELIMINAR UN REGISTRO, DEBES "
                 "SELECCIONAR UN REGISTRO EN LA TABLA."
             )
             return
@@ -341,7 +589,7 @@ class CategoriaIncidenciaController(CategoriaIncidenciaDialogController):
     def action_cargar(self, event):
         """ Carga un registro desde el menú contextual. """
 
-        self.load()
+        self.load_record()
 
     def button_delete_click(self, event):
         """ Controla el clic en el botón eliminar. """
@@ -351,8 +599,8 @@ class CategoriaIncidenciaController(CategoriaIncidenciaDialogController):
             QMessageBox.warning(
                 self._view,
                 self._view.window_title,
-                "DEBES SELECCIIONAR UN REGISTRO DE LA TABLA ANTES DE "
-                "ELIMINARLO."
+                "DEBES SELECCIONAR UN REGISTRO DE LA "
+                "TABLA ANTES DE ELIMINARLO."
             )
             return
 
@@ -396,8 +644,7 @@ class CategoriaIncidenciaController(CategoriaIncidenciaDialogController):
     def button_load_click(self, event):
         """ Controla el clic del boton de cargar. """
 
-        self.load()
-
+        self.load_record()
 
     def button_update_click(self, event):
         """ Controla el clic del botón actualizar. """
@@ -411,7 +658,7 @@ class CategoriaIncidenciaController(CategoriaIncidenciaDialogController):
                 self._view.window_title,
                 val.error_msg
             )
-            self._view.frame.edit_categoria_incidencia.setFocus()
+            self._view.frame.edit_categoria_acuario.setFocus()
             return
 
 
@@ -482,10 +729,10 @@ class CategoriaIncidenciaController(CategoriaIncidenciaDialogController):
         self.configure_table_after_crud(res.value)
 
     def fill_tableview(self, table: QTableView,
-                       data: list[CategoriaIncidenciaEntity]):
+                       data: list[UrnaEntity]):
         """ Carga los datos en la tabla. """
 
-        tv_model = CategoriaIncidenciaTableModel(data)
+        tv_model = UrnaTableModel(data)
         table.setModel(tv_model)
         table.setColumnHidden(0, True)
         table.resizeColumnsToContents()
@@ -500,7 +747,7 @@ class CategoriaIncidenciaController(CategoriaIncidenciaDialogController):
         val = self.validate_view()
 
         if not val.is_success:
-            self._view.frame.edit_categoria_incidencia.setFocus()
+            self._view.frame.edit_categoria_acuario.setFocus()
             return val
 
         # Configura la entidad
@@ -508,11 +755,12 @@ class CategoriaIncidenciaController(CategoriaIncidenciaDialogController):
 
         # Actualiza el registro
         res = self._dao.update(ent)
+
         if not res.is_success:
             return Result.failure(res.error_msg)
 
         # Limpiamos el formulario
-        self._clean_view(self._view.frame.edit_categoria_incidencia)
+        self._clean_view(self._view.frame.combo_marca)
 
         # Configuramos la tabla
         self.load_tableview()
@@ -520,7 +768,7 @@ class CategoriaIncidenciaController(CategoriaIncidenciaDialogController):
 
         return Result.success(ent.id)
 
-    def load(self) -> Result:
+    def load_record(self) -> Result:
         """ Carga el registro en el formulario. """
 
         # Carga el modelo de la fila seleccionada
@@ -529,7 +777,7 @@ class CategoriaIncidenciaController(CategoriaIncidenciaDialogController):
         # Chequea si se ha seleccionado una fila
         if not selection_model.hasSelection():
             return Result.failure(
-                "ANTES DE CARGAR UN REGISTRO, DEBES DE "
+                "ANTES DE CARGAR UN REGISTRO, DEBES "
                 "SELECCIONAR UN REGISTRO EN LA TABLA."
             )
 
@@ -539,28 +787,65 @@ class CategoriaIncidenciaController(CategoriaIncidenciaDialogController):
         modelo = self._view.data_table.model()
 
         # Lee los datos del modelo
-        id_cat = modelo.index(fila, 0).data()
-        categoria = modelo.index(fila, 2).data()  # La columna 1 es el
-                                                    # númer correlativo.
-        observaciones = modelo.index(fila, 3).data()
+        id_ent = modelo.index(fila, 0).data()
+        marca = modelo.index(fila, 2).data() #La columna 1 es el nº correlativo.
+        modelo_urna = modelo.index(fila, 3).data()
+        ancho = modelo.index(fila, 4).data()
+        profundo = modelo.index(fila, 5).data()
+        alto = modelo.index(fila, 6).data()
+        grosor = modelo.index(fila, 7).data()
+        volumen = modelo.index(fila, 8).data()
+        material = modelo.index(fila, 9).data()
+        descripcion = modelo.index(fila, 10).data()
 
         # Cargamos los widgets
         self._view.frame.edit_id.setText(
-            str(id_cat) if id_cat is not None else ""
-        )
-        self._view.frame.edit_categoria_incidencia.setText(
-            str(categoria) if categoria is not None else ""
-        )
-        self._view.frame.text_observaciones.setPlainText(
-            str(observaciones) if observaciones is not None else ""
+            str(id_ent) if id_ent is not None else ""
         )
 
-        return Result.success(id_cat)
+        self._view.frame.combo_marca.setCurrentIndex(
+            self._view.frame.combo_marca.findText(marca)
+        )
 
-    def delete(self, id: int) -> Result:
+        self._view.frame.edit_modelo.setText(
+            str(modelo_urna) if modelo_urna is not None else ""
+        )
+
+        self._view.frame.edit_ancho.setText(
+            str(ancho) if ancho is not None else ""
+        )
+
+        self._view.frame.edit_profundo.setText(
+            str(profundo) if profundo is not None else ""
+        )
+
+        self._view.frame.edit_alto.setText(
+            str(alto) if alto is not None else ""
+        )
+
+        self._view.frame.edit_grosor.setText(
+            str(grosor) if grosor is not None else ""
+        )
+
+        self._view.frame.edit_volumen.setText(
+            str(volumen) if volumen is not None else ""
+        )
+
+        self._view.frame.combo_material.setCurrentIndex(
+            self._view.frame.combo_material.findText(material)
+        )
+
+        self._view.frame.text_descripcion.setPlainText(
+            str(descripcion) if descripcion is not None else ""
+        )
+
+        return Result.success(id_ent)
+
+    def delete(self, id_: int) -> Result:
         """ Elimina un registro de la base de datos.
 
-            :param id: Id del registro a eliminar.
+            Parámetros:
+            ID: Id del registro a eliminar.
         """
 
         # Solicitamos doble confirmación
@@ -595,16 +880,16 @@ class CategoriaIncidenciaController(CategoriaIncidenciaDialogController):
             return Result.success(0)
 
         # Elimina el registro
-        res = self._dao.delete(id)
+        res = self._dao.delete(id_)
 
         if not res.is_success:
             return Result.failure(res.error_msg)
 
         # Limpiamos el formulario
-        self._clean_view(self._view.frame.edit_categoria_incidencia)
+        self._clean_view(self._view.frame.combo_marca)
 
         # Configuramos la tabla
         self.load_tableview()
 
-        return Result.success(id)
+        return Result.success(id_)
 

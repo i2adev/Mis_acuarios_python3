@@ -9,8 +9,7 @@ Commentarios:
 # Importaciones
 from PyQt6.QtCore import Qt, QEvent
 from PyQt6.QtGui import QAction
-from PyQt6.QtWidgets import (QWidget, QMessageBox, QTableView, QHeaderView,
-                             QCompleter, QComboBox)
+from PyQt6.QtWidgets import (QWidget, QMessageBox, QTableView, QCompleter, QComboBox)
 
 from Controllers.base_controller import BaseController
 from Model.DAO.paginator import Paginator
@@ -21,8 +20,8 @@ from Model.TableModel.tipo_filtro_table_model import TipoFiltroTableModel
 from Services.Result.result import Result
 from Services.Validators.tipo_filtro_validator import TipoFiltroValidator
 from Views.table_menu_contextual import TableMenuContextual
-from Views.tipo_filtro_dialog import TipoFiltroDialog
-from Views.tipo_filtro_view import TipoFiltroView
+from Views.Dialogs.tipo_filtro_dialog import TipoFiltroDialog
+from Views.Masters.tipo_filtro_view import TipoFiltroView
 
 
 class TipoFiltroDialogController(BaseController):

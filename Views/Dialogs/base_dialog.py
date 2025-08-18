@@ -105,7 +105,7 @@ class BaseDialog(QDialog):
 
         self.layout_title_bar = QHBoxLayout()  # Layout barra título
         self.layout_title_bar.setContentsMargins(0, 0, 0, 0)
-        self.layout_form_data = QVBoxLayout()  # Layout que contiene el frame con
+        self.layout_form_data = QHBoxLayout()  # Layout que contiene el frame con
                                                # el formulario de datos
         self.layout_footer = QHBoxLayout()  # Layout pie de formulario
 
@@ -244,7 +244,7 @@ if __name__ == "__main__":
     ventana = BaseDialog("BASE DIALOG")
 
     # Cargar el archivo .qss
-    with open("../Resources/Styles/main_style.qss", "r",
+    with open("../../Resources/Styles/main_style.qss", "r",
               encoding="utf-8-sig") as f:
         estilo = f.read()
         app.setStyleSheet(estilo)

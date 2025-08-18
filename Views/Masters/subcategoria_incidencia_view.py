@@ -1,23 +1,22 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
-Fecha:      18/07/2025
+Fecha:      25/07/2025
 Commentarios:
     Módulo que contiene el formulario maestro de la subcategoría de
-    acuario.
+    incidencia.
 """
 import sys
 
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QApplication, QWidget
 
-from Views.base_view import BaseView
-from Views.categoria_acuario_form import CategoriaAcuarioForm
-from Views.subcategoria_acuario_form import SubcategoriaAcuarioForm
+from Views.Masters.base_view import BaseView
+from Views.Forms.subcategoria_incidencia_form import SubcategoriaIncidenciaForm
 
 
-class SubcategoriaAcuarioView(BaseView):
+class SubcategoriaIncidenciaView(BaseView):
     """
-    Formulario maestro de la SUBCATEGORÍA DE ACUARIO.
+    Formulario maestro de la SUBCATEGORÍA DE INCIDENCIA.
     """
 
     def __init__(self, w_title: str):
@@ -26,8 +25,7 @@ class SubcategoriaAcuarioView(BaseView):
         super().__init__(w_title)
 
         # Configuramos el formulario
-        self.frame = SubcategoriaAcuarioForm()
-        # self.frame_main.setFixedWidth(650)
+        self.frame = SubcategoriaIncidenciaForm()
         self.layout_form_data.addWidget(self.frame)
         self.set_tab_order()
 
@@ -42,10 +40,10 @@ class SubcategoriaAcuarioView(BaseView):
             widget.setFocusPolicy(Qt.FocusPolicy.ClickFocus)
 
         # Establecemos las politicas de focus
-        self.frame.combo_categoria_acuario.setFocusPolicy(
+        self.frame.combo_categoria_incidencia.setFocusPolicy(
             Qt.FocusPolicy.StrongFocus
         )
-        self.frame.edit_subcategoria_acuario.setFocusPolicy(
+        self.frame.edit_subcategoria_incidencia.setFocusPolicy(
             Qt.FocusPolicy.StrongFocus
         )
         self.frame.text_observaciones.setFocusPolicy(
@@ -54,11 +52,11 @@ class SubcategoriaAcuarioView(BaseView):
 
         # Establecer el orden
         self.setTabOrder(
-            self.frame.combo_categoria_acuario,
-            self.frame.edit_subcategoria_acuario
+            self.frame.combo_categoria_incidencia,
+            self.frame.edit_subcategoria_incidencia
         )
         self.setTabOrder(
-            self.frame.edit_subcategoria_acuario,
+            self.frame.edit_subcategoria_incidencia,
             self.frame.text_observaciones
         )
 
@@ -66,10 +64,10 @@ class SubcategoriaAcuarioView(BaseView):
 if __name__ == "__main__":
     app = QApplication(sys.argv)
 
-    ventana = SubcategoriaAcuarioView("...::OOO::....")
+    ventana = SubcategoriaIncidenciaView("...::OOO::....")
 
     # Cargar el archivo .qss
-    with open("../Resources/Styles/main_style.qss", "r",
+    with open("../../Resources/Styles/main_style.qss", "r",
               encoding="utf-8-sig") as f:
         estilo = f.read()
         app.setStyleSheet(estilo)

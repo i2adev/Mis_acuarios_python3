@@ -1,21 +1,21 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
-Fecha:      28/07/2025
+Fecha:      31/07/2025
 Commentarios:
-    Módulo que contiene el modelo de visualización de la tabla de MARCAS 
-    COMERCIALES. Este módulo se encarga de dar formato a los datos de la tabla.
+    Módulo que contiene el modelo de visualización de la tabla de ACUARIOS. 
+    Este módulo se encarga de dar formato a los datos de la tabla.
 """
 from PyQt6.QtCore import QAbstractTableModel, Qt, QModelIndex
 
-from Model.Entities.marca_comercial_entity import MarcaComercialEntity
+from Model.Entities.urna_entity import UrnaEntity
 
 
-class MarcaComercialTableModel(QAbstractTableModel):
+class UrnaTableModel(QAbstractTableModel):
     """
-    Clase que controla la visualización de la lista de tipos de acuario.
+    Clase que controla la visualización de la lista de urnas.
     """
 
-    def __init__(self, data: list[MarcaComercialEntity]):
+    def __init__(self, data: list[UrnaEntity]):
         """
         Constructor de la clase.
 
@@ -24,8 +24,8 @@ class MarcaComercialTableModel(QAbstractTableModel):
 
         super().__init__()
         self.data = data
-        self._headers = ["ID", "#", "MARCA", "DIRECCIÓN", "CÓDIGO POSTAL",
-                         "POBLACIÓN", "PROVINCIA", "PAÍS", "OBSERVACIONES"]
+        self._headers = ["ID", "#", "MARCA", "MODELO", "ANCHO", "PROF.", "ALTO",
+                         "GROSOR", "VOLUMEN", "MATERIAL", "DESCRIPTION"]
 
     def rowCount(self, parent=QModelIndex()):
         """ Devuelve el número de filas de la lista de tipos de filtro. """
@@ -56,19 +56,23 @@ class MarcaComercialTableModel(QAbstractTableModel):
         elif columna == 1:
             return entidad.num
         elif columna == 2:
-            return entidad.nombre_marca
+            return entidad.id_marca
         elif columna == 3:
-            return entidad.direccion
+            return entidad.modelo
         elif columna == 4:
-            return entidad.cod_postal
+            return entidad.anchura
         elif columna == 5:
-            return entidad.poblacion
+            return entidad.profundidad
         elif columna == 6:
-            return entidad.provincia
+            return entidad.altura
         elif columna == 7:
-            return entidad.id_pais
+            return entidad.grosor_cristal
         elif columna == 8:
-            return entidad.observaciones
+            return entidad.volumen_tanque
+        elif columna == 9:
+            return entidad.id_material
+        elif columna == 10:
+            return entidad.descripcion
 
     def headerData(self, section, orientation,
                    role=Qt.ItemDataRole.DisplayRole):
@@ -83,3 +87,21 @@ class MarcaComercialTableModel(QAbstractTableModel):
             return self._headers[section]
         else:
             return str(section + 1)
+
+    @staticmethod
+    def brakdown_dimensions(self, dimensions: str) -> list[int]:
+        """
+        Separa la cadena de las dimensiones en enteros que representan la
+        longitud, profundidad y altura del acuario.
+
+        :param dimensions: Cadena que representa las dimensiones del acuario
+        """
+
+        lista = dimensions.split()
+        lista = lista[0].split("x")
+        ancho = int(lista[0])
+        profundo = int(lista[1])
+        alto = int(lista[2])
+        dims = [ancho, profundo, alto]
+
+        return dims

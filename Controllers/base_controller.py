@@ -176,7 +176,7 @@ class BaseController(QObject):
         # Ocultar la columna ID (columna 0)
         table.setColumnHidden(0, True)
 
-        # Hacer que la columna de observaciones use el espaciorestante
+        # Hacer que la columna de descripcion use el espaciorestante
         last_column_ix = table.model().columnCount() - 1
         header = table.horizontalHeader()
         header.setSectionResizeMode(last_column_ix, QHeaderView.ResizeMode.Stretch)
