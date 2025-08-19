@@ -117,7 +117,7 @@ class TipoAcuarioDialogController(BaseController):
         ent.id_categoria_acuario = self._view.frame.combo_categoria_acuario.currentData()
         ent.id_subcategoria_acuario = (self._view.frame
                                        .combo_subcategoria_acuario.currentData())
-        ent.observaciones = self._view.frame.text_observaciones.toPlainText()
+        ent.observaciones = self._view.frame.text_descripcion.toPlainText()
 
         return ent
 
@@ -187,8 +187,8 @@ class TipoAcuarioDialogController(BaseController):
             id_ta_acuario = self._view.frame.combo_categoria_acuario.currentData(),
             id_subcat_acuario = self._view.frame
                     .combo_subcategoria_acuario.currentData(),
-            observaciones = self._view.frame.text_observaciones.toPlainText()
-                          if self._view.frame.text_observaciones.toPlainText()
+            observaciones = self._view.frame.text_descripcion.toPlainText()
+                          if self._view.frame.text_descripcion.toPlainText()
                           else None
         )
 
@@ -746,7 +746,7 @@ class TipoAcuarioController(TipoAcuarioDialogController):
             self._view.frame.combo_subcategoria_acuario.findText(subcategoria)
         )
 
-        self._view.frame.text_observaciones.setPlainText(
+        self._view.frame.text_descripcion.setPlainText(
             str(observaciones) if observaciones is not None else ""
         )
 

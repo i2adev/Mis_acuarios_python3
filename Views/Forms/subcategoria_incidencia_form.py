@@ -62,7 +62,7 @@ class SubcategoriaIncidenciaForm(QFrame):
             "edit_subcategoria_incidencia"
         )
         self.text_observaciones = QPlainTextEdit()
-        self.text_observaciones.setObjectName("text_observaciones")
+        self.text_observaciones.setObjectName("text_descripcion")
 
         # Combos
         self.combo_categoria_incidencia = QComboBox()

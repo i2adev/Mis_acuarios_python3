@@ -8,6 +8,7 @@ Commentarios:
 from PyQt6.QtWidgets import QMessageBox
 
 from Model.DAO.base_dao import BaseDAO
+from Model.Entities.material_urna_entity import MaterialUrnaEntity
 from Model.Entities.urna_entity import UrnaEntity
 from Model.Entities.categoria_acuario_entity import CategoriaAcuarioEntity
 from Model.Entities.categoria_incidencia_entity import CategoriaIncidenciaEntity
@@ -302,6 +303,10 @@ class Paginator:
                                     f["ANCHURA"], f["PROFUNDIDAD"], f["ALTURA"],
                                     f["GROSOR"], f["VOLUMEN_BRUTO"],
                                     f["MATERIAL"], f["DESCRIPCION"])
+                         for f in res.value]
+        if self.procedure == "VISTA_MATERIALES_URNA":
+            data_list = [MaterialUrnaEntity(f["ID"], f["NUM"], f["MATERIAL"],
+                                          f["DESCRIPCION"])
                          for f in res.value]
 
         self.total_data = data_list

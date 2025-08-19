@@ -1,9 +1,10 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
-Fecha:      29/07/2025
+Fecha:      19/08/2025
 Commentarios:
-    Módulo que contiene la clase controladora de la entidad MARCA COMERCIAL.
+    Módulo que contiene la clase controladora de la entidad MATERIAL DE LA URNA.
 """
+
 
 # Importaciones
 from PyQt6.QtCore import Qt, QEvent
@@ -11,58 +12,45 @@ from PyQt6.QtGui import QAction
 from PyQt6.QtWidgets import (QWidget, QMessageBox, QTableView, QCompleter, QComboBox)
 
 from Controllers.base_controller import BaseController
-from Model.DAO.marca_comercial_dao import MarcaComercialDAO
+from Model.DAO.material_urna_dao import MaterialUrnaDAO
 from Model.DAO.paginator import Paginator
-from Model.DAO.pais_dao import PaisDAO
-from Model.Entities.marca_comercial_entity import MarcaComercialEntity
-from Model.TableModel.marcas_comercial_table_model import \
-    MarcaComercialTableModel
+from Model.Entities.categoria_acuario_entity import CategoriaAcuarioEntity
+from Model.Entities.material_urna_entity import MaterialUrnaEntity
+from Model.TableModel.material_urna_table_model import MaterialUrnaTableModel
 from Services.Result.result import Result
-from Services.Validators.marca_comercial_validator import \
-    MarcaComercialValidator
-from Views.Dialogs.marca_comercial_dialog import MarcaComercialDialog
-from Views.Masters.marca_comercial_view import MarcaComercialView
+from Services.Validators.material_urna_validator import MaterialUrnaValidator
+from Views.Dialogs.material_urna_dialog import MaterialUrnaDialog
+from Views.Masters.material_urna_view import MaterialUrnaView
 from Views.table_menu_contextual import TableMenuContextual
 
-class MarcaComercialDialogController(BaseController):
+
+class MaterialUrnaDialogController(BaseController):
     """ Controlador del diálogo subcategoría de acuario. """
 
-    def __init__(self, view: QWidget, dao: MarcaComercialDAO,
-                 mod: MarcaComercialEntity, index: int = -1):
+    def __init__(self, view: MaterialUrnaDialog, dao: MaterialUrnaDAO,
+                 mod: MaterialUrnaEntity):
         """
         Constructor base
 
-        :param view: Vista tipo MarcaComercialDialog
-        :param dao: DAO de la entidad MarcaComercialDAO
-        :param mod: Modelo de la entidad MarcaCOmercialEntity
-        :param index: No aplicable en esta clase
+        Parámetros:
+        :param view: Vista tipo MaterialUrna
+        :param dao: DAO de la entidad MaterialUrnaDAO
+        :param mod: Modelo de la entidad MaterialUrnaEntity
         """
-
-        # Inicializamos las variables
-        self.index = index
 
         # inicializamos la vista y pasamos al constructor padre
         super().__init__(view, dao, mod)
 
-        # Llenamo los combos
-        self.fill_combos()
-
         # Inicializamos los eventos
         self.init_basic_handlers()
-
-        # Seleccionar el valor en el combo
-        if self.index != -1:
-            self._view.frame.combo_pais.setCurrentIndex(index)
 
     def show_modal(self) -> Result:
         """ Abre la centava modal. """
 
         if self._view.exec():
-            self._view.frame.combo_pais.setCurrentIndex(self.index)
-
             # Obtenemos la subcategoría de acuario
-            subcategoria_acuario = self.get_marca_comercial()
-            return Result.success(subcategoria_acuario)
+            material = self.get_material()
+            return Result.success(material)
         else:
             return Result.failure("NO SE HA PODIDO OBTENER LA ENTIDAD.")
 
@@ -72,7 +60,7 @@ class MarcaComercialDialogController(BaseController):
         """
         self.init_imput_handlers()
 
-        if isinstance(self._view, MarcaComercialDialog):
+        if isinstance(self._view, MaterialUrnaDialog):
             self.init_dialog_handlers()
 
     def init_dialog_handlers(self):
@@ -85,27 +73,23 @@ class MarcaComercialDialogController(BaseController):
     def init_imput_handlers(self):
         """ Inicializa los controles de entrada. """
 
+        # Controles de entrada de texto
         for widget in self._view.findChildren(QWidget):
             if isinstance(widget, self._text_widgets):
                 widget.installEventFilter(self)
 
-    def entity_configuration(self) -> MarcaComercialEntity:
+    def entity_configuration(self) -> MaterialUrnaEntity:
         """ Configura la entidad. """
 
-        ent = MarcaComercialEntity()
+        ent = MaterialUrnaEntity()
 
         if self._view.frame.edit_id.text():
             ent.id = int(self._view.frame.edit_id.text())
         else:
             ent.id = None
 
-        ent.nombre_marca = self._view.frame.edit_marca.text()
-        ent.direccion = self._view.frame.edit_direccion.text()
-        ent.cod_postal = self._view.frame.edit_cod_postal.text()
-        ent.poblacion = self._view.frame.edit_poblacion.text()
-        ent.provincia = self._view.frame.edit_provincia.text()
-        ent.id_pais = self._view.frame.combo_pais.currentData()
-        ent.observaciones = self._view.frame.text_descripcion.toPlainText()
+        ent.material = self._view.frame.edit_material.text()
+        ent.descripcion = self._view.frame.text_descripcion.toPlainText()
 
         return ent
 
@@ -127,60 +111,21 @@ class MarcaComercialDialogController(BaseController):
             return res
 
         # Limpiamos el formulario
-        self._clean_view(self._view.frame.edit_marca)
+        self._clean_view(self._view.frame.edit_material)
 
         return Result.success(res.value)
 
     def validate_view(self):
         """ Valida el formulario. """
 
-        # Valida la marca
-        val = MarcaComercialValidator.validate_marca(
-            self._view.frame.edit_marca
+        # Valida el material
+        res = MaterialUrnaValidator.validate_material(
+            self._view.frame.edit_material
         )
 
-        if not val.is_success:
-            return val
-
-        # Valida la dirección
-        val = MarcaComercialValidator.validate_direccion(
-            self._view.frame.edit_direccion
-        )
-
-        if not val.is_success:
-            return val
-
-        # Valida el código postal
-        val = MarcaComercialValidator.validate_cod_postal(
-            self._view.frame.edit_cod_postal
-        )
-
-        if not val.is_success:
-            return val
-
-        # Valida población
-        val = MarcaComercialValidator.validate_poblacion(
-            self._view.frame.edit_poblacion
-        )
-
-        if not val.is_success:
-            return val
-
-        # Valida la provincia
-        val = MarcaComercialValidator.validate_provincia(
-            self._view.frame.edit_provincia
-        )
-
-        if not val.is_success:
-            return val
-
-        # Valida el país
-        val = MarcaComercialValidator.validate_pais(
-            self._view.frame.combo_pais
-        )
-
-        if not val.is_success:
-            return val
+        if not res.is_success:
+            self._view.frame.edit_material.setFocus()
+            return res
 
         return Result.success(1)
 
@@ -199,16 +144,11 @@ class MarcaComercialDialogController(BaseController):
             return
 
         # Configuramos la entidad
-        self.marca_comercial_result = MarcaComercialEntity(
+        self.material_urna_result = MaterialUrnaEntity(
             id = res.value,
             num = None,
-            nombre_marca = self._view.frame.edit_marca.text(),
-            direccion = self._view.frame.edit_direccion.text(),
-            cod_postal = self._view.frame.edit_cod_postal.text(),
-            poblacion = self._view.frame.edit_poblacion.text(),
-            provincia = self._view.frame.edit_provincia.text,
-            id_pais = self._view.frame.combo_pais.currentData(),
-            observaciones = self._view.frame.text_descripcion.toPlainText()
+            material = self._view.frame.edit_material.text(),
+            descripcion = self._view.frame.text_descripcion.toPlainText()
                           if self._view.frame.text_descripcion.toPlainText()
                           else None
         )
@@ -216,50 +156,21 @@ class MarcaComercialDialogController(BaseController):
         # Aceptamos el diálogo
         self._view.accept()
 
-    def get_marca_comercial(self):
-        """ Devuelve la categoría de filtro resultante. """
+    def get_material(self):
+        """ Devuelve el material de la urna resultante. """
 
-        return self.marca_comercial_result
+        return self.material_urna_result
 
     def dialog_cancel(self):
         """ Cancela el dialogo. """
 
         self._view.reject()
 
-    def fill_combos(self):
-        """ Llena los combos del formulario"""
-
-        self.fill_combo_pais()
-
-    def fill_combo_pais(self):
-        """ Llena el combo de paises. """
-
-        # Vaciamos el combo
-        self._view.frame.combo_pais.clear()
-
-        # Obtenemos los datos
-        dao = PaisDAO()
-        lista = dao.get_list_combo()
-        if not lista.is_success:
-            return Result.failure(
-                "NO SE HAN PODIDO OBTENER LOS 'PAISES'."
-            )
-
-        # Llenamos el combo
-        for ent in lista.value:
-            self._view.frame.combo_pais.addItem(ent.pais, ent.id)
-
-        # Establecemos el autocompletado
-        self.set_autocomplete(self._view.frame.combo_pais)
-
-        # Deseleccionamos el valor
-        self._view.frame.combo_pais.setCurrentIndex(-1)
-
     def set_autocomplete(self, combo: QComboBox):
         """
         Configura el autocompletado del combo.
 
-        :param combo: El QCOmboBox al que se le aplica él autocomplete.
+        :param combo: El QCOmboBox al que se le aplica el autocomplete.
         """
 
         completer = QCompleter()
@@ -269,25 +180,25 @@ class MarcaComercialDialogController(BaseController):
         completer.setCaseSensitivity(Qt.CaseSensitivity.CaseInsensitive)
         combo.setCompleter(completer)
 
-class MarcaComercialController(MarcaComercialDialogController):
+class MaterialUrnaController(MaterialUrnaDialogController):
     """ Controlador del formulario maestro de subcategoría de acuario. """
 
-    def __init__(self, view: MarcaComercialView, dao: MarcaComercialDAO,
-                 mod: MarcaComercialEntity):
+    def __init__(self, view: MaterialUrnaView, dao: MaterialUrnaDAO,
+                 mod: MaterialUrnaEntity):
         """
         Constructor base
 
         Parámetros:
-        :param view: Vista tipo MarcaComercialView
-        :param dao: DAO de la entidad MarcaComercial
-        :param mod: Modelo de la entidad MarcaComercialEntity
+        :param view: Vista material de urna
+        :param dao: DAO de la entidad material de urna
+        :param mod: Modelo de la entidad material de urna
         """
 
-        # Constructor base:
+        # Constructor base
         super().__init__(view, dao, mod)
 
         # Inicializamos el paginador
-        self._pag = Paginator("VISTA_MARCAS_COMERCIALES", 10)
+        self._pag = Paginator("VISTA_MATERIALES_URNA", 5)
         self._pag.initialize_paginator()
 
         # Llenamos la tabla
@@ -319,7 +230,7 @@ class MarcaComercialController(MarcaComercialDialogController):
         self._view.button_load.clicked.connect(self.button_load_click)
         self._view.button_delete.clicked.connect(self.button_delete_click)
         self._view.button_clean.clicked.connect(lambda: self._clean_view(
-            self._view.frame.edit_marca
+            self._view.frame.edit_material
         ))
         self._view.button_next.clicked.connect(self._next_page)
         self._view.button_prev.clicked.connect(self._previous_page)
@@ -328,19 +239,19 @@ class MarcaComercialController(MarcaComercialDialogController):
         self._view.button_close.clicked.connect(
             lambda: self._view.close()
         )
+
         # Inicializamos los combos
         self._view.combo_select_page.currentIndexChanged.connect(
             self.combo_page_indexchanged
         )
+
         # Eventos de la tabla
         self._view.data_table.customContextMenuRequested.connect(
             self.show_context_menu
         )
 
     def combo_page_indexchanged(self, event: QEvent):
-        """
-        Se ejecuta cuando el índice del combo de selección de página.
-        """
+        """ Muestra el menú contextual de la tabla. """
 
         page = self._view.combo_select_page.currentData()
 
@@ -394,7 +305,7 @@ class MarcaComercialController(MarcaComercialDialogController):
             QMessageBox.warning(
                 self._view,
                 self._view.window_title,
-                "ANTES DE ELIMINAR UN REGISTRO, DEBES DE "
+                "ANTES DE ELIMINAR UN REGISTRO, DEBES "
                 "SELECCIONAR UN REGISTRO EN LA TABLA."
             )
             return
@@ -444,7 +355,7 @@ class MarcaComercialController(MarcaComercialDialogController):
     def action_cargar(self, event):
         """ Carga un registro desde el menú contextual. """
 
-        self.load()
+        self.load_record()
 
     def button_delete_click(self, event):
         """ Controla el clic en el botón eliminar. """
@@ -454,8 +365,8 @@ class MarcaComercialController(MarcaComercialDialogController):
             QMessageBox.warning(
                 self._view,
                 self._view.window_title,
-                "DEBES SELECCIONAR UN REGISTRO DE LA TABLA ANTES DE "
-                "ELIMINARLO."
+                "DEBES SELECCIONAR UN REGISTRO DE LA "
+                "TABLA ANTES DE ELIMINARLO."
             )
             return
 
@@ -499,8 +410,7 @@ class MarcaComercialController(MarcaComercialDialogController):
     def button_load_click(self, event):
         """ Controla el clic del boton de cargar. """
 
-        self.load()
-
+        self.load_record()
 
     def button_update_click(self, event):
         """ Controla el clic del botón actualizar. """
@@ -514,9 +424,8 @@ class MarcaComercialController(MarcaComercialDialogController):
                 self._view.window_title,
                 val.error_msg
             )
-            self._view.frame.edit_marca.setFocus()
+            self._view.frame.edit_categoria_acuario.setFocus()
             return
-
 
         # Actualiza el registro
         res = self.update()
@@ -527,12 +436,11 @@ class MarcaComercialController(MarcaComercialDialogController):
                 self._view.window_title,
                 res.error_msg
             )
-            return
 
         # Configuramos el paginador
         self._pag.initialize_paginator()
 
-        # # Establecemos la página actual
+        # Establecemos la página actual
         self._view.combo_select_page.setCurrentIndex(-1)
 
         # Seleccionamos el último registro utilizado
@@ -586,10 +494,10 @@ class MarcaComercialController(MarcaComercialDialogController):
         self.configure_table_after_crud(res.value)
 
     def fill_tableview(self, table: QTableView,
-                       data: list[MarcaComercialEntity]):
+                       data: list[CategoriaAcuarioEntity]):
         """ Carga los datos en la tabla. """
 
-        tv_model = MarcaComercialTableModel(data)
+        tv_model = MaterialUrnaTableModel(data)
         table.setModel(tv_model)
         table.setColumnHidden(0, True)
         table.resizeColumnsToContents()
@@ -604,7 +512,7 @@ class MarcaComercialController(MarcaComercialDialogController):
         val = self.validate_view()
 
         if not val.is_success:
-            self._view.frame.edit_marca.setFocus()
+            self._view.frame.edit_categoria_acuario.setFocus()
             return val
 
         # Configura la entidad
@@ -617,7 +525,7 @@ class MarcaComercialController(MarcaComercialDialogController):
             return Result.failure(res.error_msg)
 
         # Limpiamos el formulario
-        self._clean_view(self._view.frame.edit_marca)
+        self._clean_view(self._view.frame.edit_material)
 
         # Configuramos la tabla
         self.load_tableview()
@@ -625,7 +533,7 @@ class MarcaComercialController(MarcaComercialDialogController):
 
         return Result.success(ent.id)
 
-    def load(self) -> Result:
+    def load_record(self) -> Result:
         """ Carga el registro en el formulario. """
 
         # Carga el modelo de la fila seleccionada
@@ -634,7 +542,7 @@ class MarcaComercialController(MarcaComercialDialogController):
         # Chequea si se ha seleccionado una fila
         if not selection_model.hasSelection():
             return Result.failure(
-                "ANTES DE CARGAR UN REGISTRO, DEBES DE "
+                "ANTES DE CARGAR UN REGISTRO, DEBES "
                 "SELECCIONAR UN REGISTRO EN LA TABLA."
             )
 
@@ -644,50 +552,25 @@ class MarcaComercialController(MarcaComercialDialogController):
         modelo = self._view.data_table.model()
 
         # Lee los datos del modelo
-        id_ma = modelo.index(fila, 0).data()
-        marca = modelo.index(fila, 2).data()  # La columna 1 es el
+        id_row = modelo.index(fila, 0).data()
+        material = modelo.index(fila, 2).data()  # La columna 1 es el
                                                     # númer correlativo.
-        direccion = modelo.index(fila, 3).data()
-        cod_postal = modelo.index(fila, 4).data()
-        poblacion = modelo.index(fila, 5).data()
-        provincia = modelo.index(fila, 6).data()
-        pais = modelo.index(fila, 7).data()
-        observaciones = modelo.index(fila, 8).data()
+        descripcion = modelo.index(fila, 3).data()
 
         # Cargamos los widgets
         self._view.frame.edit_id.setText(
-            str(id_ma) if id_ma is not None else None
+            str(id_row) if id_row is not None else None
         )
 
-        self._view.frame.edit_marca.setText(
-            str(marca) if marca is not None else None
-        )
-
-        self._view.frame.edit_direccion.setText(
-            str(direccion) if direccion is not None else None
-        )
-
-        self._view.frame.edit_cod_postal.setText(
-            str(cod_postal) if cod_postal is not None else None
-        )
-
-        self._view.frame.edit_poblacion.setText(
-            str(poblacion) if poblacion is not None else None
-        )
-
-        self._view.frame.edit_provincia.setText(
-            str(provincia) if provincia is not None else None
-        )
-
-        self._view.frame.combo_pais.setCurrentIndex(
-            self._view.frame.combo_pais.findText(pais)
+        self._view.frame.edit_material.setText(
+            str(material) if material else None
         )
 
         self._view.frame.text_descripcion.setPlainText(
-            str(observaciones) if observaciones is not None else ""
+            str(descripcion) if descripcion is not None else None
         )
 
-        return Result.success(id_ma)
+        return Result.success(id_row)
 
     def delete(self, id_: int) -> Result:
         """ Elimina un registro de la base de datos.
@@ -734,7 +617,7 @@ class MarcaComercialController(MarcaComercialDialogController):
             return Result.failure(res.error_msg)
 
         # Limpiamos el formulario
-        self._clean_view(self._view.frame.edit_marca)
+        self._clean_view(self._view.frame.edit_material)
 
         # Configuramos la tabla
         self.load_tableview()

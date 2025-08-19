@@ -1,26 +1,28 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
-Fecha:      12/08/2025
+Fecha:      28/06/2025
 Commentarios:
-    Módulo que contiene la vista de la entidad MATERIAL DE URNA.
+    Módulo que contiene la vista de la entidad CATEGORÍA DE ACUARIO.
 """
-
-import traceback
-
 from PyQt6.QtWidgets import QMessageBox
 
 from Model.DAO.base_dao import BaseDAO
 from Model.DAO.database import DBManager
-from Model.Entities.material_urna_entity import MaterialUrnaEntity
-from Model.TableModel.urna_table_model import UrnaTableModel
+from Model.Entities.fotografia import FotografiaEntity
 from Services.Result.result import Result
 
 
-class MaterialUrnaDAO(BaseDAO):
+class FotografiaDAO(BaseDAO):
     """
     Clase que gestiona las operaciones en la base de datos de la entidad
-    MaterialUrnaEntity.
+    FotografiaEntity.
     """
+
+    def get_list_combo(self) -> Result:
+        pass
+
+    def get_list(self) -> Result:
+        pass
 
     def __init__(self):
         """ Constructor de clase. """
@@ -28,7 +30,7 @@ class MaterialUrnaDAO(BaseDAO):
         self.db = DBManager()
         self.ent = None
 
-    def get_list(self) -> Result:
+    def get_list_id(self, tabla: str, idf: int) -> Result:
         """ Obtiene el listado completo. """
 
         with self.db:
@@ -40,21 +42,21 @@ class MaterialUrnaDAO(BaseDAO):
                 )
 
             # Obtenemos los datos
-            sql = """
-                SELECT    ID_MATERIAL AS ID,
-                          ROW_NUMBER() OVER(ORDER BY MATERIAL) AS NUM,
-                          MATERIAL AS MATERIAL,
-                          DESCRIPCION AS DESCRIPCION
-                FROM      MATERIALES_URNA;
+            sql = f"""
+                SELECT  ID_FOTOGRAFIA AS ID,
+                        ROW_NUMBER() OVER(ORDER BY ID_FOTOGRAFIA DESC) AS NUM,
+                        ID_FORANEA AS ID_FORANEA,
+                        FOTOGRAFIA AS FOTOGRAFIA
+                WHERE   ID_FORANEA = :idf
+                FROM    {tabla}
             """
             try:
-                # dims = UrnaTableModel.brakdown_dimensions()
                 cursor = self.db.conn.cursor()
-                cursor.execute(sql)
-
-                # POSIBLE ERROR AL DESGLOSAR LAS DIMENSIONES
-                value = [MaterialUrnaEntity(
-                    f["ID"], f["NUM"], f["MATERIAL"],f["DESCRIPCION"]
+                cursor.execute(sql, {
+                    "idf": idf
+                })
+                value = [FotografiaEntity(
+                    f["ID"], f["NUM"], f["ID_FORANEA"], f["FOTOGRAFIA"]
                 ) for f in cursor.fetchall()]
 
                 # Devolvemos los datos
@@ -71,56 +73,25 @@ class MaterialUrnaDAO(BaseDAO):
             finally:
                 self.db.close_connection()
 
-    def get_list_combo(self):
-        """ Obtiene el listado para el combo. """
-
-        with self.db:
-            # Obtenemos los datos
-            sql = """
-                SELECT    ID_MATERIAL AS ID,
-                          MATERIAL AS VALUE
-                FROM      MATERIALES_URNA
-                ORDER BY  MATERIAL;
-              """
-            try:
-                cursor = self.db.conn.cursor()
-                cursor.execute(sql)
-                values = [MaterialUrnaEntity(
-                    f["ID"], None, f["VALUE"]
-                ) for f in cursor.fetchall()]
-
-                # Devolvemos los datos
-                return Result.success(values)
-
-            except self.db.conn.OperationalError as e:
-                return Result.failure(f"[ERROR OPERACIONAL]\n {e}")
-            except self.db.conn.ProgrammingError as e:
-                return Result.failure(f"[ERROR DE PROGRAMACIÓN]\n {e}")
-            except self.db.conn.DatabaseError as e:
-                return Result.failure(f"[ERROR DE BASE DE DATOS]\n {e}")
-            except self.db.conn.Error as e:
-                return Result.failure(f"[ERROR GENERAL SQLITE]\n {e}")
-            finally:
-                self.db.close_connection()
-
-    def insert(self, ent: MaterialUrnaEntity) -> Result:
+    def insert(self, ent: FotografiaEntity, tabla: str) -> Result:
         """
         Inserta un nuevo registro en la base de datos.
 
-        :param ent: MaterialUrnaEntity
+        Parametros:
+        :param ent: Entidad derivada de BaseEntity
         """
 
         with self.db:
             # Obtenemos los datos
-            sql = """
-                INSERT INTO MATERIALES_URNA (MATERIAL, DESCRIPCION)
-                VALUES                      (:mat, :desc);
+            sql = f"""
+                INSERT INTO {tabla} (ID_FORANEA, FOTOGRAFIA)
+                VALUES (:idf, :foto);
             """
             try:
                 cursor = self.db.conn.cursor()
                 cursor.execute(sql, {
-                    "mat": ent.material,
-                    "desc": ent.descripcion
+                    "idf": ent.id,
+                    "foto": ent.fotografia
                 })
 
                 # Devolvemos los datos
@@ -129,7 +100,6 @@ class MaterialUrnaDAO(BaseDAO):
                 return Result.success(last_id)
 
             except self.db.conn.OperationalError as e:
-                traceback.print_exc()
                 return Result.failure(f"[ERROR OPERACIONAL]\n {e}")
             except self.db.conn.ProgrammingError as e:
                 return Result.failure(f"[ERROR DE PROGRAMACIÓN]\n {e}")
@@ -140,27 +110,28 @@ class MaterialUrnaDAO(BaseDAO):
             finally:
                 self.db.close_connection()
 
-    def update(self, ent: MaterialUrnaEntity) -> Result:
+    def update(self, ent: FotografiaEntity, tabla: str) -> Result:
         """
         Actualiza el registro de la base de datos.
 
-        :param ent: MaterialUrnaEntity
+        Parametros:
+        - ent: Entidad derivada de BaseEntity
         """
 
         with self.db:
             # Obtenemos los datos
-            sql = """
-                UPDATE    MATERIALES_URNA
-                SET       MATERIAL = :mat,
-                          DESCRIPCION = :descr
-                WHERE     ID_MATERIAL = :id;
+            sql = f"""
+                UPDATE  {tabla}
+                SET     ID_FORANEA = :idf,
+                        FOTOGRAFIA = :foto
+                WHERE   ID_FOTOGRAFIA = :id;
             """
             try:
                 cursor = self.db.conn.cursor()
                 cursor.execute(sql, {
-                    "id": ent.id,
-                    "mat": ent.material,
-                    "descr": ent.descripcion
+                    "idf": ent.id_foranea,
+                    "foto": ent.fotografia,
+                    "id": ent.id
                 })
 
                 # Devolvemos los datos
@@ -178,18 +149,19 @@ class MaterialUrnaDAO(BaseDAO):
             finally:
                 self.db.close_connection()
 
-    def delete(self, id: int) -> Result:
+    def delete(self, id: int, tabla: str) -> Result:
         """
         Elimina el registro de la base de datos.
 
-        :param id: Id del registro a aliminar.
+        Parametros:
+        - id: Id del registro a aliminar.
         """
 
         with self.db:
             # Obtenemos los datos
-            sql = """
-                DELETE FROM MATERIALES_URNA
-                WHERE       ID_MATERIAL = :id;
+            sql = f"""
+                DELETE FROM {tabla}
+                WHERE       ID_FOTOGRAFIA = :id;
             """
             try:
                 cursor = self.db.conn.cursor()

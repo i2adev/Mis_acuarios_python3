@@ -55,7 +55,7 @@ class TipoFiltroForm(QFrame):
         self.edit_tipo_filtro = QLineEdit()
         self.edit_tipo_filtro.setObjectName("edit_tipo_filtro")
         self.text_observaciones = QPlainTextEdit()
-        self.text_observaciones.setObjectName("text_observaciones")
+        self.text_observaciones.setObjectName("text_descripcion")
 
     def build_layout(self):
         """ Construye el layout del frame. """

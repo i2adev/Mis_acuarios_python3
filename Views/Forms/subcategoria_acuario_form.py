@@ -57,7 +57,7 @@ class SubcategoriaAcuarioForm(QFrame):
         self.edit_id.setFixedWidth(50)
         self.edit_id.setEnabled(False)
         self.text_observaciones = QPlainTextEdit()
-        self.text_observaciones.setObjectName("text_observaciones")
+        self.text_observaciones.setObjectName("text_descripcion")
 
         # Combos
         self.combo_categoria_acuario = QComboBox()

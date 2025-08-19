@@ -57,7 +57,7 @@ class CategoriaAcuarioForm(QFrame):
         self.edit_categoria_acuario = QLineEdit()
         self.edit_categoria_acuario.setObjectName("edit_categoria_acuario")
         self.text_observaciones = QPlainTextEdit()
-        self.text_observaciones.setObjectName("text_observaciones")
+        self.text_observaciones.setObjectName("text_descripcion")
 
     def build_layout(self):
         """ Construye el layout del frame. """

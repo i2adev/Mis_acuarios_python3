@@ -88,7 +88,7 @@ class CategoriaAcuarioDialogController(BaseController):
             ent.id = None
 
         ent.categoria = self._view.frame.edit_categoria_acuario.text()
-        ent.observaciones = self._view.frame.text_observaciones.toPlainText()
+        ent.observaciones = self._view.frame.text_descripcion.toPlainText()
 
         return ent
 
@@ -146,8 +146,8 @@ class CategoriaAcuarioDialogController(BaseController):
             id = res.value,
             num = None,
             categoria = self._view.frame.edit_categoria_acuario.text(),
-            observaciones = self._view.frame.text_observaciones.toPlainText()
-                          if self._view.frame.text_observaciones.toPlainText()
+            observaciones = self._view.frame.text_descripcion.toPlainText()
+                          if self._view.frame.text_descripcion.toPlainText()
                           else None
         )
 
@@ -550,7 +550,7 @@ class CategoriaAcuarioController(CategoriaAcuarioDialogController):
         self._view.frame.edit_categoria_acuario.setText(
             str(categoria) if categoria is not None else ""
         )
-        self._view.frame.text_observaciones.setPlainText(
+        self._view.frame.text_descripcion.setPlainText(
             str(observaciones) if observaciones is not None else ""
         )
 

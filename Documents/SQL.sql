@@ -442,3 +442,4 @@ INSERT INTO ESTADOS_PROYECTO (NOMBRE_ESTADO, DESCRIPCION) VALUES
 ('En curso', 'Proyecto actualmente en ejecución'),
 ('Finalizado', 'Proyecto completado con éxito'),
 ('Cancelado', 'Proyecto interrumpido antes de su finalización');
+

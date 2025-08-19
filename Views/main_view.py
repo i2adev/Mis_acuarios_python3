@@ -102,6 +102,7 @@ class MainView(QWidget):
         self.maestro_layout.addWidget(self.button_maestro_cat_incidencia)
         self.maestro_layout.addWidget(self.button_maestro_subcat_incidencia)
         self.maestro_layout.addWidget(self.button_maestro_marca)
+        self.maestro_layout.addWidget(self.button_maestro_material)
         self.maestro_layout.addWidget(self.button_maestro_proyecto)
         self.maestro_layout.addWidget(self.button_maestro_tipo_acuario)
         self.maestro_layout.addWidget(self.button_maestro_categoria_acuario)
@@ -368,6 +369,29 @@ class MainView(QWidget):
         )
         self.button_maestro_marca.setFlat(True)
         self.button_maestro_marca.setCursor(
+            QCursor(Qt.CursorShape.PointingHandCursor)
+        )
+
+        self.button_maestro_material = QPushButton(
+            "MATERIALES DE URNAS"
+        )
+        self.button_maestro_material.setStyleSheet(
+            """
+            QPushButton {
+                background-color: transparent;
+                text-align: left;
+                margin-bottom: 0;
+                margin-left: 20;
+                font-family: 'Roboto'; 
+                font-size: 14px;
+            }
+            """
+        )
+        self.button_maestro_material.setObjectName(
+            "button_maestro_material"
+        )
+        self.button_maestro_material.setFlat(True)
+        self.button_maestro_material.setCursor(
             QCursor(Qt.CursorShape.PointingHandCursor)
         )
 

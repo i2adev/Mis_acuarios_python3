@@ -12,14 +12,21 @@ from PyQt6.QtGui import QAction
 from PyQt6.QtWidgets import (QWidget, QMessageBox, QTableView, QCompleter, QComboBox)
 
 from Controllers.base_controller import BaseController
+from Controllers.marca_comercial_controller import \
+    MarcaComercialDialogController
+from Controllers.material_urna_controller import MaterialUrnaDialogController
 from Model.DAO.marca_comercial_dao import MarcaComercialDAO
 from Model.DAO.material_urna_dao import MaterialUrnaDAO
 from Model.DAO.paginator import Paginator
 from Model.DAO.urna_dao import UrnaDAO
+from Model.Entities.marca_comercial_entity import MarcaComercialEntity
+from Model.Entities.material_urna_entity import MaterialUrnaEntity
 from Model.Entities.urna_entity import UrnaEntity
 from Model.TableModel.urna_table_model import UrnaTableModel
 from Services.Result.result import Result
 from Services.Validators.urna_validator import UrnaValidator
+from Views.Dialogs.marca_comercial_dialog import MarcaComercialDialog
+from Views.Dialogs.material_urna_dialog import MaterialUrnaDialog
 from Views.Dialogs.urna_dialog import UrnaDialog
 from Views.Masters.urna_view import UrnaView
 from Views.table_menu_contextual import TableMenuContextual
@@ -85,20 +92,15 @@ class UrnaDialogController(BaseController):
             if isinstance(widget, self._text_widgets):
                 widget.installEventFilter(self)
 
-        # Comboboxes
-        # self._view.frame.combo_categoria_acuario.currentIndexChanged.connect(
-        #     self.combo_categoria_indexchanged
-        # )
-
         # Botones
-        # self._view.frame.button_insert_tipo_acuario.clicked.connect(
-        #     self.open_categoria_acuario_dialog
-        # )
-        # self._view.frame.button_insert_subtipo_acuario.clicked.connect(
-        #     self.open_subcategoria_acuario_dialog
-        # )
+        self._view.frame.button_insert_marca.clicked.connect(
+            self.open_marca_comercial_dialog
+        )
 
-    #   TODO:   CONTINUAR EN LA CONFIGURACIÓN DE LA ENTIDAD
+        self._view.frame.button_insert_material.clicked.connect(
+            self.open_material_urna_dialog
+        )
+
     def entity_configuration(self) -> UrnaEntity:
         """ Configura la entidad. """
 
@@ -339,80 +341,51 @@ class UrnaDialogController(BaseController):
         completer.setCaseSensitivity(Qt.CaseSensitivity.CaseInsensitive)
         combo.setCompleter(completer)
 
-    # def combo_categoria_indexchanged(self):
-    #     """ Se ejecuta cuando el índice del combo cambia. """
-    #
-    #     # Cuando en el combo categoría se limpia, se limpia a su vez el combo de
-    #     # subcategoría
-    #     if self._view.frame.combo_categoria_acuario.currentIndex() == -1:
-    #         self._view.frame.combo_subcategoria_acuario.clear()
-    #         return
-    #
-    #     # Obtenemos el dato a cargar
-    #     data = self._view.frame.combo_categoria_acuario.currentData()
-    #
-    #     # Cargamos el combo subcategoría
-    #     self.fill_combo_subcategoria(data)
+    def open_marca_comercial_dialog(self):
+        """ Abrimos el diálogo de marca comercial. """
 
-    # def open_subcategoria_acuario_dialog(self):
-    #     """ Abrimos el diálogo de subcategoria de acuario. """
-    # 
-    #     # Condiciones de salida
-    #     data = self._view.frame.combo_categoria_acuario.currentData()
-    #     if not data:
-    #         QMessageBox.information(
-    #             self._view,
-    #             self._view.window_title,
-    #             """
-    #             NO HAY NINGUNA CATEGORÍA SELECCIONADA.
-    #             SELECCIONE PRIMERO UNA CATEGFORÍA.
-    #             """
-    #         )
-    #         return
-    # 
-    #     # Configuramos el CONTROLADOR
-    #     ix_cat = self._view.frame.combo_categoria_acuario.currentIndex()
-    #     view = SubcategoriaAcuarioDialog("INSERTAR SUBCATEGORÍA")
-    #     dao = SubcategoriaMaterialUrnaDAO()
-    #     mod = UrnaEntity()
-    # 
-    #     ctrl = SubcategoriaAcuarioDialogController(view, dao, mod, ix_cat)
-    # 
-    #     # Muestra el diálogo
-    #     res = ctrl.show_modal()
-    #     if not res.is_success:
-    #         return
-    # 
-    #     # Configuramos el combo
-    #     combo = self._view.frame.combo_subcategoria_acuario
-    # 
-    #     self.fill_combo_subcategoria(data)
-    #     for i in range(combo.count()):
-    #         if combo.itemData(i) == res.value.id:
-    #             combo.setCurrentIndex(i)
+        # Configuramos el CONTROLADOR
+        view = MarcaComercialDialog("INSERTAR MARCA COMERCIAL")
+        dao = MarcaComercialDAO()
+        mod = MarcaComercialEntity()
 
-    # def open_categoria_acuario_dialog(self):
-    #     """ Abrimos el diálogo de categoria de acuario. """
-    # 
-    #     view = CategoriaAcuarioDialog(
-    #         "INSERTAR CATEGORÍA DE ACUARIO"
-    #     )
-    #     mod = CategoriaAcuarioEntity()
-    #     dao = CategoriaMaterialUrnaDAO()
-    # 
-    #     ctrl = CategoriaAcuarioDialogController(view, dao, mod)
-    #     res = ctrl.show_modal()
-    # 
-    #     if not res.is_success:
-    #         return
-    # 
-    #     # Configuramos el combo
-    #     combo = self._view.frame.combo_categoria_acuario
-    # 
-    #     self.fill_combo_categoria()
-    #     for i in range(combo.count()):
-    #         if combo.itemData(i) == res.value.id:
-    #             combo.setCurrentIndex(i)
+        ctrl = MarcaComercialDialogController(view, dao, mod)
+
+        # Muestra el diálogo
+        res = ctrl.show_modal()
+        if not res.is_success:
+            return
+
+        # Configuramos el combo
+        combo = self._view.frame.combo_marca
+
+        self.fill_combo_marca()
+        for i in range(combo.count()):
+            if combo.itemData(i) == res.value.id:
+                combo.setCurrentIndex(i)
+
+    def open_material_urna_dialog(self):
+        """ Abrimos el diálogo de categoria de acuario. """
+
+        view = MaterialUrnaDialog(
+            "INSERTAR MATERIAL DE URNA"
+        )
+        mod = MaterialUrnaEntity()
+        dao = MaterialUrnaDAO()
+
+        ctrl = MaterialUrnaDialogController(view, dao, mod)
+        res = ctrl.show_modal()
+
+        if not res.is_success:
+            return
+
+        # Configuramos el combo
+        combo = self._view.frame.combo_material
+
+        self.fill_combo_material()
+        for i in range(combo.count()):
+            if combo.itemData(i) == res.value.id:
+                combo.setCurrentIndex(i)
 
 class UrnaController(UrnaDialogController):
     """ Controlador del formulario maestro de subcategoría de acuario. """

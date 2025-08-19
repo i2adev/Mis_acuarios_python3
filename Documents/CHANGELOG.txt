@@ -1,5 +1,23 @@
 ﻿CHANGELOG:
 ================================================================================
+0.7.1   LÓGICA DE MATERIAL DE LA URNA PARA INTEGRARLO CON EL MAESTRO DE URNA
+        -   SE CREA LA ENTIDAD.
+        -   SE CREA EL VALIDADOR.
+        -   SE CREA EL FORMULARIO.
+        -   SE CREA EL DIÁLOGO.
+        -   SE CREA EL MAESTRO.
+        -   SE CREA EL CONTROLADOR.
+
+        BASE DE DATOS:
+        -   SE CREA LAS TABLAS DE LAS FOTOGRAFÍAS:
+            -   FOTOGRAFIÁS DE FAUNA.
+            -   FOTOGRAFÍAS DE FLORA.
+            -   FOTOGRAFÍAS DE ACUARIOS.
+            -   FOTOGRAFÍAS DE FILTROS.
+            -   FOTOGRAFÍAS DE ILUMINACIONES.
+            -   FOTOGRAFÍAS DE INCIDENCIAS.
+            -   FOTOGRAFÍAS DE PROYECTOS.
+
 0.7.0   SE AÑADE LA LÓGICA BÁSICA DE URNA:
         -   SE CREA LA VISTA EN LA BASE DE DATOS.
         -   SE CREA LA ENTIDAD.

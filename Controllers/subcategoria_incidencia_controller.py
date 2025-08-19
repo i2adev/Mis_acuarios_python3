@@ -103,7 +103,7 @@ class SubcategoriaAcuarioDialogController(BaseController):
 
         ent.id_categoria = self._view.frame.combo_categoria_incidencia.currentData()
         ent.subcategoria = self._view.frame.edit_subcategoria_incidencia.text()
-        ent.observaciones = self._view.frame.text_observaciones.toPlainText()
+        ent.observaciones = self._view.frame.text_descripcion.toPlainText()
 
         return ent
 
@@ -170,8 +170,8 @@ class SubcategoriaAcuarioDialogController(BaseController):
             num = None,
             id_categoria = self._view.frame.combo_categoria_incidencia.currentData(),
             subcategoria = self._view.frame.edit_subcategoria_incidencia.text(),
-            observaciones = self._view.frame.text_observaciones.toPlainText()
-                          if self._view.frame.text_observaciones.toPlainText()
+            observaciones = self._view.frame.text_descripcion.toPlainText()
+                          if self._view.frame.text_descripcion.toPlainText()
                           else None
         )
 
@@ -625,7 +625,7 @@ class SubcategoriaIncidenciaController(SubcategoriaAcuarioDialogController):
             str(subcategoria) if categoria is not None else ""
         )
 
-        self._view.frame.text_observaciones.setPlainText(
+        self._view.frame.text_descripcion.setPlainText(
             str(observaciones) if observaciones is not None else ""
         )
 

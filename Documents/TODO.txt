@@ -1,6 +1,43 @@
 ﻿================================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
+19/08/2025  LA LÓGICA DE LA URNA: SE AÑADE LA OPCIÓN DE INSERTAR IMÁGENES
+            -   SE CREA LA ENTIDAD FOTOGRAFÍA.                              DONE
+            -   SE CREA EL DAO DE LA FOTOGRAFÍA.                            DONE
+            -   SE INTEGRA EL DIALOGO DE MARCA COMERCIAL CON EL MAESTRO DE LA
+                URNA.                                                       DONE
+            -   SE CARGAN LAS IMÁGENES EN EL LABEL.                         TODO
+
+            LÓGICA DE MATERIAL DE LA URNA PARA INTEGRARLO CON EL MAESTRO DE URNA
+            -   SE CREA LA ENTIDAD.                                         DONE
+            -   SE CREA EL DAO.                                      DONE BEFORE
+            -   SE CREA EL VALIDADOR.                                       DONE
+            -   SE CREA EL FORMULARIO.                                      DONE
+            -   SE CREA EL DIÁLOGO.                                         DONE
+            -   SE CREA EL MAESTRO.                                         DONE
+            -   SE CREA EL CONTROLADOR.                                     DONE
+            -   SE CREA EL MODELO DE TABLA PARA LOS MATERIALES DE LA URNA.  DONE
+            -   SE ENLAZA EL MAESTRO CON LA VISTA PRINCIPAL.                DONE
+            -   SE ENLAZA EL DIALOGO CON LAVISTA DE URNAS.                  DONE
+
+            BASE DE DATOS:
+            -   SE ELIMINAN LAS TABLAS FOTOGRAFÍAS Y CATEGORÍAS DE FOTOGRAFÍAS.
+                                                                            DONE
+            -   SE CREA LAS TABLAS DE LAS FOTOGRAFÍAS:
+                -   FOTOGRAFIÁS DE FAUNA.                                   DONE
+                -   FOTOGRAFÍAS DE FLORA.                                   DONE
+                -   FOTOGRAFÍAS DE ACUARIOS.                                DONE
+                -   FOTOGRAFÍAS DE FILTROS.                                 DONE
+                -   FOTOGRAFÍAS DE ILUMINACIONES.                           DONE
+                -   FOTOGRAFÍAS DE INCIDENCIAS.                             DONE
+                -   FOTOGRAFÍAS DE PROYECTOS.                               DONE
+
+            -   SE CREA LA VISTA DE MATERIALES DE LAS URNAS.                DONE
+
+18/08/2025  BASE DE DATOS:
+            -   SE AÑADE LA TABLA DE LAS FOTOGRAFÍAS.                       DONE
+            -   SE CREA LA TABLA DE LAS CATEGORÍAS DE LAS FOTOGRAFÍAS.      DONE
+
 30/07/2025  SE CREA LA LÓGICA BÁSICA DE URNAS:
             -   SE CREA LA VISTA EN LA BASE DE DATOS.                       DONE
             -   SE CREA LA ENTIDAD.                                         DONE

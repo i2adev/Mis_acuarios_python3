@@ -89,7 +89,7 @@ class TipoFiltroDialogController(BaseController):
             ent.id = None
 
         ent.tipo_filtro = self._view.frame.edit_tipo_filtro.text()
-        ent.observaciones = self._view.frame.text_observaciones.toPlainText()
+        ent.observaciones = self._view.frame.text_descripcion.toPlainText()
 
         return ent
 
@@ -148,8 +148,8 @@ class TipoFiltroDialogController(BaseController):
             id = res.value,
             num = None,
             tipo_filtro = self._view.frame.edit_tipo_filtro.text(),
-            observaciones = self._view.frame.text_observaciones.toPlainText()
-                          if self._view.frame.text_observaciones.toPlainText()
+            observaciones = self._view.frame.text_descripcion.toPlainText()
+                          if self._view.frame.text_descripcion.toPlainText()
                           else None
         )
 
@@ -567,7 +567,7 @@ class TipoFiltroController(TipoFiltroDialogController):
             str(tipo_filtro) if tipo_filtro else None
         )
 
-        self._view.frame.text_observaciones.setPlainText(
+        self._view.frame.text_descripcion.setPlainText(
             str(observaciones) if observaciones is not None else None
         )
 

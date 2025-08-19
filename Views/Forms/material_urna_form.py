@@ -1,19 +1,19 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
-Fecha:      24/07/2025
+Fecha:      19/08/2025
 Commentarios:
-    Módulo que contiene los controles del formulario de la entidad CATE-
-    GORÍA DE INCIDENCIA.
+    Módulo que contiene los controles del formulario de la entidad MATERIAL 
+    DE URNA.
 """
 import sys
 
 from PyQt6.QtWidgets import QFrame, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, \
     QPlainTextEdit, QApplication
 
-class CategoriaIncidenciaForm(QFrame):
+class MaterialUrnaForm(QFrame):
     """
-    Clase que contiene los controles de edición de la entidad categoría
-    de acuario.
+    Clase que contiene los controles de edición de la entidad material 
+    de urna.
     """
 
     def __init__(self):
@@ -34,8 +34,8 @@ class CategoriaIncidenciaForm(QFrame):
         self.layout_first_line = QHBoxLayout()
         ### ID
         self.layout_id = QVBoxLayout()
-        ### Tipo incidencia
-        self.layout_tipo_incidencia = QVBoxLayout()
+        ### Material
+        self.layout_material = QVBoxLayout()
 
         ## Segunda linea
         ### Observaciones
@@ -44,7 +44,7 @@ class CategoriaIncidenciaForm(QFrame):
         # Etiquetas
         self.label_id = QLabel("ID")
         self.label_id.setFixedWidth(50)
-        self.label_tipo_incidencia = QLabel("TIPO INCIDENCIA")
+        self.label_material = QLabel("MATERIAL DE LA URNA")
         self.label_observaciones = QLabel("OBSERVACIONES")
 
         # Textos
@@ -52,10 +52,10 @@ class CategoriaIncidenciaForm(QFrame):
         self.edit_id.setObjectName("edit_id")
         self.edit_id.setFixedWidth(50)
         self.edit_id.setEnabled(False)
-        self.edit_categoria_incidencia = QLineEdit()
-        self.edit_categoria_incidencia.setObjectName("edit_categoria_incidencia")
-        self.text_observaciones = QPlainTextEdit()
-        self.text_observaciones.setObjectName("text_descripcion")
+        self.edit_material = QLineEdit()
+        self.edit_material.setObjectName("edit_material")
+        self.text_descripcion = QPlainTextEdit()
+        self.text_descripcion.setObjectName("text_descripcion")
 
     def build_layout(self):
         """ Construye el layout del frame. """
@@ -65,17 +65,17 @@ class CategoriaIncidenciaForm(QFrame):
         self.layout_id.addWidget(self.label_id)
         self.layout_id.addWidget(self.edit_id)
 
-        ## Tipo de incidencia
-        self.layout_tipo_incidencia.addWidget(self.label_tipo_incidencia)
-        self.layout_tipo_incidencia.addWidget(self.edit_categoria_incidencia)
+        ## Tipo de filtro
+        self.layout_material.addWidget(self.label_material)
+        self.layout_material.addWidget(self.edit_material)
 
         ## Montamos la primera linea
         self.layout_first_line.addLayout(self.layout_id)
-        self.layout_first_line.addLayout(self.layout_tipo_incidencia)
+        self.layout_first_line.addLayout(self.layout_material)
 
         # Segunda linea
         self.layout_observaciones.addWidget(self.label_observaciones)
-        self.layout_observaciones.addWidget(self.text_observaciones)
+        self.layout_observaciones.addWidget(self.text_descripcion)
 
         # Montamos el frame
         self.layout_form.addLayout(self.layout_first_line)
@@ -86,7 +86,7 @@ class CategoriaIncidenciaForm(QFrame):
 if __name__ == "__main__":
     app = QApplication(sys.argv)
 
-    ventana = CategoriaIncidenciaForm()
+    ventana = MaterialUrnaForm()
     ventana.show()
 
     sys.exit(app.exec())

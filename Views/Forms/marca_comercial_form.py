@@ -92,7 +92,7 @@ class MarcaComercialForm(QFrame):
         self.edit_provincia = QLineEdit()
         self.edit_provincia.setObjectName("edit_provincia")
         self.text_observaciones = QPlainTextEdit()
-        self.text_observaciones.setObjectName("text_observaciones")
+        self.text_observaciones.setObjectName("text_descripcion")
 
         # Combos
         self.combo_pais = QComboBox()
