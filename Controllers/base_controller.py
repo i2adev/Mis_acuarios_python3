@@ -10,11 +10,14 @@ Commentarios:
 # Importaciones
 from PyQt6.QtCore import Qt, QObject, QEvent
 from PyQt6.QtWidgets import (QLineEdit, QTextEdit, QPlainTextEdit, QWidget,
-                             QTableView, QComboBox, QHeaderView, QMessageBox)
+                             QTableView, QComboBox, QHeaderView, QMessageBox,
+                             QLabel)
 import enchant  # Enchant es la librería de revisión orográfica
 
 from Model.DAO.base_dao import BaseDAO
 from Model.Entities.base_entity import BaseEntity
+from Views.Forms.image_form import ImageForm
+
 
 class BaseController(QObject):
     """ Controlador base de la que hereda el resto de controladores. """
@@ -114,12 +117,26 @@ class BaseController(QObject):
                 table.selectRow(fila)
                 table.scrollTo(index)
 
+    def _clean_photografy(self, frame: ImageForm):
+        """ Limpia los controles de la imagen. """
+
+        for widget in frame.findChildren(QWidget):
+            # QLabel
+            if isinstance(widget, QLabel):
+                if widget.objectName() == "DE":
+                    continue
+                widget.clear()
+
     def _clean_view(self, control: QWidget):
         """ Limpia los controles del formulario. """
 
         # Limpia los controles del formulario
         for widget in self._view.findChildren(QWidget):
-            # En caso de que sean controles de edición de textgo
+            # Contrl de imagen
+            if isinstance(widget, ImageForm):
+                self._clean_photografy(widget)
+
+            # En caso de que sean controles de edición de texto
             if isinstance(widget, self._text_widgets):
                 widget.clear()
 

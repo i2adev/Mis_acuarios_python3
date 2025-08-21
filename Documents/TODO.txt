@@ -6,6 +6,8 @@ FECHA		DESCRIPCIÓN
             -   SE CREA EL DAO DE LA FOTOGRAFÍA.                            DONE
             -   SE INTEGRA EL DIALOGO DE MARCA COMERCIAL CON EL MAESTRO DE LA
                 URNA.                                                       DONE
+            -   AÑADIDA LÓGICA DE INSERCIÓN DE FOTOGRAFÍAS.                 DONE
+            -   SE AÑADE LA LIMPIEZA DE LOS DATOS DE LAS IMAGENES.          TODO
             -   SE CARGAN LAS IMÁGENES EN EL LABEL.                         TODO
 
             LÓGICA DE MATERIAL DE LA URNA PARA INTEGRARLO CON EL MAESTRO DE URNA

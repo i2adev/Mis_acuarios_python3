@@ -4,21 +4,24 @@ Fecha:      11/08/2025
 Commentarios:
     Módulo que contiene la clase controladora de la entidad ACUARIO.
 """
-
+from pathlib import Path
 
 # Importaciones
 from PyQt6.QtCore import Qt, QEvent
-from PyQt6.QtGui import QAction
-from PyQt6.QtWidgets import (QWidget, QMessageBox, QTableView, QCompleter, QComboBox)
+from PyQt6.QtGui import QAction, QPixmap
+from PyQt6.QtWidgets import (QWidget, QMessageBox, QTableView, QCompleter,
+                             QComboBox, QFileDialog)
 
 from Controllers.base_controller import BaseController
 from Controllers.marca_comercial_controller import \
     MarcaComercialDialogController
 from Controllers.material_urna_controller import MaterialUrnaDialogController
+from Model.DAO.fotografia_dao import FotografiaDAO
 from Model.DAO.marca_comercial_dao import MarcaComercialDAO
 from Model.DAO.material_urna_dao import MaterialUrnaDAO
 from Model.DAO.paginator import Paginator
 from Model.DAO.urna_dao import UrnaDAO
+from Model.Entities.fotografia import FotografiaEntity
 from Model.Entities.marca_comercial_entity import MarcaComercialEntity
 from Model.Entities.material_urna_entity import MaterialUrnaEntity
 from Model.Entities.urna_entity import UrnaEntity
@@ -49,6 +52,11 @@ class UrnaDialogController(BaseController):
         # inicializamos la vista y pasamos al constructor padre
         super().__init__(view, dao, mod)
 
+        # Declaramos las variables
+        self.lista_fotos: list[FotografiaEntity] = []
+        self.fdao = FotografiaDAO("FOTOGRAFIAS_URNA")
+
+
         # Llenamo los combos
         self.fill_combos()
 
@@ -59,8 +67,6 @@ class UrnaDialogController(BaseController):
         """ Abre la centava modal. """
 
         if self._view.exec():
-            # self._view.frame.combo_categoria_acuario.setCurrentIndex(self.ix_ta)
-
             # Obtenemos la subcategoría de acuario
             acuario = self.get_urna()
             return Result.success(acuario)
@@ -101,6 +107,11 @@ class UrnaDialogController(BaseController):
             self.open_material_urna_dialog
         )
 
+        # Botones de imagen
+        self._view.frame_imagen.button_load.clicked.connect(
+            self.load_images
+        )
+
     def entity_configuration(self) -> UrnaEntity:
         """ Configura la entidad. """
 
@@ -136,14 +147,23 @@ class UrnaDialogController(BaseController):
         ent = self.entity_configuration()
 
         # Inserta el registro
-        res = self._dao.insert(ent)
-        if not res.is_success:
-            return res
+        resUrna = self._dao.insert(ent)
+        if not resUrna.is_success:
+            return resUrna
+
+        # Insertamos las fotografías
+        if self.lista_fotos:
+            for f in self.lista_fotos:
+                f.id_foranea = resUrna.value
+
+                resFoto = self.fdao.insert(f)
+                if not resFoto.is_success:
+                    return Result.failure(resFoto.error_msg)
 
         # Limpiamos el formulario
         self._clean_view(self._view.frame.combo_marca)
 
-        return Result.success(res.value)
+        return Result.success(resUrna.value)
 
     def validate_view(self):
         """ Valida el formulario. """
@@ -386,6 +406,52 @@ class UrnaDialogController(BaseController):
         for i in range(combo.count()):
             if combo.itemData(i) == res.value.id:
                 combo.setCurrentIndex(i)
+
+    def load_images(self):
+        """ Carga las imágenes. """
+        filed_dialog = QFileDialog()
+
+        # Permite seleccionar varios archivos
+        filed_dialog.setFileMode(QFileDialog.FileMode.ExistingFiles)
+
+        filed_dialog.setNameFilter("Imágenes JPG (*.jpg *.jpeg)")
+
+        if filed_dialog.exec():
+            i = 1  # Indice de imagenes
+
+            files = filed_dialog.selectedFiles()
+            for f in files:
+                self.lista_fotos.append(FotografiaEntity(
+                    id = None,
+                    num = i,
+                    id_foranea = None,
+                    ruta = f,
+                    fotografia = Path(f).read_bytes()
+                ))
+                i += 1
+
+            # Configurar linea de datos
+            self._view.frame_imagen.label_num_imagen.setText("1")
+            self._view.frame_imagen.label_num_total_imegenes.setText(
+                str(len(self.lista_fotos))
+            )
+
+            # Mostrar el el QLabel
+            px = QPixmap()
+            px.loadFromData(self.lista_fotos[0].fotografia)
+
+            if px.isNull():
+                self._view.frame_imagen.label_image.clear()
+                return
+
+            self._view.frame_imagen.label_image.setPixmap(px.scaled(
+                self._view.frame_imagen.label_image.size(),
+                Qt.AspectRatioMode.KeepAspectRatio,
+                Qt.TransformationMode.SmoothTransformation
+            ))
+            self._view.frame_imagen.label_image.setAlignment(
+                Qt.AlignmentFlag.AlignCenter
+            )
 
 class UrnaController(UrnaDialogController):
     """ Controlador del formulario maestro de subcategoría de acuario. """

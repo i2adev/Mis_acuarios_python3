@@ -18,19 +18,23 @@ class FotografiaDAO(BaseDAO):
     FotografiaEntity.
     """
 
+    def __init__(self, tabla: str):
+        """
+        Constructor de clase.
+        :param tabla: Nombre de la tabla en la que se insertarán las fotos.
+        """
+
+        self.db = DBManager()
+        self.ent = None
+        self.tabla = tabla
+
     def get_list_combo(self) -> Result:
         pass
 
     def get_list(self) -> Result:
         pass
 
-    def __init__(self):
-        """ Constructor de clase. """
-
-        self.db = DBManager()
-        self.ent = None
-
-    def get_list_id(self, tabla: str, idf: int) -> Result:
+    def get_list_id(self, idf: int) -> Result:
         """ Obtiene el listado completo. """
 
         with self.db:
@@ -48,7 +52,7 @@ class FotografiaDAO(BaseDAO):
                         ID_FORANEA AS ID_FORANEA,
                         FOTOGRAFIA AS FOTOGRAFIA
                 WHERE   ID_FORANEA = :idf
-                FROM    {tabla}
+                FROM    {self.tabla}
             """
             try:
                 cursor = self.db.conn.cursor()
@@ -73,7 +77,7 @@ class FotografiaDAO(BaseDAO):
             finally:
                 self.db.close_connection()
 
-    def insert(self, ent: FotografiaEntity, tabla: str) -> Result:
+    def insert(self, ent: FotografiaEntity) -> Result:
         """
         Inserta un nuevo registro en la base de datos.
 
@@ -84,13 +88,14 @@ class FotografiaDAO(BaseDAO):
         with self.db:
             # Obtenemos los datos
             sql = f"""
-                INSERT INTO {tabla} (ID_FORANEA, FOTOGRAFIA)
+                INSERT INTO {self.tabla} (ID_FORANEA, FOTOGRAFIA)
                 VALUES (:idf, :foto);
             """
+
             try:
                 cursor = self.db.conn.cursor()
                 cursor.execute(sql, {
-                    "idf": ent.id,
+                    "idf": ent.id_foranea,
                     "foto": ent.fotografia
                 })
 
@@ -110,7 +115,7 @@ class FotografiaDAO(BaseDAO):
             finally:
                 self.db.close_connection()
 
-    def update(self, ent: FotografiaEntity, tabla: str) -> Result:
+    def update(self, ent: FotografiaEntity) -> Result:
         """
         Actualiza el registro de la base de datos.
 
@@ -121,7 +126,7 @@ class FotografiaDAO(BaseDAO):
         with self.db:
             # Obtenemos los datos
             sql = f"""
-                UPDATE  {tabla}
+                UPDATE  {self.tabla}
                 SET     ID_FORANEA = :idf,
                         FOTOGRAFIA = :foto
                 WHERE   ID_FOTOGRAFIA = :id;
@@ -149,7 +154,7 @@ class FotografiaDAO(BaseDAO):
             finally:
                 self.db.close_connection()
 
-    def delete(self, id: int, tabla: str) -> Result:
+    def delete(self, id: int) -> Result:
         """
         Elimina el registro de la base de datos.
 
@@ -160,7 +165,7 @@ class FotografiaDAO(BaseDAO):
         with self.db:
             # Obtenemos los datos
             sql = f"""
-                DELETE FROM {tabla}
+                DELETE FROM {self.tabla}
                 WHERE       ID_FOTOGRAFIA = :id;
             """
             try:

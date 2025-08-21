@@ -6,6 +6,7 @@ Commentarios:
 """
 import sys
 
+from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QFrame, QVBoxLayout, QApplication, QHBoxLayout, \
     QLabel, QSizePolicy, QPushButton, QSpacerItem
 
@@ -62,13 +63,17 @@ class ImageForm(QFrame):
         self.button_prev.setFixedWidth(20)
         ## Label numero de imagen
         self.label_num_imagen = QLabel()
-        self.label_num_imagen.setFixedWidth(50)
+        self.label_num_imagen.setFixedWidth(30)
+        self.label_num_imagen.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.label_num_imagen.setObjectName("label_num_imagen")
         ## Label DE
         self.label_de = QLabel(" DE ")
+        self.label_de.setObjectName("DE")
         ## Label número total de imagenes
         self.label_num_total_imegenes = QLabel()
-        self.label_num_total_imegenes.setFixedWidth(50)
+        self.label_num_total_imegenes.setFixedWidth(30)
+        self.label_num_total_imegenes.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.label_num_total_imegenes.setObjectName("label_num_total_imegenes")
         ## Botón siguiente
         self.button_next = QPushButton(">")
         self.button_next.setObjectName("button_next")
