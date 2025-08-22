@@ -1,14 +1,19 @@
 ﻿================================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
+21/08/2025  SE AÑADE LÓGICA DE CARGAR LAS IMÁGENES
+            -   SE AÑADE LA LÓGICA DE NAVEGACIÓN ENTRE IMÁGENES CARGADAS.   DONE
+            -   SE PROGRAMA PARA CARGAR LA IMÁGENES CUANDO SE CARGA UNA URNA.
+                                                                            DONE
+
 19/08/2025  LA LÓGICA DE LA URNA: SE AÑADE LA OPCIÓN DE INSERTAR IMÁGENES
             -   SE CREA LA ENTIDAD FOTOGRAFÍA.                              DONE
             -   SE CREA EL DAO DE LA FOTOGRAFÍA.                            DONE
             -   SE INTEGRA EL DIALOGO DE MARCA COMERCIAL CON EL MAESTRO DE LA
                 URNA.                                                       DONE
             -   AÑADIDA LÓGICA DE INSERCIÓN DE FOTOGRAFÍAS.                 DONE
-            -   SE AÑADE LA LIMPIEZA DE LOS DATOS DE LAS IMAGENES.          TODO
-            -   SE CARGAN LAS IMÁGENES EN EL LABEL.                         TODO
+            -   SE AÑADE LA LIMPIEZA DE LOS DATOS DE LAS IMÁGENES.          DONE
+            -   SE CARGAN LAS IMÁGENES EN EL LABEL.                         DONE
 
             LÓGICA DE MATERIAL DE LA URNA PARA INTEGRARLO CON EL MAESTRO DE URNA
             -   SE CREA LA ENTIDAD.                                         DONE

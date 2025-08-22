@@ -4,11 +4,13 @@ Fecha:      28/06/2025
 Commentarios:
     Módulo que contiene la vista de la entidad CATEGORÍA DE ACUARIO.
 """
+import sqlite3
+
 from PyQt6.QtWidgets import QMessageBox
 
 from Model.DAO.base_dao import BaseDAO
 from Model.DAO.database import DBManager
-from Model.Entities.fotografia import FotografiaEntity
+from Model.Entities.fotografia_entity import FotografiaEntity
 from Services.Result.result import Result
 
 
@@ -34,7 +36,7 @@ class FotografiaDAO(BaseDAO):
     def get_list(self) -> Result:
         pass
 
-    def get_list_id(self, idf: int) -> Result:
+    def get_list_by_id(self, idf: int) -> Result:
         """ Obtiene el listado completo. """
 
         with self.db:
@@ -51,20 +53,20 @@ class FotografiaDAO(BaseDAO):
                         ROW_NUMBER() OVER(ORDER BY ID_FOTOGRAFIA DESC) AS NUM,
                         ID_FORANEA AS ID_FORANEA,
                         FOTOGRAFIA AS FOTOGRAFIA
+                FROM    {self.tabla}                
                 WHERE   ID_FORANEA = :idf
-                FROM    {self.tabla}
             """
             try:
                 cursor = self.db.conn.cursor()
                 cursor.execute(sql, {
                     "idf": idf
                 })
-                value = [FotografiaEntity(
-                    f["ID"], f["NUM"], f["ID_FORANEA"], f["FOTOGRAFIA"]
+                rows = [FotografiaEntity(
+                    f["ID"], f["NUM"], f["ID_FORANEA"], None, f["FOTOGRAFIA"]
                 ) for f in cursor.fetchall()]
 
                 # Devolvemos los datos
-                return Result.success(value)
+                return Result.success(rows)
 
             except self.db.conn.OperationalError as e:
                 return Result.failure(f"[ERROR OPERACIONAL]\n {e}")
@@ -96,7 +98,7 @@ class FotografiaDAO(BaseDAO):
                 cursor = self.db.conn.cursor()
                 cursor.execute(sql, {
                     "idf": ent.id_foranea,
-                    "foto": ent.fotografia
+                    "foto": sqlite3.Binary(ent.fotografia)
                 })
 
                 # Devolvemos los datos

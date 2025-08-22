@@ -4,7 +4,7 @@ Fecha:      09/08/2025
 Commentarios:
     Módulo para la validación del formulario de acuario.
 """
-from PyQt6.QtWidgets import QWidget, QLineEdit, QComboBox
+from PyQt6.QtWidgets import QWidget, QLineEdit, QComboBox, QMessageBox
 
 from Services.Result.result import Result
 
@@ -43,14 +43,15 @@ class UrnaValidator:
         """ Válida la anchura de la urna. """
 
         # Sí el texto está vacío
-        if widget.text():
+        if not widget.text():
             return Result.success(1)
 
         # Valida el rango de la anchura
         n = int(widget.text())
-        if 0 > n > 10_000:
-            return Result.failure("LA ANCHURA de la urna DEBE SER "
-                                  "DE 0 A 10.0000 cm.")
+
+        if (n < 10) or (n > 1_000):
+            return Result.failure("LA ANCHURA DE LA URNA DEBE SER "
+                                  "DE 10 A 1.0000 cm.")
 
             # Validación exitosa
         return Result.success(1)
@@ -60,14 +61,15 @@ class UrnaValidator:
         """ Válida la profundidad de la urna. """
 
         # Sí el texto está vacío
-        if widget.text():
+        if not widget.text():
             return Result.success(1)
 
         # Valida el rango de la anchura
         n = int(widget.text())
-        if 0 > n > 2_000:
-            return Result.failure("LA PROFUNDIDAD de la urna DEBE SER "
-                                  "DE 0 A 2.0000 cm.")
+
+        if (n < 10) or (n > 2_000):
+            return Result.failure("LA PROFUNDIDAD DE LA URNA DEBE SER "
+                                  "DE 10 A 2.0000 cm.")
 
             # Validación exitosa
         return Result.success(1)
@@ -77,14 +79,15 @@ class UrnaValidator:
         """ Válida la altura de la urna. """
 
         # Sí el texto está vacío
-        if widget.text():
+        if not widget.text():
             return Result.success(1)
 
         # Valida el rango de la anchura
         n = int(widget.text())
-        if 0 > n > 2_000:
-            return Result.failure("LA ALTURA de la urna DEBE SER "
-                                  "DE 0 A 2.0000 cm.")
+
+        if (n < 10) or (n > 2_000):
+            return Result.failure("LA ALTURA DE LA URNA DEBE SER "
+                                  "DE 10 A 2.0000 cm.")
 
             # Validación exitosa
         return Result.success(1)
@@ -94,14 +97,15 @@ class UrnaValidator:
         """ Válida el grosor del cristal de la urna. """
 
         # Sí el texto está vacío
-        if widget.text():
+        if not widget.text():
             return Result.success(1)
 
         # Valida el rango de la anchura
         n = int(widget.text())
-        if 0 > n > 200:
-            return Result.failure("EL GROSOR DEL CRISTAL de la urna DEBE SER "
-                                  "DE 0 A 200 mm.")
+
+        if (n < 2) or (n > 200):
+            return Result.failure("EL GROSOR DEL CRISTAL DE LA URNA DEBE SER "
+                                  "DE 10 A 200 mm.")
 
             # Validación exitosa
         return Result.success(1)
@@ -111,14 +115,15 @@ class UrnaValidator:
         """ Válida el volumen de la urna. """
 
         # Sí el texto está vacío
-        if widget.text():
+        if not widget.text():
             return Result.success(1)
 
         # Valida el rango de la anchura
         n = int(widget.text())
-        if 0 > n > 10_000:
+
+        if (n < 10) or (n > 2_000):
             return Result.failure("EL VOLUMEN de la urna DEBE SER "
-                                  "DE 0 A 10.000 LITROS.")
+                                  "DE 10 A 2.000 LITROS.")
 
             # Validación exitosa
         return Result.success(1)

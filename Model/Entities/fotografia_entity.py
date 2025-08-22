@@ -16,7 +16,7 @@ class FotografiaEntity:
     fotografia: bytes | None
 
     def __init__(self, id: int = None, num: int = None, id_foranea: int = None,
-                 ruta: str = None,fotografia: bytes = None):
+                 ruta: str = None, fotografia: bytes = None):
         """
         Constructor de clase.
         :param id: Id de la entidad
@@ -40,5 +40,5 @@ class FotografiaEntity:
             ID:         {self.id}
             NUM:        {self.num}
             RELACION:   {self.id_foranea}
-            RUTA:       {self.ruta}
+            FOTOGRAFIA: {len(self.fotografia) if self.fotografia else 0} Bytes
         """

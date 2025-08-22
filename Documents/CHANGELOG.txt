@@ -1,5 +1,8 @@
 ﻿CHANGELOG:
 ================================================================================
+0.7.3   SE AÑADE LA OPCIÓN DE CARGAR LAS IMÁGENES CUANDO SE CARGA UNA URNA.
+        -   SE CARGAN LAS IMÁGENES DE LA BASE DE DATOS CUANDO SE CARGA UNA URNA.
+
 0.7.2   LA LÓGICA DE LA URNA: SE AÑADE LA OPCIÓN DE INSERTAR IMÁGENES
         -   SE CREA LA ENTIDAD FOTOGRAFÍA.
         -   SE CREA EL DAO DE LA FOTOGRAFÍA.

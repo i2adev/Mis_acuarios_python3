@@ -21,7 +21,7 @@ from Model.DAO.marca_comercial_dao import MarcaComercialDAO
 from Model.DAO.material_urna_dao import MaterialUrnaDAO
 from Model.DAO.paginator import Paginator
 from Model.DAO.urna_dao import UrnaDAO
-from Model.Entities.fotografia import FotografiaEntity
+from Model.Entities.fotografia_entity import FotografiaEntity
 from Model.Entities.marca_comercial_entity import MarcaComercialEntity
 from Model.Entities.material_urna_entity import MaterialUrnaEntity
 from Model.Entities.urna_entity import UrnaEntity
@@ -109,7 +109,15 @@ class UrnaDialogController(BaseController):
 
         # Botones de imagen
         self._view.frame_imagen.button_load.clicked.connect(
-            self.load_images
+            self.load_images_for_insert
+        )
+
+        self._view.frame_imagen.button_next.clicked.connect(
+            self.next_image
+        )
+
+        self._view.frame_imagen.button_prev.clicked.connect(
+            self.prev_image
         )
 
     def entity_configuration(self) -> UrnaEntity:
@@ -147,23 +155,24 @@ class UrnaDialogController(BaseController):
         ent = self.entity_configuration()
 
         # Inserta el registro
-        resUrna = self._dao.insert(ent)
-        if not resUrna.is_success:
-            return resUrna
+        res_urna = self._dao.insert(ent)
+        if not res_urna.is_success:
+            return res_urna
 
         # Insertamos las fotografías
         if self.lista_fotos:
             for f in self.lista_fotos:
-                f.id_foranea = resUrna.value
+                f.id_foranea = res_urna.value
 
-                resFoto = self.fdao.insert(f)
-                if not resFoto.is_success:
-                    return Result.failure(resFoto.error_msg)
+                res_foto = self.fdao.insert(f)
+                if not res_foto.is_success:
+                    return Result.failure(res_foto.error_msg)
 
         # Limpiamos el formulario
         self._clean_view(self._view.frame.combo_marca)
+        self.lista_fotos.clear()
 
-        return Result.success(resUrna.value)
+        return Result.success(res_urna.value)
 
     def validate_view(self):
         """ Valida el formulario. """
@@ -192,7 +201,7 @@ class UrnaDialogController(BaseController):
         )
 
         if not res.is_success:
-            self._view.frame.combo_subcategoria_acuario.setFocus()
+            self._view.frame.edit_ancho.setFocus()
             return res
 
         # Valida la profundidad de la urna
@@ -323,10 +332,6 @@ class UrnaDialogController(BaseController):
         # Vaciamos el combo
         self._view.frame.combo_material.clear()
 
-        # Condiciones de salida
-        # if id_row == -1:
-        #     return
-
         # Obtenemos los datos
         dao = MaterialUrnaDAO()
         lista = dao.get_list_combo()
@@ -344,8 +349,6 @@ class UrnaDialogController(BaseController):
 
         # Deseleccionamos el valor
         self._view.frame.combo_material.setCurrentIndex(-1)
-
-
 
     def set_autocomplete(self, combo: QComboBox):
         """
@@ -407,8 +410,9 @@ class UrnaDialogController(BaseController):
             if combo.itemData(i) == res.value.id:
                 combo.setCurrentIndex(i)
 
-    def load_images(self):
-        """ Carga las imágenes. """
+    def load_images_for_insert(self):
+        """ Carga las imágenes a insertar. """
+
         filed_dialog = QFileDialog()
 
         # Permite seleccionar varios archivos
@@ -436,22 +440,70 @@ class UrnaDialogController(BaseController):
                 str(len(self.lista_fotos))
             )
 
-            # Mostrar el el QLabel
-            px = QPixmap()
-            px.loadFromData(self.lista_fotos[0].fotografia)
+            self.show_image()
 
-            if px.isNull():
-                self._view.frame_imagen.label_image.clear()
-                return
+    def show_image(self, number: int = 1):
+        """
+        Muestra la imagen.
+        :param number: Número de imágen a mostrar
+        """
 
-            self._view.frame_imagen.label_image.setPixmap(px.scaled(
-                self._view.frame_imagen.label_image.size(),
-                Qt.AspectRatioMode.KeepAspectRatio,
-                Qt.TransformationMode.SmoothTransformation
-            ))
-            self._view.frame_imagen.label_image.setAlignment(
-                Qt.AlignmentFlag.AlignCenter
+        # Mostrar el el QLabel
+        px = QPixmap()
+        px.loadFromData(self.lista_fotos[number - 1].fotografia)
+
+        if px.isNull():
+            self._view.frame_imagen.label_image.clear()
+            return
+
+        self._view.frame_imagen.label_image.setPixmap(px.scaled(
+            self._view.frame_imagen.label_image.size(),
+            Qt.AspectRatioMode.KeepAspectRatio,
+            Qt.TransformationMode.SmoothTransformation
+        ))
+        self._view.frame_imagen.label_image.setAlignment(
+            Qt.AlignmentFlag.AlignCenter
+        )
+
+    def next_image(self):
+        """ Muestra la siguiente imagen. """
+
+        # Consiguramos las páginas
+        current_num = int(self._view.frame_imagen.label_num_imagen.text())
+        total_number = int(
+            self._view.frame_imagen.label_num_total_imegenes.text()
+        )
+
+        # Establecemos el número de imágen a mostrar
+        show_number = current_num + 1
+        if show_number <= total_number:
+            self.show_image(show_number)
+            self._view.frame_imagen.label_num_imagen.setText(str(show_number))
+        else:
+            QMessageBox.information(
+                self._view,
+                self._view.window_title,
+                "HA LLEGADO A LA ÚLTIMA IMAGEN"
             )
+
+    def prev_image(self):
+        """ Muestra la anterior imagen. """
+
+        # Consiguramos las páginas
+        current_num = int(self._view.frame_imagen.label_num_imagen.text())
+
+        # Establecemos el número de imágen a mostrar
+        show_number = current_num - 1
+        if show_number >= 1:
+            self.show_image(show_number)
+            self._view.frame_imagen.label_num_imagen.setText(str(show_number))
+        else:
+            QMessageBox.information(
+                self._view,
+                self._view.window_title,
+                "HA LLEGADO A LA PRIMERA IMAGEN"
+            )
+
 
 class UrnaController(UrnaDialogController):
     """ Controlador del formulario maestro de subcategoría de acuario. """
@@ -697,7 +749,6 @@ class UrnaController(UrnaDialogController):
                 self._view.window_title,
                 val.error_msg
             )
-            self._view.frame.edit_categoria_acuario.setFocus()
             return
 
 
@@ -714,7 +765,7 @@ class UrnaController(UrnaDialogController):
         # Configuramos el paginador
         self._pag.initialize_paginator()
 
-        # # Establecemos la página actual
+        # Establecemos la página actual
         self._view.combo_select_page.setCurrentIndex(-1)
 
         # Seleccionamos el último registro utilizado
@@ -810,24 +861,46 @@ class UrnaController(UrnaDialogController):
     def load_record(self) -> Result:
         """ Carga el registro en el formulario. """
 
+        # Carga los datos del registro
+        res_id = self.load_data()
+
+        # Carga las imágenes
+        self.load_images(res_id.value)
+
+    def load_images(self, res_id: int):
+        """ Carga las imágenes de la base de datos. """
+
+        # Chequea que el registro contiene imágenes
+        self.lista_fotos = (self.fdao.get_list_by_id(res_id)).value
+
+        # Mostramos las imágenes
+        if len(self.lista_fotos) > 0:
+            # Configurar linea de datos
+            self._view.frame_imagen.label_num_imagen.setText("1")
+            self._view.frame_imagen.label_num_total_imegenes.setText(
+                str(len(self.lista_fotos))
+            )
+            self.show_image()
+
+    def load_data(self) -> Result:
+        """ Carga los datos. """
+
         # Carga el modelo de la fila seleccionada
         selection_model = self._view.data_table.selectionModel()
-
         # Chequea si se ha seleccionado una fila
         if not selection_model.hasSelection():
             return Result.failure(
                 "ANTES DE CARGAR UN REGISTRO, DEBES "
                 "SELECCIONAR UN REGISTRO EN LA TABLA."
             )
-
         # Configuramos la fila
         index = selection_model.currentIndex()
         fila = index.row()
         modelo = self._view.data_table.model()
-
         # Lee los datos del modelo
         id_ent = modelo.index(fila, 0).data()
-        marca = modelo.index(fila, 2).data() #La columna 1 es el nº correlativo.
+        marca = modelo.index(fila,
+                             2).data()  # La columna 1 es el nº correlativo.
         modelo_urna = modelo.index(fila, 3).data()
         ancho = modelo.index(fila, 4).data()
         profundo = modelo.index(fila, 5).data()
@@ -841,44 +914,107 @@ class UrnaController(UrnaDialogController):
         self._view.frame.edit_id.setText(
             str(id_ent) if id_ent is not None else ""
         )
-
         self._view.frame.combo_marca.setCurrentIndex(
             self._view.frame.combo_marca.findText(marca)
         )
-
         self._view.frame.edit_modelo.setText(
             str(modelo_urna) if modelo_urna is not None else ""
         )
-
         self._view.frame.edit_ancho.setText(
             str(ancho) if ancho is not None else ""
         )
-
         self._view.frame.edit_profundo.setText(
             str(profundo) if profundo is not None else ""
         )
-
         self._view.frame.edit_alto.setText(
             str(alto) if alto is not None else ""
         )
-
         self._view.frame.edit_grosor.setText(
             str(grosor) if grosor is not None else ""
         )
-
         self._view.frame.edit_volumen.setText(
             str(volumen) if volumen is not None else ""
         )
-
         self._view.frame.combo_material.setCurrentIndex(
             self._view.frame.combo_material.findText(material)
         )
-
         self._view.frame.text_descripcion.setPlainText(
             str(descripcion) if descripcion is not None else ""
         )
-
         return Result.success(id_ent)
+
+    # def load_record(self) -> Result:
+    #     """ Carga el registro en el formulario. """
+    #
+    #     # Carga el modelo de la fila seleccionada
+    #     selection_model = self._view.data_table.selectionModel()
+    #
+    #     # Chequea si se ha seleccionado una fila
+    #     if not selection_model.hasSelection():
+    #         return Result.failure(
+    #             "ANTES DE CARGAR UN REGISTRO, DEBES "
+    #             "SELECCIONAR UN REGISTRO EN LA TABLA."
+    #         )
+    #
+    #     # Configuramos la fila
+    #     index = selection_model.currentIndex()
+    #     fila = index.row()
+    #     modelo = self._view.data_table.model()
+    #
+    #     # Lee los datos del modelo
+    #     id_ent = modelo.index(fila, 0).data()
+    #     marca = modelo.index(fila, 2).data() #La columna 1 es el nº correlativo.
+    #     modelo_urna = modelo.index(fila, 3).data()
+    #     ancho = modelo.index(fila, 4).data()
+    #     profundo = modelo.index(fila, 5).data()
+    #     alto = modelo.index(fila, 6).data()
+    #     grosor = modelo.index(fila, 7).data()
+    #     volumen = modelo.index(fila, 8).data()
+    #     material = modelo.index(fila, 9).data()
+    #     descripcion = modelo.index(fila, 10).data()
+    #
+    #     # Cargamos los widgets
+    #     self._view.frame.edit_id.setText(
+    #         str(id_ent) if id_ent is not None else ""
+    #     )
+    #
+    #     self._view.frame.combo_marca.setCurrentIndex(
+    #         self._view.frame.combo_marca.findText(marca)
+    #     )
+    #
+    #     self._view.frame.edit_modelo.setText(
+    #         str(modelo_urna) if modelo_urna is not None else ""
+    #     )
+    #
+    #     self._view.frame.edit_ancho.setText(
+    #         str(ancho) if ancho is not None else ""
+    #     )
+    #
+    #     self._view.frame.edit_profundo.setText(
+    #         str(profundo) if profundo is not None else ""
+    #     )
+    #
+    #     self._view.frame.edit_alto.setText(
+    #         str(alto) if alto is not None else ""
+    #     )
+    #
+    #     self._view.frame.edit_grosor.setText(
+    #         str(grosor) if grosor is not None else ""
+    #     )
+    #
+    #     self._view.frame.edit_volumen.setText(
+    #         str(volumen) if volumen is not None else ""
+    #     )
+    #
+    #     self._view.frame.combo_material.setCurrentIndex(
+    #         self._view.frame.combo_material.findText(material)
+    #     )
+    #
+    #     self._view.frame.text_descripcion.setPlainText(
+    #         str(descripcion) if descripcion is not None else ""
+    #     )
+    #
+    #     return Result.success(id_ent)
 
     def delete(self, id_: int) -> Result:
         """ Elimina un registro de la base de datos.

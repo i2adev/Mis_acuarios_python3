@@ -11,7 +11,7 @@ from PyQt6.QtWidgets import QMessageBox
 
 from Model.DAO.base_dao import BaseDAO
 from Model.DAO.database import DBManager
-from Model.Entities.fotografia import FotografiaEntity
+from Model.Entities.fotografia_entity import FotografiaEntity
 from Model.Entities.urna_entity import UrnaEntity
 from Model.TableModel.urna_table_model import UrnaTableModel
 from Services.Result.result import Result
