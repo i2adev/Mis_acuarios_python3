@@ -108,8 +108,12 @@ class UrnaDialogController(BaseController):
         )
 
         # Botones de imagen
-        self._view.frame_imagen.button_load.clicked.connect(
+        self._view.frame_imagen.button_add.clicked.connect(
             self.load_images_for_insert
+        )
+
+        self._view.frame_imagen.button_remove.clicked.connect(
+            self.delete_image
         )
 
         self._view.frame_imagen.button_next.clicked.connect(
@@ -290,6 +294,14 @@ class UrnaDialogController(BaseController):
 
         return self.urna_result
 
+    def get_max_num_in_list(self):
+        """ Obtiene el número máximo de la lista de fotografías. """
+
+        if self.lista_fotos:
+            return max(f.num for f in self.lista_fotos)
+        else:
+            return 0
+
     def dialog_cancel(self):
         """ Cancela el dialogo. """
 
@@ -413,17 +425,15 @@ class UrnaDialogController(BaseController):
     def load_images_for_insert(self):
         """ Carga las imágenes a insertar. """
 
-        filed_dialog = QFileDialog()
+        # Configuramos el diálogo de apertura de imágenes
+        file_dialog = QFileDialog()
+        file_dialog.setFileMode(QFileDialog.FileMode.ExistingFiles)
+        file_dialog.setNameFilter("Imágenes JPG (*.jpg *.jpeg)")
 
-        # Permite seleccionar varios archivos
-        filed_dialog.setFileMode(QFileDialog.FileMode.ExistingFiles)
+        if file_dialog.exec():
+            i = self.get_max_num_in_list()
 
-        filed_dialog.setNameFilter("Imágenes JPG (*.jpg *.jpeg)")
-
-        if filed_dialog.exec():
-            i = 1  # Indice de imagenes
-
-            files = filed_dialog.selectedFiles()
+            files = file_dialog.selectedFiles()
             for f in files:
                 self.lista_fotos.append(FotografiaEntity(
                     id = None,
@@ -435,12 +445,54 @@ class UrnaDialogController(BaseController):
                 i += 1
 
             # Configurar linea de datos
-            self._view.frame_imagen.label_num_imagen.setText("1")
+            if self._view.frame_imagen.label_num_imagen.text():
+                image_num = int(self._view.frame_imagen.label_num_imagen.text())
+                self.show_image(image_num)
+            else:
+                self._view.frame_imagen.label_num_imagen.setText("1")
+                self.show_image()
+
             self._view.frame_imagen.label_num_total_imegenes.setText(
                 str(len(self.lista_fotos))
             )
 
-            self.show_image()
+            # # PROVISIONAL
+            # for f in self.lista_fotos:
+            #     print(f)
+
+    def delete_image(self):
+        """
+        Elimina una imagen de la lista. En caso de que la imagen este en
+        la base de datos, se borra de la misma.
+        """
+
+        # Condiciones de salida
+        if not self._view.frame_imagen.label_num_imagen.text():
+            return
+
+        image_num = int(self._view.frame_imagen.label_num_imagen.text())
+        idx = image_num - 1
+
+        if self.lista_fotos[idx].id:
+            self.fdao.delete(self.lista_fotos[idx].id)
+
+        del self.lista_fotos[idx]
+
+        # Configurar linea de datos
+        total_number = len(self.lista_fotos)
+
+        if image_num > total_number:
+            image_num -= 1
+
+        self._view.frame_imagen.label_num_imagen.setText(
+            str(image_num)
+        )
+
+        self._view.frame_imagen.label_num_total_imegenes.setText(
+            str(total_number)
+        )
+
+        self.show_image(image_num)
 
     def show_image(self, number: int = 1):
         """
@@ -448,9 +500,19 @@ class UrnaDialogController(BaseController):
         :param number: Número de imágen a mostrar
         """
 
+        # Obtenemos el íncide de la foto en la lista
+        idx = number - 1
+
+        # En caso de que no haya fotos en la lista
+        if idx == -1:
+            self._view.frame_imagen.label_image.clear()
+            self._view.frame_imagen.label_num_imagen.clear()
+            self._view.frame_imagen.label_num_total_imegenes.clear()
+            return
+
         # Mostrar el el QLabel
         px = QPixmap()
-        px.loadFromData(self.lista_fotos[number - 1].fotografia)
+        px.loadFromData(self.lista_fotos[idx].fotografia)
 
         if px.isNull():
             self._view.frame_imagen.label_image.clear()
@@ -467,6 +529,10 @@ class UrnaDialogController(BaseController):
 
     def next_image(self):
         """ Muestra la siguiente imagen. """
+
+        # Condiciones de salida
+        if not self.lista_fotos:
+            return
 
         # Consiguramos las páginas
         current_num = int(self._view.frame_imagen.label_num_imagen.text())
@@ -488,6 +554,10 @@ class UrnaDialogController(BaseController):
 
     def prev_image(self):
         """ Muestra la anterior imagen. """
+
+        # Condiciones de salida
+        if not self.lista_fotos:
+            return
 
         # Consiguramos las páginas
         current_num = int(self._view.frame_imagen.label_num_imagen.text())
@@ -740,27 +810,26 @@ class UrnaController(UrnaDialogController):
     def button_update_click(self, event):
         """ Controla el clic del botón actualizar. """
 
-        # Valida el formulario
-        val = self.validate_view()
+        # Actualiza el registro
+        res_data = self.update_data()
 
-        if not val.is_success:
+        if not res_data.is_success:
             QMessageBox.warning(
                 self._view,
                 self._view.window_title,
-                val.error_msg
+                res_data.error_msg
             )
             return
 
+        # Inserta las fotografías
+        lista_fotos_insertar = [f for f in self.lista_fotos if f.id is None]
 
-        # Actualiza el registro
-        res = self.update()
-
-        if not res.is_success:
-            QMessageBox.warning(
-                self._view,
-                self._view.window_title,
-                res.error_msg
-            )
+        if lista_fotos_insertar:
+            for f in lista_fotos_insertar:
+                f.id_foranea = res_data.value
+                res_foto = self.fdao.insert(f)
+                if not res_foto.is_success:
+                    return Result.failure(res_foto.error_msg)
 
         # Configuramos el paginador
         self._pag.initialize_paginator()
@@ -769,7 +838,7 @@ class UrnaController(UrnaDialogController):
         self._view.combo_select_page.setCurrentIndex(-1)
 
         # Seleccionamos el último registro utilizado
-        self.configure_table_after_crud(res.value)
+        self.configure_table_after_crud(res_data.value)
 
     def configure_table_after_crud(self, id_: int):
         """
@@ -831,13 +900,12 @@ class UrnaController(UrnaDialogController):
         """ No aplicable. """
         pass
 
-    def update(self) -> Result:
+    def update_data(self) -> Result:
         """ Actualiza el registro en la base de datos. """
         # Valida el formulario
         val = self.validate_view()
 
         if not val.is_success:
-            self._view.frame.edit_categoria_acuario.setFocus()
             return val
 
         # Configura la entidad

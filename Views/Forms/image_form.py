@@ -45,10 +45,6 @@ class ImageForm(QFrame):
         )
 
         # Segunda línea
-        ## Botón load
-        self.button_load = QPushButton("LOAD")
-        self.button_load.setObjectName("button_load")
-        self.button_load.setFixedWidth(50)
         ## Botón add
         self.button_add = QPushButton("+")
         self.button_add.setObjectName("button_add")
@@ -69,6 +65,8 @@ class ImageForm(QFrame):
         ## Label DE
         self.label_de = QLabel(" DE ")
         self.label_de.setObjectName("DE")
+        self.label_de.setFixedWidth(50)
+        self.label_de.setAlignment(Qt.AlignmentFlag.AlignCenter)
         ## Label número total de imagenes
         self.label_num_total_imegenes = QLabel()
         self.label_num_total_imegenes.setFixedWidth(30)
@@ -83,15 +81,10 @@ class ImageForm(QFrame):
         """ Construye el layout. """
 
         # Controles
-        self.layout_controls.addSpacerItem(
-            QSpacerItem(20, 10, QSizePolicy.Policy.Expanding,
-                        QSizePolicy.Policy.Minimum)
-        )
-        self.layout_controls.addWidget(self.button_load)
         self.layout_controls.addWidget(self.button_add)
         self.layout_controls.addWidget(self.button_remove)
         self.layout_controls.addSpacerItem(
-            QSpacerItem(50,10, QSizePolicy.Policy.Fixed,
+            QSpacerItem(50,10, QSizePolicy.Policy.Expanding,
                         QSizePolicy.Policy.Fixed)
         )
         self.layout_controls.addWidget(self.button_prev)

@@ -214,7 +214,7 @@ class BaseDAO(ABC):
             for tabla in tablas:
                 cursor.execute(f"DELETE FROM {tabla};")
                 cursor.execute(
-                    f"UPDATE sqlite_sequence SET seq = 10000 WHERE name = '{tabla}';"
+                    f"UPDATE sqlite_sequence SET seq = 10001 WHERE name = '{tabla}';"
                 )
 
             db.conn.commit()

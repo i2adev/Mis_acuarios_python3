@@ -1,5 +1,7 @@
 ﻿CHANGELOG:
 ================================================================================
+0.7.4   SE AÑADE LA LÓGICA DE AÑADIR O QUITAR IMÁGENES A UNA URNA EXISTENTE.
+
 0.7.3   SE AÑADE LA OPCIÓN DE CARGAR LAS IMÁGENES CUANDO SE CARGA UNA URNA.
         -   SE CARGAN LAS IMÁGENES DE LA BASE DE DATOS CUANDO SE CARGA UNA URNA.
 

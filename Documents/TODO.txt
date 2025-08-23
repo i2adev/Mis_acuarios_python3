@@ -1,6 +1,13 @@
 ﻿================================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
+22/08/2025  SE AÑADE LA LÓGICA DE AÑADIR O QUITAR IMÁGENES A UNA URNA EXISTENTE
+            -   SE AÑADE LA LÓGICA DE AÑADIR IMÁGENES A LA LISTA.           DONE
+            -   SE AÑADE LA LÓGICA DE ELIMINACIÓN DE IMÁGENES DE LA LISTA.  DONE
+            -   SE AÑADE LA LÓGICA DE ACTUALIZAR LA URNA, INSERTANDO LAS IMÁ-
+                GENES AÑADIDAS QUE NO ESTABAN INSERTADAS EN LA BASE DE DATOS.
+                                                                            DONE
+
 21/08/2025  SE AÑADE LÓGICA DE CARGAR LAS IMÁGENES
             -   SE AÑADE LA LÓGICA DE NAVEGACIÓN ENTRE IMÁGENES CARGADAS.   DONE
             -   SE PROGRAMA PARA CARGAR LA IMÁGENES CUANDO SE CARGA UNA URNA.
