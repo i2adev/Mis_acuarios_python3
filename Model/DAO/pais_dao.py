@@ -6,8 +6,9 @@ Commentarios:
     entidad TIPO DE FILTRO.
 """
 
-# Importaciones
 import sqlite3
+import traceback
+
 from PyQt6.QtWidgets import QMessageBox
 from Model.DAO.base_dao import BaseDAO
 from Model.Entities.pais_entity import PaisEntity
@@ -25,74 +26,92 @@ class PaisDAO (BaseDAO):
         self.db = DBManager()
         self.ent = None
 
-    def get_list(self) -> Result:
-        """ Obtiene el listado completo. """
+    # ------------------------------------------------------------------
+    def get_list(self) -> Result(list[PaisEntity]):
+        """Obtiene el listado completo ordenado por categoría."""
 
-        with self.db:
-            if not self.db.conn:
-                QMessageBox.information(None, "CONEXIÓN", "CONEXIÓN NO "
-                                                          "INICIALIZADA")
-
-            # Obtenemos los datos
-            sql = """
-                SELECT    ID_PAIS AS ID,
-                          ROW_NUMBER() OVER(ORDER BY PAIS) AS NUM,
-                          PAIS AS PAIS,
-                          CONTINENTE AS CONTINENTE
-                FROM      PAISES;
+        sql = (
             """
+            SELECT    ID_PAIS AS ID,
+                      ROW_NUMBER() OVER(ORDER BY PAIS) AS NUM,
+                      PAIS AS PAIS,
+                      CONTINENTE AS CONTINENTE
+            FROM      PAISES;
+            """
+        )
 
-            try:
-                cursor = self.db.conn.cursor()
-                cursor.execute(sql)
-                value = [PaisEntity(f["ID"], f["NUM"], f["PAIS"],
-                                         f["CONTINENTE"])
-                        for f in cursor.fetchall()]
+        try:
+            with self.db.conn as con:
+                cur = con.cursor()
+                cur.execute(sql)
+                rows = cur.fetchall()
 
-                # Devolvemos los datos
-                return Result.success(value)
+                valores = [
+                    PaisEntity(
+                        id=f["ID"],
+                        num=f["NUM"],
+                        pais=f["PAIS"],
+                        continente=f["CONTINENTE"],
+                    )
+                    for f in rows
+                ]
+                return Result.success(valores)
 
-            except self.db.conn.OperationalError as e:
-                return Result.failure(f"[ERROR OPERACIONAL]\n {e}")
-            except self.db.conn.ProgrammingError as e:
-                return Result.failure(f"[ERROR DE PROGRAMACIÓN]\n {e}")
-            except self.db.conn.DatabaseError as e:
-                return Result.failure(f"[ERROR DE BASE DE DATOS]\n {e}")
-            except self.db.conn.Error as e:
-                return Result.failure(f"[ERROR GENERAL SQLITE]\n {e}")
-            finally:
-                self.db.close_connection()
+        except sqlite3.IntegrityError as e:
+            return Result.failure(f"[INTEGRITY ERROR]\n {e}")
+        except sqlite3.OperationalError as e:
+            traceback.print_exc()
+            return Result.failure(f"[OPERATIONAL ERROR]\n {e}")
+        except sqlite3.ProgrammingError as e:
+            return Result.failure(f"[PROGRAMMING ERROR]\n {e}")
+        except sqlite3.DatabaseError as e:
+            return Result.failure(f"[DATABASE ERROR]\n {e}")
+        except sqlite3.Error as e:
+            return Result.failure(f"[SQLITE ERROR]\n {e}")
 
-    def get_list_combo(self):
-        """ Obtiene el listado para el combo. """
+    # ------------------------------------------------------------------
+    def get_list_combo(self) -> Result(list[PaisEntity]):
+        """
+        Obtiene una lista ligera para combos (ID y texto visible).
+        Devuelve entidades con `num=None` y 'continente=None'.
+        """
 
-        with self.db:
-            # Obtenemos los datos
-            sql = """
-                SELECT    ID_PAIS AS ID,
-                          PAIS AS VALUE
-                FROM      PAISES
-                ORDER BY  PAIS;
-              """
-            try:
-                cursor = self.db.conn.cursor()
-                cursor.execute(sql)
-                values = [PaisEntity(f["ID"], None, f["VALUE"], None)
-                          for f in cursor.fetchall()]
+        sql = (
+            """
+            SELECT    ID_PAIS AS ID,
+                      PAIS AS VALUE
+            FROM      PAISES
+            ORDER BY  PAIS;
+            """
+        )
 
-                # Devolvemos los datos
-                return Result.success(values)
+        try:
+            with self.db.conn as con:
+                cur = con.cursor()
+                cur.execute(sql)
+                rows = cur.fetchall()
+                valores = [
+                    PaisEntity(
+                        id=f["ID"],
+                        num=None,
+                        pais=f["PAIS"],
+                        continente=None,
+                    )
+                    for f in rows
+                ]
+                return Result.success(valores)
 
-            except self.db.conn.OperationalError as e:
-                return Result.failure(f"[ERROR OPERACIONAL]\n {e}")
-            except self.db.conn.ProgrammingError as e:
-                return Result.failure(f"[ERROR DE PROGRAMACIÓN]\n {e}")
-            except self.db.conn.DatabaseError as e:
-                return Result.failure(f"[ERROR DE BASE DE DATOS]\n {e}")
-            except self.db.conn.Error as e:
-                return Result.failure(f"[ERROR GENERAL SQLITE]\n {e}")
-            finally:
-                self.db.close_connection()
+        except sqlite3.IntegrityError as e:
+            return Result.failure(f"[INTEGRITY ERROR]\n {e}")
+        except sqlite3.OperationalError as e:
+            traceback.print_exc()
+            return Result.failure(f"[OPERATIONAL ERROR]\n {e}")
+        except sqlite3.ProgrammingError as e:
+            return Result.failure(f"[PROGRAMMING ERROR]\n {e}")
+        except sqlite3.DatabaseError as e:
+            return Result.failure(f"[DATABASE ERROR]\n {e}")
+        except sqlite3.Error as e:
+            return Result.failure(f"[SQLITE ERROR]\n {e}")
 
     def insert(self, ent: PaisEntity) -> Result:
         pass

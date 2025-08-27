@@ -6,8 +6,9 @@ Commentarios:
     entidad TIPO DE FILTRO.
 """
 
-# Importaciones
 import sqlite3
+import traceback
+
 from PyQt6.QtWidgets import QMessageBox
 from Model.DAO.base_dao import BaseDAO
 from Services.Result.result import Result
@@ -26,181 +27,195 @@ class TipoFiltroDAO (BaseDAO):
         self.db = DBManager()
         self.ent = None
 
-    def get_list(self) -> Result:
-        """ Obtiene el listado completo. """
+    # ------------------------------------------------------------------
+    def get_list(self) -> Result(list[TipoFiltroEntity]):
+        """Obtiene el listado completo ordenado por categoría."""
 
-        with self.db:
-            if not self.db.conn:
-                QMessageBox.information(None, "CONEXIÓN", "CONEXIÓN NO "
-                                                          "INICIALIZADA")
-
-            # Obtenemos los datos
-            sql = """
-                SELECT  ID_TIPO AS ID,
-                        ROW_NUMBER() OVER(ORDER BY TIPO_FILTRO) AS NUM,
-                        TIPO_FILTRO AS TIPO,
-                        OBSERVACIONES AS OBSERVACIONES
-                FROM    TIPOS_FILTRO;
+        sql = (
             """
-            try:
-                cursor = self.db.conn.cursor()
-                cursor.execute(sql)
-                value = [TipoFiltroEntity(f["ID"], f["NUM"], f["TIPO"],
-                                         f["OBSERVACIONES"])
-                        for f in cursor.fetchall()]
+            SELECT  ID_TIPO AS ID,
+                    ROW_NUMBER() OVER(ORDER BY TIPO_FILTRO) AS NUM,
+                    TIPO_FILTRO AS TIPO,
+                    OBSERVACIONES AS OBSERVACIONES
+            FROM    TIPOS_FILTRO;
+            """
+        )
 
-                # Devolvemos los datos
-                return Result.success(value)
+        try:
+            with self.db.conn as con:
+                cur = con.cursor()
+                cur.execute(sql)
+                rows = cur.fetchall()
 
-            except self.db.conn.OperationalError as e:
-                return Result.failure(f"[ERROR OPERACIONAL]\n {e}")
-            except self.db.conn.ProgrammingError as e:
-                return Result.failure(f"[ERROR DE PROGRAMACIÓN]\n {e}")
-            except self.db.conn.DatabaseError as e:
-                return Result.failure(f"[ERROR DE BASE DE DATOS]\n {e}")
-            except self.db.conn.Error as e:
-                return Result.failure(f"[ERROR GENERAL SQLITE]\n {e}")
-            finally:
-                self.db.close_connection()
+                valores = [
+                    TipoFiltroEntity(
+                        id=f["ID"],
+                        num=f["NUM"],
+                        tipo_filtro=f["TIPO"],
+                        observaciones=f["OBSERVACIONES"]
+                    )
+                    for f in rows
+                ]
+                return Result.success(valores)
 
-    def get_list_combo(self):
-        """ Obtiene el listado para el combo. """
+        except sqlite3.IntegrityError as e:
+            return Result.failure(f"[INTEGRITY ERROR]\n {e}")
+        except sqlite3.OperationalError as e:
+            traceback.print_exc()
+            return Result.failure(f"[OPERATIONAL ERROR]\n {e}")
+        except sqlite3.ProgrammingError as e:
+            return Result.failure(f"[PROGRAMMING ERROR]\n {e}")
+        except sqlite3.DatabaseError as e:
+            return Result.failure(f"[DATABASE ERROR]\n {e}")
+        except sqlite3.Error as e:
+            return Result.failure(f"[SQLITE ERROR]\n {e}")
 
-        with self.db:
-            # # Chequeamos que la base de datos está abierta
-            # if not self.db.is_opened():
-            #     self.db.conn = self.db.initialize_db()
-
-            # Obtenemos los datos
-            sql = """
-                  SELECT  ID_TIPO AS ID,
-                          TIPO_FILTRO AS TIPO
-                  FROM    TIPOS_FILTRO;
-              """
-            try:
-                cursor = self.db.conn.cursor()
-                cursor.execute(sql)
-                values = [TipoFiltroEntity(None, None, f["TIPO"],
-                                           f["OBSERVACIONES"])
-                          for f in cursor.fetchall()]
-
-                # Devolvemos los datos
-                return Result.success(values)
-
-            except self.db.conn.OperationalError as e:
-                return Result.failure(f"[ERROR OPERACIONAL]\n {e}")
-            except self.db.conn.ProgrammingError as e:
-                return Result.failure(f"[ERROR DE PROGRAMACIÓN]\n {e}")
-            except self.db.conn.DatabaseError as e:
-                return Result.failure(f"[ERROR DE BASE DE DATOS]\n {e}")
-            except self.db.conn.Error as e:
-                return Result.failure(f"[ERROR GENERAL SQLITE]\n {e}")
-            finally:
-                self.db.close_connection()
-
-    def insert(self, ent: TipoFiltroEntity) -> Result:
+    # ------------------------------------------------------------------
+    def get_list_combo(self) -> Result(list[TipoFiltroEntity]):
         """
-        Inserta un nuevo registro en la base de datos.
-        Parametros:
-        -   ENT: Entidad derivada de BaseEntity
+        Obtiene una lista ligera para combos (ID y texto visible).
+        Devuelve entidades con `num=None` y `observaciones=None`.
         """
 
-        with self.db:
-            # Obtenemos los datos
-            sql = """
-                INSERT INTO TIPOS_FILTRO
-                    (TIPO_FILTRO, OBSERVACIONES)
-                VALUES (:tipo, :descripcion);
+        sql = (
             """
-            try:
-                cursor = self.db.conn.cursor()
-                cursor.execute(sql, {
+            SELECT  ID_TIPO AS ID,
+                    TIPO_FILTRO AS VALUE
+            FROM    TIPOS_FILTRO;
+            """
+        )
+
+        try:
+            with self.db.conn as con:
+                cur = con.cursor()
+                cur.execute(sql)
+                rows = cur.fetchall()
+                valores = [
+                    TipoFiltroEntity(
+                        id=f["ID"],
+                        num=None,
+                        tipo_filtro=f["VALUE"],
+                        observaciones=None
+                    )
+                    for f in rows
+                ]
+                return Result.success(valores)
+
+        except sqlite3.IntegrityError as e:
+            return Result.failure(f"[INTEGRITY ERROR]\n {e}")
+        except sqlite3.OperationalError as e:
+            traceback.print_exc()
+            return Result.failure(f"[OPERATIONAL ERROR]\n {e}")
+        except sqlite3.ProgrammingError as e:
+            return Result.failure(f"[PROGRAMMING ERROR]\n {e}")
+        except sqlite3.DatabaseError as e:
+            return Result.failure(f"[DATABASE ERROR]\n {e}")
+        except sqlite3.Error as e:
+            return Result.failure(f"[SQLITE ERROR]\n {e}")
+
+    # ------------------------------------------------------------------
+    def insert(self, ent: TipoFiltroEntity) -> Result(int):
+        """
+        Inserta un nuevo registro y devuelve el ID generado.
+        :param ent: Entidad derivada de BaseEntity
+        """
+
+        sql = (
+            """
+            INSERT INTO TIPOS_FILTRO
+                        (TIPO_FILTRO, OBSERVACIONES)
+            VALUES      (:tipo, :descripcion);
+            """
+        )
+        params = {
                     "tipo": ent.tipo_filtro,
                     "descripcion": ent.observaciones
-                })
+        }
 
-                # Devolvemos los datos
-                last_id = cursor.lastrowid
-                self.db.conn.commit()
-                return Result.success(last_id)
+        try:
+            with self.db.conn as con:
+                cur = con.execute(sql, params)
+                return Result.success(cur.lastrowid)
 
-            except self.db.conn.OperationalError as e:
-                return Result.failure(f"[ERROR OPERACIONAL]\n {e}")
-            except self.db.conn.ProgrammingError as e:
-                return Result.failure(f"[ERROR DE PROGRAMACIÓN]\n {e}")
-            except self.db.conn.DatabaseError as e:
-                return Result.failure(f"[ERROR DE BASE DE DATOS]\n {e}")
-            except self.db.conn.Error as e:
-                return Result.failure(f"[ERROR GENERAL SQLITE]\n {e}")
-            finally:
-                self.db.close_connection()
+        except sqlite3.IntegrityError as e:
+            return Result.failure(f"[INTEGRITY ERROR]\n {e}")
+        except sqlite3.OperationalError as e:
+            traceback.print_exc()
+            return Result.failure(f"[OPERATIONAL ERROR]\n {e}")
+        except sqlite3.ProgrammingError as e:
+            return Result.failure(f"[PROGRAMMING ERROR]\n {e}")
+        except sqlite3.DatabaseError as e:
+            return Result.failure(f"[DATABASE ERROR]\n {e}")
+        except sqlite3.Error as e:
+            return Result.failure(f"[SQLITE ERROR]\n {e}")
 
-    def update(self, ent: TipoFiltroEntity) -> Result:
+    # ------------------------------------------------------------------
+    def update(self, ent: TipoFiltroEntity) -> Result(int):
         """
-        Actualiza el registro de la base de datos.
-        Parametros:
-        -   ENT: Entidad derivada de BaseEntity
+        Actualiza el registro en la base de datos. Devuelve el ID de la entidad
+        modificada.
+        :param ent: Entidad derivada de BaseEntity
         """
 
-        with self.db:
-            # Obtenemos los datos
-            sql = """
-                UPDATE  TIPOS_FILTRO
-                SET     TIPO_FILTRO = :tipo,
-                        OBSERVACIONES = :descripcion
-                WHERE   ID_TIPO = :id_parent
+        sql = (
             """
-            try:
-                cursor = self.db.conn.cursor()
-                cursor.execute(sql, {
-                    "id_parent": ent.id,
+            UPDATE  TIPOS_FILTRO
+            SET     TIPO_FILTRO = :tipo,
+                    OBSERVACIONES = :descripcion
+            WHERE   ID_TIPO = :id;
+            """
+        )
+        params = {
+                    "id": ent.id,
                     "tipo": ent.tipo_filtro,
                     "descripcion": ent.observaciones
-                })
+        }
 
-                # Devolvemos los datos
-                self.db.conn.commit()
+        try:
+            with self.db.conn as con:
+                cur = con.execute(sql, params)
                 return Result.success(ent.id)
 
-            except self.db.conn.OperationalError as e:
-                return Result.failure(f"[ERROR OPERACIONAL]\n {e}")
-            except self.db.conn.ProgrammingError as e:
-                return Result.failure(f"[ERROR DE PROGRAMACIÓN]\n {e}")
-            except self.db.conn.DatabaseError as e:
-                return Result.failure(f"[ERROR DE BASE DE DATOS]\n {e}")
-            except self.db.conn.Error as e:
-                return Result.failure(f"[ERROR GENERAL SQLITE]\n {e}")
-            finally:
-                self.db.close_connection()
+        except sqlite3.IntegrityError as e:
+            return Result.failure(f"[INTEGRITY ERROR]\n {e}")
+        except sqlite3.OperationalError as e:
+            traceback.print_exc()
+            return Result.failure(f"[OPERATIONAL ERROR]\n {e}")
+        except sqlite3.ProgrammingError as e:
+            return Result.failure(f"[PROGRAMMING ERROR]\n {e}")
+        except sqlite3.DatabaseError as e:
+            return Result.failure(f"[DATABASE ERROR]\n {e}")
+        except sqlite3.Error as e:
+            return Result.failure(f"[SQLITE ERROR]\n {e}")
 
-    def delete(self, id: int) -> Result:
+    # ------------------------------------------------------------------
+    def delete(self, id_: int) -> Result(int):
         """
-        Elimina el registro de la base de datos.
-        Parametros:
-        - ID: Id del registro a aliminar.
+        Elimina el registro. Devuelve el ID de la entidad eliminada.
+        :param id_: ID de la entidad a eliminar
         """
-
-        with self.db:
-            # Obtenemos los datos
-            sql = """
-                DELETE FROM TIPOS_FILTRO
-                WHERE ID_TIPO = :id_parent;
+        sql = (
             """
-            try:
-                cursor = self.db.conn.cursor()
-                cursor.execute(sql, {"id_parent": id})
+            DELETE FROM TIPOS_FILTRO
+            WHERE ID_TIPO = :id;
+            """
+        )
+        params = {"id": id_}
 
-                # Devolvemos los datos
-                self.db.conn.commit()
-                return Result.success(id)
+        try:
+            with self.db.conn as con:
+                cur = con.execute(sql, params)
+                return Result.success(id_)
 
-            except self.db.conn.OperationalError as e:
-                return Result.failure(f"[ERROR OPERACIONAL]\n {e}")
-            except self.db.conn.ProgrammingError as e:
-                return Result.failure(f"[ERROR DE PROGRAMACIÓN]\n {e}")
-            except self.db.conn.DatabaseError as e:
-                return Result.failure(f"[ERROR DE BASE DE DATOS]\n {e}")
-            except self.db.conn.Error as e:
-                return Result.failure(f"[ERROR GENERAL SQLITE]\n {e}")
-            finally:
-                self.db.close_connection()
+        except sqlite3.IntegrityError as e:
+            return Result.failure(f"[INTEGRITY ERROR]\n {e}")
+        except sqlite3.OperationalError as e:
+            traceback.print_exc()
+            return Result.failure(f"[OPERATIONAL ERROR]\n {e}")
+        except sqlite3.ProgrammingError as e:
+            return Result.failure(f"[PROGRAMMING ERROR]\n {e}")
+        except sqlite3.DatabaseError as e:
+            return Result.failure(f"[DATABASE ERROR]\n {e}")
+        except sqlite3.Error as e:
+            return Result.failure(f"[SQLITE ERROR]\n {e}")
+

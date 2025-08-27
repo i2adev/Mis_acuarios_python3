@@ -6,7 +6,7 @@ Commentarios:
 """
 from pathlib import Path
 
-# Importaciones
+
 from PyQt6.QtCore import Qt, QEvent
 from PyQt6.QtGui import QAction, QPixmap
 from PyQt6.QtWidgets import (QWidget, QMessageBox, QTableView, QCompleter,
@@ -935,11 +935,14 @@ class UrnaController(UrnaDialogController):
         # Carga las imágenes
         self.load_images(res_id.value)
 
-    def load_images(self, res_id: int):
-        """ Carga las imágenes de la base de datos. """
+    def load_images(self, id_: int):
+        """
+        Carga las imágenes de la base de datos.
+        :param id_: ID de la entidad relacionada con la fotografía
+        """
 
         # Chequea que el registro contiene imágenes
-        self.lista_fotos = (self.fdao.get_list_by_id(res_id)).value
+        self.lista_fotos = (self.fdao.get_list_by_id(id_)).value
 
         # Mostramos las imágenes
         if len(self.lista_fotos) > 0:
@@ -950,11 +953,12 @@ class UrnaController(UrnaDialogController):
             )
             self.show_image()
 
-    def load_data(self) -> Result:
+    def load_data(self) -> Result(int):
         """ Carga los datos. """
 
         # Carga el modelo de la fila seleccionada
         selection_model = self._view.data_table.selectionModel()
+
         # Chequea si se ha seleccionado una fila
         if not selection_model.hasSelection():
             return Result.failure(
@@ -965,6 +969,7 @@ class UrnaController(UrnaDialogController):
         index = selection_model.currentIndex()
         fila = index.row()
         modelo = self._view.data_table.model()
+
         # Lee los datos del modelo
         id_ent = modelo.index(fila, 0).data()
         marca = modelo.index(fila,
@@ -1009,6 +1014,7 @@ class UrnaController(UrnaDialogController):
         self._view.frame.text_descripcion.setPlainText(
             str(descripcion) if descripcion is not None else ""
         )
+
         return Result.success(id_ent)
 
     # def load_record(self) -> Result:

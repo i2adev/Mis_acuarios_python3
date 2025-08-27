@@ -105,7 +105,7 @@ class MarcaComercialDialogController(BaseController):
         ent.poblacion = self._view.frame.edit_poblacion.text()
         ent.provincia = self._view.frame.edit_provincia.text()
         ent.id_pais = self._view.frame.combo_pais.currentData()
-        ent.observaciones = self._view.frame.text_descripcion.toPlainText()
+        ent.observaciones = self._view.frame.text_observaciones.toPlainText()
 
         return ent
 
@@ -683,7 +683,7 @@ class MarcaComercialController(MarcaComercialDialogController):
             self._view.frame.combo_pais.findText(pais)
         )
 
-        self._view.frame.text_descripcion.setPlainText(
+        self._view.frame.text_observaciones.setPlainText(
             str(observaciones) if observaciones is not None else ""
         )
 

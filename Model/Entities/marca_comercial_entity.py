@@ -19,12 +19,12 @@ class MarcaComercialEntity:
     id_pais: int | None
     observaciones: str | None
 
-    def __init__(self, id = None, num = None, nombre_marca = None,
+    def __init__(self, id_ = None, num = None, nombre_marca = None,
                  direccion = None, cod_postal = None, poblacion = None,
                  provincia = None, id_pais = None, observaciones = None):
         """
         Constructor de clase.
-        :param id: Id de la entidad
+        :param id_: Id de la entidad
         :param num: Número correlativo de la entidad
         :param nombre_marca: Nombre de la marca
         :param direccion: Dirección postal de la sede de la marca
@@ -38,7 +38,7 @@ class MarcaComercialEntity:
         super().__init__()
 
         # Inicializamos las variables
-        self.id = id
+        self.id = id_
         self.num = num
         self.nombre_marca = nombre_marca
         self.direccion = direccion

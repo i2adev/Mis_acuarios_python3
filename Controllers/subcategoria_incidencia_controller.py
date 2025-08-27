@@ -103,7 +103,7 @@ class SubcategoriaAcuarioDialogController(BaseController):
 
         ent.id_categoria = self._view.frame.combo_categoria_incidencia.currentData()
         ent.subcategoria = self._view.frame.edit_subcategoria_incidencia.text()
-        ent.observaciones = self._view.frame.text_descripcion.toPlainText()
+        ent.observaciones = self._view.frame.text_observaciones.toPlainText()
 
         return ent
 
@@ -209,7 +209,7 @@ class SubcategoriaAcuarioDialogController(BaseController):
 
         # Llenamos el combo
         for ent in lista.value:
-            self._view.frame.combo_categoria_incidencia.addItem(ent.categoria,
+            self._view.frame.combo_categoria_incidencia.addItem(ent.categoria_incidencia,
                                                               ent.id)
 
         # Establecemos el autocompletado
@@ -625,7 +625,7 @@ class SubcategoriaIncidenciaController(SubcategoriaAcuarioDialogController):
             str(subcategoria) if categoria is not None else ""
         )
 
-        self._view.frame.text_descripcion.setPlainText(
+        self._view.frame.text_observaciones.setPlainText(
             str(observaciones) if observaciones is not None else ""
         )
 

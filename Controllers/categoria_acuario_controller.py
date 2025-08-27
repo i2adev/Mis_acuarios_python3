@@ -88,7 +88,7 @@ class CategoriaAcuarioDialogController(BaseController):
             ent.id = None
 
         ent.categoria = self._view.frame.edit_categoria_acuario.text()
-        ent.observaciones = self._view.frame.text_descripcion.toPlainText()
+        ent.observaciones = self._view.frame.text_observaciones.toPlainText()
 
         return ent
 
@@ -506,7 +506,7 @@ class CategoriaAcuarioController(CategoriaAcuarioDialogController):
 
         # Actualiza el registro
         res = self._dao.update(ent)
-        1
+
         if not res.is_success:
             return Result.failure(res.error_msg)
 
@@ -550,7 +550,7 @@ class CategoriaAcuarioController(CategoriaAcuarioDialogController):
         self._view.frame.edit_categoria_acuario.setText(
             str(categoria) if categoria is not None else ""
         )
-        self._view.frame.text_descripcion.setPlainText(
+        self._view.frame.text_observaciones.setPlainText(
             str(observaciones) if observaciones is not None else ""
         )
 

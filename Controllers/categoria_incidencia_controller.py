@@ -89,7 +89,7 @@ class CategoriaIncidenciaDialogController(BaseController):
             ent.id = None
 
         ent.categoria_incidencia = self._view.frame.edit_categoria_incidencia.text()
-        ent.observaciones = self._view.frame.text_descripcion.toPlainText()
+        ent.observaciones = self._view.frame.text_observaciones.toPlainText()
 
         return ent
 
@@ -551,7 +551,7 @@ class CategoriaIncidenciaController(CategoriaIncidenciaDialogController):
         self._view.frame.edit_categoria_incidencia.setText(
             str(categoria) if categoria is not None else ""
         )
-        self._view.frame.text_descripcion.setPlainText(
+        self._view.frame.text_observaciones.setPlainText(
             str(observaciones) if observaciones is not None else ""
         )
 

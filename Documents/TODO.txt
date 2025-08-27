@@ -1,6 +1,26 @@
 ﻿================================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
+27/08/2025  REFACTORIZACIÓN:
+            -   SE MODIFICAN LOS DAOS:
+                -   SUBCATEGORÍA ACUARIO.                                   DONE
+                -   SUBCATEGORÍA INCIDENCIA.                                DONE
+                -   TIPOS DE ACUARIO.                                       DONE
+                -   TIPOS DE FILTRO.                                        DONE
+                -   URNAS.                                                  DONE
+
+26/05/2025  REFACTORIZACIÓN:
+            -   SE MODIFICAN LOS DAOS:
+                -   FOTOGRAFÍAS.                                            DONE
+                -   MARCAS COMERCIALES.                                     DONE
+                -   MATERIALES DE URNA.                                     DONE
+                -   PAÍSES.                                                 DONE
+
+25/08/2025  REFACTORIZACIÓN:
+            -   SE MODIFICAN LOS DAOS:
+                -   CATEGORÍA ACUARIO.                                      DONE
+                -   CATEGORÍAS INCIDENCIA.                                  DONE
+
 22/08/2025  SE AÑADE LA LÓGICA DE AÑADIR O QUITAR IMÁGENES A UNA URNA EXISTENTE
             -   SE AÑADE LA LÓGICA DE AÑADIR IMÁGENES A LA LISTA.           DONE
             -   SE AÑADE LA LÓGICA DE ELIMINACIÓN DE IMÁGENES DE LA LISTA.  DONE

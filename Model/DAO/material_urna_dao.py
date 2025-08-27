@@ -4,7 +4,7 @@ Fecha:      12/08/2025
 Commentarios:
     Módulo que contiene la vista de la entidad MATERIAL DE URNA.
 """
-
+import sqlite3
 import traceback
 
 from PyQt6.QtWidgets import QMessageBox
@@ -28,185 +28,197 @@ class MaterialUrnaDAO(BaseDAO):
         self.db = DBManager()
         self.ent = None
 
-    def get_list(self) -> Result:
-        """ Obtiene el listado completo. """
+    # ------------------------------------------------------------------
+    def get_list(self) -> Result(list[MaterialUrnaEntity]):
+        """Obtiene el listado completo ordenado por categoría."""
 
-        with self.db:
-            if not self.db.conn:
-                QMessageBox.information(
-                    None,
-                    "CONEXIÓN",
-                    "CONEXIÓN NO INICIALIZADA"
-                )
-
-            # Obtenemos los datos
-            sql = """
-                SELECT    ID_MATERIAL AS ID,
-                          ROW_NUMBER() OVER(ORDER BY MATERIAL) AS NUM,
-                          MATERIAL AS MATERIAL,
-                          DESCRIPCION AS DESCRIPCION
-                FROM      MATERIALES_URNA;
+        sql = (
             """
-            try:
-                # dims = UrnaTableModel.brakdown_dimensions()
-                cursor = self.db.conn.cursor()
-                cursor.execute(sql)
-
-                # POSIBLE ERROR AL DESGLOSAR LAS DIMENSIONES
-                value = [MaterialUrnaEntity(
-                    f["ID"], f["NUM"], f["MATERIAL"],f["DESCRIPCION"]
-                ) for f in cursor.fetchall()]
-
-                # Devolvemos los datos
-                return Result.success(value)
-
-            except self.db.conn.OperationalError as e:
-                return Result.failure(f"[ERROR OPERACIONAL]\n {e}")
-            except self.db.conn.ProgrammingError as e:
-                return Result.failure(f"[ERROR DE PROGRAMACIÓN]\n {e}")
-            except self.db.conn.DatabaseError as e:
-                return Result.failure(f"[ERROR DE BASE DE DATOS]\n {e}")
-            except self.db.conn.Error as e:
-                return Result.failure(f"[ERROR GENERAL SQLITE]\n {e}")
-            finally:
-                self.db.close_connection()
-
-    def get_list_combo(self):
-        """ Obtiene el listado para el combo. """
-
-        with self.db:
-            # Obtenemos los datos
-            sql = """
-                SELECT    ID_MATERIAL AS ID,
-                          MATERIAL AS VALUE
-                FROM      MATERIALES_URNA
-                ORDER BY  MATERIAL;
-              """
-            try:
-                cursor = self.db.conn.cursor()
-                cursor.execute(sql)
-                values = [MaterialUrnaEntity(
-                    f["ID"], None, f["VALUE"]
-                ) for f in cursor.fetchall()]
-
-                # Devolvemos los datos
-                return Result.success(values)
-
-            except self.db.conn.OperationalError as e:
-                return Result.failure(f"[ERROR OPERACIONAL]\n {e}")
-            except self.db.conn.ProgrammingError as e:
-                return Result.failure(f"[ERROR DE PROGRAMACIÓN]\n {e}")
-            except self.db.conn.DatabaseError as e:
-                return Result.failure(f"[ERROR DE BASE DE DATOS]\n {e}")
-            except self.db.conn.Error as e:
-                return Result.failure(f"[ERROR GENERAL SQLITE]\n {e}")
-            finally:
-                self.db.close_connection()
-
-    def insert(self, ent: MaterialUrnaEntity) -> Result:
-        """
-        Inserta un nuevo registro en la base de datos.
-
-        :param ent: MaterialUrnaEntity
-        """
-
-        with self.db:
-            # Obtenemos los datos
-            sql = """
-                INSERT INTO MATERIALES_URNA (MATERIAL, DESCRIPCION)
-                VALUES                      (:mat, :desc);
+            SELECT    ID_MATERIAL AS ID,
+                      ROW_NUMBER() OVER(ORDER BY MATERIAL) AS NUM,
+                      MATERIAL AS MATERIAL,
+                      DESCRIPCION AS DESCRIPCION
+            FROM      MATERIALES_URNA;
             """
-            try:
-                cursor = self.db.conn.cursor()
-                cursor.execute(sql, {
-                    "mat": ent.material,
-                    "desc": ent.descripcion
-                })
+        )
 
-                # Devolvemos los datos
-                last_id = cursor.lastrowid
-                self.db.conn.commit()
-                return Result.success(last_id)
+        try:
+            with self.db.conn as con:
+                cur = con.cursor()
+                cur.execute(sql)
+                rows = cur.fetchall()
 
-            except self.db.conn.OperationalError as e:
-                traceback.print_exc()
-                return Result.failure(f"[ERROR OPERACIONAL]\n {e}")
-            except self.db.conn.ProgrammingError as e:
-                return Result.failure(f"[ERROR DE PROGRAMACIÓN]\n {e}")
-            except self.db.conn.DatabaseError as e:
-                return Result.failure(f"[ERROR DE BASE DE DATOS]\n {e}")
-            except self.db.conn.Error as e:
-                return Result.failure(f"[ERROR GENERAL SQLITE]\n {e}")
-            finally:
-                self.db.close_connection()
+                valores = [
+                    MaterialUrnaEntity(
+                        id=f["ID"],
+                        num=f["NUM"],
+                        material=f["MATERIAL"],
+                        descripcion=f["DESCRIPCION"],
+                    )
+                    for f in rows
+                ]
+                return Result.success(valores)
 
-    def update(self, ent: MaterialUrnaEntity) -> Result:
+        except sqlite3.IntegrityError as e:
+            return Result.failure(f"[INTEGRITY ERROR]\n {e}")
+        except sqlite3.OperationalError as e:
+            traceback.print_exc()
+            return Result.failure(f"[OPERATIONAL ERROR]\n {e}")
+        except sqlite3.ProgrammingError as e:
+            return Result.failure(f"[PROGRAMMING ERROR]\n {e}")
+        except sqlite3.DatabaseError as e:
+            return Result.failure(f"[DATABASE ERROR]\n {e}")
+        except sqlite3.Error as e:
+            return Result.failure(f"[SQLITE ERROR]\n {e}")
+
+    # ------------------------------------------------------------------
+    def get_list_combo(self) -> Result(list[MaterialUrnaEntity]):
         """
-        Actualiza el registro de la base de datos.
-
-        :param ent: MaterialUrnaEntity
+        Obtiene una lista ligera para combos (ID y texto visible).
+        Devuelve entidades con `num=None` y `observaciones=None`.
         """
 
-        with self.db:
-            # Obtenemos los datos
-            sql = """
-                UPDATE    MATERIALES_URNA
-                SET       MATERIAL = :mat,
-                          DESCRIPCION = :descr
-                WHERE     ID_MATERIAL = :id;
+        sql = (
             """
-            try:
-                cursor = self.db.conn.cursor()
-                cursor.execute(sql, {
-                    "id": ent.id,
-                    "mat": ent.material,
-                    "descr": ent.descripcion
-                })
+            SELECT    ID_MATERIAL AS ID,
+                      MATERIAL AS VALUE
+            FROM      MATERIALES_URNA
+            ORDER BY  MATERIAL;
+            """
+        )
 
-                # Devolvemos los datos
-                self.db.conn.commit()
+        try:
+            with self.db.conn as con:
+                cur = con.cursor()
+                cur.execute(sql)
+                rows = cur.fetchall()
+                valores = [
+                    MaterialUrnaEntity(
+                        id=f["ID"],
+                        num=None,
+                        material=f["VALUE"],
+                        descripcion=None,
+                    )
+                    for f in rows
+                ]
+                return Result.success(valores)
+
+        except sqlite3.IntegrityError as e:
+            return Result.failure(f"[INTEGRITY ERROR]\n {e}")
+        except sqlite3.OperationalError as e:
+            traceback.print_exc()
+            return Result.failure(f"[OPERATIONAL ERROR]\n {e}")
+        except sqlite3.ProgrammingError as e:
+            return Result.failure(f"[PROGRAMMING ERROR]\n {e}")
+        except sqlite3.DatabaseError as e:
+            return Result.failure(f"[DATABASE ERROR]\n {e}")
+        except sqlite3.Error as e:
+            return Result.failure(f"[SQLITE ERROR]\n {e}")
+
+    # ------------------------------------------------------------------
+    def insert(self, ent: MaterialUrnaEntity) -> Result(int):
+        """
+        Inserta un nuevo registro y devuelve el ID generado.
+        :param ent: Entidad derivada de BaseEntity
+        """
+
+        sql = (
+            """
+            INSERT INTO MATERIALES_URNA (MATERIAL, DESCRIPCION)
+            VALUES                      (:mat, :desc);
+            """
+        )
+        params = {
+            "mat": ent.material,
+            "desc": ent.descripcion
+        }
+
+        try:
+            with self.db.conn as con:
+                cur = con.execute(sql, params)
+                return Result.success(cur.lastrowid)
+
+        except sqlite3.IntegrityError as e:
+            return Result.failure(f"[INTEGRITY ERROR]\n {e}")
+        except sqlite3.OperationalError as e:
+            traceback.print_exc()
+            return Result.failure(f"[OPERATIONAL ERROR]\n {e}")
+        except sqlite3.ProgrammingError as e:
+            return Result.failure(f"[PROGRAMMING ERROR]\n {e}")
+        except sqlite3.DatabaseError as e:
+            return Result.failure(f"[DATABASE ERROR]\n {e}")
+        except sqlite3.Error as e:
+            return Result.failure(f"[SQLITE ERROR]\n {e}")
+
+    # ------------------------------------------------------------------
+    def update(self, ent: MaterialUrnaEntity) -> Result(int):
+        """
+        Actualiza el registro en la base de datos. Devuelve el ID de la entidad
+        modificada.
+        :param ent: Entidad derivada de BaseEntity
+        """
+
+        sql = (
+            """
+            UPDATE    MATERIALES_URNA
+            SET       MATERIAL = :mat,
+                      DESCRIPCION = :descr
+            WHERE     ID_MATERIAL = :id;
+            """
+        )
+        params = {
+            "id": ent.id,
+            "mat": ent.material,
+            "descr": ent.descripcion
+        }
+
+        try:
+            with self.db.conn as con:
+                cur = con.execute(sql, params)
                 return Result.success(ent.id)
 
-            except self.db.conn.OperationalError as e:
-                return Result.failure(f"[ERROR OPERACIONAL]\n {e}")
-            except self.db.conn.ProgrammingError as e:
-                return Result.failure(f"[ERROR DE PROGRAMACIÓN]\n {e}")
-            except self.db.conn.DatabaseError as e:
-                return Result.failure(f"[ERROR DE BASE DE DATOS]\n {e}")
-            except self.db.conn.Error as e:
-                return Result.failure(f"[ERROR GENERAL SQLITE]\n {e}")
-            finally:
-                self.db.close_connection()
+        except sqlite3.IntegrityError as e:
+            return Result.failure(f"[INTEGRITY ERROR]\n {e}")
+        except sqlite3.OperationalError as e:
+            traceback.print_exc()
+            return Result.failure(f"[OPERATIONAL ERROR]\n {e}")
+        except sqlite3.ProgrammingError as e:
+            return Result.failure(f"[PROGRAMMING ERROR]\n {e}")
+        except sqlite3.DatabaseError as e:
+            return Result.failure(f"[DATABASE ERROR]\n {e}")
+        except sqlite3.Error as e:
+            return Result.failure(f"[SQLITE ERROR]\n {e}")
 
-    def delete(self, id: int) -> Result:
+    # ------------------------------------------------------------------
+    def delete(self, id_: int) -> Result(int):
         """
-        Elimina el registro de la base de datos.
-
-        :param id: Id del registro a aliminar.
+        Elimina el registro. Devuelve el ID de la entidad eliminada.
+        :param id_: ID de la entidad a eliminar
         """
 
-        with self.db:
-            # Obtenemos los datos
-            sql = """
-                DELETE FROM MATERIALES_URNA
-                WHERE       ID_MATERIAL = :id;
+        sql = (
             """
-            try:
-                cursor = self.db.conn.cursor()
-                cursor.execute(sql, {"id": id})
+            DELETE FROM MATERIALES_URNA
+            WHERE       ID_MATERIAL = :id;
+            """
+        )
+        params = {"id": id_}
 
-                # Devolvemos los datos
-                self.db.conn.commit()
-                return Result.success(id)
+        try:
+            with self.db.conn as con:
+                cur = con.execute(sql, params)
+                return Result.success(id_)
 
-            except self.db.conn.OperationalError as e:
-                return Result.failure(f"[ERROR OPERACIONAL]\n {e}")
-            except self.db.conn.ProgrammingError as e:
-                return Result.failure(f"[ERROR DE PROGRAMACIÓN]\n {e}")
-            except self.db.conn.DatabaseError as e:
-                return Result.failure(f"[ERROR DE BASE DE DATOS]\n {e}")
-            except self.db.conn.Error as e:
-                return Result.failure(f"[ERROR GENERAL SQLITE]\n {e}")
-            finally:
-                self.db.close_connection()
+        except sqlite3.IntegrityError as e:
+            return Result.failure(f"[INTEGRITY ERROR]\n {e}")
+        except sqlite3.OperationalError as e:
+            traceback.print_exc()
+            return Result.failure(f"[OPERATIONAL ERROR]\n {e}")
+        except sqlite3.ProgrammingError as e:
+            return Result.failure(f"[PROGRAMMING ERROR]\n {e}")
+        except sqlite3.DatabaseError as e:
+            return Result.failure(f"[DATABASE ERROR]\n {e}")
+        except sqlite3.Error as e:
+            return Result.failure(f"[SQLITE ERROR]\n {e}")
+
 

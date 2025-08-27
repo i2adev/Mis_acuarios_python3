@@ -4,11 +4,12 @@ Fecha:      24/07/2025
 Commentarios:
     Módulo que contiene la vista de la entidad CATEGORÍA DE INCIDENCIA.
 """
-from PyQt6.QtWidgets import QMessageBox
+import sqlite3
+import traceback
+
 
 from Model.DAO.base_dao import BaseDAO
 from Model.DAO.database import DBManager
-from Model.Entities.categoria_acuario_entity import CategoriaAcuarioEntity
 from Model.Entities.categoria_incidencia_entity import CategoriaIncidenciaEntity
 from Services.Result.result import Result
 
@@ -16,236 +17,243 @@ from Services.Result.result import Result
 class CategoriaIncidenciaDAO(BaseDAO):
     """
     Clase que gestiona las operaciones en la base de datos de la entidad
-    CategoriaAcuarioEntity.
+    CategoriaIncidenciaEntity.
     """
 
     def __init__(self):
-        """ Constructor de clase. """
+        """Constructor de clase."""
 
         self.db = DBManager()
-        self.ent = None
 
-    def get_list(self) -> Result:
-        """ Obtiene el listado completo. """
+    # ------------------------------------------------------------------
+    def get_list(self) -> Result(list[CategoriaIncidenciaEntity]):
+        """Obtiene el listado completo ordenado por categoría."""
 
-        with self.db:
-            if not self.db.conn:
-                QMessageBox.information(
-                    None,
-                    "CONEXIÓN",
-                    "CONEXIÓN NO INICIALIZADA"
-                )
-
-            # Obtenemos los datos
-            sql = """
-                SELECT  ID_CATEGORIA AS ID, 
-                        ROW_NUMBER()  OVER (ORDER BY NOMBRE_CATEGORIA) AS NUM, 
-                        NOMBRE_CATEGORIA AS CATEGORIA, 
-                        OBSERVACIONES FROM CATEGORIAS_INCIDENCIA
-                FROM    CATEGORIAS_INCIDENCIA;
+        sql = (
             """
-            try:
-                cursor = self.db.conn.cursor()
-                cursor.execute(sql)
-                value = [CategoriaAcuarioEntity(
-                    f["ID"], f["NUM"], f["TIPO"], f["SUBTIPO"],
-                    f["OBSERVACIONES"]
-                ) for f in cursor.fetchall()]
-
-                # Devolvemos los datos
-                return Result.success(value)
-
-            except self.db.conn.OperationalError as e:
-                return Result.failure(f"[ERROR OPERACIONAL]\n {e}")
-            except self.db.conn.ProgrammingError as e:
-                return Result.failure(f"[ERROR DE PROGRAMACIÓN]\n {e}")
-            except self.db.conn.DatabaseError as e:
-                return Result.failure(f"[ERROR DE BASE DE DATOS]\n {e}")
-            except self.db.conn.Error as e:
-                return Result.failure(f"[ERROR GENERAL SQLITE]\n {e}")
-            finally:
-                self.db.close_connection()
-
-    def get_num_by_id(self, id_: int) -> Result:
-        """
-        Obtiene el valor NUM de la vista VISTA_CATEGORIAS_INCIDENCIA dado un ID.
-        """
-
-        with self.db:
-            if not self.db.conn:
-                QMessageBox.information(
-                    None,
-                    "CONEXIÓN",
-                    "CONEXIÓN NO INICIALIZADA"
-                )
-
-            # Obtenemos el dato
-            sql = """
-                SELECT NUM
-                FROM   VISTA_CATEGORIAS_INCIDENCIA
-                WHERE  ID = :id;
+            SELECT  ID_CATEGORIA AS ID, 
+                    ROW_NUMBER()  OVER (ORDER BY CATEGORIA_INCIDENCIA) AS NUM, 
+                    CATEGORIA_INCIDENCIA AS CATEGORIA, 
+                    OBSERVACIONES FROM CATEGORIAS_INCIDENCIA
+            FROM    CATEGORIAS_INCIDENCIA;
             """
-            try:
-                cursor = self.db.conn.cursor()
-                cursor.execute(sql, {"id": id_})
-                row = cursor.fetchone()
+        )
+
+        try:
+            with self.db.conn as con:
+                cur = con.cursor()
+                cur.execute(sql)
+                rows = cur.fetchall()
+
+                valores = [
+                    CategoriaIncidenciaEntity(
+                        id=f["ID"],
+                        num=f["NUM"],
+                        categoria_incidencia=f["SUBTIPO"],
+                        observaciones=f["OBSERVACIONES"],
+                    )
+                    for f in rows
+                ]
+                return Result.success(valores)
+
+        except sqlite3.IntegrityError as e:
+            return Result.failure(f"[INTEGRITY ERROR]\n {e}")
+        except sqlite3.OperationalError as e:
+            traceback.print_exc()
+            return Result.failure(f"[OPERATIONAL ERROR]\n {e}")
+        except sqlite3.ProgrammingError as e:
+            return Result.failure(f"[PROGRAMMING ERROR]\n {e}")
+        except sqlite3.DatabaseError as e:
+            return Result.failure(f"[DATABASE ERROR]\n {e}")
+        except sqlite3.Error as e:
+            return Result.failure(f"[SQLITE ERROR]\n {e}")
+
+    # ------------------------------------------------------------------
+    def get_num_by_id(self, id_: int) -> Result(int):
+        """
+        Obtiene el valor NÚM. de la entidad dado un ID.
+        :param id_: ID de la entidad
+        """
+
+        sql = (
+            """
+            SELECT NUM
+            FROM   VISTA_CATEGORIAS_INCIDENCIA
+            WHERE  ID = :id;
+            """
+        )
+        params = {"id": id_}
+
+        try:
+            with self.db.conn as con:
+                cur = con.cursor()
+                cur.execute(sql, params)
+                row = cur.fetchone()
 
                 if row is not None:
                     return Result.success(row["NUM"])
-                else:
-                    return Result.failure(
-                        f"NO SE ENCONTRÓ NINGÚN RESULTADO CON EL ID '{id_}'."
-                    )
+                return Result.failure(
+                    f"NO SE ENCONTRÓ NINGÚN RESULTADO CON EL ID '{id_}'.")
 
-            except self.db.conn.OperationalError as e:
-                return Result.failure(f"[ERROR OPERACIONAL]\n{e}")
-            except self.db.conn.ProgrammingError as e:
-                return Result.failure(f"[ERROR DE PROGRAMACIÓN]\n{e}")
-            except self.db.conn.DatabaseError as e:
-                return Result.failure(f"[ERROR DE BASE DE DATOS]\n{e}")
-            except self.db.conn.Error as e:
-                return Result.failure(f"[ERROR GENERAL SQLITE]\n{e}")
-            finally:
-                self.db.close_connection()
+        except sqlite3.IntegrityError as e:
+            return Result.failure(f"[INTEGRITY ERROR]\n {e}")
+        except sqlite3.OperationalError as e:
+            traceback.print_exc()
+            return Result.failure(f"[OPERATIONAL ERROR]\n {e}")
+        except sqlite3.ProgrammingError as e:
+            return Result.failure(f"[PROGRAMMING ERROR]\n {e}")
+        except sqlite3.DatabaseError as e:
+            return Result.failure(f"[DATABASE ERROR]\n {e}")
+        except sqlite3.Error as e:
+            return Result.failure(f"[SQLITE ERROR]\n {e}")
 
-    def get_list_combo(self):
-        """ Obtiene el listado para el combo. """
-
-        with self.db:
-            # Obtenemos los datos
-            sql = """
-                SELECT    ID_CATEGORIA AS ID,
-                          NOMBRE_CATEGORIA AS VALUE
-                FROM      CATEGORIAS_INCIDENCIA
-                ORDER BY  NOMBRE_CATEGORIA;
-              """
-            try:
-                cursor = self.db.conn.cursor()
-                cursor.execute(sql)
-                values = [CategoriaAcuarioEntity(
-                    f["ID"], None, f["VALUE"]) for f in cursor.fetchall()]
-
-                # Devolvemos los datos
-                return Result.success(values)
-
-            except self.db.conn.OperationalError as e:
-                return Result.failure(f"[ERROR OPERACIONAL]\n {e}")
-            except self.db.conn.ProgrammingError as e:
-                return Result.failure(f"[ERROR DE PROGRAMACIÓN]\n {e}")
-            except self.db.conn.DatabaseError as e:
-                return Result.failure(f"[ERROR DE BASE DE DATOS]\n {e}")
-            except self.db.conn.Error as e:
-                return Result.failure(f"[ERROR GENERAL SQLITE]\n {e}")
-            finally:
-                self.db.close_connection()
-
-    def insert(self, ent: CategoriaIncidenciaEntity) -> Result:
+    # ------------------------------------------------------------------
+    def get_list_combo(self) -> Result(list[CategoriaIncidenciaEntity]):
         """
-        Inserta un nuevo registro en la base de datos.
+        Obtiene una lista ligera para combos (ID y texto visible).
+        Devuelve entidades con `num=None` y `observaciones=None`.
+        """
 
-        Parametros:
+        sql = (
+            """
+            SELECT    ID_CATEGORIA AS ID,
+                      CATEGORIA_INCIDENCIA AS VALUE
+            FROM      CATEGORIAS_INCIDENCIA
+            ORDER BY  CATEGORIA_INCIDENCIA;
+            """
+        )
+
+        try:
+            with self.db.conn as con:
+                cur = con.cursor()
+                cur.execute(sql)
+                rows = cur.fetchall()
+                valores = [
+                    CategoriaIncidenciaEntity(
+                        id=f["ID"],
+                        num=None,
+                        categoria_incidencia=f["VALUE"],
+                        observaciones=None,
+                    )
+                    for f in rows
+                ]
+                return Result.success(valores)
+
+        except sqlite3.IntegrityError as e:
+            return Result.failure(f"[INTEGRITY ERROR]\n {e}")
+        except sqlite3.OperationalError as e:
+            traceback.print_exc()
+            return Result.failure(f"[OPERATIONAL ERROR]\n {e}")
+        except sqlite3.ProgrammingError as e:
+            return Result.failure(f"[PROGRAMMING ERROR]\n {e}")
+        except sqlite3.DatabaseError as e:
+            return Result.failure(f"[DATABASE ERROR]\n {e}")
+        except sqlite3.Error as e:
+            return Result.failure(f"[SQLITE ERROR]\n {e}")
+
+    # ------------------------------------------------------------------
+    def insert(self, ent: CategoriaIncidenciaEntity) -> Result(int):
+        """
+        Inserta un nuevo registro y devuelve el ID generado.
         :param ent: Entidad derivada de BaseEntity
         """
 
-        with self.db:
-            # Obtenemos los datos
-            sql = """
-                INSERT INTO CATEGORIAS_INCIDENCIA 
-                            (NOMBRE_CATEGORIA, OBSERVACIONES)
-                VALUES      (:cat, :descripcion);
+        sql = (
             """
-            try:
-                cursor = self.db.conn.cursor()
-                cursor.execute(sql, {
+            INSERT INTO CATEGORIAS_INCIDENCIA 
+                        (CATEGORIA_INCIDENCIA, OBSERVACIONES)
+            VALUES      (:cat, :descripcion);
+            """
+        )
+        params = {
                     "cat": ent.categoria_incidencia,
                     "descripcion": ent.observaciones
-                })
+        }
 
-                # Devolvemos los datos
-                last_id = cursor.lastrowid
-                self.db.conn.commit()
-                return Result.success(last_id)
+        try:
+            with self.db.conn as con:
+                cur = con.execute(sql, params)
+                return Result.success(cur.lastrowid)
 
-            except self.db.conn.OperationalError as e:
-                return Result.failure(f"[ERROR OPERACIONAL]\n {e}")
-            except self.db.conn.ProgrammingError as e:
-                return Result.failure(f"[ERROR DE PROGRAMACIÓN]\n {e}")
-            except self.db.conn.DatabaseError as e:
-                return Result.failure(f"[ERROR DE BASE DE DATOS]\n {e}")
-            except self.db.conn.Error as e:
-                return Result.failure(f"[ERROR GENERAL SQLITE]\n {e}")
-            finally:
-                self.db.close_connection()
+        except sqlite3.IntegrityError as e:
+            return Result.failure(f"[INTEGRITY ERROR]\n {e}")
+        except sqlite3.OperationalError as e:
+            traceback.print_exc()
+            return Result.failure(f"[OPERATIONAL ERROR]\n {e}")
+        except sqlite3.ProgrammingError as e:
+            return Result.failure(f"[PROGRAMMING ERROR]\n {e}")
+        except sqlite3.DatabaseError as e:
+            return Result.failure(f"[DATABASE ERROR]\n {e}")
+        except sqlite3.Error as e:
+            return Result.failure(f"[SQLITE ERROR]\n {e}")
 
-    def update(self, ent: CategoriaIncidenciaEntity) -> Result:
+    # ------------------------------------------------------------------
+    def update(self, ent: CategoriaIncidenciaEntity) -> Result(int):
         """
-        Actualiza el registro de la base de datos.
-
-        Parametros:
-        - ent: Entidad derivada de BaseEntity
+        Actualiza el registro en la base de datos. Devuelve el ID de la entidad
+        modificada.
+        :param ent: Entidad derivada de BaseEntity
         """
 
-        with self.db:
-            # Obtenemos los datos
-            sql = """
-                UPDATE  CATEGORIAS_INCIDENCIA
-                SET     NOMBRE_CATEGORIA = :cat,
-                        OBSERVACIONES = :descripcion
-                WHERE   ID_CATEGORIA = :id;
+        sql = (
             """
-            try:
-                cursor = self.db.conn.cursor()
-                cursor.execute(sql, {
+            UPDATE  CATEGORIAS_INCIDENCIA
+            SET     CATEGORIA_INCIDENCIA = :cat,
+                    OBSERVACIONES = :descripcion
+            WHERE   ID_CATEGORIA = :id;
+            """
+        )
+        params = {
                     "id": ent.id,
                     "cat": ent.categoria_incidencia,
                     "descripcion": ent.observaciones
-                })
+                }
 
-                # Devolvemos los datos
-                self.db.conn.commit()
+        try:
+            with self.db.conn as con:
+                cur = con.execute(sql, params)
                 return Result.success(ent.id)
 
-            except self.db.conn.OperationalError as e:
-                return Result.failure(f"[ERROR OPERACIONAL]\n {e}")
-            except self.db.conn.ProgrammingError as e:
-                return Result.failure(f"[ERROR DE PROGRAMACIÓN]\n {e}")
-            except self.db.conn.DatabaseError as e:
-                return Result.failure(f"[ERROR DE BASE DE DATOS]\n {e}")
-            except self.db.conn.Error as e:
-                return Result.failure(f"[ERROR GENERAL SQLITE]\n {e}")
-            finally:
-                self.db.close_connection()
+        except sqlite3.IntegrityError as e:
+            return Result.failure(f"[INTEGRITY ERROR]\n {e}")
+        except sqlite3.OperationalError as e:
+            traceback.print_exc()
+            return Result.failure(f"[OPERATIONAL ERROR]\n {e}")
+        except sqlite3.ProgrammingError as e:
+            return Result.failure(f"[PROGRAMMING ERROR]\n {e}")
+        except sqlite3.DatabaseError as e:
+            return Result.failure(f"[DATABASE ERROR]\n {e}")
+        except sqlite3.Error as e:
+            return Result.failure(f"[SQLITE ERROR]\n {e}")
 
-    def delete(self, id: int) -> Result:
+    # ------------------------------------------------------------------
+    def delete(self, id_: int) -> Result(int):
         """
-        Elimina el registro de la base de datos.
-
-        Parametros:
-        - id: Id del registro a aliminar.
+        Elimina el registro. Devuelve el ID de la entidad eliminada.
+        :param id_: ID de la entidad a eliminar
         """
-
-        with self.db:
-            # Obtenemos los datos
-            sql = """
-                DELETE FROM CATEGORIAS_INCIDENCIA
-                WHERE ID_CATEGORIA = :id;
+        sql = (
             """
-            try:
-                cursor = self.db.conn.cursor()
-                cursor.execute(sql, {"id": id})
+            DELETE FROM CATEGORIAS_INCIDENCIA
+            WHERE       ID_CATEGORIA = :id;
+            """
+        )
+        params = {"id": id_}
 
-                # Devolvemos los datos
-                self.db.conn.commit()
-                return Result.success(id)
+        try:
+            with self.db.conn as con:
+                cur = con.execute(sql, params)
+                return Result.success(id_)
 
-            except self.db.conn.OperationalError as e:
-                return Result.failure(f"[ERROR OPERACIONAL]\n {e}")
-            except self.db.conn.ProgrammingError as e:
-                return Result.failure(f"[ERROR DE PROGRAMACIÓN]\n {e}")
-            except self.db.conn.DatabaseError as e:
-                return Result.failure(f"[ERROR DE BASE DE DATOS]\n {e}")
-            except self.db.conn.Error as e:
-                return Result.failure(f"[ERROR GENERAL SQLITE]\n {e}")
-            finally:
-                self.db.close_connection()
+        except sqlite3.IntegrityError as e:
+            return Result.failure(f"[INTEGRITY ERROR]\n {e}")
+        except sqlite3.OperationalError as e:
+            traceback.print_exc()
+            return Result.failure(f"[OPERATIONAL ERROR]\n {e}")
+        except sqlite3.ProgrammingError as e:
+            return Result.failure(f"[PROGRAMMING ERROR]\n {e}")
+        except sqlite3.DatabaseError as e:
+            return Result.failure(f"[DATABASE ERROR]\n {e}")
+        except sqlite3.Error as e:
+            return Result.failure(f"[SQLITE ERROR]\n {e}")
 
