@@ -1,6 +1,23 @@
 ﻿================================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
+PROXIMA     -   PROGRAMAR LA INSERCIÓN DE CATEGORÍA DE ACUARIO DESDE LAS VISTAS
+                DE SUBCATEGORÍA DE ACUARIO.
+            -   PROGRAMAR LA INSERCIÓN DE CATEGORÍA DE INCIDEN. DESDE LAS VISTAS
+                DE SUBCATEGORÍA DE INCIDENCIA.
+
+28/05/2025  REFACTORIZACIÓN:
+            -   SE CAMBIA EL CURSOR DE LOS BOTONES DE LOS FORMULARIOS A UNA MANO
+                -   CATEGORÍA ACUARIO.                                      DONE
+                -   CATEGORÍA INCIDENCIA.                           ALREADY DONE
+                -   MARCA COMERCIAL.                                        DONE
+                -   MATERIAL DE URNA.                               ALREADY DONE
+                -   SUBCATEGORÍA DE ACUARIO.                                DONE
+                -   SUBCATEGORÍA DE INCIDENCIA.                             DONE
+                -   TIPO DE ACUARIO.                                        DONE
+                -   TIPO DE FILTRO.                                 ALREADY DONE
+                -   URNA.                                                   DONE
+
 27/08/2025  REFACTORIZACIÓN:
             -   SE MODIFICAN LOS DAOS:
                 -   SUBCATEGORÍA ACUARIO.                                   DONE

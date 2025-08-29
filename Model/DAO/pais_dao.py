@@ -94,7 +94,7 @@ class PaisDAO (BaseDAO):
                     PaisEntity(
                         id=f["ID"],
                         num=None,
-                        pais=f["PAIS"],
+                        pais=f["VALUE"],
                         continente=None,
                     )
                     for f in rows

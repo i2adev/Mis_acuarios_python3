@@ -7,6 +7,8 @@ Commentarios:
 """
 import sys
 
+from PyQt6.QtCore import Qt
+from PyQt6.QtGui import QCursor
 from PyQt6.QtWidgets import QFrame, QLabel, QLineEdit, QPlainTextEdit, \
     QVBoxLayout, QHBoxLayout, QApplication, QComboBox, QPushButton
 
@@ -56,6 +58,8 @@ class SubcategoriaAcuarioForm(QFrame):
         self.edit_id.setObjectName("edit_id")
         self.edit_id.setFixedWidth(50)
         self.edit_id.setEnabled(False)
+        self.edit_subcategoria_acuario = QLineEdit()
+        self.edit_subcategoria_acuario.setObjectName("edit_subcategoria_acuario")
         self.text_observaciones = QPlainTextEdit()
         self.text_observaciones.setObjectName("text_descripcion")
 
@@ -63,12 +67,14 @@ class SubcategoriaAcuarioForm(QFrame):
         self.combo_categoria_acuario = QComboBox()
         self.combo_categoria_acuario.setMinimumWidth(200)
         self.combo_categoria_acuario.setEditable(True)
-        self.button_insert_categoria_acuario = QPushButton("<")
-        self.button_insert_categoria_acuario.setFixedWidth(30)
         self.combo_categoria_acuario.setObjectName("combo_subcategoria_acuario")
 
-        self.edit_subcategoria_acuario = QLineEdit()
-        self.edit_subcategoria_acuario.setObjectName("edit_subcategoria_acuario")
+        # Botones
+        self.button_insert_categoria_acuario = QPushButton("<")
+        self.button_insert_categoria_acuario.setFixedWidth(30)
+        self.button_insert_categoria_acuario.setCursor(
+            QCursor(Qt.CursorShape.PointingHandCursor)
+        )
 
     def build_layout(self):
         """ Construye el layout del frame. """

@@ -7,6 +7,8 @@ Commentarios:
 """
 import sys
 
+from PyQt6.QtCore import Qt
+from PyQt6.QtGui import QCursor
 from PyQt6.QtWidgets import QFrame, QLabel, QLineEdit, QPlainTextEdit, \
     QVBoxLayout, QHBoxLayout, QApplication, QComboBox, QPushButton
 
@@ -68,10 +70,15 @@ class SubcategoriaIncidenciaForm(QFrame):
         self.combo_categoria_incidencia = QComboBox()
         self.combo_categoria_incidencia.setMinimumWidth(200)
         self.combo_categoria_incidencia.setEditable(True)
-        self.button_insert_categoria_incidencia = QPushButton("<")
-        self.button_insert_categoria_incidencia.setFixedWidth(30)
         self.combo_categoria_incidencia.setObjectName(
             "combo_subcategoria_acuario"
+        )
+
+        # Botones
+        self.button_insert_categoria_incidencia = QPushButton("<")
+        self.button_insert_categoria_incidencia.setFixedWidth(30)
+        self.button_insert_categoria_incidencia.setCursor(
+            QCursor(Qt.CursorShape.PointingHandCursor)
         )
 
     def build_layout(self):

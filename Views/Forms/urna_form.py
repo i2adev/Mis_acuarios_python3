@@ -7,7 +7,8 @@ Commentarios:
 
 import sys
 
-from PyQt6.QtGui import QIntValidator
+from PyQt6.QtCore import Qt
+from PyQt6.QtGui import QIntValidator, QCursor
 from PyQt6.QtWidgets import QFrame, QLabel, QLineEdit, QPlainTextEdit, \
     QVBoxLayout, QHBoxLayout, QApplication, QComboBox, QPushButton, QSpacerItem, \
     QSizePolicy
@@ -118,9 +119,15 @@ class UrnaForm(QFrame):
         self.button_insert_marca = QPushButton("<")
         self.button_insert_marca.setObjectName("button_insert_marca")
         self.button_insert_marca.setFixedWidth(30)
+        self.button_insert_marca.setCursor(
+            QCursor(Qt.CursorShape.PointingHandCursor)
+        )
         self.button_insert_material = QPushButton("<")
         self.button_insert_material.setObjectName("button_insert_material")
         self.button_insert_material.setFixedWidth(30)
+        self.button_insert_material.setCursor(
+            QCursor(Qt.CursorShape.PointingHandCursor)
+        )
 
     def build_layout(self):
         """ Construye el layout del frame. """

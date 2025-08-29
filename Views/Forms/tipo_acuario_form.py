@@ -7,6 +7,8 @@ Commentarios:
 """
 import sys
 
+from PyQt6.QtCore import Qt
+from PyQt6.QtGui import QCursor
 from PyQt6.QtWidgets import QFrame, QLabel, QLineEdit, QPlainTextEdit, \
     QVBoxLayout, QHBoxLayout, QApplication, QComboBox, QPushButton
 
@@ -63,15 +65,21 @@ class TipoAcuarioForm(QFrame):
 
         # Combos
         self.combo_categoria_acuario = QComboBox()
-        # self.combo_categoria_acuario.setEditable(True)
+        self.combo_categoria_acuario.setEditable(True)
         self.button_insert_tipo_acuario = QPushButton("<")
         self.button_insert_tipo_acuario.setFixedWidth(30)
+        self.button_insert_tipo_acuario.setCursor(
+            QCursor(Qt.CursorShape.PointingHandCursor)
+        )
         self.combo_categoria_acuario.setObjectName("combo_categoria_acuario")
 
         self.combo_subcategoria_acuario = QComboBox()
-        # self.combo_subcategoria_acuario.setEditable(True)
+        self.combo_subcategoria_acuario.setEditable(True)
         self.button_insert_subtipo_acuario = QPushButton("<")
         self.button_insert_subtipo_acuario.setFixedWidth(30)
+        self.button_insert_subtipo_acuario.setCursor(
+            QCursor(Qt.CursorShape.PointingHandCursor)
+        )
         self.combo_subcategoria_acuario.setObjectName("combo_subcategoria_acuario")
 
     def build_layout(self):

@@ -26,7 +26,6 @@ class CategoriaAcuarioView(BaseView):
 
         # Configuramos el formulario
         self.frame = CategoriaAcuarioForm()
-        # self.frame_main.setFixedWidth(550)
         self.layout_form_data.addWidget(self.frame)
         self.set_tab_order()
 
@@ -35,6 +34,10 @@ class CategoriaAcuarioView(BaseView):
 
     def set_tab_order(self):
         """ Establece el orden de tabulación de los controles. """
+
+        # Eliminar el focus de los widgets que no lo necesitan
+        for widget in self.findChildren(QWidget):
+            widget.setFocusPolicy(Qt.FocusPolicy.ClickFocus)
 
         # Eliminar el focus de los widgets que no lo necesitan
         for widget in self.findChildren(QWidget):

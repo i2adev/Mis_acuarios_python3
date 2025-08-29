@@ -8,6 +8,8 @@ Commentarios:
 
 import sys
 
+from PyQt6.QtCore import Qt
+from PyQt6.QtGui import QCursor
 from PyQt6.QtWidgets import QFrame, QLabel, QLineEdit, QPlainTextEdit, \
     QVBoxLayout, QHBoxLayout, QApplication, QComboBox, QPushButton, QSpacerItem, \
     QSizePolicy
@@ -101,6 +103,7 @@ class MarcaComercialForm(QFrame):
         # Botones
         self.button_insert_pais = QPushButton("<")
         self.button_insert_pais.setFixedWidth(30)
+        self.button_insert_pais.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
 
     def build_layout(self):
         """ Construye el layout del frame. """

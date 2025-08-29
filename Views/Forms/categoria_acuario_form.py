@@ -7,8 +7,10 @@ Commentarios:
 """
 import sys
 
+from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QFrame, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, \
-    QPlainTextEdit, QApplication
+    QPlainTextEdit, QApplication, QWidget
+
 
 class CategoriaAcuarioForm(QFrame):
     """
@@ -23,6 +25,8 @@ class CategoriaAcuarioForm(QFrame):
 
         self.create_widgets()
         self.build_layout()
+
+        # self.set_tab_order()
 
     def create_widgets(self):
         """ Se encarga de crear los controles del formulario. """
@@ -84,6 +88,22 @@ class CategoriaAcuarioForm(QFrame):
         self.layout_form.addLayout(self.layout_observaciones)
 
         self.setLayout(self.layout_form)
+
+    # def set_tab_order(self):
+    #     """ Establece el orden de tabulación de los controles. """
+    #
+    #     # Eliminar el focus de los widgets que no lo necesitan
+    #     for widget in self.findChildren(QWidget):
+    #         widget.setFocusPolicy(Qt.FocusPolicy.ClickFocus)
+    #
+    #     # Establecemos las politicas de focus
+    #     self.edit_categoria_acuario.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
+    #     self.text_observaciones.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
+    #
+    #     # Establecer el orden
+    #     self.setTabOrder(
+    #         self.edit_categoria_acuario, self.text_observaciones
+    #     )
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

@@ -7,6 +7,7 @@ Commentarios:
 import sys
 
 from PyQt6.QtCore import Qt
+from PyQt6.QtGui import QCursor
 from PyQt6.QtWidgets import QFrame, QVBoxLayout, QApplication, QHBoxLayout, \
     QLabel, QSizePolicy, QPushButton, QSpacerItem
 
@@ -49,14 +50,17 @@ class ImageForm(QFrame):
         self.button_add = QPushButton("+")
         self.button_add.setObjectName("button_add")
         self.button_add.setFixedWidth(20)
+        self.button_add.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         ## Botón Remove
         self.button_remove = QPushButton("-")
         self.button_remove.setObjectName("button_remove")
         self.button_remove.setFixedWidth(20)
+        self.button_remove.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         ## Botón previo
         self.button_prev = QPushButton("<")
         self.button_prev.setObjectName("button_prev")
         self.button_prev.setFixedWidth(20)
+        self.button_prev.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         ## Label numero de imagen
         self.label_num_imagen = QLabel()
         self.label_num_imagen.setFixedWidth(30)
@@ -76,6 +80,7 @@ class ImageForm(QFrame):
         self.button_next = QPushButton(">")
         self.button_next.setObjectName("button_next")
         self.button_next.setFixedWidth(20)
+        self.button_next.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
 
     def build_layout(self):
         """ Construye el layout. """

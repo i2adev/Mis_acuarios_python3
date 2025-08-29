@@ -239,26 +239,44 @@ class BaseView(QWidget):
         ### Botón INSERT
         self.button_insert = QPushButton()
         self.button_insert.setText("&INSERTAR")
+        self.button_insert.setCursor(
+            QCursor(Qt.CursorShape.PointingHandCursor)
+        )
 
         ### Botón UPDATE
         self.button_update = QPushButton()
         self.button_update.setText("AC&TUALIZAR")
+        self.button_update.setCursor(
+            QCursor(Qt.CursorShape.PointingHandCursor)
+        )
 
         ### Botón DELETE
         self.button_delete = QPushButton()
         self.button_delete.setText("&ELIMINAR")
+        self.button_delete.setCursor(
+            QCursor(Qt.CursorShape.PointingHandCursor)
+        )
 
         ### Botón LOAD
         self.button_load = QPushButton()
         self.button_load.setText("CAR&GAR")
+        self.button_load.setCursor(
+            QCursor(Qt.CursorShape.PointingHandCursor)
+        )
 
         ### Botón CLEAN
         self.button_clean = QPushButton()
         self.button_clean.setText("LIM&PIAR")
+        self.button_clean.setCursor(
+            QCursor(Qt.CursorShape.PointingHandCursor)
+        )
 
         ### Botón SEARCH
         self.button_search = QPushButton()
         self.button_search.setText("&BUSCAR")
+        self.button_search.setCursor(
+            QCursor(Qt.CursorShape.PointingHandCursor)
+        )
 
         ## Controles de navegación
         ### Botón última página
