@@ -99,6 +99,7 @@ class MarcaComercialForm(QFrame):
         # Combos
         self.combo_pais = QComboBox()
         self.combo_pais.setObjectName("combo_pais")
+        self.combo_pais.setEditable(True)
 
         # Botones
         self.button_insert_pais = QPushButton("<")

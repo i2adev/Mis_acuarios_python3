@@ -111,9 +111,11 @@ class UrnaForm(QFrame):
         self.combo_marca = QComboBox()
         self.combo_marca.setMinimumWidth(250)
         self.combo_marca.setObjectName("combo_marca")
+        self.combo_marca.setEditable(True)
         self.combo_material = QComboBox()
         self.combo_material.setMinimumWidth(250)
         self.combo_material.setObjectName("combo_material")
+        self.combo_material.setEditable(True)
 
         # Botones
         self.button_insert_marca = QPushButton("<")

@@ -6,6 +6,18 @@ PROXIMA     -   PROGRAMAR LA INSERCIÓN DE CATEGORÍA DE ACUARIO DESDE LAS VISTA
             -   PROGRAMAR LA INSERCIÓN DE CATEGORÍA DE INCIDEN. DESDE LAS VISTAS
                 DE SUBCATEGORÍA DE INCIDENCIA.
 
+30/05/2025  REFACTORIZACIÓN:
+            -   SE CONVIERTEN TODOS LOS COMBOS EN EDITABLES.
+                -   CATEGORÍA ACUARIO.                             NOT NECESSARY
+                -   CATEGORÍA INCIDENCIA.                          NOT NECESSARY
+                -   MARCA COMERCIAL.                                        DONE
+                -   MATERIAL DE URNA.                              NOT NECESSARY
+                -   SUBCATEGORÍA DE ACUARIO.                        ALREADY DONE
+                -   SUBCATEGORÍA DE INCIDENCIA.                     ALREADY DONE
+                -   TIPO DE ACUARIO.                                ALREADY DONE
+                -   TIPO DE FILTRO.                                NOT NECESSARY
+                -   URNA.                                                   DONE
+
 28/05/2025  REFACTORIZACIÓN:
             -   SE CAMBIA EL CURSOR DE LOS BOTONES DE LOS FORMULARIOS A UNA MANO
                 -   CATEGORÍA ACUARIO.                                      DONE

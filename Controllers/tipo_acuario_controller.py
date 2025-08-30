@@ -184,7 +184,7 @@ class TipoAcuarioDialogController(BaseController):
         self.tipo_acuario_result = TipoAcuarioEntity(
             id = res.value,
             num = None,
-            id_ta_acuario = self._view.frame.combo_categoria_acuario.currentData(),
+            id_cat_acuario = self._view.frame.combo_categoria_acuario.currentData(),
             id_subcat_acuario = self._view.frame
                     .combo_subcategoria_acuario.currentData(),
             observaciones = self._view.frame.text_descripcion.toPlainText()
@@ -262,6 +262,9 @@ class TipoAcuarioDialogController(BaseController):
 
         # Deseleccionamos el valor
         self._view.frame.combo_subcategoria_acuario.setCurrentIndex(-1)
+
+        # Establecemos el autocompletado
+        self.set_autocomplete(self._view.frame.combo_subcategoria_acuario)
 
 
 
