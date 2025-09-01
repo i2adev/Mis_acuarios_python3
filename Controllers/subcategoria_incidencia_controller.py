@@ -90,6 +90,8 @@ class SubcategoriaAcuarioDialogController(BaseController):
         for widget in self._view.findChildren(QWidget):
             if isinstance(widget, self._text_widgets):
                 widget.installEventFilter(self)
+            if isinstance(widget, QComboBox):
+                widget.installEventFilter(self)
 
     def entity_configuration(self) -> SubcategoriaIncidenciaEntity:
         """ Configura la entidad. """

@@ -4,8 +4,10 @@ Fecha:      11/08/2025
 Commentarios:
     Módulo que contiene la entidad ACUARIO.
 """
+from Model.Entities.base_entity import BaseEntity
 
-class UrnaEntity:
+
+class UrnaEntity(BaseEntity):
     """ Entidad de urna. """
 
     # Notaciones de tipo

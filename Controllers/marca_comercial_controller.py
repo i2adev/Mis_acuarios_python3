@@ -85,8 +85,11 @@ class MarcaComercialDialogController(BaseController):
     def init_imput_handlers(self):
         """ Inicializa los controles de entrada. """
 
+        # Textos
         for widget in self._view.findChildren(QWidget):
             if isinstance(widget, self._text_widgets):
+                widget.installEventFilter(self)
+            if isinstance(widget, QComboBox):
                 widget.installEventFilter(self)
 
     def entity_configuration(self) -> MarcaComercialEntity:

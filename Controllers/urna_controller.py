@@ -97,6 +97,8 @@ class UrnaDialogController(BaseController):
         for widget in self._view.findChildren(QWidget):
             if isinstance(widget, self._text_widgets):
                 widget.installEventFilter(self)
+            if isinstance(widget, QComboBox):
+                widget.installEventFilter(self)
 
         # Botones
         self._view.frame.button_insert_marca.clicked.connect(

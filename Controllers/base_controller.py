@@ -8,7 +8,7 @@ Commentarios:
 """
 
 # Importaciones
-from PyQt6.QtCore import Qt, QObject, QEvent
+from PyQt6.QtCore import Qt, QEvent, QObject
 from PyQt6.QtWidgets import (QLineEdit, QTextEdit, QPlainTextEdit, QWidget,
                              QTableView, QComboBox, QHeaderView, QMessageBox,
                              QLabel)
@@ -49,41 +49,70 @@ class BaseController(QObject):
     ********************************************************************
     """
 
-    def __text_normalize(self, obj: QWidget, event):
+    def _combo_out_focus(self, widget: QComboBox, event):
+        """
+        Se ejecuta cuando un QCOmboBox pierde el foco.
+        :param widget: Combobox que pierde el foco
+        :param event: Evento del combobox
+        """
+
+        # Condiciones de salida
+        if not widget.currentText():
+            return
+
+        # Selecciona el índice de coincidencia del texto
+        text = widget.currentText()
+        index = widget.findText(text, Qt.MatchFlag.MatchStartsWith)
+
+        if index == -1:
+            QMessageBox.warning(
+                self._view,
+                self._view.window_title,
+                "NO SE HA ENCONTRADO NINGUNA COINCIDENCIA CON EL TEXTO DEL "
+                "COMBO"
+            )
+            widget.setFocus()
+
+        widget.setCurrentIndex(index)
+
+    def _text_normalize(self, widget: QWidget, event):
         """
         Normaliza el texto del widjej, eliminando los espacios iniciales
         y finales y convirtiendo el texto en mayúsculas:
-        - Parametro OBJ: Widjet de texto a normalizar.
-        - Parámetro EVENT: Evento generado por el widget.
+        :param widget: Widjet de texto a normalizar.
+        :param event: Evento generado por el widget.
         """
 
-        if isinstance(obj, QLineEdit):
-            if obj.text():
-                # obj.setText(obj.text().strip().upper())
-                obj.setText(obj.text().strip())
+        if isinstance(widget, QLineEdit):
+            if widget.text():
+                # widget.setText(widget.text().strip().upper())
+                widget.setText(widget.text().strip())
 
-        if isinstance(obj, (QTextEdit, QPlainTextEdit)):
-            if obj.toPlainText():
-                # obj.setPlainText(obj.toPlainText().strip().upper())
-                obj.setPlainText(obj.toPlainText().strip())
+        if isinstance(widget, (QTextEdit, QPlainTextEdit)):
+            if widget.toPlainText():
+                # widget.setPlainText(widget.toPlainText().strip().upper())
+                widget.setPlainText(widget.toPlainText().strip())
 
     # Maneja los diferentes tipos de eventos comunes de las diustintas
     # vistas
-    def eventFilter(self, obj: QWidget, event):
+    def eventFilter(self, widget: QWidget, event):
         """ Maneja los eventos de la vista. """
 
-        # Gestiona los eventos de perdida de foco de los controles de
-        # texto para normalizar el texto
+        # Gestiona los eventos de perdida de foco de los controles
         if event.type() == QEvent.Type.FocusOut:
-            if isinstance(obj, self._text_widgets):
-                self.__text_normalize(obj, event)
+            # Controles de texto
+            if isinstance(widget, self._text_widgets):
+                self._text_normalize(widget, event)
                 return False # Dejamos que el widget maneje también su
                              # evento.
+            # Combos
+            if isinstance(widget, QComboBox):
+                self._combo_out_focus(widget, event)
 
         # Gestiona los eventos de pulsación de teclas en los controles
         # de textp.
         if event.type() == QEvent.Type.KeyPress:
-            if isinstance(obj, (QTextEdit, QPlainTextEdit)):
+            if isinstance(widget, (QTextEdit, QPlainTextEdit)):
 
                 if event.key() == Qt.Key.Key_Tab and not event.modifiers():
                     self._view.focusNextChild()
@@ -93,13 +122,13 @@ class BaseController(QObject):
                     return True
                 elif (event.key() == Qt.Key.Key_Tab and event.modifiers()
                       == Qt.KeyboardModifier.ControlModifier):
-                    cursor = obj.textCursor()
+                    cursor = widget.textCursor()
                     cursor.insertText("\t")
                     return True
                 else:
                     return False
 
-        return super().eventFilter(obj, event)
+        return super().eventFilter(widget, event)
 
     def _select_row_by_id(self, table: QTableView, id_elem: int,
                           column: int = 0):
@@ -123,7 +152,7 @@ class BaseController(QObject):
         for widget in frame.findChildren(QWidget):
             # QLabel
             if isinstance(widget, QLabel):
-                if widget.objectName() == "DE":
+                if widget.widgetectName() == "DE":
                     continue
                 widget.clear()
 
@@ -153,7 +182,7 @@ class BaseController(QObject):
 
         Parámetros:
         :param combo: El QComboBox que quieres llenar.
-        :param lista: Lista de entidades (pueden ser objetos o diccionarios).
+        :param lista: Lista de entidades (pueden ser widgetetos o diccionarios).
         :param attr_text: Nombre del atributo para el texto visible.
         :param attr_data: Nombre del atributo para el valor (userData).
         """

@@ -7,6 +7,18 @@ PROXIMA     -   PROGRAMAR LA INSERCIÓN DE CATEGORÍA DE ACUARIO DESDE LAS VISTA
                 DE SUBCATEGORÍA DE INCIDENCIA.
 
 30/05/2025  REFACTORIZACIÓN:
+            -   SE PROGRAMA LA PERDIDA DE FOCO DE LOS COMBOS PARA QUE CUANDO
+                SALGA SELECCIONE EL ELEMENTO QUE SE ESTABA ESCRIBIENDO.
+                -   CATEGORÍA ACUARIO.                             NOT NECESSARY
+                -   CATEGORÍA INCIDENCIA.                          NOT NECESSARY
+                -   MARCA COMERCIAL.                                        DONE
+                -   MATERIAL DE URNA.                              NOT NECESSARY
+                -   SUBCATEGORÍA DE ACUARIO.                                DONE
+                -   SUBCATEGORÍA DE INCIDENCIA.                             DONE
+                -   TIPO DE ACUARIO.                                        DONE
+                -   TIPO DE FILTRO.                                NOT NECESSARY
+                -   URNA.                                                   DONE
+
             -   SE CONVIERTEN TODOS LOS COMBOS EN EDITABLES.
                 -   CATEGORÍA ACUARIO.                             NOT NECESSARY
                 -   CATEGORÍA INCIDENCIA.                          NOT NECESSARY
