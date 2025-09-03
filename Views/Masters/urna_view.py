@@ -27,7 +27,7 @@ class UrnaView(BaseView):
         # Configuramos el formulario
         self.frame = UrnaForm()
         self.frame.setMinimumWidth(650)
-        self.frame_imagen = ImageForm()
+        self.frame_imagen = ImageForm(self, "FOTOGRAFIAS_URNA")
         self.frame_imagen.setFixedWidth(450)
         self.layout_form_data.addWidget(self.frame)
         self.layout_form_data.addWidget(self.frame_imagen)

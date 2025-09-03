@@ -12,7 +12,6 @@ from PyQt6.QtCore import Qt, QEvent, QObject
 from PyQt6.QtWidgets import (QLineEdit, QTextEdit, QPlainTextEdit, QWidget,
                              QTableView, QComboBox, QHeaderView, QMessageBox,
                              QLabel)
-import enchant  # Enchant es la librería de revisión orográfica
 
 from Model.DAO.base_dao import BaseDAO
 from Model.Entities.base_entity import BaseEntity
@@ -37,8 +36,6 @@ class BaseController(QObject):
         self._view = view
         self._dao = dao
         self._mod = mod
-
-        self._spell_dict = enchant.Dict("en_EN")
 
         self._text_widgets = (QLineEdit, QTextEdit, QPlainTextEdit)
 
