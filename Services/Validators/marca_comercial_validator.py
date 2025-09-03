@@ -19,7 +19,7 @@ class MarcaComercialValidator:
         # Sí el texto está vacío
         if not widget.text():
             return Result.failure(
-                "EL CAMPO 'MARCA COMERCIAL' NO PUEDE estáR VACÍO"
+                "EL CAMPO 'MARCA COMERCIAL' NO PUEDE ESTAR VACÍO"
             )
 
         # Si el texto contiene más de 32 carácteres
@@ -49,7 +49,7 @@ class MarcaComercialValidator:
         # Si el texto contiene más de 16 carácteres
         if len(widget.text()) > 16:
             return Result.failure("EL CAMPO 'CÓDIGO POSTAL' NO PUEDE "
-                                  "CONTENER MAS DE 128 CARACTERES")
+                                  "CONTENER MAS DE 16 CARACTERES")
 
         # Validación exitosa
         return Result.success(1)
@@ -85,7 +85,7 @@ class MarcaComercialValidator:
         # Sí el texto está vacÍo
         if not widget.currentData():
             return Result.failure(
-                "EL CAMPO 'PAÍS' NO PUEDE estáR VACÍO"
+                "EL CAMPO 'PAÍS' NO PUEDE ESTAR VACÍO"
             )
 
         # Validación exitosa

@@ -35,7 +35,12 @@ class UrnaValidator:
                 "EL CAMPO 'MODELO DE ACUARIO' NO PUEDE ESTAR VACÍO"
             )
 
-            # Validación exitosa
+        # Controla la longitud del texto
+        if len(widget.text()) > 32:
+            return Result.failure("EL CAMPO 'MODELO DE ACUARIO' NO "
+                                "PUEDE CONTENER MAS DE 32 CARACTERES")
+
+        # Validación exitosa
         return Result.success(1)
 
     @staticmethod
@@ -105,7 +110,7 @@ class UrnaValidator:
 
         if (n < 2) or (n > 200):
             return Result.failure("EL GROSOR DEL CRISTAL DE LA URNA DEBE SER "
-                                  "DE 10 A 200 mm.")
+                                  "DE 2 A 200 mm.")
 
             # Validación exitosa
         return Result.success(1)
@@ -125,5 +130,18 @@ class UrnaValidator:
             return Result.failure("EL VOLUMEN de la urna DEBE SER "
                                   "DE 10 A 2.000 LITROS.")
 
-            # Validación exitosa
+        # Validación exitosa
+        return Result.success(1)
+
+    @staticmethod
+    def validate_material(widget: QComboBox):
+        """ Valida el material de lal urna. """
+
+        # Sí el texto esta vacio
+        if not widget.currentData():
+            return Result.failure(
+                "EL CAMPO 'MATERIAL DE URNA' NO PUEDE ESTAR VACIO"
+            )
+
+        # Validación exitosa
         return Result.success(1)

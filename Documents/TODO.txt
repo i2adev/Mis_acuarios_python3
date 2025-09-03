@@ -6,6 +6,18 @@ PROXIMA     -   PROGRAMAR LA INSERCIÓN DE CATEGORÍA DE ACUARIO DESDE LAS VISTA
             -   PROGRAMAR LA INSERCIÓN DE CATEGORÍA DE INCIDEN. DESDE LAS VISTAS
                 DE SUBCATEGORÍA DE INCIDENCIA.
 
+02/09/2025  REVISIÓN T TESTEO:
+            -   SE TESTEAN LOS VALIDADORES DE LOS FORMULARIOS.
+                -   CATEGORÍA ACUARIO.                                      DONE
+                -   CATEGORÍA INCIDENCIA.                                   DONE
+                -   MARCA COMERCIAL.                                        DONE
+                -   MATERIAL DE URNA.                                       DONE
+                -   SUBCATEGORÍA DE ACUARIO.                                DONE
+                -   SUBCATEGORÍA DE INCIDENCIA.                             DONE
+                -   TIPO DE ACUARIO.                                        DONE
+                -   TIPO DE FILTRO.                                         DONE
+                -   URNA.                                                   DONE
+
 30/05/2025  REFACTORIZACIÓN:
             -   SE PROGRAMA LA PERDIDA DE FOCO DE LOS COMBOS PARA QUE CUANDO
                 SALGA SELECCIONE EL ELEMENTO QUE SE ESTABA ESCRIBIENDO.

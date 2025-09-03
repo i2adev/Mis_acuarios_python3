@@ -255,6 +255,15 @@ class UrnaDialogController(BaseController):
             self._view.frame.edit_volumen.setFocus()
             return res
 
+        # Valida el material de la urna
+        res = UrnaValidator.validate_material(
+            self._view.frame.combo_material
+        )
+
+        if not res.is_success:
+            self._view.frame.combo_material.setFocus()
+            return res
+
         return Result.success(1)
 
     def dialog_accept(self):

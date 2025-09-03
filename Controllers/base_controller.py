@@ -152,7 +152,7 @@ class BaseController(QObject):
         for widget in frame.findChildren(QWidget):
             # QLabel
             if isinstance(widget, QLabel):
-                if widget.widgetectName() == "DE":
+                if widget.objectName() == "DE":
                     continue
                 widget.clear()
 

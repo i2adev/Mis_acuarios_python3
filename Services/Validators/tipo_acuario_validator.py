@@ -35,5 +35,5 @@ class TipoAcuarioValidator:
                 "EL CAMPO 'SUBCATEGORÍA DE ACUARIO' NO PUEDE ESTAR VACIO"
             )
 
-            # Validación exitosa
+        # Validación exitosa
         return Result.success(1)

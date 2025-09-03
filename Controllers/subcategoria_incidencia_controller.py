@@ -140,6 +140,7 @@ class SubcategoriaAcuarioDialogController(BaseController):
         )
 
         if not val.is_success:
+            self._view.frame.combo_categoria_incidencia.setFocus()
             return val
 
         # Valida la subcategoría de acuario
@@ -148,6 +149,7 @@ class SubcategoriaAcuarioDialogController(BaseController):
         )
 
         if not val.is_success:
+            self._view.frame.edit_subcategoria_incidencia.setFocus()
             return val
 
         return Result.success(1)

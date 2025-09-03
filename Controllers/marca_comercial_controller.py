@@ -143,6 +143,7 @@ class MarcaComercialDialogController(BaseController):
         )
 
         if not val.is_success:
+            self._view.frame.edit_marca.setFocus()
             return val
 
         # Valida la dirección
@@ -151,6 +152,7 @@ class MarcaComercialDialogController(BaseController):
         )
 
         if not val.is_success:
+            self._view.frame.edit_direccion.setFocus()
             return val
 
         # Valida el código postal
@@ -159,6 +161,7 @@ class MarcaComercialDialogController(BaseController):
         )
 
         if not val.is_success:
+            self._view.frame.edit_cod_postal.setFocus()
             return val
 
         # Valida población
@@ -167,6 +170,7 @@ class MarcaComercialDialogController(BaseController):
         )
 
         if not val.is_success:
+            self._view.frame.edit_poblacion.setFocus()
             return val
 
         # Valida la provincia
@@ -175,6 +179,7 @@ class MarcaComercialDialogController(BaseController):
         )
 
         if not val.is_success:
+            self._view.frame.edit_provincia.setFocus()
             return val
 
         # Valida el país
@@ -183,6 +188,7 @@ class MarcaComercialDialogController(BaseController):
         )
 
         if not val.is_success:
+            self._view.frame.combo_pais.setFocus()
             return val
 
         return Result.success(1)

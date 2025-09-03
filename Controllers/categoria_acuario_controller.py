@@ -92,7 +92,7 @@ class CategoriaAcuarioDialogController(BaseController):
 
         return ent
 
-    def insert(self) -> Result:
+    def insert(self) -> Result(int):
         """ Inserta un registro en la base de datos. """
 
         # Validamos el formulario
@@ -125,6 +125,7 @@ class CategoriaAcuarioDialogController(BaseController):
         val = CategoriaAcuarioValidator.validate_categoria_acuario(
             self._view.frame.edit_categoria_acuario
         )
+
         return val
 
     def dialog_accept(self):
