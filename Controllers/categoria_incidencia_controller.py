@@ -22,6 +22,7 @@ from Services.Result.result import Result
 from Services.Validators.categoria_incidencia_validator import \
     CategoriaIncidenciaValidator
 from Views.Dialogs.categoria_acuario_dialog import CategoriaAcuarioDialog
+from Views.Dialogs.categoria_incidencia_dialog import CategoriaIncidenciaDialog
 from Views.Masters.categoria_incidencia_view import CategoriaIncidenciaView
 from Views.table_menu_contextual import TableMenuContextual
 
@@ -61,7 +62,7 @@ class CategoriaIncidenciaDialogController(BaseController):
         """
         self.init_imput_handlers()
 
-        if isinstance(self._view, CategoriaAcuarioDialog):
+        if isinstance(self._view, CategoriaIncidenciaDialog):
             self.init_dialog_handlers()
 
     def init_dialog_handlers(self):
@@ -149,7 +150,7 @@ class CategoriaIncidenciaDialogController(BaseController):
             categoria_incidencia = self._view.frame
                                             .edit_categoria_incidencia.text(),
             observaciones = self._view.frame.text_descripcion.toPlainText()
-                          if self._view.frame.text_descripcion.toPlainText()
+                          if self._view.frame.text_observaciones.toPlainText()
                           else None
         )
 

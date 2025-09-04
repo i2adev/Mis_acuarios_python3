@@ -12,15 +12,20 @@ from PyQt6.QtGui import QAction
 from PyQt6.QtWidgets import (QWidget, QMessageBox, QTableView, QCompleter, QComboBox)
 
 from Controllers.base_controller import BaseController
+from Controllers.categoria_acuario_controller import CategoriaAcuarioController
+from Controllers.categoria_incidencia_controller import \
+    CategoriaIncidenciaController, CategoriaIncidenciaDialogController
 from Model.DAO.categoria_incidencia_dao import CategoriaIncidenciaDAO
 from Model.DAO.paginator import Paginator
 from Model.DAO.subcategoria_acuario_dao import SubcategoriaAcuarioDAO
+from Model.Entities.categoria_incidencia_entity import CategoriaIncidenciaEntity
 from Model.Entities.subcategoria_incidencia import SubcategoriaIncidenciaEntity
 from Model.TableModel.subcategoria_incidencia_table_model import \
     SubcategoriaIncidenciaTableModel
 from Services.Result.result import Result
 from Services.Validators.subcategoria_incidencia_validator import \
     SubcategoriaIncidenciaValidator
+from Views.Dialogs.categoria_incidencia_dialog import CategoriaIncidenciaDialog
 from Views.Dialogs.subcategoria_Acuario_dialog import SubcategoriaAcuarioDialog
 from Views.Masters.subcategoria_incidencia_view import SubcategoriaIncidenciaView
 from Views.table_menu_contextual import TableMenuContextual
@@ -92,6 +97,10 @@ class SubcategoriaAcuarioDialogController(BaseController):
                 widget.installEventFilter(self)
             if isinstance(widget, QComboBox):
                 widget.installEventFilter(self)
+
+        # Botones
+        self._view.frame.button_insert_categoria_incidencia.clicked \
+            .connect(self.open_categoria_incidencia_dialog)
 
     def entity_configuration(self) -> SubcategoriaIncidenciaEntity:
         """ Configura la entidad. """
@@ -235,6 +244,29 @@ class SubcategoriaAcuarioDialogController(BaseController):
             QCompleter.CompletionMode.PopupCompletion)
         completer.setCaseSensitivity(Qt.CaseSensitivity.CaseInsensitive)
         combo.setCompleter(completer)
+
+    def open_categoria_incidencia_dialog(self):
+        """ Abre el diálogo de categoría de incidencia. """
+
+        view = CategoriaIncidenciaDialog("INSERTAR CATEGORÍA DE INCIDENCIA")
+        mod = CategoriaIncidenciaEntity()
+        dao = CategoriaIncidenciaDAO()
+
+        ctrl = CategoriaIncidenciaDialogController(view, dao, mod)
+        res = ctrl.show_modal()
+
+        if not res.is_success:
+            return
+
+        # Configuramos el combo
+        combo = self._view.frame.combo_categoria_incidencia
+
+        self.fill_combo_categoria()
+        for i in range(combo.count()):
+            if combo.itemData(i) == res.value.id:
+                combo.setCurrentIndex(i)
+
+
 
 class SubcategoriaIncidenciaController(SubcategoriaAcuarioDialogController):
     """ Controlador del formulario maestro de subcategoría de acuario. """

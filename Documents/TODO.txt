@@ -1,10 +1,11 @@
 ﻿================================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
-PROXIMA     -   PROGRAMAR LA INSERCIÓN DE CATEGORÍA DE ACUARIO DESDE LAS VISTAS
-                DE SUBCATEGORÍA DE ACUARIO.
+04/09/2025  SE COMPLETA LA LÓGICA DE LOS SIGUIENTES FORMULARIOS:
+            -   PROGRAMAR LA INSERCIÓN DE CATEGORÍA DE ACUARIO DESDE LAS VISTAS
+                DE SUBCATEGORÍA DE ACUARIO.                                 DONE
             -   PROGRAMAR LA INSERCIÓN DE CATEGORÍA DE INCIDEN. DESDE LAS VISTAS
-                DE SUBCATEGORÍA DE INCIDENCIA.
+                DE SUBCATEGORÍA DE INCIDENCIA.                              DONE
 
 03/09/2025  REFACTORIZACIÓN
             -   SE INTEGRAN TODOS LOS MÉTODOS DE LAS IMÁGENES EN IMAGEFORM. DONE

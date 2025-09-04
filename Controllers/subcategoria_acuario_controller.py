@@ -12,6 +12,8 @@ from PyQt6.QtGui import QAction
 from PyQt6.QtWidgets import (QWidget, QMessageBox, QTableView, QCompleter, QComboBox)
 
 from Controllers.base_controller import BaseController
+from Controllers.categoria_acuario_controller import \
+    CategoriaAcuarioDialogController
 from Model.DAO.categoria_acuario_dao import CategoriaAcuarioDAO
 from Model.DAO.paginator import Paginator
 from Model.DAO.subcategoria_acuario_dao import SubcategoriaAcuarioDAO
@@ -22,6 +24,7 @@ from Model.TableModel.subcategoria_acuario_table_model import \
 from Services.Result.result import Result
 from Services.Validators.subcategoria_acuario_validator import \
     SubcategoriaAcuarioValidator
+from Views.Dialogs.categoria_acuario_dialog import CategoriaAcuarioDialog
 from Views.Dialogs.subcategoria_Acuario_dialog import SubcategoriaAcuarioDialog
 from Views.Masters.subcategoria_acuario_view import SubcategoriaAcuarioView
 from Views.table_menu_contextual import TableMenuContextual
@@ -94,6 +97,10 @@ class SubcategoriaAcuarioDialogController(BaseController):
                 widget.installEventFilter(self)
             if isinstance(widget, QComboBox):
                 widget.installEventFilter(self)
+
+        self._view.frame.button_insert_categoria_acuario.clicked.connect(
+            self.open_categoria_acuario_dialog
+        )
 
     def entity_configuration(self) -> SubcategoriaAcuarioEntity:
         """ Configura la entidad. """
@@ -242,6 +249,30 @@ class SubcategoriaAcuarioDialogController(BaseController):
             QCompleter.CompletionMode.PopupCompletion)
         completer.setCaseSensitivity(Qt.CaseSensitivity.CaseInsensitive)
         combo.setCompleter(completer)
+
+    def open_categoria_acuario_dialog(self):
+        """ Abre el diálogo de categoria de acuario. """
+
+        view = CategoriaAcuarioDialog(
+            "INSERTAR CATEGORÍA DE ACUARIO"
+        )
+        mod = CategoriaAcuarioEntity()
+        dao = CategoriaAcuarioDAO()
+
+        ctrl = CategoriaAcuarioDialogController(view, dao, mod)
+        res = ctrl.show_modal()
+
+        if not res.is_success:
+            return
+
+        # Configuramos el combo
+        combo = self._view.frame.combo_categoria_acuario
+
+        self.fill_combo_categoria()
+        for i in range(combo.count()):
+            if combo.itemData(i) == res.value.id:
+                combo.setCurrentIndex(i)
+
 
 class SubcategoriaAcuarioController(SubcategoriaAcuarioDialogController):
     """ Controlador del formulario maestro de subcategoría de acuario. """

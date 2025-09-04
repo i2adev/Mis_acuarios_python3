@@ -148,7 +148,7 @@ class CategoriaAcuarioDialogController(BaseController):
             num = None,
             categoria = self._view.frame.edit_categoria_acuario.text(),
             observaciones = self._view.frame.text_descripcion.toPlainText()
-                          if self._view.frame.text_descripcion.toPlainText()
+                          if self._view.frame.text_observaciones.toPlainText()
                           else None
         )
 
