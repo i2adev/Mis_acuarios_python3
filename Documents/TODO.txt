@@ -1,6 +1,47 @@
 ﻿================================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
+PRÓXIMO     SELECT
+                ID_TIPO_VUELO AS ID,
+                ROW_NUMBER() OVER (ORDER BY TIPO_VUELO) AS NUM,
+                COD_TIPO_VUELO AS CODIGO,
+                TIPO_VUELO,
+                DESCRIPCION,
+                UPPER(COD_TIPO_VUELO || TIPO_VUELO || DESCRIPCION) AS FIELD
+            FROM TIPOS_VUELO;
+
+MAÑANA      -   SE REPROGRAMA LA CLASE FILTER PARA DAR ROBUSTEZ A LA ASIGNACIÓN
+                DE LA PROPIEDAD STATE.
+            -   SE MODIFICA EL PAGINADOR PARA MANEJAR EL LISTADO DE REGISTROS
+                FILTRADOS.
+            -   SE REVISA LA PROGRAMACIÓN DEL BUSCADOR.
+
+12/09/2025  SE CREA:
+            -   CLASE SEARCH_COMMAND. EN ESTA CLASE SE ALMACENAN LOS COMMANDOS
+                SQL PARA LA BÚSQUEDA.                                       DONE
+
+            SE IMPLEMENTA LA FUNCIONALIDAD DE LA BÚSQUEDA EN LOS FORMULARIOS
+            EXISTENTES.
+            -   CATEGORÍA DE ACUARIO.
+                -   SE PROGRAMA EL BOTÓN FILTER.                            TODO
+
+10/09/2025  SE IMPLEMENTA LA FUNCIONALIDAD DE LA BÚSQUEDA EN LOS FORMULARIOS
+            EXISTENTES.
+            -   SE CREA LA CLASE FILTER PARA LA GESTIÓN DE LOS DATOS FILTRADOS.
+                                                                            DONE
+            -   CATEGORÍA DE ACUARIO.
+                -   SE PROGRAMA EL BOTÓN SEARCH.                            DONE
+
+09/09/2025  SE IMPLEMENTA LA FUNCIONALIDAD DE LA BÚSQUEDA EN LOS FORMULARIOS
+            EXISTENTES.
+            -   CATEGORÍA DE ACUARIO.
+                -   SE MODIFICA EL DAO.                                     DONE
+
+04/09/2025  SE IMPLEMENTA LA FUNCIONALIDAD DE LA BÚSQUEDA EN LOS FORMULARIOS
+            EXISTENTES.
+            -   SE AÑADE UNA BARRA DE ESTADO INFERIOR EN EL FORMULARIO MAESTRO
+                BASE.                                                       DONE
+
 04/09/2025  SE COMPLETA LA LÓGICA DE LOS SIGUIENTES FORMULARIOS:
             -   PROGRAMAR LA INSERCIÓN DE CATEGORÍA DE ACUARIO DESDE LAS VISTAS
                 DE SUBCATEGORÍA DE ACUARIO.                                 DONE

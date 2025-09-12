@@ -469,4 +469,3 @@ class UrnaDAO(BaseDAO):
         #         return Result.failure(f"[ERROR GENERAL SQLITE]\n {e}")
         #     finally:
         #         self.db.close_connection()
-

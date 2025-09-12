@@ -267,3 +267,4 @@ class SubcategoriaAcuarioDAO(BaseDAO):
             return Result.failure(f"[DATABASE ERROR]\n {e}")
         except sqlite3.Error as e:
             return Result.failure(f"[SQLITE ERROR]\n {e}")
+

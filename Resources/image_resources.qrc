@@ -1,12 +1,16 @@
-﻿<!DOCTYPE RCC><RCC version="1.0">
-<qresource prefix="/">
-    <!-- Imágenes -->
-    <file>Images/Window_icon.png</file>
-    <file>Images/restore.png</file>
-    <file>Images/minimize.png</file>
-    <file>Images/maximize.png</file>
-    <file>Images/Icon.png</file>
-    <file>Images/close.png</file>
-    <!-- <file>Styles/main_style.qss</file> -->
-</qresource>
+﻿<!DOCTYPE RCC>
+<RCC version="1.0">
+    <qresource prefix="/">
+        <!-- Imágenes -->
+        <file>Images/Window_icon.png</file>
+        <file>Images/restore.png</file>
+        <file>Images/minimize.png</file>
+        <file>Images/maximize.png</file>
+        <file>Images/Icon.png</file>
+        <file>Images/close.png</file>
+        <file>Images/filter.png</file>
+        <file>Images/filtered.png</file>
+        <file>Images/search.png</file>
+        <!-- <file>Styles/main_style.qss</file> -->
+    </qresource>
 </RCC>

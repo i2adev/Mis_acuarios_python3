@@ -17,7 +17,7 @@ class SubcategoriaAcuarioEntity(BaseEntity):
     subcategoria: str | None
     observaciones: str | None
 
-    def __init__(self, id_: int = None, num: int = None, id_cat: int = None,
+    def __init__(self, id: int = None, num: int = None, id_cat: int = None,
                  subcategoria: str = None, observaciones: str = None):
         """ 
         Constructor de clase. 
@@ -31,7 +31,7 @@ class SubcategoriaAcuarioEntity(BaseEntity):
 
         super().__init__()
         # Inicializamos las variables
-        self.id = id_
+        self.id = id
         self.num = num
         self.id_categoria = id_cat
         self.subcategoria = subcategoria

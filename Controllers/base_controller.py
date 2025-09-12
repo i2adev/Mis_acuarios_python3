@@ -15,6 +15,7 @@ from PyQt6.QtWidgets import (QLineEdit, QTextEdit, QPlainTextEdit, QWidget,
 
 from Model.DAO.base_dao import BaseDAO
 from Model.Entities.base_entity import BaseEntity
+from Services.Result.result import Result
 from Views.Forms.image_form import ImageForm
 
 
@@ -82,12 +83,10 @@ class BaseController(QObject):
 
         if isinstance(widget, QLineEdit):
             if widget.text():
-                # widget.setText(widget.text().strip().upper())
                 widget.setText(widget.text().strip())
 
         if isinstance(widget, (QTextEdit, QPlainTextEdit)):
             if widget.toPlainText():
-                # widget.setPlainText(widget.toPlainText().strip().upper())
                 widget.setPlainText(widget.toPlainText().strip())
 
     # Maneja los diferentes tipos de eventos comunes de las diustintas
@@ -173,7 +172,8 @@ class BaseController(QObject):
         # Establecemos el foco en el control
         control.setFocus()
 
-    def _fill_combo(self, combo: QComboBox, lista: list[BaseEntity], attr_text: str, attr_data: str):
+    def _fill_combo(self, combo: QComboBox, lista: list[BaseEntity],
+                    attr_text: str, attr_data: str):
         """
         Llena un QComboBox con una lista de entidades.
 
@@ -294,3 +294,15 @@ class BaseController(QObject):
         for i in range(1, self._pag.total_pages + 1):
             self._view.combo_select_page.addItem(str(i), i)
 
+    def _search(self, pattern: str) -> Result(list[BaseEntity]):
+        """
+        Busca los registros.
+        :param pattern: Patrón de búsqueda
+        """
+
+        # Filtramos los registros
+        filtro = Filter(self._dao)
+        res = filtro.search(pattern)
+
+        # Devolvemos el resultado
+        return res

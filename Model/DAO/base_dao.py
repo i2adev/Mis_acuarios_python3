@@ -5,12 +5,13 @@ Commentarios:
     Clase base de las que ejecutan los comandos sobre la base de datos
     (DAOs).
 """
-
+import sqlite3
+import traceback
 from abc import ABC, abstractmethod
 from PyQt6.QtWidgets import QMessageBox
 from Model.DAO.database import DBManager
 from Model.Entities.base_entity import BaseEntity
-from Model.Entities.tipo_filtro_entity import TipoFiltroEntity
+from Model.Entities.categoria_acuario_entity import CategoriaAcuarioEntity
 from Services.Result.result import Result
 
 
@@ -119,16 +120,14 @@ class BaseDAO(ABC):
 
     @staticmethod
     def get_total_data(procedure: str, col_parent: str = None,
-                        id_parent: int = None) -> Result:
+                        id_parent: int = None) -> Result([]):
         """
         Obtiene todos los datos de la vista especificada.
-
-        Parámetros:
-        - PROCEDURE: La vista de la que se tienen que obtener los datos.
-        - COL_PARENT: Nombre de la columna a la que hay que aplicar el
-          filtro del ID.
-        - ID_PARENT: Entero que representa el ID del cual dependes los
-                     datos.
+        :param procedure: La vista de la que se tienen que obtener los datos.
+        :param col_parent: Nombre de la columna a la que hay que aplicar el
+            filtro del ID.
+        :param id_parent: Entero que representa el ID del cual dependes los
+            datos.
         """
 
         db = DBManager()
@@ -165,15 +164,10 @@ class BaseDAO(ABC):
                 else:
                     cursor.execute(sql)
 
-                # TODO: DEBE DEVOLVER UNA LISTA DE VALORES GENERICA, QUE LUEGO
-                #       HAY QUE CASTEAR A UNA LISTA DE ENTIDADES QUE DESEEMOS.
-                # value = [TipoFiltroEntity(f["ID"], f["NUM"], f["TIPO"],
-                #                          f["OBSERVACIONES"])
-                #         for f in cursor.fetchall()]
-                value = cursor.fetchall()
+                rows = cursor.fetchall()
 
                 # Devolvemos los datos
-                return Result.success(value)
+                return Result.success(rows)
 
             except db.conn.OperationalError as e:
                 return Result.failure(f"[ERROR OPERACIONAL]\n {e}")
@@ -186,6 +180,50 @@ class BaseDAO(ABC):
             finally:
                 db.close_connection()
                 del db
+
+    @staticmethod
+    def get_filtered_data(sql: str, pattern: str) -> Result(list[BaseEntity]):
+        """
+        Obtiena la lista filtrada
+        :param sql: Comando sql de selección a ejecutar
+        :param pattern: Patrón de búsqueda
+        """
+
+        db = DBManager()
+
+        params = {
+            "pattern": pattern
+        }
+
+        try:
+            with db.conn as con:
+                cur = con.cursor()
+                cur.execute(sql, params)
+                rows = cur.fetchall()
+
+                valores = [
+                    CategoriaAcuarioEntity(
+                        id=f["ID"],
+                        num=f["NUM"],
+                        categoria=f["CATEGORIA"],
+                        observaciones=f["OBSERVACIONES"],
+                    )
+                    for f in rows
+                ]
+
+                return Result.success(valores)
+
+        except sqlite3.IntegrityError as e:
+            return Result.failure(f"[INTEGRITY ERROR]\n {e}")
+        except sqlite3.OperationalError as e:
+            traceback.print_exc()
+            return Result.failure(f"[OPERATIONAL ERROR]\n {e}")
+        except sqlite3.ProgrammingError as e:
+            return Result.failure(f"[PROGRAMMING ERROR]\n {e}")
+        except sqlite3.DatabaseError as e:
+            return Result.failure(f"[DATABASE ERROR]\n {e}")
+        except sqlite3.Error as e:
+            return Result.failure(f"[SQLITE ERROR]\n {e}")
 
     @staticmethod
     def clean_database() -> Result:
@@ -226,13 +264,8 @@ class BaseDAO(ABC):
     def export_db_sql(db_path: str, export_path: str) -> bool:
         """
         Exporta la base de datos SQLite completa a un archivo SQL.
-
-        Parámetros:
-        - db_path: Ruta al archivo de base de datos SQLite.
-        - export_path: Ruta donde se guardará el archivo SQL exportado.
-
-        Retorna:
-        - True si la exportación fue exitosa, False en caso de error.
+        :param db_path: Ruta al archivo de base de datos SQLite.
+        :param export_path: Ruta donde se guardará el archivo SQL exportado..
         """
 
         try:

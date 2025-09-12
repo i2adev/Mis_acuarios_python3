@@ -75,7 +75,7 @@ class BaseView(QWidget):
         self.layout_crud.addWidget(self.button_load)
         self.layout_crud.addWidget(self.button_delete)
         self.layout_crud.addWidget(self.button_clean)
-        self.layout_crud.addWidget(self.button_search)
+        # self.layout_crud.addWidget(self.button_search)
         self.layout_crud.addSpacerItem(
             QSpacerItem(20, 20, QSizePolicy.Policy.Minimum,
             QSizePolicy.Policy.Expanding)
@@ -106,12 +106,20 @@ class BaseView(QWidget):
         )
         self.layout_footer.addWidget(self.button_close)
 
+        # Configuramos el layout de la barra de estado
+        self.layout_status_bar.addWidget(self.button_filter)
+        self.layout_status_bar.addWidget(self.label_status)
+        self.layout_status_bar.addSpacing(50)
+        self.layout_status_bar.addWidget(self.edit_patron)
+        self.layout_status_bar.addWidget(self.button_search)
+
         # Cargamos los layout en la ventana
         self.layout_main.addWidget(self.frame_title_bar)
         self.layout_main.addLayout(self.layout_form_data)
         self.layout_main.addLayout(self.layout_data)
         self.layout_main.addLayout(self.layout_navigation)
         self.layout_main.addLayout(self.layout_footer)
+        self.layout_main.addLayout(self.layout_status_bar)
 
         layout_root = QVBoxLayout(self)
         layout_root.setContentsMargins(0, 0, 0, 0)
@@ -150,6 +158,7 @@ class BaseView(QWidget):
                                               # el formulario de datos
         self.layout_navigation = QHBoxLayout()  # Layout de navegación de
                                                 # páginas
+        self.layout_status_bar = QHBoxLayout()  # Barra de estado inferior
         self.layout_footer = QHBoxLayout() # Layout pie de formulario
 
         # Controles de la barra de título
@@ -271,12 +280,12 @@ class BaseView(QWidget):
             QCursor(Qt.CursorShape.PointingHandCursor)
         )
 
-        ### Botón SEARCH
-        self.button_search = QPushButton()
-        self.button_search.setText("&BUSCAR")
-        self.button_search.setCursor(
-            QCursor(Qt.CursorShape.PointingHandCursor)
-        )
+        # ### Botón SEARCH
+        # self.button_search = QPushButton()
+        # self.button_search.setText("&BUSCAR")
+        # self.button_search.setCursor(
+        #     QCursor(Qt.CursorShape.PointingHandCursor)
+        # )
 
         ## Controles de navegación
         ### Botón última página
@@ -333,12 +342,62 @@ class BaseView(QWidget):
         self.label_total_pages.setMinimumWidth(30)
         self.label_total_pages.setMaximumWidth(30)
 
+        ## Barra de estado
+        ### Boton de filtro
+        icon_filter = QIcon()
+        icon_filter.addPixmap(QPixmap(":/Images/filter.png"), QIcon.Mode.Normal,
+                       QIcon.State.On)
+        self.button_filter = QPushButton()
+        self.button_filter.setObjectName("button_filter")
+        self.button_filter.setIcon(icon_filter)
+        self.button_filter.setFixedSize(25,25)
+        self.button_filter.setCursor(Qt.CursorShape.PointingHandCursor)
+        self.button_filter.setStyleSheet(
+            """
+            border: none;
+            background-color: transparent;
+            """
+        )
+
+        ### Label de estado
+        self.label_status = QLabel("Sin filtrar")
+        self.label_status.setObjectName("label_status")
+        self.label_status.setStyleSheet(
+            """
+                background-color: transparent;
+                color: white;
+                font-family: "Roboto";
+                font-size: 12pt;
+                font-weight: normal;
+            """
+        )
+
+        ### Patrón de busqueda
+        self.edit_patron = QLineEdit()
+        self.edit_patron.setObjectName("edit_patron")
+        self.edit_patron.setFixedWidth(300)
+
+        ### Botón de buscar
+        icon_search = QIcon()
+        icon_search.addPixmap(QPixmap(":/Images/search.png"), QIcon.Mode.Normal,
+                       QIcon.State.On)
+        self.button_search = QPushButton()
+        self.button_search.setObjectName("button_search")
+        self.button_search.setIcon(icon_search)
+        self.button_search.setFixedSize(25, 25)
+        self.button_search.setCursor(Qt.CursorShape.PointingHandCursor)
+        self.button_search.setStyleSheet(
+            """
+            border: none;
+            background-color: transparent;
+            """
+        )
+
         ## Botón Cerrar
         self.button_close = QPushButton()
         self.button_close.setText("C&ERRAR")
         self.button_close.setFlat(True)
         self.button_close.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-
 
     """
     El comportamiento básico de la barra de titulo que hemos creado

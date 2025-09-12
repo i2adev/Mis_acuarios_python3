@@ -14,9 +14,25 @@ Esta aplicación tiene los siguientes requerimientos:
   identificar fácilmente las tareas de mantenimiento.
 
 ## 3. VERSIONES
+### 0.8.1
+Se completa la lógica de los formularios subcategoria de acuario y subcategoria 
+de incidencias:
+- Se añade la lógica de inserción de categoría de acuario desde el formulario de
+subcategoria de acuario.
+- Se añade la lógica de inserción de categoría de incidencia desde el formulario
+de subcategoria de incidencia.
+
 ### 0.8.0
 Refactorización
-
+- Se modifica la lógica de los DAOS.
+- Los botones de los formularios muestran el icono de la mano.
+- Los combos se hacen editables.
+- Los combos responden a la inserción de texto, mostrando el autocompletado.
+Se configura para que cuando pierda el foco muestre el primer elemento que 
+empieza con el texto insertado.
+- Revisión de los validadores.
+- Se implementa la lógica de las fotografías en el frame de los controles de 
+imagen.
 
 ### 0.7.4
 - Se añade la lógica de insertar o quitar imágenes a una urna existente.

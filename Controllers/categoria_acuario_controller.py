@@ -8,7 +8,7 @@ Commentarios:
 
 # Importaciones
 from PyQt6.QtCore import QEvent
-from PyQt6.QtGui import QAction
+from PyQt6.QtGui import QAction, QIcon
 from PyQt6.QtWidgets import (QWidget, QMessageBox, QTableView)
 
 from Controllers.base_controller import BaseController
@@ -184,6 +184,7 @@ class CategoriaAcuarioController(CategoriaAcuarioDialogController):
 
         # Inicializamos el paginador
         self._pag = Paginator("VISTA_CATEGORIAS_ACUARIO", 5)
+        self.filter = Filter(self._dao)
         self._pag.initialize_paginator()
 
         # Llenamos la tabla
@@ -224,13 +225,71 @@ class CategoriaAcuarioController(CategoriaAcuarioDialogController):
         self._view.button_close.clicked.connect(
             lambda: self._view.close()
         )
+        self._view.button_search.clicked.connect(
+            self.button_search_clicked
+        )
+
         # Inicializamos los combos
         self._view.combo_select_page.currentIndexChanged.connect(
             self.combo_page_indexchanged
         )
+
         # Eventos de la tabla
         self._view.data_table.customContextMenuRequested.connect(
             self.show_context_menu
+        )
+
+
+    def button_search_clicked(self):
+        """ Busca los registros que contengan el patrón. """
+
+        # Variables
+        patron = self._view.edit_patron.text()
+
+        # Condiciones de salida
+        if not patron:
+            QMessageBox.information(
+                self._view,
+                self._view.window_title,
+                "ANTES DE PROCEDER CON LA BÚSQUEDA\n"
+                "DEBES INSERTAR UN PATRÓN."
+            )
+            return
+
+        # Obtenemos los datos
+        res = self.filter.search(patron)
+
+        if not res.is_success:
+            QMessageBox.information(
+                self._view,
+                self._view.window_title,
+                res.error_msg
+            )
+            return
+
+        # Chequeamos que haya datos
+        if not res.value:
+            QMessageBox.information(
+                self._view,
+                self._view.window_title,
+                f"NO SE HA ENCONTRADO NINGÚN VALOR CON EL PATRON "
+                f"'{patron.upper()}'"
+            )
+            self.filter.state = "UNFILTERED"
+            self._view.label_status.setText("Sin filtro")
+            return
+
+        # Cargamos la tabla
+        self.fill_tableview(self._view.data_table, res.value)
+        self._configure_table(self._view.data_table)
+        self._clean_view(self._view.frame.edit_categoria_acuario)
+
+        self._view.button_filter.setIcon(QIcon(":/Images/filtered.png"))
+
+        self.filter.state = "FILTERED"
+        self._view.label_status.setText(
+            f"Filtrados {len(res.value)} de {self._pag.records} con el "
+            f"patrón '{patron.upper()}'."
         )
 
     def combo_page_indexchanged(self, event: QEvent):
