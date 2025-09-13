@@ -11,7 +11,7 @@ class SearchCmd:
 
     # Atributos estáticos
     ## Categoría acuario
-    SEARCH_CATEGORIA_ACUARIO = """"
+    SEARCH_CATEGORIA_ACUARIO = """
     SELECT ID, NUM, CATEGORIA, OBSERVACIONES
     FROM
     (
@@ -20,7 +20,7 @@ class SearchCmd:
                   CATEGORIA_ACUARIO AS CATEGORIA,
                   OBSERVACIONES AS OBSERVACIONES,
                   UPPER(CATEGORIA_ACUARIO || OBSERVACIONES) AS FIELD
-        FROM      "CATEGORIAS_ACUARIO"
+        FROM      CATEGORIAS_ACUARIO
     )
     WHERE     FIELD LIKE '%' || :pattern || '%';
     """

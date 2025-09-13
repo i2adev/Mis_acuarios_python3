@@ -11,6 +11,7 @@ from Model.DAO.base_dao import BaseDAO
 from Model.DAO.database import DBManager
 from Model.Entities.base_entity import BaseEntity
 from Model.Entities.material_urna_entity import MaterialUrnaEntity
+from Model.Entities.search_commands import SearchCmd
 from Model.Entities.urna_entity import UrnaEntity
 from Model.Entities.categoria_acuario_entity import CategoriaAcuarioEntity
 from Model.Entities.categoria_incidencia_entity import CategoriaIncidenciaEntity
@@ -283,6 +284,7 @@ class Paginator:
         :param page: Número de página a representar. Por defecto 1
         """
 
+        # Obtiene los datos
         res = BaseDAO.get_total_data(self.procedure)
         if not res.is_success:
             QMessageBox.warning(
@@ -292,7 +294,45 @@ class Paginator:
             )
             return
 
+        # Mapea los datos a entidades
         data_list = self.map_entity_list(res.value)
+
+        # Configura el paginador
+        self.configure_paginator(data_list, page)
+
+    def get_filtered_list(self, pattern: str, page: int = 1):
+        """
+        Obtiene la lista filtrada.
+        :param pattern: Patrón de búsqueda
+        :param page: Página a mostrar
+        """
+
+        # Obtenemos la instrucción sql
+        sql = self.get_sql_command()
+
+        # Obtiene los datos
+        res = BaseDAO.get_filtered_data(sql, pattern)
+
+        if not res.is_success:
+            QMessageBox.warning(
+                None,
+                "ERROR DE PAGINACIÓN",
+                res.error_msg
+            )
+            return
+
+        # Mapea los datos a entidades
+        data_list = self.map_entity_list(res.value)
+
+        # Configura el paginador
+        self.configure_paginator(data_list, page)
+
+    def configure_paginator(self, data_list: list[BaseEntity], page: int)->None:
+        """
+        Configura el paginador.
+        :param data_list: La lista de los datos
+        :param page: Número de página a mostrar
+        """
 
         self.total_data = data_list
         self.records = len(self.total_data)
@@ -328,7 +368,7 @@ class Paginator:
 
         elif self.procedure == "VISTA_CATEGORIAS_ACUARIO":
             data_list = [CategoriaAcuarioEntity(
-                    id=f["ID"],
+                    id_=f["ID"],
                     num=f["NUM"],
                     categoria=f["CATEGORIA"],
                     observaciones=f["OBSERVACIONES"]
@@ -439,3 +479,25 @@ class Paginator:
             """
         )
 
+    def get_sql_command(self) -> str:
+        """ Obtiene la instrucción sql dependiendo del procedimiento. """
+
+        # Configuramos la lista total
+        if self.procedure == "VISTA_TIPOS_FILTRO":
+            pass
+        elif self.procedure == "VISTA_TIPOS_ACUARIO":
+            pass
+        elif self.procedure == "VISTA_CATEGORIAS_ACUARIO":
+            return SearchCmd.SEARCH_CATEGORIA_ACUARIO
+        elif self.procedure == "VISTA_SUBCATEGORIAS_ACUARIO":
+            pass
+        elif self.procedure == "VISTA_CATEGORIAS_INCIDENCIA":
+            pass
+        elif self.procedure == "VISTA_SUBCATEGORIAS_INCIDENCIA":
+            pass
+        elif self.procedure == "VISTA_MARCAS_COMERCIALES":
+            pass
+        elif self.procedure == "VISTA_URNAS":
+            pass
+        elif self.procedure == "VISTA_MATERIALES_URNA":
+            pass

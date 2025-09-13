@@ -167,6 +167,8 @@ class BaseController(QObject):
 
             # En caso de que sean combos
             if isinstance(widget, QComboBox):
+                if widget.objectName() == "combo_select_page":
+                    continue
                 widget.setCurrentIndex(-1)
 
         # Establecemos el foco en el control

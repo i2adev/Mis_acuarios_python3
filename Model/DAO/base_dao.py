@@ -182,7 +182,7 @@ class BaseDAO(ABC):
                 del db
 
     @staticmethod
-    def get_filtered_data(sql: str, pattern: str) -> Result(list[BaseEntity]):
+    def get_filtered_data(sql: str, pattern: str) -> Result(list):
         """
         Obtiena la lista filtrada
         :param sql: Comando sql de selección a ejecutar
@@ -201,17 +201,17 @@ class BaseDAO(ABC):
                 cur.execute(sql, params)
                 rows = cur.fetchall()
 
-                valores = [
-                    CategoriaAcuarioEntity(
-                        id=f["ID"],
-                        num=f["NUM"],
-                        categoria=f["CATEGORIA"],
-                        observaciones=f["OBSERVACIONES"],
-                    )
-                    for f in rows
-                ]
+                # values = [
+                #     CategoriaAcuarioEntity(
+                #         id_=f["ID"],
+                #         num=f["NUM"],
+                #         categoria=f["CATEGORIA"],
+                #         observaciones=f["OBSERVACIONES"],
+                #     )
+                #     for f in rows
+                # ]
 
-                return Result.success(valores)
+                return Result.success(rows)
 
         except sqlite3.IntegrityError as e:
             return Result.failure(f"[INTEGRITY ERROR]\n {e}")

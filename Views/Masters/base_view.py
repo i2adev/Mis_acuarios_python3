@@ -328,6 +328,7 @@ class BaseView(QWidget):
 
         ### Combo selector de página
         self.combo_select_page = QComboBox()
+        self.combo_select_page.setObjectName("combo_select_page")
         self.combo_select_page.setMinimumWidth(50)
         self.combo_select_page.setMaximumWidth(50)
 
