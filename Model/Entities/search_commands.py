@@ -67,3 +67,18 @@ class SearchCmd:
     )
     WHERE     FIELD LIKE '%' || :pattern || '%';
     """
+
+    ## Material de urna
+    SEARCH_MATERIAL_URNA = """
+    SELECT    ID, NUM, MATERIAL, DESCRIPCION
+    FROM
+    (
+        SELECT    ID_MATERIAL AS ID,
+                  ROW_NUMBER() OVER(ORDER BY MATERIAL) AS NUM,
+                  MATERIAL AS MATERIAL,
+                  DESCRIPCION AS DESCRIPCION,
+                  UPPER(IFNULL(MATERIAL, '') || IFNULL(DESCRIPCION, '')) AS FIELD
+        FROM      MATERIALES_URNA
+    )
+    WHERE     FIELD LIKE '%' || :pattern || '%';
+    """

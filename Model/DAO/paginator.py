@@ -500,4 +500,4 @@ class Paginator:
         elif self.procedure == "VISTA_URNAS":
             pass
         elif self.procedure == "VISTA_MATERIALES_URNA":
-            pass
+            return SearchCmd.SEARCH_MATERIAL_URNA
