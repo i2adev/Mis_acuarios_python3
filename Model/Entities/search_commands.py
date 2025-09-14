@@ -24,3 +24,17 @@ class SearchCmd:
     )
     WHERE     FIELD LIKE '%' || :pattern || '%';
     """
+
+    SEARCH_CATEGORIA_INCIDENCIA = """
+        SELECT ID, NUM, CATEGORIA, OBSERVACIONES
+    FROM
+    (
+        SELECT    ID_CATEGORIA AS ID,
+                  ROW_NUMBER() OVER(ORDER BY CATEGORIA_INCIDENCIA) AS NUM,
+                  CATEGORIA_INCIDENCIA AS CATEGORIA,
+                  OBSERVACIONES AS OBSERVACIONES,
+                  UPPER(CATEGORIA_INCIDENCIA || OBSERVACIONES) AS FIELD
+        FROM      CATEGORIAS_INCIDENCIA
+    )
+    WHERE     FIELD LIKE '%' || :pattern || '%';
+    """
