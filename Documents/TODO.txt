@@ -6,6 +6,10 @@ FECHA		DESCRIPCIÓN
             -   SE MODIFICA EL CONTROLADOR.                                 DONE
             -   SE CREA EL COMANDO SQL DE BÚSQUEDA.                         DONE
 
+            SE IMPLEMENTA LA FUNCIONALIDAD DE BÚSQUEDA DE MARCAS COMERCIALES.
+            -   SE MODIFICA EL CONTROLADOR.                                 DONE
+            -   SE CREA EL COMANDO SQL DE BÚSQUEDA.                         DONE
+
 12/09/2025  SE CREA:
             -   CLASE SEARCH_COMMAND. EN ESTA CLASE SE ALMACENAN LOS COMMANDOS
                 SQL PARA LA BÚSQUEDA.                                       DONE

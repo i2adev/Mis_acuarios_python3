@@ -496,7 +496,7 @@ class Paginator:
         elif self.procedure == "VISTA_SUBCATEGORIAS_INCIDENCIA":
             pass
         elif self.procedure == "VISTA_MARCAS_COMERCIALES":
-            pass
+            return SearchCmd.SEARCH_MARCA_COMERCIAL
         elif self.procedure == "VISTA_URNAS":
             pass
         elif self.procedure == "VISTA_MATERIALES_URNA":

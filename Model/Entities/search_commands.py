@@ -25,6 +25,7 @@ class SearchCmd:
     WHERE     FIELD LIKE '%' || :pattern || '%';
     """
 
+    ## Categoría de incidencia
     SEARCH_CATEGORIA_INCIDENCIA = """
         SELECT ID, NUM, CATEGORIA, OBSERVACIONES
     FROM
@@ -35,6 +36,34 @@ class SearchCmd:
                   OBSERVACIONES AS OBSERVACIONES,
                   UPPER(CATEGORIA_INCIDENCIA || OBSERVACIONES) AS FIELD
         FROM      CATEGORIAS_INCIDENCIA
+    )
+    WHERE     FIELD LIKE '%' || :pattern || '%';
+    """
+
+    ## Marca comercial
+    SEARCH_MARCA_COMERCIAL = """
+    SELECT  ID, NUM, MARCA, DIRECCION, CODIGO_POSTAL, 
+            POBLACION, PROVINCIA, PAIS, OBSERVACIONES
+    FROM
+    (
+        SELECT  M.ID_MARCA AS ID,
+                ROW_NUMBER() OVER(ORDER BY M.MARCA) AS NUM,
+                M.MARCA AS MARCA,
+                M.DIRECCION AS DIRECCION,
+                M.COD_POSTAL AS CODIGO_POSTAL,
+                M.POBLACION AS POBLACION,
+                M.PROVINCIA AS PROVINCIA,
+                P.PAIS AS PAIS,
+                M.OBSERVACIONES AS OBSERVACIONES,
+                UPPER(
+                    IFNULL(M.MARCA, '') || IFNULL(M.DIRECCION, '') 
+                    || IFNULL(M.COD_POSTAL, '') || IFNULL(M.POBLACION, '') 
+                    || IFNULL(M.PROVINCIA, '') || IFNULL(P.PAIS, '') 
+                    || IFNULL(M.OBSERVACIONES, '')
+                ) AS FIELD
+        FROM          MARCAS_COMERCIALES M
+        LEFT JOIN     PAISES P
+        ON            M.ID_PAIS = P.ID_PAIS
     )
     WHERE     FIELD LIKE '%' || :pattern || '%';
     """

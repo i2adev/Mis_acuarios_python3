@@ -241,7 +241,6 @@ class CategoriaAcuarioController(CategoriaAcuarioDialogController):
             self.show_context_menu
         )
 
-
     def button_filter_clicked(self):
         """ Conmuta entre los modos filtrado y no filtrado. """
 

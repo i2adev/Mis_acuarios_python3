@@ -7,7 +7,7 @@ Commentarios:
 
 # Importaciones
 from PyQt6.QtCore import Qt, QEvent
-from PyQt6.QtGui import QAction
+from PyQt6.QtGui import QAction, QIcon
 from PyQt6.QtWidgets import (QWidget, QMessageBox, QTableView, QCompleter, QComboBox)
 
 from Controllers.base_controller import BaseController
@@ -337,14 +337,77 @@ class MarcaComercialController(MarcaComercialDialogController):
         self._view.button_close.clicked.connect(
             lambda: self._view.close()
         )
+        self._view.button_search.clicked.connect(
+            self.button_search_clicked
+        )
+        self._view.button_filter.clicked.connect(
+            self.button_filter_clicked
+        )
+
         # Inicializamos los combos
         self._view.combo_select_page.currentIndexChanged.connect(
             self.combo_page_indexchanged
         )
+
         # Eventos de la tabla
         self._view.data_table.customContextMenuRequested.connect(
             self.show_context_menu
         )
+
+    def button_filter_clicked(self):
+        """ Conmuta entre los modos filtrado y no filtrado. """
+
+        if self._pag.status == "FILTERED":
+            self._pag.status = "UNFILTERED"
+            self._pag.initialize_paginator()
+            self._view.button_filter.setIcon(
+                QIcon(":/Images/filter.png")
+            )
+            self._view.label_status.setText(
+                f"Sin filtrar. {self._pag.records} registros"
+            )
+
+            # Cargamos la tabla
+            self.fill_tableview(self._view.data_table, self._pag._total_data)
+            self._configure_table(self._view.data_table)
+            self._clean_view(self._view.frame.edit_marca)
+            self._view.label_total_pages.setText(str(self._pag.total_pages))
+
+
+    def button_search_clicked(self):
+        """ Busca los registros que contengan el patrón. """
+
+        # Variables
+        patron = self._view.edit_patron.text()
+        total_records = self._pag.records
+
+        # Condiciones de salida
+        if not patron:
+            QMessageBox.information(
+                self._view,
+                self._view.window_title,
+                "ANTES DE PROCEDER CON LA BÚSQUEDA "
+                "DEBES INSERTAR UN PATRÓN."
+            )
+            return
+
+        # Obtoenemos los datos
+        self._pag.get_filtered_list(patron)
+
+        # Cargamos la tabla
+        self.fill_tableview(self._view.data_table, self._pag._total_data)
+        self._configure_table(self._view.data_table)
+        self._clean_view(self._view.frame.edit_marca)
+
+        self._view.button_filter.setIcon(QIcon(":/Images/filtered.png"))
+
+        self._pag.status = "FILTERED"
+        self._view.label_status.setText(
+            f"Filtrados {len(self._pag._total_data)} de {total_records} con "
+            f"el patrón '{patron.upper()}'."
+        )
+        self._view.label_total_pages.setText(str(self._pag.total_pages))
+
 
     def combo_page_indexchanged(self, event: QEvent):
         """
