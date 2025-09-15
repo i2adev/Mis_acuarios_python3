@@ -484,7 +484,7 @@ class Paginator:
 
         # Configuramos la lista total
         if self.procedure == "VISTA_TIPOS_FILTRO":
-            pass
+            return SearchCmd.SEARCH_TIPO_FILTR0
         elif self.procedure == "VISTA_TIPOS_ACUARIO":
             return SearchCmd.SEARCH_TIPO_ACUARIO
         elif self.procedure == "VISTA_CATEGORIAS_ACUARIO":

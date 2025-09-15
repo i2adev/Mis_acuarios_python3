@@ -14,6 +14,10 @@ FECHA		DESCRIPCIÓN
             -   SE MODIFICA EL CONTROLADOR.                                 DONE
             -   SE CREA EL COMANDO SQL DE BÚSQUEDA.                         DONE
 
+            SE IMPLEMENTA LA FUNCIONALIDAD DE BÚSQUEDA DE TIPOS DE FILTRO.
+            -   SE MODIFICA EL CONTROLADOR.                                 DONE
+            -   SE CREA EL COMANDO SQL DE BÚSQUEDA.                         DONE
+
 14/09/2025  SE IMPLEMENTA LA FUNCIONALIDAD DE BÚSQUEDA DE CATEGORÍAS DE
             INCIDENCIA.
             -   SE MODIFICA EL CONTROLADOR.                                 DONE

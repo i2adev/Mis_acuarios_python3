@@ -143,3 +143,19 @@ class SearchCmd:
     )
     WHERE     FIELD LIKE '%' || :pattern || '%';
     """
+
+    ## Tipod efiltro
+    SEARCH_TIPO_FILTR0 = """
+    SELECT  ID, NUM, TIPO, OBSERVACIONES
+    FROM
+    (
+        SELECT  ID_TIPO AS ID,
+                ROW_NUMBER() OVER(ORDER BY TIPO_FILTRO) AS NUM,
+                TIPO_FILTRO AS TIPO,
+                OBSERVACIONES AS OBSERVACIONES,
+                UPPER(IFNULL(TIPO_FILTRO, '') 
+                    || IFNULL(OBSERVACIONES, '')) AS FIELD
+        FROM    TIPOS_FILTRO
+    )
+    WHERE     FIELD LIKE '%' || :pattern || '%';
+    """
