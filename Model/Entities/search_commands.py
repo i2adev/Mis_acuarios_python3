@@ -121,3 +121,25 @@ class SearchCmd:
     )
     WHERE     FIELD LIKE '%' || :pattern || '%';
     """
+
+    ## Tipo de acuario
+    SEARCH_TIPO_ACUARIO = """
+    SELECT       ID, NUM, CATEGORIA, SUBCATEGORIA, OBSERVACIONES
+    FROM
+    (
+        SELECT       ID_TIPO AS ID,
+                     ROW_NUMBER() OVER (ORDER BY CA.CATEGORIA_ACUARIO, SA.SUBCATEGORIA_ACUARIO) AS NUM,
+                     CA.CATEGORIA_ACUARIO AS CATEGORIA,
+                     SA.SUBCATEGORIA_ACUARIO AS SUBCATEGORIA,
+                     TA.OBSERVACIONES AS OBSERVACIONES,
+                     UPPER(IFNULL(CA.CATEGORIA_ACUARIO, '') 
+                        || IFNULL(SA.SUBCATEGORIA_ACUARIO, '' 
+                        || IFNULL(TA.OBSERVACIONES, ''))) AS FIELD
+        FROM         TIPOS_ACUARIO AS TA
+        LEFT JOIN    CATEGORIAS_ACUARIO AS CA
+        ON           TA.ID_CATEGORIA_aCUARIO = CA.ID_CATEGORIA_ACUARIO
+        LEFT JOIN    SUBCATEGORIAS_ACUARIO AS SA
+            ON       TA.ID_SUBCATEGORIA_ACUARIO = SA.ID_SUBCATEGORIA_ACUARIO
+    )
+    WHERE     FIELD LIKE '%' || :pattern || '%';
+    """
