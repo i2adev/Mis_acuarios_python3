@@ -159,3 +159,31 @@ class SearchCmd:
     )
     WHERE     FIELD LIKE '%' || :pattern || '%';
     """
+
+    SEARCH_URNA = """
+    SELECT    ID, NUM, MARCA, MODELO, ANCHURA, PROFUNDIDAD, ALTURA, 
+          GROSOR, VOLUMEN_BRUTO, MATERIAL, DESCRIPCION
+    FROM
+    (
+        SELECT    A.ID_URNA AS ID,
+                  ROW_NUMBER() OVER (ORDER BY M.MARCA, A.MODELO) AS NUM,
+                  M.MARCA AS MARCA,
+                  A.MODELO AS MODELO,
+                  A.ANCHURA AS ANCHURA,
+                  A.PROFUNDIDAD AS PROFUNDIDAD,
+                  A.ALTURA AS ALTURA,
+                  A.GROSOR_CRISTAL AS GROSOR,
+                  A.VOLUMEN_TANQUE AS VOLUMEN_BRUTO,
+                  T.MATERIAL AS MATERIAL,
+                  A.DESCRIPCION AS DESCRIPCION,
+                  UPPER(IFNULL(M.MARCA, '') || IFNULL(A.MODELO, '')
+                      || IFNULL(A.ANCHURA, '') || IFNULL(A.PROFUNDIDAD, '')
+                      || IFNULL(A.ALTURA, '') || IFNULL(A.GROSOR_CRISTAL, '')
+                      || IFNULL(A.VOLUMEN_TANQUE, '') || IFNULL(T.MATERIAL, '')
+                      || IFNULL(A.DESCRIPCION, '')) AS FIELD
+        FROM      URNAS AS A
+        LEFT JOIN MARCAS_COMERCIALES AS M ON A.ID_MARCA = M.ID_MARCA
+        LEFT JOIN MATERIALES_URNA T ON A.ID_MATERIAL = T.ID_MATERIAL
+    )
+    WHERE     FIELD LIKE '%' || :pattern || '%';
+    """

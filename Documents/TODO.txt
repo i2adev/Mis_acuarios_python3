@@ -18,6 +18,10 @@ FECHA		DESCRIPCIÓN
             -   SE MODIFICA EL CONTROLADOR.                                 DONE
             -   SE CREA EL COMANDO SQL DE BÚSQUEDA.                         DONE
 
+            SE IMPLEMENTA LA FUNCIONALIDAD DE BÚSQUEDA DE URNAS.
+            -   SE MODIFICA EL CONTROLADOR.                                 DONE
+            -   SE CREA EL COMANDO SQL DE BÚSQUEDA.                         DONE
+
 14/09/2025  SE IMPLEMENTA LA FUNCIONALIDAD DE BÚSQUEDA DE CATEGORÍAS DE
             INCIDENCIA.
             -   SE MODIFICA EL CONTROLADOR.                                 DONE
@@ -496,4 +500,3 @@ FECHA		DESCRIPCIÓN
             FORMULARIOS:
             -   EN VEZ DE USAR ESTILOS, COLOCARLE EL NOMBRE DEL OBJETO A LOS BO-
                 TONES PARA QUE SURTA EFECTO LA HOJA DE ESTILOS GENERAL.     DONE
-
