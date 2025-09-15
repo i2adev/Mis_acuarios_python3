@@ -13,7 +13,7 @@ from PyQt6.QtWidgets import QApplication, QMessageBox
 from Controllers.main_view_controller import MainViewController
 
 # Versión del programa
-__version__ = "0.9.2"
+__version__ = "0.9.3"
 
 from Model.DAO.base_dao import BaseDAO
 

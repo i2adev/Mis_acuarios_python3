@@ -368,7 +368,7 @@ class Paginator:
 
         elif self.procedure == "VISTA_CATEGORIAS_ACUARIO":
             data_list = [CategoriaAcuarioEntity(
-                    id_=f["ID"],
+                    id=f["ID"],
                     num=f["NUM"],
                     categoria=f["CATEGORIA"],
                     observaciones=f["OBSERVACIONES"]
@@ -490,11 +490,11 @@ class Paginator:
         elif self.procedure == "VISTA_CATEGORIAS_ACUARIO":
             return SearchCmd.SEARCH_CATEGORIA_ACUARIO
         elif self.procedure == "VISTA_SUBCATEGORIAS_ACUARIO":
-            pass
+            return SearchCmd.SEARCH_SUBCATEGORIA_ACUARIO
         elif self.procedure == "VISTA_CATEGORIAS_INCIDENCIA":
             return SearchCmd.SEARCH_CATEGORIA_INCIDENCIA
         elif self.procedure == "VISTA_SUBCATEGORIAS_INCIDENCIA":
-            pass
+            return SearchCmd.SEARCH_SUBCATEGORIA_INCIDENCIA
         elif self.procedure == "VISTA_MARCAS_COMERCIALES":
             return SearchCmd.SEARCH_MARCA_COMERCIAL
         elif self.procedure == "VISTA_URNAS":

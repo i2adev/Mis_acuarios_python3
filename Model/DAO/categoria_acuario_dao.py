@@ -129,7 +129,8 @@ class CategoriaAcuarioDAO(BaseDAO):
                 rows = cur.fetchall()
                 valores = [
                     CategoriaAcuarioEntity(
-                        id=f["ID"], num=None, categoria=f["VALUE"],
+                        id=f["ID"],
+                        num=None, categoria=f["VALUE"],
                         observaciones=None
                     )
                     for f in rows

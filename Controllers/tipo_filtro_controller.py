@@ -200,6 +200,8 @@ class TipoFiltroController(TipoFiltroDialogController):
         # Inicializamos el paginador
         self._pag = Paginator("VISTA_TIPOS_FILTRO", 5)
         self._pag.initialize_paginator()
+        self._view.label_status.setText(f"Sin filtrar. {self._pag.records} "
+                                        "registros.")
 
         # Llenamos la tabla
         self.load_tableview()

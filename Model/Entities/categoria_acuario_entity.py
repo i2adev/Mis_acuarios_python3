@@ -11,7 +11,7 @@ from Model.Entities.base_entity import BaseEntity
 class CategoriaAcuarioEntity(BaseEntity):
     """ Entidad de categoría de acuario. """
 
-    def __init__(self, id_: int = None, num: int = None, categoria: str = None,
+    def __init__(self, id: int = None, num: int = None, categoria: str = None,
                  observaciones: str = None):
         """
         Constructor de clase.
@@ -25,7 +25,7 @@ class CategoriaAcuarioEntity(BaseEntity):
         super().__init__()
 
         # Inicializamos las variables
-        self.id = id_
+        self.id = id
         self.num = num
         self.categoria = categoria
         self.observaciones = observaciones

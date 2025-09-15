@@ -14,6 +14,11 @@ FECHA		DESCRIPCIÓN
             -   SE MODIFICA EL CONTROLADOR.                                 DONE
             -   SE CREA EL COMANDO SQL DE BÚSQUEDA.                         DONE
 
+            SE IMPLEMENTA LA FUNCIONALIDAD DE BÚSQUEDA DE SUBCATEGORÍAS DE
+            ACUARIOS.
+            -   SE MODIFICA EL CONTROLADOR.                                 DONE
+            -   SE CREA EL COMANDO SQL DE BÚSQUEDA.                         DONE
+
 12/09/2025  SE CREA:
             -   CLASE SEARCH_COMMAND. EN ESTA CLASE SE ALMACENAN LOS COMMANDOS
                 SQL PARA LA BÚSQUEDA.                                       DONE
@@ -474,3 +479,4 @@ FECHA		DESCRIPCIÓN
             FORMULARIOS:
             -   EN VEZ DE USAR ESTILOS, COLOCARLE EL NOMBRE DEL OBJETO A LOS BO-
                 TONES PARA QUE SURTA EFECTO LA HOJA DE ESTILOS GENERAL.     DONE
+

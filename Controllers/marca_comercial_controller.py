@@ -298,6 +298,8 @@ class MarcaComercialController(MarcaComercialDialogController):
         # Inicializamos el paginador
         self._pag = Paginator("VISTA_MARCAS_COMERCIALES", 10)
         self._pag.initialize_paginator()
+        self._view.label_status.setText(f"Sin filtrar. {self._pag.records} "
+                                        "registros.")
 
         # Llenamos la tabla
         self.load_tableview()

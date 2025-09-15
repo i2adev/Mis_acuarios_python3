@@ -77,8 +77,47 @@ class SearchCmd:
                   ROW_NUMBER() OVER(ORDER BY MATERIAL) AS NUM,
                   MATERIAL AS MATERIAL,
                   DESCRIPCION AS DESCRIPCION,
-                  UPPER(IFNULL(MATERIAL, '') || IFNULL(DESCRIPCION, '')) AS FIELD
+                  UPPER(IFNULL(MATERIAL, '') || IFNULL(DESCRIPCION, '')) 
+                    AS FIELD
         FROM      MATERIALES_URNA
+    )
+    WHERE     FIELD LIKE '%' || :pattern || '%';
+    """
+
+    ## Subacategoría de acuarios
+    SEARCH_SUBCATEGORIA_ACUARIO = """
+    SELECT    ID, NUM, CATEGORIA, SUBCATEGORIA, OBSERVACIONES
+    FROM
+    (
+        SELECT      S.ID_SUBCATEGORIA_ACUARIO AS ID,
+                    ROW_NUMBER() OVER(ORDER BY S.ID_SUBCATEGORIA_ACUARIO) AS NUM,
+                    C.CATEGORIA_ACUARIO AS CATEGORIA,
+                    S.SUBCATEGORIA_ACUARIO AS SUBCATEGORIA,
+                    S.OBSERVACIONES AS OBSERVACIONES,
+                    UPPER(IFNULL(C.CATEGORIA_ACUARIO, '') 
+                        || IFNULL(S.SUBCATEGORIA_ACUARIO, '') 
+                        || IFNULL(S.OBSERVACIONES, '')) AS FIELD
+        FROM        SUBCATEGORIAS_ACUARIO S
+        LEFT JOIN   CATEGORIAS_ACUARIO C
+            ON      S.ID_CATEGORIA_ACUARIO = C.ID_CATEGORIA_ACUARIO
+    )
+    WHERE     FIELD LIKE '%' || :pattern || '%';   
+    """
+
+    ## Subcategoría incidencia
+    SEARCH_SUBCATEGORIA_INCIDENCIA = """
+    SELECT  ID, NUM, CATEGORIA, SUBCATEGORIA, OBSERVACIONES
+    FROM
+    (
+        SELECT S.ID_SUBCATEGORIA AS ID,
+               ROW_NUMBER() OVER (ORDER BY S.NOMBRE_SUBCATEGORIA) AS NUM,
+               C.CATEGORIA_INCIDENCIA AS CATEGORIA,
+               S.NOMBRE_SUBCATEGORIA AS SUBCATEGORIA,
+               S.DESCRIPCION AS OBSERVACIONES,
+               UPPER(IFNULL(C.CATEGORIA_INCIDENCIA, '') || IFNULL(S.NOMBRE_SUBCATEGORIA, '') || IFNULL(S.DESCRIPCION, '')) AS FIELD
+        FROM   SUBCATEGORIAS_INCIDENCIA S
+        LEFT JOIN CATEGORIAS_INCIDENCIA C 
+        ON     S.ID_CATEGORIA = C.ID_CATEGORIA
     )
     WHERE     FIELD LIKE '%' || :pattern || '%';
     """

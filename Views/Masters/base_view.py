@@ -280,13 +280,6 @@ class BaseView(QWidget):
             QCursor(Qt.CursorShape.PointingHandCursor)
         )
 
-        # ### Botón SEARCH
-        # self.button_search = QPushButton()
-        # self.button_search.setText("&BUSCAR")
-        # self.button_search.setCursor(
-        #     QCursor(Qt.CursorShape.PointingHandCursor)
-        # )
-
         ## Controles de navegación
         ### Botón última página
         self.button_last = QPushButton()
