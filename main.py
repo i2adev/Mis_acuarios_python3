@@ -13,11 +13,9 @@ from PyQt6.QtWidgets import QApplication, QMessageBox
 from Controllers.main_view_controller import MainViewController
 
 # Versión del programa
-__version__ = "0.9.6"
+__version__ = "0.10.0"
 
 from Model.DAO.base_dao import BaseDAO
-
-from Views.main_view import MainView
 
 
 # Entrada al programa
@@ -34,6 +32,15 @@ def main():
     # # Limpia la base de datos
     # msg = BaseDAO.clean_database()
     # if msg.is_success:
+    #     res = BaseDAO.fill_essential_info()
+    #     if not res.is_success:
+    #         QMessageBox.information(
+    #             None,
+    #             "LIMPIEZA DE BASE DE DATOS",
+    #             res.error_msg
+    #         )
+    #         return
+    #
     #     QMessageBox.information(
     #         None,
     #         "LIMPIEZA DE BASE DE DATOS",

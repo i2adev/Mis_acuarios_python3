@@ -8,10 +8,13 @@ Commentarios:
 import sqlite3
 import traceback
 from abc import ABC, abstractmethod
+from idlelib.undo import InsertCommand
+
 from PyQt6.QtWidgets import QMessageBox
 from Model.DAO.database import DBManager
 from Model.Entities.base_entity import BaseEntity
 from Model.Entities.categoria_acuario_entity import CategoriaAcuarioEntity
+from Model.Entities.insert_commands import InsertCmd
 from Services.Result.result import Result
 
 
@@ -113,6 +116,62 @@ class BaseDAO(ABC):
             except db.conn.DatabaseError as e:
                 return Result.failure(f"[ERROR DE BASE DE DATOS]\n {e}")
             except db.conn.Error as e:
+                return Result.failure(f"[ERROR GENERAL SQLITE]\n {e}")
+            finally:
+                db.close_connection()
+                del db
+
+    @staticmethod
+    def fill_essential_info() -> Result:
+        """ Rellena las tablas auxiliares con la info básica. """
+
+        db = DBManager()
+
+        with db:
+            if not db.conn:
+                QMessageBox.information(
+                    None,
+                    "CONEXIÓN",
+                    "CONEXIÓN NO INICIALIZADA."
+                )
+
+            try:
+                cursor = db.conn.cursor()
+                cursor.execute(InsertCmd.INSERT_ESTADOS_PRYECTO)
+                cursor.execute(InsertCmd.INSERT_SEXOS_ANIMAL)
+                cursor.execute(InsertCmd.INSERT_NIVELES_NADO)
+                cursor.execute(InsertCmd.INSERT_DIETAS_FAUNA)
+                cursor.execute(InsertCmd.INSERT_COMPORTAMIENTOS_FAUNA)
+                cursor.execute(InsertCmd.INSERT_CATEGORIAS_EQUIPAMIENTO)
+                cursor.execute(InsertCmd.INSERT_MATERIALES_URNA)
+                cursor.execute(InsertCmd.INSERT_CATEGORIAS_INCIDENCIA)
+                cursor.execute(InsertCmd.INSERT_SUBCATEGORIAS_INCIDENCIA)
+                cursor.execute(InsertCmd.INSERT_CATEGORIAS_ACUARIO)
+                cursor.execute(InsertCmd.INSERT_SUBCATEGORIAS_ACUARIO)
+                cursor.execute(InsertCmd.INSERT_MARCAS_COMERCIALES)
+                cursor.execute(InsertCmd.INSERT_TIPOS_FILTRO)
+                cursor.execute(InsertCmd.INSERT_TASAS_CRECIMIENTO)
+                cursor.execute(InsertCmd.INSERT_REQUERIMIENTOS_CO2)
+                cursor.execute(InsertCmd.INSERT_REQUERIMIENTOS_ILUMINACION)
+                cursor.execute(InsertCmd.INSERT_POSICIONES_ACUARIO)
+                cursor.execute(InsertCmd.INSERT_GRUPOS_TAXONOMICOS)
+                cursor.execute(InsertCmd.INSERT_TIPOS_CONTROL_ILUMINACON)
+                cursor.execute(InsertCmd.INSERT_TIPOS_ILUMINACON)
+                cursor.execute(InsertCmd.INSERT_PAISES)
+                db.conn.commit()
+                return Result.success(1)
+
+            except sqlite3.OperationalError as e:
+                traceback.print_exc()
+                return Result.failure(f"[ERROR OPERACIONAL]\n {e}")
+            except sqlite3.ProgrammingError as e:
+                traceback.print_exc()
+                return Result.failure(f"[ERROR DE PROGRAMACIÓN]\n {e}")
+            except sqlite3.DatabaseError as e:
+                traceback.print_exc()
+                return Result.failure(f"[ERROR DE BASE DE DATOS]\n {e}")
+            except sqlite3.Error as e:
+                traceback.print_exc()
                 return Result.failure(f"[ERROR GENERAL SQLITE]\n {e}")
             finally:
                 db.close_connection()
@@ -252,7 +311,7 @@ class BaseDAO(ABC):
             for tabla in tablas:
                 cursor.execute(f"DELETE FROM {tabla};")
                 cursor.execute(
-                    f"UPDATE sqlite_sequence SET seq = 10001 WHERE name = '{tabla}';"
+                    f"UPDATE sqlite_sequence SET seq = 10000 WHERE name = '{tabla}';"
                 )
 
             db.conn.commit()

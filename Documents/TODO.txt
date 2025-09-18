@@ -1,6 +1,21 @@
 ﻿================================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
+17/09/2025  REFACTORIZACIONES:
+            -   SE REFACTORIZA LA CONFIGURACIÓN DEL PIE DE TABLA.      POSTPOSED
+            -   SE REFACTORIZA LA CONFIGURACIÓN DE LA BARRA DE ESTADO. POSTPOSED
+
+            BUG FIXES:
+            -   SE CORRIGE EL ERROR DE LA ACTUALIZACIÓN DE LA TABLA DE LOS
+                DISTINTOS FORMULARIOS.                                      DONE
+            -   SE CORRIGE EL BUG QUE APARECE CUANDO SE ELIMINA EL ÚLTIMO
+                REGISTRO DE LA TABLA.                                       DONE
+
+15/09/2025  SE AÑADE LA LÓGICA DEL USUARIO:
+            -   SE CREA LA ENTIDAD.                                         DONE
+            -   SE CREA EL DAO.                                             DONE
+            -   SE CREA EL DIÁLOGO.                                  A MODIFICAR
+
 14/09/2025  SE IMPLEMENTA LA FUNCIONALIDAD DE BÚSQUEDA DE SUBCATEGORÍAS DE
             INCIDENCIA.
             -   SE MODIFICA EL CONTROLADOR.                                 DONE

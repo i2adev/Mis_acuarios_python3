@@ -274,9 +274,7 @@ INSERT INTO SUBCATEGORIAS_ACUARIO (ID_CATEGORIA_ACUARIO, SUBCATEGORIA_ACUARIO, O
 (10001, 'Comunitario', 'Contiene varias especies de peces de agua dulce compatibles entre sí.'),
 (10001, 'Específico', 'Dedicado a una única especie o grupo. Facilita el cuidado y reproducción.'),
 (10001, 'Biotopo', 'Recrea un hábitat natural específico (Amazonas, África, Asia, etc.).'),
-
 (10002, 'Arrecife (reef)', 'Especializado en corales vivos. Muy exigente en iluminación, química del agua y mantenimiento.'),
-
 (10003, 'Acuaterrario (paludario)', 'Mezcla zona terrestre y acuática. Ideal para anfibios, reptiles y ciertas plantas.'),
 (10003, 'Nanoacuario', 'Acuarios de tamaño reducido (menos de 40 L), tanto dulce como salado. Estéticos y compactos.');
 
@@ -318,35 +316,6 @@ INSERT INTO SUBCATEGORIAS_INCIDENCIA (ID_CATEGORIA, NOMBRE_SUBCATEGORIA, DESCRIP
 (10005, 'Falta de actividad', 'Peces inactivos o apáticos'),
 (10005, 'Comportamientos anómalos', 'Nadado errático, raspado contra objetos, etc.');
 
-INSERT INTO TIPOS_FILTRO
-       (OBSERVACIONES, TIPO_FILTRO)
-VALUES ('Ideal para acuarios pequeños o de cría; bajo flujo y oxigenación suave.',
-        'Filtro de esponja'),
-       ('Fácil de instalar; combina filtración mecánica, biológica y química.',
-        'Filtro de cascada'),
-       ('Sumergido dentro del acuario; buena opción para acuarios medianos.',
-        'Filtro interno'),
-       ('Alta capacidad de filtración; ideal para acuarios grandes.',
-        'Filtro externo'),
-       ('Funciona mediante una placa bajo el sustrato; menos común actualmente.',
-        'Filtro de fondo'),
-       ('Tipo de filtro externo presurizado, excelente capacidad de carga filtrante.',
-        'Filtro canister'),
-       ('También llamado "de cascada"; se cuelga en el borde del acuario.',
-        'Filtro de mochila'),
-       ('Usa luz ultravioleta para eliminar algas, bacterias y parásitos en suspensión.',
-        'Filtro UV'),
-       ('Alta eficiencia biológica; el material filtrante se mueve en suspensión.',
-        'Filtro de lecho fluido'),
-       ('Sistema personalizado fuera del acuario principal; común en acuarios marinos.',
-        'Filtro de sump' ),
-       ('Usa burbujeo de aire para mover el agua a través del material filtrante.',
-        'Filtro de aire'),
-       ('Filtración natural; muy usado en acuarios plantados tipo Walstad.',
-        'Filtro de movimiento lento'),
-       ('Filtro de esponja de gran superficie, muy usado en cría y gambarios.',
-        'Filtro Hamburg Mattenfilter');
-
 INSERT INTO MARCAS_COMERCIALES (MARCA, DIRECCION, COD_POSTAL, POBLACION, PROVINCIA, ID_PAIS, OBSERVACIONES)
 VALUES
 ('EHEIM', 'Plochinger Straße 54', '73779', 'Deizisau', 'Baden-Württemberg', 10003, 'Líder en filtros externos. Muy fiable.'),
@@ -386,7 +355,7 @@ VALUES
 ('Nutrafin', '20500 TransCanada Hwy', 'H9X 0A2', 'Baie d’Urfé', 'Quebec', 10035, 'Test kits y acondicionadores.'),
 ('Ocean Free', 'No. 71 Jalan Lekar', '698950', 'Singapur', '-', 10161, 'Alimentos y productos técnicos. Alta presencia en Asia.');
 
-INSERT INTO MATERIALES_ACUARIO (MATERIAL, DESCRIPCION) VALUES
+INSERT INTO MATERIALES_URNA (MATERIAL, DESCRIPCION) VALUES
 ('Cristal', 'Material transparente, resistente y con excelente visibilidad. Es el más común en acuarios domésticos.'),
 ('Cristal óptico', 'Vidrio de alta transparencia y bajo contenido en hierro, ofrece una visión más clara y sin tinte verdoso.'),
 ('Acrílico', 'Ligero y resistente a impactos. Permite formas curvas, pero es más propenso a rayarse.'),

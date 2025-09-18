@@ -1,24 +1,22 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
-Fecha:      31/07/2025
+Fecha:      15/09/2025
 Commentarios:
     Módulo que contiene el DAO de la URNA.
 """
 import sqlite3
 import traceback
 
-from PyQt6.QtWidgets import QMessageBox
-
 from Model.DAO.base_dao import BaseDAO
 from Model.DAO.database import DBManager
-from Model.Entities.urna_entity import UrnaEntity
+from Model.Entities.usuario_entity import UsuarioEntity
 from Services.Result.result import Result
 
 
-class UrnaDAO(BaseDAO):
+class UsuarioDAO (BaseDAO):
     """
     Clase que gestiona las operaciones en la base de datos de la entidad
-    UrnaEntity.
+    UsuarioEntity.
     """
 
     def __init__(self):
@@ -28,70 +26,11 @@ class UrnaDAO(BaseDAO):
         self.ent = None
 
     # ------------------------------------------------------------------
-    def get_list(self) -> Result(list[UrnaEntity]):
-        """Obtiene el listado completo ordenado por categoría."""
-
-        sql = (
-            """
-            SELECT    A.ID_URNA AS ID,
-                      ROW_NUMBER() OVER (ORDER BY M.MARCA, A.MODELO) AS NUM,
-                      M.MARCA AS MARCA,
-                      A.MODELO AS MODELO,
-                      A.ANCHURA AS ANCHURA,
-                      A.PROFUNDIDAD AS PROFUNDIDAD,
-                      A.ALTURA AS ALTURA,
-                      A.GROSOR_CRISTAL AS GROSOR,
-                      A.VOLUMEN_TANQUE AS VOLUMEN_BRUTO,
-                      T.MATERIAL AS MATERIAL,
-                      A.DESCRIPCION AS DESCRIPCION
-            FROM      URNAS AS A
-            LEFT JOIN MARCAS_COMERCIALES AS M ON A.ID_MARCA = M.ID_MARCA
-            LEFT JOIN MATERIALES_URNA T ON A.ID_MATERIAL = T.ID_MATERIAL;
-            """
-        )
-
-        try:
-            with self.db.conn as con:
-                cur = con.cursor()
-                cur.execute(sql)
-                rows = cur.fetchall()
-
-                valores = [
-                    UrnaEntity(
-                        id=f["ID"],
-                        num=f["NUM"],
-                        id_marca=f["MARCA"],
-                        modelo=f["MODELO"],
-                        anchura=f["ANCHURA"],
-                        profundidad=f["PROFUNDIDAD"],
-                        altura=f["ALTURA"],
-                        grosor_cristal=f["GROSOR"],
-                        volumen_tanque=f["VOLUMEN_BRUTO"],
-                        id_material=f["MATERIAL"],
-                        descripcion=f["DESCRIPCION"]
-                    )
-                    for f in rows
-                ]
-                return Result.success(valores)
-
-        except sqlite3.IntegrityError as e:
-            traceback.print_exc()
-            return Result.failure(f"[INTEGRITY ERROR]\n {e}")
-        except sqlite3.OperationalError as e:
-            traceback.print_exc()
-            return Result.failure(f"[OPERATIONAL ERROR]\n {e}")
-        except sqlite3.ProgrammingError as e:
-            traceback.print_exc()
-            return Result.failure(f"[PROGRAMMING ERROR]\n {e}")
-        except sqlite3.DatabaseError as e:
-            traceback.print_exc()
-            return Result.failure(f"[DATABASE ERROR]\n {e}")
-        except sqlite3.Error as e:
-            traceback.print_exc()
-            return Result.failure(f"[SQLITE ERROR]\n {e}")
+    def get_list(self) -> Result(list[UsuarioEntity]):
+        pass
 
     # ------------------------------------------------------------------
-    def get_list_combo(self) -> Result(list[UrnaEntity]):
+    def get_list_combo(self) -> Result(list[UsuarioEntity]):
         """
         Obtiene una lista ligera para combos (ID y texto visible).
         Devuelve entidades con `num=None` y `observaciones=None`.
@@ -99,12 +38,11 @@ class UrnaDAO(BaseDAO):
 
         sql = (
             """
-            SELECT    A.ID_ACUARIO AS ID,
-                      CONCAT(M.MARCA, ' ', A.MODELO) AS VALUE
-            FROM      URNAS AS A
-            LEFT JOIN MARCAS_COMERCIALES AS M
-            ON        A.ID_MARCA = M.ID_MARCA
-            ORDER BY  VALUE;
+            SELECT    ID_USUARIO AS ID,
+                      IFNULL(PRIMER_APELLIDO, '') || ' ' 
+                          || IFNULL(SEGUNDO_APELLIDO, '') || ', ' 
+                          || IFNULL(NOMBRE, '') AS VALUE
+            FROM      USUARIOS;
             """
         )
 
@@ -114,18 +52,15 @@ class UrnaDAO(BaseDAO):
                 cur.execute(sql)
                 rows = cur.fetchall()
                 valores = [
-                    UrnaEntity(
+                    UsuarioEntity(
                         id=f["ID"],
                         num=None,
-                        id_marca=None,
-                        modelo=f["VALUE"],
-                        anchura=None,
-                        profundidad=None,
-                        altura=None,
-                        grosor_cristal=None,
-                        volumen_tanque=None,
-                        id_material=None,
-                        descripcion=None
+                        nombre=f["VALUE"],
+                        apellido1=None,
+                        apellido2=None,
+                        e_mail=None,
+                        usuario=None,
+                        password=None
                     )
                     for f in rows
                 ]
@@ -148,7 +83,7 @@ class UrnaDAO(BaseDAO):
             return Result.failure(f"[SQLITE ERROR]\n {e}")
 
     # ------------------------------------------------------------------
-    def insert(self, ent: UrnaEntity) -> Result(int):
+    def insert(self, ent: UsuarioEntity) -> Result(int):
         """
         Inserta un nuevo registro y devuelve el ID generado.
         :param ent: Entidad derivada de BaseEntity
@@ -156,25 +91,19 @@ class UrnaDAO(BaseDAO):
 
         sql = (
             """
-            INSERT INTO URNAS 
-                   (ID_MARCA, MODELO, ANCHURA, PROFUNDIDAD,  ALTURA, 
-                    GROSOR_CRISTAL, VOLUMEN_TANQUE, ID_MATERIAL, 
-                    DESCRIPCION)
-            VALUES  (:idm, :modelo, :anch, :prof, :alt, :grosor, :vol, 
-                    :mat, :obs);
+            INSERT INTO USUARIOS    (NOMBRE, PRIMER_APELLIDO, SEGUNDO_APELLIDO, 
+                                    E_MAIL, USUARIO, PASSWORD)
+            VALUES                  (:nombre, :apellido1, :apellido2, :e_mail, 
+                                    :usuario, :password);
             """
         )
-
         params = {
-            "idm": ent.id_marca,
-            "modelo": ent.modelo,
-            "anch": ent.anchura,
-            "prof": ent.profundidad,
-            "alt": ent.altura,
-            "grosor": ent.grosor_cristal,
-            "vol": ent.volumen_tanque,
-            "mat": ent.id_material,
-            "obs": ent.descripcion
+            "nombre": ent.nombre,
+            "apellido1": ent.apellido1,
+            "apellido2": ent.apellido2,
+            "e_mail": ent.e_mail,
+            "usuario": ent.usuario,
+            "password": ent.password
         }
 
         try:
@@ -199,8 +128,7 @@ class UrnaDAO(BaseDAO):
             return Result.failure(f"[SQLITE ERROR]\n {e}")
 
     # ------------------------------------------------------------------
-    def update(self, ent: UrnaEntity) -> Result(int):
-
+    def update(self, ent: UsuarioEntity) -> Result(int):
         """
         Actualiza el registro en la base de datos. Devuelve el ID de la entidad
         modificada.
@@ -209,31 +137,24 @@ class UrnaDAO(BaseDAO):
 
         sql = (
             """
-                UPDATE  URNAS
-                SET     ID_MARCA = :idm,
-                        MODELO = :modelo,
-                        ANCHURA = :anch,
-                        PROFUNDIDAD = :prof,
-                        ALTURA = :alt,
-                        GROSOR_CRISTAL = :grosor,
-                        VOLUMEN_TANQUE = :vol,
-                        ID_MATERIAL = :mat,
-                        DESCRIPCION = :obs
-                WHERE   ID_URNA = :id;
+            UPDATE USUARIOS
+            SET    NOMBRE = :nombre,
+                   PRIMER_APELLIDO = :apellido1,
+                   SEGUNDO_APELLIDO = :apellido2,
+                   E_MAIL = :e_mail,
+                   USUARIO = :usuario,
+                   PASSWORD = :password
+             WHERE ID_USUARIO = :id;
             """
         )
-
         params = {
             "id": ent.id,
-            "idm": ent.id_marca,
-            "modelo": ent.modelo,
-            "anch": ent.anchura,
-            "prof": ent.profundidad,
-            "alt": ent.altura,
-            "grosor": ent.grosor_cristal,
-            "vol": ent.volumen_tanque,
-            "mat": ent.id_material,
-            "obs": ent.descripcion
+            "nombre": ent.nombre,
+            "apellido1": ent.apellido1,
+            "apellido2": ent.apellido2,
+            "e_mail": ent.e_mail,
+            "usuario": ent.usuario,
+            "password": ent.password
         }
 
         try:
@@ -265,11 +186,10 @@ class UrnaDAO(BaseDAO):
         """
         sql = (
             """
-            DELETE FROM URNAS
-            WHERE       ID_URNA = :id;
+            DELETE FROM USUARIOS
+            WHERE       ID_USUARIO = :id;
             """
         )
-
         params = {"id": id_}
 
         try:
@@ -292,4 +212,3 @@ class UrnaDAO(BaseDAO):
         except sqlite3.Error as e:
             traceback.print_exc()
             return Result.failure(f"[SQLITE ERROR]\n {e}")
-

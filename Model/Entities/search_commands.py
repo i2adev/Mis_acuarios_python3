@@ -2,8 +2,8 @@
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      12/09/2025
 Commentarios:
-    Módulo que contiene la clase Paginator, que se encarga de manejar
-    los datos paginados de las entidades.
+    Módulo que contiene la clase SearchCmd, que contiene los commandos
+    de búsqueda.
 """
 
 class SearchCmd:
@@ -19,7 +19,8 @@ class SearchCmd:
                   ROW_NUMBER() OVER(ORDER BY CATEGORIA_ACUARIO) AS NUM,
                   CATEGORIA_ACUARIO AS CATEGORIA,
                   OBSERVACIONES AS OBSERVACIONES,
-                  UPPER(CATEGORIA_ACUARIO || OBSERVACIONES) AS FIELD
+                  UPPER(IFNULL(CATEGORIA_ACUARIO, '') 
+                  || IFNULL(OBSERVACIONES, '')) AS FIELD
         FROM      CATEGORIAS_ACUARIO
     )
     WHERE     FIELD LIKE '%' || :pattern || '%';
@@ -34,7 +35,8 @@ class SearchCmd:
                   ROW_NUMBER() OVER(ORDER BY CATEGORIA_INCIDENCIA) AS NUM,
                   CATEGORIA_INCIDENCIA AS CATEGORIA,
                   OBSERVACIONES AS OBSERVACIONES,
-                  UPPER(CATEGORIA_INCIDENCIA || OBSERVACIONES) AS FIELD
+                  UPPER(IFNULL(CATEGORIA_INCIDENCIA, '') 
+                        || IFNULL(OBSERVACIONES, '')) AS FIELD
         FROM      CATEGORIAS_INCIDENCIA
     )
     WHERE     FIELD LIKE '%' || :pattern || '%';
@@ -114,7 +116,9 @@ class SearchCmd:
                C.CATEGORIA_INCIDENCIA AS CATEGORIA,
                S.NOMBRE_SUBCATEGORIA AS SUBCATEGORIA,
                S.DESCRIPCION AS OBSERVACIONES,
-               UPPER(IFNULL(C.CATEGORIA_INCIDENCIA, '') || IFNULL(S.NOMBRE_SUBCATEGORIA, '') || IFNULL(S.DESCRIPCION, '')) AS FIELD
+               UPPER(IFNULL(C.CATEGORIA_INCIDENCIA, '') 
+                    || IFNULL(S.NOMBRE_SUBCATEGORIA, '') 
+                    || IFNULL(S.DESCRIPCION, '')) AS FIELD
         FROM   SUBCATEGORIAS_INCIDENCIA S
         LEFT JOIN CATEGORIAS_INCIDENCIA C 
         ON     S.ID_CATEGORIA = C.ID_CATEGORIA
@@ -128,7 +132,8 @@ class SearchCmd:
     FROM
     (
         SELECT       ID_TIPO AS ID,
-                     ROW_NUMBER() OVER (ORDER BY CA.CATEGORIA_ACUARIO, SA.SUBCATEGORIA_ACUARIO) AS NUM,
+                     ROW_NUMBER() OVER (ORDER BY CA.CATEGORIA_ACUARIO, 
+                        SA.SUBCATEGORIA_ACUARIO) AS NUM,
                      CA.CATEGORIA_ACUARIO AS CATEGORIA,
                      SA.SUBCATEGORIA_ACUARIO AS SUBCATEGORIA,
                      TA.OBSERVACIONES AS OBSERVACIONES,

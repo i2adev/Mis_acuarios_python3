@@ -548,11 +548,11 @@ class SubcategoriaAcuarioController(SubcategoriaAcuarioDialogController):
         # Configurar paginator
         self._pag.initialize_paginator()
 
-        # Configuramos el pie de tabla
-        if paginator_pages > self._pag.total_pages:
-            # Eliminamos la última página del combo de paginación
-            self._view.combo_select_page.removeItem(self._pag.total_pages)
-            self._view.label_total_pages.setText(str(self._pag.total_pages))
+        # # Configuramos el pie de tabla
+        # if paginator_pages > self._pag.total_pages:
+        #     # Eliminamos la última página del combo de paginación
+        #     self._view.combo_select_page.removeItem(self._pag.total_pages)
+        #     self._view.label_total_pages.setText(str(self._pag.total_pages))
 
         # Establecemos la página actual
         if pagina_actual > self._pag.total_pages:
@@ -560,11 +560,12 @@ class SubcategoriaAcuarioController(SubcategoriaAcuarioDialogController):
                 self._pag.total_pages - 1
             )
             pagina_actual -= 1
-        else:
-            self._view.combo_select_page.setCurrentIndex(pagina_actual - 1)
 
         self._view.combo_select_page.setCurrentIndex(-1)
-        self._view.combo_select_page.setCurrentIndex(pagina_actual - 1)
+        if self._pag.total_pages == 0:
+            self._view.combo_select_page.setCurrentIndex(0)
+        else:
+            self._view.combo_select_page.setCurrentIndex(pagina_actual - 1)
 
     def button_load_click(self, event):
         """ Controla el clic del boton de cargar. """
@@ -614,6 +615,7 @@ class SubcategoriaAcuarioController(SubcategoriaAcuarioDialogController):
         """
 
         # Seleccionamos la página en la que se encuentra el registro
+        self._view.combo_select_page.setCurrentIndex(-1)
         num_reg = next(x.num for x in self._pag.total_data if x.id == id_)
         num_pag =  self._pag.get_page_number_by_num(num_reg)
         self._view.combo_select_page.setCurrentIndex(num_pag - 1)

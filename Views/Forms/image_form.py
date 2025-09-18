@@ -216,6 +216,7 @@ class ImageForm(QFrame):
 
                 if not res_foto.is_success:
                     return Result.failure(res_foto.error_msg)
+
             return Result.success(len(self.lista_fotos))
         else:
             return Result.success(0)

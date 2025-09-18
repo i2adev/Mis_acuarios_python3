@@ -266,8 +266,11 @@ class Paginator:
         """
 
         # Comprueba que el número de página este dentro del rango
-        if page < 1 or page > self.total_pages:
-            self.total_pages = 1
+        if page < 1: # or page > self.total_pages:
+            page = 1
+
+        if page > self.total_pages:
+             page = self.total_pages
 
         # Inicializamos las variables
         self.current_page = page
@@ -348,7 +351,7 @@ class Paginator:
         # Configuramos la lista total
         if self.procedure == "VISTA_TIPOS_FILTRO":
             data_list = [TipoFiltroEntity(
-                    id = ["ID"],
+                    id = f["ID"],
                     num = f["NUM"],
                     tipo_filtro = f["TIPO"],
                     observaciones = f["OBSERVACIONES"]
@@ -400,13 +403,13 @@ class Paginator:
                     num=f["NUM"],
                     id_categoria=f["CATEGORIA"],
                     subcategoria=f["SUBCATEGORIA"],
-                    observaciones=f ["OBSERVACIONES"]
+                    observaciones=f["OBSERVACIONES"]
                 )
                 for f in rows
             ]
         elif self.procedure == "VISTA_MARCAS_COMERCIALES":
             data_list = [MarcaComercialEntity(
-                    id=["ID"],
+                    id=f["ID"],
                     num=f["NUM"],
                     nombre_marca=f["MARCA"],
                     direccion=f["DIRECCION"],
@@ -464,21 +467,6 @@ class Paginator:
 
         return page
 
-    def __str__(self):
-        """ Muestra el objeto en forma de texto. """
-
-        return (
-            f"""
-            PROCEDURE:          {self.procedure}
-            RECORDS BY PAGE:    {self.records_page}
-            RECORDS:            {self.records}
-            TOTAL PAGES:        {self.total_pages}    
-            CURRENT PAGE:       {self.current_page}
-                START:          {self.start}
-                END:            {self.end}       
-            """
-        )
-
     def get_sql_command(self) -> str:
         """ Obtiene la instrucción sql dependiendo del procedimiento. """
 
@@ -501,3 +489,18 @@ class Paginator:
             return SearchCmd.SEARCH_URNA
         elif self.procedure == "VISTA_MATERIALES_URNA":
             return SearchCmd.SEARCH_MATERIAL_URNA
+
+    def __str__(self):
+        """ Muestra el objeto en forma de texto. """
+
+        return (
+            f"""
+            PROCEDURE:          {self.procedure}
+            RECORDS BY PAGE:    {self.records_page}
+            RECORDS:            {self.records}
+            TOTAL PAGES:        {self.total_pages}    
+            CURRENT PAGE:       {self.current_page}
+                START:          {self.start}
+                END:            {self.end}       
+            """
+        )

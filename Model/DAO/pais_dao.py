@@ -58,15 +58,19 @@ class PaisDAO (BaseDAO):
                 return Result.success(valores)
 
         except sqlite3.IntegrityError as e:
+            traceback.print_exc()
             return Result.failure(f"[INTEGRITY ERROR]\n {e}")
         except sqlite3.OperationalError as e:
             traceback.print_exc()
             return Result.failure(f"[OPERATIONAL ERROR]\n {e}")
         except sqlite3.ProgrammingError as e:
+            traceback.print_exc()
             return Result.failure(f"[PROGRAMMING ERROR]\n {e}")
         except sqlite3.DatabaseError as e:
+            traceback.print_exc()
             return Result.failure(f"[DATABASE ERROR]\n {e}")
         except sqlite3.Error as e:
+            traceback.print_exc()
             return Result.failure(f"[SQLITE ERROR]\n {e}")
 
     # ------------------------------------------------------------------
@@ -102,15 +106,19 @@ class PaisDAO (BaseDAO):
                 return Result.success(valores)
 
         except sqlite3.IntegrityError as e:
+            traceback.print_exc()
             return Result.failure(f"[INTEGRITY ERROR]\n {e}")
         except sqlite3.OperationalError as e:
             traceback.print_exc()
             return Result.failure(f"[OPERATIONAL ERROR]\n {e}")
         except sqlite3.ProgrammingError as e:
+            traceback.print_exc()
             return Result.failure(f"[PROGRAMMING ERROR]\n {e}")
         except sqlite3.DatabaseError as e:
+            traceback.print_exc()
             return Result.failure(f"[DATABASE ERROR]\n {e}")
         except sqlite3.Error as e:
+            traceback.print_exc()
             return Result.failure(f"[SQLITE ERROR]\n {e}")
 
     def insert(self, ent: PaisEntity) -> Result:

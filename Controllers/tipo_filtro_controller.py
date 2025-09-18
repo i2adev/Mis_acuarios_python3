@@ -58,6 +58,7 @@ class TipoFiltroDialogController(BaseController):
         """
         Inicializa los eventos de los widgets de la vista.
         """
+
         self.init_imput_handlers()
 
         if isinstance(self._view, TipoFiltroDialog):
@@ -319,6 +320,8 @@ class TipoFiltroController(TipoFiltroDialogController):
 
         page = self._view.combo_select_page.currentData()
 
+        # print(f"PÁGINA ACTUAL: {page}")
+
         # Condiciones de salida
         if page is None:
             return
@@ -453,11 +456,11 @@ class TipoFiltroController(TipoFiltroDialogController):
         # Configurar paginator
         self._pag.initialize_paginator()
 
-        # Configuramos el pie de tabla
-        if paginator_pages > self._pag.total_pages:
-            # Eliminamos la última página del combo de paginación
-            self._view.combo_select_page.removeItem(self._pag.total_pages)
-            self._view.label_total_pages.setText(str(self._pag.total_pages))
+        # # Configuramos el pie de tabla
+        # if paginator_pages > self._pag.total_pages:
+        #     # Eliminamos la última página del combo de paginación
+        #     self._view.combo_select_page.removeItem(self._pag.total_pages)
+        #     self._view.label_total_pages.setText(str(self._pag.total_pages))
 
         # Establecemos la página actual
         if pagina_actual > self._pag.total_pages:
@@ -465,11 +468,12 @@ class TipoFiltroController(TipoFiltroDialogController):
                 self._pag.total_pages - 1
             )
             pagina_actual -= 1
-        else:
-            self._view.combo_select_page.setCurrentIndex(pagina_actual - 1)
 
         self._view.combo_select_page.setCurrentIndex(-1)
-        self._view.combo_select_page.setCurrentIndex(pagina_actual - 1)
+        if self._pag.total_pages == 0:
+            self._view.combo_select_page.setCurrentIndex(0)
+        else:
+            self._view.combo_select_page.setCurrentIndex(pagina_actual - 1)
 
     def button_load_click(self, event):
         """ Controla el clic del boton de cargar. """
@@ -491,7 +495,6 @@ class TipoFiltroController(TipoFiltroDialogController):
             self._view.frame.edit_categoria_acuario.setFocus()
             return
 
-
         # Actualiza el registro
         res = self.update()
 
@@ -505,9 +508,6 @@ class TipoFiltroController(TipoFiltroDialogController):
         # Configuramos el paginador
         self._pag.initialize_paginator()
 
-        # Establecemos la página actual
-        self._view.combo_select_page.setCurrentIndex(-1)
-
         # Seleccionamos el último registro utilizado
         self.configure_table_after_crud(res.value)
 
@@ -518,6 +518,7 @@ class TipoFiltroController(TipoFiltroDialogController):
         """
 
         # Seleccionamos la página en la que se encuentra el registro
+        self._view.combo_select_page.setCurrentIndex(-1)
         num_reg = next(x.num for x in self._pag.total_data if x.id == id_)
         num_pag =  self._pag.get_page_number_by_num(num_reg)
         self._view.combo_select_page.setCurrentIndex(num_pag - 1)
@@ -564,7 +565,7 @@ class TipoFiltroController(TipoFiltroDialogController):
 
         tv_model = TipoFiltroTableModel(data)
         table.setModel(tv_model)
-        table.setColumnHidden(0, True)
+        # table.setColumnHidden(0, True)
         table.resizeColumnsToContents()
 
     def spell_check(self):
@@ -621,6 +622,12 @@ class TipoFiltroController(TipoFiltroDialogController):
         tipo_filtro = modelo.index(fila, 2).data()  # La columna 1 es el
                                                     # númer correlativo.
         observaciones = modelo.index(fila, 3).data()
+
+        # print(f"""
+        #     ID:     {id_ta}
+        #     TIPO:   {tipo_filtro}
+        #     OBS.:   {observaciones}
+        # """)
 
         # Cargamos los widgets
         self._view.frame.edit_id.setText(
