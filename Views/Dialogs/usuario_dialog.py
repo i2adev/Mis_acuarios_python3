@@ -23,7 +23,7 @@ class UsuarioDialog(BaseDialog):
 
         # Configura el formulario
         self.frame = UsuarioFOrm()
-        self.frame.setFixedWidth(350)
+        self.frame.setFixedWidth(600)
         self.layout_form_data.addWidget(self.frame)
         self.set_tab_order()
 
@@ -39,7 +39,7 @@ class UsuarioDialog(BaseDialog):
         self.frame.edit_apellido_1.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
         self.frame.edit_apellido_2.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
         self.frame.edit_mail.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
-        self.frame.edit_usuario.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
+        self.frame.edit_password_2.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
         self.frame.edit_password.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
 
         # Establecer el orden
@@ -53,10 +53,10 @@ class UsuarioDialog(BaseDialog):
             self.frame.edit_apellido_2, self.frame.edit_mail
         )
         self.setTabOrder(
-            self.frame.edit_mail, self.frame.edit_usuario
+            self.frame.edit_mail, self.frame.edit_password
         )
         self.setTabOrder(
-            self.frame.edit_usuario, self.frame.edit_password
+            self.frame.edit_password, self.frame.edit_password_2
         )
 
 # Entrada a la aplicación

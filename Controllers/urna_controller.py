@@ -614,11 +614,11 @@ class UrnaController(UrnaDialogController):
         # Configurar paginador
         self._pag.initialize_paginator()
 
-        # Configuramos el pie de tabla
-        if paginator_pages > self._pag.total_pages:
-            # Eliminamos la última página del combo de paginación
-            self._view.combo_select_page.removeItem(self._pag.total_pages)
-            self._view.label_total_pages.setText(str(self._pag.total_pages))
+        # # Configuramos el pie de tabla
+        # if paginator_pages > self._pag.total_pages:
+        #     # Eliminamos la última página del combo de paginación
+        #     self._view.combo_select_page.removeItem(self._pag.total_pages)
+        #     self._view.label_total_pages.setText(str(self._pag.total_pages))
 
         # Establecemos la página actual
         if pagina_actual > self._pag.total_pages:
@@ -626,11 +626,12 @@ class UrnaController(UrnaDialogController):
                 self._pag.total_pages - 1
             )
             pagina_actual -= 1
-        else:
-            self._view.combo_select_page.setCurrentIndex(pagina_actual - 1)
 
         self._view.combo_select_page.setCurrentIndex(-1)
-        self._view.combo_select_page.setCurrentIndex(pagina_actual - 1)
+        if self._pag.total_pages == 0:
+            self._view.combo_select_page.setCurrentIndex(0)
+        else:
+            self._view.combo_select_page.setCurrentIndex(pagina_actual - 1)
 
     def action_cargar(self, event):
         """ Carga un registro desde el menú contextual. """

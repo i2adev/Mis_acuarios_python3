@@ -1,6 +1,14 @@
 ﻿================================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
+18/09/2025  SE CONTINUA CON LA LÓGICA DE USUARIO:
+            -   SE CREA EL VALIDADOR DE FORMULARIO.                         DONE
+            -   SE CREA EL CONTROLADOR.                                     DONE
+
+            REFACTORIZACIONES:
+            -   SE REFACTORIZA LA ACCIÓN DE BORRAR REGISTRO DESDE EL MENU
+                CONTEXTUAL.                                                 DONE
+
 17/09/2025  REFACTORIZACIONES:
             -   SE REFACTORIZA LA CONFIGURACIÓN DEL PIE DE TABLA.      POSTPOSED
             -   SE REFACTORIZA LA CONFIGURACIÓN DE LA BARRA DE ESTADO. POSTPOSED

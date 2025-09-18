@@ -17,12 +17,11 @@ class UsuarioEntity(BaseEntity):
     apellido1: str | None
     apellido2: str | None
     e_mail: str | None
-    usuario: str | None
     password: str | None
 
     def __init__(self, id: int = None, num: int = None, nombre: str = None,
                  apellido1: str = None, apellido2: str = None,
-                 e_mail: str = None, usuario: str = None, password: str = None):
+                 e_mail: str = None, password: str = None):
         """
         Constructor de clase
         :param id: Id de la entidad
@@ -31,7 +30,6 @@ class UsuarioEntity(BaseEntity):
         :param apellido1: Primer apellido del usuario
         :param apellido2: Segundo apellido del usuario
         :param e_mail: Correo electrónico del usuario
-        :param usuario: Nombre de usuario en la aplicación
         :param password: Contraseña de acceso a la aplicación
         """
 

@@ -7,7 +7,7 @@ Commentarios:
 import sys
 
 from PyQt6.QtWidgets import QFrame, QVBoxLayout, QApplication, \
-    QLabel, QLineEdit
+    QLabel, QLineEdit, QHBoxLayout
 
 
 class UsuarioFOrm(QFrame):
@@ -23,7 +23,7 @@ class UsuarioFOrm(QFrame):
         """ Se encarga de crear los controles del formulario. """
 
         # Layouts
-        self.layout_main = QVBoxLayout()
+        self.layout_main = QHBoxLayout()
         self.layout_personal = QVBoxLayout()
         self.layout_cuenta = QVBoxLayout()
 
@@ -49,13 +49,15 @@ class UsuarioFOrm(QFrame):
         self.edit_mail = QLineEdit()
 
         # Controles con la información de la cuenta
-        ## Usuario
-        self.label_usuario = QLabel("USUARIO")
-        self.edit_usuario = QLineEdit()
-
-        ## Usuario
+        ## Contraseña
         self.label_password = QLabel("CONTRASEÑA")
         self.edit_password = QLineEdit()
+        self.edit_password.setEchoMode(QLineEdit.EchoMode.Password)
+
+        ## Repetir contraseña
+        self.label_password_2 = QLabel("REPITE CONTRASEÑA")
+        self.edit_password_2 = QLineEdit()
+        self.edit_password_2.setEchoMode(QLineEdit.EchoMode.Password)
 
     def build_layout(self):
         """ Construye el layout del frame. """
@@ -72,10 +74,10 @@ class UsuarioFOrm(QFrame):
         # Monta el frame de cuenta
         self.layout_cuenta.addWidget(self.label_mail)
         self.layout_cuenta.addWidget(self.edit_mail)
-        self.layout_cuenta.addWidget(self.label_usuario)
-        self.layout_cuenta.addWidget(self.edit_usuario)
         self.layout_cuenta.addWidget(self.label_password)
         self.layout_cuenta.addWidget(self.edit_password)
+        self.layout_cuenta.addWidget(self.label_password_2)
+        self.layout_cuenta.addWidget(self.edit_password_2)
         self.frame_cuenta.setLayout(self.layout_cuenta)
 
         # Montamos el layout principal

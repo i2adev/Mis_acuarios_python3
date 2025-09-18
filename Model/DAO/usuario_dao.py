@@ -59,7 +59,6 @@ class UsuarioDAO (BaseDAO):
                         apellido1=None,
                         apellido2=None,
                         e_mail=None,
-                        usuario=None,
                         password=None
                     )
                     for f in rows
@@ -92,9 +91,9 @@ class UsuarioDAO (BaseDAO):
         sql = (
             """
             INSERT INTO USUARIOS    (NOMBRE, PRIMER_APELLIDO, SEGUNDO_APELLIDO, 
-                                    E_MAIL, USUARIO, PASSWORD)
+                                    E_MAIL, PASSWORD)
             VALUES                  (:nombre, :apellido1, :apellido2, :e_mail, 
-                                    :usuario, :password);
+                                    :password);
             """
         )
         params = {
@@ -102,7 +101,6 @@ class UsuarioDAO (BaseDAO):
             "apellido1": ent.apellido1,
             "apellido2": ent.apellido2,
             "e_mail": ent.e_mail,
-            "usuario": ent.usuario,
             "password": ent.password
         }
 
@@ -142,7 +140,6 @@ class UsuarioDAO (BaseDAO):
                    PRIMER_APELLIDO = :apellido1,
                    SEGUNDO_APELLIDO = :apellido2,
                    E_MAIL = :e_mail,
-                   USUARIO = :usuario,
                    PASSWORD = :password
              WHERE ID_USUARIO = :id;
             """
@@ -153,7 +150,6 @@ class UsuarioDAO (BaseDAO):
             "apellido1": ent.apellido1,
             "apellido2": ent.apellido2,
             "e_mail": ent.e_mail,
-            "usuario": ent.usuario,
             "password": ent.password
         }
 
