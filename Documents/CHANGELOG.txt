@@ -1,5 +1,8 @@
 ﻿CHANGELOG:
 ================================================================================
+0.10.2  -   SE AÑADE EL ARCHIVO GITIGNORE.
+        -   SE CONFIGURA EL ARCHIVO GITIGNORE.
+
 0.10.1  SE CONTINÚA CON LA LÓGICA DE USUARIOS:
         -   SE CREA EL VALIDADOR DEL FORMULARIO.
         -   SE CREA EL CONTROLADOR.

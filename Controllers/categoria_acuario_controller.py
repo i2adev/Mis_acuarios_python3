@@ -27,7 +27,7 @@ from Views.table_menu_contextual import TableMenuContextual
 class CategoriaAcuarioDialogController(BaseController):
     """ Controlador del diálogo categoría de acuario. """
 
-    def __init__(self, view: QWidget, dao: CategoriaAcuarioDAO,
+    def __init__(self, view: CategoriaAcuarioDialog, dao: CategoriaAcuarioDAO,
                  mod: CategoriaAcuarioEntity):
         """
         Constructor base

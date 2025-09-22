@@ -1,6 +1,10 @@
 ﻿================================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
+18/09/2025  SE CREA EL LOGIN DE LA APLICACIÓN:
+            -   SE CREA LA VISTA.                                           DONE
+            -   SE CREA EL CONTROLADOR.                                     TODO
+
 18/09/2025  SE CONTINUA CON LA LÓGICA DE USUARIO:
             -   SE CREA EL VALIDADOR DE FORMULARIO.                         DONE
             -   SE CREA EL CONTROLADOR.                                     DONE
