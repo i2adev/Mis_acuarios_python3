@@ -70,6 +70,17 @@ class UsuarioValidator:
         return Result.success(1)
 
     @staticmethod
+    def validate_nick(widget: QLineEdit):
+        """ Válida el nick del usuario. """
+
+        # Controla la longitud del texto
+        if len(widget.text()) > 15:
+            return Result.failure("EL CAMPO 'NICK DE USUARIO' NO "
+                                "PUEDE CONTENER MAS DE 32 CARACTERES")
+
+        return Result.success(1)
+
+    @staticmethod
     def validate_mail(widget: QLineEdit):
         """ Válida el mail del usuario. """
 

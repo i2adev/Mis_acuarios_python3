@@ -5,24 +5,14 @@ Commentarios:
     Módulo que contiene la clase controladora de la entidad USUARIO.
 """
 
-from PyQt6.QtCore import Qt
-from PyQt6.QtWidgets import (QWidget, QMessageBox, QCompleter,
-                             QComboBox)
+from PyQt6.QtWidgets import (QWidget, QMessageBox, QComboBox)
 
 from Controllers.base_controller import BaseController
-from Controllers.marca_comercial_controller import \
-    MarcaComercialDialogController
-from Controllers.material_urna_controller import MaterialUrnaDialogController
-from Model.DAO.marca_comercial_dao import MarcaComercialDAO
-from Model.DAO.material_urna_dao import MaterialUrnaDAO
 from Model.DAO.usuario_dao import UsuarioDAO
-from Model.Entities.marca_comercial_entity import MarcaComercialEntity
 from Model.Entities.usuario_entity import UsuarioEntity
 
 from Services.Result.result import Result
 from Services.Validators.usuario_validator import UsuarioValidator
-from Views.Dialogs.marca_comercial_dialog import MarcaComercialDialog
-from Views.Dialogs.material_urna_dialog import MaterialUrnaDialog
 from Views.Dialogs.usuario_dialog import UsuarioDialog
 
 
@@ -91,15 +81,15 @@ class UsuarioDialogController(BaseController):
 
         ent = UsuarioEntity()
 
-        if self._view.frame.edit_id.text():
-            ent.id = int(self._view.frame.edit_id.text())
-        else:
-            ent.id = None
+        # if self._view.frame.edit_id.text():
+        #     ent.id = int(self._view.frame.edit_id.text())
+        # else:
+        #     ent.id = None
 
         ent.nombre = self._view.frame.edit_nombre.text()
-        ent.apellido1 = self._view.frame.edit_apelido_1.text()
-        ent.apellido2 = self._view.frame.edit_apelido_2.text()
-        ent.e_mail = self._view.frame.edit_mail.text()
+        ent.apellido1 = self._view.frame.edit_apellido_1.text()
+        ent.apellido2 = self._view.frame.edit_apellido_2.text()
+        ent.nick = self._view.frame.edit_nick.text()
         ent.password = self._view.frame.edit_password.text()
 
         return ent
@@ -156,13 +146,13 @@ class UsuarioDialogController(BaseController):
             self._view.frame.edit_ancho.edit_apellido_2.setFocus()
             return res
 
-        # Válida el e-mail del usuario
-        res = UsuarioValidator.validate_mail(
-            self._view.frame.edit_mail
+        # Válida el nick del usuario
+        res = UsuarioValidator.validate_nick(
+            self._view.frame.edit_nick
         )
 
         if not res.is_success:
-            self._view.frame.edit_mail.setFocus()
+            self._view.frame.edit_nick.setFocus()
             return res
 
         # Valida la contraseña
@@ -198,7 +188,7 @@ class UsuarioDialogController(BaseController):
             nombre = self._view.frame.edit_nombre.text(),
             apellido1 = self._view.frame.edit_apellido_1.text(),
             apellido2 = self._view.frame.edit_apellido_2.text(),
-            e_mail = self._view.frame.edit_mail.text(),
+            nick= self._view.frame.edit_nick.text(),
             password = self._view.frame.edit_password.text(),
         )
 

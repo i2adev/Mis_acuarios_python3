@@ -7,6 +7,8 @@ Commentarios:
 import sqlite3
 import traceback
 
+import bcrypt
+
 from Model.DAO.base_dao import BaseDAO
 from Model.DAO.database import DBManager
 from Model.Entities.usuario_entity import UsuarioEntity
@@ -58,7 +60,7 @@ class UsuarioDAO (BaseDAO):
                         nombre=f["VALUE"],
                         apellido1=None,
                         apellido2=None,
-                        e_mail=None,
+                        nick=None,
                         password=None
                     )
                     for f in rows
@@ -91,8 +93,8 @@ class UsuarioDAO (BaseDAO):
         sql = (
             """
             INSERT INTO USUARIOS    (NOMBRE, PRIMER_APELLIDO, SEGUNDO_APELLIDO, 
-                                    E_MAIL, PASSWORD)
-            VALUES                  (:nombre, :apellido1, :apellido2, :e_mail, 
+                                    NICK_USUARIO, PASSWORD)
+            VALUES                  (:nombre, :apellido1, :apellido2, :nick, 
                                     :password);
             """
         )
@@ -100,8 +102,8 @@ class UsuarioDAO (BaseDAO):
             "nombre": ent.nombre,
             "apellido1": ent.apellido1,
             "apellido2": ent.apellido2,
-            "e_mail": ent.e_mail,
-            "password": ent.password
+            "nick": ent.nick,
+            "password": self.hash_password(ent.password)
         }
 
         try:
@@ -139,7 +141,7 @@ class UsuarioDAO (BaseDAO):
             SET    NOMBRE = :nombre,
                    PRIMER_APELLIDO = :apellido1,
                    SEGUNDO_APELLIDO = :apellido2,
-                   E_MAIL = :e_mail,
+                   NICK_USUARIO = :nick,
                    PASSWORD = :password
              WHERE ID_USUARIO = :id;
             """
@@ -149,8 +151,8 @@ class UsuarioDAO (BaseDAO):
             "nombre": ent.nombre,
             "apellido1": ent.apellido1,
             "apellido2": ent.apellido2,
-            "e_mail": ent.e_mail,
-            "password": ent.password
+            "nick": ent.nick,
+            "password": self.hash_password(ent.password)
         }
 
         try:
@@ -208,3 +210,86 @@ class UsuarioDAO (BaseDAO):
         except sqlite3.Error as e:
             traceback.print_exc()
             return Result.failure(f"[SQLITE ERROR]\n {e}")
+
+    def get_validated_user(self, nick: str, pwd: str) -> Result(UsuarioEntity):
+        """
+        Obtiene el usuario con el nick especificado.
+        :param nick: Nick del usuario
+        """
+
+        sql = (
+            """
+            SELECT  ID_USUARIO AS ID,
+                    NOMBRE AS NOMBRE,
+                    PRIMER_APELLIDO AS APELLIDO1,
+                    SEGUNDO_APELLIDO AS APELLIDO2,
+                    NICK_USUARIO AS NICK,
+                    PASSWORD AS PASSWORD
+            FROM    USUARIOS
+            WHERE   NICK_USUARIO = :nick;
+            """
+        )
+        params = {"nick": nick}
+
+        try:
+            with self.db.conn as con:
+                cur = con.cursor()
+                cur.execute(sql, params)
+                row = cur.fetchone()
+
+                if not row:
+                    return Result.failure("ERROR DE AUTENTICACIÓN")
+
+                usuario = UsuarioEntity(
+                        id=row["ID"],
+                        num=None,
+                        nombre=row["NOMBRE"],
+                        apellido1=row["APELLIDO1"],
+                        apellido2=row["APELLIDO2"],
+                        nick=row["NICK"],
+                        password=row["PASSWORD"])
+
+                # Validamos las credencfiales
+                if self.verify_password(pwd, usuario.password):
+                    return Result.success(usuario)
+                else:
+                    return Result.failure("ERROR DE AUTENTICACIÓN")
+
+        except sqlite3.IntegrityError as e:
+            traceback.print_exc()
+            return Result.failure(f"[INTEGRITY ERROR]\n {e}")
+        except sqlite3.OperationalError as e:
+            traceback.print_exc()
+            return Result.failure(f"[OPERATIONAL ERROR]\n {e}")
+        except sqlite3.ProgrammingError as e:
+            traceback.print_exc()
+            return Result.failure(f"[PROGRAMMING ERROR]\n {e}")
+        except sqlite3.DatabaseError as e:
+            traceback.print_exc()
+            return Result.failure(f"[DATABASE ERROR]\n {e}")
+        except sqlite3.Error as e:
+            traceback.print_exc()
+            return Result.failure(f"[SQLITE ERROR]\n {e}")
+
+    def hash_password(self, password: str) -> str | None:
+        """
+        Encripta la contraseña.
+        :param password: Contraseña del usuario
+        """
+
+        # En caso de que no se haya insertado la contraseña
+        if not password:
+            return None
+
+        # Se crea la encriptación
+        salt = bcrypt.gensalt()
+        return bcrypt.hashpw(password.encode("utf-8"), salt).decode("utf-8")
+
+    def verify_password(self, password: str, hashed: str) -> bool:
+        """
+        Verifica la contraseña del usuario.
+        :param password: Contraseña a verificar
+        :param hashed: Contraseña almacenada
+        """
+
+        return bcrypt.checkpw(password.encode('utf-8'), hashed.encode('utf-8'))

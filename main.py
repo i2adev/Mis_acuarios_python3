@@ -9,25 +9,37 @@ Commentarios:
 
 # Importaciones
 import sys
-from PyQt6.QtWidgets import QApplication, QMessageBox
+from pathlib import Path
+
+from PyQt6.QtWidgets import QApplication, QMessageBox, QDialog
+
+from Controllers.login_controller import LoginDialogController
 from Controllers.main_view_controller import MainViewController
 
 # Versión del programa
-__version__ = "0.10.2"
+__version__ = "0.11.0"
 
-from Model.DAO.base_dao import BaseDAO
+from Model.DAO.usuario_dao import UsuarioDAO
+from Model.Entities.usuario_entity import UsuarioEntity
+from Views.Dialogs.login_dialog import LoginDialog
 
 
 # Entrada al programa
 def main():
     """ Punto de entrada a la aplicación """
+
     app = QApplication(sys.argv)
 
-    # Cargar el archivo .qss
-    with open("Resources/Styles/main_style.qss", "r",
-              encoding="utf-8-sig") as f:
-        testily = f.read()
-        app.setStyleSheet(testily)
+    def resource_path(relative_path):
+        """Devuelve la ruta absoluta al recurso, compatible con PyInstaller."""
+        base_path = getattr(sys, '_MEIPASS', Path(__file__).parent)
+        return Path(base_path) / relative_path
+
+    # Cargar el estilo
+    qss_path = resource_path("Resources/Styles/main_style.qss")
+    with open(qss_path, "r", encoding="utf-8") as f:
+        style = f.read()
+        app.setStyleSheet(style)
 
     # # Limpia la base de datos
     # msg = BaseDAO.clean_database()
@@ -77,11 +89,22 @@ def main():
     #         "NO SE HA PODIDO REALIZAR EL BACKUP"
     #     )
 
-    ctrl = MainViewController()
-    ctrl.show()
-    sys.exit(app.exec())
+    # Arranque inicial
+    view = LoginDialog()
+    dao = UsuarioDAO()
+    mod = UsuarioEntity()
+    ctrl = LoginDialogController(view, dao, mod)
+    res = ctrl.show_modal()
+
+    if res == QDialog.DialogCode.Accepted:
+        # Abrir la ventana principal
+        ctrl = MainViewController()
+        ctrl.show()
+        sys.exit(app.exec())
+    else:
+        # Cancelado → salir de la aplicación
+        sys.exit(0)
 
 if __name__ == "__main__":
     main()
-
 

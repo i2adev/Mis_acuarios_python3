@@ -46,7 +46,7 @@ from Views.Masters.subcategoria_acuario_view import SubcategoriaAcuarioView
 from Views.Masters.subcategoria_incidencia_view import SubcategoriaIncidenciaView
 from Views.Masters.tipo_acuario_view import TipoAcuarioView
 from Views.Masters.tipo_filtro_view import TipoFiltroView
-
+import globals
 
 class MainViewController(BaseController):
     """
@@ -57,7 +57,9 @@ class MainViewController(BaseController):
         """ Construtctor de clase. """
 
         # Inicializamos la vista, la entitdad y el DAO
-        self._view = MainView("MIS ACIUARIOS")
+        self._view = MainView("ACUARIOS DE "
+                              f"{globals.CURRENT_USER.nombre.upper()} "
+                              f"{globals.CURRENT_USER.apellido1.upper()}")
         # TODO: Crear e inicializar el DAO que gestiona el dashboard.
 
         # Llamamos al constructor base
@@ -196,7 +198,6 @@ class MainViewController(BaseController):
 
         ctrl = CategoriaIncidenciaController(view, dao, mod)
         ctrl.show()
-
 
     def subcategoria_incidencia_clicked(self):
         """

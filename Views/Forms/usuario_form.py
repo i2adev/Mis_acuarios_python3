@@ -45,8 +45,8 @@ class UsuarioFOrm(QFrame):
         self.edit_apellido_2 = QLineEdit()
 
         ## E-mail
-        self.label_mail = QLabel("E-MAIL")
-        self.edit_mail = QLineEdit()
+        self.label_nick = QLabel("NICK DEL USUARIO")
+        self.edit_nick = QLineEdit()
 
         # Controles con la información de la cuenta
         ## Contraseña
@@ -72,8 +72,8 @@ class UsuarioFOrm(QFrame):
         self.frame_personal.setLayout(self.layout_personal)
 
         # Monta el frame de cuenta
-        self.layout_cuenta.addWidget(self.label_mail)
-        self.layout_cuenta.addWidget(self.edit_mail)
+        self.layout_cuenta.addWidget(self.label_nick)
+        self.layout_cuenta.addWidget(self.edit_nick)
         self.layout_cuenta.addWidget(self.label_password)
         self.layout_cuenta.addWidget(self.edit_password)
         self.layout_cuenta.addWidget(self.label_password_2)

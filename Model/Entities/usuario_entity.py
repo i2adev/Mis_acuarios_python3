@@ -16,12 +16,12 @@ class UsuarioEntity(BaseEntity):
     nombre: str | None
     apellido1: str | None
     apellido2: str | None
-    e_mail: str | None
+    nick: str | None
     password: str | None
 
     def __init__(self, id: int = None, num: int = None, nombre: str = None,
                  apellido1: str = None, apellido2: str = None,
-                 e_mail: str = None, password: str = None):
+                 nick: str = None, password: str = None):
         """
         Constructor de clase
         :param id: Id de la entidad
@@ -29,7 +29,7 @@ class UsuarioEntity(BaseEntity):
         :param nombre: Nombre del usuario
         :param apellido1: Primer apellido del usuario
         :param apellido2: Segundo apellido del usuario
-        :param e_mail: Correo electrónico del usuario
+        :param nick: Nombre de usuario en la aplicación
         :param password: Contraseña de acceso a la aplicación
         """
 
@@ -39,8 +39,9 @@ class UsuarioEntity(BaseEntity):
         self.nombre = nombre
         self.apellido1 = apellido1
         self.apellido2 = apellido2
-        self.e_mail = e_mail
+        self.nick = nick
         self.password = password
 
     def __str__(self):
-        return f"{self.apellido1} {self.apellido2}, {self.nombre}"
+        return f"{self.apellido1.upper()} {self.apellido2.upper()}, " \
+               f"{self.nombre.upper()}"

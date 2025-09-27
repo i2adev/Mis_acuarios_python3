@@ -3,7 +3,9 @@ FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
 18/09/2025  SE CREA EL LOGIN DE LA APLICACIÓN:
             -   SE CREA LA VISTA.                                           DONE
-            -   SE CREA EL CONTROLADOR.                                     TODO
+            -   SE CREA EL CONTROLADOR.                                     DONE
+            -   SE ENCRIPTA LA CONTRASEÑA EN LA CREACIÓN DE USUARIO.        DONE
+            -   SE SE CAMBIA EL CAMPO E-MAIL POR EL DE NICK_USUARIO.        DONE
 
 18/09/2025  SE CONTINUA CON LA LÓGICA DE USUARIO:
             -   SE CREA EL VALIDADOR DE FORMULARIO.                         DONE

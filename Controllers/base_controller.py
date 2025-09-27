@@ -16,6 +16,7 @@ from PyQt6.QtWidgets import (QLineEdit, QTextEdit, QPlainTextEdit, QWidget,
 from Model.DAO.base_dao import BaseDAO
 from Model.Entities.base_entity import BaseEntity
 from Services.Result.result import Result
+from Views.Dialogs.base_dialog import BaseDialog
 from Views.Forms.image_form import ImageForm
 
 

@@ -38,7 +38,7 @@ class UsuarioDialog(BaseDialog):
         self.frame.edit_nombre.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
         self.frame.edit_apellido_1.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
         self.frame.edit_apellido_2.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
-        self.frame.edit_mail.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
+        self.frame.edit_nick.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
         self.frame.edit_password_2.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
         self.frame.edit_password.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
 
@@ -50,10 +50,10 @@ class UsuarioDialog(BaseDialog):
             self.frame.edit_apellido_1, self.frame.edit_apellido_2
         )
         self.setTabOrder(
-            self.frame.edit_apellido_2, self.frame.edit_mail
+            self.frame.edit_apellido_2, self.frame.edit_nick
         )
         self.setTabOrder(
-            self.frame.edit_mail, self.frame.edit_password
+            self.frame.edit_nick, self.frame.edit_password
         )
         self.setTabOrder(
             self.frame.edit_password, self.frame.edit_password_2

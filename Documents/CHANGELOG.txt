@@ -1,5 +1,9 @@
 ﻿CHANGELOG:
 ================================================================================
+0.11.0  SE CREA LA LÓGICA DE INICIO DE SESIÓN:
+        -   SE CREA LA VISTA.
+        -   SE CREA EL CONTROLADOR.
+
 0.10.2  -   SE AÑADE EL ARCHIVO GITIGNORE.
         -   SE CONFIGURA EL ARCHIVO GITIGNORE.
 

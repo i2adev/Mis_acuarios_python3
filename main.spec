@@ -1,11 +1,16 @@
 # -*- mode: python ; coding: utf-8 -*-
 
+block_cipher = None
 
 a = Analysis(
     ['main.py'],
     pathex=[],
     binaries=[],
-    datas=[],
+    datas=[
+        ('Services/Database/MISACUARIOS.sqlite3', 'Services/Database'),
+        ('Resources/Images/*', 'Resources/Images'),
+        ('Resources/Styles/*', 'Resources/Styles'),
+    ],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},
@@ -14,6 +19,7 @@ a = Analysis(
     noarchive=False,
     optimize=0,
 )
+
 pyz = PYZ(a.pure)
 
 exe = EXE(
@@ -21,18 +27,16 @@ exe = EXE(
     a.scripts,
     [],
     exclude_binaries=True,
-    name='main',
+    name='MisAcuarios',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
     upx=True,
-    console=True,
+    console=False,
     disable_windowed_traceback=False,
-    argv_emulation=False,
-    target_arch=None,
-    codesign_identity=None,
-    entitlements_file=None,
+    icon='Icon.ico'
 )
+
 coll = COLLECT(
     exe,
     a.binaries,
@@ -40,5 +44,5 @@ coll = COLLECT(
     strip=False,
     upx=True,
     upx_exclude=[],
-    name='main',
+    name='MisAcuarios',
 )
