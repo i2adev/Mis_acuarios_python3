@@ -1,6 +1,17 @@
 ﻿================================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
+30/09/2025  REFACGTORIZACIÓN:
+            -
+29/09/2025  SE AÑADE:
+            -   ERROR AL ELIMINAR EL FILTRO.                           POSTPOSED
+            -   FUNCIÓN QUE CONFIGURA LA BARRA DE ESTADO:
+                -   TIPO DE FILTRO.                                    POSTPOSED
+
+27/09/2025  SE MODIFICA EL NOMBRE DE LOS MÉTODOS Y VARIABLES AL INGLES:
+            -   CONTROLADORES:
+                -   BASE CONTROLER.                                         DONE
+
 18/09/2025  SE CREA EL LOGIN DE LA APLICACIÓN:
             -   SE CREA LA VISTA.                                           DONE
             -   SE CREA EL CONTROLADOR.                                     DONE

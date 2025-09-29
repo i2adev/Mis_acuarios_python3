@@ -24,7 +24,7 @@ from Views.Dialogs.tipo_filtro_dialog import TipoFiltroDialog
 from Views.Masters.tipo_filtro_view import TipoFiltroView
 
 
-class TipoFiltroDialogController(BaseController):
+class TipoFiltroDialogControllerObs(BaseController):
     """ Controlador del diálogo subcategoría de acuario. """
 
     def __init__(self, view: TipoFiltroDialog, dao: TipoFiltroDAO,
@@ -181,7 +181,7 @@ class TipoFiltroDialogController(BaseController):
         completer.setCaseSensitivity(Qt.CaseSensitivity.CaseInsensitive)
         combo.setCompleter(completer)
 
-class TipoFiltroController(TipoFiltroDialogController):
+class TipoFiltroControllerObsObs(TipoFiltroDialogControllerObs):
     """ Controlador del formulario maestro de subcategoría de acuario. """
 
     def __init__(self, view: TipoFiltroView, dao: TipoFiltroDAO,
@@ -401,12 +401,6 @@ class TipoFiltroController(TipoFiltroDialogController):
         # Configurar paginador
         self._pag.initialize_paginator()
 
-        # # Configuramos el pie de tabla
-        # if paginator_pages > self._pag.total_pages:
-        #     # Eliminamos la última página del combo de paginación
-        #     self._view.combo_select_page.removeItem(self._pag.total_pages)
-        #     self._view.label_total_pages.setText(str(self._pag.total_pages))
-
         # Establecemos la página actual
         if pagina_actual > self._pag.total_pages:
             self._view.combo_select_page.setCurrentIndex(
@@ -456,12 +450,6 @@ class TipoFiltroController(TipoFiltroDialogController):
 
         # Configurar paginator
         self._pag.initialize_paginator()
-
-        # # Configuramos el pie de tabla
-        # if paginator_pages > self._pag.total_pages:
-        #     # Eliminamos la última página del combo de paginación
-        #     self._view.combo_select_page.removeItem(self._pag.total_pages)
-        #     self._view.label_total_pages.setText(str(self._pag.total_pages))
 
         # Establecemos la página actual
         if pagina_actual > self._pag.total_pages:
@@ -623,12 +611,6 @@ class TipoFiltroController(TipoFiltroDialogController):
         tipo_filtro = modelo.index(fila, 2).data()  # La columna 1 es el
                                                     # númer correlativo.
         observaciones = modelo.index(fila, 3).data()
-
-        # print(f"""
-        #     ID:     {id_ta}
-        #     TIPO:   {tipo_filtro}
-        #     OBS.:   {observaciones}
-        # """)
 
         # Cargamos los widgets
         self._view.frame.edit_id.setText(

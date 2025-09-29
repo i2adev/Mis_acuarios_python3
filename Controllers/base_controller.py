@@ -16,7 +16,6 @@ from PyQt6.QtWidgets import (QLineEdit, QTextEdit, QPlainTextEdit, QWidget,
 from Model.DAO.base_dao import BaseDAO
 from Model.Entities.base_entity import BaseEntity
 from Services.Result.result import Result
-from Views.Dialogs.base_dialog import BaseDialog
 from Views.Forms.image_form import ImageForm
 
 
@@ -304,8 +303,8 @@ class BaseController(QObject):
         """
 
         # Filtramos los registros
-        filtro = Filter(self._dao)
-        res = filtro.search(pattern)
+        dao_filter = Filter(self._dao)
+        res = dao_filter.search(pattern)
 
         # Devolvemos el resultado
         return res

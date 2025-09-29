@@ -30,9 +30,7 @@ class MaterialUrnaDialogController(BaseController):
     def __init__(self, view: MaterialUrnaDialog, dao: MaterialUrnaDAO,
                  mod: MaterialUrnaEntity):
         """
-        Constructor base
-
-        Parámetros:
+        Constructor base.
         :param view: Vista tipo MaterialUrna
         :param dao: DAO de la entidad MaterialUrnaDAO
         :param mod: Modelo de la entidad MaterialUrnaEntity
