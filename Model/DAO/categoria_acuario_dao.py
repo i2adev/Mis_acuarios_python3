@@ -27,8 +27,9 @@ class CategoriaAcuarioDAO(BaseDAO):
         self.db = DBManager()
 
     # ------------------------------------------------------------------
-    def get_list(self) -> Result(List[CategoriaAcuarioEntity]):
+    def get_list(self) -> Result:
         """Obtiene el listado completo ordenado por categoría."""
+
         sql = (
             """
             SELECT  ID_CATEGORIA_ACUARIO AS ID,

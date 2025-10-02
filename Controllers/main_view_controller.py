@@ -6,7 +6,6 @@ Commentarios:
 """
 
 from Controllers.base_controller import BaseController
-from Controllers.categoria_acuario_controller import CategoriaAcuarioController
 from Controllers.categoria_incidencia_controller import \
     CategoriaIncidenciaController
 from Controllers.marca_comercial_controller import MarcaComercialController
@@ -46,6 +45,7 @@ from Views.Masters.subcategoria_incidencia_view import SubcategoriaIncidenciaVie
 from Views.Masters.tipo_acuario_view import TipoAcuarioView
 from Views.Masters.tipo_filtro_view import TipoFiltroView
 import globals
+from categoria_acuario_master_controller import CategoriaAcuarioMasterController
 from tipo_filtro_master_controller import TipoFiltroMasterController
 
 
@@ -169,7 +169,7 @@ class MainViewController(BaseController):
         dao = CategoriaAcuarioDAO()
         mod = CategoriaAcuarioEntity()
 
-        ctrl = CategoriaAcuarioController(view, dao, mod)
+        ctrl = CategoriaAcuarioMasterController(view, dao, mod)
         ctrl.show()
 
     def subcategoria_Acuario_clicked(self):

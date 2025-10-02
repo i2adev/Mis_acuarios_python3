@@ -17,9 +17,10 @@ from Model.DAO.base_dao import BaseDAO
 from Model.Entities.base_entity import BaseEntity
 from Services.Result.result import Result
 from Views.Forms.image_form import ImageForm
+from categoria_acuario_table_model import CategoriaAcuarioTableModel
 from paginator import Paginator
+from tipo_acuario_table_model import TipoAcuarioTableModel
 from tipo_filtro_entity import TipoFiltroEntity
-from tipo_filtro_table_model import TipoFiltroTableModel
 
 
 class BaseController(QObject):
@@ -218,7 +219,7 @@ class BaseController(QObject):
                         data: list[TipoFiltroEntity]):
         """ Carga los datos en la tabla. """
 
-        tv_model = TipoFiltroTableModel(data)
+        tv_model = CategoriaAcuarioTableModel(data)
         table.setModel(tv_model)
         table.resizeColumnsToContents()
 

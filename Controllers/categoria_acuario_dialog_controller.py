@@ -1,32 +1,30 @@
 ﻿"""
 Autor: Inigo Iturriagaetxebarria
-Fecha: 29/09/2025
+Fecha: 02/10/2025
 Commentarios:
-    Controlador del cuadro de diálogo de inserción de tipo de filtro.
+    Controlador del cuadro de diálogo de inserción de categoria de acuario.
 """
+from PyQt6.QtWidgets import QWidget, QMessageBox
 
-from PyQt6.QtCore import Qt
-from PyQt6.QtWidgets import QWidget, QMessageBox, QComboBox, QCompleter
-
-from Model.DAO.tipo_filtro_dao import TipoFiltroDAO
-from Model.Entities.tipo_filtro_entity import TipoFiltroEntity
-from Services.Result.result import Result
-from Services.Validators.tipo_filtro_validator import TipoFiltroValidator
-from Views.Dialogs.tipo_filtro_dialog import TipoFiltroDialog
-from base_controller import BaseController
-from tipo_filtro_controller import TipoFiltroController
+from categoria_acuario_controller import CategoriaAcuarioController
+from categoria_acuario_dao import CategoriaAcuarioDAO
+from categoria_acuario_dialog import CategoriaAcuarioDialog
+from categoria_acuario_entity import CategoriaAcuarioEntity
+from categoria_acuario_view import CategoriaAcuarioView
+from result import Result
 
 
-class TipoFiltroDialogoController(TipoFiltroController):
-    """ Controlador del cuadro de diálogo tipo de filtro. """
+class CategoriaAcuarioDialogoController(CategoriaAcuarioController):
+    """ Controlador del cuadro de diálogo categoria de acuario. """
 
-    def __init__(self, view: TipoFiltroDialog, dao: TipoFiltroDAO,
-                 mod: TipoFiltroEntity):
+    def __init__(self, view: CategoriaAcuarioDialog | CategoriaAcuarioView, 
+                 dao: CategoriaAcuarioDAO,
+                 mod: CategoriaAcuarioEntity):
         """
         Constructor base
-        :param view: Cuadro de diálogo de inserción de tipo de filtro
-        :param dao: DAO del tipo de filtro
-        :param mod: Modelo del tipo de filtro
+        :param view: Cuadro de diálogo de inserción de categoria de acuario.
+        :param dao: DAO de la categoria de acuario.
+        :param mod: Modelo de la categoria de acuario.
         """
 
         # inicializamos la vista y pasamos al constructor padre
@@ -62,11 +60,11 @@ class TipoFiltroDialogoController(TipoFiltroController):
             return
 
         # Configuramos la entidad
-        self._tipo_filtro_result = TipoFiltroEntity(
+        _categoria_acuario_result = CategoriaAcuarioEntity(
             id = res.value,
             num = None,
-            tipo_filtro = self._view.frame.edit_tipo_filtro.text(),
-            observaciones = self._view.frame.text_observaciones.toPlainText()
+            categoria = self._view.frame.edit_categoria_acuario.text(),
+            observaciones = self._view.frame.text_descripcion.toPlainText()
                           if self._view.frame.text_observaciones.toPlainText()
                           else None
         )
@@ -84,7 +82,7 @@ class TipoFiltroDialogoController(TipoFiltroController):
 
         if self._view.exec():
             # Obtenemos la subcategoría de acuario
-            tipo_filtro = self.get_tipo_filtro()
-            return Result.success(tipo_filtro)
+            categoria_acuario = self.get_categoria_Acuario()
+            return Result.success(categoria_acuario)
         else:
             return Result.failure("EL USUARIO CANCELÓ EL DIÁLOGO.")
