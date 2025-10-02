@@ -11,12 +11,15 @@ Commentarios:
 from PyQt6.QtCore import Qt, QEvent, QObject
 from PyQt6.QtWidgets import (QLineEdit, QTextEdit, QPlainTextEdit, QWidget,
                              QTableView, QComboBox, QHeaderView, QMessageBox,
-                             QLabel)
+                             QLabel, QCompleter)
 
 from Model.DAO.base_dao import BaseDAO
 from Model.Entities.base_entity import BaseEntity
 from Services.Result.result import Result
 from Views.Forms.image_form import ImageForm
+from paginator import Paginator
+from tipo_filtro_entity import TipoFiltroEntity
+from tipo_filtro_table_model import TipoFiltroTableModel
 
 
 class BaseController(QObject):
@@ -186,6 +189,19 @@ class BaseController(QObject):
         :param attr_data: Nombre del atributo para el valor (userData).
         """
 
+        def _set_autocomplete(self, combo: QComboBox):
+            """
+            Configura el autocompletado del combo.
+            :param combo: Combobox al que se le aplica el autocomplete.
+            """
+
+            completer = QCompleter()
+            completer.setModel(combo.model())
+            completer.setCompletionMode(
+                QCompleter.CompletionMode.PopupCompletion)
+            completer.setCaseSensitivity(Qt.CaseSensitivity.CaseInsensitive)
+            combo.setCompleter(completer)
+
         combo.clear()
         for item in lista:
             # Si es diccionario
@@ -197,6 +213,14 @@ class BaseController(QObject):
                 data = getattr(item, attr_data, None)
 
             combo.addItem(texto, data)
+
+    def _fill_tableview(self, table: QTableView,
+                        data: list[TipoFiltroEntity]):
+        """ Carga los datos en la tabla. """
+
+        tv_model = TipoFiltroTableModel(data)
+        table.setModel(tv_model)
+        table.resizeColumnsToContents()
 
     def _configure_table(self, table: QTableView):
         """ Configura l atabla de datos. """
@@ -308,3 +332,23 @@ class BaseController(QObject):
 
         # Devolvemos el resultado
         return res
+
+    def _load_tableview(self):
+        """ Gestiona los datos para llenar la tabla. """
+
+        self._fill_tableview(self._view.data_table, self._pag.current_data)
+        self._configure_table(self._view.data_table)
+
+    def _configure_status_bar(self, pag: Paginator, total_records: int = None,
+                              pattern: str = None):
+        """ Configura la barra de estado. """
+
+        if pag.status == "UNFILTERED":
+            self._view.label_status.setText(f"Sin filtrar. {pag.records} "
+                                            "registros.")
+        elif pag.status == "FILTERED":
+            self._view.label_status.setText(
+                f"Filtrados {len(pag.total_data)} de {total_records} con "
+                f"el patrón '{pattern.upper()}'."
+            )
+

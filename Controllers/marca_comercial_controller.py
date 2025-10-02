@@ -302,16 +302,16 @@ class MarcaComercialController(MarcaComercialDialogController):
                                         "registros.")
 
         # Llenamos la tabla
-        self.load_tableview()
+        self._load_tableview()
         self._configure_table_foot()
 
         # Inicializamos los eventos
         self.init_master_handlers()
 
-    def load_tableview(self):
+    def _load_tableview(self):
         """ Gestiona los datos para llenar la tabla. """
 
-        self.fill_tableview(self._view.data_table, self._pag.current_data)
+        self._fill_tableview(self._view.data_table, self._pag.current_data)
         self._configure_table(self._view.data_table)
 
     def show(self):
@@ -370,7 +370,7 @@ class MarcaComercialController(MarcaComercialDialogController):
             )
 
             # Cargamos la tabla
-            self.fill_tableview(self._view.data_table, self._pag._total_data)
+            self._fill_tableview(self._view.data_table, self._pag._total_data)
             self._configure_table(self._view.data_table)
             self._clean_view(self._view.frame.edit_marca)
             self._view.label_total_pages.setText(str(self._pag.total_pages))
@@ -397,7 +397,7 @@ class MarcaComercialController(MarcaComercialDialogController):
         self._pag.get_filtered_list(patron)
 
         # Cargamos la tabla
-        self.fill_tableview(self._view.data_table, self._pag._total_data)
+        self._fill_tableview(self._view.data_table, self._pag._total_data)
         self._configure_table(self._view.data_table)
         self._clean_view(self._view.frame.edit_marca)
 
@@ -425,7 +425,7 @@ class MarcaComercialController(MarcaComercialDialogController):
         # Configuración de salida
         self._pag.current_page = page
         self._pag.current_data = self._pag.get_paged_list(self._pag.current_page)
-        self.load_tableview()
+        self._load_tableview()
 
     def show_context_menu(self, position):
         """ Muestra el menú contextual de la tabla. """
@@ -662,8 +662,8 @@ class MarcaComercialController(MarcaComercialDialogController):
 
         self.configure_table_after_crud(res.value)
 
-    def fill_tableview(self, table: QTableView,
-                       data: list[MarcaComercialEntity]):
+    def _fill_tableview(self, table: QTableView,
+                        data: list[MarcaComercialEntity]):
         """ Carga los datos en la tabla. """
 
         tv_model = MarcaComercialTableModel(data)
@@ -697,7 +697,7 @@ class MarcaComercialController(MarcaComercialDialogController):
         self._clean_view(self._view.frame.edit_marca)
 
         # Configuramos la tabla
-        self.load_tableview()
+        self._load_tableview()
         self.configure_table_after_crud(res.value)
 
         return Result.success(ent.id)
@@ -814,7 +814,7 @@ class MarcaComercialController(MarcaComercialDialogController):
         self._clean_view(self._view.frame.edit_marca)
 
         # Configuramos la tabla
-        self.load_tableview()
+        self._load_tableview()
 
         return Result.success(id_)
 

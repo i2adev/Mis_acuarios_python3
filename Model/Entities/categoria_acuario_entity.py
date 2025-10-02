@@ -25,10 +25,52 @@ class CategoriaAcuarioEntity(BaseEntity):
         super().__init__()
 
         # Inicializamos las variables
-        self.id = id
-        self.num = num
-        self.categoria = categoria
-        self.observaciones = observaciones
+        self.__id = id
+        self.__num = num
+        self.__categoria = categoria
+        self.__observaciones = observaciones
+
+    # INICIO DE PROPIEDADES --------------------------------------------
+    @property
+    def id(self) -> int:
+        """ Id de la entidad. """
+        return self.__id
+
+    @id.setter
+    def id(self, new_id: int):
+        """ Id de la entidad. """
+        self.__id = new_id
+
+    @property
+    def num(self) -> int:
+        """ Número de la entidad. """
+        return self.__num
+
+    @num.setter
+    def num(self, new_num: int):
+        """ Número de la entidad. """
+        self.__num = new_num
+
+    @property
+    def categoria(self) -> str:
+        """ Categoria del acuario. """
+        return self.__categoria
+
+    @categoria.setter
+    def categoria(self, new_categoria: str):
+        """ Categoria del acuario. """
+        self.__categoria = new_categoria
+
+    @property
+    def observaciones(self) -> str:
+        """ Categoria del acuario. """
+        return self.__observaciones
+
+    @observaciones.setter
+    def observaciones(self, new_observaciones: str):
+        """ Categoria del acuario. """
+        self.__observaciones = new_observaciones
+    # FIN DE PROPIEDADES -----------------------------------------------
 
     def __str__(self):
         return f""""

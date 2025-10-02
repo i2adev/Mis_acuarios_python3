@@ -16,7 +16,6 @@ from Controllers.subcategoria_acuario_controller import \
 from Controllers.subcategoria_incidencia_controller import \
     SubcategoriaIncidenciaController
 from Controllers.tipo_acuario_controller import TipoAcuarioController
-from Controllers.tipo_filtro_controller import TipoFiltroControllerObsObs
 from Controllers.urna_controller import UrnaController
 from Model.DAO.categoria_acuario_dao import CategoriaAcuarioDAO
 from Model.DAO.categoria_incidencia_dao import CategoriaIncidenciaDAO
@@ -47,6 +46,8 @@ from Views.Masters.subcategoria_incidencia_view import SubcategoriaIncidenciaVie
 from Views.Masters.tipo_acuario_view import TipoAcuarioView
 from Views.Masters.tipo_filtro_view import TipoFiltroView
 import globals
+from tipo_filtro_master_controller import TipoFiltroMasterController
+
 
 class MainViewController(BaseController):
     """
@@ -139,7 +140,7 @@ class MainViewController(BaseController):
         dao = TipoFiltroDAO()
         mod = TipoFiltroEntity()
 
-        ctrl = TipoFiltroControllerObsObs(view, dao, mod)
+        ctrl = TipoFiltroMasterController(view, dao, mod)
         ctrl.show()
 
     def tipo_acuario_clicked(self, event):

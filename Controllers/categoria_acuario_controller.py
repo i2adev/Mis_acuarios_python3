@@ -187,16 +187,16 @@ class CategoriaAcuarioController(CategoriaAcuarioDialogController):
         self._pag.initialize_paginator()
         self._view.label_status.setText(f"Sin filtrar. {self._pag.records} registros.")
         # Llenamos la tabla
-        self.load_tableview()
+        self._load_tableview()
         self._configure_table_foot()
 
         # Inicializamos los eventos
         self.init_master_handlers()
 
-    def load_tableview(self):
+    def _load_tableview(self):
         """ Gestiona los datos para llenar la tabla. """
 
-        self.fill_tableview(self._view.data_table, self._pag.current_data)
+        self._fill_tableview(self._view.data_table, self._pag.current_data)
         self._configure_table(self._view.data_table)
 
     def show(self):
@@ -255,7 +255,7 @@ class CategoriaAcuarioController(CategoriaAcuarioDialogController):
             )
 
             # Cargamos la tabla
-            self.fill_tableview(self._view.data_table, self._pag._total_data)
+            self._fill_tableview(self._view.data_table, self._pag._total_data)
             self._configure_table(self._view.data_table)
             self._clean_view(self._view.frame.edit_categoria_acuario)
             self._view.label_total_pages.setText(str(self._pag.total_pages))
@@ -281,7 +281,7 @@ class CategoriaAcuarioController(CategoriaAcuarioDialogController):
         self._pag.get_filtered_list(patron)
 
         # Cargamos la tabla
-        self.fill_tableview(self._view.data_table, self._pag._total_data)
+        self._fill_tableview(self._view.data_table, self._pag._total_data)
         self._configure_table(self._view.data_table)
         self._clean_view(self._view.frame.edit_categoria_acuario)
 
@@ -308,7 +308,7 @@ class CategoriaAcuarioController(CategoriaAcuarioDialogController):
         # Configuración de salida
         self._pag.current_page = page
         self._pag.current_data = self._pag.get_paged_list(self._pag.current_page)
-        self.load_tableview()
+        self._load_tableview()
 
     def show_context_menu(self, position):
         """ Muestra el menú contextual de la tabla. """
@@ -543,8 +543,8 @@ class CategoriaAcuarioController(CategoriaAcuarioDialogController):
 
         self.configure_table_after_crud(res.value)
 
-    def fill_tableview(self, table: QTableView,
-                       data: list[CategoriaAcuarioEntity]):
+    def _fill_tableview(self, table: QTableView,
+                        data: list[CategoriaAcuarioEntity]):
         """ Carga los datos en la tabla. """
 
         tv_model = CategoriaAcuarioTableModel(data)
@@ -578,7 +578,7 @@ class CategoriaAcuarioController(CategoriaAcuarioDialogController):
         self._clean_view(self._view.frame.edit_categoria_acuario)
 
         # Configuramos la tabla
-        self.load_tableview()
+        self._load_tableview()
         self.configure_table_after_crud(res.value)
 
         return Result.success(ent.id)
@@ -668,7 +668,7 @@ class CategoriaAcuarioController(CategoriaAcuarioDialogController):
         self._clean_view(self._view.frame.edit_categoria_acuario)
 
         # Configuramos la tabla
-        self.load_tableview()
+        self._load_tableview()
 
         return Result.success(id)
 

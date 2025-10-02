@@ -420,16 +420,16 @@ class UrnaController(UrnaDialogController):
                                         "registros.")
 
         # Llenamos la tabla
-        self.load_tableview()
+        self._load_tableview()
         self._configure_table_foot()
 
         # Inicializamos los eventos
         self.init_master_handlers()
 
-    def load_tableview(self):
+    def _load_tableview(self):
         """ Gestiona los datos para llenar la tabla. """
 
-        self.fill_tableview(self._view.data_table, self._pag.current_data)
+        self._fill_tableview(self._view.data_table, self._pag.current_data)
         self._configure_table(self._view.data_table)
 
     def show(self):
@@ -488,7 +488,7 @@ class UrnaController(UrnaDialogController):
             )
 
             # Cargamos la tabla
-            self.fill_tableview(self._view.data_table, self._pag._total_data)
+            self._fill_tableview(self._view.data_table, self._pag._total_data)
             self._configure_table(self._view.data_table)
             self._clean_view(self._view.frame.combo_marca)
             self._view.label_total_pages.setText(str(self._pag.total_pages))
@@ -514,7 +514,7 @@ class UrnaController(UrnaDialogController):
         self._pag.get_filtered_list(patron)
 
         # Cargamos la tabla
-        self.fill_tableview(self._view.data_table, self._pag._total_data)
+        self._fill_tableview(self._view.data_table, self._pag._total_data)
         self._configure_table(self._view.data_table)
         self._clean_view(self._view.frame.combo_marca)
 
@@ -542,7 +542,7 @@ class UrnaController(UrnaDialogController):
         # Configuración de salida
         self._pag.current_page = page
         self._pag.current_data = self._pag.get_paged_list(self._pag.current_page)
-        self.load_tableview()
+        self._load_tableview()
 
     def show_context_menu(self, position):
         """ Muestra el menú contextual de la tabla. """
@@ -771,8 +771,8 @@ class UrnaController(UrnaDialogController):
 
         self.configure_table_after_crud(res.value)
 
-    def fill_tableview(self, table: QTableView,
-                       data: list[UrnaEntity]):
+    def _fill_tableview(self, table: QTableView,
+                        data: list[UrnaEntity]):
         """ Carga los datos en la tabla. """
 
         tv_model = UrnaTableModel(data)
@@ -805,7 +805,7 @@ class UrnaController(UrnaDialogController):
         self._clean_view(self._view.frame.combo_marca)
 
         # Configuramos la tabla
-        self.load_tableview()
+        self._load_tableview()
         self.configure_table_after_crud(res.value)
 
         return Result.success(ent.id)
@@ -931,7 +931,7 @@ class UrnaController(UrnaDialogController):
         self._clean_view(self._view.frame.combo_marca)
 
         # Configuramos la tabla
-        self.load_tableview()
+        self._load_tableview()
 
         return Result.success(id_)
 

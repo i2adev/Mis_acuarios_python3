@@ -4,7 +4,7 @@ Fecha:      02/06/2025
 Commentarios:
     Módulo que contien la entidad TIPO DE FILTRO.
 """
-from pathlib import Path
+
 from Model.Entities.base_entity import BaseEntity
 
 class TipoFiltroEntity(BaseEntity):
@@ -29,10 +29,46 @@ class TipoFiltroEntity(BaseEntity):
         super().__init__()
 
         # Inicializamos las variables
-        self.id = id
-        self.num = num
-        self.tipo_filtro = tipo_filtro
-        self.observaciones = observaciones
+        self.__id = id
+        self.__num = num
+        self.__tipo_filtro = tipo_filtro
+        self.__observaciones = observaciones
+
+    # INICIO PROPIEDADES
+
+    @property
+    def id(self) -> int:
+        return self.__id
+
+    @id.setter
+    def id(self, new_id: int):
+        self.__id = new_id
+
+    @property
+    def num(self) -> int:
+        return self.__num
+
+    @num.setter
+    def num(self, new_num: int):
+        self.__num = new_num
+
+    @property
+    def tipo_filtro(self) -> str:
+        return self.__tipo_filtro
+
+    @tipo_filtro.setter
+    def tipo_filtro(self, new_tipo_filtro: str):
+        self.__tipo_filtro = new_tipo_filtro
+
+    @property
+    def observaciones(self) -> str:
+        return self.__observaciones
+
+    @observaciones.setter
+    def observaciones(self, new_observaciones: str):
+        self.__observaciones = new_observaciones
+
+    # FIN PROPIEDADES
 
     def __str__(self):
         """ Muestra información de la clase. """
