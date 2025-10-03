@@ -23,7 +23,6 @@ from Model.Entities.tipo_acuario_entity import TipoAcuarioEntity
 from Model.TableModel.tipo_acuario_table_model import TipoAcuarioTableModel
 from Services.Result.result import Result
 from Services.Validators.tipo_acuario_validator import TipoAcuarioValidator
-from Views.Dialogs.categoria_acuario_dialog import CategoriaAcuarioDialog
 from Views.Dialogs.subcategoria_Acuario_dialog import SubcategoriaAcuarioDialog
 from Views.table_menu_contextual import TableMenuContextual
 from Views.Dialogs.tipo_acuario_dialog import TipoAcuarioDialog

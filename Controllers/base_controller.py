@@ -17,10 +17,7 @@ from Model.DAO.base_dao import BaseDAO
 from Model.Entities.base_entity import BaseEntity
 from Services.Result.result import Result
 from Views.Forms.image_form import ImageForm
-from categoria_acuario_table_model import CategoriaAcuarioTableModel
 from paginator import Paginator
-from tipo_acuario_table_model import TipoAcuarioTableModel
-from tipo_filtro_entity import TipoFiltroEntity
 
 
 class BaseController(QObject):
@@ -215,14 +212,6 @@ class BaseController(QObject):
 
             combo.addItem(texto, data)
 
-    def _fill_tableview(self, table: QTableView,
-                        data: list[TipoFiltroEntity]):
-        """ Carga los datos en la tabla. """
-
-        tv_model = CategoriaAcuarioTableModel(data)
-        table.setModel(tv_model)
-        table.resizeColumnsToContents()
-
     def _configure_table(self, table: QTableView):
         """ Configura l atabla de datos. """
 
@@ -334,11 +323,11 @@ class BaseController(QObject):
         # Devolvemos el resultado
         return res
 
-    def _load_tableview(self):
-        """ Gestiona los datos para llenar la tabla. """
-
-        self._fill_tableview(self._view.data_table, self._pag.current_data)
-        self._configure_table(self._view.data_table)
+    # def _load_tableview(self):
+    #     """ Gestiona los datos para llenar la tabla. """
+    #
+    #     self._fill_tableview(self._view.data_table, self._pag.current_data)
+    #     self._configure_table(self._view.data_table)
 
     def _configure_status_bar(self, pag: Paginator, total_records: int = None,
                               pattern: str = None):

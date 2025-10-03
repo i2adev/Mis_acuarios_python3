@@ -6,8 +6,8 @@ Commentarios:
 """
 
 from Controllers.base_controller import BaseController
-from Controllers.categoria_incidencia_controller import \
-    CategoriaIncidenciaController
+from Controllers.categoria_incidencia_controller_obs import \
+    CategoriaIncidenciaControllerObs
 from Controllers.marca_comercial_controller import MarcaComercialController
 from Controllers.material_urna_controller import MaterialUrnaController
 from Controllers.subcategoria_acuario_controller import \
@@ -197,7 +197,7 @@ class MainViewController(BaseController):
         dao = CategoriaIncidenciaDAO()
         mod = CategoriaIncidenciaEntity()
 
-        ctrl = CategoriaIncidenciaController(view, dao, mod)
+        ctrl = CategoriaIncidenciaControllerObs(view, dao, mod)
         ctrl.show()
 
     def subcategoria_incidencia_clicked(self):

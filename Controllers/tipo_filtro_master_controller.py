@@ -6,13 +6,14 @@ Commentarios:
 """
 from PyQt6.QtCore import QEvent
 from PyQt6.QtGui import QIcon, QAction
-from PyQt6.QtWidgets import QMessageBox
+from PyQt6.QtWidgets import QMessageBox, QTableView
 
 from paginator import Paginator
 from table_menu_contextual import TableMenuContextual
 from tipo_filtro_controller import TipoFiltroController
 from tipo_filtro_dao import TipoFiltroDAO
 from tipo_filtro_entity import TipoFiltroEntity
+from tipo_filtro_table_model import TipoFiltroTableModel
 from tipo_filtro_view import TipoFiltroView
 
 
@@ -357,6 +358,20 @@ class TipoFiltroMasterController(TipoFiltroController):
             # self._view.combo_select_page.setCurrentIndex(current_page - 1)
         else:
             pass
+
+    def _load_tableview(self):
+        """ Gestiona los datos para llenar la tabla. """
+
+        self._fill_tableview(self._view.data_table, self._pag.current_data)
+        self._configure_table(self._view.data_table)
+
+    def _fill_tableview(self, table: QTableView,
+                        data: list[TipoFiltroEntity]):
+        """ Carga los datos en la tabla. """
+
+        tv_model = TipoFiltroTableModel(data)
+        table.setModel(tv_model)
+        table.resizeColumnsToContents()
 
     def show(self):
         """ Abre la vista """

@@ -2,18 +2,20 @@
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
 30/09/2025  REFACGTORIZACIÓN:
-            -   SE REFACTORIZAN LOS CONTROLADORES, SEPARANDO EL CONTROLADOR DEL
+     |      -   SE REFACTORIZAN LOS CONTROLADORES, SEPARANDO EL CONTROLADOR DEL
                 DIÁLOGO Y EL MAESTRO:
                 -   TIPO DE FILTRO.                                         DONE
                 -   CATEGORIA DE ACUARIO.                                   DONE
+                -   CATEGORÍA INCIDENCIA.                                   DONE
 
             -   SE MODIFICAN LAS ENTIDADES PARA CONVERTIR LOS ATRIBUTOS EN
                 PROPIEDADES:
                 -   TIPO DE FILTRO.                                         DONE
                 -   CATEGORIA DE ACUARIO.                                   DONE
+                -   CATEGORÍA INCIDENCIA.                                   DONE
 
             BUG FIXES:
-            -   SE CIRRIGE EL BUG DE PAGINACIÓN TRAS LA BÚSQUEDA DE REGISTROS.
+            -   SE CORRIGE EL BUG DE PAGINACIÓN TRAS LA BÚSQUEDA DE REGISTROS.
                                                                             DONE
 
 29/09/2025  SE AÑADE:

@@ -9,11 +9,14 @@ from PyQt6.QtWidgets import QMessageBox, QPushButton
 
 from base_controller import BaseController
 from categoria_acuario_dao import CategoriaAcuarioDAO
-from categoria_acuario_dialog import CategoriaAcuarioDialog
 from categoria_acuario_entity import CategoriaAcuarioEntity
 from categoria_acuario_validator import CategoriaAcuarioValidator
 from categoria_acuario_view import CategoriaAcuarioView
 from result import Result
+
+
+class CategoriaAcuarioDialog:
+    pass
 
 
 class CategoriaAcuarioController(BaseController):

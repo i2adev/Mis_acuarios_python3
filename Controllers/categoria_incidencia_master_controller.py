@@ -1,38 +1,32 @@
-﻿"""
-Autor:  Inigo Iturriagaetxebarria
-Fecha:  02/10/2025
-Commentarios:
-    Controlador del formulario maestro de categoría de filtro.
-"""
-from PyQt6.QtGui import QIcon, QAction
+﻿from PyQt6.QtGui import QIcon, QAction
 from PyQt6.QtWidgets import QMessageBox, QTableView
 
-from categoria_acuario_controller import CategoriaAcuarioController
-from categoria_acuario_dao import CategoriaAcuarioDAO
-from categoria_acuario_entity import CategoriaAcuarioEntity
-from categoria_acuario_table_model import CategoriaAcuarioTableModel
-from categoria_acuario_view import CategoriaAcuarioView
+from categoria_incidencia_controller import CategoriaIncidenciaController
+from categoria_incidencia_dao import CategoriaIncidenciaDAO
+from categoria_incidencia_entity import CategoriaIncidenciaEntity
+from categoria_incidencia_table_model import CategoriaIncidenciaTableModel
+from categoria_incidencia_view import CategoriaIncidenciaView
 from paginator import Paginator
 from table_menu_contextual import TableMenuContextual
 
 
-class CategoriaAcuarioMasterController(CategoriaAcuarioController):
+class CategoriaIncidenciaMasterController(CategoriaIncidenciaController):
     """ Controlador del formulario maestro de tipo de filtro. """
 
-    def __init__(self, view: CategoriaAcuarioView, dao: CategoriaAcuarioDAO,
-                 mod: CategoriaAcuarioEntity):
+    def __init__(self, view: CategoriaIncidenciaView, dao: CategoriaIncidenciaDAO,
+                 mod: CategoriaIncidenciaEntity):
         """
         Constructor base
-        :param view: Formulario maestro de la categoría de acuario
-        :param dao: DAO de la categoría de acuario
-        :param mod: Modelo de la categoria de acuario
+        :param view: Formulario maestro de categoría de incidencia
+        :param dao: DAO de categoría de incidencia
+        :param mod: Modelo de categoría de incidencia
         """
 
         # Constructor base
         super().__init__(view, dao, mod)
 
         # Inicializamos el paginador
-        self._pag = Paginator("VISTA_CATEGORIAS_ACUARIO", 5)
+        self._pag = Paginator("VISTA_CATEGORIAS_INCIDENCIA", 5)
         self._pag.initialize_paginator()
         self._configure_status_bar(self._pag)
 
@@ -220,7 +214,7 @@ class CategoriaAcuarioMasterController(CategoriaAcuarioController):
             return
 
         # Limpiamos el formulario
-        self._clean_view(self._view.frame.edit_categoria_acuario)
+        self._clean_view(self._view.frame.edit_tipo_filtro)
 
         # Configurar paginator
         self._pag.initialize_paginator()
@@ -254,7 +248,7 @@ class CategoriaAcuarioMasterController(CategoriaAcuarioController):
             return
 
         # Limpiamos el formulario
-        self._clean_view(self._view.frame.edit_categoria_acuario)
+        self._clean_view(self._view.frame.edit_tipo_filtro)
 
         # Obtenemos los datos de paginación actuales
         paginator_pages = self._pag.total_pages
@@ -289,7 +283,7 @@ class CategoriaAcuarioMasterController(CategoriaAcuarioController):
             return
 
         # Limpiamos el formulario
-        self._clean_view(self._view.frame.edit_categoria_acuario)
+        self._clean_view(self._view.frame.edit_tipo_filtro)
 
         # Configuramos el paginador
         self._pag.initialize_paginator()
@@ -359,10 +353,10 @@ class CategoriaAcuarioMasterController(CategoriaAcuarioController):
             pass
 
     def _fill_tableview(self, table: QTableView,
-                        data: list[CategoriaAcuarioEntity]):
+                        data: list[CategoriaIncidenciaEntity]):
         """ Carga los datos en la tabla. """
 
-        tv_model = CategoriaAcuarioTableModel(data)
+        tv_model = CategoriaIncidenciaTableModel(data)
         table.setModel(tv_model)
         table.resizeColumnsToContents()
 

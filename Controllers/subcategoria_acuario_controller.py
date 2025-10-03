@@ -22,7 +22,6 @@ from Model.TableModel.subcategoria_acuario_table_model import \
 from Services.Result.result import Result
 from Services.Validators.subcategoria_acuario_validator import \
     SubcategoriaAcuarioValidator
-from Views.Dialogs.categoria_acuario_dialog import CategoriaAcuarioDialog
 from Views.Dialogs.subcategoria_Acuario_dialog import SubcategoriaAcuarioDialog
 from Views.Masters.subcategoria_acuario_view import SubcategoriaAcuarioView
 from Views.table_menu_contextual import TableMenuContextual

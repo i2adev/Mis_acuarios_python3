@@ -12,7 +12,7 @@ from PyQt6.QtWidgets import QDialog, QApplication, QMessageBox, QWidget
 from Views.Dialogs.base_dialog import BaseDialog
 from Views.Forms.categoria_acuario_form import CategoriaAcuarioForm
 
-class CategoriaAcuarioDialog(BaseDialog):
+class CategoriaIncidenciaDialog(BaseDialog):
     """ Diálogo de categoría de acuario. """
 
     def __init__(self, w_title: str):
