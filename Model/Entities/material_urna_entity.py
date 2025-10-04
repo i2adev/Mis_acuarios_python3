@@ -28,10 +28,50 @@ class MaterialUrnaEntity(BaseEntity):
 
         super().__init__()
 
-        self.id = id
-        self.num = num
-        self.material = material
-        self.descripcion = descripcion
+        self.__id = id
+        self.__num = num
+        self.__material = material
+        self.__descripcion = descripcion
+
+    @property
+    def id(self) -> int | None:
+        """ Id de la entidad. """
+        return self.__id
+
+    @id.setter
+    def id(self, new_id: int) -> None:
+        """ Id de la entidad. """
+        self.__id = new_id
+
+    @property
+    def num(self) -> int | None:
+        """ Número correlativo de la entidad. """
+        return self.__num
+
+    @num.setter
+    def num(self, new_num: int) -> None:
+        """ Número correlativo de la entidad. """
+        self.__num = new_num
+
+    @property
+    def material(self) -> str:
+        """ Material de la urna. """
+        return self.__material
+
+    @material.setter
+    def material(self, new_material) -> None:
+        """ Material de la urna. """
+        self.__material = new_material
+
+    @property
+    def descripcion(self) -> str:
+        """ Descripción del material. """
+        return self.__descripcion
+
+    @descripcion.setter
+    def descripcion(self, new_descripcion) -> None:
+        """ Descripción del material. """
+        self.__descripcion = new_descripcion
 
     def __str__(self):
         return f"""

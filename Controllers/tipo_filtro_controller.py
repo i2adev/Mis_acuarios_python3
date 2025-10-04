@@ -4,6 +4,7 @@ Fecha:  01/10/2025
 Commentarios:
     Controlador base del tipo de filtro.
 """
+
 from PyQt6.QtGui import QAction
 from PyQt6.QtWidgets import QMessageBox, QPushButton
 

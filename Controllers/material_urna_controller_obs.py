@@ -1,54 +1,43 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
-Fecha:      11/08/2025
+Fecha:      19/08/2025
 Commentarios:
-    Módulo que contiene la clase controladora de la entidad ACUARIO.
+    Módulo que contiene la clase controladora de la entidad MATERIAL DE LA URNA.
 """
 
+
+# Importaciones
 from PyQt6.QtCore import Qt, QEvent
-from PyQt6.QtGui import QAction, QPixmap, QIcon
-from PyQt6.QtWidgets import (QWidget, QMessageBox, QTableView, QCompleter,
-                             QComboBox)
+from PyQt6.QtGui import QAction, QIcon
+from PyQt6.QtWidgets import (QWidget, QMessageBox, QTableView, QCompleter, QComboBox)
 
 from Controllers.base_controller import BaseController
-from Controllers.material_urna_controller_obs import MaterialUrnaDialogControllerObs
-from Model.DAO.marca_comercial_dao import MarcaComercialDAO
 from Model.DAO.material_urna_dao import MaterialUrnaDAO
 from Model.DAO.paginator import Paginator
-from Model.DAO.urna_dao import UrnaDAO
-from Model.Entities.marca_comercial_entity import MarcaComercialEntity
+from Model.Entities.categoria_acuario_entity import CategoriaAcuarioEntity
 from Model.Entities.material_urna_entity import MaterialUrnaEntity
-from Model.Entities.urna_entity import UrnaEntity
-from Model.TableModel.urna_table_model import UrnaTableModel
+from Model.TableModel.material_urna_table_model import MaterialUrnaTableModel
 from Services.Result.result import Result
-from Services.Validators.urna_validator import UrnaValidator
-from Views.Dialogs.marca_comercial_dialog import MarcaComercialDialog
+from Services.Validators.material_urna_validator import MaterialUrnaValidator
 from Views.Dialogs.material_urna_dialog import MaterialUrnaDialog
-from Views.Dialogs.urna_dialog import UrnaDialog
-from Views.Masters.urna_view import UrnaView
+from Views.Masters.material_urna_view import MaterialUrnaView
 from Views.table_menu_contextual import TableMenuContextual
-from marca_comercial_dialog_controller import MarcaComercialDialogController
 
 
-class UrnaDialogController(BaseController):
-    """ Controlador del diálogo de acuario. """
+class MaterialUrnaDialogControllerObs(BaseController):
+    """ Controlador del diálogo subcategoría de acuario. """
 
-    def __init__(self, view: UrnaDialog, dao: UrnaDAO,
-                 mod: UrnaEntity):
+    def __init__(self, view: MaterialUrnaDialog, dao: MaterialUrnaDAO,
+                 mod: MaterialUrnaEntity):
         """
-        Constructor base
-
-        Parámetros:
-        :param view: Vista tipo Acuario
-        :param dao: DAO de la entidad UrnaDAO
-        :param mod: Modelo de la entidad UrnaEntity
+        Constructor base.
+        :param view: Vista tipo MaterialUrna
+        :param dao: DAO de la entidad MaterialUrnaDAO
+        :param mod: Modelo de la entidad MaterialUrnaEntity
         """
 
         # inicializamos la vista y pasamos al constructor padre
         super().__init__(view, dao, mod)
-
-        # Llenamo los combos
-        self.fill_combos()
 
         # Inicializamos los eventos
         self.init_basic_handlers()
@@ -58,8 +47,8 @@ class UrnaDialogController(BaseController):
 
         if self._view.exec():
             # Obtenemos la subcategoría de acuario
-            acuario = self.get_urna()
-            return Result.success(acuario)
+            material = self.get_material()
+            return Result.success(material)
         else:
             return Result.failure("NO SE HA PODIDO OBTENER LA ENTIDAD.")
 
@@ -67,10 +56,9 @@ class UrnaDialogController(BaseController):
         """
         Inicializa los eventos de los widgets de la vista.
         """
-
         self.init_imput_handlers()
 
-        if isinstance(self._view, UrnaDialog):
+        if isinstance(self._view, MaterialUrnaDialog):
             self.init_dialog_handlers()
 
     def init_dialog_handlers(self):
@@ -87,41 +75,23 @@ class UrnaDialogController(BaseController):
         for widget in self._view.findChildren(QWidget):
             if isinstance(widget, self._text_widgets):
                 widget.installEventFilter(self)
-            if isinstance(widget, QComboBox):
-                widget.installEventFilter(self)
 
-        # Botones
-        self._view.frame.button_insert_marca.clicked.connect(
-            self.open_marca_comercial_dialog
-        )
-
-        self._view.frame.button_insert_material.clicked.connect(
-            self.open_material_urna_dialog
-        )
-
-    def entity_configuration(self) -> UrnaEntity:
+    def entity_configuration(self) -> MaterialUrnaEntity:
         """ Configura la entidad. """
 
-        ent = UrnaEntity()
+        ent = MaterialUrnaEntity()
 
         if self._view.frame.edit_id.text():
             ent.id = int(self._view.frame.edit_id.text())
         else:
             ent.id = None
 
-        ent.id_marca = self._view.frame.combo_marca.currentData()
-        ent.modelo = self._view.frame.edit_modelo.text()
-        ent.anchura = self._view.frame.edit_ancho.text()
-        ent.profundidad = self._view.frame.edit_profundo.text()
-        ent.altura = self._view.frame.edit_alto.text()
-        ent.grosor_cristal = self._view.frame.edit_grosor.text()
-        ent.volumen_tanque = self._view.frame.edit_volumen.text()
-        ent.id_material = (self._view.frame.combo_material.currentData())
+        ent.material = self._view.frame.edit_material.text()
         ent.descripcion = self._view.frame.text_descripcion.toPlainText()
 
         return ent
 
-    def insert(self) -> Result(int):
+    def insert(self) -> Result:
         """ Inserta un registro en la base de datos. """
 
         # Validamos el formulario
@@ -134,104 +104,25 @@ class UrnaDialogController(BaseController):
         ent = self.entity_configuration()
 
         # Inserta el registro
-        res_urna = self._dao.insert(ent)
-        if not res_urna.is_success:
-            return res_urna
-
-        # Insertamos las fotografías
-        res_foto = self._view.frame_imagen.insert_foto(res_urna.value)
-
-        if not res_foto.is_success:
-            return Result.failure(res_foto.error_msg)
+        res = self._dao.insert(ent)
+        if not res.is_success:
+            return res
 
         # Limpiamos el formulario
-        self._clean_view(self._view.frame.combo_marca)
-        self._view.frame_imagen.lista_fotos.clear()
+        self._clean_view(self._view.frame.edit_material)
 
-        return Result.success(res_urna.value)
+        return Result.success(res.value)
 
     def validate_view(self):
         """ Valida el formulario. """
 
-        # Valida la marca
-        res = UrnaValidator.validate_marca(
-            self._view.frame.combo_marca
+        # Valida el material
+        res = MaterialUrnaValidator.validate_material(
+            self._view.frame.edit_material
         )
 
         if not res.is_success:
-            self._view.frame.combo_marca.setFocus()
-            return res
-
-        # Valida el modelo de la urna
-        res = UrnaValidator.validate_modelo_urna(
-            self._view.frame.edit_modelo
-        )
-
-        if not res.is_success:
-            self._view.frame.edit_modelo.setFocus()
-            return res
-
-        # Valida la anchura de la urna
-        res = UrnaValidator.validate_anchura(
-            self._view.frame.edit_ancho
-        )
-
-        if not res.is_success:
-            self._view.frame.edit_ancho.setFocus()
-            return res
-
-        # Valida la profundidad de la urna
-        res = UrnaValidator.validate_profundidad(
-            self._view.frame.edit_profundo
-        )
-
-        if not res.is_success:
-            self._view.frame.edit_profundo.setFocus()
-            return res
-
-        # Valida la altura de la urna
-        res = UrnaValidator.validate_altura(
-            self._view.frame.edit_alto
-        )
-
-        if not res.is_success:
-            self._view.frame.edit_alto.setFocus()
-            return res
-
-        # Válida el grosor del cristal
-        res = UrnaValidator.validate_grosor(
-            self._view.frame.edit_grosor
-        )
-
-        if not res.is_success:
-            self._view.frame.edit_grosor.setFocus()
-            return res
-
-        # Válida el volumen del tanque
-        res = UrnaValidator.validate_volumen(
-            self._view.frame.edit_volumen
-        )
-
-        if not res.is_success:
-            self._view.frame.edit_volumen.setFocus()
-            return res
-
-        # Válida el volumen del tanque
-        res = UrnaValidator.validate_volumen(
-            self._view.frame.edit_volumen
-        )
-
-        if not res.is_success:
-            self._view.frame.edit_volumen.setFocus()
-            return res
-
-        # Valida el material de la urna
-        res = UrnaValidator.validate_material(
-            self._view.frame.combo_material
-        )
-
-        if not res.is_success:
-            self._view.frame.combo_material.setFocus()
+            self._view.frame.edit_material.setFocus()
             return res
 
         return Result.success(1)
@@ -251,17 +142,10 @@ class UrnaDialogController(BaseController):
             return
 
         # Configuramos la entidad
-        self.urna_result = UrnaEntity(
+        self.material_urna_result = MaterialUrnaEntity(
             id = res.value,
             num = None,
-            id_marca = self._view.frame.combo_marca.currentData(),
-            modelo = self._view.frame.edit_modelo.text(),
-            anchura = self._view.frame.edit_ancho.text(),
-            profundidad = self._view.frame.edit_profundo.text(),
-            altura = self._view.frame.edit_alto.text(),
-            grosor_cristal = self._view.frame.edit_grosor.tect(),
-            volumen_tanque = self._view.frame.edit_volumen.text(),
-            id_material = self._view.frame.combo_material.currentData(),
+            material = self._view.frame.edit_material.text(),
             descripcion = self._view.frame.text_descripcion.toPlainText()
                           if self._view.frame.text_descripcion.toPlainText()
                           else None
@@ -270,70 +154,15 @@ class UrnaDialogController(BaseController):
         # Aceptamos el diálogo
         self._view.accept()
 
-    def get_urna(self):
-        """ Devuelve la categoría de filtro resultante. """
+    def get_material(self):
+        """ Devuelve el material de la urna resultante. """
 
-        return self.urna_result
+        return self.material_urna_result
 
     def dialog_cancel(self):
         """ Cancela el dialogo. """
 
         self._view.reject()
-
-    def fill_combos(self):
-        """ Llena los combos del formulario"""
-
-        self.fill_combo_marca()
-        self.fill_combo_material()
-
-    def fill_combo_marca(self):
-        """ Llena el combo de tipos de acuario. """
-
-        # Vaciamos el combo
-        self._view.frame.combo_marca.clear()
-
-        # Obtenemos los datos
-        dao = MarcaComercialDAO()
-        lista = dao.get_list_combo()
-
-        if not lista.is_success:
-            return Result.failure(
-                "NO SE HAN PODIDO OBTENER LAS 'MARCAS COMERCIALES'."
-            )
-
-        # Llenamos el combo
-        for ent in lista.value:
-            self._view.frame.combo_marca.addItem(ent.nombre_marca, ent.id)
-
-        # Establecemos el autocompletado
-        self.set_autocomplete(self._view.frame.combo_marca)
-
-        # Deseleccionamos el valor
-        self._view.frame.combo_marca.setCurrentIndex(-1)
-
-    def fill_combo_material(self):
-        """ Llena el combo del material de acuario. """
-
-        # Vaciamos el combo
-        self._view.frame.combo_material.clear()
-
-        # Obtenemos los datos
-        dao = MaterialUrnaDAO()
-        lista = dao.get_list_combo()
-        if not lista.is_success:
-            return Result.failure(
-                "NO SE HAN PODIDO OBTENER LOS 'MATERIALES DE URNA'."
-            )
-
-        # Llenamos el combo
-        for ent in lista.value:
-            self._view.frame.combo_material.addItem(ent.material, ent.id)
-
-        # Establecemos el autocompletado
-        self.set_autocomplete(self._view.frame.combo_material)
-
-        # Deseleccionamos el valor
-        self._view.frame.combo_material.setCurrentIndex(-1)
 
     def set_autocomplete(self, combo: QComboBox):
         """
@@ -349,71 +178,25 @@ class UrnaDialogController(BaseController):
         completer.setCaseSensitivity(Qt.CaseSensitivity.CaseInsensitive)
         combo.setCompleter(completer)
 
-    def open_marca_comercial_dialog(self):
-        """ Abrimos el diálogo de marca comercial. """
-
-        # Configuramos el CONTROLADOR
-        view = MarcaComercialDialog("INSERTAR MARCA COMERCIAL")
-        dao = MarcaComercialDAO()
-        mod = MarcaComercialEntity()
-
-        ctrl = MarcaComercialDialogController(view, dao, mod)
-
-        # Muestra el diálogo
-        res = ctrl.show_modal()
-        if not res.is_success:
-            return
-
-        # Configuramos el combo
-        combo = self._view.frame.combo_marca
-
-        self.fill_combo_marca()
-        for i in range(combo.count()):
-            if combo.itemData(i) == res.value.id:
-                combo.setCurrentIndex(i)
-
-    def open_material_urna_dialog(self):
-        """ Abrimos el diálogo de categoria de acuario. """
-
-        view = MaterialUrnaDialog(
-            "INSERTAR MATERIAL DE URNA"
-        )
-        mod = MaterialUrnaEntity()
-        dao = MaterialUrnaDAO()
-
-        ctrl = MaterialUrnaDialogControllerObs(view, dao, mod)
-        res = ctrl.show_modal()
-
-        if not res.is_success:
-            return
-
-        # Configuramos el combo
-        combo = self._view.frame.combo_material
-
-        self.fill_combo_material()
-        for i in range(combo.count()):
-            if combo.itemData(i) == res.value.id:
-                combo.setCurrentIndex(i)
-
-class UrnaController(UrnaDialogController):
+class MaterialUrnaMasterControllerObs(MaterialUrnaDialogControllerObs):
     """ Controlador del formulario maestro de subcategoría de acuario. """
 
-    def __init__(self, view: UrnaView, dao: MaterialUrnaDAO,
-                 mod: UrnaEntity):
+    def __init__(self, view: MaterialUrnaView, dao: MaterialUrnaDAO,
+                 mod: MaterialUrnaEntity):
         """
         Constructor base
 
         Parámetros:
-        :param view: Vista urna
-        :param dao: DAO de la entidad urna
-        :param mod: Modelo de la entidad urna
+        :param view: Vista material de urna
+        :param dao: DAO de la entidad material de urna
+        :param mod: Modelo de la entidad material de urna
         """
 
         # Constructor base
         super().__init__(view, dao, mod)
 
         # Inicializamos el paginador
-        self._pag = Paginator("VISTA_URNAS", 5)
+        self._pag = Paginator("VISTA_MATERIALES_URNA", 5)
         self._pag.initialize_paginator()
         self._view.label_status.setText(f"Sin filtrar. {self._pag.records} "
                                         "registros.")
@@ -447,7 +230,7 @@ class UrnaController(UrnaDialogController):
         self._view.button_load.clicked.connect(self.button_load_click)
         self._view.button_delete.clicked.connect(self.button_delete_click)
         self._view.button_clean.clicked.connect(lambda: self._clean_view(
-            self._view.frame.combo_marca
+            self._view.frame.edit_material
         ))
         self._view.button_next.clicked.connect(self._next_page)
         self._view.button_prev.clicked.connect(self._previous_page)
@@ -489,7 +272,7 @@ class UrnaController(UrnaDialogController):
             # Cargamos la tabla
             self._fill_tableview(self._view.data_table, self._pag._total_data)
             self._configure_table(self._view.data_table)
-            self._clean_view(self._view.frame.combo_marca)
+            self._clean_view(self._view.frame.edit_material)
             self._view.label_total_pages.setText(str(self._pag.total_pages))
 
     def button_search_clicked(self):
@@ -515,7 +298,7 @@ class UrnaController(UrnaDialogController):
         # Cargamos la tabla
         self._fill_tableview(self._view.data_table, self._pag._total_data)
         self._configure_table(self._view.data_table)
-        self._clean_view(self._view.frame.combo_marca)
+        self._clean_view(self._view.frame.edit_material)
 
         self._view.button_filter.setIcon(QIcon(":/Images/filtered.png"))
 
@@ -528,9 +311,7 @@ class UrnaController(UrnaDialogController):
 
 
     def combo_page_indexchanged(self, event: QEvent):
-        """
-        Se ejecuta cuando el índice del combo de selección de página.
-        """
+        """ Muestra el menú contextual de la tabla. """
 
         page = self._view.combo_select_page.currentData()
 
@@ -696,22 +477,27 @@ class UrnaController(UrnaDialogController):
     def button_update_click(self, event):
         """ Controla el clic del botón actualizar. """
 
-        # Actualiza el registro
-        res_data = self.update_data()
+        # Valida el formulario
+        val = self.validate_view()
 
-        if not res_data.is_success:
+        if not val.is_success:
             QMessageBox.warning(
                 self._view,
                 self._view.window_title,
-                res_data.error_msg
+                val.error_msg
             )
+            self._view.frame.edit_categoria_acuario.setFocus()
             return
 
-        # Insertamos las fotografías
-        res_foto = self._view.frame_imagen.insert_foto(res_data.value)
-        
-        if not res_foto.is_success:
-            return Result.failure(res_foto.error_msg)
+        # Actualiza el registro
+        res = self.update()
+
+        if not res.is_success:
+            QMessageBox.warning(
+                self._view,
+                self._view.window_title,
+                res.error_msg
+            )
 
         # Configuramos el paginador
         self._pag.initialize_paginator()
@@ -720,7 +506,7 @@ class UrnaController(UrnaDialogController):
         self._view.combo_select_page.setCurrentIndex(-1)
 
         # Seleccionamos el último registro utilizado
-        self.configure_table_after_crud(res_data.value)
+        self.configure_table_after_crud(res.value)
 
     def configure_table_after_crud(self, id_: int):
         """
@@ -771,10 +557,10 @@ class UrnaController(UrnaDialogController):
         self.configure_table_after_crud(res.value)
 
     def _fill_tableview(self, table: QTableView,
-                        data: list[UrnaEntity]):
+                        data: list[CategoriaAcuarioEntity]):
         """ Carga los datos en la tabla. """
 
-        tv_model = UrnaTableModel(data)
+        tv_model = MaterialUrnaTableModel(data)
         table.setModel(tv_model)
         table.setColumnHidden(0, True)
         table.resizeColumnsToContents()
@@ -783,12 +569,13 @@ class UrnaController(UrnaDialogController):
         """ No aplicable. """
         pass
 
-    def update_data(self) -> Result:
+    def update(self) -> Result:
         """ Actualiza el registro en la base de datos. """
         # Valida el formulario
         val = self.validate_view()
 
         if not val.is_success:
+            self._view.frame.edit_categoria_acuario.setFocus()
             return val
 
         # Configura la entidad
@@ -801,7 +588,7 @@ class UrnaController(UrnaDialogController):
             return Result.failure(res.error_msg)
 
         # Limpiamos el formulario
-        self._clean_view(self._view.frame.combo_marca)
+        self._clean_view(self._view.frame.edit_material)
 
         # Configuramos la tabla
         self._load_tableview()
@@ -809,17 +596,8 @@ class UrnaController(UrnaDialogController):
 
         return Result.success(ent.id)
 
-    def load_record(self) -> None:
+    def load_record(self) -> Result:
         """ Carga el registro en el formulario. """
-
-        # Carga los datos del registro
-        res_id = self.load_data()
-
-        # Carga las imágenes
-        self._view.frame_imagen.load_images(res_id.value)
-
-    def load_data(self) -> Result(int):
-        """ Carga los datos. """
 
         # Carga el modelo de la fila seleccionada
         selection_model = self._view.data_table.selectionModel()
@@ -830,57 +608,32 @@ class UrnaController(UrnaDialogController):
                 "ANTES DE CARGAR UN REGISTRO, DEBES "
                 "SELECCIONAR UN REGISTRO EN LA TABLA."
             )
+
         # Configuramos la fila
         index = selection_model.currentIndex()
         fila = index.row()
         modelo = self._view.data_table.model()
 
         # Lee los datos del modelo
-        id_ent = modelo.index(fila, 0).data()
-        marca = modelo.index(fila,
-                             2).data()  # La columna 1 es el nº correlativo.
-        modelo_urna = modelo.index(fila, 3).data()
-        ancho = modelo.index(fila, 4).data()
-        profundo = modelo.index(fila, 5).data()
-        alto = modelo.index(fila, 6).data()
-        grosor = modelo.index(fila, 7).data()
-        volumen = modelo.index(fila, 8).data()
-        material = modelo.index(fila, 9).data()
-        descripcion = modelo.index(fila, 10).data()
+        id_row = modelo.index(fila, 0).data()
+        material = modelo.index(fila, 2).data()  # La columna 1 es el
+                                                    # númer correlativo.
+        descripcion = modelo.index(fila, 3).data()
 
         # Cargamos los widgets
         self._view.frame.edit_id.setText(
-            str(id_ent) if id_ent is not None else ""
-        )
-        self._view.frame.combo_marca.setCurrentIndex(
-            self._view.frame.combo_marca.findText(marca)
-        )
-        self._view.frame.edit_modelo.setText(
-            str(modelo_urna) if modelo_urna is not None else ""
-        )
-        self._view.frame.edit_ancho.setText(
-            str(ancho) if ancho is not None else ""
-        )
-        self._view.frame.edit_profundo.setText(
-            str(profundo) if profundo is not None else ""
-        )
-        self._view.frame.edit_alto.setText(
-            str(alto) if alto is not None else ""
-        )
-        self._view.frame.edit_grosor.setText(
-            str(grosor) if grosor is not None else ""
-        )
-        self._view.frame.edit_volumen.setText(
-            str(volumen) if volumen is not None else ""
-        )
-        self._view.frame.combo_material.setCurrentIndex(
-            self._view.frame.combo_material.findText(material)
-        )
-        self._view.frame.text_descripcion.setPlainText(
-            str(descripcion) if descripcion is not None else ""
+            str(id_row) if id_row is not None else None
         )
 
-        return Result.success(id_ent)
+        self._view.frame.edit_material.setText(
+            str(material) if material else None
+        )
+
+        self._view.frame.text_descripcion.setPlainText(
+            str(descripcion) if descripcion is not None else None
+        )
+
+        return Result.success(id_row)
 
     def delete(self, id_: int) -> Result:
         """ Elimina un registro de la base de datos.
@@ -927,7 +680,7 @@ class UrnaController(UrnaDialogController):
             return Result.failure(res.error_msg)
 
         # Limpiamos el formulario
-        self._clean_view(self._view.frame.combo_marca)
+        self._clean_view(self._view.frame.edit_material)
 
         # Configuramos la tabla
         self._load_tableview()
