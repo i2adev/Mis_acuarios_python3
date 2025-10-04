@@ -187,19 +187,6 @@ class BaseController(QObject):
         :param attr_data: Nombre del atributo para el valor (userData).
         """
 
-        def _set_autocomplete(self, combo: QComboBox):
-            """
-            Configura el autocompletado del combo.
-            :param combo: Combobox al que se le aplica el autocomplete.
-            """
-
-            completer = QCompleter()
-            completer.setModel(combo.model())
-            completer.setCompletionMode(
-                QCompleter.CompletionMode.PopupCompletion)
-            completer.setCaseSensitivity(Qt.CaseSensitivity.CaseInsensitive)
-            combo.setCompleter(completer)
-
         combo.clear()
         for item in lista:
             # Si es diccionario
@@ -323,11 +310,18 @@ class BaseController(QObject):
         # Devolvemos el resultado
         return res
 
-    # def _load_tableview(self):
-    #     """ Gestiona los datos para llenar la tabla. """
-    #
-    #     self._fill_tableview(self._view.data_table, self._pag.current_data)
-    #     self._configure_table(self._view.data_table)
+    def _set_autocomplete(self, combo: QComboBox):
+        """
+        Configura el autocompletado del combo.
+        :param combo: El QCOmboBox al que se le aplica él autocomplete.
+        """
+
+        completer = QCompleter()
+        completer.setModel(combo.model())
+        completer.setCompletionMode(
+            QCompleter.CompletionMode.PopupCompletion)
+        completer.setCaseSensitivity(Qt.CaseSensitivity.CaseInsensitive)
+        combo.setCompleter(completer)
 
     def _configure_status_bar(self, pag: Paginator, total_records: int = None,
                               pattern: str = None):

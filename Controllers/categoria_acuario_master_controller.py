@@ -5,7 +5,7 @@ Commentarios:
     Controlador del formulario maestro de categoría de filtro.
 """
 from PyQt6.QtGui import QIcon, QAction
-from PyQt6.QtWidgets import QMessageBox, QTableView
+from PyQt6.QtWidgets import QMessageBox, QTableView, QWidget, QComboBox
 
 from categoria_acuario_controller import CategoriaAcuarioController
 from categoria_acuario_dao import CategoriaAcuarioDAO
@@ -47,6 +47,13 @@ class CategoriaAcuarioMasterController(CategoriaAcuarioController):
         """
         Inicializa los eventos de los widgets del formulario maestro.
         """
+
+        # Textos y combos
+        for widget in self._view.findChildren(QWidget):
+            if isinstance(widget, self._text_widgets):
+                widget.installEventFilter(self)
+            if isinstance(widget, QComboBox):
+                widget.installEventFilter(self)
 
         # Inizializa los botones
         self._view.button_insert.clicked.connect(self.button_insert_click)

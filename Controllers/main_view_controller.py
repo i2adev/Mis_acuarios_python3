@@ -6,9 +6,6 @@ Commentarios:
 """
 
 from Controllers.base_controller import BaseController
-from Controllers.categoria_incidencia_controller_obs import \
-    CategoriaIncidenciaControllerObs
-from Controllers.marca_comercial_controller import MarcaComercialController
 from Controllers.material_urna_controller import MaterialUrnaController
 from Controllers.subcategoria_acuario_controller import \
     SubcategoriaAcuarioController
@@ -46,6 +43,9 @@ from Views.Masters.tipo_acuario_view import TipoAcuarioView
 from Views.Masters.tipo_filtro_view import TipoFiltroView
 import globals
 from categoria_acuario_master_controller import CategoriaAcuarioMasterController
+from categoria_incidencia_master_controller import \
+    CategoriaIncidenciaMasterController
+from marca_comercial_master_controller import MarcaComercialMasterController
 from tipo_filtro_master_controller import TipoFiltroMasterController
 
 
@@ -197,7 +197,7 @@ class MainViewController(BaseController):
         dao = CategoriaIncidenciaDAO()
         mod = CategoriaIncidenciaEntity()
 
-        ctrl = CategoriaIncidenciaControllerObs(view, dao, mod)
+        ctrl = CategoriaIncidenciaMasterController(view, dao, mod)
         ctrl.show()
 
     def subcategoria_incidencia_clicked(self):
@@ -228,7 +228,7 @@ class MainViewController(BaseController):
         dao = MarcaComercialDAO()
         mod = MarcaComercialEntity()
 
-        ctrl = MarcaComercialController(view, dao, mod)
+        ctrl = MarcaComercialMasterController(view, dao, mod)
         ctrl.show()
 
     def show(self):

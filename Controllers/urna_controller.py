@@ -11,8 +11,6 @@ from PyQt6.QtWidgets import (QWidget, QMessageBox, QTableView, QCompleter,
                              QComboBox)
 
 from Controllers.base_controller import BaseController
-from Controllers.marca_comercial_controller import \
-    MarcaComercialDialogController
 from Controllers.material_urna_controller import MaterialUrnaDialogController
 from Model.DAO.marca_comercial_dao import MarcaComercialDAO
 from Model.DAO.material_urna_dao import MaterialUrnaDAO
@@ -29,6 +27,7 @@ from Views.Dialogs.material_urna_dialog import MaterialUrnaDialog
 from Views.Dialogs.urna_dialog import UrnaDialog
 from Views.Masters.urna_view import UrnaView
 from Views.table_menu_contextual import TableMenuContextual
+from marca_comercial_dialog_controller import MarcaComercialDialogController
 
 
 class UrnaDialogController(BaseController):

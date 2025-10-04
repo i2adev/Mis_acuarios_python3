@@ -38,9 +38,11 @@ class TipoFiltroDialogoController(TipoFiltroController):
     def init_handlers(self):
         """ Inicializa los manejadores de eventos."""
 
-        # Controles de entrada de texto
+        # Textos y combos
         for widget in self._view.findChildren(QWidget):
             if isinstance(widget, self._text_widgets):
+                widget.installEventFilter(self)
+            if isinstance(widget, QComboBox):
                 widget.installEventFilter(self)
 
         # Botones
@@ -87,4 +89,4 @@ class TipoFiltroDialogoController(TipoFiltroController):
             tipo_filyto = self._get_tipo_filtro()
             return Result.success(tipo_filyto)
         else:
-            return Result.failure("EL USUARIO CANCELÓ EL DIÁLOGO.")
+            return Result.failure("EL USUARIO CANCELO LA INSERCIÓN")

@@ -1,5 +1,5 @@
 ﻿from PyQt6.QtGui import QIcon, QAction
-from PyQt6.QtWidgets import QMessageBox, QTableView
+from PyQt6.QtWidgets import QMessageBox, QTableView, QWidget, QComboBox
 
 from categoria_incidencia_controller import CategoriaIncidenciaController
 from categoria_incidencia_dao import CategoriaIncidenciaDAO
@@ -41,6 +41,13 @@ class CategoriaIncidenciaMasterController(CategoriaIncidenciaController):
         """
         Inicializa los eventos de los widgets del formulario maestro.
         """
+
+        # Textos y combos
+        for widget in self._view.findChildren(QWidget):
+            if isinstance(widget, self._text_widgets):
+                widget.installEventFilter(self)
+            if isinstance(widget, QComboBox):
+                widget.installEventFilter(self)
 
         # Inizializa los botones
         self._view.button_insert.clicked.connect(self.button_insert_click)

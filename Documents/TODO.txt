@@ -3,16 +3,33 @@ FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
 30/09/2025  REFACGTORIZACIÓN:
      |      -   SE REFACTORIZAN LOS CONTROLADORES, SEPARANDO EL CONTROLADOR DEL
-                DIÁLOGO Y EL MAESTRO:
-                -   TIPO DE FILTRO.                                         DONE
-                -   CATEGORIA DE ACUARIO.                                   DONE
-                -   CATEGORÍA INCIDENCIA.                                   DONE
+                DIÁLOGO, EL MAESTRO Y EL BASE:
+                -   TIPO DE FILTRO.
+                    -   SE CREA EL CONTROLADOR BASE.                        DONE
+                    -   SE CREA EL CONTROLADOR DEL CUADRO DE DIÁLOGO.       DONE
+                    -   SE CREA EL CONTROLADOR DEL FORMULARIO MAESTRO.      DONE
+
+                -   CATEGORIA DE ACUARIO.
+                    -   SE CREA EL CONTROLADOR BASE.                        DONE
+                    -   SE CREA EL CONTROLADOR DEL CUADRO DE DIÁLOGO.       DONE
+                    -   SE CREA EL CONTROLADOR DEL FORMULARIO MAESTRO.      DONE
+
+                -   CATEGORÍA INCIDENCIA.
+                    -   SE CREA EL CONTROLADOR BASE.                        DONE
+                    -   SE CREA EL CONTROLADOR DEL CUADRO DE DIÁLOGO.       DONE
+                    -   SE CREA EL CONTROLADOR DEL FORMULARIO MAESTRO.      DONE
+
+                -   MARCA COMERCIAL.
+                    -   SE CREA EL CONTROLADOR BASE.                        DONE
+                    -   SE CREA EL CONTROLADOR DEL CUADRO DE DIÁLOGO.       DONE
+                    -   SE CREA EL CONTROLADOR DEL FORMULARIO MAESTRO.      DONE
 
             -   SE MODIFICAN LAS ENTIDADES PARA CONVERTIR LOS ATRIBUTOS EN
                 PROPIEDADES:
                 -   TIPO DE FILTRO.                                         DONE
                 -   CATEGORIA DE ACUARIO.                                   DONE
                 -   CATEGORÍA INCIDENCIA.                                   DONE
+                -   MARCA COMERCIAL.                                        DONE
 
             BUG FIXES:
             -   SE CORRIGE EL BUG DE PAGINACIÓN TRAS LA BÚSQUEDA DE REGISTROS.

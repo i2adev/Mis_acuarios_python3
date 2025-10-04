@@ -12,7 +12,6 @@ from PyQt6.QtGui import QAction, QIcon
 from PyQt6.QtWidgets import (QWidget, QMessageBox, QTableView, QCompleter, QComboBox)
 
 from Controllers.base_controller import BaseController
-from Controllers.categoria_incidencia_controller_obs import CategoriaIncidenciaDialogControllerObs
 from Model.DAO.categoria_incidencia_dao import CategoriaIncidenciaDAO
 from Model.DAO.paginator import Paginator
 from Model.DAO.subcategoria_acuario_dao import SubcategoriaAcuarioDAO

@@ -2,39 +2,41 @@
 Autor:  Inigo Iturriagaetxebarria
 Fecha:  29/09/2025
 Commentarios:
-    Controlador del formulario maestro de tipo de filtro.
+    Controlador del formulario maestro de marca comercial.
 """
 
-from PyQt6.QtCore import QEvent
 from PyQt6.QtGui import QIcon, QAction
 from PyQt6.QtWidgets import QMessageBox, QTableView, QWidget, QComboBox
 
+from marca_comercial_controller import MarcaComercialController
+from marca_comercial_dao import MarcaComercialDAO
+from marca_comercial_entity import MarcaComercialEntity
+from marca_comercial_view import MarcaComercialView
+from marcas_comercial_table_model import MarcaComercialTableModel
 from paginator import Paginator
 from table_menu_contextual import TableMenuContextual
-from tipo_filtro_controller import TipoFiltroController
-from tipo_filtro_dao import TipoFiltroDAO
-from tipo_filtro_entity import TipoFiltroEntity
-from tipo_filtro_table_model import TipoFiltroTableModel
-from tipo_filtro_view import TipoFiltroView
 
 
-class TipoFiltroMasterController(TipoFiltroController):
-    """ Controlador del formulario maestro de tipo de filtro. """
+class MarcaComercialMasterController(MarcaComercialController):
+    """ Controlador del formulario maestro de marca comercial. """
 
-    def __init__(self, view: TipoFiltroView, dao: TipoFiltroDAO,
-                 mod: TipoFiltroEntity):
+    def __init__(self, view: MarcaComercialView, dao: MarcaComercialDAO,
+                 mod: MarcaComercialEntity):
         """
         Constructor base
-        :param view: Formulario maestro de tipo de filtro
-        :param dao: DAO del tipo de filtro
-        :param mod: Modelo del tipo de filtro
+        :param view: Formulario maestro de Marca comercial
+        :param dao: DAO del Marca comercial
+        :param mod: Modelo del Marca comercial
         """
 
         # Constructor base
         super().__init__(view, dao, mod)
 
+        # Rellena los combos
+        self._fill_combos()
+
         # Inicializamos el paginador
-        self._pag = Paginator("VISTA_TIPOS_FILTRO", 5)
+        self._pag = Paginator("VISTA_MARCAS_COMERCIALES", 10)
         self._pag.initialize_paginator()
         self._configure_status_bar(self._pag)
 
@@ -103,7 +105,7 @@ class TipoFiltroMasterController(TipoFiltroController):
             # Cargamos la tabla
             self._fill_tableview(self._view.data_table, self._pag._total_data)
             self._configure_table(self._view.data_table)
-            self._clean_view(self._view.frame.edit_tipo_filtro)
+            self._clean_view(self._view.frame.edit_marca)
             self._view.label_total_pages.setText(str(self._pag.total_pages))
 
             # Configuramos la tabla
@@ -138,7 +140,7 @@ class TipoFiltroMasterController(TipoFiltroController):
         # Cargamos la tabla
         self._fill_tableview(self._view.data_table, self._pag._total_data)
         self._configure_table(self._view.data_table)
-        self._clean_view(self._view.frame.edit_tipo_filtro)
+        self._clean_view(self._view.frame.edit_marca)
 
         self._view.button_filter.setIcon(QIcon(":/Images/filtered.png"))
 
@@ -149,7 +151,7 @@ class TipoFiltroMasterController(TipoFiltroController):
         self._configure_status_bar(self._pag, total_records, pattern)
         self._configure_table_foot()
 
-    def combo_page_indexchanged(self, event: QEvent):
+    def combo_page_indexchanged(self):
         """
         Se ejecuta cuando el índice del combo de selección de página.
         """
@@ -229,7 +231,7 @@ class TipoFiltroMasterController(TipoFiltroController):
             return
 
         # Limpiamos el formulario
-        self._clean_view(self._view.frame.edit_tipo_filtro)
+        self._clean_view(self._view.frame.edit_marca)
 
         # Configurar paginator
         self._pag.initialize_paginator()
@@ -263,7 +265,7 @@ class TipoFiltroMasterController(TipoFiltroController):
             return
 
         # Limpiamos el formulario
-        self._clean_view(self._view.frame.edit_tipo_filtro)
+        self._clean_view(self._view.frame.edit_marca)
 
         # Obtenemos los datos de paginación actuales
         paginator_pages = self._pag.total_pages
@@ -298,7 +300,7 @@ class TipoFiltroMasterController(TipoFiltroController):
             return
 
         # Limpiamos el formulario
-        self._clean_view(self._view.frame.edit_tipo_filtro)
+        self._clean_view(self._view.frame.edit_marca)
 
         # Configuramos el paginador
         self._pag.initialize_paginator()
@@ -362,8 +364,6 @@ class TipoFiltroMasterController(TipoFiltroController):
 
         elif operation == "UPDATE":
             pass
-            # self._view.combo_select_page.setCurrentIndex(-1)
-            # self._view.combo_select_page.setCurrentIndex(current_page - 1)
         else:
             pass
 
@@ -374,10 +374,10 @@ class TipoFiltroMasterController(TipoFiltroController):
         self._configure_table(self._view.data_table)
 
     def _fill_tableview(self, table: QTableView,
-                        data: list[TipoFiltroEntity]):
+                        data: list[MarcaComercialEntity]):
         """ Carga los datos en la tabla. """
 
-        tv_model = TipoFiltroTableModel(data)
+        tv_model = MarcaComercialTableModel(data)
         table.setModel(tv_model)
         table.resizeColumnsToContents()
 

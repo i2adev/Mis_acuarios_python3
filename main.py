@@ -17,7 +17,7 @@ from Controllers.login_controller import LoginDialogController
 from Controllers.main_view_controller import MainViewController
 
 # Versión del programa
-__version__ = "0.12.2"
+__version__ = "0.12.3"
 
 from Model.DAO.usuario_dao import UsuarioDAO
 from Model.Entities.usuario_entity import UsuarioEntity

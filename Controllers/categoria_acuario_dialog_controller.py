@@ -4,7 +4,7 @@ Fecha: 02/10/2025
 Commentarios:
     Controlador del cuadro de diálogo de inserción de categoria de acuario.
 """
-from PyQt6.QtWidgets import QWidget, QMessageBox
+from PyQt6.QtWidgets import QWidget, QMessageBox, QComboBox
 
 from categoria_acuario_controller import CategoriaAcuarioController
 from categoria_acuario_dao import CategoriaAcuarioDAO
@@ -36,9 +36,11 @@ class CategoriaAcuarioDialogoController(CategoriaAcuarioController):
     def init_handlers(self):
         """ Inicializa los manejadores de eventos."""
 
-        # Controles de entrada de texto
+        # Textos y combos
         for widget in self._view.findChildren(QWidget):
             if isinstance(widget, self._text_widgets):
+                widget.installEventFilter(self)
+            if isinstance(widget, QComboBox):
                 widget.installEventFilter(self)
 
         # Botones
@@ -85,4 +87,4 @@ class CategoriaAcuarioDialogoController(CategoriaAcuarioController):
             categoria_acuario = self.get_categoria_Acuario()
             return Result.success(categoria_acuario)
         else:
-            return Result.failure("EL USUARIO CANCELÓ EL DIÁLOGO.")
+            return Result.failure("EL USUARIO CANCELO LA INSERCIÓN")
