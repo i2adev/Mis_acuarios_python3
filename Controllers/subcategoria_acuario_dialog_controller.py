@@ -1,33 +1,36 @@
 ﻿"""
 Autor: Inigo Iturriagaetxebarria
-Fecha: 29/09/2025
+Fecha: 03/10/2025
 Commentarios:
-    Controlador del cuadro de diálogo de inserción de tipo de filtro.
+    Controlador del cuadro de diálogo de inserción de marca comercial.
 """
 
 from PyQt6.QtWidgets import QWidget, QMessageBox, QComboBox
 
-from Services.Result.result import Result
-from material_urna_controller import MaterialUrnaController
-from material_urna_dao import MaterialUrnaDAO
-from material_urna_dialog import MaterialUrnaDialog
-from material_urna_entity import MaterialUrnaEntity
+from result import Result
+from subcategoria_Acuario_dialog import SubcategoriaAcuarioDialog
+from subcategoria_acuario_controller import SubcategoriaAcuarioController
+from subcategoria_acuario_dao import SubcategoriaAcuarioDAO
+from subcategoria_acuario_entity import SubcategoriaAcuarioEntity
 
 
-class MaterialUrnaDialogController(MaterialUrnaController):
-    """ Controlador del cuadro de diálogo tipo de filtro. """
+class SubcategoriaAcuarioDialogController(SubcategoriaAcuarioController):
+    """ Controlador del cuadro de diálogo marca comercial. """
 
-    def __init__(self, view: MaterialUrnaDialog, dao: MaterialUrnaDAO,
-                 mod: MaterialUrnaEntity):
+    def __init__(self, view: SubcategoriaAcuarioDialog, dao: SubcategoriaAcuarioDAO,
+                 mod: SubcategoriaAcuarioEntity):
         """
         Constructor base
-        :param view: Cuadro de diálogo de inserción de material de urna
-        :param dao: DAO de material de urna
-        :param mod: Modelo del material de urna
+        :param view: Cuadro de diálogo de inserción de subcategoría de acuario
+        :param dao: DAO de la subcategoría de acuario
+        :param mod: Modelo de la subcategoría de acuario
         """
 
         # inicializamos la vista y pasamos al constructor padre
         super().__init__(view, dao, mod)
+
+        # Llenamo los combos
+        self._fill_combos()
 
         # Inicializamos los eventos
         self.init_handlers()
@@ -61,11 +64,12 @@ class MaterialUrnaDialogController(MaterialUrnaController):
             return
 
         # Configuramos la entidad
-        self._material_urna_result = MaterialUrnaEntity(
+        self._subcategoria_acuario_result = SubcategoriaAcuarioEntity(
             id = res.value,
             num = None,
-            material = self._view.frame.edit_material.text(),
-            descripcion = self._view.frame.text_descripcion.toPlainText()
+            id_cat = self._view.frame.combo_categoria_acuario.currentData(),
+            subcategoria = self._view.frame.edit_subcategoria_acuario.text(),
+            observaciones = self._view.frame.text_descripcion.toPlainText()
                           if self._view.frame.text_descripcion.toPlainText()
                           else None
         )
@@ -83,7 +87,7 @@ class MaterialUrnaDialogController(MaterialUrnaController):
 
         if self._view.exec():
             # Obtenemos la subcategoría de acuario
-            material_urna = self._get_material_urna()
-            return Result.success(material_urna)
+            subcategoria_acuario = self._get_marca_comercial()
+            return Result.success(subcategoria_acuario)
         else:
             return Result.failure("EL USUARIO CANCELO LA INSERCIÓN")

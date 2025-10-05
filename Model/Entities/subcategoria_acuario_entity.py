@@ -31,11 +31,61 @@ class SubcategoriaAcuarioEntity(BaseEntity):
 
         super().__init__()
         # Inicializamos las variables
-        self.id = id
-        self.num = num
-        self.id_categoria = id_cat
-        self.subcategoria = subcategoria
-        self.observaciones = observaciones
+        self.__id = id
+        self.__num = num
+        self.__id_categoria = id_cat
+        self.__subcategoria = subcategoria
+        self.__observaciones = observaciones
+
+    @property
+    def id(self) -> int | None:
+        """ Id de la entidad. """
+        return self.__id
+
+    @id.setter
+    def id(self, new_id: int) -> None:
+        """ Id de la entidad. """
+        self.__id = new_id
+
+    @property
+    def num(self) -> int | None:
+        """ Número de la entidad. """
+        return self.__num
+
+    @num.setter
+    def num(self, new_num: int) -> None:
+        """ Número de la entidad. """
+        self.__num = new_num
+
+    @property
+    def id_categoria(self) -> int | None:
+        """ Id de la categoria de acuario. """
+        return self.__id_categoria
+
+    @id_categoria.setter
+    def id_categoria(self, new_id: int) -> None:
+        """ Id de la categoria de acuario. """
+        self.__id_categoria = new_id
+
+    @property
+    def subcategoria(self) -> str | None:
+        """ Subcategoria de acuario. """
+        return self.__subcategoria
+
+    @subcategoria.setter
+    def subcategoria(self, new_subcategoria: str) -> None:
+        """ Subcategoria de acuario. """
+        self.__subcategoria = new_subcategoria
+
+    @property
+    def observaciones(self) -> str | None:
+        """ Observaciones de la subcategoria. """
+        return self.__observaciones
+
+    @observaciones.setter
+    def observaciones(self, new_observaciones: str) -> None:
+        """ Observaciones de la subcategoria. """
+        self.__observaciones = new_observaciones
 
     def __str__(self):
         return f"""

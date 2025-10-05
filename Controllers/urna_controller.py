@@ -11,7 +11,6 @@ from PyQt6.QtWidgets import (QWidget, QMessageBox, QTableView, QCompleter,
                              QComboBox)
 
 from Controllers.base_controller import BaseController
-from Controllers.material_urna_controller_obs import MaterialUrnaDialogControllerObs
 from Model.DAO.marca_comercial_dao import MarcaComercialDAO
 from Model.DAO.material_urna_dao import MaterialUrnaDAO
 from Model.DAO.paginator import Paginator
@@ -28,6 +27,7 @@ from Views.Dialogs.urna_dialog import UrnaDialog
 from Views.Masters.urna_view import UrnaView
 from Views.table_menu_contextual import TableMenuContextual
 from marca_comercial_dialog_controller import MarcaComercialDialogController
+from material_urna_dialog_controller import MaterialUrnaDialogController
 
 
 class UrnaDialogController(BaseController):
@@ -381,7 +381,7 @@ class UrnaDialogController(BaseController):
         mod = MaterialUrnaEntity()
         dao = MaterialUrnaDAO()
 
-        ctrl = MaterialUrnaDialogControllerObs(view, dao, mod)
+        ctrl = MaterialUrnaDialogController(view, dao, mod)
         res = ctrl.show_modal()
 
         if not res.is_success:
