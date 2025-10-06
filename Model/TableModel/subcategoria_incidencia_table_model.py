@@ -8,7 +8,7 @@ Commentarios:
 from PyQt6.QtCore import QAbstractTableModel, Qt, QModelIndex
 
 
-from Model.Entities.subcategoria_incidencia import SubcategoriaIncidenciaEntity
+from Model.Entities.subcategoria_incidencia_entity import SubcategoriaIncidenciaEntity
 
 
 class SubcategoriaIncidenciaTableModel(QAbstractTableModel):

@@ -2,8 +2,13 @@
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
 30/09/2025  REFACGTORIZACIÓN:
-     |      -   SE REFACTORIZAN LOS CONTROLADORES, SEPARANDO EL CONTROLADOR DEL
+     ↓      -   SE REFACTORIZAN LOS CONTROLADORES, SEPARANDO EL CONTROLADOR DEL
                 DIÁLOGO, EL MAESTRO Y EL BASE:
+                -   SUBCATEGORIA DE INCIDENCIA.
+                    -   SE CREA EL CONTROLADOR BASE.                        DONE
+                    -   SE CREA EL CONTROLADOR DEL CUADRO DE DIÁLOGO.       DONE
+                    -   SE CREA EL CONTROLADOR DEL FORMULARIO MAESTRO.      DONE
+
                 -   SUBCATEGORIA DE ACUARIO.
                     -   SE CREA EL CONTROLADOR BASE.                        DONE
                     -   SE CREA EL CONTROLADOR DEL CUADRO DE DIÁLOGO.       DONE
@@ -42,6 +47,7 @@ FECHA		DESCRIPCIÓN
                 -   MARCA COMERCIAL.                                        DONE
                 -   MATERIAL DE URNA.                                       DONE
                 -   SUBCATEGORIA DE ACUARIO.                                DONE
+                -   SUBCATEGORIA DE INCIDENCIA.                             DONE
 
             BUG FIXES:
             -   SE CORRIGE EL BUG DE PAGINACIÓN TRAS LA BÚSQUEDA DE REGISTROS.

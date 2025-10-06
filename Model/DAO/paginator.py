@@ -17,7 +17,7 @@ from Model.Entities.categoria_acuario_entity import CategoriaAcuarioEntity
 from Model.Entities.categoria_incidencia_entity import CategoriaIncidenciaEntity
 from Model.Entities.marca_comercial_entity import MarcaComercialEntity
 from Model.Entities.subcategoria_acuario_entity import SubcategoriaAcuarioEntity
-from Model.Entities.subcategoria_incidencia import SubcategoriaIncidenciaEntity
+from Model.Entities.subcategoria_incidencia_entity import SubcategoriaIncidenciaEntity
 from Model.Entities.tipo_acuario_entity import TipoAcuarioEntity
 from Model.Entities.tipo_filtro_entity import TipoFiltroEntity
 

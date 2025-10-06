@@ -8,7 +8,11 @@ from PyQt6.QtGui import QAction
 from PyQt6.QtWidgets import QMessageBox, QPushButton
 
 from base_controller import BaseController
+from categoria_acuario_controller import CategoriaAcuarioDialog
 from categoria_acuario_dao import CategoriaAcuarioDAO
+from categoria_acuario_dialog_controller import \
+    CategoriaAcuarioDialogoController
+from categoria_acuario_entity import CategoriaAcuarioEntity
 from result import Result
 from subcategoria_Acuario_dialog import SubcategoriaAcuarioDialog
 from subcategoria_acuario_dao import SubcategoriaAcuarioDAO
@@ -273,3 +277,48 @@ class SubcategoriaAcuarioController(BaseController):
 
         # Deseleccionamos el valor
         self._view.frame.combo_categoria_acuario.setCurrentIndex(-1)
+
+    def _open_categoria_acuario_dialog(self):
+        """ Abre el diálogo de categoría de acuario. """
+
+        view = CategoriaAcuarioDialog("INSERTAR CATEGORÍA DE ACUARIO")
+        mod = CategoriaAcuarioEntity()
+        dao = CategoriaAcuarioDAO()
+
+        ctrl = CategoriaAcuarioDialogoController(view, dao, mod)
+        res = ctrl.show_modal()
+
+        if not res.is_success:
+            return
+
+        # Configuramos el combo
+        combo = self._view.frame.combo_categoria_acuario
+
+        self._fill_combo_categoria()
+        for i in range(combo.count()):
+            if combo.itemData(i) == res.value.id:
+                combo.setCurrentIndex(i)
+
+    def _fill_combos(self):
+        """ Llena los combos del formulario"""
+
+        self._fill_combo_categoria()
+
+    def _fill_combo_categoria(self):
+        """ Llena el combo de tipos de acuario. """
+
+        # Vaciamos el combo
+        self._view.frame.combo_categoria_acuario.clear()
+
+        # Obtenemos los datos
+        dao = CategoriaAcuarioDAO()
+        lista = dao.get_list_combo()
+        if not lista.is_success:
+            return Result.failure(
+                "NO SE HAN PODIDO OBTENER LOS 'CATEGORÍAS DE INCIDENCIA'."
+            )
+
+        # Llenamos el combo
+        for ent in lista.value:
+            self._view.frame.combo_categoria_acuario.addItem(
+                ent.categoria, ent.id)

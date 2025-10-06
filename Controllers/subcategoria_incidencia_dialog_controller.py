@@ -1,29 +1,31 @@
 ﻿"""
 Autor: Inigo Iturriagaetxebarria
-Fecha: 03/10/2025
+Fecha: 06/10/2025
 Commentarios:
-    Controlador del cuadro de diálogo de inserción de marca comercial.
+    Controlador del cuadro de diálogo de inserción de subcategoria de
+    incidencia.
 """
 
 from PyQt6.QtWidgets import QWidget, QMessageBox, QComboBox
 
 from result import Result
-from subcategoria_Acuario_dialog import SubcategoriaAcuarioDialog
-from subcategoria_acuario_controller import SubcategoriaAcuarioController
-from subcategoria_acuario_dao import SubcategoriaAcuarioDAO
-from subcategoria_acuario_entity import SubcategoriaAcuarioEntity
+from subcategoria_incidencia_controller import SubcategoriaIncidenciaController
+from subcategoria_incidencia_dao import SubcategoriaIncidenciaDAO
+from subcategoria_incidencia_dialog import SubcategoriaIncidenciaDialog
+from subcategoria_incidencia_entity import SubcategoriaIncidenciaEntity
 
 
-class SubcategoriaAcuarioDialogController(SubcategoriaAcuarioController):
+class SubcategoriaIncidenciaDialogController(SubcategoriaIncidenciaController):
     """ Controlador del cuadro de diálogo marca comercial. """
 
-    def __init__(self, view: SubcategoriaAcuarioDialog, dao: SubcategoriaAcuarioDAO,
-                 mod: SubcategoriaAcuarioEntity):
+    def __init__(self, view: SubcategoriaIncidenciaDialog, dao: SubcategoriaIncidenciaDAO,
+                 mod: SubcategoriaIncidenciaEntity):
         """
         Constructor base
-        :param view: Cuadro de diálogo de inserción de subcategoría de acuario
-        :param dao: DAO de la subcategoría de acuario
-        :param mod: Modelo de la subcategoría de acuario
+        :param view: Cuadro de diálogo de inserción de subcategoría de
+        incidencia
+        :param dao: DAO de la subcategoría de incidencia
+        :param mod: Modelo de la subcategoría de incidencia
         """
 
         # inicializamos la vista y pasamos al constructor padre
@@ -48,11 +50,8 @@ class SubcategoriaAcuarioDialogController(SubcategoriaAcuarioController):
         # Botones
         self._view.button_accept.clicked.connect(self.dialog_accept)
         self._view.button_cancel.clicked.connect(self.dialog_cancel)
-
-        # Combos
-        self._view.frame.button_insert_categoria_acuario.clicked.connect(
-            self._open_categoria_acuario_dialog
-        )
+        self._view.frame.button_insert_categoria_incidencia.clicked \
+            .connect(self.open_categoria_incidencia_dialog)
 
     def dialog_accept(self):
         """ Se acepta el diálogo. """
@@ -69,11 +68,11 @@ class SubcategoriaAcuarioDialogController(SubcategoriaAcuarioController):
             return
 
         # Configuramos la entidad
-        self._subcategoria_acuario_result = SubcategoriaAcuarioEntity(
+        self._subcategoria_incidencia_result = SubcategoriaIncidenciaEntity(
             id = res.value,
             num = None,
-            id_cat = self._view.frame.combo_categoria_acuario.currentData(),
-            subcategoria = self._view.frame.edit_subcategoria_acuario.text(),
+            id_categoria = self._view.frame.combo_categoria_incidencia.currentData(),
+            subcategoria = self._view.frame.edit_subcategoria_incidencia.text(),
             observaciones = self._view.frame.text_descripcion.toPlainText()
                           if self._view.frame.text_descripcion.toPlainText()
                           else None

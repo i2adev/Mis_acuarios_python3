@@ -11,7 +11,7 @@ from PyQt6.QtWidgets import QMessageBox
 
 from Model.DAO.base_dao import BaseDAO
 from Model.DAO.database import DBManager
-from Model.Entities.subcategoria_incidencia import SubcategoriaIncidenciaEntity
+from Model.Entities.subcategoria_incidencia_entity import SubcategoriaIncidenciaEntity
 from Services.Result.result import Result
 
 

@@ -34,7 +34,7 @@ class UsuarioDialogController(BaseController):
         super().__init__(view, dao, mod)
 
         # Llenamo los combos
-        # self.fill_combos()
+        # self._fill_combos()
 
         # Inicializamos los eventos
         self.init_basic_handlers()

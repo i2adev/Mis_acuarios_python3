@@ -6,9 +6,9 @@ Commentarios:
 """
 from PyQt6.QtWidgets import QWidget, QMessageBox, QComboBox
 
-from categoria_acuario_controller import CategoriaAcuarioController
+from categoria_acuario_controller import CategoriaAcuarioController, \
+    CategoriaAcuarioDialog
 from categoria_acuario_dao import CategoriaAcuarioDAO
-from categoria_acuario_dialog import CategoriaAcuarioDialog
 from categoria_acuario_entity import CategoriaAcuarioEntity
 from categoria_acuario_view import CategoriaAcuarioView
 from result import Result
@@ -62,11 +62,11 @@ class CategoriaAcuarioDialogoController(CategoriaAcuarioController):
             return
 
         # Configuramos la entidad
-        _categoria_acuario_result = CategoriaAcuarioEntity(
+        self._categoria_acuario_result = CategoriaAcuarioEntity(
             id = res.value,
             num = None,
             categoria = self._view.frame.edit_categoria_acuario.text(),
-            observaciones = self._view.frame.text_descripcion.toPlainText()
+            observaciones = self._view.frame.text_observaciones.toPlainText()
                           if self._view.frame.text_observaciones.toPlainText()
                           else None
         )
@@ -84,7 +84,7 @@ class CategoriaAcuarioDialogoController(CategoriaAcuarioController):
 
         if self._view.exec():
             # Obtenemos la subcategoría de acuario
-            categoria_acuario = self.get_categoria_Acuario()
+            categoria_acuario = self._get_categoria_acuario()
             return Result.success(categoria_acuario)
         else:
             return Result.failure("EL USUARIO CANCELO LA INSERCIÓN")

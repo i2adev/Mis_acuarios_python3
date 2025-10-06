@@ -6,8 +6,6 @@ Commentarios:
 """
 
 from Controllers.base_controller import BaseController
-from Controllers.subcategoria_incidencia_controller import \
-    SubcategoriaIncidenciaController
 from Controllers.tipo_acuario_controller import TipoAcuarioController
 from Controllers.urna_controller import UrnaController
 from Model.DAO.categoria_acuario_dao import CategoriaAcuarioDAO
@@ -24,7 +22,7 @@ from Model.Entities.categoria_incidencia_entity import CategoriaIncidenciaEntity
 from Model.Entities.marca_comercial_entity import MarcaComercialEntity
 from Model.Entities.material_urna_entity import MaterialUrnaEntity
 from Model.Entities.subcategoria_acuario_entity import SubcategoriaAcuarioEntity
-from Model.Entities.subcategoria_incidencia import SubcategoriaIncidenciaEntity
+from Model.Entities.subcategoria_incidencia_entity import SubcategoriaIncidenciaEntity
 from Model.Entities.tipo_acuario_entity import TipoAcuarioEntity
 from Model.Entities.tipo_filtro_entity import TipoFiltroEntity
 from Model.Entities.urna_entity import UrnaEntity
@@ -46,6 +44,8 @@ from marca_comercial_master_controller import MarcaComercialMasterController
 from material_urna_master_controler import MaterialUrnaMasterController
 from subcategoria_acuario_master_controller import \
     SubcategoriaAcuarioMasterController
+from subcategoria_incidencia_master_controller import \
+    SubcategoriaIncidenciaMasterController
 from tipo_filtro_master_controller import TipoFiltroMasterController
 
 
@@ -212,7 +212,7 @@ class MainViewController(BaseController):
         dao = SubcategoriaIncidenciaDAO()
         mod = SubcategoriaIncidenciaEntity()
 
-        ctrl = SubcategoriaIncidenciaController(view, dao, mod)
+        ctrl = SubcategoriaIncidenciaMasterController(view, dao, mod)
         ctrl.show()
 
 
