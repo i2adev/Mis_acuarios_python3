@@ -11,7 +11,7 @@ from base_controller import BaseController
 from categoria_acuario_controller import CategoriaAcuarioDialog
 from categoria_acuario_dao import CategoriaAcuarioDAO
 from categoria_acuario_dialog_controller import \
-    CategoriaAcuarioDialogoController
+    CategoriaAcuarioDialogController
 from categoria_acuario_entity import CategoriaAcuarioEntity
 from result import Result
 from subcategoria_Acuario_dialog import SubcategoriaAcuarioDialog
@@ -285,7 +285,7 @@ class SubcategoriaAcuarioController(BaseController):
         mod = CategoriaAcuarioEntity()
         dao = CategoriaAcuarioDAO()
 
-        ctrl = CategoriaAcuarioDialogoController(view, dao, mod)
+        ctrl = CategoriaAcuarioDialogController(view, dao, mod)
         res = ctrl.show_modal()
 
         if not res.is_success:

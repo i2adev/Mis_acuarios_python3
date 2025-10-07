@@ -184,7 +184,7 @@ class TipoAcuarioDAO(BaseDAO):
             return Result.failure(f"[SQLITE ERROR]\n {e}")
 
     # ------------------------------------------------------------------
-    def insert(self, ent: TipoAcuarioEntity) -> Result(int):
+    def insert(self, ent: TipoAcuarioEntity) -> Result:
         """
         Inserta un nuevo registro y devuelve el ID generado.
         :param ent: Entidad derivada de BaseEntity

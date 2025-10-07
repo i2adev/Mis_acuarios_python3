@@ -14,7 +14,7 @@ from categoria_acuario_view import CategoriaAcuarioView
 from result import Result
 
 
-class CategoriaAcuarioDialogoController(CategoriaAcuarioController):
+class CategoriaAcuarioDialogController(CategoriaAcuarioController):
     """ Controlador del cuadro de diálogo categoria de acuario. """
 
     def __init__(self, view: CategoriaAcuarioDialog | CategoriaAcuarioView, 
