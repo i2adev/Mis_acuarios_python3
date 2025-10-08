@@ -322,3 +322,6 @@ class SubcategoriaAcuarioController(BaseController):
         for ent in lista.value:
             self._view.frame.combo_categoria_acuario.addItem(
                 ent.categoria, ent.id)
+
+        # Vaciamos el combo
+        self._view.frame.combo_categoria_acuario.setCurrentIndex(-1)

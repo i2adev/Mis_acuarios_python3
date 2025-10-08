@@ -84,7 +84,7 @@ class CategoriaIncidenciaController(BaseController):
             return Result.failure(res.error_msg)
 
         # Limpiamos el formulario
-        self._clean_view(self._view.frame.edit_tipo_filtro)
+        self._clean_view(self._view.frame.edit_categoria_incidencia)
 
         return Result.success(ent.id)
 
@@ -132,7 +132,7 @@ class CategoriaIncidenciaController(BaseController):
             return Result.failure(res.error_msg)
 
         # Limpiamos el formulario
-        self._clean_view(self._view.frame.edit_tipo_filtro)
+        self._clean_view(self._view.frame.edit_categoria_incidencia)
         return Result.success(ide)
 
     # FIN DE CRUD --------------------------------------------------
@@ -207,22 +207,21 @@ class CategoriaIncidenciaController(BaseController):
         modelo = self._view.data_table.model()
 
         # Lee los datos del modelo
-        id_ta = modelo.index(fila, 0).data()
-        tipo_filtro = modelo.index(fila, 2).data()  # La columna 1 es el
-                                                    # númer correlativo.
+        id_ci = modelo.index(fila, 0).data()
+        cat_incidencia = modelo.index(fila, 2).data()
         observaciones = modelo.index(fila, 3).data()
 
         # Cargamos los widgets
         self._view.frame.edit_id.setText(
-            str(id_ta) if id_ta is not None else ""
+            str(id_ci) if id_ci is not None else ""
         )
 
-        self._view.frame.edit_tipo_filtro.setText(
-            str(tipo_filtro) if tipo_filtro else ""
+        self._view.frame.edit_categoria_incidencia.setText(
+            str(cat_incidencia) if cat_incidencia else ""
         )
 
         self._view.frame.text_observaciones.setPlainText(
             str(observaciones) if observaciones is not None else ""
         )
 
-        return Result.success(id_ta)
+        return Result.success(id_ci)

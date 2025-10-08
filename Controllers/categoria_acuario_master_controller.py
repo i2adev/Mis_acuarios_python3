@@ -61,7 +61,7 @@ class CategoriaAcuarioMasterController(CategoriaAcuarioController):
         self._view.button_load.clicked.connect(self.button_load_click)
         self._view.button_delete.clicked.connect(self.delete_click)
         self._view.button_clean.clicked.connect(lambda: self._clean_view(
-            self._view.frame.edit_tipo_filtro
+            self._view.frame.edit_categoria_acuario
         ))
         self._view.button_next.clicked.connect(self._next_page)
         self._view.button_prev.clicked.connect(self._previous_page)
@@ -101,7 +101,7 @@ class CategoriaAcuarioMasterController(CategoriaAcuarioController):
             # Cargamos la tabla
             self._fill_tableview(self._view.data_table, self._pag._total_data)
             self._configure_table(self._view.data_table)
-            self._clean_view(self._view.frame.edit_tipo_filtro)
+            self._clean_view(self._view.frame.edit_categoria_acuario)
             self._view.label_total_pages.setText(str(self._pag.total_pages))
 
             # Configuramos la tabla
@@ -136,7 +136,7 @@ class CategoriaAcuarioMasterController(CategoriaAcuarioController):
         # Cargamos la tabla
         self._fill_tableview(self._view.data_table, self._pag._total_data)
         self._configure_table(self._view.data_table)
-        self._clean_view(self._view.frame.edit_tipo_filtro)
+        self._clean_view(self._view.frame.edit_categoria_acuario)
 
         self._view.button_filter.setIcon(QIcon(":/Images/filtered.png"))
 

@@ -1,9 +1,100 @@
 ﻿================================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
+08/10/2025  TEST DE FORMULARIOS MAESTROS
+            -   TIPO DE FILTRO.
+                -   INSERCION DE REGISTRO.                                  DONE
+                -   ACTUALIZACIÓN DE REGISTRO.                              DONE
+                -   ELIMINACIÓN DE REGISTRO.
+                    -   ELIMINACIÓN DESDE MENÚ CONTEXTUAL.                  DONE
+                    -   ELIMINACIÓN TRAS CARGAR EL REGISTRO EN EL FORMULARIO.
+                                                                            DONE
+                -   FILTRADO DE REGISTROS.                                  DONE
+                -   COMPROBAR LA INSERCIÓN DE LOS COMBOS.          NOT NECESSARY
+
+            -   CATEGORIA DE ACUARIO.
+                -   INSERCION DE REGISTRO.                                  DONE
+                -   ACTUALIZACIÓN DE REGISTRO.                              DONE
+                -   ELIMINACIÓN DE REGISTRO.
+                    -   ELIMINACIÓN DESDE MENÚ CONTEXTUAL.                  DONE
+                    -   ELIMINACIÓN TRAS CARGAR EL REGISTRO EN EL FORMULARIO.
+                                                                            DONE
+                -   FILTRADO DE REGISTROS.                                  DONE
+                -   COMPROBAR LA INSERCIÓN DE LOS COMBOS.          NOT NECESSARY
+
+            -   CATEGORÍA INCIDENCIA.
+                -   INSERCION DE REGISTRO.                                  DONE
+                -   ACTUALIZACIÓN DE REGISTRO.                              DONE
+                -   ELIMINACIÓN DE REGISTRO.
+                    -   ELIMINACIÓN DESDE MENÚ CONTEXTUAL.                  DONE
+                    -   ELIMINACIÓN TRAS CARGAR EL REGISTRO EN EL FORMULARIO.
+                                                                            DONE
+                -   FILTRADO DE REGISTROS.                                  DONE
+                -   COMPROBAR LA INSERCIÓN DE LOS COMBOS.          NOT NECESSARY
+
+            -   MARCA COMERCIAL.
+                -   INSERCION DE REGISTRO.                                  DONE
+                -   ACTUALIZACIÓN DE REGISTRO.                              DONE
+                -   ELIMINACIÓN DE REGISTRO.
+                    -   ELIMINACIÓN DESDE MENÚ CONTEXTUAL.                  DONE
+                    -   ELIMINACIÓN TRAS CARGAR EL REGISTRO EN EL FORMULARIO.
+                                                                            DONE
+                -   FILTRADO DE REGISTROS.                                  DONE
+                -   COMPROBAR LA INSERCIÓN DE LOS COMBOS.          NOT NECESSARY
+
+            -   MATERIAL DE URNA.
+                -   INSERCION DE REGISTRO.                                  DONE
+                -   ACTUALIZACIÓN DE REGISTRO.                              DONE
+                -   ELIMINACIÓN DE REGISTRO.
+                    -   ELIMINACIÓN DESDE MENÚ CONTEXTUAL.                  DONE
+                    -   ELIMINACIÓN TRAS CARGAR EL REGISTRO EN EL FORMULARIO.
+                                                                            DONE
+                -   FILTRADO DE REGISTROS.                                  DONE
+                -   COMPROBAR LA INSERCIÓN DE LOS COMBOS.          NOT NECESSARY
+
+            -   SUBCATEGORIA DE ACUARIO.
+                -   INSERCION DE REGISTRO.                                  DONE
+                -   ACTUALIZACIÓN DE REGISTRO.                              DONE
+                -   ELIMINACIÓN DE REGISTRO.
+                    -   ELIMINACIÓN DESDE MENÚ CONTEXTUAL.                  DONE
+                    -   ELIMINACIÓN TRAS CARGAR EL REGISTRO EN EL FORMULARIO.
+                                                                            DONE
+                -   FILTRADO DE REGISTROS.                                  DONE
+                -   COMPROBAR LA INSERCIÓN DE LOS COMBOS.                   DONE
+
+            -   SUBCATEGORIA DE INCIDENCIA.
+                -   INSERCION DE REGISTRO.                                  DONE
+                -   ACTUALIZACIÓN DE REGISTRO.                              DONE
+                -   ELIMINACIÓN DE REGISTRO.
+                    -   ELIMINACIÓN DESDE MENÚ CONTEXTUAL.                  DONE
+                    -   ELIMINACIÓN TRAS CARGAR EL REGISTRO EN EL FORMULARIO.
+                                                                            DONE
+                -   FILTRADO DE REGISTROS.                                  DONE
+                -   COMPROBAR LA INSERCIÓN DE LOS COMBOS.                   DONE
+
+            -   TIPO DE ACUARIO.
+                -   INSERCION DE REGISTRO.                                  DONE
+                -   ACTUALIZACIÓN DE REGISTRO.                              DONE
+                -   ELIMINACIÓN DE REGISTRO.
+                    -   ELIMINACIÓN DESDE MENÚ CONTEXTUAL.                  DONE
+                    -   ELIMINACIÓN TRAS CARGAR EL REGISTRO EN EL FORMULARIO.
+                                                                            DONE
+                -   FILTRADO DE REGISTROS.                                  DONE
+                -   COMPROBAR LA INSERCIÓN DE LOS COMBOS.                   DONE
+
+            -   URNA.
+                -   INSERCION DE REGISTRO.                                  DONE
+                -   ACTUALIZACIÓN DE REGISTRO.                              DONE
+                -   ELIMINACIÓN DE REGISTRO.
+                    -   ELIMINACIÓN DESDE MENÚ CONTEXTUAL.                  DONE
+                    -   ELIMINACIÓN TRAS CARGAR EL REGISTRO EN EL FORMULARIO.
+                                                                            DONE
+                -   FILTRADO DE REGISTROS.                                  DONE
+                -   COMPROBAR LA INSERCIÓN DE LOS COMBOS.                   DONE
+
 30/09/2025  REFACGTORIZACIÓN:
      ↓      -   SE REFACTORIZAN LOS CONTROLADORES, SEPARANDO EL CONTROLADOR DEL
-                DIÁLOGO, EL MAESTRO Y EL BASE:
+08/10/2025      DIÁLOGO, EL MAESTRO Y EL BASE:
 
                 -   URNA.
                     -   SE CREA EL CONTROLADOR BASE.                        DONE

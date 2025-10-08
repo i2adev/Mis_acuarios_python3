@@ -85,7 +85,6 @@ class SubcategoriaAcuarioMasterController(SubcategoriaAcuarioController):
         self._view.combo_select_page.currentIndexChanged.connect(
             self.combo_page_indexchanged
         )
-        # Combos
         self._view.frame.button_insert_categoria_acuario.clicked.connect(
             self._open_categoria_acuario_dialog
         )

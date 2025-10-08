@@ -12,6 +12,7 @@ from subcategoria_Acuario_dialog import SubcategoriaAcuarioDialog
 from subcategoria_acuario_dao import SubcategoriaAcuarioDAO
 from subcategoria_acuario_dialog_controller import \
     SubcategoriaAcuarioDialogController
+from subcategoria_acuario_entity import SubcategoriaAcuarioEntity
 from tipo_acuario_dao import TipoAcuarioDAO
 from tipo_acuario_dialog import TipoAcuarioDialog
 from tipo_acuario_entity import TipoAcuarioEntity
@@ -252,9 +253,9 @@ class TipoAcuarioController(BaseController):
     def _fill_combos(self):
         """ Llena los combos del formulario"""
 
-        self._fill_categoria_acuario()
+        self._fill_combo_categoria_acuario()
         
-    def _fill_categoria_acuario(self):
+    def _fill_combo_categoria_acuario(self):
         """ Llena el combo de tipos de acuario. """
 
         # Vaciamos el combo
@@ -279,7 +280,7 @@ class TipoAcuarioController(BaseController):
         # Deseleccionamos el valor
         self._view.frame.combo_categoria_acuario.setCurrentIndex(-1)
 
-    def _fill_subcategoria_acuario(self, id_ta: int):
+    def _fill_combo_subcategoria_acuario(self, id_ta: int):
         """ Llena el combo de subcategoría de acuario. """
 
         # Vaciamos el combo
@@ -323,7 +324,7 @@ class TipoAcuarioController(BaseController):
         data = self._view.frame.combo_categoria_acuario.currentData()
 
         # Cargamos el combo subcategoría
-        self._fill_subcategoria_acuario(data)
+        self._fill_combo_subcategoria_acuario(data)
 
     def _open_categoria_acuario_dialog(self):
         """ Abre el diálogo de categoría de acuario. """
@@ -368,7 +369,7 @@ class TipoAcuarioController(BaseController):
         ix_cat = self._view.frame.combo_categoria_acuario.currentIndex()
         view = SubcategoriaAcuarioDialog("INSERTAR SUBCATEGORÍA")
         dao = SubcategoriaAcuarioDAO()
-        mod = TipoAcuarioEntity()
+        mod = SubcategoriaAcuarioEntity()
 
         ctrl = SubcategoriaAcuarioDialogController(view, dao, mod, ix_cat)
 
@@ -380,7 +381,7 @@ class TipoAcuarioController(BaseController):
         # Configuramos el combo
         combo = self._view.frame.combo_subcategoria_acuario
 
-        self.fill_combo_subcategoria(data)
+        self._fill_combo_subcategoria_acuario(data)
         for i in range(combo.count()):
             if combo.itemData(i) == res.value.id:
                 combo.setCurrentIndex(i)

@@ -364,7 +364,7 @@ class UrnaController(BaseController):
         # Configuramos el combo
         combo = self._view.frame.combo_marca
 
-        self.fill_combo_marca()
+        self._fill_combo_marca()
         for i in range(combo.count()):
             if combo.itemData(i) == res.value.id:
                 combo.setCurrentIndex(i)
@@ -387,7 +387,7 @@ class UrnaController(BaseController):
         # Configuramos el combo
         combo = self._view.frame.combo_material
 
-        self.fill_combo_material()
+        self._fill_combo_material()
         for i in range(combo.count()):
             if combo.itemData(i) == res.value.id:
                 combo.setCurrentIndex(i)

@@ -54,9 +54,9 @@ class SubcategoriaAcuarioDialogController(SubcategoriaAcuarioController):
         )
 
         # Comboboxes
-        self._view.frame.combo_categoria_acuario.currentIndexChanged.connect(
-            self._combo_categoria_indexchanged
-        )
+        # self._view.frame.combo_categoria_acuario.currentIndexChanged.connect(
+        #     self._combo_categoria_indexchanged
+        # )
 
     def dialog_accept(self):
         """ Se acepta el diálogo. """
@@ -96,7 +96,7 @@ class SubcategoriaAcuarioDialogController(SubcategoriaAcuarioController):
 
         if self._view.exec():
             # Obtenemos la subcategoría de acuario
-            subcategoria_acuario = self._get_marca_comercial()
+            subcategoria_acuario = self._get_subcategoria_acuario()
             return Result.success(subcategoria_acuario)
         else:
             return Result.failure("EL USUARIO CANCELO LA INSERCIÓN")

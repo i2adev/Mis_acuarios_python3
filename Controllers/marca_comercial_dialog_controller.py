@@ -31,7 +31,7 @@ class MarcaComercialDialogController(MarcaComercialController):
         super().__init__(view, dao, mod)
 
         # Llenamo los combos
-        self.fill_combos()
+        self._fill_combos()
 
         # Inicializamos los eventos
         self.init_handlers()
@@ -74,9 +74,9 @@ class MarcaComercialDialogController(MarcaComercialController):
             poblacion = self._view.frame.edit_poblacion.text(),
             provincia = self._view.frame.edit_provincia.text,
             id_pais = self._view.frame.combo_pais.currentData(),
-            observaciones = self._view.frame.text_descripcion.toPlainText()
-                          if self._view.frame.text_descripcion.toPlainText()
-                          else None
+            observaciones = self._view.frame.text_observaciones.toPlainText()
+                          if self._view.frame.text_observaciones.toPlainText()
+                          else ""
         )
 
         # Aceptamos el diálogo
@@ -111,7 +111,7 @@ class MarcaComercialDialogController(MarcaComercialController):
             self._view.frame.combo_pais.addItem(ent.pais, ent.id)
 
         # Establecemos el autocompletado
-        self.set_autocomplete(self._view.frame.combo_pais)
+        self._set_autocomplete(self._view.frame.combo_pais)
 
         # Deseleccionamos el valor
         self._view.frame.combo_pais.setCurrentIndex(-1)
