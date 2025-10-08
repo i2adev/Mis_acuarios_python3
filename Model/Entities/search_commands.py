@@ -192,3 +192,17 @@ class SearchCmd:
     )
     WHERE     FIELD LIKE '%' || :pattern || '%';
     """
+
+    SEARCH_ESTADO_PROYECTO = """
+    SELECT    ID, NUM, ESTADO, DESCRIPCION
+    FROM
+    (
+        SELECT    ID_ESTADO AS ID,
+                  ROW_NUMBER() OVER (ORDER BY NOMBRE_ESTADO) AS NUM,
+                  NOMBRE_ESTADO AS ESTADO,
+                  DESCRIPCION AS DESCRIPCION,
+                  UPPER(IFNULL(NOMBRE_ESTADO, '') || IFNULL(DESCRIPCION, '')) AS FIELD
+        FROM      ESTADOS_PROYECTO
+    )
+    WHERE     FIELD LIKE '%' || :pattern || '%';
+    """

@@ -20,6 +20,7 @@ from Model.Entities.subcategoria_acuario_entity import SubcategoriaAcuarioEntity
 from Model.Entities.subcategoria_incidencia_entity import SubcategoriaIncidenciaEntity
 from Model.Entities.tipo_acuario_entity import TipoAcuarioEntity
 from Model.Entities.tipo_filtro_entity import TipoFiltroEntity
+from estado_proyecto_entity import EstadoProyectoEntity
 
 
 class Paginator:
@@ -437,7 +438,7 @@ class Paginator:
                 )
                 for f in rows
             ]
-        if self.procedure == "VISTA_MATERIALES_URNA":
+        elif self.procedure == "VISTA_MATERIALES_URNA":
             data_list = [MaterialUrnaEntity(
                     id=f["ID"],
                     num=f["NUM"],
@@ -446,6 +447,16 @@ class Paginator:
                 )
                 for f in rows
             ]
+        elif self.procedure == "VISTA_ESTADOS_PROYECTO":
+            data_list = [EstadoProyectoEntity(
+                    id=f["ID"],
+                    num=f["NUM"],
+                    estado=f["ESTADO"],
+                    descripcion=f["DESCRIPCION"]
+                )
+                for f in rows
+            ]
+
         return data_list
 
     def get_page_number_by_num(self, num: int) -> int:
@@ -489,6 +500,8 @@ class Paginator:
             return SearchCmd.SEARCH_URNA
         elif self.procedure == "VISTA_MATERIALES_URNA":
             return SearchCmd.SEARCH_MATERIAL_URNA
+        elif self.procedure == "VISTA_ESTADOS_PROYECTO":
+            return SearchCmd.SEARCH_ESTADO_PROYECTO
 
     def __str__(self):
         """ Muestra el objeto en forma de texto. """

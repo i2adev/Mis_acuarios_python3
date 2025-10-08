@@ -104,6 +104,7 @@ class MainView(QWidget):
         self.maestro_layout.addWidget(self.button_maestro_marca)
         self.maestro_layout.addWidget(self.button_maestro_material)
         self.maestro_layout.addWidget(self.button_maestro_proyecto)
+        self.maestro_layout.addWidget(self.button_maestro_estado_proyecto)
         self.maestro_layout.addWidget(self.button_maestro_tipo_acuario)
         self.maestro_layout.addWidget(self.button_maestro_categoria_acuario)
         self.maestro_layout.addWidget(self.button_maestro_subcategoria_acuario)
@@ -415,6 +416,29 @@ class MainView(QWidget):
         )
         self.button_maestro_proyecto.setFlat(True)
         self.button_maestro_proyecto.setCursor(
+            QCursor(Qt.CursorShape.PointingHandCursor)
+        )
+
+        self.button_maestro_estado_proyecto = QPushButton(
+            " > ESTADOS PROYECTOS"
+        )
+        self.button_maestro_estado_proyecto.setStyleSheet(
+            """
+            QPushButton {
+                background-color: transparent;
+                text-align: left;
+                margin-bottom: 0;
+                margin-left: 20;
+                font-family: 'Roboto'; 
+                font-size: 14px;
+            }
+            """
+        )
+        self.button_maestro_estado_proyecto.setObjectName(
+            "button_maestro_estado_proyecto"
+        )
+        self.button_maestro_estado_proyecto.setFlat(True)
+        self.button_maestro_estado_proyecto.setCursor(
             QCursor(Qt.CursorShape.PointingHandCursor)
         )
 

@@ -241,7 +241,7 @@ class BaseDAO(ABC):
                 del db
 
     @staticmethod
-    def get_filtered_data(sql: str, pattern: str) -> Result(list):
+    def get_filtered_data(sql: str, pattern: str) -> Result:
         """
         Obtiena la lista filtrada
         :param sql: Comando sql de selección a ejecutar

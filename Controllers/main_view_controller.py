@@ -38,6 +38,10 @@ import globals
 from categoria_acuario_master_controller import CategoriaAcuarioMasterController
 from categoria_incidencia_master_controller import \
     CategoriaIncidenciaMasterController
+from estado_proyecto_dao import EstadoProyectoDAO
+from estado_proyecto_entity import EstadoProyectoEntity
+from estado_proyecto_master_controller import EstadoProyectoMasterController
+from estado_proyecto_view import EstadoProyectoView
 from marca_comercial_master_controller import MarcaComercialMasterController
 from material_urna_master_controler import MaterialUrnaMasterController
 from subcategoria_acuario_master_controller import \
@@ -105,6 +109,23 @@ class MainViewController(BaseController):
         self._view.button_maestro_urna.clicked.connect(
             self.urna_clicked
         )
+
+        self._view.button_maestro_estado_proyecto.clicked.connect(
+            self.estado_proyecto_clicked
+        )
+
+    def estado_proyecto_clicked(self):
+        """
+        Cuando se presiona en el estado de proyecto.
+        Acción: Abre el formulario de estado de proyecto.
+        """
+
+        view = EstadoProyectoView("MAESTRO DE ESTADOS DE PROYECTO")
+        dao = EstadoProyectoDAO()
+        mod = EstadoProyectoEntity()
+
+        ctrl = EstadoProyectoMasterController(view, dao, mod)
+        ctrl.show()
 
     def material_urna_clicked(self):
         """
@@ -235,4 +256,6 @@ class MainViewController(BaseController):
         """ Abre la vista """
         self._view.show()
         #self._view.showMaximized()
+
+
 

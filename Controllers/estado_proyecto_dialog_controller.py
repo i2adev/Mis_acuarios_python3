@@ -5,26 +5,25 @@ Commentarios:
     Controlador del cuadro de diálogo de inserción de tipo de filtro.
 """
 
-from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QWidget, QMessageBox, QComboBox, QCompleter
 
-from Model.DAO.tipo_filtro_dao import TipoFiltroDAO
-from Model.Entities.tipo_filtro_entity import TipoFiltroEntity
-from Services.Result.result import Result
-from Views.Dialogs.tipo_filtro_dialog import TipoFiltroDialog
-from tipo_filtro_controller import TipoFiltroController
+from estado_proyecto_controller import EstadoProyectoController
+from estado_proyecto_dao import EstadoProyectoDAO
+from estado_proyecto_dialogo import EstadoProyectoDialog
+from estado_proyecto_entity import EstadoProyectoEntity
+from result import Result
 
 
-class TipoFiltroDialogoController(TipoFiltroController):
+class EstadoProyectoDialogController(EstadoProyectoController):
     """ Controlador del cuadro de diálogo tipo de filtro. """
 
-    def __init__(self, view: TipoFiltroDialog, dao: TipoFiltroDAO,
-                 mod: TipoFiltroEntity):
+    def __init__(self, view: EstadoProyectoDialog, dao: EstadoProyectoDAO,
+                 mod: EstadoProyectoEntity):
         """
         Constructor base
-        :param view: Cuadro de diálogo de inserción de tipo de filtro
-        :param dao: DAO del tipo de filtro
-        :param mod: Modelo del tipo de filtro
+        :param view: Cuadro de diálogo de inserción de estado de proyecto
+        :param dao: DAO del estado de proyecto
+        :param mod: Modelo del estado de proyecto
         """
 
         # inicializamos la vista y pasamos al constructor padre
@@ -62,13 +61,13 @@ class TipoFiltroDialogoController(TipoFiltroController):
             return
 
         # Configuramos la entidad
-        self._tipo_filtro_result = TipoFiltroEntity(
+        self._tipo_filtro_result = EstadoProyectoEntity(
             id = res.value,
             num = None,
-            tipo_filtro = self._view.frame.edit_tipo_filtro.text(),
-            observaciones = self._view.frame.text_observaciones.toPlainText()
+            estado = self._view.frame.edit_estado_proyecto.text(),
+            descripcion = self._view.frame.text_observaciones.toPlainText()
                           if self._view.frame.text_observaciones.toPlainText()
-                          else None
+                          else ""
         )
 
         # Aceptamos el diálogo
@@ -84,7 +83,7 @@ class TipoFiltroDialogoController(TipoFiltroController):
 
         if self._view.exec():
             # Obtenemos la subcategoría de acuario
-            tipo_filyto = self._get_tipo_filtro()
-            return Result.success(tipo_filyto)
+            estado_proyecto = self._get_estado_proyecto()
+            return Result.success(estado_proyecto)
         else:
             return Result.failure("EL USUARIO CANCELO LA INSERCIÓN")

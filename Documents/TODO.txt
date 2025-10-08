@@ -1,6 +1,22 @@
 ﻿================================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
+08/10/2025  SE AÑADE LA LÓGICA DE ESTADO DE PROYECTO:
+     ↓      -   SE CREA LA ENTIDAD.                                         DONE
+            -   SE CREA LA VISTA EN LA BASE DE DATOS.                       DONE
+            -   SE CREA EL DAO.                                             DONE
+            -   SE CREA EL FORMULARIO.                                      DONE
+            -   SE CREA EL CUADRO DE DIÁLOGO.                               DONE
+            -   SE CREA EL FORMULARIO MAESTRO.                              DONE
+            -   SE CREA EL VALIDADOR DEL FORMULARIO.                        DONE
+            -   SE CREA EL MODELO DE TABLA.                                 DONE
+            -   ACTUALIZAR EL SISTEMA DE BÚSQUEDA.                          DONE
+            -   SE CREAN LOS CONTROLADORES:
+                -   CONTROLADOR BASE.                                       DONE
+                -   CONTROLADOR DEL CUADRO DE DIÁLOGO.                      DONE
+                -   CONTROLADOR DEL FORMULARIO MAESTRO.                     DONE
+            - INTEGRAR EN LA VISTA PRINCIPAL.                               DONE
+
 08/10/2025  TEST DE FORMULARIOS MAESTROS
             -   TIPO DE FILTRO.
                 -   INSERCION DE REGISTRO.                                  DONE
