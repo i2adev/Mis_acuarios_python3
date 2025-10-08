@@ -92,7 +92,7 @@ class FotografiaDAO(BaseDAO):
             return Result.failure(f"[SQLITE ERROR]\n {e}")
 
     # ------------------------------------------------------------------
-    def insert(self, ent: FotografiaEntity) -> Result(int):
+    def insert(self, ent: FotografiaEntity) -> Result:
         """
         Inserta un nuevo registro y devuelve el ID generado.
         :param ent: Entidad derivada de BaseEntity

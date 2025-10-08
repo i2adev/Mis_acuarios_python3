@@ -6,7 +6,6 @@ Commentarios:
 """
 
 from Controllers.base_controller import BaseController
-from Controllers.urna_controller import UrnaController
 from Model.DAO.categoria_acuario_dao import CategoriaAcuarioDAO
 from Model.DAO.categoria_incidencia_dao import CategoriaIncidenciaDAO
 from Model.DAO.marca_comercial_dao import MarcaComercialDAO
@@ -47,6 +46,7 @@ from subcategoria_incidencia_master_controller import \
     SubcategoriaIncidenciaMasterController
 from tipo_acuario_master_controller import TipoAcuarioMasterController
 from tipo_filtro_master_controller import TipoFiltroMasterController
+from urna_master_controller import UrnaMasterController
 
 
 class MainViewController(BaseController):
@@ -128,7 +128,7 @@ class MainViewController(BaseController):
         dao = UrnaDAO()
         mod = UrnaEntity()
 
-        ctrl = UrnaController(view, dao, mod)
+        ctrl = UrnaMasterController(view, dao, mod)
         ctrl.show()
 
     def tipo_filtro_clicked(self, event):

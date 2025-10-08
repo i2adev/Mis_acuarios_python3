@@ -16,13 +16,12 @@ from PyQt6.QtWidgets import QApplication, QMessageBox, QDialog
 from Controllers.login_controller import LoginDialogController
 from Controllers.main_view_controller import MainViewController
 
-# Versión del programa
-__version__ = "0.12.7"
-
 from Model.DAO.usuario_dao import UsuarioDAO
 from Model.Entities.usuario_entity import UsuarioEntity
 from Views.Dialogs.login_dialog import LoginDialog
 
+# Versión del programa
+__version__ = "0.12.8"
 
 # Entrada al programa
 def main():
