@@ -6,8 +6,6 @@ Commentarios:
     programa. Este método da estilo a la aplicación y abre la ventana
     principal.
 """
-
-# Importaciones
 import sys
 from pathlib import Path
 
@@ -21,7 +19,7 @@ from Model.Entities.usuario_entity import UsuarioEntity
 from Views.Dialogs.login_dialog import LoginDialog
 
 # Versión del programa
-__version__ = "0.13.0"
+__version__ = "0.14.0"
 
 # Entrada al programa
 def main():

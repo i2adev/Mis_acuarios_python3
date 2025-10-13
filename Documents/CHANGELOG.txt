@@ -1,5 +1,7 @@
 ﻿CHANGELOG:
 ================================================================================
+0.14.0  SE AÑADE LA LÓGICA DE PRFOYECTO.
+
 0.13.0  SE AÑADE LA LÓGICA DE ESTADO DE PROYECTO.
 
 0.12.9  TESTS:

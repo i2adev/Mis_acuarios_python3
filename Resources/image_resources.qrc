@@ -12,6 +12,7 @@
         <file>Images/filtered.png</file>
         <file>Images/search.png</file>
         <file>Images/cuenta.png</file>
+        <file>Images/calendario.png</file>
         <!-- <file>Styles/main_style.qss</file> -->
     </qresource>
 </RCC>

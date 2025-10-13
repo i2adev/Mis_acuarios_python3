@@ -9,7 +9,7 @@ from PyQt6.QtWidgets import QWidget, QMessageBox, QComboBox, QCompleter
 
 from estado_proyecto_controller import EstadoProyectoController
 from estado_proyecto_dao import EstadoProyectoDAO
-from estado_proyecto_dialogo import EstadoProyectoDialog
+from estado_proyecto_dialog import EstadoProyectoDialog
 from estado_proyecto_entity import EstadoProyectoEntity
 from result import Result
 

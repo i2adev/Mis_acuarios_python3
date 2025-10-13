@@ -1,8 +1,26 @@
 ﻿================================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
+09/10/2025  SE AÑADE LA LÓGICA DEL PROYECTO:
+            -   SE CREA LA ENTIDAD.                                         DONE
+            -   SE CREA LA VISTA EN LA BASE DE DATOS.                       DONE
+            -   SE CREA EL DAO.                                             DONE
+            -   SE CREA EL FORMULARIO.                                      DONE
+            -   SE CREA EL CUADRO DE DIÁLOGO.                               TODO
+            -   SE CREA EL FORMULARIO MAESTRO.                              TODO
+            -   SE CREA EL VALIDADOR DEL FORMULARIO.                        TODO
+            -   SE CREA EL MODELO DE TABLA.                                 TODO
+            -   ACTUALIZAR EL SISTEMA DE BÚSQUEDA.                          TODO
+
+            -   SE CREAN LOS CONTROLADORES:
+                -   CONTROLADOR BASE.                                       TODO
+                -   CONTROLADOR DEL CUADRO DE DIÁLOGO.                      TODO
+                -   CONTROLADOR DEL FORMULARIO MAESTRO.                     TODO
+
+            - INTEGRAR EN LA VISTA PRINCIPAL.                               TODO
+
 08/10/2025  SE AÑADE LA LÓGICA DE ESTADO DE PROYECTO:
-     ↓      -   SE CREA LA ENTIDAD.                                         DONE
+            -   SE CREA LA ENTIDAD.                                         DONE
             -   SE CREA LA VISTA EN LA BASE DE DATOS.                       DONE
             -   SE CREA EL DAO.                                             DONE
             -   SE CREA EL FORMULARIO.                                      DONE
@@ -11,10 +29,12 @@ FECHA		DESCRIPCIÓN
             -   SE CREA EL VALIDADOR DEL FORMULARIO.                        DONE
             -   SE CREA EL MODELO DE TABLA.                                 DONE
             -   ACTUALIZAR EL SISTEMA DE BÚSQUEDA.                          DONE
+
             -   SE CREAN LOS CONTROLADORES:
                 -   CONTROLADOR BASE.                                       DONE
                 -   CONTROLADOR DEL CUADRO DE DIÁLOGO.                      DONE
                 -   CONTROLADOR DEL FORMULARIO MAESTRO.                     DONE
+
             - INTEGRAR EN LA VISTA PRINCIPAL.                               DONE
 
 08/10/2025  TEST DE FORMULARIOS MAESTROS

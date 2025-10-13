@@ -10,7 +10,7 @@ from PyQt6.QtWidgets import QMessageBox, QPushButton
 
 from base_controller import BaseController
 from estado_proyecto_dao import EstadoProyectoDAO
-from estado_proyecto_dialogo import EstadoProyectoDialog
+from estado_proyecto_dialog import EstadoProyectoDialog
 from estado_proyecto_entity import EstadoProyectoEntity
 from estado_proyecto_validator import EstadoProyectoValidator
 from estado_proyecto_view import EstadoProyectoView
