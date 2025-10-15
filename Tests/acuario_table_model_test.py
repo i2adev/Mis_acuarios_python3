@@ -4,7 +4,7 @@ Fecha:      31/07/2025
 Commentarios:
     Tests de la clase UrnaTableModel.
 """
-from Model.TableModel.urna_table_model import UrnaTableModel
+from Model import UrnaTableModel
 
 
 def test_desglose_dimensiones(dimension: str):

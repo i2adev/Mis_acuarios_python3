@@ -4,7 +4,7 @@ Fecha:      24/07/2025
 Commentarios:
     Módulo que contiene la entidad estado de proyecto.
 """
-from base_entity import BaseEntity
+from Model.Entities.base_entity import BaseEntity
 
 
 class EstadoProyectoEntity(BaseEntity):

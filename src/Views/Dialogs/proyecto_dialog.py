@@ -10,7 +10,7 @@ from PyQt6.QtCore import Qt, QDate
 from PyQt6.QtWidgets import QApplication, QWidget
 
 from base_dialog import BaseDialog
-from proyecto_form import ProyectoForm
+from Views.Forms.proyecto_form import ProyectoForm
 
 
 class ProyectoDialog(BaseDialog):

@@ -4,7 +4,7 @@ Fecha:      18/06/2025
 Commentarios:
     Tests de la clase paginator.
 """
-from Model.DAO.paginator import Paginator
+from Model.DAO import Paginator
 
 
 def test_configuracion():

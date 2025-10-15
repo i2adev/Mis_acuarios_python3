@@ -1,6 +1,13 @@
 ﻿================================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
+15/10/2025  LAS IMPORTACIONES SE PASAN A REFERENCIAS ABSOLUTAS:
+            -   CONTROLADORES:
+                -   BASE CONTROLLER.                                        DONE
+                -   CATEGORÍA ACUARIO CONTROLLER.                           TODO
+                -   CATEGORÍA ACUARIO DIALOG CONTROLLER.                    TODO
+                -   CATEGORÍA ACUARIO MASTER CONTROLER.                     TODO
+
 09/10/2025  SE AÑADE LA LÓGICA DEL PROYECTO:
             -   SE CREA LA ENTIDAD.                                         DONE
             -   SE CREA LA VISTA EN LA BASE DE DATOS.                       DONE

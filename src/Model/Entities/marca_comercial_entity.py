@@ -4,7 +4,7 @@ Fecha:      26/07/2025
 Commentarios:
     Módulo que contiene la entidad MARCA DE PRODUCTO.
 """
-from base_entity import BaseEntity
+from Model.Entities.base_entity import BaseEntity
 
 
 class MarcaComercialEntity(BaseEntity):

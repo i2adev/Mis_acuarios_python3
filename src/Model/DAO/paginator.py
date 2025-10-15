@@ -20,7 +20,7 @@ from Model.Entities.subcategoria_acuario_entity import SubcategoriaAcuarioEntity
 from Model.Entities.subcategoria_incidencia_entity import SubcategoriaIncidenciaEntity
 from Model.Entities.tipo_acuario_entity import TipoAcuarioEntity
 from Model.Entities.tipo_filtro_entity import TipoFiltroEntity
-from estado_proyecto_entity import EstadoProyectoEntity
+from Model.Entities.estado_proyecto_entity import EstadoProyectoEntity
 
 
 class Paginator:

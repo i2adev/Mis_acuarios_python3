@@ -14,10 +14,10 @@ from PyQt6.QtWidgets import (QLineEdit, QTextEdit, QPlainTextEdit, QWidget,
                              QLabel, QCompleter)
 
 from Model.DAO.base_dao import BaseDAO
+from Model.DAO.paginator import Paginator
 from Model.Entities.base_entity import BaseEntity
 from Services.Result.result import Result
 from Views.Forms.image_form import ImageForm
-from paginator import Paginator
 
 
 class BaseController(QObject):

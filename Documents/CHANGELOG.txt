@@ -1,6 +1,7 @@
 ﻿CHANGELOG:
 ================================================================================
-0.14.0  SE AÑADE LA LÓGICA DE PRFOYECTO.
+0.13.1  REFACTORIZACIÓN:
+        -   SE MUEVEN TODOS SLOS ARCHIVOS FUENTE A LA CARPETA SRC.
 
 0.13.0  SE AÑADE LA LÓGICA DE ESTADO DE PROYECTO.
 
