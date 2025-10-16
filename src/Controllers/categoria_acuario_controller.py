@@ -8,12 +8,12 @@ from PyQt6.QtGui import QAction
 from PyQt6.QtWidgets import QMessageBox, QPushButton
 
 from base_controller import BaseController
-from categoria_acuario_dao import CategoriaAcuarioDAO
-from categoria_acuario_dialog import CategoriaAcuarioDialog
-from categoria_acuario_entity import CategoriaAcuarioEntity
-from categoria_acuario_validator import CategoriaAcuarioValidator
-from categoria_acuario_view import CategoriaAcuarioView
-from result import Result
+from Model.DAO.categoria_acuario_dao import CategoriaAcuarioDAO
+from Views.Dialogs.categoria_acuario_dialog import CategoriaAcuarioDialog
+from Model.Entities.categoria_acuario_entity import CategoriaAcuarioEntity
+from Services.Validators.categoria_acuario_validator import CategoriaAcuarioValidator
+from Views.Masters.categoria_acuario_view import CategoriaAcuarioView
+from Services.Result.result import Result
 
 
 

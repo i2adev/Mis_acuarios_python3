@@ -1,13 +1,14 @@
 ﻿from PyQt6.QtGui import QAction
 from PyQt6.QtWidgets import QPushButton, QMessageBox
 
-from base_controller import BaseController
-from categoria_incidencia_dao import CategoriaIncidenciaDAO
-from categoria_incidencia_dialog import CategoriaIncidenciaDialog
-from categoria_incidencia_entity import CategoriaIncidenciaEntity
-from categoria_incidencia_validator import CategoriaIncidenciaValidator
-from categoria_incidencia_view import CategoriaIncidenciaView
-from result import Result
+from Controllers.base_controller import BaseController
+from Model.DAO.categoria_incidencia_dao import CategoriaIncidenciaDAO
+from Views.Dialogs.categoria_incidencia_dialog import CategoriaIncidenciaDialog
+from Model.Entities.categoria_incidencia_entity import CategoriaIncidenciaEntity
+from Services.Validators.categoria_incidencia_validator import \
+    CategoriaIncidenciaValidator
+from Views.Masters.categoria_incidencia_view import CategoriaIncidenciaView
+from Services.Result.result import Result
 
 
 class CategoriaIncidenciaController(BaseController):

@@ -5,7 +5,6 @@ Commentarios:
     Controlador del cuadro de diálogo de inserción de tipo de filtro.
 """
 
-from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QWidget, QMessageBox, QComboBox, QCompleter
 
 from Model.DAO.tipo_filtro_dao import TipoFiltroDAO

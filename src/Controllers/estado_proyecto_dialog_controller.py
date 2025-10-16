@@ -7,11 +7,11 @@ Commentarios:
 
 from PyQt6.QtWidgets import QWidget, QMessageBox, QComboBox, QCompleter
 
-from estado_proyecto_controller import EstadoProyectoController
-from estado_proyecto_dao import EstadoProyectoDAO
-from estado_proyecto_dialog import EstadoProyectoDialog
-from estado_proyecto_entity import EstadoProyectoEntity
-from result import Result
+from Controllers.estado_proyecto_controller import EstadoProyectoController
+from Model.DAO.estado_proyecto_dao import EstadoProyectoDAO
+from Views.Dialogs.estado_proyecto_dialog import EstadoProyectoDialog
+from Model.Entities.estado_proyecto_entity import EstadoProyectoEntity
+from Services.Result.result import Result
 
 
 class EstadoProyectoDialogController(EstadoProyectoController):

@@ -2,11 +2,41 @@
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
 15/10/2025  LAS IMPORTACIONES SE PASAN A REFERENCIAS ABSOLUTAS:
-            -   CONTROLADORES:
+     |       -   CONTROLADORES:
                 -   BASE CONTROLLER.                                        DONE
-                -   CATEGORÍA ACUARIO CONTROLLER.                           TODO
-                -   CATEGORÍA ACUARIO DIALOG CONTROLLER.                    TODO
-                -   CATEGORÍA ACUARIO MASTER CONTROLER.                     TODO
+                -   CATEGORÍA ACUARIO CONTROLLER.                           DONE
+                -   CATEGORÍA ACUARIO DIALOG CONTROLLER.                    DONE
+                -   CATEGORÍA ACUARIO MASTER CONTROLLER.                    DONE
+                -   CATEGORÍA INCIDENCIA CONTROLLER.                        DONE
+                -   CATEGORÍA INCIDENCIA DIALOG CONTROLLER.                 DONE
+                -   CATEGORÍA INCIDENCIA MASTER CONTROLLER.                 DONE
+                -   ESTADO PROYECTO CONTROLLER.                             DONE
+                -   ESTADO PROYECTO DIALOG CONTROLLER.                      DONE
+                -   ESTADO PROYECTO MASTER CONTROLER.                       DONE
+                -   LOGIN CONTROLLER.                                       DONE
+                -   MAIN VIEW CONTROLLER.                                   DONE
+                -   MARCA COMERCIAL CONTROLLER.                             DONE
+                -   MARCA COMERCIAL DIALOG CONTROLLER.                      DONE
+                -   MARCA COMERCIAL MASTER CONTROLLER.                      DONE
+                -   MATERIAL URNA CONTROLLER.                               DONE
+                -   MATERIAL URNA DIALOG CONTROLLER.                        DONE
+                -   MATERIAL URNA MASTER CONTROLLER.                        DONE
+                -   SUBCATEGORÍA ACUARIO CONTROLLER.                        DONE
+                -   SUBCATEGORÍA ACUARIO DIALOG CONTROLLER.                 DONE
+                -   SUBCATEGORÍA ACUARIO MASTER CONTROLLER.                 DONE
+                -   SUBCATEGORÍA INCIDENCIA CONTROLLER.                     DONE
+                -   SUBCATEGORÍA INCIDENCIA DIALOG CONTROLLER.              DONE
+                -   SUBCATEGORÍA INCIDENCIA MASTER CONTROLLER.              DONE
+                -   TIPO ACUARIO CONTROLLER.                                DONE
+                -   TIPO ACUARIO DIALOG CONTROLLER.                         DONE
+                -   TIPO ACUARIO MASTER CONTROLLER.                         DONE
+                -   TIPO FILTRO CONTROLLER.                                 DONE
+                -   TIPO FILTRO DIALOG CONTROLLER.                          DONE
+                -   TIPO FILTRO MASTER CONTROLLER.                          DONE
+                -   URNA CONTROLLER.                                        DONE
+                -   URNA DIALOG CONTROLLER.                                 DONE
+                -   URNA MASTER CONTROLLER.                                 DONE
+                -   USUARIO CONTROLLER.                                     DONE
 
 09/10/2025  SE AÑADE LA LÓGICA DEL PROYECTO:
             -   SE CREA LA ENTIDAD.                                         DONE

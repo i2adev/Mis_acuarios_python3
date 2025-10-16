@@ -9,12 +9,12 @@ from PyQt6.QtGui import QAction
 from PyQt6.QtWidgets import QMessageBox, QPushButton
 
 from base_controller import BaseController
-from result import Result
-from tipo_filtro_dao import TipoFiltroDAO
-from tipo_filtro_dialog import TipoFiltroDialog
-from tipo_filtro_entity import TipoFiltroEntity
-from tipo_filtro_validator import TipoFiltroValidator
-from tipo_filtro_view import TipoFiltroView
+from Services.Result.result import Result
+from Model.DAO.tipo_filtro_dao import TipoFiltroDAO
+from Views.Dialogs.tipo_filtro_dialog import TipoFiltroDialog
+from Model.Entities.tipo_filtro_entity import TipoFiltroEntity
+from Services.Validators.tipo_filtro_validator import TipoFiltroValidator
+from Views.Masters.tipo_filtro_view import TipoFiltroView
 
 
 class TipoFiltroController(BaseController):

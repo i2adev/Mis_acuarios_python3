@@ -9,13 +9,13 @@ from PyQt6.QtCore import QEvent
 from PyQt6.QtGui import QIcon, QAction
 from PyQt6.QtWidgets import QMessageBox, QTableView, QWidget, QComboBox
 
-from material_urna_controller import MaterialUrnaController
-from material_urna_dao import MaterialUrnaDAO
-from material_urna_entity import MaterialUrnaEntity
-from material_urna_table_model import MaterialUrnaTableModel
-from material_urna_view import MaterialUrnaView
-from paginator import Paginator
-from table_menu_contextual import TableMenuContextual
+from Controllers.material_urna_controller import MaterialUrnaController
+from Model.DAO.material_urna_dao import MaterialUrnaDAO
+from Model.Entities.material_urna_entity import MaterialUrnaEntity
+from Model.TableModel.material_urna_table_model import MaterialUrnaTableModel
+from Views.Masters.material_urna_view import MaterialUrnaView
+from Model.DAO.paginator import Paginator
+from Views.table_menu_contextual import TableMenuContextual
 
 
 class MaterialUrnaMasterController(MaterialUrnaController):

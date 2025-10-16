@@ -7,11 +7,11 @@ Commentarios:
 
 from PyQt6.QtWidgets import QWidget, QMessageBox, QComboBox
 
-from result import Result
-from tipo_acuario_controller import TipoAcuarioController
-from tipo_acuario_dao import TipoAcuarioDAO
-from tipo_acuario_dialog import TipoAcuarioDialog
-from tipo_acuario_entity import TipoAcuarioEntity
+from Services.Result.result import Result
+from Controllers.tipo_acuario_controller import TipoAcuarioController
+from Model.DAO.tipo_acuario_dao import TipoAcuarioDAO
+from Views.Dialogs.tipo_acuario_dialog import TipoAcuarioDialog
+from Model.Entities.tipo_acuario_entity import TipoAcuarioEntity
 
 
 class TipoAcuarioDialogController(TipoAcuarioController):

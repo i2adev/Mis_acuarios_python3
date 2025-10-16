@@ -8,11 +8,11 @@ Commentarios:
 from PyQt6.QtWidgets import QWidget, QMessageBox, QComboBox
 
 from Services.Result.result import Result
-from marca_comercial_controller import MarcaComercialController
-from marca_comercial_dao import MarcaComercialDAO
-from marca_comercial_dialog import MarcaComercialDialog
-from marca_comercial_entity import MarcaComercialEntity
-from pais_dao import PaisDAO
+from Controllers.marca_comercial_controller import MarcaComercialController
+from Model.DAO.marca_comercial_dao import MarcaComercialDAO
+from Views.Dialogs.marca_comercial_dialog import MarcaComercialDialog
+from Model.Entities.marca_comercial_entity import MarcaComercialEntity
+from Model.DAO.pais_dao import PaisDAO
 
 
 class MarcaComercialDialogController(MarcaComercialController):

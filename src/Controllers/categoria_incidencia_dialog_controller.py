@@ -1,10 +1,10 @@
 ﻿from PyQt6.QtWidgets import QWidget, QMessageBox, QComboBox
 
-from categoria_incidencia_controller import CategoriaIncidenciaController
-from categoria_incidencia_dao import CategoriaIncidenciaDAO
-from categoria_incidencia_dialog import CategoriaIncidenciaDialog
-from categoria_incidencia_entity import CategoriaIncidenciaEntity
-from result import Result
+from Controllers.categoria_incidencia_controller import CategoriaIncidenciaController
+from Model.DAO.categoria_incidencia_dao import CategoriaIncidenciaDAO
+from Views.Dialogs.categoria_incidencia_dialog import CategoriaIncidenciaDialog
+from Model.Entities.categoria_incidencia_entity import CategoriaIncidenciaEntity
+from Services.Result.result import Result
 
 
 class CategoriaIncidenciaDialogController(CategoriaIncidenciaController):

@@ -9,13 +9,13 @@ from PyQt6.QtCore import QEvent
 from PyQt6.QtGui import QIcon, QAction
 from PyQt6.QtWidgets import QMessageBox, QTableView, QWidget, QComboBox
 
-from estado_proyecto_controller import EstadoProyectoController
-from estado_proyecto_dao import EstadoProyectoDAO
-from estado_proyecto_entity import EstadoProyectoEntity
-from estado_proyecto_table_model import EstadoProyectoTableModel
-from estado_proyecto_view import EstadoProyectoView
-from paginator import Paginator
-from table_menu_contextual import TableMenuContextual
+from Controllers.estado_proyecto_controller import EstadoProyectoController
+from Model.DAO.estado_proyecto_dao import EstadoProyectoDAO
+from Model.Entities.estado_proyecto_entity import EstadoProyectoEntity
+from Model.TableModel.estado_proyecto_table_model import EstadoProyectoTableModel
+from Views.Masters.estado_proyecto_view import EstadoProyectoView
+from Model.DAO.paginator import Paginator
+from Views.able_menu_contextual import TableMenuContextual
 
 
 class EstadoProyectoMasterController(EstadoProyectoController):

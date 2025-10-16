@@ -8,13 +8,13 @@ Commentarios:
 from PyQt6.QtGui import QIcon, QAction
 from PyQt6.QtWidgets import QMessageBox, QTableView, QWidget, QComboBox
 
-from marca_comercial_controller import MarcaComercialController
-from marca_comercial_dao import MarcaComercialDAO
-from marca_comercial_entity import MarcaComercialEntity
-from marca_comercial_view import MarcaComercialView
-from marcas_comercial_table_model import MarcaComercialTableModel
-from paginator import Paginator
-from table_menu_contextual import TableMenuContextual
+from Controllers.marca_comercial_controller import MarcaComercialController
+from Model.DAO.marca_comercial_dao import MarcaComercialDAO
+from Model.Entities.marca_comercial_entity import MarcaComercialEntity
+from Views.Masters.marca_comercial_view import MarcaComercialView
+from Model.TableModel.marcas_comercial_table_model import MarcaComercialTableModel
+from Model.DAO.paginator import Paginator
+from Views.table_menu_contextual import TableMenuContextual
 
 
 class MarcaComercialMasterController(MarcaComercialController):

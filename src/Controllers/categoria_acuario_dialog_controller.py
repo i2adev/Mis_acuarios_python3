@@ -6,12 +6,12 @@ Commentarios:
 """
 from PyQt6.QtWidgets import QWidget, QMessageBox, QComboBox
 
-from categoria_acuario_controller import CategoriaAcuarioController, \
-    CategoriaAcuarioDialog
-from categoria_acuario_dao import CategoriaAcuarioDAO
-from categoria_acuario_entity import CategoriaAcuarioEntity
-from categoria_acuario_view import CategoriaAcuarioView
-from result import Result
+from Controllers.categoria_acuario_controller import (CategoriaAcuarioController,
+    CategoriaAcuarioDialog)
+from Model.DAO.categoria_acuario_dao import CategoriaAcuarioDAO
+from Model.Entities.categoria_acuario_entity import CategoriaAcuarioEntity
+from Views.Masters.categoria_acuario_view import CategoriaAcuarioView
+from Services.Result.result import Result
 
 
 class CategoriaAcuarioDialogController(CategoriaAcuarioController):

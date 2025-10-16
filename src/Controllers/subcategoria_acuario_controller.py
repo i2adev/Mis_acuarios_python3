@@ -7,18 +7,18 @@ Commentarios:
 from PyQt6.QtGui import QAction
 from PyQt6.QtWidgets import QMessageBox, QPushButton
 
-from base_controller import BaseController
-from categoria_acuario_controller import CategoriaAcuarioDialog
-from categoria_acuario_dao import CategoriaAcuarioDAO
-from categoria_acuario_dialog_controller import \
+from Controllers.base_controller import BaseController
+from Controllers.categoria_acuario_controller import CategoriaAcuarioDialog
+from Model.DAO.categoria_acuario_dao import CategoriaAcuarioDAO
+from Controllers.categoria_acuario_dialog_controller import \
     CategoriaAcuarioDialogController
-from categoria_acuario_entity import CategoriaAcuarioEntity
-from result import Result
-from subcategoria_Acuario_dialog import SubcategoriaAcuarioDialog
-from subcategoria_acuario_dao import SubcategoriaAcuarioDAO
-from subcategoria_acuario_entity import SubcategoriaAcuarioEntity
-from subcategoria_acuario_validator import SubcategoriaAcuarioValidator
-from subcategoria_acuario_view import SubcategoriaAcuarioView
+from Model.Entities.categoria_acuario_entity import CategoriaAcuarioEntity
+from Services.Result.result import Result
+from Views.Dialogs.subcategoria_Acuario_dialog import SubcategoriaAcuarioDialog
+from Model.DAO.subcategoria_acuario_dao import SubcategoriaAcuarioDAO
+from Model.Entities.subcategoria_acuario_entity import SubcategoriaAcuarioEntity
+from Services.Validators.subcategoria_acuario_validator import SubcategoriaAcuarioValidator
+from Views.Masters.subcategoria_acuario_view import SubcategoriaAcuarioView
 
 
 class SubcategoriaAcuarioController(BaseController):

@@ -9,13 +9,13 @@ from PyQt6.QtCore import QEvent
 from PyQt6.QtGui import QIcon, QAction
 from PyQt6.QtWidgets import QMessageBox, QTableView, QWidget, QComboBox
 
-from paginator import Paginator
-from table_menu_contextual import TableMenuContextual
-from tipo_filtro_controller import TipoFiltroController
-from tipo_filtro_dao import TipoFiltroDAO
-from tipo_filtro_entity import TipoFiltroEntity
-from tipo_filtro_table_model import TipoFiltroTableModel
-from tipo_filtro_view import TipoFiltroView
+from Model.DAO.paginator import Paginator
+from Views.table_menu_contextual import TableMenuContextual
+from Controllers.tipo_filtro_controller import TipoFiltroController
+from Model.DAO.tipo_filtro_dao import TipoFiltroDAO
+from Model.Entities.tipo_filtro_entity import TipoFiltroEntity
+from Model.TableModel.tipo_filtro_table_model import TipoFiltroTableModel
+from Views.Masters.tipo_filtro_view import TipoFiltroView
 
 
 class TipoFiltroMasterController(TipoFiltroController):

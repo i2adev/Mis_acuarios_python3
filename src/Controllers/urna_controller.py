@@ -7,21 +7,21 @@ Commentarios:
 from PyQt6.QtGui import QAction
 from PyQt6.QtWidgets import QMessageBox, QPushButton
 
-from base_controller import BaseController
-from marca_comercial_dao import MarcaComercialDAO
-from marca_comercial_dialog import MarcaComercialDialog
-from marca_comercial_dialog_controller import MarcaComercialDialogController
-from marca_comercial_entity import MarcaComercialEntity
-from material_urna_dao import MaterialUrnaDAO
-from material_urna_dialog import MaterialUrnaDialog
-from material_urna_dialog_controller import MaterialUrnaDialogController
-from material_urna_entity import MaterialUrnaEntity
-from result import Result
-from urna_dao import UrnaDAO
-from urna_dialog import UrnaDialog
-from urna_entity import UrnaEntity
-from urna_validator import UrnaValidator
-from urna_view import UrnaView
+from Controllers.base_controller import BaseController
+from Model.DAO.marca_comercial_dao import MarcaComercialDAO
+from Views.Dialogs.marca_comercial_dialog import MarcaComercialDialog
+from Controllers.marca_comercial_dialog_controller import MarcaComercialDialogController
+from Model.Entities.marca_comercial_entity import MarcaComercialEntity
+from Model.DAO.material_urna_dao import MaterialUrnaDAO
+from Views.Dialogs.material_urna_dialog import MaterialUrnaDialog
+from Controllers.material_urna_dialog_controller import MaterialUrnaDialogController
+from Model.Entities.material_urna_entity import MaterialUrnaEntity
+from Services.Result.result import Result
+from Model.DAO.urna_dao import UrnaDAO
+from Views.Dialogs.urna_dialog import UrnaDialog
+from Model.Entities.urna_entity import UrnaEntity
+from Services.Validators.urna_validator import UrnaValidator
+from Views.Masters.urna_view import UrnaView
 
 
 class UrnaController(BaseController):

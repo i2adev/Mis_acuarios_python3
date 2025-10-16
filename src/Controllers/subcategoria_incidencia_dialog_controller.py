@@ -8,11 +8,11 @@ Commentarios:
 
 from PyQt6.QtWidgets import QWidget, QMessageBox, QComboBox
 
-from result import Result
-from subcategoria_incidencia_controller import SubcategoriaIncidenciaController
-from subcategoria_incidencia_dao import SubcategoriaIncidenciaDAO
-from subcategoria_incidencia_dialog import SubcategoriaIncidenciaDialog
-from subcategoria_incidencia_entity import SubcategoriaIncidenciaEntity
+from Services.Result.result import Result
+from Controllers.subcategoria_incidencia_controller import SubcategoriaIncidenciaController
+from Model.DAO.subcategoria_incidencia_dao import SubcategoriaIncidenciaDAO
+from Views.Dialogs.subcategoria_incidencia_dialog import SubcategoriaIncidenciaDialog
+from Model.Entities.subcategoria_incidencia_entity import SubcategoriaIncidenciaEntity
 
 
 class SubcategoriaIncidenciaDialogController(SubcategoriaIncidenciaController):

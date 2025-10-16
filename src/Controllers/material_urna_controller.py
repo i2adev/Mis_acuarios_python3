@@ -8,13 +8,13 @@ Commentarios:
 from PyQt6.QtGui import QAction
 from PyQt6.QtWidgets import QMessageBox, QPushButton
 
-from base_controller import BaseController
-from material_urna_dao import MaterialUrnaDAO
-from material_urna_dialog import MaterialUrnaDialog
-from material_urna_entity import MaterialUrnaEntity
-from material_urna_validator import MaterialUrnaValidator
-from material_urna_view import MaterialUrnaView
-from result import Result
+from Controllers.base_controller import BaseController
+from Model.DAO.material_urna_dao import MaterialUrnaDAO
+from Views.Dialogs.material_urna_dialog import MaterialUrnaDialog
+from Model.Entities.material_urna_entity import MaterialUrnaEntity
+from Services.Validators.material_urna_validator import MaterialUrnaValidator
+from Views.Masters.material_urna_view import MaterialUrnaView
+from Services.Result.result import Result
 
 
 class MaterialUrnaController(BaseController):

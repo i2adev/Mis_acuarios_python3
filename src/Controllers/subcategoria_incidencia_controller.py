@@ -7,18 +7,23 @@ Commentarios:
 from PyQt6.QtGui import QAction
 from PyQt6.QtWidgets import QMessageBox, QPushButton
 
-from base_controller import BaseController
-from categoria_incidencia_dao import CategoriaIncidenciaDAO
-from categoria_incidencia_dialog import CategoriaIncidenciaDialog
-from categoria_incidencia_dialog_controller import \
+from Controllers.base_controller import BaseController
+from Model.DAO.categoria_incidencia_dao import CategoriaIncidenciaDAO
+from Views.Dialogs.categoria_incidencia_dialog import CategoriaIncidenciaDialog
+from Controllers.categoria_incidencia_dialog_controller import \
     CategoriaIncidenciaDialogController
-from categoria_incidencia_entity import CategoriaIncidenciaEntity
-from result import Result
-from subcategoria_incidencia_dao import SubcategoriaIncidenciaDAO
-from subcategoria_incidencia_dialog import SubcategoriaIncidenciaDialog
-from subcategoria_incidencia_entity import SubcategoriaIncidenciaEntity
-from subcategoria_incidencia_validator import SubcategoriaIncidenciaValidator
-from subcategoria_incidencia_view import SubcategoriaIncidenciaView
+from Model.Entities.categoria_incidencia_entity import \
+    CategoriaIncidenciaEntity
+from Services.Result.result import Result
+from Model.DAO.subcategoria_incidencia_dao import SubcategoriaIncidenciaDAO
+from Views.Dialogs.subcategoria_incidencia_dialog import \
+    SubcategoriaIncidenciaDialog
+from Model.Entities.subcategoria_incidencia_entity import \
+    SubcategoriaIncidenciaEntity
+from Services.Validators.subcategoria_incidencia_validator import \
+    SubcategoriaIncidenciaValidator
+from Views.Masters.subcategoria_incidencia_view import \
+    SubcategoriaIncidenciaView
 
 
 class SubcategoriaIncidenciaController(BaseController):

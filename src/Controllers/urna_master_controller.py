@@ -8,13 +8,13 @@ Commentarios:
 from PyQt6.QtGui import QIcon, QAction
 from PyQt6.QtWidgets import QMessageBox, QTableView, QWidget, QComboBox
 
-from paginator import Paginator
-from table_menu_contextual import TableMenuContextual
-from urna_controller import UrnaController
-from urna_dao import UrnaDAO
-from urna_entity import UrnaEntity
-from urna_table_model import UrnaTableModel
-from urna_view import UrnaView
+from Model.DAO.paginator import Paginator
+from Views.table_menu_contextual import TableMenuContextual
+from Controllers.urna_controller import UrnaController
+from Model.DAO.urna_dao import UrnaDAO
+from Model.Entities.urna_entity import UrnaEntity
+from Model.TableModel.urna_table_model import UrnaTableModel
+from Views.Masters.urna_view import UrnaView
 
 
 class UrnaMasterController(UrnaController):

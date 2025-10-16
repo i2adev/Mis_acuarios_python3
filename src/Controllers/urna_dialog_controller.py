@@ -7,11 +7,11 @@ Commentarios:
 
 from PyQt6.QtWidgets import QWidget, QMessageBox, QComboBox
 
-from result import Result
-from urna_controller import UrnaController
-from urna_dao import UrnaDAO
-from urna_dialog import UrnaDialog
-from urna_entity import UrnaEntity
+from Services.Result.result import Result
+from Controllers.urna_controller import UrnaController
+from Model.DAO.urna_dao import UrnaDAO
+from Views.Dialogs.urna_dialog import UrnaDialog
+from Model.Entities.urna_entity import UrnaEntity
 
 
 class UrnaDialogController(UrnaController):

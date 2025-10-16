@@ -1,13 +1,13 @@
 ﻿from PyQt6.QtGui import QIcon, QAction
 from PyQt6.QtWidgets import QMessageBox, QTableView, QWidget, QComboBox
 
-from categoria_incidencia_controller import CategoriaIncidenciaController
-from categoria_incidencia_dao import CategoriaIncidenciaDAO
-from categoria_incidencia_entity import CategoriaIncidenciaEntity
-from categoria_incidencia_table_model import CategoriaIncidenciaTableModel
-from categoria_incidencia_view import CategoriaIncidenciaView
-from paginator import Paginator
-from table_menu_contextual import TableMenuContextual
+from Controllers.categoria_incidencia_controller import CategoriaIncidenciaController
+from Model.DAO.categoria_incidencia_dao import CategoriaIncidenciaDAO
+from Model.Entities.categoria_incidencia_entity import CategoriaIncidenciaEntity
+from Model.TableModel.categoria_incidencia_table_model import CategoriaIncidenciaTableModel
+from Views.Masters.categoria_incidencia_view import CategoriaIncidenciaView
+from Model.DAO.paginator import Paginator
+from Views.table_menu_contextual import TableMenuContextual
 
 
 class CategoriaIncidenciaMasterController(CategoriaIncidenciaController):

@@ -7,14 +7,14 @@ Commentarios:
 from PyQt6.QtGui import QAction
 from PyQt6.QtWidgets import QMessageBox, QPushButton
 
-from base_controller import BaseController
-from marca_comercial_dao import MarcaComercialDAO
-from marca_comercial_dialog import MarcaComercialDialog
-from marca_comercial_entity import MarcaComercialEntity
-from marca_comercial_validator import MarcaComercialValidator
-from marca_comercial_view import MarcaComercialView
-from pais_dao import PaisDAO
-from result import Result
+from Controllers.base_controller import BaseController
+from Model.DAO.marca_comercial_dao import MarcaComercialDAO
+from Views.Dialogs.marca_comercial_dialog import MarcaComercialDialog
+from Model.Entities.marca_comercial_entity import MarcaComercialEntity
+from Services.Validators.marca_comercial_validator import MarcaComercialValidator
+from Views.Masters.marca_comercial_view import MarcaComercialView
+from Model.DAO.pais_dao import PaisDAO
+from Services.Result.result import Result
 
 
 class MarcaComercialController(BaseController):

@@ -8,10 +8,10 @@ Commentarios:
 from PyQt6.QtWidgets import QWidget, QMessageBox, QComboBox
 
 from Services.Result.result import Result
-from material_urna_controller import MaterialUrnaController
-from material_urna_dao import MaterialUrnaDAO
-from material_urna_dialog import MaterialUrnaDialog
-from material_urna_entity import MaterialUrnaEntity
+from Controllers.material_urna_controller import MaterialUrnaController
+from Model.DAO.material_urna_dao import MaterialUrnaDAO
+from Views.Dialogs.material_urna_dialog import MaterialUrnaDialog
+from Model.Entities.material_urna_entity import MaterialUrnaEntity
 
 
 class MaterialUrnaDialogController(MaterialUrnaController):

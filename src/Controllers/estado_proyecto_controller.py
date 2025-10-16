@@ -8,13 +8,13 @@ Commentarios:
 from PyQt6.QtGui import QAction
 from PyQt6.QtWidgets import QMessageBox, QPushButton
 
-from base_controller import BaseController
-from estado_proyecto_dao import EstadoProyectoDAO
-from estado_proyecto_dialog import EstadoProyectoDialog
-from estado_proyecto_entity import EstadoProyectoEntity
-from estado_proyecto_validator import EstadoProyectoValidator
-from estado_proyecto_view import EstadoProyectoView
-from result import Result
+from Controllers.base_controller import BaseController
+from Model.DAO.estado_proyecto_dao import EstadoProyectoDAO
+from Views.Dialogs.estado_proyecto_dialog import EstadoProyectoDialog
+from Model.Entities.estado_proyecto_entity import EstadoProyectoEntity
+from Services.Validators.estado_proyecto_validator import EstadoProyectoValidator
+from Views.Masters.estado_proyecto_view import EstadoProyectoView
+from Services.Result.result import Result
 
 
 class EstadoProyectoController(BaseController):

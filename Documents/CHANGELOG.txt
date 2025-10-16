@@ -1,5 +1,9 @@
 ﻿CHANGELOG:
 ================================================================================
+0.13.2  REFACTORIZACIÓN:
+        -   A LAS IMPORTACIONES SE LE ASIGNA LA RUTA ABSOLUTA DESDE LA CARPETA
+            RAIZ DEL CÓDIGO DE LOS CONTROLADORES.
+
 0.13.1  REFACTORIZACIÓN:
         -   SE MUEVEN TODOS SLOS ARCHIVOS FUENTE A LA CARPETA SRC.
 

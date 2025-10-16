@@ -8,13 +8,13 @@ Commentarios:
 from PyQt6.QtGui import QIcon, QAction
 from PyQt6.QtWidgets import QMessageBox, QTableView, QWidget, QComboBox
 
-from paginator import Paginator
-from subcategoria_acuario_controller import SubcategoriaAcuarioController
-from subcategoria_acuario_dao import SubcategoriaAcuarioDAO
-from subcategoria_acuario_entity import SubcategoriaAcuarioEntity
-from subcategoria_acuario_table_model import SubcategoriaAcuarioTableModel
-from subcategoria_acuario_view import SubcategoriaAcuarioView
-from table_menu_contextual import TableMenuContextual
+from Model.DAO.paginator import Paginator
+from Controllers.subcategoria_acuario_controller import SubcategoriaAcuarioController
+from Model.DAO.subcategoria_acuario_dao import SubcategoriaAcuarioDAO
+from Model.Entities.subcategoria_acuario_entity import SubcategoriaAcuarioEntity
+from Model.TableModel.subcategoria_acuario_table_model import SubcategoriaAcuarioTableModel
+from Views.Masters.subcategoria_acuario_view import SubcategoriaAcuarioView
+from Views.table_menu_contextual import TableMenuContextual
 
 
 class SubcategoriaAcuarioMasterController(SubcategoriaAcuarioController):
