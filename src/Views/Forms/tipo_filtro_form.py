@@ -5,6 +5,7 @@ Commentarios:
     Módulo que contiene los controles del formulario de la entidad TIPO DE
     FILTRO.
 """
+
 import sys
 
 from PyQt6.QtWidgets import QFrame, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, \

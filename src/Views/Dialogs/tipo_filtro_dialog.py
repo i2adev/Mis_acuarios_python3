@@ -4,6 +4,7 @@ Fecha:      21/07/2025
 Commentarios:
     Módulo que contiene el diálogo de la entidad TIPO DE FILTRO.
 """
+
 import sys
 
 from PyQt6.QtCore import Qt

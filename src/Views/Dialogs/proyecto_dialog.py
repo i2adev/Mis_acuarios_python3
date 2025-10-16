@@ -4,6 +4,7 @@ Fecha:      09/10/2025
 Commentarios:
     Módulo que contiene el diálogo de la entidad PROYECTO.
 """
+
 import sys
 
 from PyQt6.QtCore import Qt, QDate

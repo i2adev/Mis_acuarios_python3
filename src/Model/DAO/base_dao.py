@@ -8,12 +8,10 @@ Commentarios:
 import sqlite3
 import traceback
 from abc import ABC, abstractmethod
-from idlelib.undo import InsertCommand
 
 from PyQt6.QtWidgets import QMessageBox
 from Model.DAO.database import DBManager
 from Model.Entities.base_entity import BaseEntity
-from Model.Entities.categoria_acuario_entity import CategoriaAcuarioEntity
 from Model.Entities.insert_commands import InsertCmd
 from Services.Result.result import Result
 

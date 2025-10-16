@@ -10,8 +10,7 @@ import sys
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QIntValidator, QCursor
 from PyQt6.QtWidgets import QFrame, QLabel, QLineEdit, QPlainTextEdit, \
-    QVBoxLayout, QHBoxLayout, QApplication, QComboBox, QPushButton, QSpacerItem, \
-    QSizePolicy
+    QVBoxLayout, QHBoxLayout, QApplication, QComboBox, QPushButton
 
 
 class UrnaForm(QFrame):

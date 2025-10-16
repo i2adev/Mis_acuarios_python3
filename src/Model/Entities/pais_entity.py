@@ -4,8 +4,10 @@ Fecha:      29/07/2025
 Commentarios:
     Módulo que contiene la entidad PAÍS.
 """
+from Model.Entities.base_entity import BaseEntity
 
-class PaisEntity:
+
+class PaisEntity(BaseEntity):
     """ Entidad país. """
 
     # Notaciones de tipo

@@ -5,6 +5,7 @@ Commentarios:
     Módulo que contiene el modelo de visualización de la tabla de SUBCATEGORÍAS
     DE INCIDENCIA. Este módulo se encarga de dar formato a los datos de la tabla.
 """
+
 from PyQt6.QtCore import QAbstractTableModel, Qt, QModelIndex
 
 

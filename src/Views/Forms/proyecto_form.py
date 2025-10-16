@@ -4,11 +4,12 @@ Fecha:      09/10/2025
 Commentarios:
     Módulo que contiene los controles del formulario de la entidad PROYECTO.
 """
+
 import sys
 
-from PyQt6.QtCore import QDate
+
 from PyQt6.QtWidgets import QFrame, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, \
-    QPlainTextEdit, QApplication, QComboBox, QDateTimeEdit
+    QPlainTextEdit, QApplication, QComboBox
 
 from CustomControls.nullable_text_edit import NullableDateEdit
 

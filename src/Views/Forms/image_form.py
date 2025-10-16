@@ -4,6 +4,7 @@ Fecha:      08/08/2025
 Commentarios:
     Módulo que contiene los controles para la inserción de imagenes.
 """
+
 import sys
 from pathlib import Path
 

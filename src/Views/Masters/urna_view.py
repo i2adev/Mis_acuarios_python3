@@ -4,6 +4,7 @@ Fecha:      08/08/2025
 Commentarios:
     Módulo que contiene el formulario maestro de acuario.
 """
+
 import sys
 
 from PyQt6.QtCore import Qt

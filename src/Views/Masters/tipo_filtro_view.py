@@ -4,6 +4,7 @@ Fecha:      21/07/2025
 Commentarios:
     Módulo que contiene la vista de la entidad TIPO DE ACUARIO.
 """
+
 import sys
 
 from PyQt6.QtCore import Qt

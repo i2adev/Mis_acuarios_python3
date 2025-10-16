@@ -5,6 +5,7 @@ Commentarios:
     Módulo para la validación del formulario de la subcategoría de
     acuario.
 """
+
 from PyQt6.QtWidgets import QWidget, QLineEdit, QComboBox
 
 from Services.Result.result import Result

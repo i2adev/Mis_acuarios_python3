@@ -5,14 +5,14 @@ Commentarios:
     Módulo que contiene la vista base de la que derivan los formularios.
 """
 
-# Importaciones
+
 import sys
 from PyQt6.QtWidgets import (QApplication, QWidget, QLabel, QLineEdit,
-                             QTextEdit, QPushButton, QHBoxLayout, QVBoxLayout,
+                             QPushButton, QHBoxLayout, QVBoxLayout,
                              QSpacerItem, QComboBox, QSizePolicy, QFrame,
-                             QTableView, QSizeGrip, QAbstractItemView)
+                             QTableView, QAbstractItemView)
 from PyQt6.QtGui import QIcon, QPixmap, QCursor
-from PyQt6.QtCore import Qt, QPoint, QRect
+from PyQt6.QtCore import Qt, QRect
 
 import Resources.image_rc
 

@@ -4,6 +4,7 @@ Fecha:      30/06/2025
 Commentarios:
     Módulo que contiene el diálogo de la entidad CATEGORÍA DE ACUARIO.
 """
+
 import sys
 
 from PyQt6.QtCore import Qt

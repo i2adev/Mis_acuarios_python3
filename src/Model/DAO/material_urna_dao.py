@@ -7,12 +7,10 @@ Commentarios:
 import sqlite3
 import traceback
 
-from PyQt6.QtWidgets import QMessageBox
 
 from Model.DAO.base_dao import BaseDAO
 from Model.DAO.database import DBManager
 from Model.Entities.material_urna_entity import MaterialUrnaEntity
-from Model.TableModel.urna_table_model import UrnaTableModel
 from Services.Result.result import Result
 
 

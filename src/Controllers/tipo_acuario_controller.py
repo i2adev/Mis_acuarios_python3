@@ -10,7 +10,7 @@ from Model.Entities.categoria_acuario_entity import CategoriaAcuarioEntity
 from Services.Result.result import Result
 from Views.Dialogs.subcategoria_Acuario_dialog import SubcategoriaAcuarioDialog
 from Model.DAO.subcategoria_acuario_dao import SubcategoriaAcuarioDAO
-from subcategoria_acuario_dialog_controller import \
+from Controllers.subcategoria_acuario_dialog_controller import \
     SubcategoriaAcuarioDialogController
 from Model.Entities.subcategoria_acuario_entity import SubcategoriaAcuarioEntity
 from Model.DAO.tipo_acuario_dao import TipoAcuarioDAO

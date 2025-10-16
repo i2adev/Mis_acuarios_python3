@@ -15,7 +15,7 @@ from Model.Entities.estado_proyecto_entity import EstadoProyectoEntity
 from Model.TableModel.estado_proyecto_table_model import EstadoProyectoTableModel
 from Views.Masters.estado_proyecto_view import EstadoProyectoView
 from Model.DAO.paginator import Paginator
-from Views.able_menu_contextual import TableMenuContextual
+from Views.table_menu_contextual import TableMenuContextual
 
 
 class EstadoProyectoMasterController(EstadoProyectoController):

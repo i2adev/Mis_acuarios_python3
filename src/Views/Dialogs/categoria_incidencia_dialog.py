@@ -4,6 +4,7 @@ Fecha:      24/07/2025
 Commentarios:
     Módulo que contiene el diálogo de la entidad CATEGORÍA DE INCIDENCIA.
 """
+
 import sys
 
 from PyQt6.QtCore import Qt

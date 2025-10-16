@@ -4,14 +4,14 @@ Fecha:      21/07/2025
 Commentarios:
     Módulo que contiene el diálogo de la entidad TIPO DE FILTRO.
 """
+
 import sys
 
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QApplication, QWidget
 
 from Views.Dialogs.base_dialog import BaseDialog
-from Views.Forms.tipo_filtro_form import TipoFiltroForm
-from estado_proyecto_form import EstadoProyectoForm
+from Views.Forms.estado_proyecto_form import EstadoProyectoForm
 
 
 class EstadoProyectoDialog(BaseDialog):

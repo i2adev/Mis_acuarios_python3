@@ -9,7 +9,7 @@ Commentarios:
 # Importaciones
 from PyQt6.QtCore import Qt, QAbstractTableModel, QModelIndex
 
-from estado_proyecto_entity import EstadoProyectoEntity
+from Model.Entities.estado_proyecto_entity import EstadoProyectoEntity
 
 
 class EstadoProyectoTableModel(QAbstractTableModel):

@@ -6,7 +6,6 @@ Commentarios:
     FILTRO. Este módulo se encarga de dar formato a los datos de la tabla.
 """
 
-# Importaciones
 from PyQt6.QtCore import Qt, QAbstractTableModel, QModelIndex
 
 from Model.Entities.tipo_filtro_entity import TipoFiltroEntity

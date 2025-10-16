@@ -4,6 +4,7 @@ Fecha:      18/09/2025
 Commentarios:
     Módulo que contiene la vista de inicio de sesión.
 """
+
 import sys
 
 from PyQt6.QtCore import Qt, QSize

@@ -5,13 +5,11 @@ Commentarios:
     Módulo que contiene el formulario principal.
 """
 
-# Importaciones
+
 import sys
-from PyQt6.QtWidgets import (QApplication, QWidget, QLabel, QLineEdit,
-                             QTextEdit, QPushButton, QHBoxLayout, QVBoxLayout,
-                             QSpacerItem, QComboBox, QSizePolicy, QFrame,
-                             QTableView, QSizeGrip, QAbstractItemView,
-                             QMainWindow, QGridLayout)
+from PyQt6.QtWidgets import (QApplication, QWidget, QLabel, QPushButton,
+                             QHBoxLayout, QVBoxLayout, QSpacerItem,
+                             QSizePolicy, QFrame, QSizeGrip)
 from PyQt6.QtGui import QIcon, QPixmap, QCursor, QFont
 from PyQt6.QtCore import Qt
 

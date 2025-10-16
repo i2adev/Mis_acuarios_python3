@@ -4,6 +4,7 @@ Fecha:      28/07/2025
 Commentarios:
     Módulo para la validación del formulario de marca comercial.
 """
+
 from PyQt6.QtWidgets import QWidget, QLineEdit, QComboBox
 
 from Services.Result.result import Result

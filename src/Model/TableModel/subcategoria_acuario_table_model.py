@@ -5,6 +5,7 @@ Commentarios:
     Módulo que contiene el modelo de visualización de la tabla de SUBCATEGORÍAS
     DE ACUARIO. Este módulo se encarga de dar formato a los datos de la tabla.
 """
+
 from PyQt6.QtCore import QAbstractTableModel, Qt, QModelIndex
 
 from Model.Entities.subcategoria_acuario_entity import SubcategoriaAcuarioEntity

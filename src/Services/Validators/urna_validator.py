@@ -4,6 +4,7 @@ Fecha:      09/08/2025
 Commentarios:
     Módulo para la validación del formulario de acuario.
 """
+
 from PyQt6.QtWidgets import QWidget, QLineEdit, QComboBox, QMessageBox
 
 from Services.Result.result import Result

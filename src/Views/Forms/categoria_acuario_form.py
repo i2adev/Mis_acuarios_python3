@@ -5,11 +5,12 @@ Commentarios:
     Módulo que contiene los controles del formulario de la entidad CATE-
     GORÍA DE ACUARIO.
 """
+
 import sys
 
-from PyQt6.QtCore import Qt
+
 from PyQt6.QtWidgets import QFrame, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, \
-    QPlainTextEdit, QApplication, QWidget
+    QPlainTextEdit, QApplication
 
 
 class CategoriaAcuarioForm(QFrame):

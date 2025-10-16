@@ -9,7 +9,7 @@ Commentarios:
 import sqlite3
 import traceback
 
-from PyQt6.QtWidgets import QMessageBox
+
 from Model.DAO.base_dao import BaseDAO
 from Model.Entities.pais_entity import PaisEntity
 from Services.Result.result import Result

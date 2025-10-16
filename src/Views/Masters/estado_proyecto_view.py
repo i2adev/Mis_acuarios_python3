@@ -4,13 +4,14 @@ Fecha:      08/10/2025
 Commentarios:
     Módulo que contiene la vista de la entidad ESTADO DE PROYECTO.
 """
+
 import sys
 
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QApplication, QWidget
 
-from base_view import BaseView
-from estado_proyecto_form import EstadoProyectoForm
+from Views.Masters.base_view import BaseView
+from Views.Forms.estado_proyecto_form import EstadoProyectoForm
 
 
 class EstadoProyectoView(BaseView):

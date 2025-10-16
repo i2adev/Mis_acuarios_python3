@@ -4,6 +4,7 @@ Fecha:      15/09/2025
 Commentarios:
     Módulo que contiene los controles del formulario de la entidad USUARIO.
 """
+
 import sys
 
 from PyQt6.QtWidgets import QFrame, QVBoxLayout, QApplication, \

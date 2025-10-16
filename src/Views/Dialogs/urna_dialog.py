@@ -4,6 +4,7 @@ Fecha:      09/08/2025
 Commentarios:
     Módulo que contiene el diálogo de la entidad ACUARIO.
 """
+
 import sys
 
 from PyQt6.QtCore import Qt

@@ -2,7 +2,7 @@
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
 15/10/2025  LAS IMPORTACIONES SE PASAN A REFERENCIAS ABSOLUTAS:
-     |       -   CONTROLADORES:
+     |      -   CONTROLADORES:
                 -   BASE CONTROLLER.                                        DONE
                 -   CATEGORÍA ACUARIO CONTROLLER.                           DONE
                 -   CATEGORÍA ACUARIO DIALOG CONTROLLER.                    DONE
@@ -37,6 +37,110 @@ FECHA		DESCRIPCIÓN
                 -   URNA DIALOG CONTROLLER.                                 DONE
                 -   URNA MASTER CONTROLLER.                                 DONE
                 -   USUARIO CONTROLLER.                                     DONE
+
+            -   CONTROLES PERSONALIZADOS:
+                -   NULLABLE DATE EDIT.                                     DONE
+
+            -   MODELS:
+                -   DAO.
+                    -   BASE DAO.                                           DONE
+                    -   CATEGORÍA ACUARIO DAO.                              DONE
+                    -   CATEGORIA NCIDENCIA DAO.                            DONE
+                    -   ESTADO PROYECTO DAO.                                DONE
+                    -   FOTOGRAFÍA DAO.                                     DONE
+                    -   MARCA COMERCIAL DAO.                                DONE
+                    -   MATERIAL DE URNA DAO.                               DONE
+                    -   PAÍS DAO.                                           DONE
+                    -   PROYECTO DAO.                                       DONE
+                    -   SUBCATEGORÍA ACUARIO DAO.                           DONE
+                    -   SUBCATEGORÍA INCIDENCIA DAO.                        DONE
+                    -   TIPO ACUARIO DAO.                                   DONE
+                    -   TIPO FILTRO DAO.                                    DONE
+                    -   URNA DAO.                                           DONE
+                    -   USUARIO DAO.                                        DONE
+
+                -   ENTITIES:
+                    -   BASE ENTITY.                                        DONE
+                    -   CATEGORÍA ACUARIO ENTITY.                           DONE
+                    -   CATEGORIA NCIDENCIA ENTITY.                         DONE
+                    -   ESTADO PROYECTO ENTITY.                             DONE
+                    -   FOTOGRAFÍA ENTITY.                                  DONE
+                    -   MARCA COMERCIAL ENTITY.                             DONE
+                    -   MATERIAL DE URNA ENTITY.                            DONE
+                    -   PAÍS ENTITY.                                        DONE
+                    -   PROYECTO ENTITY.                                    DONE
+                    -   SUBCATEGORÍA ACUARIO ENTITY.                        DONE
+                    -   SUBCATEGORÍA INCIDENCIA ENTITY.                     DONE
+                    -   TIPO ACUARIO ENTITY.                                DONE
+                    -   TIPO FILTRO ENTITY.                                 DONE
+                    -   URNA ENTITY.                                        DONE
+                    -   USUARIO ENTITY.                                     DONE
+
+                -   ENTITIES:
+                    -   CATEGORÍA ACUARIO ENTITY.                           DONE
+                    -   CATEGORIA NCIDENCIA ENTITY.                         DONE
+                    -   ESTADO PROYECTO ENTITY.                             DONE
+                    -   MARCA COMERCIAL ENTITY.                             DONE
+                    -   MATERIAL DE URNA ENTITY.                            DONE
+                    -   PROYECTO ENTITY.                                    DONE
+                    -   SUBCATEGORÍA ACUARIO ENTITY.                        DONE
+                    -   SUBCATEGORÍA INCIDENCIA ENTITY.                     DONE
+                    -   TIPO ACUARIO ENTITY.                                DONE
+                    -   TIPO FILTRO ENTITY.                                 DONE
+                    -   URNA ENTITY.                                        DONE
+
+                -   VALIDATOR:
+                    -   CATEGORÍA ACUARIO VALIDATOR.                        DONE
+                    -   CATEGORIA NCIDENCIA VALIDATOR.                      DONE
+                    -   ESTADO PROYECTO VALIDATOR.                          DONE
+                    -   MARCA COMERCIAL VALIDATOR.                          DONE
+                    -   MATERIAL DE URNA VALIDATOR.                         DONE
+                    -   PROYECTO VALIDATOR.                                 DONE
+                    -   SUBCATEGORÍA ACUARIO VALIDATOR.                     DONE
+                    -   SUBCATEGORÍA INCIDENCIA VALIDATOR.                  DONE
+                    -   TIPO ACUARIO VALIDATOR.                             DONE
+                    -   TIPO FILTRO VALIDATOR.                              DONE
+                    -   URNA VALIDATOR.                                     DONE
+
+            -   VIEWS:
+                -   DIALOGS.
+                    -   CATEGORÍA ACUARIO.                                  DONE
+                    -   CATEGORIA NCIDENCIA.                                DONE
+                    -   ESTADO PROYECTO.                                    DONE
+                    -   MARCA COMERCIAL.                                    DONE
+                    -   MATERIAL DE URNA.                                   DONE
+                    -   PROYECTO.                                           DONE
+                    -   SUBCATEGORÍA ACUARIO.                               DONE
+                    -   SUBCATEGORÍA INCIDENCIA.                            DONE
+                    -   TIPO ACUARIO.                                       DONE
+                    -   TIPO FILTRO.                                        DONE
+                    -   URNA.                                               DONE
+
+                -   FORMD.
+                    -   CATEGORÍA ACUARIO.                                  DONE
+                    -   CATEGORIA NCIDENCIA.                                DONE
+                    -   ESTADO PROYECTO.                                    DONE
+                    -   MARCA COMERCIAL.                                    DONE
+                    -   MATERIAL DE URNA.                                   DONE
+                    -   PROYECTO.                                           DONE
+                    -   SUBCATEGORÍA ACUARIO.                               DONE
+                    -   SUBCATEGORÍA INCIDENCIA.                            DONE
+                    -   TIPO ACUARIO.                                       DONE
+                    -   TIPO FILTRO.                                        DONE
+                    -   URNA.                                               DONE
+
+                -   MASTERS.
+                    -   CATEGORÍA ACUARIO.                                  DONE
+                    -   CATEGORIA NCIDENCIA.                                DONE
+                    -   ESTADO PROYECTO.                                    DONE
+                    -   MARCA COMERCIAL.                                    DONE
+                    -   MATERIAL DE URNA.                                   DONE
+                    -   PROYECTO.                                           DONE
+                    -   SUBCATEGORÍA ACUARIO.                               DONE
+                    -   SUBCATEGORÍA INCIDENCIA.                            DONE
+                    -   TIPO ACUARIO.                                       DONE
+                    -   TIPO FILTRO.                                        DONE
+                    -   URNA.                                               DONE
 
 09/10/2025  SE AÑADE LA LÓGICA DEL PROYECTO:
             -   SE CREA LA ENTIDAD.                                         DONE

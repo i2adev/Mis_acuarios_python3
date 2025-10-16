@@ -4,6 +4,7 @@ Fecha:      15/09/2025
 Commentarios:
     Módulo que contiene el diálogo de la entidad USUARIO.
 """
+
 import sys
 
 from PyQt6.QtCore import Qt

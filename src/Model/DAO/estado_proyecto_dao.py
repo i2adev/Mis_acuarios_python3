@@ -9,10 +9,10 @@ Commentarios:
 import sqlite3
 import traceback
 
-from base_dao import BaseDAO
-from database import DBManager
-from estado_proyecto_entity import EstadoProyectoEntity
-from result import Result
+from Model.DAO.base_dao import BaseDAO
+from Model.DAO.database import DBManager
+from Model.Entities.estado_proyecto_entity import EstadoProyectoEntity
+from Services.Result.result import Result
 
 
 class EstadoProyectoDAO(BaseDAO):

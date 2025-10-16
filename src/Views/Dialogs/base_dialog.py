@@ -4,6 +4,7 @@ Fecha:      30/06/2025
 Commentarios:
     Módulo que contiene la vista de la que derivan los dialogos.
 """
+
 import sys
 
 from PyQt6.QtCore import Qt

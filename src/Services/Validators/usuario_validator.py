@@ -4,6 +4,7 @@ Fecha:      09/08/2025
 Commentarios:
     Módulo para la validación del formulario de usuario.
 """
+
 import re
 
 from PyQt6.QtCore import QRegularExpression

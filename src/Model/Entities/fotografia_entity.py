@@ -4,8 +4,10 @@ Fecha:      19/08/2025
 Commentarios:
     Módulo que contiene la entidad FOTOGRAFÍA.
 """
+from Model.Entities.base_entity import BaseEntity
 
-class FotografiaEntity:
+
+class FotografiaEntity(BaseEntity):
     """ Entidad de fotografía. """
 
     # Notaciones de tipo

@@ -4,6 +4,7 @@ Fecha:      28/07/2025
 Commentarios:
     Módulo que contiene el formulario maestro de la marca comercial.
 """
+
 import sys
 
 from PyQt6.QtCore import Qt

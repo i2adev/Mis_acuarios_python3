@@ -4,6 +4,7 @@ Fecha:      19/08/2025
 Commentarios:
     Módulo que contiene el diálogo de la entidad MATERIAL DE URNA.
 """
+
 import sys
 
 from PyQt6.QtCore import Qt

@@ -5,6 +5,7 @@ Commentarios:
     Módulo que contiene el formulario maestro de la subcategoría de
     incidencia.
 """
+
 import sys
 
 from PyQt6.QtCore import Qt

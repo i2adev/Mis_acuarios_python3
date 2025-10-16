@@ -5,6 +5,7 @@ Commentarios:
     Módulo que contiene los controles del formulario de la entidad CATE-
     GORÍA DE INCIDENCIA.
 """
+
 import sys
 
 from PyQt6.QtWidgets import QFrame, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, \

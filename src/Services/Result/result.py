@@ -6,9 +6,6 @@ Commentarios:
     aplicar el patron result.
 """
 
-
-# Importaciones
-
 class Result:
     """
     Clase que gestiona las devoluciones de las funciones, siguiendo el

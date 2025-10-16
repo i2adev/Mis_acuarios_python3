@@ -10,8 +10,8 @@ import sqlite3
 
 from base_dao import BaseDAO
 from database import DBManager
-from proyecto_entity import ProyectoEntity
-from result import Result
+from Model.Entities.proyecto_entity import ProyectoEntity
+from Services.Result.result import Result
 
 
 class ProyectoDAO (BaseDAO):

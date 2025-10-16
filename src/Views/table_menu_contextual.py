@@ -6,7 +6,7 @@ Commentarios:
     menú contextual que permite cargar o eliminar un registro de la tabla.
 """
 
-# Importaciones
+
 from PyQt6.QtWidgets import QMenu, QTableView
 
 class TableMenuContextual(QMenu):

@@ -5,6 +5,7 @@ Commentarios:
     Módulo que contiene los controles del formulario de la entidad TIPO DE
     ACUARIO.
 """
+
 import sys
 
 from PyQt6.QtCore import Qt

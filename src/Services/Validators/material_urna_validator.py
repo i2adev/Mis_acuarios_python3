@@ -4,8 +4,8 @@ Fecha:      19/08/2025
 Commentarios:
     Módulo para la validación del formulario de material de la urna.
 """
+
 from PyQt6.QtWidgets import QLineEdit
-from Tools.scripts.generate_opcode_h import write_int_array_from_ops
 
 from Services.Result.result import Result
 

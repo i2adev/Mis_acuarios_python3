@@ -4,9 +4,10 @@ Fecha:      08/10/2025
 Commentarios:
     Módulo para la validación del formulario de estado de proyecto.
 """
+
 from PyQt6.QtWidgets import QLineEdit
 
-# Importaciones
+
 from Services.Result.result import Result
 
 class EstadoProyectoValidator:

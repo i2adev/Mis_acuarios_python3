@@ -8,7 +8,7 @@ Commentarios:
 from PyQt6.QtGui import QAction
 from PyQt6.QtWidgets import QMessageBox, QPushButton
 
-from base_controller import BaseController
+from Controllers.base_controller import BaseController
 from Services.Result.result import Result
 from Model.DAO.tipo_filtro_dao import TipoFiltroDAO
 from Views.Dialogs.tipo_filtro_dialog import TipoFiltroDialog
