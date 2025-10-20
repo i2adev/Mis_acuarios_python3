@@ -19,7 +19,7 @@ from Model.Entities.usuario_entity import UsuarioEntity
 from Views.Dialogs.login_dialog import LoginDialog
 
 # Versión del programa
-__version__ = "0.13.4"
+__version__ = "0.13.5"
 
 # Entrada al programa
 def main():
