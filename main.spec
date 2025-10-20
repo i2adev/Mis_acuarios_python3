@@ -10,6 +10,7 @@ a = Analysis(
         ('src/Services/Database/MISACUARIOS.sqlite3', 'Services/Database'),
         ('src/Resources/Images/*', 'Resources/Images'),
         ('src/Resources/Styles/*', 'Resources/Styles'),
+        ('src/Resources/Fonts/*', 'Resources/Fonts'),
     ],
     hiddenimports=[],
     hookspath=[],
