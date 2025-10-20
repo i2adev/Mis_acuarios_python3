@@ -13,6 +13,7 @@ from PyQt6.QtWidgets import (QDialog, QVBoxLayout, QFrame, QSizePolicy,
                              QHBoxLayout, QPushButton, QLabel, QSpacerItem,
                              QApplication, QLineEdit, QWidget)
 
+import Resources.image_rc
 
 class LoginDialog(QDialog):
     """ Formulario de tipo de filtro """
@@ -60,7 +61,8 @@ class LoginDialog(QDialog):
         ## Imagen
         self.label_image = QLabel()
         self.label_image.setPixmap(
-                QPixmap("../../Resources/Images/cuenta.png").scaled(
+                # QPixmap("../../Resources/Images/cuenta.png").scaled(
+                QPixmap(":/Images/cuenta.png").scaled(
                     QSize(100,100),
                     Qt.AspectRatioMode.KeepAspectRatio,
                     Qt.TransformationMode.SmoothTransformation

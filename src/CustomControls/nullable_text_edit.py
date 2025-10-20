@@ -13,6 +13,8 @@ from PyQt6.QtWidgets import (
     QHBoxLayout, QApplication, QFrame
 )
 
+import Resources.image_rc
+
 
 class NullableDateEdit(QWidget):
     """QDateEdit personalizado con calendario integrado y soporte para valor nulo."""

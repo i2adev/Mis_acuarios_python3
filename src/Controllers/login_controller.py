@@ -4,7 +4,6 @@ Fecha:      18/09/2025
 Commentarios:
     Módulo que contiene la clase controladora del formulario de login.
 """
-import sys
 
 from PyQt6.QtWidgets import (QWidget, QMessageBox, QComboBox)
 

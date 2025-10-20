@@ -19,7 +19,7 @@ from Model.Entities.usuario_entity import UsuarioEntity
 from Views.Dialogs.login_dialog import LoginDialog
 
 # Versión del programa
-__version__ = "0.13.3"
+__version__ = "0.13.4"
 
 # Entrada al programa
 def main():
@@ -33,7 +33,7 @@ def main():
         return Path(base_path) / relative_path
 
     # Cargar el estilo
-    qss_path = resource_path("src/Resources/Styles/main_style.qss")
+    qss_path = resource_path("Resources/Styles/main_style.qss")
     with open(qss_path, "r", encoding="utf-8") as f:
         style = f.read()
         app.setStyleSheet(style)

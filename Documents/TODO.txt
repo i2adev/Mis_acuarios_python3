@@ -2,8 +2,8 @@
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
 15/10/2025  LAS IMPORTACIONES SE PASAN A REFERENCIAS ABSOLUTAS:
-     |      -   CONTROLADORES:
-                -   BASE CONTROLLER.                                        DONE
+     ↓      -   CONTROLADORES:
+17/10/2025      -   BASE CONTROLLER.                                        DONE
                 -   CATEGORÍA ACUARIO CONTROLLER.                           DONE
                 -   CATEGORÍA ACUARIO DIALOG CONTROLLER.                    DONE
                 -   CATEGORÍA ACUARIO MASTER CONTROLLER.                    DONE

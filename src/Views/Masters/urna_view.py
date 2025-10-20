@@ -28,10 +28,10 @@ class UrnaView(BaseView):
         # Configuramos el formulario
         self.frame = UrnaForm()
         self.frame.setMinimumWidth(650)
-        self.frame_imagen = ImageForm(self, "FOTOGRAFIAS_URNA")
-        self.frame_imagen.setFixedWidth(450)
+        self.frame_image = ImageForm(self, "FOTOGRAFIAS_URNA")
+        self.frame_image.setFixedWidth(450)
         self.layout_form_data.addWidget(self.frame)
-        self.layout_form_data.addWidget(self.frame_imagen)
+        self.layout_form_data.addWidget(self.frame_image)
 
         self.set_tab_order()
 

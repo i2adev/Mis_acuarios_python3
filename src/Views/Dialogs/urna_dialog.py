@@ -25,7 +25,7 @@ class UrnaDialog(BaseDialog):
 
         # Configura el formulario
         self.frame = UrnaForm()
-        self.frame_image = ImageForm()
+        self.frame_image = ImageForm(self, "FOTOGRAFIAS_URNA")
         self.frame.setFixedWidth(650)
         self.layout_form_data.addWidget(self.frame)
         self.layout_form_data.addWidget(self.frame_image)

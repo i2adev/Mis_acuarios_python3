@@ -83,11 +83,16 @@ class UrnaController(BaseController):
         ent = self._entity_configuration()
 
         # Inserta el registro
-        res = self._dao.insert(ent)
-        if not res.is_success:
-            return res
+        res_urna = self._dao.insert(ent)
+        if not res_urna.is_success:
+            return res_urna
 
-        return Result.success(res.value)
+        # Insertamos las fotografías
+        res_foto = self._view.frame_image.insert_images(res_urna.value)
+        if not res_foto.is_success:
+            return res_foto
+
+        return Result.success(res_urna.value)
 
     def _update(self) -> Result:
         """ Actualiza el registro en la base de datos. """
@@ -102,13 +107,15 @@ class UrnaController(BaseController):
         ent = self._entity_configuration()
 
         # Actualiza el registro
-        res = self._dao.update(ent)
+        res_urna = self._dao.update(ent)
 
-        if not res.is_success:
-            return Result.failure(res.error_msg)
+        if not res_urna.is_success:
+            return res_urna
 
-        # Limpiamos el formulario
-        self._clean_view(self._view.frame.combo_marca)
+        # Actualizamos las fotografías
+        res_foto = self._view.frame_image.insert_images(res_urna.value)
+        if not res_foto.is_success:
+            return res_foto
 
         return Result.success(ent.id)
 
@@ -289,7 +296,7 @@ class UrnaController(BaseController):
         res_id = self._load_data()
 
         # Carga las imágenes
-        self._view.frame_imagen.load_images(res_id.value)
+        self._view.frame_image.load_images(res_id.value)
 
     def _fill_combos(self):
         """ Llena los combos del formulario"""

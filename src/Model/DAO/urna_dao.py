@@ -27,7 +27,7 @@ class UrnaDAO(BaseDAO):
         self.ent = None
 
     # ------------------------------------------------------------------
-    def get_list(self) -> Result(list[UrnaEntity]):
+    def get_list(self) -> Result:
         """Obtiene el listado completo ordenado por categoría."""
 
         sql = (
@@ -90,7 +90,7 @@ class UrnaDAO(BaseDAO):
             return Result.failure(f"[SQLITE ERROR]\n {e}")
 
     # ------------------------------------------------------------------
-    def get_list_combo(self) -> Result(list[UrnaEntity]):
+    def get_list_combo(self) -> Result:
         """
         Obtiene una lista ligera para combos (ID y texto visible).
         Devuelve entidades con `num=None` y `observaciones=None`.
@@ -147,7 +147,7 @@ class UrnaDAO(BaseDAO):
             return Result.failure(f"[SQLITE ERROR]\n {e}")
 
     # ------------------------------------------------------------------
-    def insert(self, ent: UrnaEntity) -> Result(int):
+    def insert(self, ent: UrnaEntity) -> Result:
         """
         Inserta un nuevo registro y devuelve el ID generado.
         :param ent: Entidad derivada de BaseEntity
@@ -198,7 +198,7 @@ class UrnaDAO(BaseDAO):
             return Result.failure(f"[SQLITE ERROR]\n {e}")
 
     # ------------------------------------------------------------------
-    def update(self, ent: UrnaEntity) -> Result(int):
+    def update(self, ent: UrnaEntity) -> Result:
 
         """
         Actualiza el registro en la base de datos. Devuelve el ID de la entidad
@@ -257,7 +257,7 @@ class UrnaDAO(BaseDAO):
             return Result.failure(f"[SQLITE ERROR]\n {e}")
 
     # ------------------------------------------------------------------
-    def delete(self, id_: int) -> Result(int):
+    def delete(self, id_: int) -> Result:
         """
         Elimina el registro. Devuelve el ID de la entidad eliminada.
         :param id_: ID de la entidad a eliminar

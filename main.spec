@@ -3,13 +3,13 @@
 block_cipher = None
 
 a = Analysis(
-    ['main.py'],
-    pathex=[],
+    ['src/main.py'],
+    pathex=['src'],
     binaries=[],
     datas=[
-        ('Services/Database/MISACUARIOS.sqlite3', 'Services/Database'),
-        ('Resources/Images/*', 'Resources/Images'),
-        ('Resources/Styles/*', 'Resources/Styles'),
+        ('src/Services/Database/MISACUARIOS.sqlite3', 'Services/Database'),
+        ('src/Resources/Images/*', 'Resources/Images'),
+        ('src/Resources/Styles/*', 'Resources/Styles'),
     ],
     hiddenimports=[],
     hookspath=[],
@@ -34,7 +34,7 @@ exe = EXE(
     upx=True,
     console=False,
     disable_windowed_traceback=False,
-    icon='Icon.ico'
+    icon='src/Icon.ico'
 )
 
 coll = COLLECT(

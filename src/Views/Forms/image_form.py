@@ -201,7 +201,7 @@ class ImageForm(QFrame):
             )
             self.show_image()
 
-    def insert_foto(self, idf: int) -> Result:
+    def insert_images(self, idf: int) -> Result:
         """ Inserta una fotografía en la base de datos. """
 
         # Insertamos las fotografías
