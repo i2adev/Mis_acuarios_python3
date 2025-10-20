@@ -14,7 +14,7 @@ from PyQt6.QtWidgets import (QApplication, QWidget, QLabel, QLineEdit,
 from PyQt6.QtGui import QIcon, QPixmap, QCursor
 from PyQt6.QtCore import Qt, QRect
 
-import Resources.image_rc
+import Resources.resources_rc
 
 class BaseView(QWidget):
     """ Formulario maestro base """

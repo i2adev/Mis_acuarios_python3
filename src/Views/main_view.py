@@ -13,7 +13,7 @@ from PyQt6.QtWidgets import (QApplication, QWidget, QLabel, QPushButton,
 from PyQt6.QtGui import QIcon, QPixmap, QCursor, QFont
 from PyQt6.QtCore import Qt
 
-import Resources.image_rc
+import Resources.resources_rc
 
 class MainView(QWidget):
     """ Formulario de tipo de filtro """

@@ -13,7 +13,7 @@ from PyQt6.QtWidgets import (QDialog, QVBoxLayout, QFrame, QSizePolicy,
                              QHBoxLayout, QPushButton, QLabel, QSpacerItem,
                              QApplication, QLineEdit, QWidget)
 
-import Resources.image_rc
+import Resources.resources_rc
 
 class LoginDialog(QDialog):
     """ Formulario de tipo de filtro """

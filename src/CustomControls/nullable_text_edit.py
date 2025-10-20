@@ -13,7 +13,7 @@ from PyQt6.QtWidgets import (
     QHBoxLayout, QApplication, QFrame
 )
 
-import Resources.image_rc
+import Resources.resources_rc
 
 
 class NullableDateEdit(QWidget):
