@@ -1,0 +1,883 @@
+﻿================================================================================
+FECHA		DESCRIPCIÓN
+----------  --------------------------------------------------------------------
+23/10/2025  TESTS DEL MAESTRO DE PROYECTO:
+     ↓      -   TESTEO DE LA APERTURA DEL MAESTRO.                          DONE
+            -   TESTEO DE INSERCIÓN DE REGISTRO.                            TODO
+            -   TESTEO DE ACTUALIZACIÓN DE REGISTRO.                        TODO
+            -   TESTEO DE ELIMINACIÓN DE REGISTRO.                          TODO
+            -   TESTEO DE BÚSQUEDA DE REGISTROS.                            TODO
+
+09/10/2025  SE AÑADE LA LÓGICA DEL PROYECTO:
+     ↓      -   SE CREA LA ENTIDAD.                                         DONE
+23/10/2025  -   SE CREA LA VISTA EN LA BASE DE DATOS.                       DONE
+            -   SE CREA EL DAO.                                             DONE
+            -   SE CREA EL FORMULARIO.                                      DONE
+            -   SE CREA EL CUADRO DE DIÁLOGO.                               DONE
+            -   SE CREA EL FORMULARIO MAESTRO.                              DONE
+            -   SE CREA EL VALIDADOR DEL FORMULARIO.                        DONE
+            -   SE CREA EL MODELO DE TABLA.                                 DONE
+            -   ACTUALIZAR EL PAGINADOR.
+                -   CREAR EL COPMANDO DE BÚSQUEDA.                          DONE
+                -   SE CONFIGURA LA OBTENCIÓN DE LA LISTA DE ENTIDADES.     DONE
+                -   SE CONFIGURA LA OBTENCIÓN DEL COMANDO DE BÚSQUEDA.      DONE
+
+            -   SE CREAN LOS CONTROLADORES:
+                -   CONTROLADOR BASE.                                       DONE
+                -   CONTROLADOR DEL CUADRO DE DIÁLOGO.                      DONE
+                -   CONTROLADOR DEL FORMULARIO MAESTRO.                     DONE
+
+            -   INTEGRAR EN LA VISTA PRINCIPAL.                             DONE
+
+15/10/2025  LAS IMPORTACIONES SE PASAN A REFERENCIAS ABSOLUTAS:
+     ↓      -   CONTROLADORES:
+17/10/2025      -   BASE CONTROLLER.                                        DONE
+                -   CATEGORÍA ACUARIO CONTROLLER.                           DONE
+                -   CATEGORÍA ACUARIO DIALOG CONTROLLER.                    DONE
+                -   CATEGORÍA ACUARIO MASTER CONTROLLER.                    DONE
+                -   CATEGORÍA INCIDENCIA CONTROLLER.                        DONE
+                -   CATEGORÍA INCIDENCIA DIALOG CONTROLLER.                 DONE
+                -   CATEGORÍA INCIDENCIA MASTER CONTROLLER.                 DONE
+                -   ESTADO PROYECTO CONTROLLER.                             DONE
+                -   ESTADO PROYECTO DIALOG CONTROLLER.                      DONE
+                -   ESTADO PROYECTO MASTER CONTROLER.                       DONE
+                -   LOGIN CONTROLLER.                                       DONE
+                -   MAIN VIEW CONTROLLER.                                   DONE
+                -   MARCA COMERCIAL CONTROLLER.                             DONE
+                -   MARCA COMERCIAL DIALOG CONTROLLER.                      DONE
+                -   MARCA COMERCIAL MASTER CONTROLLER.                      DONE
+                -   MATERIAL URNA CONTROLLER.                               DONE
+                -   MATERIAL URNA DIALOG CONTROLLER.                        DONE
+                -   MATERIAL URNA MASTER CONTROLLER.                        DONE
+                -   SUBCATEGORÍA ACUARIO CONTROLLER.                        DONE
+                -   SUBCATEGORÍA ACUARIO DIALOG CONTROLLER.                 DONE
+                -   SUBCATEGORÍA ACUARIO MASTER CONTROLLER.                 DONE
+                -   SUBCATEGORÍA INCIDENCIA CONTROLLER.                     DONE
+                -   SUBCATEGORÍA INCIDENCIA DIALOG CONTROLLER.              DONE
+                -   SUBCATEGORÍA INCIDENCIA MASTER CONTROLLER.              DONE
+                -   TIPO ACUARIO CONTROLLER.                                DONE
+                -   TIPO ACUARIO DIALOG CONTROLLER.                         DONE
+                -   TIPO ACUARIO MASTER CONTROLLER.                         DONE
+                -   TIPO FILTRO CONTROLLER.                                 DONE
+                -   TIPO FILTRO DIALOG CONTROLLER.                          DONE
+                -   TIPO FILTRO MASTER CONTROLLER.                          DONE
+                -   URNA CONTROLLER.                                        DONE
+                -   URNA DIALOG CONTROLLER.                                 DONE
+                -   URNA MASTER CONTROLLER.                                 DONE
+                -   USUARIO CONTROLLER.                                     DONE
+
+            -   CONTROLES PERSONALIZADOS:
+                -   NULLABLE DATE EDIT.                                     DONE
+
+            -   MODELS:
+                -   DAO.
+                    -   BASE DAO.                                           DONE
+                    -   CATEGORÍA ACUARIO DAO.                              DONE
+                    -   CATEGORIA NCIDENCIA DAO.                            DONE
+                    -   ESTADO PROYECTO DAO.                                DONE
+                    -   FOTOGRAFÍA DAO.                                     DONE
+                    -   MARCA COMERCIAL DAO.                                DONE
+                    -   MATERIAL DE URNA DAO.                               DONE
+                    -   PAÍS DAO.                                           DONE
+                    -   PROYECTO DAO.                                       DONE
+                    -   SUBCATEGORÍA ACUARIO DAO.                           DONE
+                    -   SUBCATEGORÍA INCIDENCIA DAO.                        DONE
+                    -   TIPO ACUARIO DAO.                                   DONE
+                    -   TIPO FILTRO DAO.                                    DONE
+                    -   URNA DAO.                                           DONE
+                    -   USUARIO DAO.                                        DONE
+
+                -   ENTITIES:
+                    -   BASE ENTITY.                                        DONE
+                    -   CATEGORÍA ACUARIO ENTITY.                           DONE
+                    -   CATEGORIA NCIDENCIA ENTITY.                         DONE
+                    -   ESTADO PROYECTO ENTITY.                             DONE
+                    -   FOTOGRAFÍA ENTITY.                                  DONE
+                    -   MARCA COMERCIAL ENTITY.                             DONE
+                    -   MATERIAL DE URNA ENTITY.                            DONE
+                    -   PAÍS ENTITY.                                        DONE
+                    -   PROYECTO ENTITY.                                    DONE
+                    -   SUBCATEGORÍA ACUARIO ENTITY.                        DONE
+                    -   SUBCATEGORÍA INCIDENCIA ENTITY.                     DONE
+                    -   TIPO ACUARIO ENTITY.                                DONE
+                    -   TIPO FILTRO ENTITY.                                 DONE
+                    -   URNA ENTITY.                                        DONE
+                    -   USUARIO ENTITY.                                     DONE
+
+                -   ENTITIES:
+                    -   CATEGORÍA ACUARIO ENTITY.                           DONE
+                    -   CATEGORIA NCIDENCIA ENTITY.                         DONE
+                    -   ESTADO PROYECTO ENTITY.                             DONE
+                    -   MARCA COMERCIAL ENTITY.                             DONE
+                    -   MATERIAL DE URNA ENTITY.                            DONE
+                    -   PROYECTO ENTITY.                                    DONE
+                    -   SUBCATEGORÍA ACUARIO ENTITY.                        DONE
+                    -   SUBCATEGORÍA INCIDENCIA ENTITY.                     DONE
+                    -   TIPO ACUARIO ENTITY.                                DONE
+                    -   TIPO FILTRO ENTITY.                                 DONE
+                    -   URNA ENTITY.                                        DONE
+
+                -   VALIDATOR:
+                    -   CATEGORÍA ACUARIO VALIDATOR.                        DONE
+                    -   CATEGORIA NCIDENCIA VALIDATOR.                      DONE
+                    -   ESTADO PROYECTO VALIDATOR.                          DONE
+                    -   MARCA COMERCIAL VALIDATOR.                          DONE
+                    -   MATERIAL DE URNA VALIDATOR.                         DONE
+                    -   PROYECTO VALIDATOR.                                 DONE
+                    -   SUBCATEGORÍA ACUARIO VALIDATOR.                     DONE
+                    -   SUBCATEGORÍA INCIDENCIA VALIDATOR.                  DONE
+                    -   TIPO ACUARIO VALIDATOR.                             DONE
+                    -   TIPO FILTRO VALIDATOR.                              DONE
+                    -   URNA VALIDATOR.                                     DONE
+
+            -   VIEWS:
+                -   DIALOGS.
+                    -   CATEGORÍA ACUARIO.                                  DONE
+                    -   CATEGORIA NCIDENCIA.                                DONE
+                    -   ESTADO PROYECTO.                                    DONE
+                    -   MARCA COMERCIAL.                                    DONE
+                    -   MATERIAL DE URNA.                                   DONE
+                    -   PROYECTO.                                           DONE
+                    -   SUBCATEGORÍA ACUARIO.                               DONE
+                    -   SUBCATEGORÍA INCIDENCIA.                            DONE
+                    -   TIPO ACUARIO.                                       DONE
+                    -   TIPO FILTRO.                                        DONE
+                    -   URNA.                                               DONE
+
+                -   FORMD.
+                    -   CATEGORÍA ACUARIO.                                  DONE
+                    -   CATEGORIA NCIDENCIA.                                DONE
+                    -   ESTADO PROYECTO.                                    DONE
+                    -   MARCA COMERCIAL.                                    DONE
+                    -   MATERIAL DE URNA.                                   DONE
+                    -   PROYECTO.                                           DONE
+                    -   SUBCATEGORÍA ACUARIO.                               DONE
+                    -   SUBCATEGORÍA INCIDENCIA.                            DONE
+                    -   TIPO ACUARIO.                                       DONE
+                    -   TIPO FILTRO.                                        DONE
+                    -   URNA.                                               DONE
+
+                -   MASTERS.
+                    -   CATEGORÍA ACUARIO.                                  DONE
+                    -   CATEGORIA NCIDENCIA.                                DONE
+                    -   ESTADO PROYECTO.                                    DONE
+                    -   MARCA COMERCIAL.                                    DONE
+                    -   MATERIAL DE URNA.                                   DONE
+                    -   PROYECTO.                                           DONE
+                    -   SUBCATEGORÍA ACUARIO.                               DONE
+                    -   SUBCATEGORÍA INCIDENCIA.                            DONE
+                    -   TIPO ACUARIO.                                       DONE
+                    -   TIPO FILTRO.                                        DONE
+                    -   URNA.                                               DONE
+
+08/10/2025  SE AÑADE LA LÓGICA DE ESTADO DE PROYECTO:
+            -   SE CREA LA ENTIDAD.                                         DONE
+            -   SE CREA LA VISTA EN LA BASE DE DATOS.                       DONE
+            -   SE CREA EL DAO.                                             DONE
+            -   SE CREA EL FORMULARIO.                                      DONE
+            -   SE CREA EL CUADRO DE DIÁLOGO.                               DONE
+            -   SE CREA EL FORMULARIO MAESTRO.                              DONE
+            -   SE CREA EL VALIDADOR DEL FORMULARIO.                        DONE
+            -   SE CREA EL MODELO DE TABLA.                                 DONE
+            -   ACTUALIZAR EL SISTEMA DE BÚSQUEDA.                          DONE
+
+            -   SE CREAN LOS CONTROLADORES:
+                -   CONTROLADOR BASE.                                       DONE
+                -   CONTROLADOR DEL CUADRO DE DIÁLOGO.                      DONE
+                -   CONTROLADOR DEL FORMULARIO MAESTRO.                     DONE
+
+            - INTEGRAR EN LA VISTA PRINCIPAL.                               DONE
+
+08/10/2025  TEST DE FORMULARIOS MAESTROS
+            -   TIPO DE FILTRO.
+                -   INSERCION DE REGISTRO.                                  DONE
+                -   ACTUALIZACIÓN DE REGISTRO.                              DONE
+                -   ELIMINACIÓN DE REGISTRO.
+                    -   ELIMINACIÓN DESDE MENÚ CONTEXTUAL.                  DONE
+                    -   ELIMINACIÓN TRAS CARGAR EL REGISTRO EN EL FORMULARIO.
+                                                                            DONE
+                -   FILTRADO DE REGISTROS.                                  DONE
+                -   COMPROBAR LA INSERCIÓN DE LOS COMBOS.          NOT NECESSARY
+
+            -   CATEGORIA DE ACUARIO.
+                -   INSERCION DE REGISTRO.                                  DONE
+                -   ACTUALIZACIÓN DE REGISTRO.                              DONE
+                -   ELIMINACIÓN DE REGISTRO.
+                    -   ELIMINACIÓN DESDE MENÚ CONTEXTUAL.                  DONE
+                    -   ELIMINACIÓN TRAS CARGAR EL REGISTRO EN EL FORMULARIO.
+                                                                            DONE
+                -   FILTRADO DE REGISTROS.                                  DONE
+                -   COMPROBAR LA INSERCIÓN DE LOS COMBOS.          NOT NECESSARY
+
+            -   CATEGORÍA INCIDENCIA.
+                -   INSERCION DE REGISTRO.                                  DONE
+                -   ACTUALIZACIÓN DE REGISTRO.                              DONE
+                -   ELIMINACIÓN DE REGISTRO.
+                    -   ELIMINACIÓN DESDE MENÚ CONTEXTUAL.                  DONE
+                    -   ELIMINACIÓN TRAS CARGAR EL REGISTRO EN EL FORMULARIO.
+                                                                            DONE
+                -   FILTRADO DE REGISTROS.                                  DONE
+                -   COMPROBAR LA INSERCIÓN DE LOS COMBOS.          NOT NECESSARY
+
+            -   MARCA COMERCIAL.
+                -   INSERCION DE REGISTRO.                                  DONE
+                -   ACTUALIZACIÓN DE REGISTRO.                              DONE
+                -   ELIMINACIÓN DE REGISTRO.
+                    -   ELIMINACIÓN DESDE MENÚ CONTEXTUAL.                  DONE
+                    -   ELIMINACIÓN TRAS CARGAR EL REGISTRO EN EL FORMULARIO.
+                                                                            DONE
+                -   FILTRADO DE REGISTROS.                                  DONE
+                -   COMPROBAR LA INSERCIÓN DE LOS COMBOS.          NOT NECESSARY
+
+            -   MATERIAL DE URNA.
+                -   INSERCION DE REGISTRO.                                  DONE
+                -   ACTUALIZACIÓN DE REGISTRO.                              DONE
+                -   ELIMINACIÓN DE REGISTRO.
+                    -   ELIMINACIÓN DESDE MENÚ CONTEXTUAL.                  DONE
+                    -   ELIMINACIÓN TRAS CARGAR EL REGISTRO EN EL FORMULARIO.
+                                                                            DONE
+                -   FILTRADO DE REGISTROS.                                  DONE
+                -   COMPROBAR LA INSERCIÓN DE LOS COMBOS.          NOT NECESSARY
+
+            -   SUBCATEGORIA DE ACUARIO.
+                -   INSERCION DE REGISTRO.                                  DONE
+                -   ACTUALIZACIÓN DE REGISTRO.                              DONE
+                -   ELIMINACIÓN DE REGISTRO.
+                    -   ELIMINACIÓN DESDE MENÚ CONTEXTUAL.                  DONE
+                    -   ELIMINACIÓN TRAS CARGAR EL REGISTRO EN EL FORMULARIO.
+                                                                            DONE
+                -   FILTRADO DE REGISTROS.                                  DONE
+                -   COMPROBAR LA INSERCIÓN DE LOS COMBOS.                   DONE
+
+            -   SUBCATEGORIA DE INCIDENCIA.
+                -   INSERCION DE REGISTRO.                                  DONE
+                -   ACTUALIZACIÓN DE REGISTRO.                              DONE
+                -   ELIMINACIÓN DE REGISTRO.
+                    -   ELIMINACIÓN DESDE MENÚ CONTEXTUAL.                  DONE
+                    -   ELIMINACIÓN TRAS CARGAR EL REGISTRO EN EL FORMULARIO.
+                                                                            DONE
+                -   FILTRADO DE REGISTROS.                                  DONE
+                -   COMPROBAR LA INSERCIÓN DE LOS COMBOS.                   DONE
+
+            -   TIPO DE ACUARIO.
+                -   INSERCION DE REGISTRO.                                  DONE
+                -   ACTUALIZACIÓN DE REGISTRO.                              DONE
+                -   ELIMINACIÓN DE REGISTRO.
+                    -   ELIMINACIÓN DESDE MENÚ CONTEXTUAL.                  DONE
+                    -   ELIMINACIÓN TRAS CARGAR EL REGISTRO EN EL FORMULARIO.
+                                                                            DONE
+                -   FILTRADO DE REGISTROS.                                  DONE
+                -   COMPROBAR LA INSERCIÓN DE LOS COMBOS.                   DONE
+
+            -   URNA.
+                -   INSERCION DE REGISTRO.                                  DONE
+                -   ACTUALIZACIÓN DE REGISTRO.                              DONE
+                -   ELIMINACIÓN DE REGISTRO.
+                    -   ELIMINACIÓN DESDE MENÚ CONTEXTUAL.                  DONE
+                    -   ELIMINACIÓN TRAS CARGAR EL REGISTRO EN EL FORMULARIO.
+                                                                            DONE
+                -   FILTRADO DE REGISTROS.                                  DONE
+                -   COMPROBAR LA INSERCIÓN DE LOS COMBOS.                   DONE
+
+30/09/2025  REFACGTORIZACIÓN:
+     ↓      -   SE REFACTORIZAN LOS CONTROLADORES, SEPARANDO EL CONTROLADOR DEL
+08/10/2025      DIÁLOGO, EL MAESTRO Y EL BASE:
+
+                -   URNA.
+                    -   SE CREA EL CONTROLADOR BASE.                        DONE
+                    -   SE CREA EL CONTROLADOR DEL CUADRO DE DIÁLOGO.       DONE
+                    -   SE CREA EL CONTROLADOR DEL FORMULARIO MAESTRO.      DONE
+
+                -   TIPO DE ACUARIO.
+                    -   SE CREA EL CONTROLADOR BASE.                        DONE
+                    -   SE CREA EL CONTROLADOR DEL CUADRO DE DIÁLOGO.       DONE
+                    -   SE CREA EL CONTROLADOR DEL FORMULARIO MAESTRO.      DONE
+
+                -   SUBCATEGORIA DE INCIDENCIA.
+                    -   SE CREA EL CONTROLADOR BASE.                        DONE
+                    -   SE CREA EL CONTROLADOR DEL CUADRO DE DIÁLOGO.       DONE
+                    -   SE CREA EL CONTROLADOR DEL FORMULARIO MAESTRO.      DONE
+
+                -   SUBCATEGORIA DE ACUARIO.
+                    -   SE CREA EL CONTROLADOR BASE.                        DONE
+                    -   SE CREA EL CONTROLADOR DEL CUADRO DE DIÁLOGO.       DONE
+                    -   SE CREA EL CONTROLADOR DEL FORMULARIO MAESTRO.      DONE
+
+                -   MATERIAL DE URNA.
+                    -   SE CREA EL CONTROLADOR BASE.                        DONE
+                    -   SE CREA EL CONTROLADOR DEL CUADRO DE DIÁLOGO.       DONE
+                    -   SE CREA EL CONTROLADOR DEL FORMULARIO MAESTRO.      DONE
+
+                -   TIPO DE FILTRO.
+                    -   SE CREA EL CONTROLADOR BASE.                        DONE
+                    -   SE CREA EL CONTROLADOR DEL CUADRO DE DIÁLOGO.       DONE
+                    -   SE CREA EL CONTROLADOR DEL FORMULARIO MAESTRO.      DONE
+
+                -   CATEGORIA DE ACUARIO.
+                    -   SE CREA EL CONTROLADOR BASE.                        DONE
+                    -   SE CREA EL CONTROLADOR DEL CUADRO DE DIÁLOGO.       DONE
+                    -   SE CREA EL CONTROLADOR DEL FORMULARIO MAESTRO.      DONE
+
+                -   CATEGORÍA INCIDENCIA.
+                    -   SE CREA EL CONTROLADOR BASE.                        DONE
+                    -   SE CREA EL CONTROLADOR DEL CUADRO DE DIÁLOGO.       DONE
+                    -   SE CREA EL CONTROLADOR DEL FORMULARIO MAESTRO.      DONE
+
+                -   MARCA COMERCIAL.
+                    -   SE CREA EL CONTROLADOR BASE.                        DONE
+                    -   SE CREA EL CONTROLADOR DEL CUADRO DE DIÁLOGO.       DONE
+                    -   SE CREA EL CONTROLADOR DEL FORMULARIO MAESTRO.      DONE
+
+            -   SE MODIFICAN LAS ENTIDADES PARA CONVERTIR LOS ATRIBUTOS EN
+                PROPIEDADES:
+                -   TIPO DE FILTRO.                                         DONE
+                -   CATEGORIA DE ACUARIO.                                   DONE
+                -   CATEGORÍA INCIDENCIA.                                   DONE
+                -   MARCA COMERCIAL.                                        DONE
+                -   MATERIAL DE URNA.                                       DONE
+                -   SUBCATEGORIA DE ACUARIO.                                DONE
+                -   SUBCATEGORIA DE INCIDENCIA.                             DONE
+                -   TIPO DE ACUARIO.                                        DONE
+                -   URNA.                                                   DONE
+
+            BUG FIXES:
+            -   SE CORRIGE EL BUG DE PAGINACIÓN TRAS LA BÚSQUEDA DE REGISTROS.
+                                                                            DONE
+
+29/09/2025  SE AÑADE:
+            -   ERROR AL ELIMINAR EL FILTRO.                           POSTPOSED
+            -   FUNCIÓN QUE CONFIGURA LA BARRA DE ESTADO:
+                -   TIPO DE FILTRO.                                    POSTPOSED
+
+27/09/2025  SE MODIFICA EL NOMBRE DE LOS MÉTODOS Y VARIABLES AL INGLES:
+            -   CONTROLADORES:
+                -   BASE CONTROLER.                                         DONE
+
+18/09/2025  SE CREA EL LOGIN DE LA APLICACIÓN:
+            -   SE CREA LA VISTA.                                           DONE
+            -   SE CREA EL CONTROLADOR.                                     DONE
+            -   SE ENCRIPTA LA CONTRASEÑA EN LA CREACIÓN DE USUARIO.        DONE
+            -   SE SE CAMBIA EL CAMPO E-MAIL POR EL DE NICK_USUARIO.        DONE
+
+18/09/2025  SE CONTINUA CON LA LÓGICA DE USUARIO:
+            -   SE CREA EL VALIDADOR DE FORMULARIO.                         DONE
+            -   SE CREA EL CONTROLADOR.                                     DONE
+
+            REFACTORIZACIONES:
+            -   SE REFACTORIZA LA ACCIÓN DE BORRAR REGISTRO DESDE EL MENU
+                CONTEXTUAL.                                                 DONE
+
+17/09/2025  REFACTORIZACIONES:
+            -   SE REFACTORIZA LA CONFIGURACIÓN DEL PIE DE TABLA.      POSTPOSED
+            -   SE REFACTORIZA LA CONFIGURACIÓN DE LA BARRA DE ESTADO. POSTPOSED
+
+            BUG FIXES:
+            -   SE CORRIGE EL ERROR DE LA ACTUALIZACIÓN DE LA TABLA DE LOS
+                DISTINTOS FORMULARIOS.                                      DONE
+            -   SE CORRIGE EL BUG QUE APARECE CUANDO SE ELIMINA EL ÚLTIMO
+                REGISTRO DE LA TABLA.                                       DONE
+
+15/09/2025  SE AÑADE LA LÓGICA DEL USUARIO:
+            -   SE CREA LA ENTIDAD.                                         DONE
+            -   SE CREA EL DAO.                                             DONE
+            -   SE CREA EL DIÁLOGO.                                  A MODIFICAR
+
+14/09/2025  SE IMPLEMENTA LA FUNCIONALIDAD DE BÚSQUEDA DE SUBCATEGORÍAS DE
+            INCIDENCIA.
+            -   SE MODIFICA EL CONTROLADOR.                                 DONE
+            -   SE CREA EL COMANDO SQL DE BÚSQUEDA.                         DONE
+
+            SE IMPLEMENTA LA FUNCIONALIDAD DE BÚSQUEDA DE SUBCAT. DE ACUARIO.
+            -   SE MODIFICA EL CONTROLADOR.                                 DONE
+            -   SE CREA EL COMANDO SQL DE BÚSQUEDA.                         DONE
+
+            SE IMPLEMENTA LA FUNCIONALIDAD DE BÚSQUEDA DE TIPOS DE ACUARIO.
+            -   SE MODIFICA EL CONTROLADOR.                                 DONE
+            -   SE CREA EL COMANDO SQL DE BÚSQUEDA.                         DONE
+
+            SE IMPLEMENTA LA FUNCIONALIDAD DE BÚSQUEDA DE TIPOS DE FILTRO.
+            -   SE MODIFICA EL CONTROLADOR.                                 DONE
+            -   SE CREA EL COMANDO SQL DE BÚSQUEDA.                         DONE
+
+            SE IMPLEMENTA LA FUNCIONALIDAD DE BÚSQUEDA DE URNAS.
+            -   SE MODIFICA EL CONTROLADOR.                                 DONE
+            -   SE CREA EL COMANDO SQL DE BÚSQUEDA.                         DONE
+
+14/09/2025  SE IMPLEMENTA LA FUNCIONALIDAD DE BÚSQUEDA DE CATEGORÍAS DE
+            INCIDENCIA.
+            -   SE MODIFICA EL CONTROLADOR.                                 DONE
+            -   SE CREA EL COMANDO SQL DE BÚSQUEDA.                         DONE
+
+            SE IMPLEMENTA LA FUNCIONALIDAD DE BÚSQUEDA DE MARCAS COMERCIALES.
+            -   SE MODIFICA EL CONTROLADOR.                                 DONE
+            -   SE CREA EL COMANDO SQL DE BÚSQUEDA.                         DONE
+
+            SE IMPLEMENTA LA FUNCIONALIDAD DE BÚSQUEDA DE MARCAS COMERCIALES.
+            -   SE MODIFICA EL CONTROLADOR.                                 DONE
+            -   SE CREA EL COMANDO SQL DE BÚSQUEDA.                         DONE
+
+            SE IMPLEMENTA LA FUNCIONALIDAD DE BÚSQUEDA DE SUBCATEGORÍAS DE
+            ACUARIOS.
+            -   SE MODIFICA EL CONTROLADOR.                                 DONE
+            -   SE CREA EL COMANDO SQL DE BÚSQUEDA.                         DONE
+
+12/09/2025  SE CREA:
+            -   CLASE SEARCH_COMMAND. EN ESTA CLASE SE ALMACENAN LOS COMMANDOS
+                SQL PARA LA BÚSQUEDA.                                       DONE
+
+            SE IMPLEMENTA LA FUNCIONALIDAD DE LA BÚSQUEDA EN LOS FORMULARIOS
+            EXISTENTES.
+            -   CATEGORÍA DE ACUARIO.
+                -   SE PROGRAMA EL BOTÓN FILTER.                            DONE
+
+10/09/2025  SE IMPLEMENTA LA FUNCIONALIDAD DE LA BÚSQUEDA EN LOS FORMULARIOS
+            EXISTENTES.
+            -   SE CREA LA CLASE FILTER PARA LA GESTIÓN DE LOS DATOS FILTRADOS.
+                                                                            DONE
+            -   CATEGORÍA DE ACUARIO.
+                -   SE PROGRAMA EL BOTÓN SEARCH.                            DONE
+
+09/09/2025  SE IMPLEMENTA LA FUNCIONALIDAD DE LA BÚSQUEDA EN LOS FORMULARIOS
+            EXISTENTES.
+            -   CATEGORÍA DE ACUARIO.
+                -   SE MODIFICA EL DAO.                                     DONE
+
+04/09/2025  SE IMPLEMENTA LA FUNCIONALIDAD DE LA BÚSQUEDA EN LOS FORMULARIOS
+            EXISTENTES.
+            -   SE AÑADE UNA BARRA DE ESTADO INFERIOR EN EL FORMULARIO MAESTRO
+                BASE.                                                       DONE
+
+04/09/2025  SE COMPLETA LA LÓGICA DE LOS SIGUIENTES FORMULARIOS:
+            -   PROGRAMAR LA INSERCIÓN DE CATEGORÍA DE ACUARIO DESDE LAS VISTAS
+                DE SUBCATEGORÍA DE ACUARIO.                                 DONE
+            -   PROGRAMAR LA INSERCIÓN DE CATEGORÍA DE INCIDEN. DESDE LAS VISTAS
+                DE SUBCATEGORÍA DE INCIDENCIA.                              DONE
+
+03/09/2025  REFACTORIZACIÓN
+            -   SE INTEGRAN TODOS LOS MÉTODOS DE LAS IMÁGENES EN IMAGEFORM. DONE
+
+            TESTEO
+            -   SE TESTEA LAS REFACTORIZACIONES QUE SE HAN REALIZADO.       DONE
+
+02/09/2025  REVISIÓN T TESTEO:
+            -   SE TESTEAN LOS VALIDADORES DE LOS FORMULARIOS.
+                -   CATEGORÍA ACUARIO.                                      DONE
+                -   CATEGORÍA INCIDENCIA.                                   DONE
+                -   MARCA COMERCIAL.                                        DONE
+                -   MATERIAL DE URNA.                                       DONE
+                -   SUBCATEGORÍA DE ACUARIO.                                DONE
+                -   SUBCATEGORÍA DE INCIDENCIA.                             DONE
+                -   TIPO DE ACUARIO.                                        DONE
+                -   TIPO DE FILTRO.                                         DONE
+                -   URNA.                                                   DONE
+
+30/05/2025  REFACTORIZACIÓN:
+            -   SE PROGRAMA LA PERDIDA DE FOCO DE LOS COMBOS PARA QUE CUANDO
+                SALGA SELECCIONE EL ELEMENTO QUE SE ESTABA ESCRIBIENDO.
+                -   CATEGORÍA ACUARIO.                             NOT NECESSARY
+                -   CATEGORÍA INCIDENCIA.                          NOT NECESSARY
+                -   MARCA COMERCIAL.                                        DONE
+                -   MATERIAL DE URNA.                              NOT NECESSARY
+                -   SUBCATEGORÍA DE ACUARIO.                                DONE
+                -   SUBCATEGORÍA DE INCIDENCIA.                             DONE
+                -   TIPO DE ACUARIO.                                        DONE
+                -   TIPO DE FILTRO.                                NOT NECESSARY
+                -   URNA.                                                   DONE
+
+            -   SE CONVIERTEN TODOS LOS COMBOS EN EDITABLES.
+                -   CATEGORÍA ACUARIO.                             NOT NECESSARY
+                -   CATEGORÍA INCIDENCIA.                          NOT NECESSARY
+                -   MARCA COMERCIAL.                                        DONE
+                -   MATERIAL DE URNA.                              NOT NECESSARY
+                -   SUBCATEGORÍA DE ACUARIO.                        ALREADY DONE
+                -   SUBCATEGORÍA DE INCIDENCIA.                     ALREADY DONE
+                -   TIPO DE ACUARIO.                                ALREADY DONE
+                -   TIPO DE FILTRO.                                NOT NECESSARY
+                -   URNA.                                                   DONE
+
+28/05/2025  REFACTORIZACIÓN:
+            -   SE CAMBIA EL CURSOR DE LOS BOTONES DE LOS FORMULARIOS A UNA MANO
+                -   CATEGORÍA ACUARIO.                                      DONE
+                -   CATEGORÍA INCIDENCIA.                           ALREADY DONE
+                -   MARCA COMERCIAL.                                        DONE
+                -   MATERIAL DE URNA.                               ALREADY DONE
+                -   SUBCATEGORÍA DE ACUARIO.                                DONE
+                -   SUBCATEGORÍA DE INCIDENCIA.                             DONE
+                -   TIPO DE ACUARIO.                                        DONE
+                -   TIPO DE FILTRO.                                 ALREADY DONE
+                -   URNA.                                                   DONE
+
+27/08/2025  REFACTORIZACIÓN:
+            -   SE MODIFICAN LOS DAOS:
+                -   SUBCATEGORÍA ACUARIO.                                   DONE
+                -   SUBCATEGORÍA INCIDENCIA.                                DONE
+                -   TIPOS DE ACUARIO.                                       DONE
+                -   TIPOS DE FILTRO.                                        DONE
+                -   URNAS.                                                  DONE
+
+26/05/2025  REFACTORIZACIÓN:
+            -   SE MODIFICAN LOS DAOS:
+                -   FOTOGRAFÍAS.                                            DONE
+                -   MARCAS COMERCIALES.                                     DONE
+                -   MATERIALES DE URNA.                                     DONE
+                -   PAÍSES.                                                 DONE
+
+25/08/2025  REFACTORIZACIÓN:
+            -   SE MODIFICAN LOS DAOS:
+                -   CATEGORÍA ACUARIO.                                      DONE
+                -   CATEGORÍAS INCIDENCIA.                                  DONE
+
+22/08/2025  SE AÑADE LA LÓGICA DE AÑADIR O QUITAR IMÁGENES A UNA URNA EXISTENTE
+            -   SE AÑADE LA LÓGICA DE AÑADIR IMÁGENES A LA LISTA.           DONE
+            -   SE AÑADE LA LÓGICA DE ELIMINACIÓN DE IMÁGENES DE LA LISTA.  DONE
+            -   SE AÑADE LA LÓGICA DE ACTUALIZAR LA URNA, INSERTANDO LAS IMÁ-
+                GENES AÑADIDAS QUE NO ESTABAN INSERTADAS EN LA BASE DE DATOS.
+                                                                            DONE
+
+21/08/2025  SE AÑADE LÓGICA DE CARGAR LAS IMÁGENES
+            -   SE AÑADE LA LÓGICA DE NAVEGACIÓN ENTRE IMÁGENES CARGADAS.   DONE
+            -   SE PROGRAMA PARA CARGAR LA IMÁGENES CUANDO SE CARGA UNA URNA.
+                                                                            DONE
+
+19/08/2025  LA LÓGICA DE LA URNA: SE AÑADE LA OPCIÓN DE INSERTAR IMÁGENES
+            -   SE CREA LA ENTIDAD FOTOGRAFÍA.                              DONE
+            -   SE CREA EL DAO DE LA FOTOGRAFÍA.                            DONE
+            -   SE INTEGRA EL DIALOGO DE MARCA COMERCIAL CON EL MAESTRO DE LA
+                URNA.                                                       DONE
+            -   AÑADIDA LÓGICA DE INSERCIÓN DE FOTOGRAFÍAS.                 DONE
+            -   SE AÑADE LA LIMPIEZA DE LOS DATOS DE LAS IMÁGENES.          DONE
+            -   SE CARGAN LAS IMÁGENES EN EL LABEL.                         DONE
+
+            LÓGICA DE MATERIAL DE LA URNA PARA INTEGRARLO CON EL MAESTRO DE URNA
+            -   SE CREA LA ENTIDAD.                                         DONE
+            -   SE CREA EL DAO.                                      DONE BEFORE
+            -   SE CREA EL VALIDADOR.                                       DONE
+            -   SE CREA EL FORMULARIO.                                      DONE
+            -   SE CREA EL DIÁLOGO.                                         DONE
+            -   SE CREA EL MAESTRO.                                         DONE
+            -   SE CREA EL CONTROLADOR.                                     DONE
+            -   SE CREA EL MODELO DE TABLA PARA LOS MATERIALES DE LA URNA.  DONE
+            -   SE ENLAZA EL MAESTRO CON LA VISTA PRINCIPAL.                DONE
+            -   SE ENLAZA EL DIALOGO CON LAVISTA DE URNAS.                  DONE
+
+            BASE DE DATOS:
+            -   SE ELIMINAN LAS TABLAS FOTOGRAFÍAS Y CATEGORÍAS DE FOTOGRAFÍAS.
+                                                                            DONE
+            -   SE CREA LAS TABLAS DE LAS FOTOGRAFÍAS:
+                -   FOTOGRAFIÁS DE FAUNA.                                   DONE
+                -   FOTOGRAFÍAS DE FLORA.                                   DONE
+                -   FOTOGRAFÍAS DE ACUARIOS.                                DONE
+                -   FOTOGRAFÍAS DE FILTROS.                                 DONE
+                -   FOTOGRAFÍAS DE ILUMINACIONES.                           DONE
+                -   FOTOGRAFÍAS DE INCIDENCIAS.                             DONE
+                -   FOTOGRAFÍAS DE PROYECTOS.                               DONE
+
+            -   SE CREA LA VISTA DE MATERIALES DE LAS URNAS.                DONE
+
+18/08/2025  BASE DE DATOS:
+            -   SE AÑADE LA TABLA DE LAS FOTOGRAFÍAS.                       DONE
+            -   SE CREA LA TABLA DE LAS CATEGORÍAS DE LAS FOTOGRAFÍAS.      DONE
+
+30/07/2025  SE CREA LA LÓGICA BÁSICA DE URNAS:
+            -   SE CREA LA VISTA EN LA BASE DE DATOS.                       DONE
+            -   SE CREA LA ENTIDAD.                                         DONE
+            -   SE CREA EL DAO (DATA ACCESS OBJECT).                        DONE
+            -   SE CREA EL MODELO DE TABLA.                                 DONE
+                NOTA:
+                EL FORMATO DE LA TABLA NO COINCIDE CON LOS ATRIBUTOS DE LA CLASE,
+                PUESTO QUE LAS DIMENSIONES SE UNEN EN LA TABLA.
+            -   SE CREA EL FORMULARIO.                                      DONE
+            -   SE CREA EL FORMULARIO DE INSERCIÓN DE IMAGEN.               DONE
+            -   SE CREA EL DIÁLOGO.                                         DONE
+            -   SE CREA EL MAESTRO.                                         DONE
+            -   SE CREA EL VALIDADOR DEL FORMULARIO.                        DONE
+            -   SE CREA LA ENTIDAD.                                         DONE
+            -   SE CREA EL DAO.                                             DONE
+            -   SE CREA EL CONTROLADOR DEL FORMULARIO.                      DONE
+                -   SE CREA LA ENTIDAD MATERIAL DE URNA.                    DONE
+                -   SE CREA EL DAO DE LA ENTIDAD MATERIAL DE URNA.          DONE
+
+            BASE DE DATOS:
+            -   SE CREA LA VISTA DE LOS ACUARIOS EN LA BASE DE DATOS.       DONE
+            -   SE MODIFICA LA ESTRUCTURA DE LA BASE DE DATOS PARA QUE UN
+                PROYECTO PERMITA MAS DE UN ACUARIO, Y UN ACUARIO PUEDA PERTENE-
+                CER A MAS DE UN PROYECTO (SIEMPRE QUE SOLO UNO ESTE EN ACTIVO).
+                                                                            DONE
+            -   SE CREA LA TABLA ESPECIES ANIMALES.                         DONE
+            -   SE CREA LA TABLA ESPECIES_VEGETALES.                        DONE
+            -   SE CREA LA TABLA FAUNA_ACUARIO.                             DONE
+            -   SE CREA LA TABLA FLORA_ACUARIO.                             DONE
+            -   SE CREA LA TABLA GRUPOS_TAXONÓMICOS.                        DONE
+            -   SE CREA LA TABLA POSICIONES_ACUARIO.                        DONE
+            -   SE CREA LA TABLA REQUERIMIENTOS_ILUMINACIÓN.                DONE
+            -   SE CREA LA TABLA REQUERIMIENTOS_CO2.                        DONE
+            -   SE CREA LA TABLA TASAS_CRECIMIENTO.                         DONE
+            -   SE CREA LA TABLA MATERIAL_URNA.                             DONE
+            -   SE CREA LA TABLA EQUIPAMIENTOS.                             DONE
+            -   SE CREA LA TABLA CATEGORIAS_EQUIPAMIENTO.                   DONE
+            -   SE CREA LA VISTA DE MATERIALES DE URNA                      DONE
+            -   SE CREA LA TABLA PROYECTOS_ILUMINACIONES.                  DONE
+            -   SE CREA LA TABLA COMPORTAMIENTO_FAUNA.                      DONE
+            -   SE CREA LA TABLA DIETA_FAUNA.                               DONE
+            -   SE CREA LA TABLA NIVEL_NADO.                                DONE
+            -   SE CREA LA TABLA PROYECTOS_EQUIPAMIENTO.                    DONE
+
+30/07/2025  CONTROLADORES:
+            -   SE RENOMBRAN LAS FUNCIONES DE MANEJO DE PÁGINAS.            DONE
+
+            VISTAS DE MARCAS COMERCIALES:
+            -   SE MODIFICA EL TAMAÑO DEL DIALOGO Y MAESTRO DE LAS MARCAS
+                COMERCIALES.                                                DONE
+
+            BASE DE DATOS:
+            -   SE MODIFICAN LAS TABLAS DE PROYECTOS Y ACUARIOS PARA PERMITIR
+                QUE UN PROYECTO PUEDA CONTENER MAS DE UN ACUARIO.           DONE
+
+29/07/2025  CONTROLADORES DE LOS MAESTROS:
+            -   SE MODIFICA LA LIMPIEZA DE FORMULARIO PARA QUE TRAS LA LIMPIEZA
+                SE MUEVA EL FOCO AL PRIMER CONTROL.                         DONE
+            -   PASAR TODOS LOS CONTROLES DE PAGINACIÓN Y FORMATEO DE TABLA AL
+                CONTROLADOR BASE.                                           DONE
+
+            BASE DE DATOS:
+            -   SE AÑADEN LAS TABLAS DE ILUMINACIÓN, TIPO DE ILUMINACIÓN Y TIPOS
+                DE CONTROL DE LA ILUMINACIÓN.                               DONE
+
+25/07/2025  SE AÑADE LA LÓGICA DE LA MARCA:
+            -   SE CREA LA VISTA EN LA BASE DE DATOS.                       DONE
+            -   SE CREA LA ENTIDAD.                                         DONE
+            -   SE CREA EL DAO (DATA ACCESS OBJECT).                        DONE
+            -   SE CREA EL MODELO DE TABLA.                                 DONE
+            -   SE CREA EL FORMULARIO.                                      DONE
+            -   SE CREA EL DIÁLOGO.                                         DONE
+            -   SE CREA EL MAESTRO.                                         DONE
+            -   SE CREA EL VALIDADOR DEL FORMULARIO.                        DONE
+            -   SE CREA LA VISTA DE LOS PAISES EN LA BASE DE DATOS.         DONE
+            -   SE CREA LA ENTIDAD PAÍS.                                    DONE
+            -   SE CREA EL DAO DE LOS PAÍSES.                               DONE
+            -   SE CREA EL CONTROLADOR DEL FORMULARIO.                      DONE
+
+            OTROS:
+            -   SE CREA LA TABLA DETALLES DE INCIDENCIA EN LA BASE DE DATOS.DONE
+
+24/07/2025  SE AÑADE LA LÓGICA DE LA SUBCATEGORÍA DE LA INCIDENCIA:
+            -   SE CREA LA VISTA EN LA BASE DE DATOS.                       DONE
+            -   SE CREA LA ENTIDAD.                                         DONE
+            -   SE CREA EL DAO (DATA ACCESS OBJECT).                        DONE
+            -   SE CREA EL MODELO DE TABLA.                                 DONE
+            -   SE CREA EL FORMULARIO.                                      DONE
+            -   SE CREA EL DIÁLOGO.                                         DONE
+            -   SE CREA EL MAESTRO.                                         DONE
+            -   SE CREA EL VALIDADOR DEL FORMULARIO.                        DONE
+            -   SE CREA EL CONTROLADOR DEL FORMULARIO.                      DONE
+
+24/07/2025  SE AÑADE LA LÓGICA DE LA CATEGORÍA DE LA INCIDENCIA:
+            -   SE CREA LA VISTA.                                           DONE
+            -   SE CREA LA ENTIDAD.                                         DONE
+            -   SE CREA EL DAO (DATA ACCESS OBJECT).                        DONE
+            -   SE CREA EL MODELO DE TABLA.                                 DONE
+            -   SE CREA EL FORMULARIO.                                      DONE
+            -   SE CREA EL DIÁLOGO.                                         DONE
+            -   SE CREA EL MAESTRO.                                         DONE
+            -   SE CREA EL VALIDADOR DEL FORMULARIO.                        DONE
+            -   SE CREA EL CONTROLADOR DEL FORMULARIO.                      DONE
+
+23/07/2025  MEJORAS:
+            -   SE MEJORA EL REDIMENSIONAMIENTO Y EL MOVIMIENTO DE LAS VENTANAS.
+                                                                            DONE
+            -   SE MEJORA EL TAMAÑO AUTOMÁTICO DE LAS VENTANAS.             DONE
+
+21/07/2025  FORMULARIO DE TIPO DE FILTRO:
+            -   SE CREA EL FRAME CON EL FORMULARIO.                         DONE
+            -   SE CREA EL DIALOGO DE TIPO DE FILTRO.                       DONE
+            -   SE CREA EL MAESTRO DEL TIPO DE FILTRO.                      DONE
+            -   SE ACTUALIZA EL CONTROLADOR PARA ADAPTAR AL NUEVO SISTEMA DE
+                CONTROLADORES.                                              DONE
+
+18/07/2025  MAESTRO DE SUBCATEGORÍA DE ACUARIO:
+            -   SE CREA EL MODELO DE TABLA DE LA ENTIDAD.                   DONE
+            -   SE MODIFICA EL PAGINADOR PARA ACEPTAR LA LÓGICA DE LA ENTIDAD.
+                                                                            DONE
+            -   SE CREA EL FORMULARIO MAESTRO.                              DONE
+            -   SE MODIFICA EL CONTROLADOR PARA ACEPTAR LAS ORDENES DEL MAESTRO.
+                                                                            DONE
+            -   SE CREA EL EL DIALOGO DE TIPO DE ACUARIO.                   DONE
+            -   SE MODIFICA EL CONTROLADOR DEL TIPO DE ACUARIO PARA ADECUARLO AL
+                DIALOGO Y AL MAESTRO.                                       DONE
+
+            TESTEO:
+            -   SE TESTEA EL COMPORTAMIENTO DEL DIALOGO DE CATEGORÍAS DE ACUARIO
+                                                                            DONE
+            -   SE TESTEA EL COMPORTAMIENTO DEL MAESTRO DE CATEGORÍAS DE ACUARIO
+                                                                            DONE
+            -   SE TESTEA EL COMPORTAMIENTO DEL DIALOGO DE SUBCATEGORÍAS DE
+                ACUARIO.                                                    DONE
+            -   SE TESTEA EL COMPORTAMIENTO DEL MAESTRO DE SUBCATEGORÍAS DE
+                ACUARIO.                                                    DONE
+            -   SE TESTEA EL COMPORTAMIENTO DEL MAESTRO DE TIPOS DE ACUARIO.DONE
+
+17/07/2025  MODIFICACIÓN DE LA LÓGICA DE MAESTRO DE CATEGORÍA DE ACUARIO:
+            -   SE AÑADE EL MÉTODO DE OBTENER EL NÚMERO DE REGISTRO DE CATEGORÍA
+                DE ACUARIO DADO SU ID.                                      DONE
+            -   SE MODIFICA LA CLASE PARA QUE CUANDO SE INSERTE UN REGISTRO SE
+                SELECCIONES EL REGISTRO INSERTADO.                          DONE
+            -   SE MODIFICA LA CLASE PARA QUE CUANDO SE MODIFICA UN REGISTRO SE
+                MUESTRE EL REGISTRO MODIFICADO.                             DONE
+
+            MODIFICAR LA CLASE PAGINATOR:
+            -   SE AÑADE EL MÉTODO PARA OBTENER EL NÚMERO DE PÁGINA A PARTIR DE
+                UN NÚMERO DE REGISTRO.                                      DONE
+
+16/07/2025  REFACTORIZACIÓN:
+            -   SE SUBEN LOS ATRIBUTOS DAO A LA BASE DEL CONTROLADOR.       TODO
+            -   SE SUBEN LOS ATRIBUTOS ENTITY A LA BASE DEL CONTROLADOR.    TODO
+
+15/07/2025  MAESTRO DE CATEGORÍA DE ACUARIO:
+            BUGFIXES
+            -   CORREGIDO: SALTA ERROR DE VALIDACIÓN DE DATOS DESPUÉS DE IN-
+                SERTAR CATEGORÍA DE ACUARIO.                                DONE
+            -   CORREGIDO: EL LABEL DE PÁGINAS TOTALES NO SE ACTUALIZA CUANDO
+                    ELIMINAS UN REGISTRO Y SE BORRA LA ÚLTIMA PÁGINA.       DONE
+            -   CORREGIDO: EL LABEL DE LAS PÁGINAS TOTALES CUANDO SE INSERTA UN
+                NUEVO REGISTRO.                                             DONE
+
+09/07/2025  SE AÑADE EL MAESTRO DE CATEGORÍA DE ACUARIO:
+            -   SE CREA EL FORMULARIO MAESTRO.                              DONE
+            -   CREAMOS EL MODELO DE LA TABLA.                              DONE
+            -   SE CREA EL CONTROLADOR.                                     DONE
+
+            BUG FIXES:
+            -   SE CORRIGE LA LIMPIEZA DE FORMULARIO, LOS COMBOS NO SE LIMPIAN
+                CORRECTAMENTE.                                              DONE
+
+03/07/2025  SE CREA LA LÓGICA DEL MAESTRO DE TIPOS DE ACUARIO:
+            -   SE CREA EL MÉTODO PARA OBTENER SUNCATEGORÍAS A PARTIR DE UNA CA-
+                TEGORÍA.                                                    DONE
+            -   A LA HORA DE CARGAR EL DIÁLOGO DE SUBCATEGORÍA SE DEBE DE CARGAR
+                LA CATEGORÍA EN EN EL COMBO.                                DONE
+
+            BUGFIXES:
+            -   SE CORRIGE EL COMPORTAMIENTO DE INSERCIÓN DE SUBCATEGORÍA EN EL
+                DIALOGO DE TIPOS DE ACUARIO.                                DONE
+
+            REFACTOR:
+            -   SE MODIFICA EL COMPORTAMIENTO DEL COMBO DE SUBCATEGORÍA DE ACUA-
+                RIO PARA QUE MUESTRE SOLO LAS SUBCATEGORÍAS DE ACUARIOS CORRES-
+                PONDIENTES AL VALOR SELECCIONADO EN EL COMBO DE CATEGORÍA DE A-
+                CUARIO.                                                     DONE
+
+02/07/2025  SE AÑADE:
+            -   SE CREA LA ENTIDAD SUBCATEGORÍA DE ACUARIO.                 DONE
+            -   EL DAO DE LA SUBCATEGORÍA DE ACUARIO.                       DONE
+            -   SE CREA EL CONTROLADOR DE SUBCATEGORÍA DE ACUARIO.          DONE
+            -   SE CREA EL DIÁLOGO DE SUBCATEGORÍA DE ACUARIO.              DONE
+            -   SE CREA EL VALIDADOR DE SUBCATEGORÍA DE ACUARIO.            DONE
+
+01/07/2025  REFACTOR:
+            -   SE MODIFICA LA ESTRUCTURA DEL CONTROLADOR PARA SEPARAR EN EL
+                CONTROLADOR DEL DIALOGO Y EL CONTROLADOR DEL FORMULARIO MAESTRO.
+                                                                            DONE
+
+01/07/2025  SE AÑADE:
+            -   SE CREA EL VALIDADOR DE CATEGORÍA DE ACUARIO.               DONE
+            .   SE CREA EL CONTROLADOR DE CATEGORÍA DE ACUARIO.             DONE
+            -   SE INTEGRA EL DIALOGO DE CATEGORÍA DE ACUARIO CON EL FORMULARIO
+                DE TIPO DE ACUARIO.                                         DONE
+
+30/06/2025  SE AÑADE:
+            -   SE CREA LA ENTIDAD CATEGORÍA DE ACUARIO.                    DONE
+            -   SE CREA EL DAO DE CATEGORÍA DE ACUARIO.                     DONE
+            -   SE CREA LA BASE DE LOS CUADROS DE DIALOGO.                  DONE
+            -   SE CREA EL FRAME CON LOS CONTROLES DE DIÁLOGO DEL FORMULARIO DEL
+                FORMULARIO CATEGORÍA DE ACUARIO.                            DONE
+            .   SE CREA EL DAO DE LA ENTIDAD CATEGORÍA DE ACUARIO.          DONE
+            -   SE AÑADEN LOS METODOS PARA OBTENER LA LISTA DE CATEGORIAS DE
+                ACUARIO A LA CLASE TIPOACUARIODAO.                          DONE
+
+            REFACTORIZACIÓN:
+            -   SE CAMBIA LA ENTRADA DE LOS TIPOS DE ACUARIO Y SUBTIPOS DE ACUA-
+                RIO PARA ADECUARLOS A COMBOS.                               DONE
+
+27/06/2025  LÓGICA DE TIPO DE ACUARIO:
+            -   SE CREA LA ENTIDAD.                                         DONE
+            -   SE CREA EL FORMULARIO.                                      DONE
+            -   SE CREA EL FRAME CON LOS CONTROLES DEL FORMULARIO           DONE
+            -   SE CREA EL CONTROLADOR DEL FORMULARIO TIPO DE ACUARIO.      DONE
+            -   SE CREA EL DAO DE LA ENTIDAD.                               DONE
+            -   SE CEA EL MODELO DE TABLA.                                  DONE
+            -   SE DA FUNCIONALIDAD CRUD.                                   DONE
+
+25/06/2025  REFACTORIZACIÓN:
+            -   SE MODIFICA LA LÓGICA DE LOS ESPACIADORES EN EL FORMULARIO DE
+                TIPO DE FILTRO.                                             DONE
+            -   SE ORGANIZA EL MÉTODO DE CREACIÓN DE FUNCIONES Y LA CONS-
+                TRUCCIÓN DEL LAYOUT DEL FORMULARIO.                         DONE
+            -   SE PASAN LAS FUNCIONES BÁSICAS DE VENTANA, COMO MOVER, REDIMEN-
+                SIONAR, ... AL CONTROLADOR BASE.                            POSP
+
+22/06/2025  SE CREA UNA VERSIÓN INICIAL DEL FORMULARIO PRINCIPAL:
+            -   SE CREA EL ESQUELETO DEL FORMULARIO.                        DONE
+            -   SE CREA LA CLASE CONTROLADORA DEL FORMULARIO PRINCIPAL.     DONE
+            -   SE LE AÑADE FUNCIONALIDAD BÁSICA AL FORMULARIO PRINCIPAL.   DONE
+
+21/06/2025  TESTEO DE LA LÓGICA DE TIPOS DE FILTRO:
+            -   SE COMPRUEBA EL FUNCIONAMIENTO CON LA TABLA TIPOS DE FILTRO SIN
+                NINGÚN REGISTRO.                                            DONE
+            -   SE COMPRUEBA LA ACTUALIZACIÓN DE REGISTROS.                 DONE
+            -   SE PRUEBA LA INSERCIÓN DE REGISTROS.                        DONE
+
+            SE CREA LA OPCIÓN DE EXPORTAR LA ESTRUCTURA Y LOS DATOS DE LA BASE
+            DE DATOS A UN ARCHIVO SQL:
+            -   SE CREA LA FUNCIÓN DE EXPORTACIÓN EN LA CLASE BASEDAO.      DONE
+            -   EN UN PRINCIPIO SE INTEGRA EN LA CLASE MAIN.                DONE
+
+18/06/2025  SE IMPLEMENTA LA PAGINACIÓN DE LA TABLA EN EL FORMULARIO TIPOS DE
+            FILTRO:
+            -   SE MODIFICA EL MODELO DE LA TABLA PARA QUE IMPLEMENTE LA
+                PAGINACIÓN.                                                 DONE
+            -   SE IMPLEMENTA LA CONFIGURACIÓN DEL PIE DE TABLA.            DONE
+            -   CONFIGURAR CUANDO SE INSERTA UN REGISTRO.                   DONE
+            -   CONFIGURAR CUANDO SE MODIFICA UN REGISTRO.                  DONE
+            -   CONFIGURAR CUANDO SE ELIMINA UN REGISTRO.                   DONE
+
+16/06/2025  IMPLEMENTACIÓN DE LA PAGINACIÓN:
+            -   SE CREA LA CLASE PAGINATOR.                                 DONE
+            -   SE CREA LA CLASE BASE DE LOS DAOS.                          DONE
+
+12/06/2025  IMPLEMENTACIÓN DE MENÚ CONTEXTUAL DE LA TABLA DEL FORMULARIO  DE
+            TIPO DE FILTRO:
+            -   SE CREA UNA CLASE TABLECONTMENU.                            DONE
+            -   SE CONECTA LA TABLA.                                        DONE
+            -   SE LE DA FUNCIONALIDAD AL MENÚ CONTEXTUAL.                  DONE
+
+11/06/2025  SE IMPLEMENTA EL CRUD DE LA ENTIDAD TIPO DE FILTRO:
+            -   SE IMPLEMENTA LA LIMPIEZA DEL FORMULARIO.                   DONE
+            -   SE AÑADE EL VALIDADOR DE FORMULARIO.                        DONE
+            -   SE IMPLEMENTA LA INSERCIÓN.                                 DONE
+            -   SE IMPLEMENTA LA MODIFICACIÓN.                              DONE
+            -   SE IMPLEMENTA LA LECTURA.                                   DONE
+            -   SE IMPLEMENTA LA ELIMINACIÓN.                               DONE
+
+08/06/2025  SE CREA LA LÓGICA DE REVISIÓN ORTOGRÁFICA DE LOS WIDGETS DE
+            INSERCIÓN DE TEXTO.                                         POSPOSED
+                SE POSTERGA PORQUE NO SE HA PODIDO CARGAR EL CORRECTOR
+                ORTOGRÁFICO.
+
+05/06/2025  SE CREA LA CLASE RESULT PARA APLICAR EL PATRÓN RESULTADO.       DONE
+            SE CREA EL MODELO DEL TIPO DE FILTRO.                           DONE
+
+            SE PROGRAMA LA CARGA DE LOS DATOS DE LA TABLA DESDE LA BASE DE DATOS
+            - SE CREA EL MODELO PERSONALIZADO DE LA TABLA.                  DONE
+            - SE ENLAZA EL MODELO AL CONTROLADOR.                           DONE
+
+04/06/2025  SE CONFIGURAN LOS CONTROLES QTEXTTEDIT Y QPLAINTEXTEDIT PARA QUE
+            CUANDO SE PULSA EL TABULADOR PASE AL SIGUIENTE CONTROL. PARA
+            INSERTAR UN TABULADOR EN LOS CONTROLES SE PULSA CTRL+TAB.       DONE
+
+            SE UNIFICAN LOS MÉTODOS DE CREAR WIDGETS Y EL DE CONFIGURAR WIDGETS
+            PARA UNA LECTURA MAS FACIL DEL CÓDIGO.                          DONE
+
+03/06/2025  MODIFICAR LOS ESTILOS DE LOS BOTONES DE LA BARRA DE TÍTULO DE DE LOS
+            FORMULARIOS:
+            -   EN VEZ DE USAR ESTILOS, COLOCARLE EL NOMBRE DEL OBJETO A LOS BO-
+                TONES PARA QUE SURTA EFECTO LA HOJA DE ESTILOS GENERAL.     DONE
