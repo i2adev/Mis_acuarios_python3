@@ -9,7 +9,8 @@ Commentarios:
 import sys
 from pathlib import Path
 
-from PyQt6.QtWidgets import QApplication, QMessageBox, QDialog
+from PyQt6.QtGui import QFontDatabase
+from PyQt6.QtWidgets import QApplication, QDialog
 
 from Controllers.login_controller import LoginDialogController
 from Controllers.main_view_controller import MainViewController
@@ -18,8 +19,10 @@ from Model.DAO.usuario_dao import UsuarioDAO
 from Model.Entities.usuario_entity import UsuarioEntity
 from Views.Dialogs.login_dialog import LoginDialog
 
+import Resources.resources_rc
+
 # Versión del programa
-__version__ = "0.13.5"
+__version__ = "0.14.0"
 
 # Entrada al programa
 def main():
@@ -37,6 +40,12 @@ def main():
     with open(qss_path, "r", encoding="utf-8") as f:
         style = f.read()
         app.setStyleSheet(style)
+
+    # Carga las fuentes desde el recurso
+    QFontDatabase.addApplicationFont(":/Fonts/Roboto-Bold.ttf")
+    QFontDatabase.addApplicationFont(":/Fonts/Roboto-Medium.ttf")
+    QFontDatabase.addApplicationFont(":/Fonts/Roboto-Regular.ttf")
+    QFontDatabase.addApplicationFont(":/Fonts/Roboto-Medium.ttf")
 
     # # Limpia la base de datos
     # msg = BaseDAO.clean_database()

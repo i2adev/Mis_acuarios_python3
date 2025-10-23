@@ -2,32 +2,32 @@
 Autor:  Inigo Iturriagaetxebarria
 Fecha:  06/10/2025
 Commentarios:
-    Controlador del formulario maestro de subcategoría de incidencia.
+    Controlador del formulario maestro del proyecto.
 """
 
 from PyQt6.QtGui import QIcon, QAction
 from PyQt6.QtWidgets import QMessageBox, QTableView, QWidget, QComboBox
 
+from Controllers.proyecto_controller import ProyectoController
 from Model.DAO.paginator import Paginator
+from Views.Masters.proyecto_view import ProyectoView
+from Model.DAO.proyecto_dao import ProyectoDAO
+from Model.Entities.proyecto_entity import ProyectoEntity
 from Views.table_menu_contextual import TableMenuContextual
-from Controllers.urna_controller import UrnaController
-from Model.DAO.urna_dao import UrnaDAO
-from Model.Entities.urna_entity import UrnaEntity
-from Model.TableModel.urna_table_model import UrnaTableModel
-from Views.Masters.urna_view import UrnaView
+from Model.TableModel.proyecto_table_model import ProyectoTableModel
 
 
-class UrnaMasterController(UrnaController):
+class ProyectoMasterController(ProyectoController):
     """ Controlador del formulario maestro de marca comercial. """
 
-    def __init__(self, view: UrnaView, 
-                 dao: UrnaDAO,
-                 mod: UrnaEntity):
+    def __init__(self, view: ProyectoView, 
+                 dao: ProyectoDAO,
+                 mod: ProyectoEntity):
         """
         Constructor base
-        :param view: Formulario maestro de la urna
-        :param dao: DAO de la urna
-        :param mod: Modelo de la urna
+        :param view: Formulario maestro de proyecto
+        :param dao: DAO de proyecto
+        :param mod: Modelo de proyecto
         """
 
         # Constructor base
@@ -37,7 +37,7 @@ class UrnaMasterController(UrnaController):
         self._fill_combos()
 
         # Inicializamos el paginador
-        self._pag = Paginator("VISTA_URNAS", 5)
+        self._pag = Paginator("VISTA_PROYECTOS", 5)
         self._pag.initialize_paginator()
         self._configure_status_bar(self._pag)
 
@@ -66,7 +66,7 @@ class UrnaMasterController(UrnaController):
         self._view.button_load.clicked.connect(self.button_load_click)
         self._view.button_delete.clicked.connect(self.delete_click)
         self._view.button_clean.clicked.connect(lambda: self._clean_view(
-            self._view.frame.combo_marca
+            self._view.frame.edit_nombre_proyecto
         ))
         self._view.button_next.clicked.connect(self._next_page)
         self._view.button_prev.clicked.connect(self._previous_page)
@@ -80,12 +80,6 @@ class UrnaMasterController(UrnaController):
         )
         self._view.button_filter.clicked.connect(
             self.button_filter_clicked
-        )
-        self._view.frame.button_insert_marca.clicked.connect(
-            self._open_marca_comercial_dialog
-        )
-        self._view.frame.button_insert_material.clicked.connect(
-            self._open_material_urna_dialog
         )
 
         # Inicializamos los combos
@@ -112,7 +106,7 @@ class UrnaMasterController(UrnaController):
             # Cargamos la tabla
             self._fill_tableview(self._view.data_table, self._pag._total_data)
             self._configure_table(self._view.data_table)
-            self._clean_view(self._view.frame.combo_marca)
+            self._clean_view(self._view.frame.edit_nombre_proyecto)
             self._view.label_total_pages.setText(str(self._pag.total_pages))
 
             # Configuramos la tabla
@@ -147,7 +141,7 @@ class UrnaMasterController(UrnaController):
         # Cargamos la tabla
         self._fill_tableview(self._view.data_table, self._pag._total_data)
         self._configure_table(self._view.data_table)
-        self._clean_view(self._view.frame.combo_marca)
+        self._clean_view(self._view.frame.edit_nombre_proyecto)
 
         self._view.button_filter.setIcon(QIcon(":/Images/filtered.png"))
 
@@ -238,7 +232,7 @@ class UrnaMasterController(UrnaController):
             return
 
         # Limpiamos el formulario
-        self._clean_view(self._view.frame.combo_marca)
+        self._clean_view(self._view.frame.edit_nombre_proyecto)
 
         # Configurar paginator
         self._pag.initialize_paginator()
@@ -272,7 +266,7 @@ class UrnaMasterController(UrnaController):
             return
 
         # Limpiamos el formulario
-        self._clean_view(self._view.frame.combo_marca)
+        self._clean_view(self._view.frame.edit_nombre_proyecto)
 
         # Obtenemos los datos de paginación actuales
         paginator_pages = self._pag.total_pages
@@ -307,7 +301,7 @@ class UrnaMasterController(UrnaController):
             return
 
         # Limpiamos el formulario
-        self._clean_view(self._view.frame.combo_marca)
+        self._clean_view(self._view.frame.edit_nombre_proyecto)
 
         # Configuramos el paginador
         self._pag.initialize_paginator()
@@ -381,10 +375,10 @@ class UrnaMasterController(UrnaController):
         self._configure_table(self._view.data_table)
 
     def _fill_tableview(self, table: QTableView,
-                        data: list[UrnaEntity]):
+                        data: list[ProyectoEntity]):
         """ Carga los datos en la tabla. """
 
-        tv_model = UrnaTableModel(data)
+        tv_model = ProyectoTableModel(data)
         table.setModel(tv_model)
         table.resizeColumnsToContents()
 

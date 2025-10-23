@@ -7,9 +7,11 @@ Commentarios:
 """
 
 import sqlite3
+import traceback
 
-from base_dao import BaseDAO
-from database import DBManager
+import globals
+from Model.DAO.base_dao import BaseDAO
+from Model.DAO.database import DBManager
 from Model.Entities.proyecto_entity import ProyectoEntity
 from Services.Result.result import Result
 
@@ -69,7 +71,7 @@ class ProyectoDAO (BaseDAO):
 
                 valores = [
                     ProyectoEntity(
-                        ide=f["ID"],
+                        id=f["ID"],
                         num=f["NUM"],
                         id_usuario=f["ID_USUARIO"],
                         nombre=f["NOMBRE"],
@@ -145,7 +147,7 @@ class ProyectoDAO (BaseDAO):
 
                 valores = [
                     ProyectoEntity(
-                        ide=f["ID"],
+                        id=f["ID"],
                         num=f["NUM"],
                         id_usuario=f["ID_USUARIO"],
                         nombre=f["NOMBRE"],
@@ -204,9 +206,8 @@ class ProyectoDAO (BaseDAO):
                 rows = cur.fetchall()
                 valores = [
                     ProyectoEntity(
-                        ide=f["ID"],
-                        id_usuario=f["ID_USUARIO"],
-                        nombre=f["NOMBRE"]
+                        id=f["ID"],
+                        nombre=f["VALUE"]
                     )
                     for f in rows
                 ]
@@ -237,14 +238,21 @@ class ProyectoDAO (BaseDAO):
 
         sql = (
             """
-            INSERT INTO TIPOS_FILTRO
-                        (TIPO_FILTRO, OBSERVACIONES)
-            VALUES      (:tipo, :descripcion);
+            INSERT INTO PROYECTOS (ID_USUARIO, NOMBRE, ID_ESTADO, FECHA_INICIO,
+                        FECHA_FIN, MOTIVO_CIERRE, DESCRIPCION)
+            VALUES (:id_usuario, :nombre, :id_estado, :fecha_inicio,
+                    :fecha_fin, :motivo_cierre, :descripcion);
             """
         )
+
         params = {
-                    "tipo": ent.tipo_filtro,
-                    "descripcion": ent.observaciones
+            "id_usuario": globals.CURRENT_USER.id,
+            "nombre": ent.nombre,
+            "id_estado": ent.id_estado,
+            "fecha_inicio": ent.fecha_inicio,
+            "fecha_fin": ent.fecha_fin,
+            "motivo_cierre": ent.motivo_cierre,
+            "descripcion": ent.descripcion,
         }
 
         try:
@@ -278,16 +286,27 @@ class ProyectoDAO (BaseDAO):
 
         sql = (
             """
-            UPDATE  TIPOS_FILTRO
-            SET     TIPO_FILTRO = :tipo,
-                    OBSERVACIONES = :descripcion
-            WHERE   ID_TIPO = :id;
+            UPDATE  PROYECTOS
+            SET     ID_USUARIO = :id_usuario,
+                    NOMBRE = :nombre,
+                    ID_ESTADO = :id_estado,
+                    FECHA_INICIO = :fecha_inicio,
+                    FECHA_FIN = :fecha_fin,
+                    MOTIVO_CIERRE = :motivo_cierre,
+                    DESCRIPCION = :descripcion
+            WHERE   ID_PROYECTO = :id;
             """
         )
+
         params = {
-                    "id": ent.id,
-                    "tipo": ent.tipo_filtro,
-                    "descripcion": ent.observaciones
+            "id": ent.id,
+            "id_usuario": globals.CURRENT_USER.id,
+            "nombre": ent.nombre,
+            "id_estado": ent.id_estado,
+            "fecha_inicio": ent.fecha_inicio,
+            "fecha_fin": ent.fecha_fin,
+            "motivo_cierre": ent.motivo_cierre,
+            "descripcion": ent.descripcion,
         }
 
         try:
@@ -296,19 +315,19 @@ class ProyectoDAO (BaseDAO):
                 return Result.success(ent.id)
 
         except sqlite3.IntegrityError as e:
-            # traceback.print_exc()
+            traceback.print_exc()
             return Result.failure(f"[INTEGRITY ERROR]\n {e}")
         except sqlite3.OperationalError as e:
-            # traceback.print_exc()
+            traceback.print_exc()
             return Result.failure(f"[OPERATIONAL ERROR]\n {e}")
         except sqlite3.ProgrammingError as e:
-            # traceback.print_exc()
+            traceback.print_exc()
             return Result.failure(f"[PROGRAMMING ERROR]\n {e}")
         except sqlite3.DatabaseError as e:
-            # traceback.print_exc()
+            traceback.print_exc()
             return Result.failure(f"[DATABASE ERROR]\n {e}")
         except sqlite3.Error as e:
-            # traceback.print_exc()
+            traceback.print_exc()
             return Result.failure(f"[SQLITE ERROR]\n {e}")
 
     # ------------------------------------------------------------------

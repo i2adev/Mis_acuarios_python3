@@ -21,6 +21,7 @@ from Model.Entities.subcategoria_incidencia_entity import SubcategoriaIncidencia
 from Model.Entities.tipo_acuario_entity import TipoAcuarioEntity
 from Model.Entities.tipo_filtro_entity import TipoFiltroEntity
 from Model.Entities.estado_proyecto_entity import EstadoProyectoEntity
+from Model.Entities.proyecto_entity import ProyectoEntity
 
 
 class Paginator:
@@ -456,6 +457,20 @@ class Paginator:
                 )
                 for f in rows
             ]
+        elif self.procedure == "VISTA_PROYECTOS":
+            data_list = [ProyectoEntity(
+                id=f["ID"],
+                num=f["NUM"],
+                id_usuario=f["ID_USUARIO"],
+                nombre=f["NOMBRE"],
+                id_estado=f["ESTADO"],
+                fecha_inicio=f["FECHA_INICIO"],
+                fecha_fin=f["FECHA_FIN"],
+                motivo_cierre=f["MOTIVO_CIERRE"],
+                descripcion=f["DESCRIPCION"]
+                )
+                for f in rows
+            ]
 
         return data_list
 
@@ -502,6 +517,9 @@ class Paginator:
             return SearchCmd.SEARCH_MATERIAL_URNA
         elif self.procedure == "VISTA_ESTADOS_PROYECTO":
             return SearchCmd.SEARCH_ESTADO_PROYECTO
+        elif self.procedure == "VISTA_PROYECTOS":
+            return SearchCmd.SEARCH_PROYECTO
+
 
     def __str__(self):
         """ Muestra el objeto en forma de texto. """

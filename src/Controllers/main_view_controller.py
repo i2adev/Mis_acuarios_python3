@@ -6,6 +6,8 @@ Commentarios:
 """
 
 from Controllers.base_controller import BaseController
+from Controllers.proyecto_controller import ProyectoController
+from Controllers.proyecto_master_controller import ProyectoMasterController
 from Model.DAO.categoria_acuario_dao import CategoriaAcuarioDAO
 from Model.DAO.categoria_incidencia_dao import CategoriaIncidenciaDAO
 from Model.DAO.marca_comercial_dao import MarcaComercialDAO
@@ -51,6 +53,9 @@ from Controllers.subcategoria_incidencia_master_controller import \
 from Controllers.tipo_acuario_master_controller import TipoAcuarioMasterController
 from Controllers.tipo_filtro_master_controller import TipoFiltroMasterController
 from Controllers.urna_master_controller import UrnaMasterController
+from Model.DAO.proyecto_dao import ProyectoDAO
+from Model.Entities.proyecto_entity import ProyectoEntity
+from Views.Masters.proyecto_view import ProyectoView
 
 
 class MainViewController(BaseController):
@@ -110,9 +115,27 @@ class MainViewController(BaseController):
             self.urna_clicked
         )
 
+        self._view.button_maestro_proyecto.clicked.connect(
+            self.proyecto_clicked
+        )
+
         self._view.button_maestro_estado_proyecto.clicked.connect(
             self.estado_proyecto_clicked
         )
+
+
+    def proyecto_clicked(self):
+        """
+        Cuando se presiona en el proyecto.
+        Acción: Abre el formulario de proyecto.
+        """
+
+        view = ProyectoView("MAESTRO DE PROYECTOS")
+        dao = ProyectoDAO()
+        mod = ProyectoEntity()
+
+        ctrl = ProyectoMasterController(view, dao, mod)
+        ctrl.show()
 
     def estado_proyecto_clicked(self):
         """
@@ -256,6 +279,4 @@ class MainViewController(BaseController):
         """ Abre la vista """
         self._view.show()
         #self._view.showMaximized()
-
-
 

@@ -149,7 +149,7 @@ class SearchCmd:
     WHERE     FIELD LIKE '%' || :pattern || '%';
     """
 
-    ## Tipod efiltro
+    ## Tipo de filtro
     SEARCH_TIPO_FILTR0 = """
     SELECT  ID, NUM, TIPO, OBSERVACIONES
     FROM
@@ -165,6 +165,7 @@ class SearchCmd:
     WHERE     FIELD LIKE '%' || :pattern || '%';
     """
 
+    ## Urna
     SEARCH_URNA = """
     SELECT    ID, NUM, MARCA, MODELO, ANCHURA, PROFUNDIDAD, ALTURA, 
           GROSOR, VOLUMEN_BRUTO, MATERIAL, DESCRIPCION
@@ -193,6 +194,7 @@ class SearchCmd:
     WHERE     FIELD LIKE '%' || :pattern || '%';
     """
 
+    ## Estado del proyecto
     SEARCH_ESTADO_PROYECTO = """
     SELECT    ID, NUM, ESTADO, DESCRIPCION
     FROM
@@ -205,4 +207,30 @@ class SearchCmd:
         FROM      ESTADOS_PROYECTO
     )
     WHERE     FIELD LIKE '%' || :pattern || '%';
+    """
+
+    ## Proyecto
+    SEARCH_PROYECTO = """
+    SELECT  ID, NUM, ID_USUARIO, NOMBRE, ESTADO, FECHA_INICIO, FECHA_FIN, 
+            MOTIVO_CIERRE, DESCRIPCION
+    FROM
+    (
+        SELECT P.ID_PROYECTO AS ID,
+               ROW_NUMBER() OVER(ORDER BY P.ID_PROYECTO) AS NUM,
+               P.ID_USUARIO AS ID_USUARIO,
+               P.NOMBRE AS NOMBRE,
+               E.NOMBRE_ESTADO AS ESTADO,
+               IFNULL(strftime('%Y-%m-%d', P.FECHA_INICIO, 'unixepoch', 'localtime'), '') AS FECHA_INICIO,
+               IFNULL(strftime('%Y-%m-%d', P.FECHA_FIN, 'unixepoch', 'localtime'), '') AS FECHA_FIN,
+               P.MOTIVO_CIERRE AS MOTIVO_CIERRE,
+               P.DESCRIPCION AS DESCRIPCION,
+               UPPER(IFNULL(P.NOMBRE, '' ) || IFNULL(E.NOMBRE_ESTADO, '') || 
+               IFNULL(strftime('%Y-%m-%d', P.FECHA_INICIO, 'unixepoch', 'localtime'), '') || 
+               IFNULL(strftime('%Y-%m-%d', P.FECHA_FIN, 'unixepoch', 'localtime'), '') ||
+               IFNULL(P.MOTIVO_CIERRE, '') || IFNULL(P.DESCRIPCION, '')) AS FIELD
+        FROM   PROYECTOS P
+        LEFT JOIN ESTADOS_PROYECTO E
+        ON     P.ID_ESTADO = E.ID_ESTADO
+    )
+    WHERE ID_USUARIO = :id_usuario AND FIELD LIKE '%' || :pattern || '%';
     """

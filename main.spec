@@ -11,6 +11,7 @@ a = Analysis(
         ('src/Resources/Images/*', 'Resources/Images'),
         ('src/Resources/Styles/*', 'Resources/Styles'),
         ('src/Resources/Fonts/*', 'Resources/Fonts'),
+        ('src/Resources/resources_rc.py', 'Resources/resources_rc.py'),
     ],
     hiddenimports=[],
     hookspath=[],

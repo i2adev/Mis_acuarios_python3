@@ -1,8 +1,8 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
-Fecha:      09/10/2025
+Fecha:      08/08/2025
 Commentarios:
-    Módulo que contiene el diálogo de la entidad PROYECTO.
+    Módulo que contiene el formulario maestro de acuario.
 """
 
 import sys
@@ -10,27 +10,33 @@ import sys
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QApplication, QWidget
 
-from Views.Dialogs.base_dialog import BaseDialog
-from Views.Forms.proyecto_form import ProyectoForm
 from Views.Forms.image_form import ImageForm
+from Views.Masters.base_view import BaseView
+from Views.Forms.proyecto_form import ProyectoForm
 
 
-class ProyectoDialog(BaseDialog):
-    """ Diálogo de categoría de acuario. """
+class ProyectoView(BaseView):
+    """
+    Formulario maestro del PROYECTO.
+    """
 
     def __init__(self, w_title: str):
         """ Constructor de clase. """
 
         super().__init__(w_title)
 
-        # Configura el formulario
+        # Configuramos el formulario
         self.frame = ProyectoForm()
-        self.frame_image = ImageForm(self,"FOTOGRAFIAS_PROYECTO")
+        self.frame.setMinimumWidth(650)
+        self.frame_image = ImageForm(self, "FOTOGRAFIAS_PROYECTO")
         self.frame_image.setFixedWidth(450)
-        self.frame.setFixedWidth(650)
         self.layout_form_data.addWidget(self.frame)
         self.layout_form_data.addWidget(self.frame_image)
+
         self.set_tab_order()
+
+        # Asigna atajos de teclado
+        self.button_insert.setShortcut("Ctrl+I")
 
     def set_tab_order(self):
         """ Establece el orden de tabulación de los controles. """
@@ -68,7 +74,7 @@ class ProyectoDialog(BaseDialog):
 if __name__ == "__main__":
     app = QApplication(sys.argv)
 
-    ventana = ProyectoDialog("...::OOO::....")
+    ventana = ProyectoView("...::OOO::....")
 
     # Cargar el archivo .qss
     with open("../../Resources/Styles/main_style.qss", "r",

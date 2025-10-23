@@ -12,24 +12,24 @@ class ProyectoEntity(BaseEntity):
     """ Entidad del tipo de filtro. """
 
     # Anotaciones de tipo (atributos con sus tipos esperados)
-    ide: int | None
+    id: int | None
     num: int | None
     id_usuario: int | None
     nombre: str | None
     id_estado: int | None
-    fecha_inicio: datetime | None
+    fecha_inicio: int | None
     fecha_fin: datetime | None
     motivo_cierre: str | None
     descripcion: str | None
 
-    def __init__(self, ide: int = None, num: int = None,
+    def __init__(self, id: int = None, num: int = None,
                  id_usuario: int = None, nombre: str = None,
-                 id_estado: int = None, fecha_inicio: datetime = None,
-                 fecha_fin: datetime = None, motivo_cierre: str = None,
+                 id_estado: int = None, fecha_inicio: int = None,
+                 fecha_fin: int = None, motivo_cierre: str = None,
                  descripcion: str = None):
         """
         Constructor de clase:
-        :param ide: ide del proyecto
+        :param id: id del proyecto
         :param num: Número correlativo del tipo de filtro
         :param id_usuario: Id del usuario
         :param nombre: Nombre del proyecto
@@ -42,7 +42,7 @@ class ProyectoEntity(BaseEntity):
         super().__init__()
 
         # Inicializamos las variables
-        self.__id = ide
+        self.__id = id
         self.__num = num
         self.__id_usuario = id_usuario
         self.__nombre = nombre
@@ -54,11 +54,11 @@ class ProyectoEntity(BaseEntity):
 
     # INICIO PROPIEDADES
     @property
-    def ide(self) -> int:
+    def id(self) -> int:
         return self.__id
 
-    @ide.setter
-    def ide(self, new_id: int):
+    @id.setter
+    def id(self, new_id: int):
         self.__id = new_id
 
     @property
@@ -71,12 +71,12 @@ class ProyectoEntity(BaseEntity):
 
     @property
     def id_usuario(self) -> int:
-        """ ide del usuario. """
+        """ id del usuario. """
         return self.__id_usuario
 
     @id_usuario.setter
     def id_usuario(self, new_id_usuario: int):
-        """ ide del usuario. """
+        """ id del usuario. """
         self.__id_usuario = new_id_usuario
 
     @property
@@ -91,12 +91,12 @@ class ProyectoEntity(BaseEntity):
 
     @property
     def id_estado(self) -> int:
-        """ ide del estado del proyecto. """
+        """ id del estado del proyecto. """
         return self.__id_estado
 
     @id_estado.setter
     def id_estado(self, new_id_estado: int):
-        """ ide del estado del proyecto. """
+        """ id del estado del proyecto. """
         self.__id_estado = new_id_estado
 
     @property
@@ -144,7 +144,7 @@ class ProyectoEntity(BaseEntity):
         """ Muestra información de la clase. """
 
         return f"""
-            ide:             {self.ide}
+            id:             {self.ide}
             NUM:            {self.num}
             NOMBRE:         {self.nombre}
             DESCRIPCIÓN:    {self.descripcion:50}

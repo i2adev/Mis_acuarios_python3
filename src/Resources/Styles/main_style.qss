@@ -1,24 +1,4 @@
-﻿@font-face  {
-    font-family: "Roboto-Bold";
-    src: url(":/Fonts/Roboto-Bold.ttf");
-}
-
-@font-face  {
-    font-family: "Roboto-Medium";
-    src: url(":/Fonts/Roboto-Medium.ttf");
-}
-
-@font-face  {
-    font-family: "Roboto";
-    src: url(":/Fonts/Roboto-Regular.ttf");
-}
-
-@font-face  {
-    font-family: "Roboto-Thin";
-    src: url(":/Fonts/Roboto-Thin.ttf");
-}
-
-/* Estilo de la ventana */
+﻿/* Estilo de la ventana */
 QWidget {
     background-color: black;
 	color: white;
@@ -63,11 +43,16 @@ QPushButton {
 
 /* Estilo de las etiquetas */
 QLabel {
-    font-family: "Roboto-Medium";
+    font-weight: bold;
+    font-size: 12pt;
 	background-color: transparent;
 }
 
 /* Estilo de tabla */
+QTableView::header {
+    text-align: left;
+}
+
 QTableView::item:hover {
     background-color: #264f78;
     color: #ffffff;

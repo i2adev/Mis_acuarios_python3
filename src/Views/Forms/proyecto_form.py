@@ -81,6 +81,9 @@ class ProyectoForm(QFrame):
 
         # Combos
         self.combo_estado_proyecto = QComboBox()
+        # self.combo_estado_proyecto.setMinimumWidth(250)
+        self.combo_estado_proyecto.setObjectName("combo_estado_proyecto")
+        self.combo_estado_proyecto.setEditable(True)
 
         # Datetimepickers
         self.date_inicio = NullableDateEdit()
@@ -89,6 +92,8 @@ class ProyectoForm(QFrame):
         self.date_inicio.setDate(None)
         self.date_fin = NullableDateEdit()
         self.date_fin.setDisplayFormat("dd/MM/yyyy")
+        self.date_fin.setObjectName("date_fin")
+        self.date_fin.setDate(None)
 
     def build_layout(self):
         """ Construye el layout del frame. """
