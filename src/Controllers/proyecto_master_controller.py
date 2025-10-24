@@ -8,6 +8,7 @@ Commentarios:
 from PyQt6.QtGui import QIcon, QAction
 from PyQt6.QtWidgets import QMessageBox, QTableView, QWidget, QComboBox
 
+import globals
 from Controllers.proyecto_controller import ProyectoController
 from Model.DAO.paginator import Paginator
 from Views.Masters.proyecto_view import ProyectoView
@@ -125,6 +126,8 @@ class ProyectoMasterController(ProyectoController):
         pattern = self._view.edit_patron.text()
         total_records = self._pag.records
 
+        print(pattern)
+
         # Condiciones de salida
         if not pattern:
             QMessageBox.information(
@@ -136,7 +139,7 @@ class ProyectoMasterController(ProyectoController):
             return
 
         # Obtoenemos los datos
-        self._pag.get_filtered_list(pattern)
+        self._pag.get_filtered_list_by_id(pattern, globals.CURRENT_USER.id)
 
         # Cargamos la tabla
         self._fill_tableview(self._view.data_table, self._pag._total_data)
@@ -372,7 +375,7 @@ class ProyectoMasterController(ProyectoController):
         """ Gestiona los datos para llenar la tabla. """
 
         self._fill_tableview(self._view.data_table, self._pag.current_data)
-        self._configure_table(self._view.data_table)
+        self._configure_table(self._view.data_table, [0, 1, 7])
 
     def _fill_tableview(self, table: QTableView,
                         data: list[ProyectoEntity]):

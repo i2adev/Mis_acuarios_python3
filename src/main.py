@@ -14,7 +14,6 @@ from PyQt6.QtWidgets import QApplication, QDialog
 
 from Controllers.login_controller import LoginDialogController
 from Controllers.main_view_controller import MainViewController
-
 from Model.DAO.usuario_dao import UsuarioDAO
 from Model.Entities.usuario_entity import UsuarioEntity
 from Views.Dialogs.login_dialog import LoginDialog

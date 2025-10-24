@@ -332,6 +332,34 @@ class Paginator:
         # Configura el paginador
         self.configure_paginator(data_list, page)
 
+    def get_filtered_list_by_id(self, pattern: str, id: int, page: int = 1):
+        """
+        Obtiene la lista filtrada por id del dependiente.
+        :param pattern: Patrón de búsqueda
+        :param id: ID del dependiente
+        :param page: Página a mostrar
+        """
+
+        # Obtenemos la instrucción sql
+        sql = self.get_sql_command()
+
+        # Obtiene los datos
+        res = BaseDAO.get_filtered_data_by_id(sql, id, pattern)
+
+        if not res.is_success:
+            QMessageBox.warning(
+                None,
+                "ERROR DE PAGINACIÓN",
+                res.error_msg
+            )
+            return
+
+        # Mapea los datos a entidades
+        data_list = self.map_entity_list(res.value)
+
+        # Configura el paginador
+        self.configure_paginator(data_list, page)
+
     def configure_paginator(self, data_list: list[BaseEntity], page: int)->None:
         """
         Configura el paginador.

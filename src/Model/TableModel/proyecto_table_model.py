@@ -26,7 +26,7 @@ class ProyectoTableModel(QAbstractTableModel):
         super().__init__()
         self.data = data
         self._headers = ["ID", "ID_USUARIO", "#", "NOMBRE", "ESTADO",
-                         "FECHA_INICIO", "FECHA_CIERRE", "MOTIVO_CIERRE",
+                         "F. INICIO", "F. CIERRE", "MOTIVO CIERRE",
                          "DESCRIPTION"]
 
     def rowCount(self, parent=QModelIndex()):

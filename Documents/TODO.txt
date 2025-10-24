@@ -1,12 +1,12 @@
 ﻿================================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
-23/10/2025  TESTS DEL MAESTRO DE PROYECTO:
+23/10/2025  TESTS BÁSICO DEL MAESTRO DE PROYECTO:
      ↓      -   TESTEO DE LA APERTURA DEL MAESTRO.                          DONE
-            -   TESTEO DE INSERCIÓN DE REGISTRO.                            TODO
-            -   TESTEO DE ACTUALIZACIÓN DE REGISTRO.                        TODO
-            -   TESTEO DE ELIMINACIÓN DE REGISTRO.                          TODO
-            -   TESTEO DE BÚSQUEDA DE REGISTROS.                            TODO
+25/10/2025  -   TESTEO DE INSERCIÓN DE REGISTRO.                            DONE
+            -   TESTEO DE ACTUALIZACIÓN DE REGISTRO.                        DONE
+            -   TESTEO DE ELIMINACIÓN DE REGISTRO.                          DONE
+            -   TESTEO DE BÚSQUEDA DE REGISTROS.                            DONE
 
 09/10/2025  SE AÑADE LA LÓGICA DEL PROYECTO:
      ↓      -   SE CREA LA ENTIDAD.                                         DONE

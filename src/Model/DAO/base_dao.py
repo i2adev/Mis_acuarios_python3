@@ -258,15 +258,41 @@ class BaseDAO(ABC):
                 cur.execute(sql, params)
                 rows = cur.fetchall()
 
-                # values = [
-                #     CategoriaAcuarioEntity(
-                #         id_=f["ID"],
-                #         num=f["NUM"],
-                #         categoria=f["CATEGORIA"],
-                #         observaciones=f["OBSERVACIONES"],
-                #     )
-                #     for f in rows
-                # ]
+                return Result.success(rows)
+
+        except sqlite3.IntegrityError as e:
+            return Result.failure(f"[INTEGRITY ERROR]\n {e}")
+        except sqlite3.OperationalError as e:
+            traceback.print_exc()
+            return Result.failure(f"[OPERATIONAL ERROR]\n {e}")
+        except sqlite3.ProgrammingError as e:
+            return Result.failure(f"[PROGRAMMING ERROR]\n {e}")
+        except sqlite3.DatabaseError as e:
+            return Result.failure(f"[DATABASE ERROR]\n {e}")
+        except sqlite3.Error as e:
+            return Result.failure(f"[SQLITE ERROR]\n {e}")
+
+    @staticmethod
+    def get_filtered_data_by_id(sql: str, id: int, pattern: str) -> Result:
+        """
+        Obtiena la lista filtrada por id dependiente
+        :param sql: Comando sql de selección a ejecutar
+        :param id: ID del usuario
+        :param pattern: Patrón de búsqueda
+        """
+
+        db = DBManager()
+
+        params = {
+            "id_dep": id,
+            "pattern": pattern
+        }
+
+        try:
+            with db.conn as con:
+                cur = con.cursor()
+                cur.execute(sql, params)
+                rows = cur.fetchall()
 
                 return Result.success(rows)
 

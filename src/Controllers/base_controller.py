@@ -199,7 +199,7 @@ class BaseController(QObject):
 
             combo.addItem(texto, data)
 
-    def _configure_table(self, table: QTableView):
+    def _configure_table(self, table: QTableView, columns_hide: list[int] | None = None):
         """ Configura l atabla de datos. """
 
         # Selecciona un afila entera
@@ -219,8 +219,12 @@ class BaseController(QObject):
         # Elimina el tabulador
         table.setFocusPolicy(Qt.FocusPolicy.NoFocus)
 
-        # Ocultar la columna ID (columna 0)
-        table.setColumnHidden(0, True)
+        # Ocultar las columnas pasadas como parámetro
+        if columns_hide is None:
+            table.setColumnHidden(0, True)
+        else:
+            for col in columns_hide:
+                table.setColumnHidden(col, True)
 
         # Hacer que la columna de descripcion use el espaciorestante
         last_column_ix = table.model().columnCount() - 1

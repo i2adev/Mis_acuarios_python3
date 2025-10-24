@@ -220,8 +220,12 @@ class SearchCmd:
                P.ID_USUARIO AS ID_USUARIO,
                P.NOMBRE AS NOMBRE,
                E.NOMBRE_ESTADO AS ESTADO,
-               IFNULL(strftime('%Y-%m-%d', P.FECHA_INICIO, 'unixepoch', 'localtime'), '') AS FECHA_INICIO,
-               IFNULL(strftime('%Y-%m-%d', P.FECHA_FIN, 'unixepoch', 'localtime'), '') AS FECHA_FIN,
+               IFNULL(
+                strftime('%Y-%m-%d', P.FECHA_INICIO, 'unixepoch', 'localtime'), 
+                '') AS FECHA_INICIO,
+               IFNULL(
+                strftime('%Y-%m-%d', P.FECHA_FIN, 'unixepoch', 'localtime'), 
+                '') AS FECHA_FIN,
                P.MOTIVO_CIERRE AS MOTIVO_CIERRE,
                P.DESCRIPCION AS DESCRIPCION,
                UPPER(IFNULL(P.NOMBRE, '' ) || IFNULL(E.NOMBRE_ESTADO, '') || 
@@ -232,5 +236,5 @@ class SearchCmd:
         LEFT JOIN ESTADOS_PROYECTO E
         ON     P.ID_ESTADO = E.ID_ESTADO
     )
-    WHERE ID_USUARIO = :id_usuario AND FIELD LIKE '%' || :pattern || '%';
+    WHERE ID_USUARIO = :id_dep AND FIELD LIKE '%' || :pattern || '%';
     """
