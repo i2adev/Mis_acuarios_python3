@@ -3,7 +3,7 @@ build/
 dist/
 .idea/
 qt_env/
-__pycache__/*.pyc
+*.pyc
 
 
 # La carpeta Documentos escpecto el TODO y el CHAMGELOG

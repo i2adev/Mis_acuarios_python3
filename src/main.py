@@ -18,10 +18,9 @@ from Model.DAO.usuario_dao import UsuarioDAO
 from Model.Entities.usuario_entity import UsuarioEntity
 from Views.Dialogs.login_dialog import LoginDialog
 
-import Resources.resources_rc
-
 # Versión del programa
 __version__ = "0.14.1"
+
 
 # Entrada al programa
 def main():
@@ -110,6 +109,6 @@ def main():
         # Cancelado → salir de la aplicación
         sys.exit(0)
 
+
 if __name__ == "__main__":
     main()
-

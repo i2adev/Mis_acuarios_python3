@@ -1,6 +1,15 @@
 ﻿================================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
+24/10/2025  TESTS AUTOMÁTICOS DEL MAESTRO DE PROYECTO:
+     ↓      -   PRUEBA DEL VALIDADOR.                                       DONE
+29/10/2025  -   PRUEBA DE INSERCIÓN:
+                -   INSERTAR TODOS LOS CAMPOS.                              DONE
+
+            NOTA:
+            NO SE CONTROLA LA TECNOLOGÍA DE TESTS UNITARIOS CON INTERFAZ GRÁFICA
+            CON EL FRAMEWORK QT6. SE POSPONE LAS PURUEBAS A MAS ADELANTE.
+
 23/10/2025  TESTS BÁSICO DEL MAESTRO DE PROYECTO:
      ↓      -   TESTEO DE LA APERTURA DEL MAESTRO.                          DONE
 25/10/2025  -   TESTEO DE INSERCIÓN DE REGISTRO.                            DONE

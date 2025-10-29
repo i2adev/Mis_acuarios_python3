@@ -126,8 +126,6 @@ class ProyectoMasterController(ProyectoController):
         pattern = self._view.edit_patron.text()
         total_records = self._pag.records
 
-        print(pattern)
-
         # Condiciones de salida
         if not pattern:
             QMessageBox.information(
