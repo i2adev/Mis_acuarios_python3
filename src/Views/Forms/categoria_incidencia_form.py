@@ -9,7 +9,8 @@ Commentarios:
 import sys
 
 from PyQt6.QtWidgets import QFrame, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, \
-    QPlainTextEdit, QApplication
+    QPlainTextEdit, QApplication, QSpacerItem, QSizePolicy
+
 
 class CategoriaIncidenciaForm(QFrame):
     """
@@ -20,7 +21,7 @@ class CategoriaIncidenciaForm(QFrame):
     def __init__(self):
         super().__init__()
 
-        self.setFixedHeight(150)
+        self.setFixedHeight(200)
 
         self.create_widgets()
         self.build_layout()
@@ -33,6 +34,7 @@ class CategoriaIncidenciaForm(QFrame):
 
         ## Layout primera linea
         self.layout_first_line = QHBoxLayout()
+        self.layout_first_line.setContentsMargins(0, 0, 0, 20)
         ### ID
         self.layout_id = QVBoxLayout()
         ### Tipo incidencia
@@ -54,7 +56,8 @@ class CategoriaIncidenciaForm(QFrame):
         self.edit_id.setFixedWidth(50)
         self.edit_id.setEnabled(False)
         self.edit_categoria_incidencia = QLineEdit()
-        self.edit_categoria_incidencia.setObjectName("edit_categoria_incidencia")
+        self.edit_categoria_incidencia.setObjectName(
+            "edit_categoria_incidencia")
         self.text_observaciones = QPlainTextEdit()
         self.text_observaciones.setObjectName("text_descripcion")
 
@@ -73,6 +76,10 @@ class CategoriaIncidenciaForm(QFrame):
         ## Montamos la primera linea
         self.layout_first_line.addLayout(self.layout_id)
         self.layout_first_line.addLayout(self.layout_tipo_incidencia)
+        self.layout_first_line.addSpacerItem(
+            QSpacerItem(20, 20, QSizePolicy.Policy.Expanding,
+                        QSizePolicy.Policy.Expanding)
+        )
 
         # Segunda linea
         self.layout_observaciones.addWidget(self.label_observaciones)
@@ -83,6 +90,7 @@ class CategoriaIncidenciaForm(QFrame):
         self.layout_form.addLayout(self.layout_observaciones)
 
         self.setLayout(self.layout_form)
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

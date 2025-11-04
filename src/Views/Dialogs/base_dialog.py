@@ -107,7 +107,7 @@ class BaseDialog(QDialog):
         self.layout_title_bar = QHBoxLayout()  # Layout barra título
         self.layout_title_bar.setContentsMargins(0, 0, 0, 0)
         self.layout_form_data = QHBoxLayout()  # Layout que contiene el frame con
-                                               # el formulario de datos
+        # el formulario de datos
         self.layout_footer = QHBoxLayout()  # Layout pie de formulario
 
         # Controles de la barra de título

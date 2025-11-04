@@ -11,8 +11,8 @@ from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QApplication, QWidget
 
 from Views.Dialogs.base_dialog import BaseDialog
-from Views.Forms.proyecto_form import ProyectoForm
 from Views.Forms.image_form import ImageForm
+from Views.Forms.proyecto_form import ProyectoForm
 
 
 class ProyectoDialog(BaseDialog):
@@ -25,9 +25,8 @@ class ProyectoDialog(BaseDialog):
 
         # Configura el formulario
         self.frame = ProyectoForm()
-        self.frame_image = ImageForm(self,"FOTOGRAFIAS_PROYECTO")
+        self.frame_image = ImageForm(self, "FOTOGRAFIAS_PROYECTO")
         self.frame_image.setFixedWidth(450)
-        self.frame.setFixedWidth(650)
         self.layout_form_data.addWidget(self.frame)
         self.layout_form_data.addWidget(self.frame_image)
         self.set_tab_order()
@@ -40,10 +39,13 @@ class ProyectoDialog(BaseDialog):
             widget.setFocusPolicy(Qt.FocusPolicy.ClickFocus)
 
         # Establecemos las politicas de focus
-        self.frame.edit_nombre_proyecto.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
-        self.frame.combo_estado_proyecto.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
-        self.frame.date_inicio.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
-        self.frame.date_fin.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
+        self.frame.edit_nombre_proyecto.setFocusPolicy(
+            Qt.FocusPolicy.StrongFocus)
+        self.frame.combo_estado_proyecto.setFocusPolicy(
+            Qt.FocusPolicy.StrongFocus)
+        self.frame.date_inicio.edit_date.setFocusPolicy(
+            Qt.FocusPolicy.StrongFocus)
+        self.frame.date_fin.edit_date.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
         self.frame.edit_motivo_cierre.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
         self.frame.text_descripcion.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
 
@@ -52,17 +54,18 @@ class ProyectoDialog(BaseDialog):
             self.frame.edit_nombre_proyecto, self.frame.combo_estado_proyecto
         )
         self.setTabOrder(
-            self.frame.combo_estado_proyecto, self.frame.date_inicio
+            self.frame.combo_estado_proyecto, self.frame.date_inicio.edit_date
         )
         self.setTabOrder(
-            self.frame.date_inicio, self.frame.date_fin
+            self.frame.date_inicio.edit_date, self.frame.date_fin.edit_date
         )
         self.setTabOrder(
-            self.frame.date_fin, self.frame.edit_motivo_cierre
+            self.frame.date_fin.edit_date, self.frame.edit_motivo_cierre
         )
         self.setTabOrder(
             self.frame.edit_motivo_cierre, self.frame.text_descripcion
         )
+
 
 # Entrada a la aplicación
 if __name__ == "__main__":

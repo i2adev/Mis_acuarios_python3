@@ -10,18 +10,19 @@ from PyQt6.QtWidgets import QMessageBox, QTableView, QWidget, QComboBox
 
 import globals
 from Controllers.proyecto_controller import ProyectoController
+from CustomControls.nullable_date_edit import NullableDateEdit
 from Model.DAO.paginator import Paginator
-from Views.Masters.proyecto_view import ProyectoView
 from Model.DAO.proyecto_dao import ProyectoDAO
 from Model.Entities.proyecto_entity import ProyectoEntity
-from Views.table_menu_contextual import TableMenuContextual
 from Model.TableModel.proyecto_table_model import ProyectoTableModel
+from Views.Masters.proyecto_view import ProyectoView
+from Views.table_menu_contextual import TableMenuContextual
 
 
 class ProyectoMasterController(ProyectoController):
     """ Controlador del formulario maestro de marca comercial. """
 
-    def __init__(self, view: ProyectoView, 
+    def __init__(self, view: ProyectoView,
                  dao: ProyectoDAO,
                  mod: ProyectoEntity):
         """
@@ -46,6 +47,10 @@ class ProyectoMasterController(ProyectoController):
         self._load_tableview()
         self._configure_table_foot()
 
+        # Ocultamos los controles del motivo de cierre
+        self._hide_layout(self._view.frame.layout_motivo_cierre)
+        self._hide_layout(self._view.frame.layout_id)
+
         # Inicializamos los eventos
         self.init_handlers()
 
@@ -60,6 +65,8 @@ class ProyectoMasterController(ProyectoController):
                 widget.installEventFilter(self)
             if isinstance(widget, QComboBox):
                 widget.installEventFilter(self)
+            if isinstance(widget, NullableDateEdit):
+                widget.edit_date.installEventFilter(self)
 
         # Inizializa los botones
         self._view.button_insert.clicked.connect(self.button_insert_click)
@@ -166,7 +173,8 @@ class ProyectoMasterController(ProyectoController):
 
         # Configuración de salida
         self._pag.current_page = page
-        self._pag.current_data = self._pag.get_paged_list(self._pag.current_page)
+        self._pag.current_data = self._pag.get_paged_list(
+            self._pag.current_page)
         self._load_tableview()
 
     def show_context_menu(self, position):
@@ -324,7 +332,7 @@ class ProyectoMasterController(ProyectoController):
         # Seleccionamos la página en la que se encuentra el registro
         self._view.combo_select_page.setCurrentIndex(-1)
         num_reg = next(x.num for x in self._pag.total_data if x.id == ide)
-        num_pag =  self._pag.get_page_number_by_num(num_reg)
+        num_pag = self._pag.get_page_number_by_num(num_reg)
         self._view.combo_select_page.setCurrentIndex(num_pag - 1)
 
         # Selecciona la última fila
@@ -348,7 +356,7 @@ class ProyectoMasterController(ProyectoController):
             # Comprobamos si al eliminar un registro se la disminuido el número
             # de páginas totales
             if self._pag.total_pages < before_pages:
-                page_index = self._pag.total_pages # ïndice del item a eliminar
+                page_index = self._pag.total_pages  # ïndice del item a eliminar
                 self._view.combo_select_page.removeItem(page_index)
                 if current_page > self._pag.total_pages:
                     current_page -= 1

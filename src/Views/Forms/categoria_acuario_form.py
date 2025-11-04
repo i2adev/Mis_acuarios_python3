@@ -8,9 +8,8 @@ Commentarios:
 
 import sys
 
-
 from PyQt6.QtWidgets import QFrame, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, \
-    QPlainTextEdit, QApplication
+    QPlainTextEdit, QApplication, QSpacerItem, QSizePolicy
 
 
 class CategoriaAcuarioForm(QFrame):
@@ -22,7 +21,7 @@ class CategoriaAcuarioForm(QFrame):
     def __init__(self):
         super().__init__()
 
-        self.setFixedHeight(150)
+        self.setFixedHeight(200)
 
         self.create_widgets()
         self.build_layout()
@@ -37,6 +36,7 @@ class CategoriaAcuarioForm(QFrame):
 
         ## Layout primera linea
         self.layout_first_line = QHBoxLayout()
+        self.layout_first_line.setContentsMargins(0, 0, 0, 20)
         ### ID
         self.layout_id = QVBoxLayout()
         ### Tipo acuario
@@ -79,6 +79,10 @@ class CategoriaAcuarioForm(QFrame):
         ## Montamos la primera linea
         self.layout_first_line.addLayout(self.layout_id)
         self.layout_first_line.addLayout(self.layout_tipo_acuario)
+        self.layout_first_line.addSpacerItem(
+            QSpacerItem(20, 20, QSizePolicy.Policy.Expanding,
+                        QSizePolicy.Policy.Expanding)
+        )
 
         # Segunda linea
         self.layout_observaciones.addWidget(self.label_observaciones)
@@ -105,6 +109,7 @@ class CategoriaAcuarioForm(QFrame):
     #     self.setTabOrder(
     #         self.edit_categoria_acuario, self.text_observaciones
     #     )
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

@@ -7,12 +7,13 @@ Commentarios:
 
 from PyQt6.QtWidgets import QWidget, QMessageBox, QComboBox
 
+import globals
 from Controllers.proyecto_controller import ProyectoController
-from Services.Result.result import Result
-from Views.Dialogs.proyecto_dialog import ProyectoDialog
+from CustomControls.nullable_date_edit import NullableDateEdit
 from Model.DAO.proyecto_dao import ProyectoDAO
 from Model.Entities.proyecto_entity import ProyectoEntity
-import globals
+from Services.Result.result import Result
+from Views.Dialogs.proyecto_dialog import ProyectoDialog
 
 
 class ProyectoDialogController(ProyectoController):
@@ -33,6 +34,10 @@ class ProyectoDialogController(ProyectoController):
         # Llenamo los combos
         self._fill_combos()
 
+        # Ocultamos los controles del motivo de cierre
+        self._hide_layout(self._view.frame.layout_motivo_cierre)
+        self._hide_layout(self._view.frame.layout_id)
+
         # Inicializamos los eventos
         self.init_handlers()
 
@@ -45,6 +50,8 @@ class ProyectoDialogController(ProyectoController):
                 widget.installEventFilter(self)
             if isinstance(widget, QComboBox):
                 widget.installEventFilter(self)
+            if isinstance(widget, NullableDateEdit):
+                widget.edit_date.installEventFilter(self)
 
         # Botones
         self._view.button_accept.clicked.connect(self.dialog_accept)
@@ -81,9 +88,9 @@ class ProyectoDialogController(ProyectoController):
                 self._view.frame.date_fin.dateTime().toSecsSinceEpoch()
             ),
             motivo_cierre=self._view.frame.edit_motivo_cierre_proyecto.text(),
-            descripcion = self._view.frame.text_descripcion.toPlainText()
-                          if self._view.frame.text_descripcion.toPlainText()
-                          else ""
+            descripcion=self._view.frame.text_descripcion.toPlainText()
+            if self._view.frame.text_descripcion.toPlainText()
+            else ""
         )
 
         # Aceptamos el diálogo

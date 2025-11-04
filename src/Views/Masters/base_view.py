@@ -5,16 +5,15 @@ Commentarios:
     Módulo que contiene la vista base de la que derivan los formularios.
 """
 
-
 import sys
+
+from PyQt6.QtCore import Qt, QRect
+from PyQt6.QtGui import QIcon, QPixmap, QCursor
 from PyQt6.QtWidgets import (QApplication, QWidget, QLabel, QLineEdit,
                              QPushButton, QHBoxLayout, QVBoxLayout,
                              QSpacerItem, QComboBox, QSizePolicy, QFrame,
                              QTableView, QAbstractItemView)
-from PyQt6.QtGui import QIcon, QPixmap, QCursor
-from PyQt6.QtCore import Qt, QRect
 
-import Resources.resources_rc
 
 class BaseView(QWidget):
     """ Formulario maestro base """
@@ -62,7 +61,7 @@ class BaseView(QWidget):
         self.layout_title_bar.addWidget(self.label_window_title)
         self.layout_title_bar.addSpacerItem(
             QSpacerItem(20, 20, QSizePolicy.Policy.Expanding,
-            QSizePolicy.Policy.Minimum)
+                        QSizePolicy.Policy.Minimum)
         )
         self.layout_title_bar.addWidget(self.button_tb_minimize)
         self.layout_title_bar.addWidget(self.button_tb_restore)
@@ -75,10 +74,9 @@ class BaseView(QWidget):
         self.layout_crud.addWidget(self.button_load)
         self.layout_crud.addWidget(self.button_delete)
         self.layout_crud.addWidget(self.button_clean)
-        # self.layout_crud.addWidget(self.button_search)
         self.layout_crud.addSpacerItem(
             QSpacerItem(20, 20, QSizePolicy.Policy.Minimum,
-            QSizePolicy.Policy.Expanding)
+                        QSizePolicy.Policy.Expanding)
         )
 
         self.layout_table.addWidget(self.data_table)
@@ -96,13 +94,13 @@ class BaseView(QWidget):
         self.layout_navigation.addWidget(self.button_last)
         self.layout_navigation.addSpacerItem(
             QSpacerItem(20, 20, QSizePolicy.Policy.Expanding,
-            QSizePolicy.Policy.Minimum)
+                        QSizePolicy.Policy.Minimum)
         )
 
         # Configulamos el layout del pie de formulario
         self.layout_footer.addSpacerItem(
             QSpacerItem(20, 20, QSizePolicy.Policy.Expanding,
-            QSizePolicy.Policy.Minimum)
+                        QSizePolicy.Policy.Minimum)
         )
         self.layout_footer.addWidget(self.button_close)
 
@@ -128,7 +126,7 @@ class BaseView(QWidget):
 
     def create_widgets(self):
         """ Crea los elementos del formulario"""
-        self.layout_main = QVBoxLayout() # Layout principal
+        self.layout_main = QVBoxLayout()  # Layout principal
 
         self.frame_main = QFrame()
         self.frame_main.setMouseTracking(True)
@@ -144,22 +142,22 @@ class BaseView(QWidget):
             }
         """)
 
-        self.layout_title_bar = QHBoxLayout() # Layout barra título
+        self.layout_title_bar = QHBoxLayout()  # Layout barra título
         self.layout_title_bar.setContentsMargins(0, 0, 0, 0)
-        self.layout_table = QHBoxLayout() # Layout del frame_table que contiene
-                                          # la tabla
-        self.layout_data = QHBoxLayout() # Layout de datatable y crud
-        self.frame_table = QFrame() # Frame que contiene el datatable
+        self.layout_table = QHBoxLayout()  # Layout del frame_table que contiene
+        # la tabla
+        self.layout_data = QHBoxLayout()  # Layout de datatable y crud
+        self.frame_table = QFrame()  # Frame que contiene el datatable
         self.frame_table.setLayout(self.layout_table)
         self.frame_table.setMinimumHeight(210)
         self.layout_crud = QVBoxLayout()  # Layout donde se colocan los botones 
-                                          # del CRUD
-        self.layout_form_data = QHBoxLayout() # Layout que contiene el frame con
-                                              # el formulario de datos
+        # del CRUD
+        self.layout_form_data = QHBoxLayout()  # Layout que contiene el frame con
+        # el formulario de datos
         self.layout_navigation = QHBoxLayout()  # Layout de navegación de
-                                                # páginas
+        # páginas
         self.layout_status_bar = QHBoxLayout()  # Barra de estado inferior
-        self.layout_footer = QHBoxLayout() # Layout pie de formulario
+        self.layout_footer = QHBoxLayout()  # Layout pie de formulario
 
         # Controles de la barra de título
         ## Frame de la barra de título
@@ -340,11 +338,11 @@ class BaseView(QWidget):
         ### Boton de filtro
         icon_filter = QIcon()
         icon_filter.addPixmap(QPixmap(":/Images/filter.png"), QIcon.Mode.Normal,
-                       QIcon.State.On)
+                              QIcon.State.On)
         self.button_filter = QPushButton()
         self.button_filter.setObjectName("button_filter")
         self.button_filter.setIcon(icon_filter)
-        self.button_filter.setFixedSize(25,25)
+        self.button_filter.setFixedSize(25, 25)
         self.button_filter.setCursor(Qt.CursorShape.PointingHandCursor)
         self.button_filter.setStyleSheet(
             """
@@ -374,7 +372,7 @@ class BaseView(QWidget):
         ### Botón de buscar
         icon_search = QIcon()
         icon_search.addPixmap(QPixmap(":/Images/search.png"), QIcon.Mode.Normal,
-                       QIcon.State.On)
+                              QIcon.State.On)
         self.button_search = QPushButton()
         self.button_search.setObjectName("button_search")
         self.button_search.setIcon(icon_search)
@@ -396,6 +394,7 @@ class BaseView(QWidget):
     """
     El comportamiento básico de la barra de titulo que hemos creado
     """
+
     def control_bt_minimizar(self):
         """ Minimiza la ventana """
         self.showMinimized()
@@ -415,6 +414,7 @@ class BaseView(QWidget):
     """
     El comportamiento básico de la barra de titulo que hemos creado
     """
+
     def control_bt_minimizar(self):
         """ Minimiza la ventana """
         self.showMinimized()
@@ -448,6 +448,7 @@ class BaseView(QWidget):
     """
     El comportamiento del redimensionado de la ventana
     """
+
     def mousePressEvent(self, event):
         if event.button() == Qt.MouseButton.LeftButton:
             self._resize_direction = self._detect_resize_region(event.pos())
@@ -533,6 +534,7 @@ class BaseView(QWidget):
             new_rect.setHeight(min_height)
 
         self.setGeometry(new_rect)
+
 
 # Entrada a la aplicación
 if __name__ == "__main__":

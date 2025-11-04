@@ -9,7 +9,8 @@ Commentarios:
 import sys
 
 from PyQt6.QtWidgets import QFrame, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, \
-    QPlainTextEdit, QApplication
+    QPlainTextEdit, QApplication, QSpacerItem, QSizePolicy
+
 
 class EstadoProyectoForm(QFrame):
     """
@@ -20,7 +21,7 @@ class EstadoProyectoForm(QFrame):
     def __init__(self):
         super().__init__()
 
-        self.setFixedHeight(150)
+        self.setFixedHeight(200)
 
         self.create_widgets()
         self.build_layout()
@@ -33,6 +34,7 @@ class EstadoProyectoForm(QFrame):
 
         ## Layout primera linea
         self.layout_first_line = QHBoxLayout()
+        self.layout_first_line.setContentsMargins(0, 0, 0, 20)
         ### ID
         self.layout_id = QVBoxLayout()
         ### Tipo filtro
@@ -73,6 +75,10 @@ class EstadoProyectoForm(QFrame):
         ## Montamos la primera linea
         self.layout_first_line.addLayout(self.layout_id)
         self.layout_first_line.addLayout(self.layout_estado_proyecto)
+        self.layout_first_line.addSpacerItem(
+            QSpacerItem(20, 20, QSizePolicy.Policy.Expanding,
+                        QSizePolicy.Policy.Expanding)
+        )
 
         # Segunda linea
         self.layout_observaciones.addWidget(self.label_observaciones)
@@ -83,6 +89,7 @@ class EstadoProyectoForm(QFrame):
         self.layout_form.addLayout(self.layout_observaciones)
 
         self.setLayout(self.layout_form)
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

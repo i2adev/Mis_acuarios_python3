@@ -11,7 +11,7 @@ Commentarios:
 from PyQt6.QtCore import Qt, QEvent, QObject
 from PyQt6.QtWidgets import (QLineEdit, QTextEdit, QPlainTextEdit, QWidget,
                              QTableView, QComboBox, QHeaderView, QMessageBox,
-                             QLabel, QCompleter)
+                             QLabel, QCompleter, QHBoxLayout, QVBoxLayout)
 
 from Model.DAO.base_dao import BaseDAO
 from Model.DAO.paginator import Paginator
@@ -40,7 +40,6 @@ class BaseController(QObject):
         self._mod = mod
 
         self._text_widgets = (QLineEdit, QTextEdit, QPlainTextEdit)
-
 
     """
     ********************************************************************
@@ -100,11 +99,27 @@ class BaseController(QObject):
             # Controles de texto
             if isinstance(widget, self._text_widgets):
                 self._text_normalize(widget, event)
-                return False # Dejamos que el widget maneje también su
-                             # evento.
+                if (isinstance(widget, QLineEdit)
+                        and widget.objectName() == 'date_fin_proyecto'):
+                    if widget.text():
+                        self._show_layout(self._view.frame.layout_motivo_cierre)
+                    else:
+                        self._hide_layout(self._view.frame.layout_motivo_cierre)
+
+                return False  # Dejamos que el widget maneje también su
+                # evento.
             # Combos
             if isinstance(widget, QComboBox):
                 self._combo_out_focus(widget, event)
+
+            # # Editores de fechas personalizadas
+            # if isinstance(widget, NullableDateEdit):
+            #     QMessageBox.information(None, "0000", "PERDIENDO EL FOCO")
+            #     if widget.objectName() == "date_fin":
+            #         if widget.isNull():
+            #             self._hide_layout(self._view.frame.layout_motivo_cierre)
+            #         else:
+            #             self._show_layout(self._view.frame.layout_motivo_cierre)
 
         # Gestiona los eventos de pulsación de teclas en los controles
         # de textp.
@@ -199,7 +214,8 @@ class BaseController(QObject):
 
             combo.addItem(texto, data)
 
-    def _configure_table(self, table: QTableView, columns_hide: list[int] | None = None):
+    def _configure_table(self, table: QTableView,
+                         columns_hide: list[int] | None = None):
         """ Configura l atabla de datos. """
 
         # Selecciona un afila entera
@@ -229,7 +245,8 @@ class BaseController(QObject):
         # Hacer que la columna de descripcion use el espaciorestante
         last_column_ix = table.model().columnCount() - 1
         header = table.horizontalHeader()
-        header.setSectionResizeMode(last_column_ix, QHeaderView.ResizeMode.Stretch)
+        header.setSectionResizeMode(last_column_ix,
+                                    QHeaderView.ResizeMode.Stretch)
 
         # Mostrar puntos suspensivos si el texto no cabe
         table.setTextElideMode(Qt.TextElideMode.ElideRight)
@@ -340,3 +357,26 @@ class BaseController(QObject):
                 f"el patrón '{pattern.upper()}'."
             )
 
+    def _hide_layout(self, layout: QHBoxLayout | QVBoxLayout):
+        """
+        Oculta los controles del layout.
+        :param layout: EL layout a ocultar
+        """
+
+        for i in range(layout.count()):
+            widget = layout.itemAt(i).widget()
+            if widget is not None:
+                widget.hide()
+        layout.setContentsMargins(0, 0, 0, 0)
+
+    def _show_layout(self, layout: QHBoxLayout | QVBoxLayout):
+        """
+        Muestra los controles del layout.
+        :param layout: EL layout a mostrar
+        """
+
+        for i in range(layout.count()):
+            widget = layout.itemAt(i).widget()
+            if widget is not None:
+                widget.show()
+        layout.setContentsMargins(0, 0, 0, 20)

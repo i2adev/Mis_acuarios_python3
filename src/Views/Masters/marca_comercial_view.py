@@ -8,10 +8,10 @@ Commentarios:
 import sys
 
 from PyQt6.QtCore import Qt
-from PyQt6.QtWidgets import QApplication, QWidget
+from PyQt6.QtWidgets import QApplication, QWidget, QSpacerItem, QSizePolicy
 
-from Views.Masters.base_view import BaseView
 from Views.Forms.marca_comercial_form import MarcaComercialForm
+from Views.Masters.base_view import BaseView
 
 
 class MarcaComercialView(BaseView):
@@ -24,11 +24,18 @@ class MarcaComercialView(BaseView):
 
         super().__init__(w_title)
 
-        self.setMinimumSize(1400, 760)
+        # Establecemos los tamaños
+        self.setMinimumSize(1400, 870)
+        self.data_table.setMinimumHeight(200)
 
         # Configuramos el formulario
         self.frame = MarcaComercialForm()
+
         self.layout_form_data.addWidget(self.frame)
+        self.layout_form_data.addSpacerItem(
+            QSpacerItem(20, 20, QSizePolicy.Policy.Expanding,
+                        QSizePolicy.Policy.Minimum)
+        )
         self.set_tab_order()
 
         # Asigna atajos de teclado
@@ -69,6 +76,7 @@ class MarcaComercialView(BaseView):
         self.setTabOrder(
             self.frame.combo_pais, self.frame.text_observaciones
         )
+
 
 # Entrada a la aplicación
 if __name__ == "__main__":

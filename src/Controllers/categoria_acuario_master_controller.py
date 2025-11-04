@@ -9,10 +9,11 @@ from PyQt6.QtWidgets import QMessageBox, QTableView, QWidget, QComboBox
 
 from Controllers.categoria_acuario_controller import CategoriaAcuarioController
 from Model.DAO.categoria_acuario_dao import CategoriaAcuarioDAO
-from Model.Entities.categoria_acuario_entity import CategoriaAcuarioEntity
-from Model.TableModel.categoria_acuario_table_model import CategoriaAcuarioTableModel
-from Views.Masters.categoria_acuario_view import CategoriaAcuarioView
 from Model.DAO.paginator import Paginator
+from Model.Entities.categoria_acuario_entity import CategoriaAcuarioEntity
+from Model.TableModel.categoria_acuario_table_model import \
+    CategoriaAcuarioTableModel
+from Views.Masters.categoria_acuario_view import CategoriaAcuarioView
 from Views.table_menu_contextual import TableMenuContextual
 
 
@@ -39,6 +40,9 @@ class CategoriaAcuarioMasterController(CategoriaAcuarioController):
         # Llenamos la tabla
         self._load_tableview()
         self._configure_table_foot()
+
+        # Oculta el layout del ID
+        self._hide_layout(self._view.frame.layout_id)
 
         # Inicializamos los eventos
         self.init_handlers()
@@ -160,7 +164,8 @@ class CategoriaAcuarioMasterController(CategoriaAcuarioController):
 
         # Configuración de salida
         self._pag.current_page = page
-        self._pag.current_data = self._pag.get_paged_list(self._pag.current_page)
+        self._pag.current_data = self._pag.get_paged_list(
+            self._pag.current_page)
         self._load_tableview()
 
     def show_context_menu(self, position):
@@ -318,7 +323,7 @@ class CategoriaAcuarioMasterController(CategoriaAcuarioController):
         # Seleccionamos la página en la que se encuentra el registro
         self._view.combo_select_page.setCurrentIndex(-1)
         num_reg = next(x.num for x in self._pag.total_data if x.id == ide)
-        num_pag =  self._pag.get_page_number_by_num(num_reg)
+        num_pag = self._pag.get_page_number_by_num(num_reg)
         self._view.combo_select_page.setCurrentIndex(num_pag - 1)
 
         # Selecciona la última fila
@@ -342,7 +347,7 @@ class CategoriaAcuarioMasterController(CategoriaAcuarioController):
             # Comprobamos si al eliminar un registro se la disminuido el número
             # de páginas totales
             if self._pag.total_pages < before_pages:
-                page_index = self._pag.total_pages # ïndice del item a eliminar
+                page_index = self._pag.total_pages  # ïndice del item a eliminar
                 self._view.combo_select_page.removeItem(page_index)
                 if current_page > self._pag.total_pages:
                     current_page -= 1

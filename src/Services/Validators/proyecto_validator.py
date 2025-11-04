@@ -7,7 +7,7 @@ Commentarios:
 
 from PyQt6.QtWidgets import QLineEdit, QComboBox
 
-from CustomControls.nullable_text_edit import NullableDateEdit
+from CustomControls.nullable_date_edit import NullableDateEdit
 from Services.Result.result import Result
 
 
@@ -40,7 +40,7 @@ class ProyectoValidator:
         # Controla la longitud del texto
         if len(widget.text()) > 32:
             return Result.failure("EL CAMPO 'NOMBRE DEL PROYECTO' NO "
-                                "PUEDE CONTENER MAS DE 32 CARACTERES")
+                                  "PUEDE CONTENER MAS DE 32 CARACTERES")
 
         # Validación exitosa
         return Result.success(1)
@@ -68,8 +68,7 @@ class ProyectoValidator:
         # Controla la longitud del texto
         if len(widget.text()) > 64:
             return Result.failure("EL CAMPO 'MOTIVO DE CIERRE' NO "
-                                "PUEDE CONTENER MAS DE 64 CARACTERES")
+                                  "PUEDE CONTENER MAS DE 64 CARACTERES")
 
         # Validación exitosa
         return Result.success(1)
-

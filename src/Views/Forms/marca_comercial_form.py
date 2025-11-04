@@ -23,7 +23,7 @@ class MarcaComercialForm(QFrame):
     def __init__(self):
         super().__init__()
 
-        self.setFixedHeight(275)
+        # self.setFixedHeight(275)
 
         self.create_widgets()
         self.build_layout()
@@ -32,10 +32,14 @@ class MarcaComercialForm(QFrame):
         """ Se encarga de crear los controles del formulario. """
         # Layouts
         ## Layout principal
+        self.layout_main = QHBoxLayout()
+
+        ## Layout del formulario
         self.layout_form = QVBoxLayout()
 
         ## Layout primera linea
         self.layout_first_line = QHBoxLayout()
+        self.layout_first_line.setContentsMargins(0, 0, 0, 20)
         ### ID
         self.layout_id = QVBoxLayout()
         ### Marca comercial
@@ -43,6 +47,7 @@ class MarcaComercialForm(QFrame):
 
         ## Segunda línea
         self.layout_second_line = QHBoxLayout()
+        self.layout_second_line.setContentsMargins(0, 0, 0, 20)
         ### Dirección
         self.layout_direccion = QVBoxLayout()
 
@@ -51,6 +56,7 @@ class MarcaComercialForm(QFrame):
 
         ## Tercera línea
         self.layout_third_line = QHBoxLayout()
+        self.layout_third_line.setContentsMargins(0, 0, 0, 20)
         ### Población
         self.layout_poblacion = QVBoxLayout()
 
@@ -95,6 +101,7 @@ class MarcaComercialForm(QFrame):
         self.edit_provincia.setObjectName("edit_provincia")
         self.text_observaciones = QPlainTextEdit()
         self.text_observaciones.setObjectName("text_descripcion")
+        self.text_observaciones.setMaximumHeight(75)
 
         # Combos
         self.combo_pais = QComboBox()
@@ -104,7 +111,8 @@ class MarcaComercialForm(QFrame):
         # Botones
         self.button_insert_pais = QPushButton("<")
         self.button_insert_pais.setFixedWidth(30)
-        self.button_insert_pais.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.button_insert_pais.setCursor(
+            QCursor(Qt.CursorShape.PointingHandCursor))
 
     def build_layout(self):
         """ Construye el layout del frame. """
@@ -137,11 +145,11 @@ class MarcaComercialForm(QFrame):
 
         ## Monta la segunda línea
         self.layout_second_line.addLayout(self.layout_direccion)
+        self.layout_second_line.addSpacerItem(
+            QSpacerItem(20, 20, QSizePolicy.Policy.Expanding,
+                        QSizePolicy.Policy.Expanding)
+        )
         self.layout_second_line.addLayout(self.layout_cod_postal)
-        # self.layout_second_line.addSpacerItem(
-        #     QSpacerItem(0, 0, QSizePolicy.Policy.Expanding,
-        #                 QSizePolicy.Policy.Minimum)
-        # )
 
         # Tercera línea
         ## Población
@@ -160,28 +168,30 @@ class MarcaComercialForm(QFrame):
 
         ## Monta la tercera línea
         self.layout_third_line.addLayout(self.layout_poblacion)
+        self.layout_third_line.addSpacerItem(
+            QSpacerItem(20, 20, QSizePolicy.Policy.Expanding,
+                        QSizePolicy.Policy.Expanding)
+        )
         self.layout_third_line.addLayout(self.layout_provincia)
+        self.layout_third_line.addSpacerItem(
+            QSpacerItem(20, 20, QSizePolicy.Policy.Expanding,
+                        QSizePolicy.Policy.Expanding)
+        )
         self.layout_third_line.addLayout(self.layout_pais)
-        # self.layout_third_line.addSpacerItem(
-        #     QSpacerItem(0, 0, QSizePolicy.Policy.Expanding,
-        #                 QSizePolicy.Policy.Minimum)
-        # )
 
         # Cuarta linea
         self.layout_observaciones.addWidget(self.label_observaciones)
         self.layout_observaciones.addWidget(self.text_observaciones)
-        # self.layout_observaciones.addSpacerItem(
-        #     QSpacerItem(0, 0, QSizePolicy.Policy.Expanding,
-        #                 QSizePolicy.Policy.Minimum)
-        # )
 
         # Montamos el frame
         self.layout_form.addLayout(self.layout_first_line)
         self.layout_form.addLayout(self.layout_second_line)
         self.layout_form.addLayout(self.layout_third_line)
         self.layout_form.addLayout(self.layout_observaciones)
+        self.layout_main.addLayout(self.layout_form)
 
-        self.setLayout(self.layout_form)
+        self.setLayout(self.layout_main)
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

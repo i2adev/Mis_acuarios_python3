@@ -5,13 +5,13 @@ Commentarios:
     Controlador del cuadro de diálogo de inserción de tipo de filtro.
 """
 
-from PyQt6.QtWidgets import QWidget, QMessageBox, QComboBox, QCompleter
+from PyQt6.QtWidgets import QWidget, QMessageBox, QComboBox
 
 from Controllers.estado_proyecto_controller import EstadoProyectoController
 from Model.DAO.estado_proyecto_dao import EstadoProyectoDAO
-from Views.Dialogs.estado_proyecto_dialog import EstadoProyectoDialog
 from Model.Entities.estado_proyecto_entity import EstadoProyectoEntity
 from Services.Result.result import Result
+from Views.Dialogs.estado_proyecto_dialog import EstadoProyectoDialog
 
 
 class EstadoProyectoDialogController(EstadoProyectoController):
@@ -28,6 +28,9 @@ class EstadoProyectoDialogController(EstadoProyectoController):
 
         # inicializamos la vista y pasamos al constructor padre
         super().__init__(view, dao, mod)
+
+        # Oculta el layout del ID
+        self._hide_layout(self._view.frame.layout_id)
 
         # Inicializamos los eventos
         self.init_handlers()
@@ -62,12 +65,12 @@ class EstadoProyectoDialogController(EstadoProyectoController):
 
         # Configuramos la entidad
         self._tipo_filtro_result = EstadoProyectoEntity(
-            id = res.value,
-            num = None,
-            estado = self._view.frame.edit_estado_proyecto.text(),
-            descripcion = self._view.frame.text_observaciones.toPlainText()
-                          if self._view.frame.text_observaciones.toPlainText()
-                          else ""
+            id=res.value,
+            num=None,
+            estado=self._view.frame.edit_estado_proyecto.text(),
+            descripcion=self._view.frame.text_observaciones.toPlainText()
+            if self._view.frame.text_observaciones.toPlainText()
+            else ""
         )
 
         # Aceptamos el diálogo

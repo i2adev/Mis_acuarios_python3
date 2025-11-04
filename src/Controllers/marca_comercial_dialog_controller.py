@@ -7,12 +7,12 @@ Commentarios:
 
 from PyQt6.QtWidgets import QWidget, QMessageBox, QComboBox
 
-from Services.Result.result import Result
 from Controllers.marca_comercial_controller import MarcaComercialController
 from Model.DAO.marca_comercial_dao import MarcaComercialDAO
-from Views.Dialogs.marca_comercial_dialog import MarcaComercialDialog
-from Model.Entities.marca_comercial_entity import MarcaComercialEntity
 from Model.DAO.pais_dao import PaisDAO
+from Model.Entities.marca_comercial_entity import MarcaComercialEntity
+from Services.Result.result import Result
+from Views.Dialogs.marca_comercial_dialog import MarcaComercialDialog
 
 
 class MarcaComercialDialogController(MarcaComercialController):
@@ -32,6 +32,9 @@ class MarcaComercialDialogController(MarcaComercialController):
 
         # Llenamo los combos
         self._fill_combos()
+
+        # Oculta el layout del ID
+        self._hide_layout(self._view.frame.layout_id)
 
         # Inicializamos los eventos
         self.init_handlers()
@@ -66,17 +69,17 @@ class MarcaComercialDialogController(MarcaComercialController):
 
         # Configuramos la entidad
         self._marca_comercial_result = MarcaComercialEntity(
-            id = res.value,
-            num = None,
-            nombre_marca = self._view.frame.edit_marca.text(),
-            direccion = self._view.frame.edit_direccion.text(),
-            cod_postal = self._view.frame.edit_cod_postal.text(),
-            poblacion = self._view.frame.edit_poblacion.text(),
-            provincia = self._view.frame.edit_provincia.text,
-            id_pais = self._view.frame.combo_pais.currentData(),
-            observaciones = self._view.frame.text_observaciones.toPlainText()
-                          if self._view.frame.text_observaciones.toPlainText()
-                          else ""
+            id=res.value,
+            num=None,
+            nombre_marca=self._view.frame.edit_marca.text(),
+            direccion=self._view.frame.edit_direccion.text(),
+            cod_postal=self._view.frame.edit_cod_postal.text(),
+            poblacion=self._view.frame.edit_poblacion.text(),
+            provincia=self._view.frame.edit_provincia.text,
+            id_pais=self._view.frame.combo_pais.currentData(),
+            observaciones=self._view.frame.text_observaciones.toPlainText()
+            if self._view.frame.text_observaciones.toPlainText()
+            else ""
         )
 
         # Aceptamos el diálogo
@@ -86,7 +89,7 @@ class MarcaComercialDialogController(MarcaComercialController):
         """ Cancela el dialogo. """
 
         self._view.reject()
-        
+
     def _fill_combos(self):
         """ Llena los combos del formulario"""
 
@@ -115,7 +118,7 @@ class MarcaComercialDialogController(MarcaComercialController):
 
         # Deseleccionamos el valor
         self._view.frame.combo_pais.setCurrentIndex(-1)
-        
+
     def show_modal(self) -> Result:
         """ Abre la centava modal. """
 

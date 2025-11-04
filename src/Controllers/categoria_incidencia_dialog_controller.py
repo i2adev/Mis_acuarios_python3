@@ -1,15 +1,18 @@
 ﻿from PyQt6.QtWidgets import QWidget, QMessageBox, QComboBox
 
-from Controllers.categoria_incidencia_controller import CategoriaIncidenciaController
+from Controllers.categoria_incidencia_controller import \
+    CategoriaIncidenciaController
 from Model.DAO.categoria_incidencia_dao import CategoriaIncidenciaDAO
-from Views.Dialogs.categoria_incidencia_dialog import CategoriaIncidenciaDialog
 from Model.Entities.categoria_incidencia_entity import CategoriaIncidenciaEntity
 from Services.Result.result import Result
+from Views.Dialogs.categoria_incidencia_dialog import CategoriaIncidenciaDialog
 
 
 class CategoriaIncidenciaDialogController(CategoriaIncidenciaController):
     """ """
-    def __init__(self, view: CategoriaIncidenciaDialog, dao: CategoriaIncidenciaDAO,
+
+    def __init__(self, view: CategoriaIncidenciaDialog,
+                 dao: CategoriaIncidenciaDAO,
                  mod: CategoriaIncidenciaEntity):
         """
         Constructor base
@@ -20,6 +23,9 @@ class CategoriaIncidenciaDialogController(CategoriaIncidenciaController):
 
         # inicializamos la vista y pasamos al constructor padre
         super().__init__(view, dao, mod)
+
+        # Oculta el layout del ID
+        self._hide_layout(self._view.frame.layout_id)
 
         # Inicializamos los eventos
         self.init_handlers()
@@ -54,13 +60,13 @@ class CategoriaIncidenciaDialogController(CategoriaIncidenciaController):
 
         # Configuramos la entidad
         self._categoria_incidencia_result = CategoriaIncidenciaEntity(
-            id = res.value,
-            num = None,
-            categoria_incidencia = self._view.frame
-                                            .edit_categoria_incidencia.text(),
-            observaciones = self._view.frame.text_descripcion.toPlainText()
-                          if self._view.frame.text_observaciones.toPlainText()
-                          else None
+            id=res.value,
+            num=None,
+            categoria_incidencia=self._view.frame
+            .edit_categoria_incidencia.text(),
+            observaciones=self._view.frame.text_descripcion.toPlainText()
+            if self._view.frame.text_observaciones.toPlainText()
+            else None
         )
 
         # Aceptamos el diálogo

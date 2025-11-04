@@ -13,8 +13,6 @@ from PyQt6.QtWidgets import (
     QHBoxLayout, QApplication, QFrame
 )
 
-import Resources.resources_rc
-
 
 class NullableDateEdit(QWidget):
     """QDateEdit personalizado con calendario integrado y soporte para valor nulo."""
@@ -33,7 +31,8 @@ class NullableDateEdit(QWidget):
 
         # Campo de texto (entrada manual)
         self.edit_date = QLineEdit()
-        regex = QRegularExpression(r"^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\d{4}$|^$")
+        regex = QRegularExpression(
+            r"^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\d{4}$|^$")
         validator = QRegularExpressionValidator(regex)
         self.edit_date.setValidator(validator)
         self.edit_date.textChanged.connect(self._on_text_changed)
@@ -48,8 +47,9 @@ class NullableDateEdit(QWidget):
         # self.button_calendar.setText("📅")
 
         icon_calendar = QIcon()
-        icon_calendar.addPixmap(QPixmap(":/Images/calendario.png"), QIcon.Mode.Normal,
-                        QIcon.State.On)
+        icon_calendar.addPixmap(QPixmap(":/Images/calendario.png"),
+                                QIcon.Mode.Normal,
+                                QIcon.State.On)
         self.button_calendar.setIcon(icon_calendar)
         self.button_calendar.setIconSize(QSize(16, 16))
         self.button_calendar.setCursor(Qt.CursorShape.PointingHandCursor)
@@ -148,7 +148,8 @@ class NullableDateEdit(QWidget):
             init_date = self._current_date if self._current_date.isValid() else QDate.currentDate()
             self.calendar.setSelectedDate(init_date)
 
-            pos = self.mapToGlobal(self.button_calendar.pos() + QPoint(0, self.button_calendar.height()))
+            pos = self.mapToGlobal(self.button_calendar.pos() + QPoint(0,
+                                                                       self.button_calendar.height()))
             self.calendar_popup.move(pos)
             self.calendar_popup.adjustSize()
             self.calendar_popup.show()
@@ -159,6 +160,10 @@ class NullableDateEdit(QWidget):
         self.setDate(date)
         self.calendar_popup.hide()
         self._calendar_visible = False
+        self.edit_date.setFocus()
+        self.edit_date.clearFocus()
+        self.edit_date.setFocus()
+        self.edit_date.focusNextChild()
 
     def _on_text_changed(self, text: str):
         """Cuando cambia el texto del campo."""
@@ -189,6 +194,11 @@ class NullableDateEdit(QWidget):
         self.button_clear.hide()
         if self._has_focus:
             self.edit_date.setPlaceholderText("dd/mm/aaaa")
+        self.edit_date.setFocus()
+
+        # Ocultamos los controles del motivo de cierre
+        self.edit_date.clearFocus()
+
         self.date_changed.emit(QDate())
 
     def setDate(self, date: QDate | None):
@@ -213,7 +223,8 @@ class NullableDateEdit(QWidget):
     def _update_appearance(self):
         """Actualizar el estado visual."""
         if self._current_date.isValid():
-            self.edit_date.setText(self._current_date.toString(self._display_format))
+            self.edit_date.setText(
+                self._current_date.toString(self._display_format))
             self.button_clear.show()
             self.edit_date.setPlaceholderText("")
         else:
@@ -237,6 +248,7 @@ if __name__ == "__main__":
     import sys
     from PyQt6.QtWidgets import QVBoxLayout, QLabel, QPushButton, QDialog
 
+
     class ExampleDialog(QDialog):
         def __init__(self):
             super().__init__()
@@ -249,7 +261,8 @@ if __name__ == "__main__":
 
             self.status_label = QLabel("Fecha: NULA")
             btn_today = QPushButton("Fecha actual")
-            btn_today.clicked.connect(lambda: self.date_edit.setDate(QDate.currentDate()))
+            btn_today.clicked.connect(
+                lambda: self.date_edit.setDate(QDate.currentDate()))
 
             btn_clear = QPushButton("Limpiar")
             btn_clear.clicked.connect(self.date_edit.clear_date)
@@ -262,9 +275,11 @@ if __name__ == "__main__":
 
         def on_date_changed(self, date):
             if date.isValid():
-                self.status_label.setText(f"Fecha: {date.toString('dd/MM/yyyy')}")
+                self.status_label.setText(
+                    f"Fecha: {date.toString('dd/MM/yyyy')}")
             else:
                 self.status_label.setText("Fecha: NULA")
+
 
     app = QApplication(sys.argv)
     dlg = ExampleDialog()

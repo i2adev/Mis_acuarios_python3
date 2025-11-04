@@ -11,6 +11,7 @@ import sys
 from PyQt6.QtWidgets import QFrame, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, \
     QPlainTextEdit, QApplication
 
+
 class MaterialUrnaForm(QFrame):
     """
     Clase que contiene los controles de edición de la entidad material 
@@ -20,7 +21,7 @@ class MaterialUrnaForm(QFrame):
     def __init__(self):
         super().__init__()
 
-        self.setFixedHeight(150)
+        # self.setFixedHeight(150)
 
         self.create_widgets()
         self.build_layout()
@@ -33,6 +34,7 @@ class MaterialUrnaForm(QFrame):
 
         ## Layout primera linea
         self.layout_first_line = QHBoxLayout()
+        self.layout_first_line.setContentsMargins(0, 0, 0, 20)
         ### ID
         self.layout_id = QVBoxLayout()
         ### Material
@@ -57,6 +59,7 @@ class MaterialUrnaForm(QFrame):
         self.edit_material.setObjectName("edit_material")
         self.text_descripcion = QPlainTextEdit()
         self.text_descripcion.setObjectName("text_descripcion")
+        self.text_descripcion.setMaximumHeight(75)
 
     def build_layout(self):
         """ Construye el layout del frame. """
@@ -83,6 +86,7 @@ class MaterialUrnaForm(QFrame):
         self.layout_form.addLayout(self.layout_observaciones)
 
         self.setLayout(self.layout_form)
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

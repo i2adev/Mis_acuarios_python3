@@ -8,7 +8,7 @@ Commentarios:
 import sys
 
 from PyQt6.QtCore import Qt
-from PyQt6.QtWidgets import QApplication, QWidget
+from PyQt6.QtWidgets import QApplication, QWidget, QSpacerItem, QSizePolicy
 
 from Views.Forms.material_urna_form import MaterialUrnaForm
 from Views.Masters.base_view import BaseView
@@ -25,6 +25,10 @@ class MaterialUrnaView(BaseView):
         # Configura el formulario
         self.frame = MaterialUrnaForm()
         self.layout_form_data.addWidget(self.frame)
+        self.layout_form_data.addSpacerItem(
+            QSpacerItem(20, 20, QSizePolicy.Policy.Expanding,
+                        QSizePolicy.Policy.Minimum)
+        )
         self.set_tab_order()
 
     def set_tab_order(self):
@@ -58,4 +62,3 @@ if __name__ == "__main__":
 
     ventana.show()
     sys.exit(app.exec())
-

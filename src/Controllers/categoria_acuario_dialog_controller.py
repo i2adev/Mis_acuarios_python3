@@ -6,18 +6,19 @@ Commentarios:
 """
 from PyQt6.QtWidgets import QWidget, QMessageBox, QComboBox
 
-from Controllers.categoria_acuario_controller import (CategoriaAcuarioController,
+from Controllers.categoria_acuario_controller import (
+    CategoriaAcuarioController,
     CategoriaAcuarioDialog)
 from Model.DAO.categoria_acuario_dao import CategoriaAcuarioDAO
 from Model.Entities.categoria_acuario_entity import CategoriaAcuarioEntity
-from Views.Masters.categoria_acuario_view import CategoriaAcuarioView
 from Services.Result.result import Result
+from Views.Masters.categoria_acuario_view import CategoriaAcuarioView
 
 
 class CategoriaAcuarioDialogController(CategoriaAcuarioController):
     """ Controlador del cuadro de diálogo categoria de acuario. """
 
-    def __init__(self, view: CategoriaAcuarioDialog | CategoriaAcuarioView, 
+    def __init__(self, view: CategoriaAcuarioDialog | CategoriaAcuarioView,
                  dao: CategoriaAcuarioDAO,
                  mod: CategoriaAcuarioEntity):
         """
@@ -29,6 +30,9 @@ class CategoriaAcuarioDialogController(CategoriaAcuarioController):
 
         # inicializamos la vista y pasamos al constructor padre
         super().__init__(view, dao, mod)
+
+        # Oculta el layout del ID
+        self._hide_layout(self._view.frame.layout_id)
 
         # Inicializamos los eventos
         self.init_handlers()
@@ -63,12 +67,12 @@ class CategoriaAcuarioDialogController(CategoriaAcuarioController):
 
         # Configuramos la entidad
         self._categoria_acuario_result = CategoriaAcuarioEntity(
-            id = res.value,
-            num = None,
-            categoria = self._view.frame.edit_categoria_acuario.text(),
-            observaciones = self._view.frame.text_observaciones.toPlainText()
-                          if self._view.frame.text_observaciones.toPlainText()
-                          else None
+            id=res.value,
+            num=None,
+            categoria=self._view.frame.edit_categoria_acuario.text(),
+            observaciones=self._view.frame.text_observaciones.toPlainText()
+            if self._view.frame.text_observaciones.toPlainText()
+            else None
         )
 
         # Aceptamos el diálogo

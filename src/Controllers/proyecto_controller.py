@@ -8,19 +8,19 @@ from PyQt6.QtCore import QDate, QDateTime, QTime
 from PyQt6.QtGui import QAction
 from PyQt6.QtWidgets import QMessageBox, QPushButton
 
+import globals
 from Controllers.base_controller import BaseController
 from Controllers.estado_proyecto_dialog_controller import \
     EstadoProyectoDialogController
+from Model.DAO.estado_proyecto_dao import EstadoProyectoDAO
+from Model.DAO.proyecto_dao import ProyectoDAO
+from Model.Entities.estado_proyecto_entity import EstadoProyectoEntity
+from Model.Entities.proyecto_entity import ProyectoEntity
 from Services.Result.result import Result
 from Services.Validators.proyecto_validator import ProyectoValidator
+from Views.Dialogs.estado_proyecto_dialog import EstadoProyectoDialog
 from Views.Dialogs.proyecto_dialog import ProyectoDialog
 from Views.Masters.proyecto_view import ProyectoView
-from Model.DAO.proyecto_dao import ProyectoDAO
-from Model.Entities.proyecto_entity import ProyectoEntity
-from Model.DAO.estado_proyecto_dao import EstadoProyectoDAO
-import globals
-from Views.Dialogs.estado_proyecto_dialog import EstadoProyectoDialog
-from Model.Entities.estado_proyecto_entity import EstadoProyectoEntity
 
 
 class ProyectoController(BaseController):
@@ -203,7 +203,7 @@ class ProyectoController(BaseController):
         )
 
         if not res.is_success:
-            self._view.frame.date_inicio.setFocus()
+            self._view.frame.date_inicio.edit_date.setFocus()
             return res
 
         # Valida el motivo de cierre del proyecto

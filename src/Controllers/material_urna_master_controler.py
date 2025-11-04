@@ -11,10 +11,10 @@ from PyQt6.QtWidgets import QMessageBox, QTableView, QWidget, QComboBox
 
 from Controllers.material_urna_controller import MaterialUrnaController
 from Model.DAO.material_urna_dao import MaterialUrnaDAO
+from Model.DAO.paginator import Paginator
 from Model.Entities.material_urna_entity import MaterialUrnaEntity
 from Model.TableModel.material_urna_table_model import MaterialUrnaTableModel
 from Views.Masters.material_urna_view import MaterialUrnaView
-from Model.DAO.paginator import Paginator
 from Views.table_menu_contextual import TableMenuContextual
 
 
@@ -37,6 +37,9 @@ class MaterialUrnaMasterController(MaterialUrnaController):
         self._pag = Paginator("VISTA_MATERIALES_URNA", 5)
         self._pag.initialize_paginator()
         self._configure_status_bar(self._pag)
+
+        # Ocultar el layout ID
+        self._hide_layout(self._view.frame.layout_id)
 
         # Llenamos la tabla
         self._load_tableview()
@@ -162,7 +165,8 @@ class MaterialUrnaMasterController(MaterialUrnaController):
 
         # Configuración de salida
         self._pag.current_page = page
-        self._pag.current_data = self._pag.get_paged_list(self._pag.current_page)
+        self._pag.current_data = self._pag.get_paged_list(
+            self._pag.current_page)
         self._load_tableview()
 
     def show_context_menu(self, position):
@@ -321,7 +325,7 @@ class MaterialUrnaMasterController(MaterialUrnaController):
         # Seleccionamos la página en la que se encuentra el registro
         self._view.combo_select_page.setCurrentIndex(-1)
         num_reg = next(x.num for x in self._pag.total_data if x.id == ide)
-        num_pag =  self._pag.get_page_number_by_num(num_reg)
+        num_pag = self._pag.get_page_number_by_num(num_reg)
         self._view.combo_select_page.setCurrentIndex(num_pag - 1)
 
         # Selecciona la última fila
@@ -345,7 +349,7 @@ class MaterialUrnaMasterController(MaterialUrnaController):
             # Comprobamos si al eliminar un registro se la disminuido el número
             # de páginas totales
             if self._pag.total_pages < before_pages:
-                page_index = self._pag.total_pages # ïndice del item a eliminar
+                page_index = self._pag.total_pages  # ïndice del item a eliminar
                 self._view.combo_select_page.removeItem(page_index)
                 if current_page > self._pag.total_pages:
                     current_page -= 1
