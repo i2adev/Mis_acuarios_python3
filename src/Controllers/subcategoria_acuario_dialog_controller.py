@@ -7,17 +7,19 @@ Commentarios:
 
 from PyQt6.QtWidgets import QWidget, QMessageBox, QComboBox
 
-from Services.Result.result import Result
-from Views.Dialogs.subcategoria_Acuario_dialog import SubcategoriaAcuarioDialog
-from Controllers.subcategoria_acuario_controller import SubcategoriaAcuarioController
+from Controllers.subcategoria_acuario_controller import \
+    SubcategoriaAcuarioController
 from Model.DAO.subcategoria_acuario_dao import SubcategoriaAcuarioDAO
 from Model.Entities.subcategoria_acuario_entity import SubcategoriaAcuarioEntity
+from Services.Result.result import Result
+from Views.Dialogs.subcategoria_Acuario_dialog import SubcategoriaAcuarioDialog
 
 
 class SubcategoriaAcuarioDialogController(SubcategoriaAcuarioController):
     """ Controlador del cuadro de diálogo marca comercial. """
 
-    def __init__(self, view: SubcategoriaAcuarioDialog, dao: SubcategoriaAcuarioDAO,
+    def __init__(self, view: SubcategoriaAcuarioDialog,
+                 dao: SubcategoriaAcuarioDAO,
                  mod: SubcategoriaAcuarioEntity, id_sa: int = None):
         """
         Constructor base
@@ -32,6 +34,9 @@ class SubcategoriaAcuarioDialogController(SubcategoriaAcuarioController):
         # Llenamo los combos
         self._fill_combos()
         self._view.frame.combo_categoria_acuario.setCurrentIndex(id_sa)
+
+        # Oculta el layout del ID
+        self._hide_layout(self._view.frame.layout_id)
 
         # Inicializamos los eventos
         self.init_handlers()
@@ -74,13 +79,13 @@ class SubcategoriaAcuarioDialogController(SubcategoriaAcuarioController):
 
         # Configuramos la entidad
         self._subcategoria_acuario_result = SubcategoriaAcuarioEntity(
-            id = res.value,
-            num = None,
-            id_cat = self._view.frame.combo_categoria_acuario.currentData(),
-            subcategoria = self._view.frame.edit_subcategoria_acuario.text(),
-            observaciones = self._view.frame.text_observaciones.toPlainText()
-                          if self._view.frame.text_observaciones.toPlainText()
-                          else ""
+            id=res.value,
+            num=None,
+            id_cat=self._view.frame.combo_categoria_acuario.currentData(),
+            subcategoria=self._view.frame.edit_subcategoria_acuario.text(),
+            observaciones=self._view.frame.text_observaciones.toPlainText()
+            if self._view.frame.text_observaciones.toPlainText()
+            else ""
         )
 
         # Aceptamos el diálogo

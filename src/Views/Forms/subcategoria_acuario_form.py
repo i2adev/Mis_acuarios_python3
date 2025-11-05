@@ -13,6 +13,7 @@ from PyQt6.QtGui import QCursor
 from PyQt6.QtWidgets import QFrame, QLabel, QLineEdit, QPlainTextEdit, \
     QVBoxLayout, QHBoxLayout, QApplication, QComboBox, QPushButton
 
+
 class SubcategoriaAcuarioForm(QFrame):
     """
     Clase que contiene los controles de edición de la entidad tipo de acuario.
@@ -21,7 +22,7 @@ class SubcategoriaAcuarioForm(QFrame):
     def __init__(self):
         super().__init__()
 
-        self.setFixedHeight(150)
+        # self.setFixedHeight(150)
 
         self.create_widgets()
         self.build_layout()
@@ -35,6 +36,7 @@ class SubcategoriaAcuarioForm(QFrame):
 
         ## Layout primera linea
         self.layout_first_line = QHBoxLayout()
+        self.layout_first_line.setContentsMargins(0, 0, 0, 20)
         ### ID
         self.layout_id = QVBoxLayout()
         ### Categoría acuario
@@ -60,9 +62,11 @@ class SubcategoriaAcuarioForm(QFrame):
         self.edit_id.setFixedWidth(50)
         self.edit_id.setEnabled(False)
         self.edit_subcategoria_acuario = QLineEdit()
-        self.edit_subcategoria_acuario.setObjectName("edit_subcategoria_acuario")
+        self.edit_subcategoria_acuario.setObjectName(
+            "edit_subcategoria_acuario")
         self.text_observaciones = QPlainTextEdit()
         self.text_observaciones.setObjectName("text_descripcion")
+        self.text_observaciones.setFixedHeight(75)
 
         # Combos
         self.combo_categoria_acuario = QComboBox()
@@ -121,6 +125,7 @@ class SubcategoriaAcuarioForm(QFrame):
         self.layout_form.addLayout(self.layout_observaciones)
 
         self.setLayout(self.layout_form)
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

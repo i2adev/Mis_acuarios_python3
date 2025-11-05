@@ -8,19 +8,23 @@ Commentarios:
 from PyQt6.QtGui import QIcon, QAction
 from PyQt6.QtWidgets import QMessageBox, QTableView, QWidget, QComboBox
 
+from Controllers.subcategoria_incidencia_controller import \
+    SubcategoriaIncidenciaController
 from Model.DAO.paginator import Paginator
-from Controllers.subcategoria_incidencia_controller import SubcategoriaIncidenciaController
 from Model.DAO.subcategoria_incidencia_dao import SubcategoriaIncidenciaDAO
-from Model.Entities.subcategoria_incidencia_entity import SubcategoriaIncidenciaEntity
-from Model.TableModel.subcategoria_incidencia_table_model import SubcategoriaIncidenciaTableModel
-from Views.Masters.subcategoria_incidencia_view import SubcategoriaIncidenciaView
+from Model.Entities.subcategoria_incidencia_entity import \
+    SubcategoriaIncidenciaEntity
+from Model.TableModel.subcategoria_incidencia_table_model import \
+    SubcategoriaIncidenciaTableModel
+from Views.Masters.subcategoria_incidencia_view import \
+    SubcategoriaIncidenciaView
 from Views.table_menu_contextual import TableMenuContextual
 
 
 class SubcategoriaIncidenciaMasterController(SubcategoriaIncidenciaController):
     """ Controlador del formulario maestro de marca comercial. """
 
-    def __init__(self, view: SubcategoriaIncidenciaView, 
+    def __init__(self, view: SubcategoriaIncidenciaView,
                  dao: SubcategoriaIncidenciaDAO,
                  mod: SubcategoriaIncidenciaEntity):
         """
@@ -44,6 +48,9 @@ class SubcategoriaIncidenciaMasterController(SubcategoriaIncidenciaController):
         # Llenamos la tabla
         self._load_tableview()
         self._configure_table_foot()
+
+        # Oculta el layout del ID
+        self._hide_layout(self._view.frame.layout_id)
 
         # Inicializamos los eventos
         self.init_handlers()
@@ -168,7 +175,8 @@ class SubcategoriaIncidenciaMasterController(SubcategoriaIncidenciaController):
 
         # Configuración de salida
         self._pag.current_page = page
-        self._pag.current_data = self._pag.get_paged_list(self._pag.current_page)
+        self._pag.current_data = self._pag.get_paged_list(
+            self._pag.current_page)
         self._load_tableview()
 
     def show_context_menu(self, position):
@@ -326,7 +334,7 @@ class SubcategoriaIncidenciaMasterController(SubcategoriaIncidenciaController):
         # Seleccionamos la página en la que se encuentra el registro
         self._view.combo_select_page.setCurrentIndex(-1)
         num_reg = next(x.num for x in self._pag.total_data if x.id == ide)
-        num_pag =  self._pag.get_page_number_by_num(num_reg)
+        num_pag = self._pag.get_page_number_by_num(num_reg)
         self._view.combo_select_page.setCurrentIndex(num_pag - 1)
 
         # Selecciona la última fila
@@ -350,7 +358,7 @@ class SubcategoriaIncidenciaMasterController(SubcategoriaIncidenciaController):
             # Comprobamos si al eliminar un registro se la disminuido el número
             # de páginas totales
             if self._pag.total_pages < before_pages:
-                page_index = self._pag.total_pages # ïndice del item a eliminar
+                page_index = self._pag.total_pages  # ïndice del item a eliminar
                 self._view.combo_select_page.removeItem(page_index)
                 if current_page > self._pag.total_pages:
                     current_page -= 1

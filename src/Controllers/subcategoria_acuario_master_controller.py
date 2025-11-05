@@ -8,11 +8,13 @@ Commentarios:
 from PyQt6.QtGui import QIcon, QAction
 from PyQt6.QtWidgets import QMessageBox, QTableView, QWidget, QComboBox
 
+from Controllers.subcategoria_acuario_controller import \
+    SubcategoriaAcuarioController
 from Model.DAO.paginator import Paginator
-from Controllers.subcategoria_acuario_controller import SubcategoriaAcuarioController
 from Model.DAO.subcategoria_acuario_dao import SubcategoriaAcuarioDAO
 from Model.Entities.subcategoria_acuario_entity import SubcategoriaAcuarioEntity
-from Model.TableModel.subcategoria_acuario_table_model import SubcategoriaAcuarioTableModel
+from Model.TableModel.subcategoria_acuario_table_model import \
+    SubcategoriaAcuarioTableModel
 from Views.Masters.subcategoria_acuario_view import SubcategoriaAcuarioView
 from Views.table_menu_contextual import TableMenuContextual
 
@@ -20,7 +22,8 @@ from Views.table_menu_contextual import TableMenuContextual
 class SubcategoriaAcuarioMasterController(SubcategoriaAcuarioController):
     """ Controlador del formulario maestro de marca comercial. """
 
-    def __init__(self, view: SubcategoriaAcuarioView, dao: SubcategoriaAcuarioDAO,
+    def __init__(self, view: SubcategoriaAcuarioView,
+                 dao: SubcategoriaAcuarioDAO,
                  mod: SubcategoriaAcuarioEntity):
         """
         Constructor base
@@ -43,6 +46,9 @@ class SubcategoriaAcuarioMasterController(SubcategoriaAcuarioController):
         # Llenamos la tabla
         self._load_tableview()
         self._configure_table_foot()
+
+        # Oculta el layout del ID
+        self._hide_layout(self._view.frame.layout_id)
 
         # Inicializamos los eventos
         self.init_handlers()
@@ -167,7 +173,8 @@ class SubcategoriaAcuarioMasterController(SubcategoriaAcuarioController):
 
         # Configuración de salida
         self._pag.current_page = page
-        self._pag.current_data = self._pag.get_paged_list(self._pag.current_page)
+        self._pag.current_data = self._pag.get_paged_list(
+            self._pag.current_page)
         self._load_tableview()
 
     def show_context_menu(self, position):
@@ -325,7 +332,7 @@ class SubcategoriaAcuarioMasterController(SubcategoriaAcuarioController):
         # Seleccionamos la página en la que se encuentra el registro
         self._view.combo_select_page.setCurrentIndex(-1)
         num_reg = next(x.num for x in self._pag.total_data if x.id == ide)
-        num_pag =  self._pag.get_page_number_by_num(num_reg)
+        num_pag = self._pag.get_page_number_by_num(num_reg)
         self._view.combo_select_page.setCurrentIndex(num_pag - 1)
 
         # Selecciona la última fila
@@ -349,7 +356,7 @@ class SubcategoriaAcuarioMasterController(SubcategoriaAcuarioController):
             # Comprobamos si al eliminar un registro se la disminuido el número
             # de páginas totales
             if self._pag.total_pages < before_pages:
-                page_index = self._pag.total_pages # ïndice del item a eliminar
+                page_index = self._pag.total_pages  # ïndice del item a eliminar
                 self._view.combo_select_page.removeItem(page_index)
                 if current_page > self._pag.total_pages:
                     current_page -= 1

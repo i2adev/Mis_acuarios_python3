@@ -22,7 +22,7 @@ class TipoAcuarioForm(QFrame):
     def __init__(self):
         super().__init__()
 
-        self.setFixedHeight(150)
+        # self.setFixedHeight(150)
 
         self.create_widgets()
         self.build_layout()
@@ -35,6 +35,7 @@ class TipoAcuarioForm(QFrame):
 
         ## Layout primera linea
         self.layout_first_line = QHBoxLayout()
+        self.layout_first_line.setContentsMargins(0, 0, 0, 20)
         ### ID
         self.layout_id = QVBoxLayout()
         ### Tipo acuario
@@ -63,6 +64,7 @@ class TipoAcuarioForm(QFrame):
         self.edit_id.setEnabled(False)
         self.text_observaciones = QPlainTextEdit()
         self.text_observaciones.setObjectName("text_descripcion")
+        self.text_observaciones.setFixedHeight(75)
 
         # Combos
         self.combo_categoria_acuario = QComboBox()
@@ -123,6 +125,7 @@ class TipoAcuarioForm(QFrame):
         self.layout_form.addLayout(self.layout_observaciones)
 
         self.setLayout(self.layout_form)
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

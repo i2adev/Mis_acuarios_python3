@@ -8,17 +8,21 @@ Commentarios:
 
 from PyQt6.QtWidgets import QWidget, QMessageBox, QComboBox
 
-from Services.Result.result import Result
-from Controllers.subcategoria_incidencia_controller import SubcategoriaIncidenciaController
+from Controllers.subcategoria_incidencia_controller import \
+    SubcategoriaIncidenciaController
 from Model.DAO.subcategoria_incidencia_dao import SubcategoriaIncidenciaDAO
-from Views.Dialogs.subcategoria_incidencia_dialog import SubcategoriaIncidenciaDialog
-from Model.Entities.subcategoria_incidencia_entity import SubcategoriaIncidenciaEntity
+from Model.Entities.subcategoria_incidencia_entity import \
+    SubcategoriaIncidenciaEntity
+from Services.Result.result import Result
+from Views.Dialogs.subcategoria_incidencia_dialog import \
+    SubcategoriaIncidenciaDialog
 
 
 class SubcategoriaIncidenciaDialogController(SubcategoriaIncidenciaController):
     """ Controlador del cuadro de diálogo marca comercial. """
 
-    def __init__(self, view: SubcategoriaIncidenciaDialog, dao: SubcategoriaIncidenciaDAO,
+    def __init__(self, view: SubcategoriaIncidenciaDialog,
+                 dao: SubcategoriaIncidenciaDAO,
                  mod: SubcategoriaIncidenciaEntity):
         """
         Constructor base
@@ -33,6 +37,9 @@ class SubcategoriaIncidenciaDialogController(SubcategoriaIncidenciaController):
 
         # Llenamo los combos
         self._fill_combos()
+
+        # Oculta el layout del ID
+        self._hide_layout(self._view.frame.layout_id)
 
         # Inicializamos los eventos
         self.init_handlers()
@@ -69,13 +76,13 @@ class SubcategoriaIncidenciaDialogController(SubcategoriaIncidenciaController):
 
         # Configuramos la entidad
         self._subcategoria_incidencia_result = SubcategoriaIncidenciaEntity(
-            id = res.value,
-            num = None,
-            id_categoria = self._view.frame.combo_categoria_incidencia.currentData(),
-            subcategoria = self._view.frame.edit_subcategoria_incidencia.text(),
-            observaciones = self._view.frame.text_descripcion.toPlainText()
-                          if self._view.frame.text_descripcion.toPlainText()
-                          else None
+            id=res.value,
+            num=None,
+            id_categoria=self._view.frame.combo_categoria_incidencia.currentData(),
+            subcategoria=self._view.frame.edit_subcategoria_incidencia.text(),
+            observaciones=self._view.frame.text_descripcion.toPlainText()
+            if self._view.frame.text_descripcion.toPlainText()
+            else None
         )
 
         # Aceptamos el diálogo

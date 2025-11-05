@@ -38,16 +38,20 @@ class UrnaForm(QFrame):
 
         ## Primera línea
         self.layout_first_line = QHBoxLayout()
+        self.layout_first_line.setContentsMargins(0, 0, 0, 20)
         ### ID
         self.layout_id = QVBoxLayout()
         ## Marca
         self.layout_marca = QVBoxLayout()
+        self.layout_marca.setContentsMargins(0, 0, 0, 0)
         self.layout_combo_marca = QHBoxLayout()
+        self.layout_combo_marca.setContentsMargins(0, 0, 0, 0)
         ## Modelo
         self.layout_modelo = QVBoxLayout()
 
         ## Segunda línea
         self.layout_second_line = QHBoxLayout()
+        self.layout_second_line.setContentsMargins(0, 0, 0, 20)
         ### Ancho
         self.layout_ancho = QVBoxLayout()
         ### Profundo
@@ -57,6 +61,7 @@ class UrnaForm(QFrame):
 
         ## Tercera línea
         self.layout_third_line = QHBoxLayout()
+        self.layout_third_line.setContentsMargins(0, 0, 0, 20)
         ### Grosor del cristal
         self.layout_grosor = QVBoxLayout()
         ### Volumen del tanque
@@ -105,6 +110,7 @@ class UrnaForm(QFrame):
         self.edit_volumen.setValidator(QIntValidator())
         self.text_descripcion = QPlainTextEdit()
         self.text_descripcion.setObjectName("text_descripcion")
+        self.text_descripcion.setFixedHeight(75)
 
         # Combos
         self.combo_marca = QComboBox()
@@ -151,6 +157,10 @@ class UrnaForm(QFrame):
         ## Montamos la primera linea
         self.layout_first_line.addLayout(self.layout_id)
         self.layout_first_line.addLayout(self.layout_marca)
+        # self.layout_first_line.addSpacerItem(
+        #     QSpacerItem(30, 20, QSizePolicy.Policy.Expanding,
+        #                 QSizePolicy.Policy.Fixed)
+        # )
         self.layout_first_line.addLayout(self.layout_modelo)
 
         # Segunda línea
@@ -168,7 +178,15 @@ class UrnaForm(QFrame):
 
         ## Montamos la segunda línea
         self.layout_second_line.addLayout(self.layout_ancho)
+        # self.layout_second_line.addSpacerItem(
+        #     QSpacerItem(50, 20, QSizePolicy.Policy.Expanding,
+        #                 QSizePolicy.Policy.Fixed)
+        # )
         self.layout_second_line.addLayout(self.layout_profundo)
+        # self.layout_second_line.addSpacerItem(
+        #     QSpacerItem(50, 20, QSizePolicy.Policy.Expanding,
+        #                 QSizePolicy.Policy.Fixed)
+        # )
         self.layout_second_line.addLayout(self.layout_alto)
 
         # Tercera línea
@@ -188,7 +206,15 @@ class UrnaForm(QFrame):
 
         ## Montamos la tercera línea
         self.layout_third_line.addLayout(self.layout_grosor)
+        # self.layout_third_line.addSpacerItem(
+        #     QSpacerItem(50, 20, QSizePolicy.Policy.Expanding,
+        #                 QSizePolicy.Policy.Fixed)
+        # )
         self.layout_third_line.addLayout(self.layout_volumen)
+        # self.layout_third_line.addSpacerItem(
+        #     QSpacerItem(50, 20, QSizePolicy.Policy.Expanding,
+        #                 QSizePolicy.Policy.Fixed)
+        # )
         self.layout_third_line.addLayout(self.layout_material)
 
         # Cuarta línea
@@ -204,6 +230,7 @@ class UrnaForm(QFrame):
         self.layout_main.addLayout(self.layout_form)
 
         self.setLayout(self.layout_main)
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

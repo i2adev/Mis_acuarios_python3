@@ -41,6 +41,29 @@ FECHA		DESCRIPCIÓN
                 -   SE AUMENTA EL ESPACIO ENTRE LAS FILAS DEL FORMULARIO.   DONE
                 -   SE OCULTA EL LAYOUT DEL ID.                             DONE
 
+            -   EN EL FORMULARIO DE SUBCATEGORÍA DE ACUARIO:
+                -   SE AUMENTA EL ESPACIO ENTRE LAS FILAS DEL FORMULARIO.   DONE
+                -   SE OCULTA EL LAYOUT DEL ID.                             DONE
+
+            -   EN EL FORMULARIO DE SUBCATEGORÍA DE INCIDENCIA:
+                -   SE AUMENTA EL ESPACIO ENTRE LAS FILAS DEL FORMULARIO.   DONE
+                -   SE OCULTA EL LAYOUT DEL ID.                             DONE
+
+            -   EN EL FORMULARIO DE TIPO DE ACUARIO:
+                -   SE AUMENTA EL ESPACIO ENTRE LAS FILAS DEL FORMULARIO.   DONE
+                -   SE OCULTA EL LAYOUT DEL ID.                             DONE
+
+            -   EN EL FORMULARIO DE TIPO DE ACUARIO:
+                -   SE AUMENTA EL ESPACIO ENTRE LAS FILAS DEL FORMULARIO.   DONE
+                -   SE OCULTA EL LAYOUT DEL ID.                             DONE
+
+            -   EN EL FORMULARIO DE URNA:
+                -   SE AUMENTA EL ESPACIO ENTRE LAS FILAS DEL FORMULARIO.   DONE
+                -   SE OCULTA EL LAYOUT DEL ID.                             DONE
+
+            -   EN EL FORMULARIO DE USUARIO:
+                -   SE AUMENTA EL ESPACIO ENTRE LAS FILAS DEL FORMULARIO.   TODO
+
 30/10/2025  TESTS ÑADE LA LÓGICA DE ACUARIO:
      ↓      -   SE CREA LA ENTIDAD.                                         DONE
             -   SE CREA LA VISTA EN LA BASE DE DATOS.                       DONE

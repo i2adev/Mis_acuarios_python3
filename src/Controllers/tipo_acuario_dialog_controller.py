@@ -7,11 +7,11 @@ Commentarios:
 
 from PyQt6.QtWidgets import QWidget, QMessageBox, QComboBox
 
-from Services.Result.result import Result
 from Controllers.tipo_acuario_controller import TipoAcuarioController
 from Model.DAO.tipo_acuario_dao import TipoAcuarioDAO
-from Views.Dialogs.tipo_acuario_dialog import TipoAcuarioDialog
 from Model.Entities.tipo_acuario_entity import TipoAcuarioEntity
+from Services.Result.result import Result
+from Views.Dialogs.tipo_acuario_dialog import TipoAcuarioDialog
 
 
 class TipoAcuarioDialogController(TipoAcuarioController):
@@ -31,6 +31,9 @@ class TipoAcuarioDialogController(TipoAcuarioController):
 
         # Llenamo los combos
         self._fill_combos()
+
+        # Oculta el layout del ID
+        self._hide_layout(self._view.frame.layout_id)
 
         # Inicializamos los eventos
         self.init_handlers()
@@ -76,14 +79,14 @@ class TipoAcuarioDialogController(TipoAcuarioController):
 
         # Configuramos la entidad
         self._tipo_acuario_result = TipoAcuarioEntity(
-            id = res.value,
-            num = None,
-            id_cat_acuario = self._view.frame.combo_categoria_acuario.currentData(),
-            id_subcat_acuario = self._view.frame
-                    .combo_subcategoria_acuario.currentData(),
-            observaciones = self._view.frame.text_descripcion.toPlainText()
-                          if self._view.frame.text_descripcion.toPlainText()
-                          else ""
+            id=res.value,
+            num=None,
+            id_cat_acuario=self._view.frame.combo_categoria_acuario.currentData(),
+            id_subcat_acuario=self._view.frame
+            .combo_subcategoria_acuario.currentData(),
+            observaciones=self._view.frame.text_descripcion.toPlainText()
+            if self._view.frame.text_descripcion.toPlainText()
+            else ""
         )
 
         # Aceptamos el diálogo

@@ -8,19 +8,19 @@ Commentarios:
 from PyQt6.QtGui import QIcon, QAction
 from PyQt6.QtWidgets import QMessageBox, QTableView, QWidget, QComboBox
 
-from Model.DAO.paginator import Paginator
-from Views.table_menu_contextual import TableMenuContextual
 from Controllers.urna_controller import UrnaController
+from Model.DAO.paginator import Paginator
 from Model.DAO.urna_dao import UrnaDAO
 from Model.Entities.urna_entity import UrnaEntity
 from Model.TableModel.urna_table_model import UrnaTableModel
 from Views.Masters.urna_view import UrnaView
+from Views.table_menu_contextual import TableMenuContextual
 
 
 class UrnaMasterController(UrnaController):
     """ Controlador del formulario maestro de marca comercial. """
 
-    def __init__(self, view: UrnaView, 
+    def __init__(self, view: UrnaView,
                  dao: UrnaDAO,
                  mod: UrnaEntity):
         """
@@ -44,6 +44,9 @@ class UrnaMasterController(UrnaController):
         # Llenamos la tabla
         self._load_tableview()
         self._configure_table_foot()
+
+        # Oculta el layout del ID
+        self._hide_layout(self._view.frame.layout_id)
 
         # Inicializamos los eventos
         self.init_handlers()
@@ -171,7 +174,8 @@ class UrnaMasterController(UrnaController):
 
         # Configuración de salida
         self._pag.current_page = page
-        self._pag.current_data = self._pag.get_paged_list(self._pag.current_page)
+        self._pag.current_data = self._pag.get_paged_list(
+            self._pag.current_page)
         self._load_tableview()
 
     def show_context_menu(self, position):
@@ -329,7 +333,7 @@ class UrnaMasterController(UrnaController):
         # Seleccionamos la página en la que se encuentra el registro
         self._view.combo_select_page.setCurrentIndex(-1)
         num_reg = next(x.num for x in self._pag.total_data if x.id == ide)
-        num_pag =  self._pag.get_page_number_by_num(num_reg)
+        num_pag = self._pag.get_page_number_by_num(num_reg)
         self._view.combo_select_page.setCurrentIndex(num_pag - 1)
 
         # Selecciona la última fila
@@ -353,7 +357,7 @@ class UrnaMasterController(UrnaController):
             # Comprobamos si al eliminar un registro se la disminuido el número
             # de páginas totales
             if self._pag.total_pages < before_pages:
-                page_index = self._pag.total_pages # ïndice del item a eliminar
+                page_index = self._pag.total_pages  # ïndice del item a eliminar
                 self._view.combo_select_page.removeItem(page_index)
                 if current_page > self._pag.total_pages:
                     current_page -= 1

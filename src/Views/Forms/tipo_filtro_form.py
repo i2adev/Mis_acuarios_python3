@@ -9,7 +9,8 @@ Commentarios:
 import sys
 
 from PyQt6.QtWidgets import QFrame, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, \
-    QPlainTextEdit, QApplication
+    QPlainTextEdit, QApplication, QSpacerItem, QSizePolicy
+
 
 class TipoFiltroForm(QFrame):
     """
@@ -20,7 +21,7 @@ class TipoFiltroForm(QFrame):
     def __init__(self):
         super().__init__()
 
-        self.setFixedHeight(150)
+        # self.setFixedHeight(150)
 
         self.create_widgets()
         self.build_layout()
@@ -33,6 +34,7 @@ class TipoFiltroForm(QFrame):
 
         ## Layout primera linea
         self.layout_first_line = QHBoxLayout()
+        self.layout_first_line.setContentsMargins(0, 0, 0, 20)
         ### ID
         self.layout_id = QVBoxLayout()
         ### Tipo filtro
@@ -57,6 +59,7 @@ class TipoFiltroForm(QFrame):
         self.edit_tipo_filtro.setObjectName("edit_tipo_filtro")
         self.text_observaciones = QPlainTextEdit()
         self.text_observaciones.setObjectName("text_descripcion")
+        self.text_observaciones.setFixedHeight(75)
 
     def build_layout(self):
         """ Construye el layout del frame. """
@@ -73,6 +76,10 @@ class TipoFiltroForm(QFrame):
         ## Montamos la primera linea
         self.layout_first_line.addLayout(self.layout_id)
         self.layout_first_line.addLayout(self.layout_tipo_filtro)
+        self.layout_first_line.addSpacerItem(
+            QSpacerItem(100, 20, QSizePolicy.Policy.Expanding,
+                        QSizePolicy.Policy.Fixed)
+        )
 
         # Segunda linea
         self.layout_observaciones.addWidget(self.label_observaciones)
@@ -83,6 +90,7 @@ class TipoFiltroForm(QFrame):
         self.layout_form.addLayout(self.layout_observaciones)
 
         self.setLayout(self.layout_form)
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

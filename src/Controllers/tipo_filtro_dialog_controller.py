@@ -5,7 +5,7 @@ Commentarios:
     Controlador del cuadro de diálogo de inserción de tipo de filtro.
 """
 
-from PyQt6.QtWidgets import QWidget, QMessageBox, QComboBox, QCompleter
+from PyQt6.QtWidgets import QWidget, QMessageBox, QComboBox
 
 from Model.DAO.tipo_filtro_dao import TipoFiltroDAO
 from Model.Entities.tipo_filtro_entity import TipoFiltroEntity
@@ -28,6 +28,9 @@ class TipoFiltroDialogoController(TipoFiltroController):
 
         # inicializamos la vista y pasamos al constructor padre
         super().__init__(view, dao, mod)
+
+        # Oculta el layout del ID
+        self._hide_layout(self._view.frame.layout_id)
 
         # Inicializamos los eventos
         self.init_handlers()
@@ -62,12 +65,12 @@ class TipoFiltroDialogoController(TipoFiltroController):
 
         # Configuramos la entidad
         self._tipo_filtro_result = TipoFiltroEntity(
-            id = res.value,
-            num = None,
-            tipo_filtro = self._view.frame.edit_tipo_filtro.text(),
-            observaciones = self._view.frame.text_observaciones.toPlainText()
-                          if self._view.frame.text_observaciones.toPlainText()
-                          else None
+            id=res.value,
+            num=None,
+            tipo_filtro=self._view.frame.edit_tipo_filtro.text(),
+            observaciones=self._view.frame.text_observaciones.toPlainText()
+            if self._view.frame.text_observaciones.toPlainText()
+            else None
         )
 
         # Aceptamos el diálogo

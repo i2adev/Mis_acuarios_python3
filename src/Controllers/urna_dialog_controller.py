@@ -7,11 +7,11 @@ Commentarios:
 
 from PyQt6.QtWidgets import QWidget, QMessageBox, QComboBox
 
-from Services.Result.result import Result
 from Controllers.urna_controller import UrnaController
 from Model.DAO.urna_dao import UrnaDAO
-from Views.Dialogs.urna_dialog import UrnaDialog
 from Model.Entities.urna_entity import UrnaEntity
+from Services.Result.result import Result
+from Views.Dialogs.urna_dialog import UrnaDialog
 
 
 class UrnaDialogController(UrnaController):
@@ -31,6 +31,9 @@ class UrnaDialogController(UrnaController):
 
         # Llenamo los combos
         self._fill_combos()
+
+        # Oculta el layout del ID
+        self._hide_layout(self._view.frame.layout_id)
 
         # Inicializamos los eventos
         self.init_handlers()
@@ -73,19 +76,19 @@ class UrnaDialogController(UrnaController):
 
         # Configuramos la entidad
         self._urna_result = UrnaEntity(
-            id = res.value,
-            num = None,
-            id_marca = self._view.frame.combo_marca.currentData(),
-            modelo = self._view.frame.edit_modelo.text(),
-            anchura = self._view.frame.edit_ancho.text(),
-            profundidad = self._view.frame.edit_profundo.text(),
-            altura = self._view.frame.edit_alto.text(),
-            grosor_cristal = self._view.frame.edit_grosor.tect(),
-            volumen_tanque = self._view.frame.edit_volumen.text(),
-            id_material = self._view.frame.combo_material.currentData(),
-            descripcion = self._view.frame.text_descripcion.toPlainText()
-                          if self._view.frame.text_descripcion.toPlainText()
-                          else ""
+            id=res.value,
+            num=None,
+            id_marca=self._view.frame.combo_marca.currentData(),
+            modelo=self._view.frame.edit_modelo.text(),
+            anchura=self._view.frame.edit_ancho.text(),
+            profundidad=self._view.frame.edit_profundo.text(),
+            altura=self._view.frame.edit_alto.text(),
+            grosor_cristal=self._view.frame.edit_grosor.tect(),
+            volumen_tanque=self._view.frame.edit_volumen.text(),
+            id_material=self._view.frame.combo_material.currentData(),
+            descripcion=self._view.frame.text_descripcion.toPlainText()
+            if self._view.frame.text_descripcion.toPlainText()
+            else ""
         )
 
         # Aceptamos el diálogo

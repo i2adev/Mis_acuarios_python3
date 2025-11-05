@@ -8,7 +8,7 @@ Commentarios:
 import sys
 
 from PyQt6.QtWidgets import QFrame, QVBoxLayout, QApplication, \
-    QLabel, QLineEdit, QHBoxLayout
+    QLabel, QLineEdit, QHBoxLayout, QSpacerItem, QSizePolicy
 
 
 class UsuarioFOrm(QFrame):
@@ -66,8 +66,16 @@ class UsuarioFOrm(QFrame):
         # Monta el frame de información personal
         self.layout_personal.addWidget(self.label_nombre)
         self.layout_personal.addWidget(self.edit_nombre)
+        self.layout_personal.addSpacerItem(
+            QSpacerItem(0, 20, QSizePolicy.Policy.Fixed,
+                        QSizePolicy.Policy.Fixed)
+        )
         self.layout_personal.addWidget(self.label_apellido_1)
         self.layout_personal.addWidget(self.edit_apellido_1)
+        self.layout_personal.addSpacerItem(
+            QSpacerItem(0, 20, QSizePolicy.Policy.Fixed,
+                        QSizePolicy.Policy.Fixed)
+        )
         self.layout_personal.addWidget(self.label_apellido_2)
         self.layout_personal.addWidget(self.edit_apellido_2)
         self.frame_personal.setLayout(self.layout_personal)
@@ -75,8 +83,16 @@ class UsuarioFOrm(QFrame):
         # Monta el frame de cuenta
         self.layout_cuenta.addWidget(self.label_nick)
         self.layout_cuenta.addWidget(self.edit_nick)
+        self.layout_cuenta.addSpacerItem(
+            QSpacerItem(0, 20, QSizePolicy.Policy.Fixed,
+                        QSizePolicy.Policy.Fixed)
+        )
         self.layout_cuenta.addWidget(self.label_password)
         self.layout_cuenta.addWidget(self.edit_password)
+        self.layout_cuenta.addSpacerItem(
+            QSpacerItem(0, 20, QSizePolicy.Policy.Fixed,
+                        QSizePolicy.Policy.Fixed)
+        )
         self.layout_cuenta.addWidget(self.label_password_2)
         self.layout_cuenta.addWidget(self.edit_password_2)
         self.frame_cuenta.setLayout(self.layout_cuenta)
@@ -86,6 +102,7 @@ class UsuarioFOrm(QFrame):
         self.layout_main.addWidget(self.frame_cuenta)
 
         self.setLayout(self.layout_main)
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
