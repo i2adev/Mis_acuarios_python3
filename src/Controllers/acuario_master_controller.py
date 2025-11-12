@@ -49,7 +49,6 @@ class AcuarioMasterController(AcuarioController):
 
         # Ocultamos los layouts
         self._hide_layout(self._view.frame.layout_id)
-        self._hide_layout(self._view.frame.layout_id_proyecto)
         self._hide_layout(self._view.frame.layout_color)
 
         # Inicializamos los eventos

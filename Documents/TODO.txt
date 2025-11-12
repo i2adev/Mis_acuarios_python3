@@ -1,6 +1,23 @@
 ﻿================================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
+12/11/2025  TESTEO DE LA LÓGICA DE ACUARIO:
+            -   APERTURA DE FORMULARIO DE ACUARIOS.                         DONE
+            -   INSERCIÓN DE RESGISTRO.                                     DONE
+
+            REFACTOR:
+            -   SE CONVIERTE EL TEXTBOX DEL PROYECTO A COMBOBOX PARA PODER
+                SELECCIONAR UN POROYECTO AL QUE AÑADIR EL ACUARIO.          DONE
+            -   SE MODIFICA EL VALIDADOR PARA AÑADIR VALIDACIÓN DEL COMBO DE
+                PROYECTO.                                                   DONE
+
+            BUG FIXES:
+            -   SE CORRIGE EL ERROR DE LA CARGA DE LAS FECHAS EN EL MAESTRO DE
+                ACUARIOS.                                                   DONE
+            -   SE CORRIGE LA VALIDACIÓN DE ACUARIOS.                       DONE
+            -   SE CORRIGE LA CONFIGURACIÓN DE LA ENTIDAD ACUARIO EN EL
+                CONTROLADOR.                                                DONE
+
 03/11/2025  OTRAS MEJORAS:
      ↓      -   EN EL DIÁLOGO Y MAESTRO DE PROYECTO:
 05/11/2025  -   CUANDO NO VALIDA LA FECHA DE INICIO, SE SELECCIONA EL CAMPO.
@@ -66,7 +83,7 @@ FECHA		DESCRIPCIÓN
 
 30/10/2025  TESTS ÑADE LA LÓGICA DE ACUARIO:
      ↓      -   SE CREA LA ENTIDAD.                                         DONE
-            -   SE CREA LA VISTA EN LA BASE DE DATOS.                       DONE
+12/11/2025  -   SE CREA LA VISTA EN LA BASE DE DATOS.                       DONE
             -   SE CREA EL DAO.                                             DONE
             -   SE CREA EL FORMULARIO.                                      DONE
             -   SE CREA EL CUADRO DE DIÁLOGO.                               DONE
@@ -83,7 +100,7 @@ FECHA		DESCRIPCIÓN
                 -   CONTROLADOR DEL CUADRO DE DIÁLOGO.                      DONE
                 -   CONTROLADOR DEL FORMULARIO MAESTRO.                     DONE
 
-            -   INTEGRAR EN LA VISTA PRINCIPAL.                             TODO
+            -   INTEGRAR EN LA VISTA PRINCIPAL.                             DONE
 
             REFACTORIZACIÓN:
             -   SE AÑADE EL CAMPO ID_COLOR A LA TABLA ACUARIO DEBASE DE DATOS.

@@ -1,5 +1,7 @@
 ﻿CHANGELOG:
 ================================================================================
+0.15.1  TESTEO BÁSICO DE LA APLICACIÓN.
+
 0.15.0  SE AÑADE LA LÓGICA DE ACUARIO.
 
 0.14.2b SE MODIFICAN LOS FORMULARIOS MAESTROS (CONTINUACIÓN):

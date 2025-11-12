@@ -35,7 +35,6 @@ class AcuarioDialogController(AcuarioController):
 
         # Ocultamos los layouts
         self._hide_layout(self._view.frame.layout_id)
-        self._hide_layout(self._view.frame.layout_id_proyecto)
         self._hide_layout(self._view.frame.layout_color)
 
         # Inicializamos los eventos
@@ -77,7 +76,7 @@ class AcuarioDialogController(AcuarioController):
         # Configuramos la entidad
         self._proyecto_result = AcuarioEntity(
             id=res.value,
-            id_proyecto=self._view.frame.edit_id_proyecto.text(),
+            id_proyecto=self._view.frame.combo_proyecto.text(),
             num=None,
             cod_color=self._view.frame.edit_cod_color.text(),
             nombre=self._view.frame.edit_nombre_acuarfio.text(),

@@ -96,16 +96,13 @@ class AcuarioForm(QFrame):
         self.edit_id.setFixedWidth(50)
         self.edit_id.setEnabled(False)
         self.edit_id.setObjectName("edit_id")
-        self.edit_id_proyecto = QLineEdit()
-        self.edit_id_proyecto.setObjectName("edit_id_proyecto")
-        self.edit_id_proyecto.setFixedWidth(50)
-        self.edit_id_proyecto.setEnabled(False)
         self.edit_cod_color = QLineEdit()
         self.edit_cod_color.setObjectName("edit_cod_color")
         self.edit_cod_color.setFixedWidth(50)
         self.edit_cod_color.setEnabled(False)
         self.edit_nombre_acuario = QLineEdit()
         self.edit_nombre_acuario.setObjectName("edit_nombre_acuario")
+        self.edit_nombre_acuario.setMinimumWidth(250)
         self.edit_vol_neto = QLineEdit()
         self.edit_vol_neto.setObjectName("edit_vol_neto")
         self.edit_vol_neto.setValidator(QIntValidator())
@@ -118,6 +115,9 @@ class AcuarioForm(QFrame):
         self.text_descripcion.setFixedHeight(75)
 
         # Combos
+        self.combo_proyecto = QComboBox()
+        self.combo_proyecto.setObjectName("combo_proyecto")
+        self.combo_proyecto.setMinimumWidth(250)
         self.combo_urna = QComboBox()
         self.combo_urna.setMinimumWidth(250)
         self.combo_urna.setObjectName("combo_urna")
@@ -162,7 +162,7 @@ class AcuarioForm(QFrame):
 
         ## ID del proyecto
         self.layout_id_proyecto.addWidget(self.label_proyecto)
-        self.layout_id_proyecto.addWidget(self.edit_id_proyecto)
+        self.layout_id_proyecto.addWidget(self.combo_proyecto)
 
         ## ID de color
         self.layout_color.addWidget(self.label_color)

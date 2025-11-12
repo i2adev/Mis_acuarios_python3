@@ -8,11 +8,13 @@ from PyQt6.QtCore import QDate, QDateTime, QTime
 from PyQt6.QtGui import QAction
 from PyQt6.QtWidgets import QMessageBox, QPushButton
 
+import globals
 from Controllers.base_controller import BaseController
 from Controllers.tipo_acuario_dialog_controller import \
     TipoAcuarioDialogController
 from Controllers.urna_dialog_controller import UrnaDialogController
 from Model.DAO.acuario_dao import AcuarioDAO
+from Model.DAO.proyecto_dao import ProyectoDAO
 from Model.DAO.tipo_acuario_dao import TipoAcuarioDAO
 from Model.DAO.urna_dao import UrnaDAO
 from Model.Entities.acuario_entity import AcuarioEntity
@@ -60,22 +62,19 @@ class AcuarioController(BaseController):
         else:
             ent.id = None
 
-        if self._view.frame.edit_id_proyecto.text():
-            ent.id_proyecto = int(self._view.frame.edit_id_proyecto.text())
-        else:
-            ent.id_proyecto = None
+        ent.id_proyecto = int(self._view.frame.combo_proyecto.currentData())
 
         if self._view.frame.edit_cod_color.text():
             ent.cod_color = self._view.frame.edit_cod_color.text()
         else:
             ent.cod_color = None
 
-        ent.nombre = self._view.frame.edit_nombre.text()
+        ent.nombre = self._view.frame.edit_nombre_acuario.text()
         ent.id_urna = int(self._view.frame.combo_urna.currentData())
         ent.id_tipo = int(self._view.frame.combo_tipo_acuario.currentData())
 
-        if self._view.frame.edit_vol_neto.ttext():
-            ent.volumen_neto = self._view.frame.edit_vol_neto.ttext()
+        if self._view.frame.edit_vol_neto.text():
+            ent.volumen_neto = self._view.frame.edit_vol_neto.text()
         else:
             ent.volumen_neto = None
 
@@ -117,7 +116,7 @@ class AcuarioController(BaseController):
         else:
             ent.motivo_desmontaje = None
 
-        if self._view.frame.text_descripcion.text():
+        if self._view.frame.text_descripcion.toPlainText():
             ent.descripcion = self._view.frame.text_descripcion.toPlainText()
         else:
             ent.descripcion = None
@@ -224,6 +223,15 @@ class AcuarioController(BaseController):
     def _validate_view(self) -> Result:
         """ Valida el formulario. """
 
+        # Valida el proyecto
+        res = AcuarioValidator.validate_proyecto(
+            self._view.frame.combo_proyecto
+        )
+
+        if not res.is_success:
+            self._view.frame.combo_proyecto.setFocus()
+            return res
+
         # Valida el nombre del acuario
         res = AcuarioValidator.validate_nombre(
             self._view.frame.edit_nombre_acuario
@@ -253,15 +261,15 @@ class AcuarioController(BaseController):
 
         # Valida el volumen neto
         res = AcuarioValidator.validate_vol_neto(
-            self._view.frame.edit_nombre_acuario
+            self._view.frame.edit_vol_neto
         )
 
         if not res.is_success:
-            self._view.frame.edit_nombre_acuario.setFocus()
+            self._view.frame.edit_vol_neto.setFocus()
             return res
 
         # Valida la fecha de montaje
-        res = AcuarioValidator.validate_tipo_acuario(
+        res = AcuarioValidator.validate_fecha_montaje(
             self._view.frame.fecha_montaje
         )
 
@@ -323,6 +331,34 @@ class AcuarioController(BaseController):
 
         self._fill_combo_urna()
         self._fill_combo_tipo_acuario()
+        self._fill_combo_proyecto()
+
+    def _fill_combo_proyecto(self):
+        """ Llena el combo de los proyectos. """
+
+        # Vaciamos el combo
+        self._view.frame.combo_proyecto.clear()
+
+        # Obtenemos los datos
+        dao = ProyectoDAO()
+        lista = dao.get_list_combo_by_user(globals.CURRENT_USER.id)
+
+        if not lista.is_success:
+            return Result.failure(
+                "NO SE HAN PODIDO OBTENER LAS 'URNAS'."
+            )
+
+        # Llenamos el combo
+        for ent in lista.value:
+            self._view.frame.combo_proyecto.addItem(
+                ent.nombre, ent.id
+            )
+
+        # Establecemos el autocompletado
+        self._set_autocomplete(self._view.frame.combo_proyecto)
+
+        # Deseleccionamos el valor
+        self._view.frame.combo_proyecto.setCurrentIndex(-1)
 
     def _fill_combo_urna(self):
         """ Llena el combo de la urna. """
@@ -466,7 +502,7 @@ class AcuarioController(BaseController):
         self._view.frame.edit_id.setText(
             str(id_ent) if id_ent is not None else ""
         )
-        self._view.frame.edit_id_proyecto.setText(
+        self._view.frame.combo_proyecto.setText(
             str(id_proyecto) if id_proyecto is not None else ""
         )
         self._view.frame.edit_cod_color.setText(

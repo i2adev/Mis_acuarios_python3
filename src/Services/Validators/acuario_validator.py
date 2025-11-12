@@ -15,6 +15,19 @@ class AcuarioValidator:
     """ Clase validadora del formulario de acuario. """
 
     @staticmethod
+    def validate_proyecto(widget: QComboBox):
+        """ Válida el proyecto. """
+
+        # Sí el combo está vacío
+        if not widget.currentData():
+            return Result.failure(
+                "EL CAMPO 'PROYECTO' NO PUEDE ESTAR VACÍO"
+            )
+
+        # Validación exitosa
+        return Result.success(1)
+
+    @staticmethod
     def validate_nombre(widget: QLineEdit):
         """ Válida el nombre del acuario. """
 
