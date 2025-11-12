@@ -9,19 +9,21 @@ from PyQt6.QtWidgets import QMessageBox
 
 from Model.DAO.base_dao import BaseDAO
 from Model.DAO.database import DBManager
+from Model.Entities.acuario_entity import AcuarioEntity
 from Model.Entities.base_entity import BaseEntity
-from Model.Entities.material_urna_entity import MaterialUrnaEntity
-from Model.Entities.search_commands import SearchCmd
-from Model.Entities.urna_entity import UrnaEntity
 from Model.Entities.categoria_acuario_entity import CategoriaAcuarioEntity
 from Model.Entities.categoria_incidencia_entity import CategoriaIncidenciaEntity
+from Model.Entities.estado_proyecto_entity import EstadoProyectoEntity
 from Model.Entities.marca_comercial_entity import MarcaComercialEntity
+from Model.Entities.material_urna_entity import MaterialUrnaEntity
+from Model.Entities.proyecto_entity import ProyectoEntity
+from Model.Entities.search_commands import SearchCmd
 from Model.Entities.subcategoria_acuario_entity import SubcategoriaAcuarioEntity
-from Model.Entities.subcategoria_incidencia_entity import SubcategoriaIncidenciaEntity
+from Model.Entities.subcategoria_incidencia_entity import \
+    SubcategoriaIncidenciaEntity
 from Model.Entities.tipo_acuario_entity import TipoAcuarioEntity
 from Model.Entities.tipo_filtro_entity import TipoFiltroEntity
-from Model.Entities.estado_proyecto_entity import EstadoProyectoEntity
-from Model.Entities.proyecto_entity import ProyectoEntity
+from Model.Entities.urna_entity import UrnaEntity
 
 
 class Paginator:
@@ -31,29 +33,30 @@ class Paginator:
                  id_parent: int = None):
         """ Constructor de la clase. """
 
-        self._id = id_parent                # Id, por sí hay que obtener
-                                            # un listado dependiente de
-                                            # otro.
-        self._db = DBManager()              # Base de datos
-        self._status = "UNFILTERED"         # Estado del paginador:
-                                            #   UNFILTERED
-                                            #   FILTERED
-        self._procedure = procedure         # Procedimiento.
-        self._records_page = records_page   # Registros por página.
-        self._total_data = None             # Lista total de elementos.
-        self._current_data = None           # Lista de los datos de la
-                                            # página actual.
-        self._records = None                # Registros totales.
-        self._total_pages = None            # Número de páginas totales.
-        self._current_page = None           # Número de página actual.
-        self._start = None                  # Numero inicial de registro.
-        self._end = None                    # Número final de registro.
-        self._page_index = None             # Ïndice de página.
+        self._id = id_parent  # Id, por sí hay que obtener
+        # un listado dependiente de
+        # otro.
+        self._db = DBManager()  # Base de datos
+        self._status = "UNFILTERED"  # Estado del paginador:
+        #   UNFILTERED
+        #   FILTERED
+        self._procedure = procedure  # Procedimiento.
+        self._records_page = records_page  # Registros por página.
+        self._total_data = None  # Lista total de elementos.
+        self._current_data = None  # Lista de los datos de la
+        # página actual.
+        self._records = None  # Registros totales.
+        self._total_pages = None  # Número de páginas totales.
+        self._current_page = None  # Número de página actual.
+        self._start = None  # Numero inicial de registro.
+        self._end = None  # Número final de registro.
+        self._page_index = None  # Ïndice de página.
 
     """ ****************************************************************
         * GETTERS Y SETTER DE LAS PROPIEDADES.                         *
         ****************************************************************
     """
+
     # Id de la entidad dependiente
     @property
     def id(self) -> int:
@@ -268,18 +271,18 @@ class Paginator:
         """
 
         # Comprueba que el número de página este dentro del rango
-        if page < 1: # or page > self.total_pages:
+        if page < 1:  # or page > self.total_pages:
             page = 1
 
         if page > self.total_pages:
-             page = self.total_pages
+            page = self.total_pages
 
         # Inicializamos las variables
         self.current_page = page
-        self.page_index = page -1
+        self.page_index = page - 1
         self.start = (self.current_page - 1) * self.records_page + 1
         self.end = self.current_page * self.records_page
-        paged_list = self.total_data[self.start - 1 : self.end]
+        paged_list = self.total_data[self.start - 1: self.end]
 
         return paged_list
 
@@ -360,7 +363,8 @@ class Paginator:
         # Configura el paginador
         self.configure_paginator(data_list, page)
 
-    def configure_paginator(self, data_list: list[BaseEntity], page: int)->None:
+    def configure_paginator(self, data_list: list[BaseEntity],
+                            page: int) -> None:
         """
         Configura el paginador.
         :param data_list: La lista de los datos
@@ -381,41 +385,41 @@ class Paginator:
         # Configuramos la lista total
         if self.procedure == "VISTA_TIPOS_FILTRO":
             data_list = [TipoFiltroEntity(
-                    id = f["ID"],
-                    num = f["NUM"],
-                    tipo_filtro = f["TIPO"],
-                    observaciones = f["OBSERVACIONES"]
-                )
+                id=f["ID"],
+                num=f["NUM"],
+                tipo_filtro=f["TIPO"],
+                observaciones=f["OBSERVACIONES"]
+            )
                 for f in rows
             ]
         elif self.procedure == "VISTA_TIPOS_ACUARIO":
             data_list = [TipoAcuarioEntity(
-                    id=f["ID"],
-                    num=f["NUM"],
-                    id_cat_acuario=f["CATEGORIA"],
-                    id_subcat_acuario=f["SUBCATEGORIA"],
-                    observaciones=f["OBSERVACIONES"]
-                )
+                id=f["ID"],
+                num=f["NUM"],
+                id_cat_acuario=f["CATEGORIA"],
+                id_subcat_acuario=f["SUBCATEGORIA"],
+                observaciones=f["OBSERVACIONES"]
+            )
                 for f in rows
             ]
 
         elif self.procedure == "VISTA_CATEGORIAS_ACUARIO":
             data_list = [CategoriaAcuarioEntity(
-                    id=f["ID"],
-                    num=f["NUM"],
-                    categoria=f["CATEGORIA"],
-                    observaciones=f["OBSERVACIONES"]
-                )
+                id=f["ID"],
+                num=f["NUM"],
+                categoria=f["CATEGORIA"],
+                observaciones=f["OBSERVACIONES"]
+            )
                 for f in rows
             ]
         elif self.procedure == "VISTA_SUBCATEGORIAS_ACUARIO":
             data_list = [SubcategoriaAcuarioEntity(
-                    id=f["ID"],
-                    num=f["NUM"],
-                    id_cat=f["CATEGORIA"],
-                    subcategoria=f["SUBCATEGORIA"],
-                    observaciones=f["OBSERVACIONES"]
-                )
+                id=f["ID"],
+                num=f["NUM"],
+                id_cat=f["CATEGORIA"],
+                subcategoria=f["SUBCATEGORIA"],
+                observaciones=f["OBSERVACIONES"]
+            )
                 for f in rows
             ]
         elif self.procedure == "VISTA_CATEGORIAS_INCIDENCIA":
@@ -424,65 +428,65 @@ class Paginator:
                 num=f["NUM"],
                 categoria_incidencia=f["CATEGORIA"],
                 observaciones=f["OBSERVACIONES"]
-                )
+            )
                 for f in rows
             ]
         elif self.procedure == "VISTA_SUBCATEGORIAS_INCIDENCIA":
             data_list = [SubcategoriaIncidenciaEntity(
-                    id=f["ID"],
-                    num=f["NUM"],
-                    id_categoria=f["CATEGORIA"],
-                    subcategoria=f["SUBCATEGORIA"],
-                    observaciones=f["OBSERVACIONES"]
-                )
+                id=f["ID"],
+                num=f["NUM"],
+                id_categoria=f["CATEGORIA"],
+                subcategoria=f["SUBCATEGORIA"],
+                observaciones=f["OBSERVACIONES"]
+            )
                 for f in rows
             ]
         elif self.procedure == "VISTA_MARCAS_COMERCIALES":
             data_list = [MarcaComercialEntity(
-                    id=f["ID"],
-                    num=f["NUM"],
-                    nombre_marca=f["MARCA"],
-                    direccion=f["DIRECCION"],
-                    cod_postal=f["CODIGO_POSTAL"],
-                    poblacion=f["POBLACION"],
-                    provincia=f["PROVINCIA"],
-                    id_pais=f["PAIS"],
-                    observaciones=f["OBSERVACIONES"]
-                )
+                id=f["ID"],
+                num=f["NUM"],
+                nombre_marca=f["MARCA"],
+                direccion=f["DIRECCION"],
+                cod_postal=f["CODIGO_POSTAL"],
+                poblacion=f["POBLACION"],
+                provincia=f["PROVINCIA"],
+                id_pais=f["PAIS"],
+                observaciones=f["OBSERVACIONES"]
+            )
                 for f in rows
             ]
         elif self.procedure == "VISTA_URNAS":
             data_list = [UrnaEntity(
-                    id=f["ID"],
-                    num=f["NUM"],
-                    id_marca=f["MARCA"],
-                    modelo=f["MODELO"],
-                    anchura=f["ANCHURA"],
-                    profundidad=f["PROFUNDIDAD"],
-                    altura=f["ALTURA"],
-                    grosor_cristal=f["GROSOR"],
-                    volumen_tanque=f["VOLUMEN_BRUTO"],
-                    id_material=f["MATERIAL"],
-                    descripcion=f["DESCRIPCION"]
-                )
+                id=f["ID"],
+                num=f["NUM"],
+                id_marca=f["MARCA"],
+                modelo=f["MODELO"],
+                anchura=f["ANCHURA"],
+                profundidad=f["PROFUNDIDAD"],
+                altura=f["ALTURA"],
+                grosor_cristal=f["GROSOR"],
+                volumen_tanque=f["VOLUMEN_BRUTO"],
+                id_material=f["MATERIAL"],
+                descripcion=f["DESCRIPCION"]
+            )
                 for f in rows
             ]
         elif self.procedure == "VISTA_MATERIALES_URNA":
             data_list = [MaterialUrnaEntity(
-                    id=f["ID"],
-                    num=f["NUM"],
-                    material=f["MATERIAL"],
-                    descripcion=f["DESCRIPCION"]
-                )
+                id=f["ID"],
+                num=f["NUM"],
+                material=f["MATERIAL"],
+                descripcion=f["DESCRIPCION"]
+            )
                 for f in rows
             ]
         elif self.procedure == "VISTA_ESTADOS_PROYECTO":
             data_list = [EstadoProyectoEntity(
-                    id=f["ID"],
-                    num=f["NUM"],
-                    estado=f["ESTADO"],
-                    descripcion=f["DESCRIPCION"]
-                )
+                id=f["ID"],
+                num=f["NUM"],
+                estado=f["ESTADO"],
+                descripcion=f["DESCRIPCION"]
+            )
                 for f in rows
             ]
         elif self.procedure == "VISTA_PROYECTOS":
@@ -496,7 +500,27 @@ class Paginator:
                 fecha_fin=f["FECHA_FIN"],
                 motivo_cierre=f["MOTIVO_CIERRE"],
                 descripcion=f["DESCRIPCION"]
-                )
+            )
+                for f in rows
+            ]
+        elif self.procedure == "VISTA_ACUARIOS":
+            data_list = [AcuarioEntity(
+                id=f["ID"],
+                id_proyecto=f["ID_PROYECTO"],
+                num=f["NUM"],
+                cod_color=f["COLOR"],
+                nombre=f["NOMBRE"],
+                id_urna=f["URNA"],
+                id_tipo=f["TIPO"],
+                volumen_neto=f["VOLUMEN_B_N"],
+                fecha_montaje=f["FECHA_MONTAJE"],
+                fecha_inicio_ciclado=f["FECHA_INICIO_CICLADO"],
+                fecha_fin_ciclado=f["FECHA_FIN_CICLADO"],
+                ubicacion_acuario=f["UBICACION"],
+                fecha_desmontaje=f["FECHA_DESMONTAJE"],
+                motivo_desmontaje=f["MOTIVO_DESMONTAJE"],
+                descripcion=f["DESCRIPCION"],
+            )
                 for f in rows
             ]
 
@@ -547,7 +571,8 @@ class Paginator:
             return SearchCmd.SEARCH_ESTADO_PROYECTO
         elif self.procedure == "VISTA_PROYECTOS":
             return SearchCmd.SEARCH_PROYECTO
-
+        elif self.procedure == "VISTA_ACUARIOS":
+            return SearchCmd.SEARCH_ACUARIO
 
     def __str__(self):
         """ Muestra el objeto en forma de texto. """

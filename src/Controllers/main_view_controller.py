@@ -4,58 +4,67 @@ Fecha:      23/06/2025
 Commentarios:
     Módulo que contiene la clase controladora de la vista principal.
 """
-
+import globals
+from Controllers.acuario_master_controller import AcuarioMasterController
 from Controllers.base_controller import BaseController
-from Controllers.proyecto_controller import ProyectoController
+from Controllers.categoria_acuario_master_controller import \
+    CategoriaAcuarioMasterController
+from Controllers.categoria_incidencia_master_controller import \
+    CategoriaIncidenciaMasterController
+from Controllers.estado_proyecto_master_controller import \
+    EstadoProyectoMasterController
+from Controllers.marca_comercial_master_controller import \
+    MarcaComercialMasterController
+from Controllers.material_urna_master_controler import \
+    MaterialUrnaMasterController
 from Controllers.proyecto_master_controller import ProyectoMasterController
+from Controllers.subcategoria_acuario_master_controller import \
+    SubcategoriaAcuarioMasterController
+from Controllers.subcategoria_incidencia_master_controller import \
+    SubcategoriaIncidenciaMasterController
+from Controllers.tipo_acuario_master_controller import \
+    TipoAcuarioMasterController
+from Controllers.tipo_filtro_master_controller import TipoFiltroMasterController
+from Controllers.urna_master_controller import UrnaMasterController
+from Model.DAO.acuario_dao import AcuarioDAO
 from Model.DAO.categoria_acuario_dao import CategoriaAcuarioDAO
 from Model.DAO.categoria_incidencia_dao import CategoriaIncidenciaDAO
+from Model.DAO.estado_proyecto_dao import EstadoProyectoDAO
 from Model.DAO.marca_comercial_dao import MarcaComercialDAO
 from Model.DAO.material_urna_dao import MaterialUrnaDAO
+from Model.DAO.proyecto_dao import ProyectoDAO
 from Model.DAO.subcategoria_acuario_dao import SubcategoriaAcuarioDAO
 from Model.DAO.subcategoria_incidencia_dao import SubcategoriaIncidenciaDAO
 from Model.DAO.tipo_acuario_dao import TipoAcuarioDAO
 from Model.DAO.tipo_filtro_dao import TipoFiltroDAO
 from Model.DAO.urna_dao import UrnaDAO
+from Model.Entities.acuario_entity import AcuarioEntity
 from Model.Entities.categoria_acuario_entity import CategoriaAcuarioEntity
 from Model.Entities.categoria_incidencia_entity import CategoriaIncidenciaEntity
+from Model.Entities.estado_proyecto_entity import EstadoProyectoEntity
 from Model.Entities.marca_comercial_entity import MarcaComercialEntity
 from Model.Entities.material_urna_entity import MaterialUrnaEntity
+from Model.Entities.proyecto_entity import ProyectoEntity
 from Model.Entities.subcategoria_acuario_entity import SubcategoriaAcuarioEntity
-from Model.Entities.subcategoria_incidencia_entity import SubcategoriaIncidenciaEntity
+from Model.Entities.subcategoria_incidencia_entity import \
+    SubcategoriaIncidenciaEntity
 from Model.Entities.tipo_acuario_entity import TipoAcuarioEntity
 from Model.Entities.tipo_filtro_entity import TipoFiltroEntity
 from Model.Entities.urna_entity import UrnaEntity
+from Views.Masters.acuario_view import AcuarioView
 from Views.Masters.categoria_acuario_view import CategoriaAcuarioView
 from Views.Masters.categoria_incidencia_view import CategoriaIncidenciaView
-from Views.Masters.material_urna_view import MaterialUrnaView
-from Views.Masters.urna_view import UrnaView
-from Views.main_view import MainView
+from Views.Masters.estado_proyecto_view import EstadoProyectoView
 from Views.Masters.marca_comercial_view import MarcaComercialView
+from Views.Masters.material_urna_view import MaterialUrnaView
+from Views.Masters.proyecto_view import ProyectoView
 from Views.Masters.subcategoria_acuario_view import SubcategoriaAcuarioView
-from Views.Masters.subcategoria_incidencia_view import SubcategoriaIncidenciaView
+from Views.Masters.subcategoria_incidencia_view import \
+    SubcategoriaIncidenciaView
 from Views.Masters.tipo_acuario_view import TipoAcuarioView
 from Views.Masters.tipo_filtro_view import TipoFiltroView
-import globals
-from Controllers.categoria_acuario_master_controller import CategoriaAcuarioMasterController
-from Controllers.categoria_incidencia_master_controller import \
-    CategoriaIncidenciaMasterController
-from Model.DAO.estado_proyecto_dao import EstadoProyectoDAO
-from Model.Entities.estado_proyecto_entity import EstadoProyectoEntity
-from Controllers.estado_proyecto_master_controller import EstadoProyectoMasterController
-from Views.Masters.estado_proyecto_view import EstadoProyectoView
-from Controllers.marca_comercial_master_controller import MarcaComercialMasterController
-from Controllers.material_urna_master_controler import MaterialUrnaMasterController
-from Controllers.subcategoria_acuario_master_controller import \
-    SubcategoriaAcuarioMasterController
-from Controllers.subcategoria_incidencia_master_controller import \
-    SubcategoriaIncidenciaMasterController
-from Controllers.tipo_acuario_master_controller import TipoAcuarioMasterController
-from Controllers.tipo_filtro_master_controller import TipoFiltroMasterController
-from Controllers.urna_master_controller import UrnaMasterController
-from Model.DAO.proyecto_dao import ProyectoDAO
-from Model.Entities.proyecto_entity import ProyectoEntity
-from Views.Masters.proyecto_view import ProyectoView
+from Views.Masters.urna_view import UrnaView
+from Views.main_view import MainView
 
 
 class MainViewController(BaseController):
@@ -123,6 +132,22 @@ class MainViewController(BaseController):
             self.estado_proyecto_clicked
         )
 
+        self._view.button_maestro_acuario.clicked.connect(
+            self.acuario_clicked
+        )
+
+    def acuario_clicked(self):
+        """
+        Cuando se presiona en el acuario.
+        Acción: Abre el formulario de acuario.
+        """
+
+        view = AcuarioView("MAESTRO DE ACUARIOS")
+        dao = AcuarioDAO()
+        mod = AcuarioEntity()
+
+        ctrl = AcuarioMasterController(view, dao, mod)
+        ctrl.show()
 
     def proyecto_clicked(self):
         """
@@ -259,7 +284,6 @@ class MainViewController(BaseController):
         ctrl = SubcategoriaIncidenciaMasterController(view, dao, mod)
         ctrl.show()
 
-
     def marca_comercial_clicked(self):
         """
         Cuando se presiona en el maestro de marcas comerciales.
@@ -278,5 +302,4 @@ class MainViewController(BaseController):
     def show(self):
         """ Abre la vista """
         self._view.show()
-        #self._view.showMaximized()
-
+        # self._view.showMaximized()

@@ -2,7 +2,7 @@
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      08/08/2025
 Commentarios:
-    Módulo que contiene el formulario maestro de acuario.
+    Módulo que contiene el formulario maestro de urna.
 """
 
 import sys
@@ -10,8 +10,8 @@ import sys
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QApplication, QWidget
 
-from Views.Forms.urna_form import UrnaForm
 from Views.Forms.image_form import ImageForm
+from Views.Forms.urna_form import UrnaForm
 from Views.Masters.base_view import BaseView
 
 
@@ -65,6 +65,7 @@ class UrnaView(BaseView):
         self.setTabOrder(self.frame.edit_grosor, self.frame.edit_volumen)
         self.setTabOrder(self.frame.edit_volumen, self.frame.combo_material)
         self.setTabOrder(self.frame.combo_material, self.frame.text_descripcion)
+
 
 # Entrada a la aplicación
 if __name__ == "__main__":

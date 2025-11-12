@@ -5,7 +5,7 @@ Commentarios:
     Módulo para la validación del formulario de acuario.
 """
 
-from PyQt6.QtWidgets import QWidget, QLineEdit, QComboBox, QMessageBox
+from PyQt6.QtWidgets import QLineEdit, QComboBox
 
 from Services.Result.result import Result
 
@@ -20,7 +20,7 @@ class UrnaValidator:
         # Sí el combo está vacío
         if not widget.currentData():
             return Result.failure(
-                "EL CAMPO 'MARCA DE ACUARIO' NO PUEDE ESTAR VACÍO"
+                "EL CAMPO 'MARCA DE URNA' NO PUEDE ESTAR VACÍO"
             )
 
         # Validación exitosa
@@ -33,13 +33,13 @@ class UrnaValidator:
         # Sí el texto está vacío
         if not widget.text():
             return Result.failure(
-                "EL CAMPO 'MODELO DE ACUARIO' NO PUEDE ESTAR VACÍO"
+                "EL CAMPO 'MODELO DE URNA' NO PUEDE ESTAR VACÍO"
             )
 
         # Controla la longitud del texto
         if len(widget.text()) > 32:
-            return Result.failure("EL CAMPO 'MODELO DE ACUARIO' NO "
-                                "PUEDE CONTENER MAS DE 32 CARACTERES")
+            return Result.failure("EL CAMPO 'MODELO DE URNA' NO "
+                                  "PUEDE CONTENER MAS DE 32 CARACTERES")
 
         # Validación exitosa
         return Result.success(1)
@@ -128,7 +128,7 @@ class UrnaValidator:
         n = int(widget.text())
 
         if (n < 10) or (n > 2_000):
-            return Result.failure("EL VOLUMEN de la urna DEBE SER "
+            return Result.failure("EL VOLUMEN DE LA URNA DEBE SER "
                                   "DE 10 A 2.000 LITROS.")
 
         # Validación exitosa

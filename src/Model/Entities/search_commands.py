@@ -6,6 +6,7 @@ Commentarios:
     de búsqueda.
 """
 
+
 class SearchCmd:
     """ Clase que contiene los commandos de búsqueda. """
 
@@ -237,4 +238,47 @@ class SearchCmd:
         ON     P.ID_ESTADO = E.ID_ESTADO
     )
     WHERE ID_USUARIO = :id_dep AND FIELD LIKE '%' || :pattern || '%';
+    """
+
+    SEARCH_ACUARIO = """
+    SELECT ID, ID_PROYECTO, NUM, COLOR, URNA, TIPO, VOLUMEN_B_N, FECHA_MONTAJE,
+       FECHA_INICIO_CICLADO, FECHA_FIN_CICLADO, UBICACION, FECHA_DESMONTAJE,
+       MOTIVO_DESMONTAJE, DESCRIPCION
+    FROM
+    (
+        SELECT A.ID_ACUARIO AS ID,
+               A.ID_PROYECTO AS ID_PROYECTO,
+               ROW_NUMBER() OVER (ORDER BY A.NOMBRE) AS NUM,
+               A.COD_COLOR AS COLOR,
+               A.NOMBRE AS NOMBRE,
+               MC.MARCA || ' ' || U.MODELO AS URNA,
+               CA.CATEGORIA_ACUARIO || ' > ' || SA.SUBCATEGORIA_ACUARIO AS TIPO,
+               U.VOLUMEN_TANQUE || '/' || A.VOLUMEN_NETO AS VOLUMEN_B_N,
+               A.FECHA_MONTAJE AS FECHA_MONTAJE,
+               A.FECHA_INICIO_CICLADO AS FECHA_INICIO_CICLADO,
+               A.FECHA_FIN_CICLADO AS FECHA_FIN_CICLADO,
+               A.UBICACION_ACUARIO AS UBICACION,
+               A.FECHA_DESMONTAJE AS FECHA_DESMONTAJE,
+               A.MOTIVO_DESMONTAJE AS MOTIVO_DESMONTAJE,
+               A.DESCRIPCION AS DESCRIPCION,
+               UPPER(IFNULL(A.NOMBRE, '') || IFNULL(MC.MARCA, '' || IFNULL(U.MODELO, '') 
+               || IFNULL(CA.CATEGORIA_ACUARIO, '') || IFNULL(SA.SUBCATEGORIA_ACUARIO, '') 
+               || IFNULL(U.VOLUMEN_TANQUE, '') || IFNULL(A.VOLUMEN_NETO, '') 
+               || IFNULL(A.UBICACION_ACUARIO, '') || IFNULL(A.MOTIVO_DESMONTAJE, '') 
+               || IFNULL(A.DESCRIPCION, '') || IFNULL(A.FECHA_MONTAJE, '') 
+               || IFNULL(A.FECHA_INICIO_CICLADO, '') || IFNULL(FECHA_FIN_CICLADO, '') 
+               || IFNULL(FECHA_DESMONTAJE, ''))) AS FIELD
+          FROM ACUARIOS A
+               LEFT JOIN
+               URNAS U ON A.ID_URNA = U.ID_URNA
+               LEFT JOIN
+               MARCAS_COMERCIALES MC ON U.ID_MARCA = MC.ID_MARCA
+               LEFT JOIN
+               TIPOS_ACUARIO TA ON A.ID_TIPO = TA.ID_TIPO
+               LEFT JOIN
+               CATEGORIAS_ACUARIO CA ON TA.ID_CATEGORIA_ACUARIO = CA.ID_CATEGORIA_ACUARIO
+               LEFT JOIN
+               SUBCATEGORIAS_ACUARIO SA ON TA.ID_SUBCATEGORIA_ACUARIO = SA.ID_SUBCATEGORIA_ACUARIO
+    )
+    WHERE ID_PROYECTO = :id_dep AND FIELD LIKE '%' || :pattern || '%';
     """

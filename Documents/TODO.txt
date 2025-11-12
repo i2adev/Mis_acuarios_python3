@@ -3,7 +3,7 @@ FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
 03/11/2025  OTRAS MEJORAS:
      ↓      -   EN EL DIÁLOGO Y MAESTRO DE PROYECTO:
-                -   CUANDO NO VALIDA LA FECHA DE INICIO, SE SELECCIONA EL CAMPO.
+05/11/2025  -   CUANDO NO VALIDA LA FECHA DE INICIO, SE SELECCIONA EL CAMPO.
                                                                             DONE
                 -   SE MODIFICA EL TAMAÑO FIJO DEL FORMULARIO PARA ADAPTAR EL
                     TAMAÑO DEL CAMPO DESCRIPCIÓN/OBSERVACIONES.             DONE
@@ -62,28 +62,37 @@ FECHA		DESCRIPCIÓN
                 -   SE OCULTA EL LAYOUT DEL ID.                             DONE
 
             -   EN EL FORMULARIO DE USUARIO:
-                -   SE AUMENTA EL ESPACIO ENTRE LAS FILAS DEL FORMULARIO.   TODO
+                -   SE AUMENTA EL ESPACIO ENTRE LAS FILAS DEL FORMULARIO.   DONE
 
 30/10/2025  TESTS ÑADE LA LÓGICA DE ACUARIO:
      ↓      -   SE CREA LA ENTIDAD.                                         DONE
             -   SE CREA LA VISTA EN LA BASE DE DATOS.                       DONE
             -   SE CREA EL DAO.                                             DONE
-            -   SE CREA EL FORMULARIO.                                      TODO
-            -   SE CREA EL CUADRO DE DIÁLOGO.                               TODO
-            -   SE CREA EL FORMULARIO MAESTRO.                              TODO
-            -   SE CREA EL VALIDADOR DEL FORMULARIO.                        TODO
-            -   SE CREA EL MODELO DE TABLA.                                 TODO
+            -   SE CREA EL FORMULARIO.                                      DONE
+            -   SE CREA EL CUADRO DE DIÁLOGO.                               DONE
+            -   SE CREA EL FORMULARIO MAESTRO.                              DONE
+            -   SE CREA EL VALIDADOR DEL FORMULARIO.                        DONE
+            -   SE CREA EL MODELO DE TABLA.                                 DONE
             -   ACTUALIZAR EL PAGINADOR.
-                -   CREAR EL COPMANDO DE BÚSQUEDA.                          TODO
-                -   SE CONFIGURA LA OBTENCIÓN DE LA LISTA DE ENTIDADES.     TODO
-                -   SE CONFIGURA LA OBTENCIÓN DEL COMANDO DE BÚSQUEDA.      TODO
+                -   CREAR EL COMANDO DE BÚSQUEDA.                           DONE
+                -   SE CONFIGURA LA OBTENCIÓN DE LA LISTA DE ENTIDADES.     DONE
+                -   SE CONFIGURA LA OBTENCIÓN DEL COMANDO DE BÚSQUEDA.      DONE
 
             -   SE CREAN LOS CONTROLADORES:
-                -   CONTROLADOR BASE.                                       TODO
-                -   CONTROLADOR DEL CUADRO DE DIÁLOGO.                      TODO
-                -   CONTROLADOR DEL FORMULARIO MAESTRO.                     TODO
+                -   CONTROLADOR BASE.                                       DONE
+                -   CONTROLADOR DEL CUADRO DE DIÁLOGO.                      DONE
+                -   CONTROLADOR DEL FORMULARIO MAESTRO.                     DONE
 
             -   INTEGRAR EN LA VISTA PRINCIPAL.                             TODO
+
+            REFACTORIZACIÓN:
+            -   SE AÑADE EL CAMPO ID_COLOR A LA TABLA ACUARIO DEBASE DE DATOS.
+                                                                            DONE
+            -   SE MODIFICA LA ENTIDAD ACUARIO PARA ACEPTAR EL CÓDIGO DE COLOR.
+                                                                            DONE
+            -   SE MODIFICA LA VISTA DEL ACUARIO.                           DONE
+            -   SE MODIFICA EL DAO DE ACUARIO PARA ADAPTAR EL CÓDIGO DE COLOR.
+                                                                            DONE
 
 24/10/2025  TESTS AUTOMÁTICOS DEL MAESTRO DE PROYECTO:
      ↓      -   PRUEBA DEL VALIDADOR.                                       DONE

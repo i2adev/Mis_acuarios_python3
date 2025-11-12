@@ -13,6 +13,7 @@ class AcuarioEntity(BaseEntity):
     # Anotaciones de tipo (atributos con sus tipos esperados)
     id: int | None
     num: int | None
+    cod_color: str | None
     id_proyecto: int | None
     nombre: str | None
     id_urna: int | None
@@ -26,8 +27,9 @@ class AcuarioEntity(BaseEntity):
     motivo_desmontaje: str | None
     descripcion: str | None
 
-    def __init__(self, id: int = None, num: int = None, id_proyecto: int = None,
-                 nombre: str = None, id_urna: int = None, id_tipo: int = None,
+    def __init__(self, id: int = None, cod_color=None, num: int = None,
+                 id_proyecto: int = None, nombre: str = None,
+                 id_urna: int = None, id_tipo: int = None,
                  volumen_neto: int = None, fecha_montaje: int = None,
                  fecha_inicio_ciclado: int = None,
                  fecha_fin_ciclado: int = None,
@@ -36,6 +38,7 @@ class AcuarioEntity(BaseEntity):
         """
         Constructor de la clase
         :param id: ID de la entidad acuario
+        :param cod_color: Código hexadecimal del color de la etiqueta acuario
         :param num: Num de la entidad acuario
         :param id_proyecto: ID del proyecto
         :param nombre: Nombre asignado al acuario
@@ -56,6 +59,7 @@ class AcuarioEntity(BaseEntity):
         # Inicializamos las variables
         self._id = id
         self._num = num
+        self._cod_color = cod_color
         self._id_proyecto = id_proyecto
         self._nombre = nombre
         self._id_urna = id_urna
@@ -90,6 +94,16 @@ class AcuarioEntity(BaseEntity):
         self._num = num
 
     @property
+    def cod_color(self) -> str:
+        """ Código de la color de la etiqueta de acuario """
+        return self._cod_color
+
+    @cod_color.setter
+    def cod_color(self, cod_color: str) -> None:
+        """ Código de la color de la etiqueta de acuario """
+        self._cod_color = cod_color
+
+    @property
     def id_proyecto(self) -> int | None:
         """ ID del proyecto """
         return self._id_proyecto
@@ -103,7 +117,7 @@ class AcuarioEntity(BaseEntity):
     def nombre(self) -> str:
         """ Nombre de la entidad acuario """
         return self._nombre
-    
+
     @nombre.setter
     def nombre(self, nombre) -> None:
         """ Nombre de la entidad acuario """

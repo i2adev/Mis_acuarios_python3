@@ -5,8 +5,6 @@ Commentarios:
     Módulo que contiene el DAO de la URNA.
 """
 import sqlite3
-import traceback
-
 
 from Model.DAO.base_dao import BaseDAO
 from Model.DAO.database import DBManager
@@ -98,7 +96,7 @@ class UrnaDAO(BaseDAO):
 
         sql = (
             """
-            SELECT    A.ID_ACUARIO AS ID,
+            SELECT    A.ID_URNA AS ID,
                       CONCAT(M.MARCA, ' ', A.MODELO) AS VALUE
             FROM      URNAS AS A
             LEFT JOIN MARCAS_COMERCIALES AS M
@@ -291,4 +289,3 @@ class UrnaDAO(BaseDAO):
         except sqlite3.Error as e:
             # traceback.print_exc()
             return Result.failure(f"[SQLITE ERROR]\n {e}")
-

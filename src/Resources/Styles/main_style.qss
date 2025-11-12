@@ -83,3 +83,7 @@ QComboBox {
 QComboBox:focus {
     border-bottom: 1px solid #607dfc;
 }
+
+QGroupBox {
+    background-color: transparent;
+}

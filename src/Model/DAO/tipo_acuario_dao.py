@@ -5,8 +5,6 @@ Commentarios:
     Módulo que contiene la vista de la entidad TIPO DE ACUARIO.
 """
 import sqlite3
-import traceback
-
 
 from Model.DAO.base_dao import BaseDAO
 from Model.DAO.database import DBManager
@@ -83,7 +81,7 @@ class TipoAcuarioDAO(BaseDAO):
             return Result.failure(f"[SQLITE ERROR]\n {e}")
 
     # ------------------------------------------------------------------
-    def get_list_combo(self) -> Result(list[TipoAcuarioEntity]):
+    def get_list_combo(self) -> Result:
         """
         Obtiene una lista ligera para combos (ID y texto visible).
         Devuelve entidades con `num=None` y `observaciones=None`.
@@ -92,12 +90,12 @@ class TipoAcuarioDAO(BaseDAO):
         sql = (
             """
             SELECT       TA.ID_TIPO AS ID,
-                         CA.CATEGORIA_ACUARIO || ' / ' 
+                         CA.CATEGORIA_ACUARIO || ' > ' 
                          || SA.SUBCATEGORIA_ACUARIO AS VALUE
             FROM         TIPOS_ACUARIO AS TA
-            LEFT JOIN    CATEGORIA_ACUARIO AS CA
-            ON           TA.ID_CATEGORIA_aCUARIO = CA.ID_CATEGORIA_ACUARIO
-            LEFT JOIN    SUBCATEGORIA_ACUARIO AS SA
+            LEFT JOIN    CATEGORIAS_ACUARIO AS CA
+            ON           TA.ID_CATEGORIA_ACUARIO = CA.ID_CATEGORIA_ACUARIO
+            LEFT JOIN    SUBCATEGORIAS_ACUARIO AS SA
             ON          TA.ID_SUBCATEGORIA_ACUARIO = SA.ID_SUBCATEGORIA_ACUARIO;
             """
         )
@@ -110,10 +108,7 @@ class TipoAcuarioDAO(BaseDAO):
                 valores = [
                     TipoAcuarioEntity(
                         id=f["ID"],
-                        num=None,
-                        id_categoria_acuario=f["VALUE"],
-                        id_subcategoria_acuario=None,
-                        observaciones=None
+                        observaciones=f["VALUE"],
                     )
                     for f in rows
                 ]
@@ -243,10 +238,10 @@ class TipoAcuarioDAO(BaseDAO):
             """
         )
         params = {
-                    "id_parent": ent.id,
-                    "cat": ent.id_categoria_acuario,
-                    "subcat": ent.id_subcategoria_acuario,
-                    "descripcion": ent.observaciones
+            "id_parent": ent.id,
+            "cat": ent.id_categoria_acuario,
+            "subcat": ent.id_subcategoria_acuario,
+            "descripcion": ent.observaciones
         }
 
         try:
@@ -305,4 +300,3 @@ class TipoAcuarioDAO(BaseDAO):
         except sqlite3.Error as e:
             # traceback.print_exc()
             return Result.failure(f"[SQLITE ERROR]\n {e}")
-

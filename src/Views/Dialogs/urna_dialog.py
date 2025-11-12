@@ -2,7 +2,7 @@
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      09/08/2025
 Commentarios:
-    Módulo que contiene el diálogo de la entidad ACUARIO.
+    Módulo que contiene el diálogo de la entidad URNA.
 """
 
 import sys
@@ -11,8 +11,8 @@ from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QApplication, QWidget
 
 from Views.Dialogs.base_dialog import BaseDialog
-from Views.Forms.urna_form import UrnaForm
 from Views.Forms.image_form import ImageForm
+from Views.Forms.urna_form import UrnaForm
 
 
 class UrnaDialog(BaseDialog):
@@ -58,6 +58,7 @@ class UrnaDialog(BaseDialog):
         self.setTabOrder(self.frame.edit_grosor, self.frame.edit_volumen)
         self.setTabOrder(self.frame.edit_volumen, self.frame.combo_material)
         self.setTabOrder(self.frame.combo_material, self.frame.text_descripcion)
+
 
 # Entrada a la aplicación
 if __name__ == "__main__":

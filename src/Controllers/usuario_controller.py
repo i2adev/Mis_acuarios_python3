@@ -10,7 +10,6 @@ from PyQt6.QtWidgets import (QWidget, QMessageBox, QComboBox)
 from Controllers.base_controller import BaseController
 from Model.DAO.usuario_dao import UsuarioDAO
 from Model.Entities.usuario_entity import UsuarioEntity
-
 from Services.Result.result import Result
 from Services.Validators.usuario_validator import UsuarioValidator
 from Views.Dialogs.usuario_dialog import UsuarioDialog
@@ -183,13 +182,13 @@ class UsuarioDialogController(BaseController):
 
         # Configuramos la entidad
         self.usuario_result = UsuarioEntity(
-            id = res.value,
-            num = None,
-            nombre = self._view.frame.edit_nombre.text(),
-            apellido1 = self._view.frame.edit_apellido_1.text(),
-            apellido2 = self._view.frame.edit_apellido_2.text(),
-            nick= self._view.frame.edit_nick.text(),
-            password = self._view.frame.edit_password.text(),
+            id=res.value,
+            num=None,
+            nombre=self._view.frame.edit_nombre.text(),
+            apellido1=self._view.frame.edit_apellido_1.text(),
+            apellido2=self._view.frame.edit_apellido_2.text(),
+            nick=self._view.frame.edit_nick.text(),
+            password=self._view.frame.edit_password.text(),
         )
 
         # Aceptamos el diálogo
@@ -204,4 +203,3 @@ class UsuarioDialogController(BaseController):
         """ Cancela el dialogo. """
 
         self._view.reject()
-

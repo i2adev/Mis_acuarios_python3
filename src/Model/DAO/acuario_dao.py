@@ -34,6 +34,7 @@ class AcuarioDAO(BaseDAO):
             SELECT      A.ID_ACUARIO AS ID,
                         A.ID_PROYECTO AS ID_PROYECTO,
                         ROW_NUMBER() OVER(ORDER BY A.NOMBRE) AS NUM,
+                        A.COD_COLOR AS COLOR,
                         A.NOMBRE AS NOMBRE,
                         MC.MARCA || ' ' || U.MODELO AS URNA,
                         CA.CATEGORIA_ACUARIO || ' > ' || SA.SUBCATEGORIA_ACUARIO AS TIPO,
@@ -67,6 +68,7 @@ class AcuarioDAO(BaseDAO):
                         id=f["ID"],
                         id_proyecto=f["ID_PROYECTO"],
                         num=f["NUM"],
+                        cod_color=f["COLOR"],
                         nombre=f["NOMBRE"],
                         id_urna=f["URNA"],
                         id_tipo=f["TIPO"],
@@ -108,6 +110,7 @@ class AcuarioDAO(BaseDAO):
             SELECT      A.ID_ACUARIO AS ID,
                         A.ID_PROYECTO AS ID_PROYECTO,
                         ROW_NUMBER() OVER(ORDER BY A.NOMBRE) AS NUM,
+                        A.COD_COLOR AS COLOR,
                         A.NOMBRE AS NOMBRE,
                         MC.MARCA || ' ' || U.MODELO AS URNA,
                         CA.CATEGORIA_ACUARIO || ' > ' || SA.SUBCATEGORIA_ACUARIO AS TIPO,
@@ -144,6 +147,7 @@ class AcuarioDAO(BaseDAO):
                         id=f["ID"],
                         id_proyecto=f["ID_PROYECTO"],
                         num=f["NUM"],
+                        cod_color=f["COLOR"],
                         nombre=f["NOMBRE"],
                         id_urna=f["URNA"],
                         id_tipo=f["TIPO"],
@@ -239,19 +243,20 @@ class AcuarioDAO(BaseDAO):
         sql = (
             """
             INSERT INTO ACUARIOS 
-                (ID_PROYECTO, NOMBRE, ID_URNA, ID_TIPO, VOLUMEN_NETO, 
+                (ID_PROYECTO, COD_COLOR, NOMBRE, ID_URNA, ID_TIPO, VOLUMEN_NETO, 
                 FECHA_MONTAJE, FECHA_INICIO_CICLADO, FECHA_FIN_CICLADO, 
                 UBICACION_ACUARIO, FECHA_DESMONTAJE, MOTIVO_DESMONTAJE, 
                 DESCRIPCION)
             VALUES 
-                (:id_proyecto, :nombre, :id_urna, :id_tipo, :volumen, 
-                :f_montaje, :f_i_ciclado, :f_f_ciclado, :ubicacion, 
+                (:id_proyecto, :cod_color, :nombre, :id_urna, :id_tipo, 
+                :volumen, :f_montaje, :f_i_ciclado, :f_f_ciclado, :ubicacion, 
                 :f_desmontaje, :motivo_desmontaje, :descripcion);
             """
         )
 
         params = {
             "id_proyecto": ent.id_proyecto,
+            "cod_color": ent.cod_color,
             "nombre": ent.nombre,
             "id_urna": ent.id_urna,
             "id_tipo": ent.id_tipo,
@@ -298,6 +303,7 @@ class AcuarioDAO(BaseDAO):
             """
             UPDATE  ACUARIOS
             SET     ID_PROYECTO = id_proyecto,
+                    COD_COLOR = cod_color,
                     NOMBRE = :nombre,
                     ID_URNA = :id_urna,
                     ID_TIPO = :id_tipo,
@@ -316,6 +322,7 @@ class AcuarioDAO(BaseDAO):
         params = {
             "id": ent.id,
             "id_proyecto": ent.id_proyecto,
+            "cod_color": ent.cod_color,
             "nombre": ent.nombre,
             "id_urna": ent.id_urna,
             "id_tipo": ent.id_tipo,
@@ -331,7 +338,7 @@ class AcuarioDAO(BaseDAO):
 
         try:
             with self.db.conn as con:
-                cur = con.execute(sql, params)
+                _ = con.execute(sql, params)
                 return Result.success(ent.id)
 
         except sqlite3.IntegrityError as e:

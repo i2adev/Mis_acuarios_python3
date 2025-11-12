@@ -2,7 +2,7 @@
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      31/07/2025
 Commentarios:
-    Módulo que contiene los controles del formulario de la entidad ACUARIO.
+    Módulo que contiene los controles del formulario de la entidad URNA.
 """
 
 import sys
