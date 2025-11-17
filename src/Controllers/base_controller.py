@@ -9,9 +9,11 @@ Commentarios:
 
 # Importaciones
 from PyQt6.QtCore import Qt, QEvent, QObject
+from PyQt6.QtGui import QGuiApplication
 from PyQt6.QtWidgets import (QLineEdit, QTextEdit, QPlainTextEdit, QWidget,
                              QTableView, QComboBox, QHeaderView, QMessageBox,
-                             QLabel, QCompleter, QHBoxLayout, QVBoxLayout)
+                             QLabel, QCompleter, QHBoxLayout, QVBoxLayout,
+                             QPushButton)
 
 from Model.DAO.base_dao import BaseDAO
 from Model.DAO.paginator import Paginator
@@ -180,6 +182,11 @@ class BaseController(QObject):
             # En caso de que sean controles de edición de texto
             if isinstance(widget, self._text_widgets):
                 widget.clear()
+
+            # En caso de que sea un botón
+            if isinstance(widget, QPushButton):
+                if widget.objectName() == "button_color":
+                    widget.setStyleSheet("background-color: transparent;")
 
             # En caso de que sean combos
             if isinstance(widget, QComboBox):
@@ -380,3 +387,20 @@ class BaseController(QObject):
             if widget is not None:
                 widget.show()
         layout.setContentsMargins(0, 0, 0, 20)
+
+    def _center_window(self):
+        """ Centra la ventana. """
+
+        # Obtener geometría disponible de la pantalla
+        screen = QGuiApplication.primaryScreen().availableGeometry()
+
+        # Tomar tamaño real del widget
+        width = self._view.width()
+        height = self._view.height()
+
+        # Calcular coordenadas centradas
+        x = screen.x() + (screen.width() - width) // 2
+        y = screen.y() + (screen.height() - height) // 2
+
+        # Mover la ventana
+        self._view.move(x, y)

@@ -4,6 +4,25 @@ FECHA		DESCRIPCIÓN
 12/11/2025  TESTEO DE LA LÓGICA DE ACUARIO:
             -   APERTURA DE FORMULARIO DE ACUARIOS.                         DONE
             -   INSERCIÓN DE RESGISTRO.                                     DONE
+            -   CARGA DE REGISTRO.                                          DONE
+            -   ACTUALIZACIÓN DE REGISTRO.                                  DONE
+            -   ELIMINACIÓN DE REGISTRO.                                    DONE
+            -   BUSQUEDA DE REGISTROS:
+                SE BUSCA EN BASE A USUARIO.                                 DONE
+            -   SE PROGRAMA PARA QUE LOS FORMULARIOS MAESTROS APAREZCAN
+                CENTRADOS.                                                  DONE
+
+            SE AÑADE:
+            -   SE AÑADE AL FORMULARIO EL CAMPO DE UBICACIÓN.               DONE
+            -   SE AÑADE LA VALIDACIÓN DEL CAMPO UBICACIÓN DEL ACUARIO.     DONE
+            -   SE AÑADE AL FORMULARIO UN BOTÓN JUNTO AL CAMPO DE NOMBRE PARA
+                SELECCIONAR EL COLOR ASIGNADO AL ACUARIO.                   DONE
+            -   SE CREA EL MÉTODO QUE CHEQUEA QUE UN COLOR EXISTE EN UN PROYECTO
+                DADO.                                                       DONE
+            -   SE AÑADE LA VALIDACIÓN DEL COLOR DEL ACUARIO, EN CASO DE QUE
+                EXISTA EL COLOR EN EL MISMO PROYECTO, SE RECHAZA EL MISMO.  DONE
+            -   SE ELIMINAN LOS CAMPOS DE LAS FECHAS DE CICLADO, Y SE SUSTITUYE
+                POR UN CHECKBOX.                                            DONE
 
             REFACTOR:
             -   SE CONVIERTE EL TEXTBOX DEL PROYECTO A COMBOBOX PARA PODER
@@ -17,6 +36,10 @@ FECHA		DESCRIPCIÓN
             -   SE CORRIGE LA VALIDACIÓN DE ACUARIOS.                       DONE
             -   SE CORRIGE LA CONFIGURACIÓN DE LA ENTIDAD ACUARIO EN EL
                 CONTROLADOR.                                                DONE
+            -   SE CORRIGE EL ERROR DE CARGA DE REGISTRO QUE CARGABA EL VOLUMEN
+                NETO COMO RELACION DE VOLUMEN BRUTO/NETO.                   DONE
+            -   SE CORRIGE EL ERROR DE QUE NO ACTUALIZA EL COLOR DEL ACUARIO.
+                                                                            DONE
 
 03/11/2025  OTRAS MEJORAS:
      ↓      -   EN EL DIÁLOGO Y MAESTRO DE PROYECTO:

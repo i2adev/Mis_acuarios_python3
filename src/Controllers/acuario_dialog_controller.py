@@ -53,6 +53,7 @@ class AcuarioDialogController(AcuarioController):
                 widget.edit_date.installEventFilter(self)
 
         # Botones
+        self._view.frame.button_color.clicked.connect(self._choose_color)
         self._view.button_accept.clicked.connect(self.dialog_accept)
         self._view.button_cancel.clicked.connect(self.dialog_cancel)
         self._view.frame.button_insert_material.clicked.connect(

@@ -39,7 +39,7 @@ class AcuarioMasterController(AcuarioController):
         self._fill_combos()
 
         # Inicializamos el paginador
-        self._pag = Paginator("VISTA_ACUARIOS", 10)
+        self._pag = Paginator("VISTA_ACUARIOS", 5)
         self._pag.initialize_paginator()
         self._configure_status_bar(self._pag)
 
@@ -69,6 +69,7 @@ class AcuarioMasterController(AcuarioController):
                 widget.edit_date.installEventFilter(self)
 
         # Inizializa los botones
+        self._view.frame.button_color.clicked.connect(self._choose_color)
         self._view.button_insert.clicked.connect(self.button_insert_click)
         self._view.button_update.clicked.connect(self.button_update_click)
         self._view.button_load.clicked.connect(self.button_load_click)
@@ -131,6 +132,7 @@ class AcuarioMasterController(AcuarioController):
 
         # Variables
         pattern = self._view.edit_patron.text()
+        user = globals.CURRENT_USER.id
         total_records = self._pag.records
 
         # Condiciones de salida
@@ -143,8 +145,13 @@ class AcuarioMasterController(AcuarioController):
             )
             return
 
+        print(f"SEARCH: {pattern}, {user}")
+
         # Obtoenemos los datos
-        self._pag.get_filtered_list_by_id(pattern, globals.CURRENT_USER.id)
+        # ----------------------------------------------------------------------
+        # SE BÚSCA EN BASE A USUARIO
+        # ----------------------------------------------------------------------
+        self._pag.get_filtered_list_by_id(pattern, user)
 
         # Cargamos la tabla
         self._fill_tableview(self._view.data_table, self._pag._total_data)
@@ -381,7 +388,9 @@ class AcuarioMasterController(AcuarioController):
         """ Gestiona los datos para llenar la tabla. """
 
         self._fill_tableview(self._view.data_table, self._pag.current_data)
-        self._configure_table(self._view.data_table, [0, 1, 3])
+        self._configure_table(self._view.data_table,
+                              [0, 3, 9, 10, ]
+                              )
 
     def _fill_tableview(self, table: QTableView,
                         data: list[AcuarioEntity]):
@@ -395,3 +404,4 @@ class AcuarioMasterController(AcuarioController):
         """ Abre la vista """
 
         self._view.show()
+        self._center_window()

@@ -506,7 +506,7 @@ class Paginator:
         elif self.procedure == "VISTA_ACUARIOS":
             data_list = [AcuarioEntity(
                 id=f["ID"],
-                id_proyecto=f["ID_PROYECTO"],
+                id_proyecto=f["PROYECTO"],
                 num=f["NUM"],
                 cod_color=f["COLOR"],
                 nombre=f["NOMBRE"],

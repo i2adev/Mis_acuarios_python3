@@ -388,3 +388,4 @@ class CategoriaAcuarioMasterController(CategoriaAcuarioController):
         """ Abre la vista """
 
         self._view.show()
+        self._center_window()

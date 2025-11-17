@@ -6,7 +6,9 @@ Commentarios:
     programa. Este método da estilo a la aplicación y abre la ventana
     principal.
 """
+
 import sys
+import traceback
 from pathlib import Path
 
 from PyQt6.QtGui import QFontDatabase
@@ -20,6 +22,20 @@ from Views.Dialogs.login_dialog import LoginDialog
 
 # Versión del programa
 __version__ = "0.15.0"
+
+
+def excepthook(exc_type, exc_value, exc_traceback):
+    """
+    Muestra en consola cualquier excepción no capturada,
+    incluso las que ocurren dentro del event loop de Qt.
+    """
+    print(
+        "".join(traceback.format_exception(exc_type, exc_value, exc_traceback))
+    )
+    sys.exit(1)
+
+
+sys.excepthook = excepthook
 
 
 # Entrada al programa

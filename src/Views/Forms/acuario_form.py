@@ -44,6 +44,7 @@ class AcuarioForm(QFrame):
         self.layout_color = QVBoxLayout()
         ### Nombre
         self.layout_nombre = QVBoxLayout()
+        self.layout_edit_nombre = QHBoxLayout()
         ### Urna
         self.layout_urna = QVBoxLayout()
         self.layout_combo_urna = QHBoxLayout()
@@ -67,8 +68,12 @@ class AcuarioForm(QFrame):
         self.layout_fecha_desmontaje = QVBoxLayout()
 
         ## Tercera línea
+        self.layout_third_line = QHBoxLayout()
+        self.layout_third_line.setContentsMargins(0, 0, 0, 20)
+        ### Ubicación acuario
+        self.layout_ubicacion_acuario = QVBoxLayout()
+        ### Motivo desmontaje
         self.layout_motivo_desmontaje = QVBoxLayout()
-        self.layout_motivo_desmontaje.setContentsMargins(0, 0, 0, 20)
 
         ## Cuarta línea
         self.layout_descripcion = QVBoxLayout()
@@ -88,6 +93,7 @@ class AcuarioForm(QFrame):
         self.label_fecha_inicio_ciclado = QLabel("INICIO CICLADO")
         self.label_fecha_fin_ciclado = QLabel("FIN CICLADO")
         self.label_fecha_desmontaje = QLabel("DESMONTAJE")
+        self.label_ubicacion_acuario = QLabel("UBICACIÓN ACUARIO")
         self.label_motivo_desmontaje = QLabel("MOTIVO DESMONTAJE")
         self.label_descripcion = QLabel("DESCRIPCIÓN")
 
@@ -108,6 +114,8 @@ class AcuarioForm(QFrame):
         self.edit_vol_neto.setValidator(QIntValidator())
         self.edit_ubicacion_acuario = QLineEdit()
         self.edit_ubicacion_acuario.setObjectName("edit_ubicacion_acuario")
+        self.edit_motivo_desmontaje = QLineEdit()
+        self.edit_motivo_desmontaje.setObjectName("edit_motivo_desmontaje")
         self.edit_motivo_desmontaje = QLineEdit()
         self.edit_motivo_desmontaje.setObjectName("edit_motivo_desmontaje")
         self.text_descripcion = QPlainTextEdit()
@@ -134,6 +142,13 @@ class AcuarioForm(QFrame):
         self.fecha_desmontaje = NullableDateEdit()
 
         # Botones
+        self.button_color = QPushButton()
+        self.button_color.setFixedWidth(30)
+        self.button_color.setObjectName("button_color")
+        self.button_color.setStyleSheet("background-color: transparent;")
+        self.button_color.setCursor(
+            QCursor(Qt.CursorShape.PointingHandCursor)
+        )
         self.button_insert_urna = QPushButton("<")
         self.button_insert_urna.setObjectName("button_insert_urna")
         self.button_insert_urna.setFixedWidth(30)
@@ -169,8 +184,10 @@ class AcuarioForm(QFrame):
         self.layout_color.addWidget(self.edit_cod_color)
 
         ## Nombre
+        self.layout_edit_nombre.addWidget(self.button_color)
+        self.layout_edit_nombre.addWidget(self.edit_nombre_acuario)
         self.layout_nombre.addWidget(self.label_nombre)
-        self.layout_nombre.addWidget(self.edit_nombre_acuario)
+        self.layout_nombre.addLayout(self.layout_edit_nombre)
 
         ## Urna
         self.layout_combo_urna.addWidget(self.combo_urna)
@@ -225,9 +242,15 @@ class AcuarioForm(QFrame):
         self.layout_second_line.addWidget(self.dates_group_box)
 
         # Tercera línea
+        ## Ubicación acuario
+        self.layout_ubicacion_acuario.addWidget(self.label_ubicacion_acuario)
+        self.layout_ubicacion_acuario.addWidget(self.edit_ubicacion_acuario)
         ## Motivo de desmontaje
         self.layout_motivo_desmontaje.addWidget(self.label_motivo_desmontaje)
         self.layout_motivo_desmontaje.addWidget(self.edit_motivo_desmontaje)
+        ## Montaje tercera linea
+        self.layout_third_line.addLayout(self.layout_motivo_desmontaje)
+        self.layout_third_line.addLayout(self.layout_ubicacion_acuario)
 
         # Cuarta línea
         self.layout_descripcion.addWidget(self.label_descripcion)
@@ -237,7 +260,7 @@ class AcuarioForm(QFrame):
         ## Montamos el formulario
         self.layout_form.addLayout(self.layout_first_line)
         self.layout_form.addLayout(self.layout_second_line)
-        self.layout_form.addLayout(self.layout_motivo_desmontaje)
+        self.layout_form.addLayout(self.layout_third_line)
         self.layout_form.addLayout(self.layout_descripcion)
         self.setLayout(self.layout_form)
 

@@ -302,8 +302,8 @@ class AcuarioDAO(BaseDAO):
         sql = (
             """
             UPDATE  ACUARIOS
-            SET     ID_PROYECTO = id_proyecto,
-                    COD_COLOR = cod_color,
+            SET     ID_PROYECTO = :id_proyecto,
+                    COD_COLOR = :cod_color,
                     NOMBRE = :nombre,
                     ID_URNA = :id_urna,
                     ID_TIPO = :id_tipo,
@@ -375,6 +375,50 @@ class AcuarioDAO(BaseDAO):
             with self.db.conn as con:
                 _ = con.execute(sql, params)
                 return Result.success(id)
+
+        except sqlite3.IntegrityError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[INTEGRITY ERROR]\n {e}")
+        except sqlite3.OperationalError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[OPERATIONAL ERROR]\n {e}")
+        except sqlite3.ProgrammingError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[PROGRAMMING ERROR]\n {e}")
+        except sqlite3.DatabaseError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[DATABASE ERROR]\n {e}")
+        except sqlite3.Error as e:
+            # traceback.print_exc()
+            return Result.failure(f"[SQLITE ERROR]\n {e}")
+
+    def color_exists(self, cod_color: str, id_proyectto: int) -> Result:
+        """
+        Devuelve si ya existe un acuario con el mismo color en el proyecto.
+        :param cod_color: Codigo del color de acuario a consultyar
+        :param id_proyectto: ID del proyecto
+        """
+
+        sql = (
+            """
+            SELECT EXISTS(
+                SELECT 1
+                FROM ACUARIOS
+                WHERE COD_COLOR = :cod_color AND ID_PROYECTO = :id_proyecto
+            ) AS Existe;
+            """
+        )
+        params = {
+            "cod_color": cod_color,
+            "id_proyecto": id_proyectto
+        }
+
+        try:
+            with self.db.conn as con:
+                cur = con.execute(sql, params)
+                row = cur.fetchone()
+                exists = bool(row[0])
+                return Result.success(exists)
 
         except sqlite3.IntegrityError as e:
             # traceback.print_exc()

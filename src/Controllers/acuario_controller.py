@@ -6,7 +6,7 @@ Commentarios:
 """
 from PyQt6.QtCore import QDate, QDateTime, QTime
 from PyQt6.QtGui import QAction
-from PyQt6.QtWidgets import QMessageBox, QPushButton
+from PyQt6.QtWidgets import QMessageBox, QPushButton, QColorDialog
 
 import globals
 from Controllers.base_controller import BaseController
@@ -79,7 +79,7 @@ class AcuarioController(BaseController):
             ent.volumen_neto = None
 
         if self._view.frame.edit_cod_color.text():
-            ent.cod_color = int(self._view.frame.edit_cod_color.text())
+            ent.cod_color = self._view.frame.edit_cod_color.text()
         else:
             ent.cod_color = None
 
@@ -97,7 +97,7 @@ class AcuarioController(BaseController):
         else:
             ent.fecha_inicio_ciclado = None
 
-        fin_ciclado = self._view.frame.fecha_inicio_ciclado.date()
+        fin_ciclado = self._view.frame.fecha_fin_ciclado.date()
         if fin_ciclado.isValid():
             time_inicio = QDateTime(fin_ciclado, QTime(0, 0))
             ent.fecha_fin_ciclado = int(time_inicio.toSecsSinceEpoch())
@@ -115,6 +115,11 @@ class AcuarioController(BaseController):
             ent.motivo_desmontaje = self._view.frame.edit_motivo_desmontaje.text()
         else:
             ent.motivo_desmontaje = None
+
+        if self._view.frame.edit_ubicacion_acuario.text():
+            ent.ubicacion_acuario = self._view.frame.edit_ubicacion_acuario.text()
+        else:
+            ent.ubicacion_acuario = None
 
         if self._view.frame.text_descripcion.toPlainText():
             ent.descripcion = self._view.frame.text_descripcion.toPlainText()
@@ -152,7 +157,7 @@ class AcuarioController(BaseController):
         """ Actualiza el registro en la base de datos. """
 
         # Valida el formulario
-        val = self._validate_view()
+        val = self._validate_view(False)
 
         if not val.is_success:
             return val
@@ -220,8 +225,19 @@ class AcuarioController(BaseController):
 
     # FIN DE CRUD --------------------------------------------------
 
-    def _validate_view(self) -> Result:
+    def _validate_view(self, val_color: bool = True) -> Result:
         """ Valida el formulario. """
+
+        # Valida el color
+        res = AcuarioValidator.validate_color(
+            self._view.frame.edit_cod_color,
+            int(self._view.frame.combo_proyecto.currentData()),
+            val_color
+        )
+
+        if not res.is_success:
+            self._view.frame.combo_proyecto.setFocus()
+            return res
 
         # Valida el proyecto
         res = AcuarioValidator.validate_proyecto(
@@ -275,6 +291,24 @@ class AcuarioController(BaseController):
 
         if not res.is_success:
             self._view.frame.fecha_montaje.edit_date.setFocus()
+            return res
+
+        # Valida el motivo de desmontaje
+        res = AcuarioValidator.validate_motivo_desmontaje(
+            self._view.frame.edit_motivo_desmontaje
+        )
+
+        if not res.is_success:
+            self._view.frame.edit_fecha_montaje.setFocus()
+            return res
+
+        # Valida la ubicación del acuario
+        res = AcuarioValidator.validate_ubicación_acuarfio(
+            self._view.frame.edit_ubicacion_acuario
+        )
+
+        if not res.is_success:
+            self._view.frame.edit_ubicacion_acuario.setFocus()
             return res
 
         return Result.success(1)
@@ -480,34 +514,43 @@ class AcuarioController(BaseController):
 
         # Lee los datos del modelo
         id_ent = modelo.index(fila, 0).data()
-        id_proyecto = modelo.index(fila, 1).data()
+        proyecto = modelo.index(fila, 2).data()
         cod_color = modelo.index(fila, 3).data()
         nombre = modelo.index(fila, 4).data()
         urna = modelo.index(fila, 5).data()
         tipo = modelo.index(fila, 6).data()
-        volumen = modelo.index(fila, 7).data()
+        volumen = self.brakdown_volumes(modelo.index(fila, 7).data())
         fecha_montaje = QDate.fromString(
-            str(modelo.index(fila, 8).data()), "dd-MM-yyyy")
+            str(modelo.index(fila, 8).data()), "dd/MM/yyyy")
         fecha_inicio_ciclado = QDate.fromString(
-            str(modelo.index(fila, 9).data()), "dd-MM-yyyy")
+            str(modelo.index(fila, 9).data()), "dd/MM/yyyy")
         fecha_fin_ciclado = QDate.fromString(
-            str(modelo.index(fila, 10).data()), "dd-MM-yyyy")
-        ubicacion = modelo.index(fila, 11).data()
+            str(modelo.index(fila, 10).data()), "dd/MM/yyyy")
+        ubicacion = modelo.index(fila, 12).data()
         fecha_desmontaje = QDate.fromString(
-            str(modelo.index(fila, 12).data()), "dd-MM-yyyy")
-        motivo_desmontaje = modelo.index(fila, 13).data()
-        descripcion = modelo.index(fila, 14).data()
+            str(modelo.index(fila, 13).data()), "dd/MM/yyyy")
+        motivo_desmontaje = modelo.index(fila, 14).data()
+        descripcion = modelo.index(fila, 15).data()
 
         # Cargamos los widgets
         self._view.frame.edit_id.setText(
             str(id_ent) if id_ent is not None else ""
         )
-        self._view.frame.combo_proyecto.setText(
-            str(id_proyecto) if id_proyecto is not None else ""
+        self._view.frame.combo_proyecto.setCurrentIndex(
+            self._view.frame.combo_proyecto.findText(proyecto)
         )
-        self._view.frame.edit_cod_color.setText(
-            str(cod_color) if cod_color is not None else ""
-        )
+
+        if cod_color:
+            self._view.frame.edit_cod_color.setText(cod_color)
+            self._view.frame.button_color.setStyleSheet(
+                f"background-color: {cod_color};"
+            )
+        else:
+            self._view.frame.edit_cod_color.setText(None)
+            self._view.frame.button_color.setStyleSheet(
+                "background-color: transparent;"
+            )
+
         self._view.frame.edit_nombre_acuario.setText(
             str(nombre) if nombre is not None else ""
         )
@@ -527,6 +570,9 @@ class AcuarioController(BaseController):
             str(ubicacion) if ubicacion is not None else ""
         )
         self._view.frame.fecha_desmontaje.setDate(fecha_desmontaje)
+        self._view.frame.edit_motivo_desmontaje.setText(
+            str(motivo_desmontaje) if motivo_desmontaje is not None else ""
+        )
         self._view.frame.text_descripcion.setPlainText(
             str(descripcion) if descripcion is not None else ""
         )
@@ -550,3 +596,33 @@ class AcuarioController(BaseController):
                 str(len(self.lista_fotos))
             )
             self.show_image()
+
+    def _choose_color(self):
+        """ Selecciona un color. """
+
+        color = QColorDialog.getColor()
+
+        if color.isValid():
+            self._view.frame.edit_cod_color.setText(color.name())
+            self._view.frame.button_color.setStyleSheet(
+                f"background-color: {color.name()};"
+            )
+        else:
+            QMessageBox(
+                self._view,
+                self._view.windowTitle(),
+                "SE LA CANCELADO LA SELECCIÓN DE COLOR"
+            )
+
+    def brakdown_volumes(self, volumes: str) -> str:
+        """
+        Desmonta la celda del volumen y devuelve el volumen neto
+        :param volumes: Cadena que representa las dimensiones del acuario
+        """
+        if not volumes:
+            return ""
+
+        lista = volumes.split("/")
+        volumen_neto = lista[1]
+
+        return volumen_neto

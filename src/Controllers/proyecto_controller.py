@@ -341,10 +341,10 @@ class ProyectoController(BaseController):
         estado = modelo.index(fila, 4).data()
 
         fecha_inicio = QDate.fromString(
-            str(modelo.index(fila, 5).data()), "dd-MM-yyyy")
+            str(modelo.index(fila, 5).data()), "dd/MM/yyyy")
 
         fecha_fin = QDate.fromString(
-            str(modelo.index(fila, 6).data()), "dd-MM-yyyy")
+            str(modelo.index(fila, 6).data()), "dd/MM/yyyy")
         motivo_cierre = modelo.index(fila, 7).data()
         descripcion = modelo.index(fila, 8).data()
 
