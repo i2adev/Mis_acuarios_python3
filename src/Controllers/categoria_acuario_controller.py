@@ -9,12 +9,12 @@ from PyQt6.QtWidgets import QMessageBox, QPushButton
 
 from Controllers.base_controller import BaseController
 from Model.DAO.categoria_acuario_dao import CategoriaAcuarioDAO
-from Views.Dialogs.categoria_acuario_dialog import CategoriaAcuarioDialog
 from Model.Entities.categoria_acuario_entity import CategoriaAcuarioEntity
-from Services.Validators.categoria_acuario_validator import CategoriaAcuarioValidator
-from Views.Masters.categoria_acuario_view import CategoriaAcuarioView
 from Services.Result.result import Result
-
+from Services.Validators.categoria_acuario_validator import \
+    CategoriaAcuarioValidator
+from Views.Dialogs.categoria_acuario_dialog import CategoriaAcuarioDialog
+from Views.Masters.categoria_acuario_view import CategoriaAcuarioView
 
 
 class CategoriaAcuarioController(BaseController):
@@ -212,7 +212,7 @@ class CategoriaAcuarioController(BaseController):
         # Lee los datos del modelo
         id_cat = modelo.index(fila, 0).data()
         categoria = modelo.index(fila, 2).data()  # La columna 1 es el
-                                                    # númer correlativo.
+        # númer correlativo.
         observaciones = modelo.index(fila, 3).data()
 
         # Cargamos los widgets
@@ -227,4 +227,3 @@ class CategoriaAcuarioController(BaseController):
         )
 
         return Result.success(id_cat)
-

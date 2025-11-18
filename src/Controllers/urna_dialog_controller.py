@@ -51,8 +51,6 @@ class UrnaDialogController(UrnaController):
         # Botones
         self._view.button_accept.clicked.connect(self.dialog_accept)
         self._view.button_cancel.clicked.connect(self.dialog_cancel)
-        self._view.frame.button_insert_categoria_incidencia.clicked \
-            .connect(self.open_categoria_incidencia_dialog)
         self._view.frame.button_insert_marca.clicked.connect(
             self._open_marca_comercial_dialog
         )
@@ -83,7 +81,7 @@ class UrnaDialogController(UrnaController):
             anchura=self._view.frame.edit_ancho.text(),
             profundidad=self._view.frame.edit_profundo.text(),
             altura=self._view.frame.edit_alto.text(),
-            grosor_cristal=self._view.frame.edit_grosor.tect(),
+            grosor_cristal=self._view.frame.edit_grosor.text(),
             volumen_tanque=self._view.frame.edit_volumen.text(),
             id_material=self._view.frame.combo_material.currentData(),
             descripcion=self._view.frame.text_descripcion.toPlainText()
@@ -104,7 +102,7 @@ class UrnaDialogController(UrnaController):
 
         if self._view.exec():
             # Obtenemos la subcategoría de acuario
-            subcategoria_acuario = self._get_marca_comercial()
+            subcategoria_acuario = self._get_urna()
             return Result.success(subcategoria_acuario)
         else:
             return Result.failure("EL USUARIO CANCELO LA INSERCIÓN")

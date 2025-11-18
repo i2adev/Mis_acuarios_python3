@@ -3,12 +3,12 @@ from PyQt6.QtWidgets import QPushButton, QMessageBox
 
 from Controllers.base_controller import BaseController
 from Model.DAO.categoria_incidencia_dao import CategoriaIncidenciaDAO
-from Views.Dialogs.categoria_incidencia_dialog import CategoriaIncidenciaDialog
 from Model.Entities.categoria_incidencia_entity import CategoriaIncidenciaEntity
+from Services.Result.result import Result
 from Services.Validators.categoria_incidencia_validator import \
     CategoriaIncidenciaValidator
+from Views.Dialogs.categoria_incidencia_dialog import CategoriaIncidenciaDialog
 from Views.Masters.categoria_incidencia_view import CategoriaIncidenciaView
-from Services.Result.result import Result
 
 
 class CategoriaIncidenciaController(BaseController):
@@ -16,7 +16,8 @@ class CategoriaIncidenciaController(BaseController):
     Controlador base del cuadro de dialogo de la categoría de incidencia. 
     """
 
-    def __init__(self, view: CategoriaIncidenciaDialog | CategoriaIncidenciaView,
+    def __init__(self,
+                 view: CategoriaIncidenciaDialog | CategoriaIncidenciaView,
                  dao: CategoriaIncidenciaDAO,
                  model: CategoriaIncidenciaEntity):
         """

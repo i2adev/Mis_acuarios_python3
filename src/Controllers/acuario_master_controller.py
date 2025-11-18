@@ -69,6 +69,12 @@ class AcuarioMasterController(AcuarioController):
                 widget.edit_date.installEventFilter(self)
 
         # Inizializa los botones
+        self._view.frame.button_insert_urna.clicked.connect(
+            self._open_urna_dialog
+        )
+        self._view.frame.button_insert_tipo_acuario.clicked.connect(
+            self._open_tipo_acuario_dialog
+        )
         self._view.frame.button_color.clicked.connect(self._choose_color)
         self._view.button_insert.clicked.connect(self.button_insert_click)
         self._view.button_update.clicked.connect(self.button_update_click)

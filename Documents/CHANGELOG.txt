@@ -1,5 +1,8 @@
 ﻿CHANGELOG:
 ================================================================================
+0.15.2  A LOS FORMULARIOS DE ACUARIOS SE LES AÑADE LA LOGICA DE LOS DIÁLOGOS
+        DE URNA Y TOPO DE ACUARIO.
+
 0.15.1  TESTEO BÁSICO DE LA APLICACIÓN.
 
 0.15.0  SE AÑADE LA LÓGICA DE ACUARIO.

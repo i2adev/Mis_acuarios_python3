@@ -10,11 +10,12 @@ from PyQt6.QtWidgets import QMessageBox, QPushButton
 
 from Controllers.base_controller import BaseController
 from Model.DAO.estado_proyecto_dao import EstadoProyectoDAO
-from Views.Dialogs.estado_proyecto_dialog import EstadoProyectoDialog
 from Model.Entities.estado_proyecto_entity import EstadoProyectoEntity
-from Services.Validators.estado_proyecto_validator import EstadoProyectoValidator
-from Views.Masters.estado_proyecto_view import EstadoProyectoView
 from Services.Result.result import Result
+from Services.Validators.estado_proyecto_validator import \
+    EstadoProyectoValidator
+from Views.Dialogs.estado_proyecto_dialog import EstadoProyectoDialog
+from Views.Masters.estado_proyecto_view import EstadoProyectoView
 
 
 class EstadoProyectoController(BaseController):
@@ -216,7 +217,7 @@ class EstadoProyectoController(BaseController):
         # Lee los datos del modelo
         ide = modelo.index(fila, 0).data()
         estado = modelo.index(fila, 2).data()  # La columna 1 es el
-                                                    # númer correlativo.
+        # númer correlativo.
         observaciones = modelo.index(fila, 3).data()
 
         # Cargamos los widgets

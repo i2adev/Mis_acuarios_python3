@@ -57,10 +57,13 @@ class TipoAcuarioDialogController(TipoAcuarioController):
         self._view.frame.button_insert_subtipo_acuario.clicked.connect(
             self._open_subcategoria_acuario_dialog
         )
-
-        # Combos
-        self._view.frame.button_insert_categoria_acuario.clicked.connect(
+        self._view.frame.button_insert_tipo_acuario.clicked.connect(
             self._open_categoria_acuario_dialog
+        )
+
+        # Comboboxes
+        self._view.frame.combo_categoria_acuario.currentIndexChanged.connect(
+            self._combo_categoria_indexchanged
         )
 
     def dialog_accept(self):
@@ -84,8 +87,8 @@ class TipoAcuarioDialogController(TipoAcuarioController):
             id_cat_acuario=self._view.frame.combo_categoria_acuario.currentData(),
             id_subcat_acuario=self._view.frame
             .combo_subcategoria_acuario.currentData(),
-            observaciones=self._view.frame.text_descripcion.toPlainText()
-            if self._view.frame.text_descripcion.toPlainText()
+            observaciones=self._view.frame.text_observaciones.toPlainText()
+            if self._view.frame.text_observaciones.toPlainText()
             else ""
         )
 

@@ -614,6 +614,52 @@ class AcuarioController(BaseController):
                 "SE LA CANCELADO LA SELECCIÓN DE COLOR"
             )
 
+    def _open_urna_dialog(self):
+        """ Abrimos el diálogo de urna. """
+
+        # Configuramos el CONTROLADOR
+        view = UrnaDialog("INSERTAR URNA")
+        dao = UrnaDAO()
+        mod = UrnaEntity()
+
+        ctrl = UrnaDialogController(view, dao, mod)
+
+        # Muestra el diálogo
+        res = ctrl.show_modal()
+        if not res.is_success:
+            return
+
+        # Configuramos el combo
+        combo = self._view.frame.combo_urna
+
+        self._fill_combo_urna()
+        for i in range(combo.count()):
+            if combo.itemData(i) == res.value.id:
+                combo.setCurrentIndex(i)
+
+    def _open_tipo_acuario_dialog(self):
+        """ Abrimos el diálogo de tipo de acuario. """
+
+        # Configuramos el CONTROLADOR
+        view = TipoAcuarioDialog("INSERTAR TIPO DE ACUARIO")
+        dao = TipoAcuarioDAO()
+        mod = TipoAcuarioEntity()
+
+        ctrl = TipoAcuarioDialogController(view, dao, mod)
+
+        # Muestra el diálogo
+        res = ctrl.show_modal()
+        if not res.is_success:
+            return
+
+        # Configuramos el combo
+        combo = self._view.frame.combo_tipo_acuario
+
+        self._fill_combo_tipo_acuario()
+        for i in range(combo.count()):
+            if combo.itemData(i) == res.value.id:
+                combo.setCurrentIndex(i)
+
     def brakdown_volumes(self, volumes: str) -> str:
         """
         Desmonta la celda del volumen y devuelve el volumen neto

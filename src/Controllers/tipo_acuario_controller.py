@@ -2,21 +2,21 @@
 from PyQt6.QtWidgets import QPushButton, QMessageBox
 
 from Controllers.base_controller import BaseController
-from Model.DAO.categoria_acuario_dao import CategoriaAcuarioDAO
-from Views.Dialogs.categoria_acuario_dialog import CategoriaAcuarioDialog
 from Controllers.categoria_acuario_dialog_controller import \
     CategoriaAcuarioDialogController
-from Model.Entities.categoria_acuario_entity import CategoriaAcuarioEntity
-from Services.Result.result import Result
-from Views.Dialogs.subcategoria_Acuario_dialog import SubcategoriaAcuarioDialog
-from Model.DAO.subcategoria_acuario_dao import SubcategoriaAcuarioDAO
 from Controllers.subcategoria_acuario_dialog_controller import \
     SubcategoriaAcuarioDialogController
-from Model.Entities.subcategoria_acuario_entity import SubcategoriaAcuarioEntity
+from Model.DAO.categoria_acuario_dao import CategoriaAcuarioDAO
+from Model.DAO.subcategoria_acuario_dao import SubcategoriaAcuarioDAO
 from Model.DAO.tipo_acuario_dao import TipoAcuarioDAO
-from Views.Dialogs.tipo_acuario_dialog import TipoAcuarioDialog
+from Model.Entities.categoria_acuario_entity import CategoriaAcuarioEntity
+from Model.Entities.subcategoria_acuario_entity import SubcategoriaAcuarioEntity
 from Model.Entities.tipo_acuario_entity import TipoAcuarioEntity
+from Services.Result.result import Result
 from Services.Validators.tipo_acuario_validator import TipoAcuarioValidator
+from Views.Dialogs.categoria_acuario_dialog import CategoriaAcuarioDialog
+from Views.Dialogs.subcategoria_Acuario_dialog import SubcategoriaAcuarioDialog
+from Views.Dialogs.tipo_acuario_dialog import TipoAcuarioDialog
 from Views.Masters.tipo_acuario_view import TipoAcuarioView
 
 
@@ -34,14 +34,13 @@ class TipoAcuarioController(BaseController):
         """
 
         # Atributos
-        self._tipo_filtro_result = None
+        self._tipo_acuario_result = None
 
         # Llamaos al constructor de la superclase
         super().__init__(view, dao, model)
 
     def _entity_configuration(self) -> TipoAcuarioEntity:
         """ Configura la entidad. """
-
 
         ent = TipoAcuarioEntity()
 
@@ -144,6 +143,7 @@ class TipoAcuarioController(BaseController):
             return Result.failure(res.error_msg)
 
         return Result.success(ide)
+
     # FIN DE CRUD --------------------------------------------------
 
     def _validate_view(self) -> Result:
@@ -204,7 +204,7 @@ class TipoAcuarioController(BaseController):
     def _get_tipo_acuario(self):
         """ Devuelve la categoría de filtro resultante. """
 
-        return self._tipo_filtro_result
+        return self._tipo_acuario_result
 
     def _load_record(self) -> Result:
         """ Carga el registro en el formulario. """
@@ -227,7 +227,7 @@ class TipoAcuarioController(BaseController):
         # Lee los datos del modelo
         id_ta = modelo.index(fila, 0).data()
         categoria = modelo.index(fila, 2).data()  # La columna 1 es el
-                                                    # númer correlativo.
+        # númer correlativo.
         subcategoria = modelo.index(fila, 3).data()
         observaciones = modelo.index(fila, 4).data()
 
@@ -254,7 +254,7 @@ class TipoAcuarioController(BaseController):
         """ Llena los combos del formulario"""
 
         self._fill_combo_categoria_acuario()
-        
+
     def _fill_combo_categoria_acuario(self):
         """ Llena el combo de tipos de acuario. """
 
@@ -272,7 +272,7 @@ class TipoAcuarioController(BaseController):
         # Llenamos el combo
         for ent in lista.value:
             self._view.frame.combo_categoria_acuario.addItem(ent.categoria,
-                                                              ent.id)
+                                                             ent.id)
 
         # Establecemos el autocompletado
         self._set_autocomplete(self._view.frame.combo_categoria_acuario)
@@ -300,7 +300,8 @@ class TipoAcuarioController(BaseController):
 
         # Llenamos el combo
         for ent in lista.value:
-            self._view.frame.combo_subcategoria_acuario.addItem(ent.subcategoria, ent.id)
+            self._view.frame.combo_subcategoria_acuario.addItem(
+                ent.subcategoria, ent.id)
 
         # Establecemos el autocompletado
         self._set_autocomplete(self._view.frame.combo_categoria_acuario)

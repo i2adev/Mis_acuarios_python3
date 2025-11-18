@@ -9,11 +9,11 @@ from PyQt6.QtGui import QAction
 from PyQt6.QtWidgets import QMessageBox, QPushButton
 
 from Controllers.base_controller import BaseController
-from Services.Result.result import Result
 from Model.DAO.tipo_filtro_dao import TipoFiltroDAO
-from Views.Dialogs.tipo_filtro_dialog import TipoFiltroDialog
 from Model.Entities.tipo_filtro_entity import TipoFiltroEntity
+from Services.Result.result import Result
 from Services.Validators.tipo_filtro_validator import TipoFiltroValidator
+from Views.Dialogs.tipo_filtro_dialog import TipoFiltroDialog
 from Views.Masters.tipo_filtro_view import TipoFiltroView
 
 
@@ -214,7 +214,7 @@ class TipoFiltroController(BaseController):
         # Lee los datos del modelo
         id_ta = modelo.index(fila, 0).data()
         tipo_filtro = modelo.index(fila, 2).data()  # La columna 1 es el
-                                                    # númer correlativo.
+        # númer correlativo.
         observaciones = modelo.index(fila, 3).data()
 
         # Cargamos los widgets

@@ -8,20 +8,20 @@ from PyQt6.QtGui import QAction
 from PyQt6.QtWidgets import QMessageBox, QPushButton
 
 from Controllers.base_controller import BaseController
-from Model.DAO.categoria_incidencia_dao import CategoriaIncidenciaDAO
-from Views.Dialogs.categoria_incidencia_dialog import CategoriaIncidenciaDialog
 from Controllers.categoria_incidencia_dialog_controller import \
     CategoriaIncidenciaDialogController
+from Model.DAO.categoria_incidencia_dao import CategoriaIncidenciaDAO
+from Model.DAO.subcategoria_incidencia_dao import SubcategoriaIncidenciaDAO
 from Model.Entities.categoria_incidencia_entity import \
     CategoriaIncidenciaEntity
-from Services.Result.result import Result
-from Model.DAO.subcategoria_incidencia_dao import SubcategoriaIncidenciaDAO
-from Views.Dialogs.subcategoria_incidencia_dialog import \
-    SubcategoriaIncidenciaDialog
 from Model.Entities.subcategoria_incidencia_entity import \
     SubcategoriaIncidenciaEntity
+from Services.Result.result import Result
 from Services.Validators.subcategoria_incidencia_validator import \
     SubcategoriaIncidenciaValidator
+from Views.Dialogs.categoria_incidencia_dialog import CategoriaIncidenciaDialog
+from Views.Dialogs.subcategoria_incidencia_dialog import \
+    SubcategoriaIncidenciaDialog
 from Views.Masters.subcategoria_incidencia_view import \
     SubcategoriaIncidenciaView
 
@@ -29,7 +29,7 @@ from Views.Masters.subcategoria_incidencia_view import \
 class SubcategoriaIncidenciaController(BaseController):
     """ Controlador base del formulario maestro de tipo de filtro. """
 
-    def __init__(self, view: SubcategoriaIncidenciaDialog | 
+    def __init__(self, view: SubcategoriaIncidenciaDialog |
                              SubcategoriaIncidenciaView,
                  dao: SubcategoriaIncidenciaDAO,
                  model: SubcategoriaIncidenciaEntity):
@@ -149,6 +149,7 @@ class SubcategoriaIncidenciaController(BaseController):
             return Result.failure(res.error_msg)
 
         return Result.success(ide)
+
     # FIN DE CRUD --------------------------------------------------
 
     def _validate_view(self) -> Result:
@@ -232,7 +233,7 @@ class SubcategoriaIncidenciaController(BaseController):
         # Lee los datos del modelo
         id_cat = modelo.index(fila, 0).data()
         categoria = modelo.index(fila, 2).data()  # La columna 1 es el
-                                                    # númer correlativo.
+        # númer correlativo.
         subcategoria = modelo.index(fila, 3).data()
         observaciones = modelo.index(fila, 4).data()
 

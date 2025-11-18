@@ -9,12 +9,13 @@ from PyQt6.QtWidgets import QMessageBox, QPushButton
 
 from Controllers.base_controller import BaseController
 from Model.DAO.marca_comercial_dao import MarcaComercialDAO
-from Views.Dialogs.marca_comercial_dialog import MarcaComercialDialog
-from Model.Entities.marca_comercial_entity import MarcaComercialEntity
-from Services.Validators.marca_comercial_validator import MarcaComercialValidator
-from Views.Masters.marca_comercial_view import MarcaComercialView
 from Model.DAO.pais_dao import PaisDAO
+from Model.Entities.marca_comercial_entity import MarcaComercialEntity
 from Services.Result.result import Result
+from Services.Validators.marca_comercial_validator import \
+    MarcaComercialValidator
+from Views.Dialogs.marca_comercial_dialog import MarcaComercialDialog
+from Views.Masters.marca_comercial_view import MarcaComercialView
 
 
 class MarcaComercialController(BaseController):
@@ -78,7 +79,7 @@ class MarcaComercialController(BaseController):
 
     def _update(self) -> Result:
         """ Actualiza el registro en la base de datos. """
-        
+
         # Valida el formulario
         val = self._validate_view()
 
@@ -263,7 +264,7 @@ class MarcaComercialController(BaseController):
         # Lee los datos del modelo
         id_ma = modelo.index(fila, 0).data()
         marca = modelo.index(fila, 2).data()  # La columna 1 es el
-                                                    # númer correlativo.
+        # númer correlativo.
         direccion = modelo.index(fila, 3).data()
         cod_postal = modelo.index(fila, 4).data()
         poblacion = modelo.index(fila, 5).data()

@@ -9,22 +9,24 @@ from PyQt6.QtWidgets import QMessageBox, QPushButton
 
 from Controllers.base_controller import BaseController
 from Controllers.categoria_acuario_controller import CategoriaAcuarioDialog
-from Model.DAO.categoria_acuario_dao import CategoriaAcuarioDAO
 from Controllers.categoria_acuario_dialog_controller import \
     CategoriaAcuarioDialogController
-from Model.Entities.categoria_acuario_entity import CategoriaAcuarioEntity
-from Services.Result.result import Result
-from Views.Dialogs.subcategoria_Acuario_dialog import SubcategoriaAcuarioDialog
+from Model.DAO.categoria_acuario_dao import CategoriaAcuarioDAO
 from Model.DAO.subcategoria_acuario_dao import SubcategoriaAcuarioDAO
+from Model.Entities.categoria_acuario_entity import CategoriaAcuarioEntity
 from Model.Entities.subcategoria_acuario_entity import SubcategoriaAcuarioEntity
-from Services.Validators.subcategoria_acuario_validator import SubcategoriaAcuarioValidator
+from Services.Result.result import Result
+from Services.Validators.subcategoria_acuario_validator import \
+    SubcategoriaAcuarioValidator
+from Views.Dialogs.subcategoria_Acuario_dialog import SubcategoriaAcuarioDialog
 from Views.Masters.subcategoria_acuario_view import SubcategoriaAcuarioView
 
 
 class SubcategoriaAcuarioController(BaseController):
     """ Controlador base del formulario maestro de tipo de filtro. """
 
-    def __init__(self, view: SubcategoriaAcuarioDialog | SubcategoriaAcuarioView,
+    def __init__(self,
+                 view: SubcategoriaAcuarioDialog | SubcategoriaAcuarioView,
                  dao: SubcategoriaAcuarioDAO,
                  model: SubcategoriaAcuarioEntity):
         """
@@ -143,6 +145,7 @@ class SubcategoriaAcuarioController(BaseController):
             return Result.failure(res.error_msg)
 
         return Result.success(ide)
+
     # FIN DE CRUD --------------------------------------------------
 
     def _validate_view(self) -> Result:
@@ -226,7 +229,7 @@ class SubcategoriaAcuarioController(BaseController):
         # Lee los datos del modelo
         id_cat = modelo.index(fila, 0).data()
         categoria = modelo.index(fila, 2).data()  # La columna 1 es el
-                                                    # númer correlativo.
+        # númer correlativo.
         subcategoria = modelo.index(fila, 3).data()
         observaciones = modelo.index(fila, 4).data()
 
@@ -270,7 +273,8 @@ class SubcategoriaAcuarioController(BaseController):
 
         # Llenamos el combo
         for ent in lista.value:
-            self._view.frame.combo_categoria_acuario.addItem(ent.categoria, ent.id)
+            self._view.frame.combo_categoria_acuario.addItem(ent.categoria,
+                                                             ent.id)
 
         # Establecemos el autocompletado
         self._set_autocomplete(self._view.frame.combo_categoria_acuario)

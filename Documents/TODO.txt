@@ -1,9 +1,13 @@
 ﻿================================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
+18/11/2025  SE IMPLEMENTAN LOS DIALOGOS AL MAESTRO MAESTRO DE ACUARIO:
+            -   SE IMPLEMENTA EL DIÁLOGO DE URNA.                           DONE
+            -   SE IMPLEMENTA EL DIÁLOGO DE TIPO DE ACUARIO.                DONE
+
 12/11/2025  TESTEO DE LA LÓGICA DE ACUARIO:
-            -   APERTURA DE FORMULARIO DE ACUARIOS.                         DONE
-            -   INSERCIÓN DE RESGISTRO.                                     DONE
+     ↓      -   APERTURA DE FORMULARIO DE ACUARIOS.                         DONE
+17/11/2025  -   INSERCIÓN DE RESGISTRO.                                     DONE
             -   CARGA DE REGISTRO.                                          DONE
             -   ACTUALIZACIÓN DE REGISTRO.                                  DONE
             -   ELIMINACIÓN DE REGISTRO.                                    DONE

@@ -64,6 +64,7 @@ class MarcaComercialDialog(BaseDialog):
             self.frame.combo_pais, self.frame.text_observaciones
         )
 
+
 # Entrada a la aplicación
 if __name__ == "__main__":
     app = QApplication(sys.argv)
@@ -79,4 +80,3 @@ if __name__ == "__main__":
 
     ventana.show()
     sys.exit(app.exec())
-
