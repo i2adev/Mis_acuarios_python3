@@ -1,7 +1,7 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      31/07/2025
-Commentarios:
+Comentarios:
     Módulo que contiene el DAO de la URNA.
 """
 import sqlite3
@@ -273,6 +273,49 @@ class UrnaDAO(BaseDAO):
             with self.db.conn as con:
                 cur = con.execute(sql, params)
                 return Result.success(id_)
+
+        except sqlite3.IntegrityError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[INTEGRITY ERROR]\n {e}")
+        except sqlite3.OperationalError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[OPERATIONAL ERROR]\n {e}")
+        except sqlite3.ProgrammingError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[PROGRAMMING ERROR]\n {e}")
+        except sqlite3.DatabaseError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[DATABASE ERROR]\n {e}")
+        except sqlite3.Error as e:
+            # traceback.print_exc()
+            return Result.failure(f"[SQLITE ERROR]\n {e}")
+
+    def is_mounted(self, id_urna: int) -> Result:
+        """ Determina si una urna esta montada."""
+
+        sql = (
+            """
+            SELECT  CASE
+                        WHEN FECHA_DESMONTAJE IS NULL THEN 1 ELSE 0
+                    END AS MONTADO
+            FROM    ACUARIOS
+            WHERE   ID_URNA = :id;
+            """
+        )
+
+        params = {"id": id_urna}
+
+        try:
+            with self.db.conn as con:
+                cur = con.execute(sql, params)
+                rows = cur.fetchall()
+
+                if rows is None:
+                    return Result.failure(f"NO EXISTE NINGUNA URNA CON EL ID "
+                                          f" {id_urna}")
+
+                is_mounted = any(row[0] == 1 for row in rows)
+                return Result.success(is_mounted)
 
         except sqlite3.IntegrityError as e:
             # traceback.print_exc()

@@ -1,12 +1,11 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      28/06/2025
-Commentarios:
+Comentarios:
     Módulo que contiene la vista de la entidad CATEGORÍA DE ACUARIO.
 """
 import sqlite3
 import traceback
-
 
 from Model.DAO.base_dao import BaseDAO
 from Model.DAO.database import DBManager
@@ -105,8 +104,8 @@ class FotografiaDAO(BaseDAO):
             """
         )
         params = {
-                    "idf": ent.id_foranea,
-                    "foto": sqlite3.Binary(ent.fotografia)
+            "idf": ent.id_foranea,
+            "foto": sqlite3.Binary(ent.fotografia)
         }
 
         try:
@@ -147,9 +146,9 @@ class FotografiaDAO(BaseDAO):
             """
         )
         params = {
-                    "idf": ent.id_foranea,
-                    "foto": ent.fotografia,
-                    "id": ent.id
+            "idf": ent.id_foranea,
+            "foto": ent.fotografia,
+            "id": ent.id
         }
 
         try:
@@ -207,4 +206,3 @@ class FotografiaDAO(BaseDAO):
         except sqlite3.Error as e:
             # traceback.print_exc()
             return Result.failure(f"[SQLITE ERROR]\n {e}")
-

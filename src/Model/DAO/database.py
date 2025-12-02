@@ -1,13 +1,14 @@
 """
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      02/06/2025
-Commentarios:
+Comentarios:
     Módulo que contien la clase que gestiona las connexiones a la base
     de datos.
 """
 # Importaciones
 import sqlite3
 from pathlib import Path
+
 
 class DBManager:
     """ Clase para gestionar la conexión a la base de datos. """
@@ -32,7 +33,8 @@ class DBManager:
                     "Services" / "Database" / "MISACUARIOS.sqlite3")
 
             if not file.exists():
-                raise FileNotFoundError(f"No se encontró la base de datos en: {file}")
+                raise FileNotFoundError(
+                    f"No se encontró la base de datos en: {file}")
 
             self.conn = sqlite3.connect(file)
             self.conn.row_factory = sqlite3.Row
@@ -54,4 +56,3 @@ class DBManager:
     def is_opened(self) -> bool:
         """ Indica si la conexión está abierta. """
         return self.conn is not None
-

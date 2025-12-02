@@ -1,7 +1,7 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      21/07/2025
-Commentarios:
+Comentarios:
     Módulo que contiene la vista de la entidad TIPO DE ACUARIO.
 """
 
@@ -17,7 +17,7 @@ from Views.Forms.tipo_filtro_form import TipoFiltroForm
 class TipoFiltroView(BaseView):
     """ Formulario de tipo de acuario. """
 
-    def  __init__(self, w_title: str):
+    def __init__(self, w_title: str):
         """ Constructor de clase. """
 
         super().__init__(w_title)
@@ -43,6 +43,7 @@ class TipoFiltroView(BaseView):
             self.frame.edit_tipo_filtro, self.frame.text_observaciones
         )
 
+
 # Entrada a la aplicación
 if __name__ == "__main__":
     app = QApplication(sys.argv)
@@ -57,5 +58,3 @@ if __name__ == "__main__":
 
     ventana.show()
     sys.exit(app.exec())
-
-    

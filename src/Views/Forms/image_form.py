@@ -1,7 +1,7 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      08/08/2025
-Commentarios:
+Comentarios:
     Módulo que contiene los controles para la inserción de imagenes.
 """
 
@@ -11,7 +11,8 @@ from pathlib import Path
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QCursor, QPixmap
 from PyQt6.QtWidgets import (QFrame, QVBoxLayout, QApplication, QHBoxLayout,
-    QLabel, QSizePolicy, QPushButton, QSpacerItem, QMessageBox, QFileDialog)
+                             QLabel, QSizePolicy, QPushButton, QSpacerItem,
+                             QMessageBox, QFileDialog)
 
 from Model.DAO.fotografia_dao import FotografiaDAO
 from Model.Entities.fotografia_entity import FotografiaEntity
@@ -27,7 +28,7 @@ class ImageForm(QFrame):
 
     def __init__(self, p_window: BaseView | BaseDialog, procedure: str):
         """ Constructor de clase. """
-        
+
         # Constructor de la superclase
         super().__init__()
 
@@ -40,13 +41,13 @@ class ImageForm(QFrame):
         self.setMinimumWidth(150)
         self.create_widgets()
         self.build_layout()
-        
+
         # Inicializamos los eventos
         self.init_handlers()
 
     def init_handlers(self):
         """ Inicializa los eventos de los controles. """
-        
+
         # Botones de imagen
         self.button_add.clicked.connect(
             self.load_images_for_insert
@@ -63,7 +64,7 @@ class ImageForm(QFrame):
         self.button_prev.clicked.connect(
             self.prev_image
         )
-    
+
     def create_widgets(self):
         """ Crea los widgets. """
 
@@ -126,7 +127,7 @@ class ImageForm(QFrame):
         self.layout_controls.addWidget(self.button_add)
         self.layout_controls.addWidget(self.button_remove)
         self.layout_controls.addSpacerItem(
-            QSpacerItem(50,10, QSizePolicy.Policy.Expanding,
+            QSpacerItem(50, 10, QSizePolicy.Policy.Expanding,
                         QSizePolicy.Policy.Fixed)
         )
         self.layout_controls.addWidget(self.button_prev)
@@ -155,11 +156,11 @@ class ImageForm(QFrame):
             files = file_dialog.selectedFiles()
             for f in files:
                 self.lista_fotos.append(FotografiaEntity(
-                    id = None,
-                    num = i,
-                    id_foranea = None,
-                    ruta = f,
-                    fotografia = Path(f).read_bytes()
+                    id=None,
+                    num=i,
+                    id_foranea=None,
+                    ruta=f,
+                    fotografia=Path(f).read_bytes()
                 ))
                 i += 1
 
@@ -335,6 +336,7 @@ class ImageForm(QFrame):
                 self.parent_window.window_title,
                 "HA LLEGADO A LA PRIMERA IMAGEN"
             )
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

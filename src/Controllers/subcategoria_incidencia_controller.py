@@ -1,7 +1,7 @@
 ﻿"""
 Autor:  Inigo Iturriagaetxebarria
 Fecha:  06/10/2025
-Commentarios:
+Comentarios:
     Controlador base de la subcategoría de incidencia.
 """
 from PyQt6.QtGui import QAction

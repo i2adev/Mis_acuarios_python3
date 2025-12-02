@@ -1,7 +1,7 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      30/06/2025
-Commentarios:
+Comentarios:
     Módulo que contiene la vista de la que derivan los dialogos.
 """
 

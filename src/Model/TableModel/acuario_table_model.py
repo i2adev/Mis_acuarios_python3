@@ -1,12 +1,13 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      31/07/2025
-Commentarios:
+Comentarios:
     Módulo que contiene el modelo de visualización de la tabla de ACUARIOS. 
     Este módulo se encarga de dar formato a los datos de la tabla.
 """
 
 from PyQt6.QtCore import QAbstractTableModel, Qt, QModelIndex
+from PyQt6.QtGui import QColor
 
 from Model.Entities.acuario_entity import AcuarioEntity
 
@@ -24,7 +25,7 @@ class AcuarioTableModel(QAbstractTableModel):
         self._headers = ([
             "ID", "#", "PROYECTO", "COLOR", "NOMBRE", "URNA",
             "TIPO", "VOLUMEN", "F. MONTAJE", "F. I. CICLADO",
-            "F. F. CICLADO", "CICL.", "UBICACIÓN", "F.DESMONTAJE",
+            "F. F. CICLADO", "CICL.", "UBICACIÓN", "F.DESMONTAJE", "MONT.",
             "MOTIVO DESMONTAJE", "DESCRIPCIÓN"
         ])
 
@@ -41,11 +42,25 @@ class AcuarioTableModel(QAbstractTableModel):
         entidad = self.data[index.row()]
         col = index.column()
 
+        if col == 4:  # NOMBRE
+            if role == Qt.ItemDataRole.DisplayRole:
+                return entidad.nombre
+            elif role == Qt.ItemDataRole.DecorationRole:
+                return QColor(entidad.cod_color)
+            return None
+
         # === Columna del CHECKBOX (CICL. = col 11) ===
         if col == 11:
             if role == Qt.ItemDataRole.CheckStateRole:
                 ciclado = entidad.fecha_fin_ciclado not in (None, "")
                 return Qt.CheckState.Checked if ciclado else Qt.CheckState.Unchecked
+            return None
+
+        # === Columna del CHECKBOX (CICL. = col 11) ===
+        if col == 14:
+            if role == Qt.ItemDataRole.CheckStateRole:
+                mounted = entidad.fecha_desmontaje not in (None, "")
+                return Qt.CheckState.Checked if mounted else Qt.CheckState.Unchecked
             return None
 
         # === Resto de columnas (DisplayRole) ===
@@ -78,9 +93,9 @@ class AcuarioTableModel(QAbstractTableModel):
             return entidad.ubicacion_acuario
         elif col == 13:
             return entidad.fecha_desmontaje
-        elif col == 14:
-            return entidad.motivo_desmontaje
         elif col == 15:
+            return entidad.motivo_desmontaje
+        elif col == 16:
             return entidad.descripcion
 
         return None
@@ -93,6 +108,10 @@ class AcuarioTableModel(QAbstractTableModel):
 
         # Checkbox → no editable pero sí seleccionable
         if col == 11:
+            return (Qt.ItemFlag.ItemIsEnabled |
+                    Qt.ItemFlag.ItemIsSelectable)
+
+        if col == 14:
             return (Qt.ItemFlag.ItemIsEnabled |
                     Qt.ItemFlag.ItemIsSelectable)
 
@@ -110,18 +129,20 @@ class AcuarioTableModel(QAbstractTableModel):
                 1: "Identificador del proyecto",
                 2: "Número interno",
                 3: "Código de color",
-                4: "Nombre del acuario",
-                5: "Identificador de la urna",
-                6: "Tipo de acuario",
-                7: "Volumen neto del acuario",
-                8: "Fecha de montaje",
-                9: "Inicio de ciclado",
-                10: "Fin de ciclado",
-                11: "Ciclado completado",
-                12: "Ubicación del acuario",
-                13: "Fecha de desmontaje",
-                14: "Motivo del desmontaje",
-                15: "Descripción general"
+                4: "Color del acuario",
+                5: "Nombre del acuario",
+                6: "Urna del acuario",
+                7: "Tipo de acuario",
+                8: "Volumen neto del acuario",
+                9: "Fecha de montaje",
+                10: "Inicio de ciclado",
+                11: "Fin de ciclado",
+                12: "Ciclado completado",
+                13: "Ubicación del acuario",
+                14: "Fecha de desmontaje",
+                15: "¿Está montado el acuario?",
+                16: "Motivo del desmontaje",
+                17: "Descripción general"
             }
             return tooltips.get(section, "")
 
@@ -133,16 +154,3 @@ class AcuarioTableModel(QAbstractTableModel):
 
         # Número de fila
         return str(section + 1)
-
-# def brakdown_volumes(self, volumes: str) -> str:
-#     """
-#     Desmonta la celda del volumen y devuelve el volumen neto
-#     :param volumes: Cadena que representa las dimensiones del acuario
-#     """
-#     if not volumes:
-#         return ""
-#
-#     lista = volumes.split("/")
-#     volumen_neto = lista[1]
-#
-#     return volumen_neto

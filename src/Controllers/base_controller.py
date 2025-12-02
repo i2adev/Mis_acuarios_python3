@@ -1,7 +1,7 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      02/06/2025
-Commentarios:
+Comentarios:
     Módulo que contiene el controlador base del que heredarán los otros
     controladores. Estra clase contiene los comportamientos de los
     elementos comunes a todas las ventanas como la barra de título.
@@ -107,21 +107,26 @@ class BaseController(QObject):
                         self._show_layout(self._view.frame.layout_motivo_cierre)
                     else:
                         self._hide_layout(self._view.frame.layout_motivo_cierre)
+                elif (isinstance(widget, QLineEdit)
+                      and widget.objectName() == 'fecha_desmontaje_acuario'):
+                    if widget.text():
+                        self._view.frame.edit_motivo_desmontaje.setEnabled(
+                            True)
+                        self._view.frame.edit_motivo_desmontaje.setPlaceholderText(
+                            "")
+                    else:
+                        self._view.frame.edit_motivo_desmontaje.setEnabled(
+                            False)
+                        (self._view.frame.edit_motivo_desmontaje
+                         .setPlaceholderText("Este campo se mantiene "
+                                             "desactivado hasta que se "
+                                             "inserte una fecha de desmontaje"))
 
                 return False  # Dejamos que el widget maneje también su
                 # evento.
             # Combos
             if isinstance(widget, QComboBox):
                 self._combo_out_focus(widget, event)
-
-            # # Editores de fechas personalizadas
-            # if isinstance(widget, NullableDateEdit):
-            #     QMessageBox.information(None, "0000", "PERDIENDO EL FOCO")
-            #     if widget.objectName() == "date_fin":
-            #         if widget.isNull():
-            #             self._hide_layout(self._view.frame.layout_motivo_cierre)
-            #         else:
-            #             self._show_layout(self._view.frame.layout_motivo_cierre)
 
         # Gestiona los eventos de pulsación de teclas en los controles
         # de textp.

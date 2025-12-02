@@ -1,7 +1,7 @@
 """
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      24/07/2025
-Commentarios:
+Comentarios:
     Módulo para la validación del formulario de la categoría de acuario.
 """
 
@@ -26,7 +26,7 @@ class CategoriaIncidenciaValidator:
         # Si el texto contiene más de 32 carácteres
         if len(widget.text()) > 32:
             return Result.failure(
-                "EL CAMPO 'CATEGORÍA DE INCIDENCIA' NO PUEDE CONTENER MAS DE " 
+                "EL CAMPO 'CATEGORÍA DE INCIDENCIA' NO PUEDE CONTENER MAS DE "
                 "32 CARACTERES"
             )
 

@@ -1,15 +1,15 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      24/07/2025
-Commentarios:
+Comentarios:
     Módulo que contiene el modelo de visualización de la tabla de SUBCATEGORÍAS
     DE INCIDENCIA. Este módulo se encarga de dar formato a los datos de la tabla.
 """
 
 from PyQt6.QtCore import QAbstractTableModel, Qt, QModelIndex
 
-
-from Model.Entities.subcategoria_incidencia_entity import SubcategoriaIncidenciaEntity
+from Model.Entities.subcategoria_incidencia_entity import \
+    SubcategoriaIncidenciaEntity
 
 
 class SubcategoriaIncidenciaTableModel(QAbstractTableModel):
@@ -22,7 +22,8 @@ class SubcategoriaIncidenciaTableModel(QAbstractTableModel):
 
         super().__init__()
         self.data = data
-        self._headers = ["ID", "#", "CATEGORÍA", "SUBCATEGORÍA", "OBSERVACIONES"]
+        self._headers = ["ID", "#", "CATEGORÍA", "SUBCATEGORÍA",
+                         "OBSERVACIONES"]
 
     def rowCount(self, parent=QModelIndex()):
         """ Devuelve el número de filas de la lista de tipos de filtro. """
@@ -73,4 +74,3 @@ class SubcategoriaIncidenciaTableModel(QAbstractTableModel):
             return self._headers[section]
         else:
             return str(section + 1)
-

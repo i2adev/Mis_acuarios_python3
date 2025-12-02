@@ -1,7 +1,7 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      27/06/2025
-Commentarios:
+Comentarios:
     Módulo que contien la entidad TIPO DE ACUARIO.
 """
 from Model.Entities.base_entity import BaseEntity
@@ -17,7 +17,8 @@ class TipoAcuarioEntity(BaseEntity):
     id_subcat_acuario: int | None
     observaciones: str | None
 
-    def __init__(self, id: int = None, num: int = None, id_cat_acuario: int = None,
+    def __init__(self, id: int = None, num: int = None,
+                 id_cat_acuario: int = None,
                  id_subcat_acuario: int = None, observaciones: str = None):
         """
         Constructor de clase.

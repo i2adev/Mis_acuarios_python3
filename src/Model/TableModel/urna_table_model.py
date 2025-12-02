@@ -1,7 +1,7 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      31/07/2025
-Commentarios:
+Comentarios:
     Módulo que contiene el modelo de visualización de la tabla de ACUARIOS. 
     Este módulo se encarga de dar formato a los datos de la tabla.
 """

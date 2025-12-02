@@ -1,7 +1,7 @@
 ﻿"""
 Autor:  Inigo Iturriagaetxebarria
 Fecha:  02/10/2025
-Commentarios:
+Comentarios:
     Controlador del formulario maestro de categoría de filtro.
 """
 from PyQt6.QtGui import QIcon, QAction
@@ -134,7 +134,7 @@ class CategoriaAcuarioMasterController(CategoriaAcuarioController):
             )
             return
 
-        # Obtoenemos los datos
+        # Obtiene los datos
         self._pag.get_filtered_list(pattern)
 
         # Cargamos la tabla

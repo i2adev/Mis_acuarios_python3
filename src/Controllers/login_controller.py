@@ -1,7 +1,7 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      18/09/2025
-Commentarios:
+Comentarios:
     Módulo que contiene la clase controladora del formulario de login.
 """
 

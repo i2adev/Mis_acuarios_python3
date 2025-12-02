@@ -1,7 +1,7 @@
 ﻿"""
 Autor:  Inigo Iturriagaetxebarria
 Fecha:  02/06/2025
-Commentarios:
+Comentarios:
     Módulo que contiene el modelo de visualización de la tabla de ESTADOS DE 
     PROYECTO. Este módulo se encarga de dar formato a los datos de la tabla.
 """
@@ -70,4 +70,3 @@ class EstadoProyectoTableModel(QAbstractTableModel):
             return self._headers[section]
         else:
             return str(section + 1)
-

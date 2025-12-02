@@ -1,7 +1,7 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      19/08/2025
-Commentarios:
+Comentarios:
     Módulo que contiene el diálogo de la entidad MATERIAL DE URNA.
 """
 
@@ -43,6 +43,7 @@ class MaterialUrnaDialog(BaseDialog):
         self.setTabOrder(
             self.frame.edit_material, self.frame.text_descripcion
         )
+
 
 # Entrada a la aplicación
 if __name__ == "__main__":

@@ -1,12 +1,11 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      12/08/2025
-Commentarios:
+Comentarios:
     Módulo que contiene la vista de la entidad MATERIAL DE URNA.
 """
 import sqlite3
 import traceback
-
 
 from Model.DAO.base_dao import BaseDAO
 from Model.DAO.database import DBManager

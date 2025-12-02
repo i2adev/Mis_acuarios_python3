@@ -1,7 +1,7 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      19/08/2025
-Commentarios:
+Comentarios:
     Módulo que contiene la entidad MATERIAL DE URNA.
 """
 from Model.Entities.base_entity import BaseEntity

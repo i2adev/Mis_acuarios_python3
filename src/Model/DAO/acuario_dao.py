@@ -1,7 +1,7 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      30/10/2025
-Commentarios:
+Comentarios:
     Módulo que contiene los métodos de acceso a la base de datos de la
     entidad ACUARIO.
 """

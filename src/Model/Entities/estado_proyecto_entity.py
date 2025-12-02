@@ -1,7 +1,7 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      24/07/2025
-Commentarios:
+Comentarios:
     Módulo que contiene la entidad estado de proyecto.
 """
 from Model.Entities.base_entity import BaseEntity
@@ -71,4 +71,3 @@ class EstadoProyectoEntity(BaseEntity):
             ESTADO: {self.estado}
             DESCRIPCIÓN: {self.descripcion}
         """
-

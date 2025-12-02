@@ -1,7 +1,7 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      02/06/2025
-Commentarios:
+Comentarios:
     Módulo que contiene los métodos de acceso a la base de datos de la
     entidad TIPO DE FILTRO.
 """
@@ -9,13 +9,13 @@ Commentarios:
 import sqlite3
 import traceback
 
-
 from Model.DAO.base_dao import BaseDAO
 from Model.Entities.pais_entity import PaisEntity
 from Services.Result.result import Result
 from Model.DAO.database import DBManager
 
-class PaisDAO (BaseDAO):
+
+class PaisDAO(BaseDAO):
     """
     Clase que gestiona las operaciones en la base de datos de la entidad país.
     """

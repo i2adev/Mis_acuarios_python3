@@ -1,7 +1,7 @@
 """
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      02/06/2025
-Commentarios:
+Comentarios:
     Fichero que contiene el método main(), que es la entrada al
     programa. Este método da estilo a la aplicación y abre la ventana
     principal.
@@ -21,7 +21,7 @@ from Model.Entities.usuario_entity import UsuarioEntity
 from Views.Dialogs.login_dialog import LoginDialog
 
 # Versión del programa
-__version__ = "0.15.2"
+__version__ = "0.16.0"
 
 
 def excepthook(exc_type, exc_value, exc_traceback):

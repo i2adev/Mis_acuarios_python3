@@ -1,7 +1,7 @@
 ﻿"""
 Autor: Inigo Iturriagaetxebarria
 Fecha: 29/09/2025
-Commentarios:
+Comentarios:
     Controlador del cuadro de diálogo de inserción de tipo de filtro.
 """
 
@@ -62,12 +62,12 @@ class MaterialUrnaDialogController(MaterialUrnaController):
 
         # Configuramos la entidad
         self._material_urna_result = MaterialUrnaEntity(
-            id = res.value,
-            num = None,
-            material = self._view.frame.edit_material.text(),
-            descripcion = self._view.frame.text_descripcion.toPlainText()
-                          if self._view.frame.text_descripcion.toPlainText()
-                          else None
+            id=res.value,
+            num=None,
+            material=self._view.frame.edit_material.text(),
+            descripcion=self._view.frame.text_descripcion.toPlainText()
+            if self._view.frame.text_descripcion.toPlainText()
+            else None
         )
 
         # Aceptamos el diálogo

@@ -1,7 +1,7 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      02/06/2025
-Commentarios:
+Comentarios:
     Módulo que contiene los métodos de acceso a la base de datos de la
     entidad TIPO DE FILTRO.
 """
@@ -9,13 +9,13 @@ Commentarios:
 import sqlite3
 import traceback
 
-
 from Model.DAO.base_dao import BaseDAO
 from Services.Result.result import Result
 from Model.DAO.database import DBManager
 from Model.Entities.tipo_filtro_entity import TipoFiltroEntity
 
-class TipoFiltroDAO (BaseDAO):
+
+class TipoFiltroDAO(BaseDAO):
     """
     Clase que gestiona las operaciones en la base de datos de la entidad
     TipoFiltroEntity.
@@ -136,8 +136,8 @@ class TipoFiltroDAO (BaseDAO):
             """
         )
         params = {
-                    "tipo": ent.tipo_filtro,
-                    "descripcion": ent.observaciones
+            "tipo": ent.tipo_filtro,
+            "descripcion": ent.observaciones
         }
 
         try:
@@ -178,9 +178,9 @@ class TipoFiltroDAO (BaseDAO):
             """
         )
         params = {
-                    "id": ent.id,
-                    "tipo": ent.tipo_filtro,
-                    "descripcion": ent.observaciones
+            "id": ent.id,
+            "tipo": ent.tipo_filtro,
+            "descripcion": ent.observaciones
         }
 
         try:

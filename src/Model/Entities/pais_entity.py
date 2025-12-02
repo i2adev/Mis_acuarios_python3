@@ -1,7 +1,7 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      29/07/2025
-Commentarios:
+Comentarios:
     Módulo que contiene la entidad PAÍS.
 """
 from Model.Entities.base_entity import BaseEntity

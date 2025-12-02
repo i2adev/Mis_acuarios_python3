@@ -1,7 +1,7 @@
 ﻿"""
 Autor: Inigo Iturriagaetxebarria
 Fecha: 02/10/2025
-Commentarios:
+Comentarios:
     Controlador del cuadro de diálogo de inserción de categoria de acuario.
 """
 from PyQt6.QtWidgets import QWidget, QMessageBox, QComboBox

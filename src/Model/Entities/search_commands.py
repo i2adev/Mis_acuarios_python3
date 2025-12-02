@@ -1,7 +1,7 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      12/09/2025
-Commentarios:
+Comentarios:
     Módulo que contiene la clase SearchCmd, que contiene los commandos
     de búsqueda.
 """
@@ -295,4 +295,49 @@ class SearchCmd:
            WHERE P.ID_USUARIO = :id_dep
     ) AS S
     WHERE FIELD LIKE '%' || :pattern || '%';
+    """
+
+    SEARCH_FILTRO = """
+    SELECT  ID, NUM, MARCA, MODELO, TIPO_FILTRO, TERMOFILTRO, NUMERO_SERIE, 
+            VOLUMEN_ACUARIO, CAUDAL, ALTURA_BOMBEO, CONSUMO, CONSUMO_CALENTADOR,
+            VOLUMEN_FILTRANTE, DIMENSIONES, FECHA_COMPRA, FECHA_BAJA, 
+            MOTIVO_BAJA, DESCRIPCION
+    FROM
+    (
+        SELECT    F.ID_FILTRO AS ID,
+                  ROW_NUMBER() OVER(ORDER BY MC.MARCA, F.MODELO) AS NUM,
+                  MC.MARCA AS MARCA,
+                  F.MODELO AS MODELO,
+                  TF.TIPO_FILTRO AS TIPO_FILTRO,
+                  F.ES_THERMOFILTRO AS TERMOFILTRO,
+                  F.NUMERO_SERIE AS NUMERO_SERIE,
+                  F.VOLUMEN_MIN_ACUARIO || '/' || F.VOLUMEN_MAX_ACUARIO AS VOLUMEN_ACUARIO,
+                  F.CAUDAL AS CAUDAL,
+                  F.ALTURA_BOMBEO AS ALTURA_BOMBEO,
+                  F.CONSUMO AS CONSUMO,
+                  F.CONSUMO_CALENTADOR AS CONSUMO_CALENTADOR,
+                  F.VOLUMEN_FILTRANTE AS VOLUMEN_FILTRANTE,
+                  F.ANCHO || 'x' || F.FONDO || 'x' || F.ALTO AS DIMENSIONES,
+                  IFNULL(strftime('%d/%m/%Y', F.FECHA_COMPRA, 'unixepoch', 'localtime'), '') AS FECHA_COMPRA,
+                  IFNULL(strftime('%d/%m/%Y', F.FECHA_BAJA, 'unixepoch', 'localtime'), '') AS FECHA_BAJA,
+                  F.MOTIVO_BAJA AS MOTIVO_BAJA,
+                  F.DESCRIPCION AS DESCRIPCION,
+                  UPPER(
+                      IFNULL(MC.MARCA, '')
+                      || IFNULL(TF.TIPO_FILTRO, '')
+                      || IFNULL(F.VOLUMEN_MIN_ACUARIO || '/' || F.VOLUMEN_MAX_ACUARIO, '')
+                      || IFNULL(F.CAUDAL, '')
+                      || IFNULL(F.ALTURA_BOMBEO, '')
+                      || IFNULL(F.CONSUMO, '')
+                      || IFNULL(F.CONSUMO_CALENTADOR, '')
+                      || IFNULL(F.VOLUMEN_FILTRANTE, '')
+                      || IFNULL(F.ANCHO || 'x' || F.FONDO || 'x' || F.ALTO, '')
+                      || IFNULL(F.MOTIVO_BAJA, '')
+                      || IFNULL(F.DESCRIPCION, '')
+                  ) AS FIELD
+        FROM      FILTROS F
+        LEFT JOIN MARCAS_COMERCIALES MC ON F.ID_MARCA = MC.ID_MARCA
+        LEFT JOIN TIPOS_FILTRO TF ON F.ID_TIPO = TF.ID_TIPO
+    )
+    WHERE FIELD LIKE'%' || :pattern || '%';
     """

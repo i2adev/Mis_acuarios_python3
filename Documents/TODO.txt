@@ -1,13 +1,51 @@
 ﻿================================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
+19/11/2025  SE AÑADE LA LÓGICA DE FILTRO:
+     ↓      -   SE CREA LA ENTIDAD.                                         DONE
+02/12/2025  -   SE CREA LA VISTA EN LA BASE DE DATOS.                       DONE
+            -   SE CREA EL DAO.                                             DONE
+            -   SE CREA EL FORMULARIO.                                      DONE
+            -   SE CREA EL CUADRO DE DIÁLOGO.                               DONE
+            -   SE CREA EL FORMULARIO MAESTRO.                              DONE
+            -   SE CREA EL VALIDADOR DEL FORMULARIO.                        DONE
+            -   SE CREA EL MODELO DE TABLA.                                 DONE
+            -   ACTUALIZAR EL PAGINADOR.
+                -   CREAR EL COMANDO DE BÚSQUEDA.                           DONE
+                -   SE CONFIGURA LA OBTENCIÓN DE LA LISTA DE ENTIDADES.     DONE
+                -   SE CONFIGURA LA OBTENCIÓN DEL COMANDO DE BÚSQUEDA.      DONE
+
+            -   SE CREAN LOS CONTROLADORES:
+                -   CONTROLADOR BASE.                                       DONE
+                -   CONTROLADOR DEL CUADRO DE DIÁLOGO.                      DONE
+                -   CONTROLADOR DEL FORMULARIO MAESTRO.                     DONE
+
+            -   INTEGRAR EN LA VISTA PRINCIPAL.                             DONE
+
+            REFACTOR:
+            -   SE MODIFICAN LAS POSICIONES DE LOS BOTONES DE LOS MAESTROS PARA
+                ORDENARLAS MEJOR.                                           DONE
+            -   SE MODIFICA LA VALIDACIÓN DE LA URNA, PARA GARANTIZAR QUE LA
+                URNA NO SE ESTÁ UTILIZANDO EN OTRO PROYECTO:
+                -   SE CREA EL MÉTODO DE CHEQUEAR QUE UN ACUARIO ESTÁ MONTADO EN
+                    EL DAO DE ACUARIO.                                      DONE
+                -   SE MODIFICA LA VALIDACIÓN PARA EL ACUARIO.              DONE
+            -   EN LA TABLA DE ACUARIOS SE MUESTRA UN CHECKBOX NO EDITABLE QUE
+                INDICA SI EL ACUARIO ESTA MONTADO.                          DONE
+            -   SE AÑADE UNA COLUMNA A LA IZQUIERDA DEL NOMBRE DEL ACUARIO CON
+                UN BOTÓN QUE INDICA EL COLOR DEL ACUARIO, RELACIONADO CON EL
+                CAMPO COLOR.                                                DONE
+            -   SE MODIFICA EL CONTROLADO DEL ACUARIO PARA QUE MUESTRE/OCULTE EL
+                LAYOUT DE MOTIVO DE DESMONTAJE SEGUN LA FECHA DE DESMONTAJE.
+                                                                            DONE
+
 18/11/2025  SE IMPLEMENTAN LOS DIALOGOS AL MAESTRO MAESTRO DE ACUARIO:
             -   SE IMPLEMENTA EL DIÁLOGO DE URNA.                           DONE
             -   SE IMPLEMENTA EL DIÁLOGO DE TIPO DE ACUARIO.                DONE
 
 12/11/2025  TESTEO DE LA LÓGICA DE ACUARIO:
      ↓      -   APERTURA DE FORMULARIO DE ACUARIOS.                         DONE
-17/11/2025  -   INSERCIÓN DE RESGISTRO.                                     DONE
+17/11/2025  -   INSERCIÓN DE REGISTRO.                                     DONE
             -   CARGA DE REGISTRO.                                          DONE
             -   ACTUALIZACIÓN DE REGISTRO.                                  DONE
             -   ELIMINACIÓN DE REGISTRO.                                    DONE
@@ -30,7 +68,7 @@ FECHA		DESCRIPCIÓN
 
             REFACTOR:
             -   SE CONVIERTE EL TEXTBOX DEL PROYECTO A COMBOBOX PARA PODER
-                SELECCIONAR UN POROYECTO AL QUE AÑADIR EL ACUARIO.          DONE
+                SELECCIONAR UN PROYECTO AL QUE AÑADIR EL ACUARIO.           DONE
             -   SE MODIFICA EL VALIDADOR PARA AÑADIR VALIDACIÓN DEL COMBO DE
                 PROYECTO.                                                   DONE
 
@@ -108,7 +146,7 @@ FECHA		DESCRIPCIÓN
             -   EN EL FORMULARIO DE USUARIO:
                 -   SE AUMENTA EL ESPACIO ENTRE LAS FILAS DEL FORMULARIO.   DONE
 
-30/10/2025  TESTS ÑADE LA LÓGICA DE ACUARIO:
+30/10/2025  SE AÑADE LA LÓGICA DE ACUARIO:
      ↓      -   SE CREA LA ENTIDAD.                                         DONE
 12/11/2025  -   SE CREA LA VISTA EN LA BASE DE DATOS.                       DONE
             -   SE CREA EL DAO.                                             DONE

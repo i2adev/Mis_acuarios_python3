@@ -1,7 +1,7 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      19/08/2025
-Commentarios:
+Comentarios:
     Módulo para la validación del formulario de material de la urna.
 """
 
@@ -15,7 +15,7 @@ class MaterialUrnaValidator:
     """
 
     @staticmethod
-    def validate_material (widget: QLineEdit):
+    def validate_material(widget: QLineEdit):
         """ Valida el material de la urna. """
 
         # Si el campo está vacío

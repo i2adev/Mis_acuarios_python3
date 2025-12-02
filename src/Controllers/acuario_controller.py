@@ -1,7 +1,7 @@
 ﻿"""
 Autor:  Inigo Iturriagaetxebarria
 Fecha:  11/11/2025
-Commentarios:
+Comentarios:
     Controlador base de acuario.
 """
 from PyQt6.QtCore import QDate, QDateTime, QTime
@@ -49,7 +49,7 @@ class AcuarioController(BaseController):
         # Llamaos al constructor de la superclase
         super().__init__(view, dao, model)
 
-        # Llenamo los combos
+        # Llenamos los combos
         self._fill_combos()
 
     def _entity_configuration(self) -> AcuarioEntity:
@@ -157,7 +157,7 @@ class AcuarioController(BaseController):
         """ Actualiza el registro en la base de datos. """
 
         # Valida el formulario
-        val = self._validate_view(False)
+        val = self._validate_view(False, False)
 
         if not val.is_success:
             return val
@@ -225,8 +225,13 @@ class AcuarioController(BaseController):
 
     # FIN DE CRUD --------------------------------------------------
 
-    def _validate_view(self, val_color: bool = True) -> Result:
-        """ Valida el formulario. """
+    def _validate_view(self, val_color: bool = True,
+                       val_is_mounted: bool = True) -> Result:
+        """
+        Valida el formulario.
+        :param val_color: Indica si valida el color.
+        :param val_is_mounted: Indica si valida si la urna está montada.
+        """
 
         # Valida el color
         res = AcuarioValidator.validate_color(
@@ -259,7 +264,7 @@ class AcuarioController(BaseController):
 
         # Valida la urna
         res = AcuarioValidator.validate_urna(
-            self._view.frame.combo_urna
+            self._view.frame.combo_urna, val_is_mounted
         )
 
         if not res.is_success:
@@ -529,8 +534,8 @@ class AcuarioController(BaseController):
         ubicacion = modelo.index(fila, 12).data()
         fecha_desmontaje = QDate.fromString(
             str(modelo.index(fila, 13).data()), "dd/MM/yyyy")
-        motivo_desmontaje = modelo.index(fila, 14).data()
-        descripcion = modelo.index(fila, 15).data()
+        motivo_desmontaje = modelo.index(fila, 15).data()
+        descripcion = modelo.index(fila, 16).data()
 
         # Cargamos los widgets
         self._view.frame.edit_id.setText(

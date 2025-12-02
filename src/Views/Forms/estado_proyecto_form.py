@@ -1,7 +1,7 @@
 ﻿"""
 Autor: Inigo Iturriagaetxebarria
 Fecha: 08/10/2025
-Commentarios:
+Comentarios:
     Módulo que contiene los controles del formulario de la entidad ESTADO DE 
     PROYECTO.
 """

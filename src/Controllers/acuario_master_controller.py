@@ -1,7 +1,7 @@
 ﻿"""
 Autor:  Inigo Iturriagaetxebarria
 Fecha:  06/10/2025
-Commentarios:
+Comentarios:
     Controlador del formulario maestro del acuario.
 """
 
@@ -50,6 +50,10 @@ class AcuarioMasterController(AcuarioController):
         # Ocultamos los layouts
         self._hide_layout(self._view.frame.layout_id)
         self._hide_layout(self._view.frame.layout_color)
+        # self._hide_layout(self._view.frame.layout_motivo_desmontaje)
+
+        # Inhabilitamos el layout del motivo de desmontaje
+        self._view.frame.edit_motivo_desmontaje.setEnabled(False)
 
         # Inicializamos los eventos
         self.init_handlers()
@@ -68,7 +72,7 @@ class AcuarioMasterController(AcuarioController):
             if isinstance(widget, NullableDateEdit):
                 widget.edit_date.installEventFilter(self)
 
-        # Inizializa los botones
+        # Inicializa los botones
         self._view.frame.button_insert_urna.clicked.connect(
             self._open_urna_dialog
         )
@@ -121,7 +125,7 @@ class AcuarioMasterController(AcuarioController):
             # Cargamos la tabla
             self._fill_tableview(self._view.data_table, self._pag._total_data)
             self._configure_table(self._view.data_table)
-            self._clean_view(self._view.frame.edit_nombre_acuario)
+            self._clean_view(self._view.frame.combo_proyecto)
             self._view.label_total_pages.setText(str(self._pag.total_pages))
 
             # Configuramos la tabla
@@ -153,7 +157,7 @@ class AcuarioMasterController(AcuarioController):
 
         print(f"SEARCH: {pattern}, {user}")
 
-        # Obtoenemos los datos
+        # Obtiene los datos
         # ----------------------------------------------------------------------
         # SE BÚSCA EN BASE A USUARIO
         # ----------------------------------------------------------------------
@@ -162,7 +166,7 @@ class AcuarioMasterController(AcuarioController):
         # Cargamos la tabla
         self._fill_tableview(self._view.data_table, self._pag._total_data)
         self._configure_table(self._view.data_table)
-        self._clean_view(self._view.frame.edit_nombre_acuario)
+        self._clean_view(self._view.frame.combo_proyecto)
 
         self._view.button_filter.setIcon(QIcon(":/Images/filtered.png"))
 
@@ -254,7 +258,7 @@ class AcuarioMasterController(AcuarioController):
             return
 
         # Limpiamos el formulario
-        self._clean_view(self._view.frame.edit_nombre_acuario)
+        self._clean_view(self._view.frame.combo_proyecto)
 
         # Configurar paginator
         self._pag.initialize_paginator()
@@ -269,7 +273,7 @@ class AcuarioMasterController(AcuarioController):
         self._configure_status_bar(self._pag)
 
     def button_load_click(self, event):
-        """ Controla el clic del boton de cargar. """
+        """ Controla el clic del botón de cargar. """
 
         self._load_record()
 
@@ -288,7 +292,7 @@ class AcuarioMasterController(AcuarioController):
             return
 
         # Limpiamos el formulario
-        self._clean_view(self._view.frame.edit_nombre_acuario)
+        self._clean_view(self._view.frame.combo_proyecto)
 
         # Obtenemos los datos de paginación actuales
         paginator_pages = self._pag.total_pages
@@ -323,7 +327,7 @@ class AcuarioMasterController(AcuarioController):
             return
 
         # Limpiamos el formulario
-        self._clean_view(self._view.frame.edit_nombre_acuario)
+        self._clean_view(self._view.frame.combo_proyecto)
 
         # Configuramos el paginador
         self._pag.initialize_paginator()
@@ -395,7 +399,7 @@ class AcuarioMasterController(AcuarioController):
 
         self._fill_tableview(self._view.data_table, self._pag.current_data)
         self._configure_table(self._view.data_table,
-                              [0, 3, 9, 10, ]
+                              [0, 3, 9, 10, 12, 13, 15, ]
                               )
 
     def _fill_tableview(self, table: QTableView,

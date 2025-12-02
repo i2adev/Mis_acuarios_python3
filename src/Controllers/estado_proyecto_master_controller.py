@@ -1,7 +1,7 @@
 ﻿"""
 Autor:  Inigo Iturriagaetxebarria
 Fecha:  29/09/2025
-Commentarios:
+Comentarios:
     Controlador del formulario maestro de tipo de filtro.
 """
 
@@ -136,7 +136,7 @@ class EstadoProyectoMasterController(EstadoProyectoController):
             )
             return
 
-        # Obtoenemos los datos
+        # Obtiene los datos
         self._pag.get_filtered_list(pattern)
 
         # Cargamos la tabla

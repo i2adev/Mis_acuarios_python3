@@ -130,7 +130,7 @@ class CategoriaIncidenciaMasterController(CategoriaIncidenciaController):
             )
             return
 
-        # Obtoenemos los datos
+        # Obtiene los datos
         self._pag.get_filtered_list(pattern)
 
         # Cargamos la tabla

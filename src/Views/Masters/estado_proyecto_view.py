@@ -1,7 +1,7 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      08/10/2025
-Commentarios:
+Comentarios:
     Módulo que contiene la vista de la entidad ESTADO DE PROYECTO.
 """
 
@@ -35,13 +35,15 @@ class EstadoProyectoView(BaseView):
             widget.setFocusPolicy(Qt.FocusPolicy.ClickFocus)
 
         # Establecemos las politicas de focus
-        self.frame.edit_estado_proyecto.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
+        self.frame.edit_estado_proyecto.setFocusPolicy(
+            Qt.FocusPolicy.StrongFocus)
         self.frame.text_observaciones.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
 
         # Establecer el orden
         self.setTabOrder(
             self.frame.edit_estado_proyecto, self.frame.text_observaciones
         )
+
 
 # Entrada a la aplicación
 if __name__ == "__main__":
@@ -57,4 +59,3 @@ if __name__ == "__main__":
 
     ventana.show()
     sys.exit(app.exec())
-

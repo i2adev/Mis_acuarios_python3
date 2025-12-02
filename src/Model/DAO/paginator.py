@@ -1,7 +1,7 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      16/06/2025
-Commentarios:
+Comentarios:
     Módulo que contiene la clase Paginator, que se encarga de manejar
     los datos paginados de las entidades.
 """
@@ -14,6 +14,7 @@ from Model.Entities.base_entity import BaseEntity
 from Model.Entities.categoria_acuario_entity import CategoriaAcuarioEntity
 from Model.Entities.categoria_incidencia_entity import CategoriaIncidenciaEntity
 from Model.Entities.estado_proyecto_entity import EstadoProyectoEntity
+from Model.Entities.filtro_entity import FiltroEntity
 from Model.Entities.marca_comercial_entity import MarcaComercialEntity
 from Model.Entities.material_urna_entity import MaterialUrnaEntity
 from Model.Entities.proyecto_entity import ProyectoEntity
@@ -523,6 +524,29 @@ class Paginator:
             )
                 for f in rows
             ]
+        elif self.procedure == "VISTA_FILTROS":
+            data_list = [FiltroEntity(
+                id=f["ID"],
+                num=f["NUM"],
+                id_marca=f["MARCA"],
+                modelo=f["MODELO"],
+                id_tipo=f["TIPO_FILTRO"],
+                es_thermo=f["TERMOFILTRO"],
+                num_serie=f["NUMERO_SERIE"],
+                vol_min_acuario=f["VOLUMEN_ACUARIO"],
+                caudal=f["CAUDAL"],
+                altura_bombeo=f["ALTURA_BOMBEO"],
+                consumo=f["CONSUMO"],
+                consumo_calentador=f["CONSUMO_CALENTADOR"],
+                vol_filtrante=f["VOLUMEN_FILTRANTE"],
+                ancho=f["DIMENSIONES"],
+                fecha_compra=f["fecha_compra"],
+                fecha_baja=f["FECHA_BAJA"],
+                motivo_baja=f["MOTIVO_BAJA"],
+                descripcion=f["DESCRIPCION"],
+            )
+                for f in rows
+            ]
 
         return data_list
 
@@ -573,6 +597,8 @@ class Paginator:
             return SearchCmd.SEARCH_PROYECTO
         elif self.procedure == "VISTA_ACUARIOS":
             return SearchCmd.SEARCH_ACUARIO
+        elif self.procedure == "VISTA_FILTROS":
+            return SearchCmd.SEARCH_FILTRO
 
     def __str__(self):
         """ Muestra el objeto en forma de texto. """

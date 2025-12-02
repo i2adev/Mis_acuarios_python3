@@ -1,7 +1,7 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      28/07/2025
-Commentarios:
+Comentarios:
     Módulo que contiene los controles del formulario de la entidad MARCA
     COMERCIAL.
 """

@@ -1,7 +1,7 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      31/07/2025
-Commentarios:
+Comentarios:
     Módulo que contiene los controles del formulario de la entidad ACUARIO.
 """
 
@@ -140,7 +140,9 @@ class AcuarioForm(QFrame):
         self.fecha_inicio_ciclado = NullableDateEdit()
         self.fecha_fin_ciclado = NullableDateEdit()
         self.fecha_desmontaje = NullableDateEdit()
-
+        self.fecha_desmontaje.setObjectName("fecha_desmontaje")
+        self.fecha_desmontaje.edit_date.setObjectName(
+            "fecha_desmontaje_acuario")
         # Botones
         self.button_color = QPushButton()
         self.button_color.setFixedWidth(30)

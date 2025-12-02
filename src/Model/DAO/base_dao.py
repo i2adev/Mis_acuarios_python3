@@ -1,7 +1,7 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      17/06/2025
-Commentarios:
+Comentarios:
     Clase base de las que ejecutan los comandos sobre la base de datos
     (DAOs).
 """
@@ -10,6 +10,7 @@ import traceback
 from abc import ABC, abstractmethod
 
 from PyQt6.QtWidgets import QMessageBox
+
 from Model.DAO.database import DBManager
 from Model.Entities.base_entity import BaseEntity
 from Model.Entities.insert_commands import InsertCmd
@@ -177,7 +178,7 @@ class BaseDAO(ABC):
 
     @staticmethod
     def get_total_data(procedure: str, col_parent: str = None,
-                        id_parent: int = None) -> Result([]):
+                       id_parent: int = None) -> Result([]):
         """
         Obtiene todos los datos de la vista especificada.
         :param procedure: La vista de la que se tienen que obtener los datos.
@@ -241,7 +242,7 @@ class BaseDAO(ABC):
     @staticmethod
     def get_filtered_data(sql: str, pattern: str) -> Result:
         """
-        Obtiena la lista filtrada
+        Obtiene la lista filtrada
         :param sql: Comando sql de selección a ejecutar
         :param pattern: Patrón de búsqueda
         """
@@ -275,7 +276,7 @@ class BaseDAO(ABC):
     @staticmethod
     def get_filtered_data_by_id(sql: str, id: int, pattern: str) -> Result:
         """
-        Obtiena la lista filtrada por id dependiente
+        Obtiene la lista filtrada por ID dependiente
         :param sql: Comando sql de selección a ejecutar
         :param id: ID del usuario
         :param pattern: Patrón de búsqueda
@@ -313,7 +314,7 @@ class BaseDAO(ABC):
         """
         Limpia la base de datos:
         - Elimina todos los registros.
-        - Inicializa los autonúmericos.
+        - Inicializa los autonumericos.
         """
 
         db = DBManager()

@@ -1,7 +1,7 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      15/09/2025
-Commentarios:
+Comentarios:
     Módulo que contiene la entidad USUARIO
 """
 from Model.Entities.base_entity import BaseEntity
@@ -116,7 +116,6 @@ class UsuarioEntity(BaseEntity):
     def password(self) -> None:
         """ Contraseñaa del usuario. """
         del self.__password
-
 
     def __str__(self):
         return f"{self.apellido1.upper()} {self.apellido2.upper()}, " \

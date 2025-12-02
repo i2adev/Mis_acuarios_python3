@@ -87,3 +87,10 @@ QComboBox:focus {
 QGroupBox {
     background-color: transparent;
 }
+
+/* Estilo de checkboxes */
+QCheckBox {
+    border: none;
+	background-color: transparent;
+    padding: 2px;
+}

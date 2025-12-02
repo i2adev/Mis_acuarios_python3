@@ -1,7 +1,7 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      20/07/2025
-Commentarios:
+Comentarios:
     Módulo que contiene el diálogo de la entidad TIPO DE ACUARIO.
 """
 
@@ -36,8 +36,10 @@ class TipoAcuarioDialog(BaseDialog):
             widget.setFocusPolicy(Qt.FocusPolicy.ClickFocus)
 
         # Establecemos las políticas de focus
-        self.frame.combo_categoria_acuario.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
-        self.frame.combo_subcategoria_acuario.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
+        self.frame.combo_categoria_acuario.setFocusPolicy(
+            Qt.FocusPolicy.StrongFocus)
+        self.frame.combo_subcategoria_acuario.setFocusPolicy(
+            Qt.FocusPolicy.StrongFocus)
         self.frame.text_observaciones.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
 
         # Establecer el orden
@@ -48,6 +50,7 @@ class TipoAcuarioDialog(BaseDialog):
         self.setTabOrder(
             self.frame.combo_subcategoria_acuario, self.frame.text_observaciones
         )
+
 
 # Entrada a la aplicación
 if __name__ == "__main__":

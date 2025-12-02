@@ -1,7 +1,7 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      09/10/2025
-Commentarios:
+Comentarios:
     Módulo que contiene los métodos de acceso a la base de datos de la
     entidad PROYECTO.
 """
@@ -16,7 +16,7 @@ from Model.Entities.proyecto_entity import ProyectoEntity
 from Services.Result.result import Result
 
 
-class ProyectoDAO (BaseDAO):
+class ProyectoDAO(BaseDAO):
     """
     Clase que gestiona las operaciones en la base de datos de la entidad
     proyecto.
@@ -100,8 +100,7 @@ class ProyectoDAO (BaseDAO):
         except sqlite3.Error as e:
             # traceback.print_exc()
             return Result.failure(f"[SQLITE ERROR]\n {e}")
-        
-        
+
     # ------------------------------------------------------------------
     def get_list_by_user(self, id_user: int) -> Result:
         """ Obtiene el listado por usuario. """
@@ -178,7 +177,7 @@ class ProyectoDAO (BaseDAO):
             return Result.failure(f"[SQLITE ERROR]\n {e}")
 
     # ------------------------------------------------------------------
-    def get_list_combo(self,) -> Result:
+    def get_list_combo(self, ) -> Result:
         pass
 
     # ------------------------------------------------------------------

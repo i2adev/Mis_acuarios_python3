@@ -1,7 +1,7 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      09/06/2025
-Commentarios:
+Comentarios:
     Controlador que se encarga de la revisión de ortografía de los
     controles de inserción de texto.
 """
@@ -13,6 +13,7 @@ import enchant
 
 from PyQt6.QtGui import QTextCharFormat, QColor
 from PyQt6.QtCore import Qt
+
 
 class SpellCheckController:
     def __init__(self):
@@ -29,7 +30,8 @@ class SpellCheckController:
         print(f"📁 Afirmaciones: {self.aff_path}")
 
         if not self.aff_path.exists() or not self.dic_file.exists():
-            raise FileNotFoundError("❌ Faltan archivos del diccionario Hunspell")
+            raise FileNotFoundError(
+                "❌ Faltan archivos del diccionario Hunspell")
 
         try:
             self.dic = enchant.Dict("es_ES")
@@ -41,7 +43,8 @@ class SpellCheckController:
         if hasattr(widget, "textChanged"):
             widget.textChanged.connect(lambda: self._verificar(widget))
         elif hasattr(widget, "editingFinished"):
-            widget.editingFinished.connect(lambda: self._verificar_line_edit(widget))
+            widget.editingFinished.connect(
+                lambda: self._verificar_line_edit(widget))
 
     def _verificar(self, widget):
         if not hasattr(widget, "toPlainText"):
@@ -58,7 +61,8 @@ class SpellCheckController:
             if not self.dict.check(limpia):
                 fmt = QTextCharFormat()
                 fmt.setUnderlineColor(QColor("red"))
-                fmt.setUnderlineStyle(QTextCharFormat.UnderlineStyle.SpellCheckUnderline)
+                fmt.setUnderlineStyle(
+                    QTextCharFormat.UnderlineStyle.SpellCheckUnderline)
                 buscador = widget.document().find(limpia)
                 while not buscador.isNull():
                     buscador.mergeCharFormat(fmt)
@@ -67,12 +71,14 @@ class SpellCheckController:
     def _verificar_line_edit(self, widget):
         texto = widget.text()
         palabras = texto.split()
-        errores = [p for p in palabras if not self.dict.check(p.strip(".,;:!?()\"“”¡¿"))]
+        errores = [p for p in palabras if
+                   not self.dict.check(p.strip(".,;:!?()\"“”¡¿"))]
 
         if errores:
             print(f"❌ Ortografía incorrecta en QLineEdit: {errores}")
         else:
             print("✅ Ortografía correcta en QLineEdit.")
+
 
 if __name__ == "__main__":
     sc = SpellCheckController()

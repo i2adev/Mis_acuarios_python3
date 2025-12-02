@@ -1,7 +1,7 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      15/09/2025
-Commentarios:
+Comentarios:
     Módulo que contiene el diálogo de la entidad USUARIO.
 """
 
@@ -59,6 +59,7 @@ class UsuarioDialog(BaseDialog):
         self.setTabOrder(
             self.frame.edit_password, self.frame.edit_password_2
         )
+
 
 # Entrada a la aplicación
 if __name__ == "__main__":

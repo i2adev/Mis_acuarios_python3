@@ -1,12 +1,10 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      26/07/2025
-Commentarios:
+Comentarios:
     Módulo que contiene la vista de la entidad MARCA COMERCIAL.
 """
 import sqlite3
-import traceback
-
 
 from Model.DAO.base_dao import BaseDAO
 from Model.DAO.database import DBManager
@@ -108,7 +106,8 @@ class MarcaComercialDAO(BaseDAO):
                 rows = cur.fetchall()
                 valores = [
                     MarcaComercialEntity(
-                        f["ID"], None, f["VALUE"]
+                        id=f["ID"],
+                        nombre_marca=f["VALUE"]
                     )
                     for f in rows
                 ]
@@ -197,14 +196,14 @@ class MarcaComercialDAO(BaseDAO):
             """
         )
         params = {
-                    "id": ent.id,
-                    "marca": ent.nombre_marca,
-                    "direccion": ent.direccion,
-                    "codp": ent.cod_postal,
-                    "poblacion": ent.poblacion,
-                    "provincia": ent.provincia,
-                    "idp": ent.id_pais,
-                    "descripcion": ent.observaciones
+            "id": ent.id,
+            "marca": ent.nombre_marca,
+            "direccion": ent.direccion,
+            "codp": ent.cod_postal,
+            "poblacion": ent.poblacion,
+            "provincia": ent.provincia,
+            "idp": ent.id_pais,
+            "descripcion": ent.observaciones
         }
 
         try:

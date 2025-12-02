@@ -1,7 +1,7 @@
 ﻿"""
 Autor:  Inigo Iturriagaetxebarria
 Fecha:  05/10/2025
-Commentarios:
+Comentarios:
     Controlador base de la subcategoría de acuario.
 """
 from PyQt6.QtGui import QAction

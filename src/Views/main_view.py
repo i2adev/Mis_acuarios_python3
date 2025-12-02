@@ -1,19 +1,18 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      22/06/2025
-Commentarios:
+Comentarios:
     Módulo que contiene el formulario principal.
 """
 
-
 import sys
+
+from PyQt6.QtCore import Qt
+from PyQt6.QtGui import QIcon, QPixmap, QCursor, QFont
 from PyQt6.QtWidgets import (QApplication, QWidget, QLabel, QPushButton,
                              QHBoxLayout, QVBoxLayout, QSpacerItem,
                              QSizePolicy, QFrame, QSizeGrip)
-from PyQt6.QtGui import QIcon, QPixmap, QCursor, QFont
-from PyQt6.QtCore import Qt
 
-import Resources.resources_rc
 
 class MainView(QWidget):
     """ Formulario de tipo de filtro """
@@ -73,10 +72,9 @@ class MainView(QWidget):
         self.menu_layout.addWidget(self.button_menu_maestro)
         self.menu_layout.addLayout(self.maestro_layout)
         self.menu_layout.addLayout(self.maestro_layout)
-
         self.menu_layout.addSpacerItem(
             QSpacerItem(20, 20, QSizePolicy.Policy.Minimum,
-            QSizePolicy.Policy.Expanding)
+                        QSizePolicy.Policy.Expanding)
         )
 
         # Configuramos la barra del título
@@ -90,24 +88,23 @@ class MainView(QWidget):
 
         # Layout de menú maestro
         self.maestro_layout.addWidget(self.button_maestro_acuario)
+        self.maestro_layout.addWidget(self.button_maestro_tipo_acuario)
+        self.maestro_layout.addWidget(self.button_maestro_categoria_acuario)
+        self.maestro_layout.addWidget(self.button_maestro_subcategoria_acuario)
         self.maestro_layout.addWidget(self.button_maestro_subcat_incidencia)
         self.maestro_layout.addWidget(self.button_maestro_cat_producto)
         self.maestro_layout.addWidget(self.button_maestro_comercio)
         self.maestro_layout.addWidget(self.button_maestro_facturas)
         self.maestro_layout.addWidget(self.button_maestro_filtro)
+        self.maestro_layout.addWidget(self.button_maestro_tipo_filtro)
         self.maestro_layout.addWidget(self.button_maestro_incidencia)
-        self.maestro_layout.addWidget(self.button_maestro_cat_incidencia)
         self.maestro_layout.addWidget(self.button_maestro_cat_incidencia)
         self.maestro_layout.addWidget(self.button_maestro_subcat_incidencia)
         self.maestro_layout.addWidget(self.button_maestro_marca)
-        self.maestro_layout.addWidget(self.button_maestro_material)
         self.maestro_layout.addWidget(self.button_maestro_proyecto)
         self.maestro_layout.addWidget(self.button_maestro_estado_proyecto)
-        self.maestro_layout.addWidget(self.button_maestro_tipo_acuario)
-        self.maestro_layout.addWidget(self.button_maestro_categoria_acuario)
-        self.maestro_layout.addWidget(self.button_maestro_subcategoria_acuario)
-        self.maestro_layout.addWidget(self.button_maestro_tipo_filtro)
         self.maestro_layout.addWidget(self.button_maestro_urna)
+        self.maestro_layout.addWidget(self.button_maestro_material)
 
         # Cargamos los layout en la ventana
         self.layout_central.addWidget(self.frame_menu)
@@ -119,11 +116,11 @@ class MainView(QWidget):
 
     def create_widgets(self):
         """ Crea los elementos del formulario"""
-        self.layout_main = QVBoxLayout(self) # Layout principal
+        self.layout_main = QVBoxLayout(self)  # Layout principal
         self.layout_central = QVBoxLayout()  # Layout central donde se coloca
-                                             # la barra de título y el dashboard
+        # la barra de título y el dashboard
         self.menu_layout = QVBoxLayout()  # Layout donde se alberga el menú
-                                          # lateral
+        # lateral
         self.maestro_layout = QVBoxLayout()
         self.frame_menu = QFrame()
         self.frame_menu.setStyleSheet(
@@ -148,7 +145,7 @@ class MainView(QWidget):
         self.frame_menu.setFixedWidth(250)
         self.frame_menu.setLayout(self.menu_layout)
 
-        self.layout_title_bar = QHBoxLayout() # Layout barra título
+        self.layout_title_bar = QHBoxLayout()  # Layout barra título
         self.layout_title_bar.setContentsMargins(0, 0, 0, 0)
 
         self.layout_dashboard = QHBoxLayout()  # Layout del dashboard
@@ -180,7 +177,7 @@ class MainView(QWidget):
             """
         )
         self.button_maestro_acuario.setObjectName(
-            "button_maestro_tipo_filtro"
+            "button_maestro_acuario"
         )
         self.button_maestro_acuario.setFlat(True)
         self.button_maestro_acuario.setCursor(
@@ -188,7 +185,7 @@ class MainView(QWidget):
         )
 
         self.button_maestro_cat_incidencia = QPushButton(
-            "CATEGORÍAS DE INCIDENCIA"
+            " > CATEGORÍAS DE INCIDENCIA"
         )
         self.button_maestro_cat_incidencia.setStyleSheet(
             """
@@ -211,7 +208,7 @@ class MainView(QWidget):
         )
 
         self.button_maestro_subcat_incidencia = QPushButton(
-            "SUBCATEGORÍAS DE INCIDENCIA"
+            " > SUBCATEGORÍAS DE INCIDENCIA"
         )
         self.button_maestro_subcat_incidencia.setStyleSheet(
             """
@@ -372,7 +369,7 @@ class MainView(QWidget):
         )
 
         self.button_maestro_material = QPushButton(
-            "MATERIALES DE URNAS"
+            " > MATERIALES DE URNAS"
         )
         self.button_maestro_material.setStyleSheet(
             """
@@ -441,7 +438,7 @@ class MainView(QWidget):
         )
 
         self.button_maestro_tipo_acuario = QPushButton(
-            "TIPOS DE ACUARIO"
+            " > TIPOS DE ACUARIO"
         )
         self.button_maestro_tipo_acuario.setStyleSheet(
             """
@@ -464,7 +461,7 @@ class MainView(QWidget):
         )
 
         self.button_maestro_categoria_acuario = QPushButton(
-            "CATEGORÍAS DE ACUARIO"
+            " > CATEGORÍAS DE ACUARIO"
         )
         self.button_maestro_categoria_acuario.setStyleSheet(
             """
@@ -487,7 +484,7 @@ class MainView(QWidget):
         )
 
         self.button_maestro_subcategoria_acuario = QPushButton(
-            "SUBCATEGORÍAS DE ACUARIO"
+            " > SUBCATEGORÍAS DE ACUARIO"
         )
         self.button_maestro_subcategoria_acuario.setStyleSheet(
             """
@@ -509,30 +506,7 @@ class MainView(QWidget):
             QCursor(Qt.CursorShape.PointingHandCursor)
         )
 
-        self.button_maestro_cat_incidencia = QPushButton(
-            "CATEGORÍAS DE INCIDENCIA"
-        )
-        self.button_maestro_cat_incidencia.setStyleSheet(
-            """
-            QPushButton {
-                background-color: transparent;
-                text-align: left;
-                margin-bottom: 0;
-                margin-left: 20;
-                font-family: 'Roboto'; 
-                font-size: 14px;
-            }
-            """
-        )
-        self.button_maestro_cat_incidencia.setObjectName(
-            "button_maestro_cat_incidencia"
-        )
-        self.button_maestro_cat_incidencia.setFlat(True)
-        self.button_maestro_cat_incidencia.setCursor(
-            QCursor(Qt.CursorShape.PointingHandCursor)
-        )
-
-        self.button_maestro_tipo_filtro = QPushButton("TIPOS DE FILTRO")
+        self.button_maestro_tipo_filtro = QPushButton(" > TIPOS DE FILTRO")
         self.button_maestro_tipo_filtro.setStyleSheet(
             """
             QPushButton {
@@ -655,9 +629,11 @@ class MainView(QWidget):
     """
     El comportamiento básico de la barra de titulo que hemos creado
     """
+
     def control_bt_minimizar(self):
         """ Minimiza la ventana """
         self.showMinimized()
+
     def control_bt_maximizar(self):
         """ Maximiza la ventana """
         self.showMaximized()

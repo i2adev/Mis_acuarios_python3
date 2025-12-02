@@ -1,7 +1,7 @@
 ﻿"""
 Autor:  Inigo Iturriagaetxebarria
 Fecha:  06/10/2025
-Commentarios:
+Comentarios:
     Controlador del formulario maestro del proyecto.
 """
 
@@ -143,7 +143,7 @@ class ProyectoMasterController(ProyectoController):
             )
             return
 
-        # Obtoenemos los datos
+        # Obtiene los datos
         self._pag.get_filtered_list_by_id(pattern, globals.CURRENT_USER.id)
 
         # Cargamos la tabla

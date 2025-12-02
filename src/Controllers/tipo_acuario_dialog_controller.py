@@ -1,7 +1,7 @@
 ﻿"""
 Autor: Inigo Iturriagaetxebarria
 Fecha: 03/10/2025
-Commentarios:
+Comentarios:
     Controlador del cuadro de diálogo de inserción de marca comercial.
 """
 

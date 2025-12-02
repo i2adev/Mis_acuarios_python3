@@ -1,7 +1,7 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      09/08/2025
-Commentarios:
+Comentarios:
     Módulo para la validación del formulario de acuario.
 """
 
@@ -9,6 +9,7 @@ from PyQt6.QtWidgets import QLineEdit, QComboBox
 
 from CustomControls.nullable_date_edit import NullableDateEdit
 from Model.DAO.acuario_dao import AcuarioDAO
+from Model.DAO.urna_dao import UrnaDAO
 from Services.Result.result import Result
 
 
@@ -70,7 +71,7 @@ class AcuarioValidator:
         return Result.success(1)
 
     @staticmethod
-    def validate_urna(widget: QComboBox) -> Result:
+    def validate_urna(widget: QComboBox, val_is_mounted: bool = True) -> Result:
         """ Válida la urna. """
 
         # Sí el combo está vacío
@@ -78,6 +79,16 @@ class AcuarioValidator:
             return Result.failure(
                 "EL CAMPO 'URNA' NO PUEDE ESTAR VACÍO"
             )
+
+        if val_is_mounted:
+            # Valida de que no se inserta una urna que está aún montada
+            id_urna = int(widget.currentData())
+            dao = UrnaDAO()
+
+            if dao.is_mounted(id_urna).value:
+                return Result.failure(
+                    f"lA URNA '{widget.currentText().upper()}' ESTÁ SIENDO UTILIZADA."
+                )
 
         # Validación exitosa
         return Result.success(1)

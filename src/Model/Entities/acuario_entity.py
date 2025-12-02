@@ -1,7 +1,7 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      30/10/2025
-Commentarios:
+Comentarios:
     Módulo que contiene la entidad ACAURIO.
 """
 from Model.Entities.base_entity import BaseEntity

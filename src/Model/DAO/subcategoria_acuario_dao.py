@@ -1,12 +1,11 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      03/07/2025
-Commentarios:
+Comentarios:
     Módulo que contiene la vista de la entidad SUBCATEGORÍA DE ACUARIO.
 """
 import sqlite3
 import traceback
-
 
 from Model.DAO.base_dao import BaseDAO
 from Model.DAO.database import DBManager
@@ -73,6 +72,7 @@ class SubcategoriaAcuarioDAO(BaseDAO):
         except sqlite3.Error as e:
             # traceback.print_exc()
             return Result.failure(f"[SQLITE ERROR]\n {e}")
+
     # ------------------------------------------------------------------
     def get_list_combo(self) -> Result(list[SubcategoriaAcuarioEntity]):
         """
@@ -290,4 +290,3 @@ class SubcategoriaAcuarioDAO(BaseDAO):
         except sqlite3.Error as e:
             # traceback.print_exc()
             return Result.failure(f"[SQLITE ERROR]\n {e}")
-

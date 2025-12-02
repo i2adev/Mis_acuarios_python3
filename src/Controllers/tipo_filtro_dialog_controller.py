@@ -1,7 +1,7 @@
 ﻿"""
 Autor: Inigo Iturriagaetxebarria
 Fecha: 29/09/2025
-Commentarios:
+Comentarios:
     Controlador del cuadro de diálogo de inserción de tipo de filtro.
 """
 
@@ -14,7 +14,7 @@ from Views.Dialogs.tipo_filtro_dialog import TipoFiltroDialog
 from tipo_filtro_controller import TipoFiltroController
 
 
-class TipoFiltroDialogoController(TipoFiltroController):
+class TipoFiltroDialogController(TipoFiltroController):
     """ Controlador del cuadro de diálogo tipo de filtro. """
 
     def __init__(self, view: TipoFiltroDialog, dao: TipoFiltroDAO,

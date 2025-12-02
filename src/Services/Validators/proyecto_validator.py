@@ -1,7 +1,7 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      21/10/2025
-Commentarios:
+Comentarios:
     Módulo para la validación del formulario de proyecto.
 """
 

@@ -1,7 +1,7 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      30/06/2025
-Commentarios:
+Comentarios:
     Módulo que contiene la entidad CATEGORÍA DE ACUARIO.
 """
 
@@ -70,6 +70,7 @@ class CategoriaAcuarioEntity(BaseEntity):
     def observaciones(self, new_observaciones: str):
         """ Categoria del acuario. """
         self.__observaciones = new_observaciones
+
     # FIN DE PROPIEDADES -----------------------------------------------
 
     def __str__(self):

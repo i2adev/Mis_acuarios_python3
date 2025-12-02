@@ -1,12 +1,11 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      24/07/2025
-Commentarios:
+Comentarios:
     Módulo que contiene la vista de la entidad CATEGORÍA DE INCIDENCIA.
 """
 import sqlite3
 import traceback
-
 
 from Model.DAO.base_dao import BaseDAO
 from Model.DAO.database import DBManager
@@ -178,8 +177,8 @@ class CategoriaIncidenciaDAO(BaseDAO):
             """
         )
         params = {
-                    "cat": ent.categoria_incidencia,
-                    "descripcion": ent.observaciones
+            "cat": ent.categoria_incidencia,
+            "descripcion": ent.observaciones
         }
 
         try:
@@ -220,10 +219,10 @@ class CategoriaIncidenciaDAO(BaseDAO):
             """
         )
         params = {
-                    "id": ent.id,
-                    "cat": ent.categoria_incidencia,
-                    "descripcion": ent.observaciones
-                }
+            "id": ent.id,
+            "cat": ent.categoria_incidencia,
+            "descripcion": ent.observaciones
+        }
 
         try:
             with self.db.conn as con:

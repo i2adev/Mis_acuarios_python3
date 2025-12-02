@@ -1,7 +1,7 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      21/07/2025
-Commentarios:
+Comentarios:
     Módulo que contiene el diálogo de la entidad TIPO DE FILTRO.
 """
 
@@ -43,6 +43,7 @@ class TipoFiltroDialog(BaseDialog):
         self.setTabOrder(
             self.frame.edit_tipo_filtro, self.frame.text_observaciones
         )
+
 
 # Entrada a la aplicación
 if __name__ == "__main__":

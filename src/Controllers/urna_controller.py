@@ -1,7 +1,7 @@
 ﻿"""
 Autor:  Inigo Iturriagaetxebarria
 Fecha:  07/10/2025
-Commentarios:
+Comentarios:
     Controlador base de urna.
 """
 from PyQt6.QtGui import QAction
@@ -10,11 +10,13 @@ from PyQt6.QtWidgets import QMessageBox, QPushButton
 from Controllers.base_controller import BaseController
 from Model.DAO.marca_comercial_dao import MarcaComercialDAO
 from Views.Dialogs.marca_comercial_dialog import MarcaComercialDialog
-from Controllers.marca_comercial_dialog_controller import MarcaComercialDialogController
+from Controllers.marca_comercial_dialog_controller import \
+    MarcaComercialDialogController
 from Model.Entities.marca_comercial_entity import MarcaComercialEntity
 from Model.DAO.material_urna_dao import MaterialUrnaDAO
 from Views.Dialogs.material_urna_dialog import MaterialUrnaDialog
-from Controllers.material_urna_dialog_controller import MaterialUrnaDialogController
+from Controllers.material_urna_dialog_controller import \
+    MaterialUrnaDialogController
 from Model.Entities.material_urna_entity import MaterialUrnaEntity
 from Services.Result.result import Result
 from Model.DAO.urna_dao import UrnaDAO
@@ -46,10 +48,9 @@ class UrnaController(BaseController):
         # Llenamo los combos
         self._fill_combos()
 
-
     def _entity_configuration(self) -> UrnaEntity:
         """ Configura la entidad. """
-        
+
         ent = UrnaEntity()
 
         if self._view.frame.edit_id.text():
@@ -163,11 +164,11 @@ class UrnaController(BaseController):
             return Result.failure(res.error_msg)
 
         return Result.success(ide)
+
     # FIN DE CRUD --------------------------------------------------
 
     def _validate_view(self) -> Result:
         """ Valida el formulario. """
-
 
         # Valida la marca
         res = UrnaValidator.validate_marca(

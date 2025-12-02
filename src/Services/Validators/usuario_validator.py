@@ -1,7 +1,7 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      09/08/2025
-Commentarios:
+Comentarios:
     Módulo para la validación del formulario de usuario.
 """
 
@@ -29,7 +29,7 @@ class UsuarioValidator:
         # Controla la longitud del texto
         if len(widget.text()) > 20:
             return Result.failure("EL CAMPO 'NOMBRE' NO "
-                                "PUEDE CONTENER MAS DE 32 CARACTERES")
+                                  "PUEDE CONTENER MAS DE 32 CARACTERES")
 
         # Validación exitosa
         return Result.success(1)
@@ -47,7 +47,7 @@ class UsuarioValidator:
         # Controla la longitud del texto
         if len(widget.text()) > 32:
             return Result.failure("EL CAMPO 'PRIMER APELLIDO' NO "
-                                "PUEDE CONTENER MAS DE 32 CARACTERES")
+                                  "PUEDE CONTENER MAS DE 32 CARACTERES")
 
         # Validación exitosa
         return Result.success(1)
@@ -65,7 +65,7 @@ class UsuarioValidator:
         # Controla la longitud del texto
         if len(widget.text()) > 32:
             return Result.failure("EL CAMPO 'SEGUNDO APELLIDO' NO "
-                                "PUEDE CONTENER MAS DE 32 CARACTERES")
+                                  "PUEDE CONTENER MAS DE 32 CARACTERES")
 
         # Validación exitosa
         return Result.success(1)
@@ -77,7 +77,7 @@ class UsuarioValidator:
         # Controla la longitud del texto
         if len(widget.text()) > 15:
             return Result.failure("EL CAMPO 'NICK DE USUARIO' NO "
-                                "PUEDE CONTENER MAS DE 32 CARACTERES")
+                                  "PUEDE CONTENER MAS DE 32 CARACTERES")
 
         return Result.success(1)
 
@@ -94,7 +94,7 @@ class UsuarioValidator:
         # Controla la longitud del texto
         if len(widget.text()) > 32:
             return Result.failure("EL CAMPO 'E-MAIL' NO "
-                                "PUEDE CONTENER MAS DE 32 CARACTERES")
+                                  "PUEDE CONTENER MAS DE 32 CARACTERES")
 
         # Comprobamos el formato de la dirección e-mail
         pattern = QRegularExpression(
@@ -104,7 +104,7 @@ class UsuarioValidator:
 
         if not re.match(pattern, widget.text()):
             return Result.failure("EL CAMPO 'E-MAIL' NO "
-                                "TIENE EL FORMATO CORRECTO")
+                                  "TIENE EL FORMATO CORRECTO")
 
         # Validación exitosa
         return Result.success(1)
@@ -125,6 +125,3 @@ class UsuarioValidator:
                                   "ENTRE 6 Y 8 CARÁCTERES")
 
         return Result.success(1)
-
-
-

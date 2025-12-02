@@ -1,7 +1,7 @@
 ﻿"""
 Autor:  Inigo Iturriagaetxebarria
 Fecha:  01/10/2025
-Commentarios:
+Comentarios:
     Controlador base del material de la urna.
 """
 
@@ -73,7 +73,7 @@ class MaterialUrnaController(BaseController):
 
     def _update(self) -> Result:
         """ Actualiza el registro en la base de datos. """
-        
+
         # Valida el formulario
         val = self._validate_view()
 
@@ -210,7 +210,7 @@ class MaterialUrnaController(BaseController):
         # Lee los datos del modelo
         id_row = modelo.index(fila, 0).data()
         material = modelo.index(fila, 2).data()  # La columna 1 es el
-                                                    # númer correlativo.
+        # númer correlativo.
         descripcion = modelo.index(fila, 3).data()
 
         # Cargamos los widgets

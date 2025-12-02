@@ -1,7 +1,7 @@
 ﻿"""
 Autor:  Inigo Iturriagaetxebarria
 Fecha:  07/10/2025
-Commentarios:
+Comentarios:
     Controlador base de urna.
 """
 from PyQt6.QtCore import QDate, QDateTime, QTime

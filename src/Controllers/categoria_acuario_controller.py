@@ -1,7 +1,7 @@
 ﻿"""
 Autor:  Inigo Iturriagaetxebarria
 Fecha:  02/10/2025
-Commentarios:
+Comentarios:
     Controlador base del categoria de filtro.
 """
 from PyQt6.QtGui import QAction

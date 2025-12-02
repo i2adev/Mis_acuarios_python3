@@ -1,7 +1,7 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      25/07/2025
-Commentarios:
+Comentarios:
     Módulo que contiene el diálogo de la entidad SUBCATEGORÍA DE INCIDENCIA.
 """
 
@@ -36,8 +36,10 @@ class SubcategoriaIncidenciaDialog(BaseDialog):
             widget.setFocusPolicy(Qt.FocusPolicy.ClickFocus)
 
         # Establecemos las politicas de focus
-        self.frame.combo_categoria_incidencia.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
-        self.frame.edit_subcategoria_incidencia.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
+        self.frame.combo_categoria_incidencia.setFocusPolicy(
+            Qt.FocusPolicy.StrongFocus)
+        self.frame.edit_subcategoria_incidencia.setFocusPolicy(
+            Qt.FocusPolicy.StrongFocus)
         self.frame.text_observaciones.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
 
         # Establecer el orden
@@ -46,8 +48,10 @@ class SubcategoriaIncidenciaDialog(BaseDialog):
             self.frame.edit_subcategoria_incidencia
         )
         self.setTabOrder(
-            self.frame.edit_subcategoria_incidencia, self.frame.text_observaciones
+            self.frame.edit_subcategoria_incidencia,
+            self.frame.text_observaciones
         )
+
 
 # Entrada a la aplicación
 if __name__ == "__main__":

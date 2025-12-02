@@ -1,7 +1,7 @@
 ﻿"""
 Autor: Inigo Iturriagaetxebarria
 Fecha: 08/10/2025
-Commentarios:
+Comentarios:
     Controlador del cuadro de diálogo de inserción de urna.
 """
 
@@ -30,12 +30,16 @@ class AcuarioDialogController(AcuarioController):
         # inicializamos la vista y pasamos al constructor padre
         super().__init__(view, dao, mod)
 
-        # Llenamo los combos
+        # Llena los combos
         self._fill_combos()
 
-        # Ocultamos los layouts
+        # Oculta los layouts
         self._hide_layout(self._view.frame.layout_id)
         self._hide_layout(self._view.frame.layout_color)
+        # self._hide_layout(self._view.frame.layout_motivo_desmontaje)
+
+        # Inhabilita el layout del motivo de desmontaje
+        self._view.frame.layout_motivo_desmontaje.setEnabled(False)
 
         # Inicializamos los eventos
         self.init_handlers()
@@ -81,7 +85,7 @@ class AcuarioDialogController(AcuarioController):
             return
 
         # Configuramos la entidad
-        self._proyecto_result = AcuarioEntity(
+        self._acuario_result = AcuarioEntity(
             id=res.value,
             id_proyecto=self._view.frame.combo_proyecto.text(),
             num=None,
@@ -121,8 +125,8 @@ class AcuarioDialogController(AcuarioController):
         """ Abre la centava modal. """
 
         if self._view.exec():
-            # Obtenemos la subcategoría de acuario
-            acuario = self._get_proyecto()
+            # Obtiene la subcategoría de acuario
+            acuario = self._get_acuario()
             return Result.success(acuario)
         else:
             return Result.failure("EL USUARIO CANCELO LA INSERCIÓN")

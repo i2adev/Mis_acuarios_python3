@@ -1,7 +1,7 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      24/07/2025
-Commentarios:
+Comentarios:
     Módulo que contiene el formulario maestro de la categoría de incidencia.
 """
 
@@ -51,6 +51,7 @@ class CategoriaIncidenciaView(BaseView):
         self.setTabOrder(
             self.frame.edit_categoria_incidencia, self.frame.text_observaciones
         )
+
 
 # Entrada a la aplicación
 if __name__ == "__main__":

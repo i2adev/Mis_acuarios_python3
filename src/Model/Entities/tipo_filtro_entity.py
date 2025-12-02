@@ -1,11 +1,12 @@
 """
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      02/06/2025
-Commentarios:
+Comentarios:
     Módulo que contien la entidad TIPO DE FILTRO.
 """
 
 from Model.Entities.base_entity import BaseEntity
+
 
 class TipoFiltroEntity(BaseEntity):
     """ Entidad del tipo de filtro. """

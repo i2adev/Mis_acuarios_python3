@@ -1,12 +1,13 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      09/10/2025
-Commentarios:
+Comentarios:
     Módulo que contiene la entidad PROYECTO.
 """
 from datetime import datetime
 
 from Model.Entities.base_entity import BaseEntity
+
 
 class ProyectoEntity(BaseEntity):
     """ Entidad del tipo de filtro. """
@@ -138,6 +139,7 @@ class ProyectoEntity(BaseEntity):
     def descripcion(self, new_descripcion: str):
         """ Observaciones del proyecto. """
         self.__descripcion = new_descripcion
+
     # FIN PROPIEDADES
 
     def __str__(self):

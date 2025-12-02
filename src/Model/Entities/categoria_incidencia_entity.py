@@ -1,7 +1,7 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      24/07/2025
-Commentarios:
+Comentarios:
     Módulo que contiene la entidad CATEGORÍA DE INCIDENCIA.
 """
 from Model.Entities.base_entity import BaseEntity
@@ -16,8 +16,8 @@ class CategoriaIncidenciaEntity(BaseEntity):
     categoria_incidencia: str | None
     observaciones: str | None
 
-    def __init__(self, id = None, num = None, categoria_incidencia = None,
-                 observaciones = None):
+    def __init__(self, id=None, num=None, categoria_incidencia=None,
+                 observaciones=None):
         """
         Constructor de clase:
 
@@ -39,6 +39,7 @@ class CategoriaIncidenciaEntity(BaseEntity):
     def id(self):
         """ Id de la entidad """
         return self.__id
+
     @id.setter
     def id(self, new_id):
         """ Id de la entidad """

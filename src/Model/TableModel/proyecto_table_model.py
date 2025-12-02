@@ -1,7 +1,7 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      21/10/2025
-Commentarios:
+Comentarios:
     Módulo que contiene el modelo de visualización de la tabla de PROYECTOS. 
     Este módulo se encarga de dar formato a los datos de la tabla.
 """
@@ -85,4 +85,3 @@ class ProyectoTableModel(QAbstractTableModel):
             return self._headers[section]
         else:
             return str(section + 1)
-

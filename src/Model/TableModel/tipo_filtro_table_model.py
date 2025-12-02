@@ -1,7 +1,7 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      02/06/2025
-Commentarios:
+Comentarios:
     Módulo que contiene el modelo de visualización de la tabla de TIPOS DE
     FILTRO. Este módulo se encarga de dar formato a los datos de la tabla.
 """
@@ -37,7 +37,7 @@ class TipoFiltroTableModel(QAbstractTableModel):
     def data(self, index, role=Qt.ItemDataRole.DisplayRole):
         """
         Devuelve el dato de una de las celdas.
-        Parametros:
+        Parámetros:
         - INDEX: Índice de la columna
         - ROLE: Rol de la _______
         """
@@ -70,4 +70,3 @@ class TipoFiltroTableModel(QAbstractTableModel):
             return self._headers[section]
         else:
             return str(section + 1)
-

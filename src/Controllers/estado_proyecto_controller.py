@@ -1,7 +1,7 @@
 ﻿"""
 Autor:  Inigo Iturriagaetxebarria
 Fecha:  01/10/2025
-Commentarios:
+Comentarios:
     Controlador base del tipo de filtro.
 """
 

@@ -1,7 +1,7 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      09/08/2025
-Commentarios:
+Comentarios:
     Módulo que contiene el diálogo de la entidad URNA.
 """
 

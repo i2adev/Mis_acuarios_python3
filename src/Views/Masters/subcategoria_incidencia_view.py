@@ -1,7 +1,7 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      25/07/2025
-Commentarios:
+Comentarios:
     Módulo que contiene el formulario maestro de la subcategoría de
     incidencia.
 """
@@ -60,6 +60,7 @@ class SubcategoriaIncidenciaView(BaseView):
             self.frame.edit_subcategoria_incidencia,
             self.frame.text_observaciones
         )
+
 
 # Entrada a la aplicación
 if __name__ == "__main__":

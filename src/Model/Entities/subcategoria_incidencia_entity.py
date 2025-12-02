@@ -1,7 +1,7 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      24/07/2025
-Commentarios:
+Comentarios:
     Módulo que contiene la entidad SUBCATEGORÍA DE INCIDENCIA.
 """
 from Model.Entities.base_entity import BaseEntity
@@ -17,8 +17,8 @@ class SubcategoriaIncidenciaEntity(BaseEntity):
     subcategoria: str | None
     observaciones: str | None
 
-    def __init__(self, id = None, num = None, id_categoria = None,
-                 subcategoria = None, observaciones = None):
+    def __init__(self, id=None, num=None, id_categoria=None,
+                 subcategoria=None, observaciones=None):
         """
         Constructor de clase:
 

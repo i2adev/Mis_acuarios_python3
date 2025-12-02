@@ -1,10 +1,11 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      02/06/2025
-Commentarios:
+Comentarios:
     Módulo que contiene la clase Result. Esta clase se utiliza para
     aplicar el patron result.
 """
+
 
 class Result:
     """
@@ -12,7 +13,7 @@ class Result:
     patron result.
     """
 
-    def __init__(self, value = None, is_success: bool = None,
+    def __init__(self, value=None, is_success: bool = None,
                  error_msg: str = None):
         """ Constructor de clase. """
         self.value = value

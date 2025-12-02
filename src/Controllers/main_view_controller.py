@@ -1,7 +1,7 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      23/06/2025
-Commentarios:
+Comentarios:
     Módulo que contiene la clase controladora de la vista principal.
 """
 import globals
@@ -13,6 +13,7 @@ from Controllers.categoria_incidencia_master_controller import \
     CategoriaIncidenciaMasterController
 from Controllers.estado_proyecto_master_controller import \
     EstadoProyectoMasterController
+from Controllers.filtro_master_controller import FiltroMasterController
 from Controllers.marca_comercial_master_controller import \
     MarcaComercialMasterController
 from Controllers.material_urna_master_controler import \
@@ -30,6 +31,7 @@ from Model.DAO.acuario_dao import AcuarioDAO
 from Model.DAO.categoria_acuario_dao import CategoriaAcuarioDAO
 from Model.DAO.categoria_incidencia_dao import CategoriaIncidenciaDAO
 from Model.DAO.estado_proyecto_dao import EstadoProyectoDAO
+from Model.DAO.filtro_dao import FiltroDAO
 from Model.DAO.marca_comercial_dao import MarcaComercialDAO
 from Model.DAO.material_urna_dao import MaterialUrnaDAO
 from Model.DAO.proyecto_dao import ProyectoDAO
@@ -42,6 +44,7 @@ from Model.Entities.acuario_entity import AcuarioEntity
 from Model.Entities.categoria_acuario_entity import CategoriaAcuarioEntity
 from Model.Entities.categoria_incidencia_entity import CategoriaIncidenciaEntity
 from Model.Entities.estado_proyecto_entity import EstadoProyectoEntity
+from Model.Entities.filtro_entity import FiltroEntity
 from Model.Entities.marca_comercial_entity import MarcaComercialEntity
 from Model.Entities.material_urna_entity import MaterialUrnaEntity
 from Model.Entities.proyecto_entity import ProyectoEntity
@@ -55,6 +58,7 @@ from Views.Masters.acuario_view import AcuarioView
 from Views.Masters.categoria_acuario_view import CategoriaAcuarioView
 from Views.Masters.categoria_incidencia_view import CategoriaIncidenciaView
 from Views.Masters.estado_proyecto_view import EstadoProyectoView
+from Views.Masters.filtro_view import FiltroView
 from Views.Masters.marca_comercial_view import MarcaComercialView
 from Views.Masters.material_urna_view import MaterialUrnaView
 from Views.Masters.proyecto_view import ProyectoView
@@ -73,9 +77,9 @@ class MainViewController(BaseController):
     """
 
     def __init__(self):
-        """ Construtctor de clase. """
+        """ Constructor de clase. """
 
-        # Inicializamos la vista, la entitdad y el DAO
+        # Inicializamos la vista, la entidad y el DAO
         self._view = MainView("ACUARIOS DE "
                               f"{globals.CURRENT_USER.nombre.upper()} "
                               f"{globals.CURRENT_USER.apellido1.upper()}")
@@ -90,6 +94,11 @@ class MainViewController(BaseController):
     def init_handlers(self):
         """ Inicializa los handlers. """
         # Inicializamos los botones
+
+        self._view.button_maestro_filtro.clicked.connectpo_acuario_dao(
+            self.filtro_clicked
+        )
+
         self._view.button_maestro_tipo_filtro.clicked.connect(
             self.tipo_filtro_clicked
         )
@@ -135,6 +144,19 @@ class MainViewController(BaseController):
         self._view.button_maestro_acuario.clicked.connect(
             self.acuario_clicked
         )
+
+    def filtro_clicked(self):
+        """
+        Cuando se presiona en el filtro.
+        Acción: Abre el formulario de filtro.
+        """
+
+        view = FiltroView("MAESTRO DE FILTROS")
+        dao = FiltroDAO()
+        mod = FiltroEntity()
+
+        ctrl = FiltroMasterController(view, dao, mod)
+        ctrl.show()
 
     def acuario_clicked(self):
         """

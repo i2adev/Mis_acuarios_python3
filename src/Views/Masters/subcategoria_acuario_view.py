@@ -1,7 +1,7 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      18/07/2025
-Commentarios:
+Comentarios:
     Módulo que contiene el formulario maestro de la subcategoría de
     acuario.
 """
@@ -61,6 +61,7 @@ class SubcategoriaAcuarioView(BaseView):
             self.frame.edit_subcategoria_acuario,
             self.frame.text_observaciones
         )
+
 
 # Entrada a la aplicación
 if __name__ == "__main__":

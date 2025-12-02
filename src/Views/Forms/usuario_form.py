@@ -1,7 +1,7 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      15/09/2025
-Commentarios:
+Comentarios:
     Módulo que contiene los controles del formulario de la entidad USUARIO.
 """
 

@@ -1,7 +1,7 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      14/07/2025
-Commentarios:
+Comentarios:
     Módulo que contiene el formulario maestro de la categoría de
     acuario.
 """
@@ -56,6 +56,7 @@ class CategoriaAcuarioView(BaseView):
         self.setTabOrder(
             self.frame.edit_categoria_acuario, self.frame.text_observaciones
         )
+
 
 # Entrada a la aplicación
 if __name__ == "__main__":

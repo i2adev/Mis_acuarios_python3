@@ -1,7 +1,7 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      18/07/2025
-Commentarios:
+Comentarios:
     Módulo que contiene el modelo de visualización de la tabla de SUBCATEGORÍAS
     DE ACUARIO. Este módulo se encarga de dar formato a los datos de la tabla.
 """
@@ -21,7 +21,8 @@ class SubcategoriaAcuarioTableModel(QAbstractTableModel):
 
         super().__init__()
         self.data = data
-        self._headers = ["ID", "#", "CATEGORÍA", "SUBCATEGORÍA", "OBSERVACIONES"]
+        self._headers = ["ID", "#", "CATEGORÍA", "SUBCATEGORÍA",
+                         "OBSERVACIONES"]
 
     def rowCount(self, parent=QModelIndex()):
         """ Devuelve el número de filas de la lista de tipos de filtro. """

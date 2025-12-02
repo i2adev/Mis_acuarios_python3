@@ -1,7 +1,7 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      28/07/2025
-Commentarios:
+Comentarios:
     Módulo que contiene el modelo de visualización de la tabla de MARCAS 
     COMERCIALES. Este módulo se encarga de dar formato a los datos de la tabla.
 """

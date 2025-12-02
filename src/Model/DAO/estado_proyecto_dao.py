@@ -1,7 +1,7 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      08/10/2025
-Commentarios:
+Comentarios:
     Módulo que contiene los métodos de acceso a la base de datos de la
     entidad ESTADO DE PROYECTO.
 """
@@ -137,8 +137,8 @@ class EstadoProyectoDAO(BaseDAO):
             """
         )
         params = {
-                    "estado": ent.estado,
-                    "descripcion": ent.descripcion
+            "estado": ent.estado,
+            "descripcion": ent.descripcion
         }
 
         try:
@@ -179,9 +179,9 @@ class EstadoProyectoDAO(BaseDAO):
             """
         )
         params = {
-                    "id": ent.id,
-                    "estado": ent.estado,
-                    "descripcion": ent.descripcion
+            "id": ent.id,
+            "estado": ent.estado,
+            "descripcion": ent.descripcion
         }
 
         try:

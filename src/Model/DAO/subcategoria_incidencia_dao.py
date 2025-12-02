@@ -1,16 +1,16 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      03/07/2025
-Commentarios:
+Comentarios:
     Módulo que contiene la vista de la entidad SUBCATEGORÍA DE ACUARIO.
 """
 import sqlite3
 import traceback
 
-
 from Model.DAO.base_dao import BaseDAO
 from Model.DAO.database import DBManager
-from Model.Entities.subcategoria_incidencia_entity import SubcategoriaIncidenciaEntity
+from Model.Entities.subcategoria_incidencia_entity import \
+    SubcategoriaIncidenciaEntity
 from Services.Result.result import Result
 
 

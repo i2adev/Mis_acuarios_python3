@@ -1,7 +1,7 @@
 ﻿"""
 Autor:  Inigo Iturriagaetxebarria
 Fecha:  06/10/2025
-Commentarios:
+Comentarios:
     Controlador del formulario maestro de subcategoría de incidencia.
 """
 
@@ -144,7 +144,7 @@ class UrnaMasterController(UrnaController):
             )
             return
 
-        # Obtoenemos los datos
+        # Obtiene los datos
         self._pag.get_filtered_list(pattern)
 
         # Cargamos la tabla

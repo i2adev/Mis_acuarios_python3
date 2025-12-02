@@ -1,7 +1,7 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      08/08/2025
-Commentarios:
+Comentarios:
     Módulo que contiene el formulario maestro de urna.
 """
 

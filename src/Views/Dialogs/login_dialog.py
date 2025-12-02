@@ -1,7 +1,7 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      18/09/2025
-Commentarios:
+Comentarios:
     Módulo que contiene la vista de inicio de sesión.
 """
 
@@ -15,6 +15,7 @@ from PyQt6.QtWidgets import (QDialog, QVBoxLayout, QFrame, QSizePolicy,
 
 import Resources.resources_rc
 
+
 class LoginDialog(QDialog):
     """ Formulario de tipo de filtro """
 
@@ -26,8 +27,6 @@ class LoginDialog(QDialog):
         self.create_widgets()
         self.build_layout()
         self.set_tab_order()
-
-
 
     def create_widgets(self):
         """ Crea los elementos del formulario"""
@@ -61,11 +60,11 @@ class LoginDialog(QDialog):
         ## Imagen
         self.label_image = QLabel()
         self.label_image.setPixmap(
-                # QPixmap("../../Resources/Images/cuenta.png").scaled(
-                QPixmap(":/Images/cuenta.png").scaled(
-                    QSize(100,100),
-                    Qt.AspectRatioMode.KeepAspectRatio,
-                    Qt.TransformationMode.SmoothTransformation
+            # QPixmap("../../Resources/Images/cuenta.png").scaled(
+            QPixmap(":/Images/cuenta.png").scaled(
+                QSize(100, 100),
+                Qt.AspectRatioMode.KeepAspectRatio,
+                Qt.TransformationMode.SmoothTransformation
             )
         )
         self.label_image.setAlignment(Qt.AlignmentFlag.AlignHCenter)
@@ -100,7 +99,8 @@ class LoginDialog(QDialog):
         ## Botón Crear usuario
         self.button_crear_usuario = QPushButton("CREAR NUEVO USUARIO")
         self.button_crear_usuario.setFlat(True)
-        self.button_crear_usuario.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.button_crear_usuario.setCursor(
+            QCursor(Qt.CursorShape.PointingHandCursor))
 
     def build_layout(self):
         """ Construye el layout de la ventana """

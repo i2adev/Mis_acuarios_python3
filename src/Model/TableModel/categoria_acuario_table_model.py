@@ -1,7 +1,7 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      15/07/2025
-Commentarios:
+Comentarios:
     Módulo que contiene el modelo de visualización de la tabla de CATEGORÍAS DE
     ACUARIO. Este módulo se encarga de dar formato a los datos de la tabla.
 """
@@ -35,9 +35,9 @@ class CategoriaAcuarioTableModel(QAbstractTableModel):
     def data(self, index, role=Qt.ItemDataRole.DisplayRole):
         """
         Devuelve el dato de una de las celdas.
-        Parametros:
-        - INDEX: Índice de la columna
-        - ROLE: Rol de la _______
+        Parámetros:
+        :param index: Índice de la columna
+        :param role: Rol de la _______
         """
 
         if not index.isValid() or role != Qt.ItemDataRole.DisplayRole:
@@ -58,7 +58,7 @@ class CategoriaAcuarioTableModel(QAbstractTableModel):
     def headerData(self, section, orientation,
                    role=Qt.ItemDataRole.DisplayRole):
         """
-        Depencdiendo de la horientación de la tabla, Obtiene el encabezado
+        Depencdiendo de la orientación de la tabla, Obtiene el encabezado
         de la columna o número de fila.
         """
         if role != Qt.ItemDataRole.DisplayRole:

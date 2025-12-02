@@ -1,10 +1,11 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      16/09/2025
-Commentarios:
+Comentarios:
     Módulo que contiene la clase Paginator, que se encarga de manejar
     los datos paginados de las entidades.
 """
+
 
 class InsertCmd:
     """

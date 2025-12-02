@@ -1,7 +1,7 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      15/09/2025
-Commentarios:
+Comentarios:
     Módulo que contiene el DAO de la URNA.
 """
 import sqlite3
@@ -15,7 +15,7 @@ from Model.Entities.usuario_entity import UsuarioEntity
 from Services.Result.result import Result
 
 
-class UsuarioDAO (BaseDAO):
+class UsuarioDAO(BaseDAO):
     """
     Clase que gestiona las operaciones en la base de datos de la entidad
     UsuarioEntity.
@@ -241,13 +241,13 @@ class UsuarioDAO (BaseDAO):
                     return Result.failure("ERROR DE AUTENTICACIÓN")
 
                 usuario = UsuarioEntity(
-                        id=row["ID"],
-                        num=None,
-                        nombre=row["NOMBRE"],
-                        apellido1=row["APELLIDO1"],
-                        apellido2=row["APELLIDO2"],
-                        nick=row["NICK"],
-                        password=row["PASSWORD"])
+                    id=row["ID"],
+                    num=None,
+                    nombre=row["NOMBRE"],
+                    apellido1=row["APELLIDO1"],
+                    apellido2=row["APELLIDO2"],
+                    nick=row["NICK"],
+                    password=row["PASSWORD"])
 
                 # Validamos las credencfiales
                 if self.verify_password(pwd, usuario.password):

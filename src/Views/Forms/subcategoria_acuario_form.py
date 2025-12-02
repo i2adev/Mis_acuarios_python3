@@ -1,7 +1,7 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      27/06/2025
-Commentarios:
+Comentarios:
     Módulo que contiene los controles del formulario de la entidad TIPO DE
     ACUARIO.
 """

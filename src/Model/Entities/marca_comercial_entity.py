@@ -1,7 +1,7 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      26/07/2025
-Commentarios:
+Comentarios:
     Módulo que contiene la entidad MARCA DE PRODUCTO.
 """
 from Model.Entities.base_entity import BaseEntity
@@ -21,9 +21,9 @@ class MarcaComercialEntity(BaseEntity):
     id_pais: int | None
     observaciones: str | None
 
-    def __init__(self, id = None, num = None, nombre_marca = None,
-                 direccion = None, cod_postal = None, poblacion = None,
-                 provincia = None, id_pais = None, observaciones = None):
+    def __init__(self, id=None, num=None, nombre_marca=None,
+                 direccion=None, cod_postal=None, poblacion=None,
+                 provincia=None, id_pais=None, observaciones=None):
         """
         Constructor de clase.
         :param id: Id de la entidad
@@ -74,6 +74,7 @@ class MarcaComercialEntity(BaseEntity):
     def nombre_marca(self) -> str | None:
         """ Nombre de la marca. """
         return self.__nombre_marca
+
     @nombre_marca.setter
     def nombre_marca(self, new_nombre_marca: str) -> None:
         """ Nombre de la marca. """

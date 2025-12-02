@@ -1,7 +1,7 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      30/06/2025
-Commentarios:
+Comentarios:
     Módulo que contiene el diálogo de la entidad CATEGORÍA DE ACUARIO.
 """
 
@@ -12,6 +12,7 @@ from PyQt6.QtWidgets import QDialog, QApplication, QMessageBox, QWidget
 
 from Views.Dialogs.base_dialog import BaseDialog
 from Views.Forms.categoria_acuario_form import CategoriaAcuarioForm
+
 
 class CategoriaAcuarioDialog(BaseDialog):
     """ Diálogo de categoría de acuario. """
@@ -35,13 +36,15 @@ class CategoriaAcuarioDialog(BaseDialog):
             widget.setFocusPolicy(Qt.FocusPolicy.ClickFocus)
 
         # Establecemos las politicas de focus
-        self.frame.edit_categoria_acuario.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
+        self.frame.edit_categoria_acuario.setFocusPolicy(
+            Qt.FocusPolicy.StrongFocus)
         self.frame.text_observaciones.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
 
         # Establecer el orden
         self.setTabOrder(
             self.frame.edit_categoria_acuario, self.frame.text_observaciones
         )
+
 
 # Entrada a la aplicación
 if __name__ == "__main__":

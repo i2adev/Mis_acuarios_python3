@@ -1,7 +1,7 @@
 ﻿"""
 Autor:  Inigo Iturriagaetxebarria
 Fecha:  29/09/2025
-Commentarios:
+Comentarios:
     Controlador del formulario maestro de material de urna.
 """
 
@@ -135,7 +135,7 @@ class MaterialUrnaMasterController(MaterialUrnaController):
             )
             return
 
-        # Obtoenemos los datos
+        # Obtiene los datos
         self._pag.get_filtered_list(pattern)
 
         # Cargamos la tabla

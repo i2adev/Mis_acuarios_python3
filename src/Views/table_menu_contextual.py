@@ -1,13 +1,13 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      11/06/2025
-Commentarios:
+Comentarios:
     Módulo que contiene una clase derivada de QMenu. Esta clase contiene un
     menú contextual que permite cargar o eliminar un registro de la tabla.
 """
 
-
 from PyQt6.QtWidgets import QMenu, QTableView
+
 
 class TableMenuContextual(QMenu):
     """ Menú contextual de la tabla. """
@@ -28,4 +28,3 @@ class TableMenuContextual(QMenu):
         # # Armamos el menú
         # self.addAction(action_cargar)
         # self.addAction(action_eliminar)
-

@@ -1,7 +1,7 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      28/07/2025
-Commentarios:
+Comentarios:
     Módulo para la validación del formulario de marca comercial.
 """
 
@@ -91,4 +91,3 @@ class MarcaComercialValidator:
 
         # Validación exitosa
         return Result.success(1)
-
