@@ -95,7 +95,7 @@ class MainViewController(BaseController):
         """ Inicializa los handlers. """
         # Inicializamos los botones
 
-        self._view.button_maestro_filtro.clicked.connectpo_acuario_dao(
+        self._view.button_maestro_filtro.clicked.connect(
             self.filtro_clicked
         )
 

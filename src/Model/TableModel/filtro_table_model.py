@@ -16,40 +16,16 @@ class FiltroTableModel(QAbstractTableModel):
     Clase que controla la visualización de la lista de acuarios.
     """
 
-    sql = """
-    SELECT  F.ID_FILTRO AS ID,
-          ROW_NUMBER() OVER(ORDER BY MC.MARCA, F.MODELO) AS NUM,
-          MC.MARCA AS MARCA,
-          F.MODELO AS MODELO,
-          TF.TIPO_FILTRO AS TIPO_FILTRO,
-          F.ES_THERMOFILTRO AS TERMOFILTRO,
-          F.NUMERO_SERIE AS NUMERO_SERIE,
-          F.VOLUMEN_MIN_ACUARIO || '/' || F.VOLUMEN_MAX_ACUARIO AS 
-          VOLUMEN_ACUARIO,
-          F.CAUDAL AS CAUDAL,
-          F.ALTURA_BOMBEO AS ALTURA_BOMBEO,
-          F.CONSUMO AS CONSUMO,
-          F.CONSUMO_CALENTADOR AS CONSUMO_CALENTADOR,
-          F.VOLUMEN_FILTRANTE AS VOLUMEN_FILTRANTE,
-          F.ANCHO || 'x' || F.FONDO || 'x' || F.ALTO AS DIMENSIONES,
-          F.FECHA_INSTALACION AS FECHA_INSTALACIÓN,
-          F.FECHA_BAJA AS FECHA_BAJA,
-          F.MOTIVO_BAJA AS MOTIVO_BAJA,
-          F.DESCRIPCION AS DESCRIPCIÓN
-    FROM  FILTROS F
-    LEFT JOIN MARCAS_COMERCIALES MC ON F.ID_MARCA = MC.ID_MARCA
-    LEFT JOIN TIPOS_FILTRO TF ON F.ID_TIPO = TF.ID_TIPO
-    """
-
     def __init__(self, data: list[FiltroEntity]):
         super().__init__()
         self.data = data
 
         self._headers = ([
-            "ID", "#", "MARCA", "MODELO", "TIPO FILTRO", "NUMERO SERIE",
-            "VOLUMEN ACUARIO", "CAUDAL", "ALTURA BOMBEO", "CONSUMO FILTRO",
-            "CONSUMO CALENTADOR", "VOL. FILTRANTE.", "DIMENSIONES (cm)",
-            "F.COMPRA", "F. BAJA.", "MOTIVO BAJA", "DESCRIPCIÓN"
+            "ID", "#", "MARCA", "MODELO", "TIPO FILTRO", "TERMO.",
+            "NUMERO SERIE", "VOLUMEN ACUARIO", "CAUDAL", "ALTURA BOMBEO",
+            "CONSUMO FILTRO", "CONSUMO CALENTADOR", "VOL. FILTRANTE.",
+            "DIMENSIONES (cm)", "F.COMPRA", "F. BAJA.", "DISP.", "MOTIVO BAJA",
+            "DESCRIPCIÓN"
         ])
 
     def rowCount(self, parent=QModelIndex()):
@@ -65,49 +41,75 @@ class FiltroTableModel(QAbstractTableModel):
         :param index: Índice de la column
         :param role: Rol de la _______
         """
-
-        if not index.isValid() or role != Qt.ItemDataRole.DisplayRole:
+        
+        if not index.isValid():
             return None
 
         entidad = self.data[index.row()]
         column = index.column()
 
-        if column == 0:
-            return entidad.id  # el ID de fila
-        elif column == 1:
-            return entidad.num  # Número de la fila
-        elif column == 2:
-            return entidad.id_marca  # Marca
-        elif column == 3:
-            return entidad.modelo  # Modelo
-        elif column == 4:
-            return entidad.id_tipo  # Tipo de filtro
-        elif column == 5:
-            return entidad.es_thermo  # Es termofiltro
-        elif column == 6:
-            return entidad.num_serie  # Número de serie
-        elif column == 7:
-            return entidad.vol_min_acuario  # Volumen de acuario
-        elif column == 8:
-            return entidad.caudal  # Caudal del filtro
-        elif column == 9:
-            return entidad.altura_bombeo  # Altura de bombeo
-        elif column == 10:
-            return entidad.consumo  # Consumo de la bomba
-        elif column == 11:
-            return entidad.consumo_calentador  # COnsumo del calentador
-        elif column == 12:
-            return entidad.vol_filtrante  # Volumen de material filtrante
-        elif column == 13:
-            return entidad.ancho  # Dimensiones del filtro
-        elif column == 14:
-            return entidad.fecha_compra  # Fecha de compra del filtro
-        elif column == 15:
-            return entidad.fecha_baja  # Fecha de baja del filtro
-        elif column == 16:
-            return entidad.motivo_baja  # Motivo de la baja
-        elif column == 17:
-            return entidad.descripcion  # Descripción del filtro
+        # --- CENTRADO ---
+        if role == Qt.ItemDataRole.TextAlignmentRole:
+            if column in (1, 5, 8, 9, 10, 11, 12):
+                return Qt.AlignmentFlag.AlignCenter
+
+        # --- CHECKBOX TERMOFILTRO ---
+        if column == 5:
+            if role == Qt.ItemDataRole.CheckStateRole:
+                return Qt.CheckState.Checked if entidad.es_thermo == 1 else Qt.CheckState.Unchecked
+            if role == Qt.ItemDataRole.DisplayRole:
+                return ""  # MUY IMPORTANTE: evita mostrar 0/1
+            return None
+
+        # --- CHECKBOX DISPONIBLE ---
+        if column == 16:
+            if role == Qt.ItemDataRole.CheckStateRole:
+                disponible = entidad.fecha_baja in (None, "")
+                return Qt.CheckState.Checked if disponible else Qt.CheckState.Unchecked
+            return None
+
+        # --- SOLO DISPLAY PARA EL RESTO ---
+        if role != Qt.ItemDataRole.DisplayRole:
+            return None
+
+        if column == 0:  # ID del filtro
+            return entidad.id
+        elif column == 1:  # Número correlativo de filtro
+            return entidad.num
+        elif column == 2:  # Marca de filtro
+            return entidad.id_marca
+        elif column == 3:  # Modelo de filtro
+            return entidad.modelo
+        elif column == 4:  # Tipo de filtro
+            return entidad.id_tipo
+        elif column == 6:  # Número de serie
+            return entidad.num_serie
+        elif column == 7:  # Volumen mínimo del acuario recomendado
+            return entidad.vol_min_acuario
+        elif column == 8:  # Volumen máximo del acuario recomendado
+            return entidad.caudal
+        elif column == 9:  # Altura máxima de bombeo
+            return entidad.altura_bombeo
+        elif column == 10:  # Consumo del filtro
+            return entidad.consumo
+        elif column == 11:  # Consumo del calentador
+            return entidad.consumo_calentador
+        elif column == 12:  # Volumen de material filtrante
+            return entidad.vol_filtrante
+        elif column == 13:  # Dimensiones del acuario
+            return entidad.ancho
+        elif column == 14:  # Fecha de compra del filtro
+            return entidad.fecha_compra
+        elif column == 15:  # Fecha de baja del filtro
+            return entidad.fecha_baja
+        elif column == 16:  # Filtro disponible?
+            return entidad.fecha_baja
+        elif column == 17:  # Motivo de la baja del filtro
+            return entidad.motivo_baja
+        elif column == 18:  # Descripción del filtro
+            return entidad.descripcion
+        else:
+            return None
 
     def headerData(self, section, orientation,
                    role=Qt.ItemDataRole.DisplayRole):
@@ -133,8 +135,9 @@ class FiltroTableModel(QAbstractTableModel):
                 13: "Dimensiones del filtro (ancho x fondo x alto) (cm)",
                 14: "Fecha de compra dle filtro",
                 15: "Fecha de baja del filtro",
-                16: "Motivo de baja del filtro",
-                17: "Descripción general"
+                16: "¿Está disponible el filtro?",
+                17: "Motivo de baja del filtro",
+                18: "Descripción general"
             }
             return tooltips.get(section, "")
 
@@ -146,3 +149,16 @@ class FiltroTableModel(QAbstractTableModel):
 
         # Número de fila
         return str(section + 1)
+
+    def flags(self, index):
+        if not index.isValid():
+            return Qt.ItemFlag.NoItemFlags
+
+        if index.column() == 5 or index.column() == 16:
+            return (
+                    Qt.ItemFlag.ItemIsEnabled |
+                    Qt.ItemFlag.ItemIsUserCheckable |
+                    Qt.ItemFlag.ItemIsSelectable
+            )
+
+        return Qt.ItemFlag.ItemIsEnabled | Qt.ItemFlag.ItemIsSelectable

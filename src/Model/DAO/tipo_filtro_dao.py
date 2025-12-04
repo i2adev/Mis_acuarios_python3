@@ -7,12 +7,11 @@ Comentarios:
 """
 
 import sqlite3
-import traceback
 
 from Model.DAO.base_dao import BaseDAO
-from Services.Result.result import Result
 from Model.DAO.database import DBManager
 from Model.Entities.tipo_filtro_entity import TipoFiltroEntity
+from Services.Result.result import Result
 
 
 class TipoFiltroDAO(BaseDAO):
@@ -75,7 +74,7 @@ class TipoFiltroDAO(BaseDAO):
             return Result.failure(f"[SQLITE ERROR]\n {e}")
 
     # ------------------------------------------------------------------
-    def get_list_combo(self) -> Result(list[TipoFiltroEntity]):
+    def get_list_combo(self) -> Result:
         """
         Obtiene una lista ligera para combos (ID y texto visible).
         Devuelve entidades con `num=None` y `observaciones=None`.

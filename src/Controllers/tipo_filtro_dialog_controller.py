@@ -7,11 +7,11 @@ Comentarios:
 
 from PyQt6.QtWidgets import QWidget, QMessageBox, QComboBox
 
+from Controllers.tipo_filtro_controller import TipoFiltroController
 from Model.DAO.tipo_filtro_dao import TipoFiltroDAO
 from Model.Entities.tipo_filtro_entity import TipoFiltroEntity
 from Services.Result.result import Result
 from Views.Dialogs.tipo_filtro_dialog import TipoFiltroDialog
-from tipo_filtro_controller import TipoFiltroController
 
 
 class TipoFiltroDialogController(TipoFiltroController):

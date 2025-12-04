@@ -40,6 +40,7 @@ class FiltroDialog(BaseDialog):
 
         # Establecemos las políticas de focus
         self.frame.combo_tipo_filtro.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
+        self.frame.check_termofiltro.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
         self.frame.combo_marca.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
         self.frame.edit_modelo.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
         self.frame.edit_num_serie.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
@@ -66,7 +67,9 @@ class FiltroDialog(BaseDialog):
         self.frame.text_descripcion.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
 
         # Establecer el orden
-        self.setTabOrder(self.frame.combo_tipo_filtro, self.frame.combo_marca)
+        self.setTabOrder(self.frame.combo_tipo_filtro,
+                         self.frame.check_termofiltro)
+        self.setTabOrder(self.frame.check_termofiltro, self.frame.combo_marca)
         self.setTabOrder(self.frame.combo_marca, self.frame.edit_modelo)
         self.setTabOrder(self.frame.edit_modelo, self.frame.edit_num_serie)
         self.setTabOrder(self.frame.edit_num_serie,

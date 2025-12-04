@@ -127,9 +127,11 @@ class FiltroForm(QFrame):
         self.edit_id.setObjectName("edit_id")
 
         self.edit_modelo = QLineEdit()
+        self.edit_modelo.setMinimumWidth(250)
         self.edit_modelo.setObjectName("edit_modelo")
 
         self.edit_num_serie = QLineEdit()
+        self.edit_num_serie.setMinimumWidth(250)
         self.edit_num_serie.setObjectName("edit_num_serie")
 
         self.edit_vol_min_acuario = QLineEdit()

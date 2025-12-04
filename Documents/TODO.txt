@@ -1,6 +1,61 @@
 ﻿================================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
+02/12/2025  SE REALIZA EL TESTEO MANUAL DEL FORMULARIO DE FILTRO:
+     ↓      -   TEST: APERTURA DEL FORMULARIO.                              DONE
+            -   TEST: INSERCIÓN DE REGISTRO.                                DONE
+            -   TEST: CARGA DE REGISTRO.                                    DONE
+            -   TEST: ELIMINACIÓN DE REGISTRO DESDE MENÚ CONTEXTUAL.        DONE
+            -   TEST: ELIMINACIÓN DE REGISTRO DESPUÉS DE CARGAR EN EL FORMULARIO
+                                                                            DONE
+            -   TEST: MODIFICACIÓN DE REGISTRO.                             DONE
+            -   TEST: BÚSQUEDA DE REGISTROS.                                DONE
+
+            CORRECCIONES:
+            -   SE PULEN LOS DISTINTOS NOMBRES DE LOS ELEMENTOS PARA PERMITIR LA
+                APERTURA DEL FORMULARIO MAESTRO DE FILTROS.                 DONE
+            -   SE CORRIGEN LOS CAMPOS DE LA TABLA DEL MAESTRO DE FILTRO PARA
+                QUE REPRESENTE EL NÚMERO DE COLUMNAS DESEADAS.              DONE
+            -   SE HAN MODIFICADO ALGUNOS NOMBRES DE LOS CONTROLES EN EL
+                CONTROLADOR.                                                DONE
+            -   SE HAN MODIFICADO ALGUNOS NOMBRES EN LA ENTIDAD DEL FILTRO
+                PARA ADECUARLOS AL CONTEXTO ACTUAL.                         DONE
+            -   CORREGIDO EL ERROR DE CONVERSIÓN A NUMEROS DECIMALES DEL
+                CONTENIDO DE LOS CUADROS DE TEXTO QUE ADMITEN NÚMEROS DECIMALES.
+                                                                            DONE
+            -   SE CORRIGE LA INSERCIÓN DE LA FECHA DE BAJA DEL FILTRO. SI SE
+                DEJA VACÍO SE INSERTAS LA FECHA MINIMA.                     DONE
+            -   SE MODIFICA EL DAO DEL FILTRO PARA QUE PERMITA LA INSERCIÓN DEL
+                CAMPO DE TERMOFILTRO.                                       DONE
+            -   SE CORRIGE LA LIMPIEZA DE LOS FORMULARIOS PARA QUE LIMPIEN
+                TAMBIEN LOS CHECKBOXES.                                     DONE
+            -   HACER QUE SE CARGUE EL CAMPO DE TERMOFILTRO.                DONE
+            -   AÑADIR UNA COLUMNA DE DISPONIBILIDAD DEL FILTRO. SI NO SE HA
+                DADO DE BAJA AL FILTRO ESTÁ DISPONIBLE, EN CASO CONTRARIO NO.
+                ESTA COLUMNA SERA UN CHECKBOX.                              DONE
+            -   SE MODIFICA EL ORDEN TDE TABULACIÓN DEL FORMULARIO PARA
+                INTERCALAR EL CAMPO DEL TERMOFILTRO.                        DONE
+            -   SE CORRIGE LA CARGA DE VOLUMENES DE ACUARIOS.               DONE
+            -   SE CORRIGE LA CARGA DE LAS MEDIDAS DEL FILTRO.              DONE
+            -   SE CORRIGE LA CARGA DEL CHECKBOX QUE ESPECIFICA SI ES UN FILTRO
+                CON CALENTADOR INTEGRADO.                                   DONE
+            -   SE CORRIGE LA CARGA DE LAS DIMENSIONES.                     DONE
+            -   SE CORRIGE LA CARGA DE LAS MEDIDAS DEL FILTRO.              DONE
+            -   SE MODIFICA LA LLAMADA A LA VALIDACIÓN DEL FORMULARIO EN LA
+                ACTUALIZACIÓN DEL REGISTRO.                                 DONE
+            -   SE CORRIGEN LOS NOMBRES DE ALGUNAS VARIABLES PARA ADECUARLAS AL
+                ESTANDAR ACTUAL.                                            DONE
+            -   SE CORRIGE EL ERROR DE INSERTAR LA ALTURA DEL FILTRO, SE INSERTA
+                COMO 'ALTO'.                                                DONE
+            -   CORREGIDO: SE CORRIGE EL COMANDO DE BÚSQUEDA PARA INCLUIR EL
+                MODELO EN EL PATRÓN DE BÚSQUEDA.                            DONE
+
+            MEJORAS:
+            -   SE MODIFICA LA APARIENCIA DEL FORMULARIO:
+                -   SE AUMENTA LA ANCHURA DEL CUADRO DE TEXTO DEL MODELO.   DONE
+                -   SE AUMENTA LA ANCHURA DEL CUADRO DE TEXTO DEL NÚMERO DE
+                    SERIE.                                                  DONE
+
 19/11/2025  SE AÑADE LA LÓGICA DE FILTRO:
      ↓      -   SE CREA LA ENTIDAD.                                         DONE
 02/12/2025  -   SE CREA LA VISTA EN LA BASE DE DATOS.                       DONE

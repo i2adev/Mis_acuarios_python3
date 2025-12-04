@@ -13,7 +13,7 @@ from PyQt6.QtGui import QGuiApplication
 from PyQt6.QtWidgets import (QLineEdit, QTextEdit, QPlainTextEdit, QWidget,
                              QTableView, QComboBox, QHeaderView, QMessageBox,
                              QLabel, QCompleter, QHBoxLayout, QVBoxLayout,
-                             QPushButton)
+                             QPushButton, QCheckBox)
 
 from Model.DAO.base_dao import BaseDAO
 from Model.DAO.paginator import Paginator
@@ -180,7 +180,7 @@ class BaseController(QObject):
 
         # Limpia los controles del formulario
         for widget in self._view.findChildren(QWidget):
-            # Contrl de imagen
+            # Control de imagen
             if isinstance(widget, ImageForm):
                 self._clean_photografy(widget)
 
@@ -198,6 +198,10 @@ class BaseController(QObject):
                 if widget.objectName() == "combo_select_page":
                     continue
                 widget.setCurrentIndex(-1)
+
+            # En caso de que sean checkboxes
+            if isinstance(widget, QCheckBox):
+                widget.setChecked(False)
 
         # Establecemos el foco en el control
         control.setFocus()

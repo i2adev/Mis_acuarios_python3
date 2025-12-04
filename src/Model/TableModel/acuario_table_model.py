@@ -21,7 +21,7 @@ class AcuarioTableModel(QAbstractTableModel):
         super().__init__()
         self.data = data
 
-        # Añadimos la columna CICL. después de "F. F. CICLADO"
+        # Encabezados de columna de la tabla
         self._headers = ([
             "ID", "#", "PROYECTO", "COLOR", "NOMBRE", "URNA",
             "TIPO", "VOLUMEN", "F. MONTAJE", "F. I. CICLADO",

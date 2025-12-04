@@ -178,7 +178,7 @@ class FiltroEntity(BaseEntity):
 
     @vol_max_acuario.setter
     def vol_max_acuario(self, vol_max_acuario: int) -> None:
-        """ Volumen mánimo del acuario. """
+        """ Volumen máximo del acuario. """
         self._vol_max_acuario = vol_max_acuario
 
     @property
@@ -194,12 +194,12 @@ class FiltroEntity(BaseEntity):
     @property
     def altura_bombeo(self) -> int | None:
         """ Altuna bombeo. """
-        return self._altuna_bombeo
+        return self._altura_bombeo
 
     @altura_bombeo.setter
     def altura_bombeo(self, altura_bombeo: int) -> None:
         """ Altuna bombeo. """
-        self._altuna_bombeo = altura_bombeo
+        self._altura_bombeo = altura_bombeo
 
     @property
     def consumo(self) -> int | None:
@@ -244,12 +244,12 @@ class FiltroEntity(BaseEntity):
     @property
     def fecha_compra(self) -> int | None:
         """ Fecha instalación. """
-        return self._fecha_instalacion
+        return self._fecha_compra
 
     @fecha_compra.setter
-    def fecha_compra(self, fecha_instalacion: int) -> None:
+    def fecha_compra(self, fecha_compra: int) -> None:
         """ Fecha instalación. """
-        self._fecha_instalacion = fecha_instalacion
+        self._fecha_compra = fecha_compra
 
     @property
     def fecha_baja(self) -> int | None:

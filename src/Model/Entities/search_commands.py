@@ -325,6 +325,7 @@ class SearchCmd:
                   UPPER(
                       IFNULL(MC.MARCA, '')
                       || IFNULL(TF.TIPO_FILTRO, '')
+                      || IFNULL(F.MODELO, '')
                       || IFNULL(F.VOLUMEN_MIN_ACUARIO || '/' || F.VOLUMEN_MAX_ACUARIO, '')
                       || IFNULL(F.CAUDAL, '')
                       || IFNULL(F.ALTURA_BOMBEO, '')

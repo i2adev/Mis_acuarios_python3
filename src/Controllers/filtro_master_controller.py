@@ -72,10 +72,10 @@ class FiltroMasterController(FiltroController):
 
         # Inicializa los botones
         self._view.frame.button_insert_tipo_filtro.clicked.connect(
-            self._open_tipo_filtro_dialog()
+            self._open_tipo_filtro_dialog
         )
         self._view.frame.button_insert_marca.clicked.connect(
-            self._open_marca_dialog()
+            self._open_marca_dialog
         )
         self._view.button_insert.clicked.connect(self.button_insert_click)
         self._view.button_update.clicked.connect(self.button_update_click)
@@ -392,9 +392,7 @@ class FiltroMasterController(FiltroController):
         """ Gestiona los datos para llenar la tabla. """
 
         self._fill_tableview(self._view.data_table, self._pag.current_data)
-        self._configure_table(self._view.data_table,
-                              [0, 3, 9, 10, 12, 13, 15, ]
-                              )
+        self._configure_table(self._view.data_table)
 
     def _fill_tableview(self, table: QTableView,
                         data: list[FiltroEntity]):

@@ -5,7 +5,7 @@ Comentarios:
     Controlador base de filtro.
 """
 
-from PyQt6.QtCore import QDate, QDateTime, QTime
+from PyQt6.QtCore import QDate, QDateTime, QTime, Qt
 from PyQt6.QtGui import QAction
 from PyQt6.QtWidgets import QMessageBox, QPushButton
 
@@ -62,6 +62,7 @@ class FiltroController(BaseController):
             ent.id = None
 
         ent.id_tipo = int(self._view.frame.combo_tipo_filtro.currentData())
+        ent.es_thermo = 1 if self._view.frame.check_termofiltro.isChecked() else 0
         ent.id_marca = int(self._view.frame.combo_marca.currentData())
         ent.modelo = self._view.frame.edit_modelo.text()
 
@@ -108,15 +109,17 @@ class FiltroController(BaseController):
         else:
             ent.alto = None
 
-        if self._view.frame.edit_vol_filtrante.text():
-            ent.vol_filtrante = float(
-                self._view.frame.edit_vol_filtrante.text())
+        if self._view.frame.edit_vol_material.text():
+            vol_material = self._view.frame.edit_vol_material.text()
+            vol_material = vol_material.replace(',', '.')
+            ent.vol_filtrante = float(vol_material)
         else:
             ent.vol_filtrante = None
 
-        if self._view.frame.edit_altura_maxima.text():
-            ent.altura_bombeo = float(
-                self._view.frame.edit_altura_maxima.text())
+        if self._view.frame.edit_altura_max_bombeo.text():
+            altura_max_bombeo = self._view.frame.edit_altura_max_bombeo.text()
+            altura_max_bombeo = altura_max_bombeo.replace(',', '.')
+            ent.altura_bombeo = float(altura_max_bombeo)
         else:
             ent.altura_bombeo = None
 
@@ -134,21 +137,19 @@ class FiltroController(BaseController):
             ent.fecha_compra = None
 
         baja = self._view.frame.fecha_baja.date()
-        if compra.isValid():
+        if baja.isValid():
             time_baja = QDateTime(baja, QTime(0, 0))
             ent.fecha_baja = int(time_baja.toSecsSinceEpoch())
         else:
             ent.fecha_baja = None
 
         if self._view.frame.edit_motivo_baja.text():
-            ent.motivo_baja = float(
-                self._view.frame.edit_motivo_baja.text())
+            ent.motivo_baja = self._view.frame.edit_motivo_baja.text()
         else:
             ent.motivo_baja = None
 
-        if self._view.frame.edit_descripcion.text():
-            ent.descripcion = float(
-                self._view.frame.edit_descripcion.text())
+        if self._view.frame.text_descripcion.toPlainText():
+            ent.descripcion = self._view.frame.text_descripcion.toPlainText()
         else:
             ent.descripcion = None
 
@@ -183,7 +184,7 @@ class FiltroController(BaseController):
         """ Actualiza el registro en la base de datos. """
 
         # Valida el formulario
-        val = self._validate_view(False, False)
+        val = self._validate_view()
 
         if not val.is_success:
             return val
@@ -285,11 +286,11 @@ class FiltroController(BaseController):
 
         # Valida el número de serie
         res = FiltroValidator.validate_numero_serie(
-            self._view.frame.edit_numero_serie
+            self._view.frame.edit_num_serie
         )
 
         if not res.is_success:
-            self._view.frame.edit_numero_serie.setFocus()
+            self._view.frame.edit_num_serie.setFocus()
             return res
 
         # Valida el motivo de la baja del filtro
@@ -374,7 +375,7 @@ class FiltroController(BaseController):
         # Llenamos el combo
         for ent in lista.value:
             self._view.frame.combo_tipo_filtro.addItem(
-                ent.modelo, ent.id
+                ent.tipo_filtro, ent.id
             )
 
         # Establecemos el autocompletado
@@ -454,14 +455,22 @@ class FiltroController(BaseController):
         # Lee los datos del modelo
         id_ent = modelo.index(fila, 0).data()
         marca = modelo.index(fila, 2).data()
-        modelo = modelo.index(fila, 3).data()
+        modelo_filtro = modelo.index(fila, 3).data()
         tipo_filtro = modelo.index(fila, 4).data()
-        termofiltro = modelo.index(fila, 5).data()
+
+        index_check = modelo.index(fila, 5)
+        estado = index_check.data(Qt.ItemDataRole.CheckStateRole)
+        termofiltro = True if estado == Qt.CheckState.Checked else False
+
         num_serie = modelo.index(fila, 6).data()
 
         volumes = self.brakdown_volumes(modelo.index(fila, 7).data())
-        volumen_min_acuario = volumes[0]
-        volumen_max_acuario = volumes[1]
+        if volumes and len(volumes) == 2:
+            volumen_min_acuario = volumes[0]
+            volumen_max_acuario = volumes[1]
+        else:
+            volumen_min_acuario = None
+            volumen_max_acuario = None
 
         caudal = modelo.index(fila, 8).data()
         altura_bombeo = modelo.index(fila, 9).data()
@@ -469,16 +478,25 @@ class FiltroController(BaseController):
         consumo_calentador = modelo.index(fila, 11).data()
 
         volumen_material = modelo.index(fila, 12).data()
+
         dimensions = self.brakdown_dimensions(modelo.index(fila, 13).data())
-        ancho_filtro = dimensions[0]
-        fondo_filtro = dimensions[1]
-        altura_filtro = dimensions[2]
+        if dimensions and len(dimensions) == 3:
+            ancho_filtro = dimensions[0]
+            fondo_filtro = dimensions[1]
+            altura_filtro = dimensions[2]
+        else:
+            ancho_filtro = None
+            fondo_filtro = None
+            altura_filtro = None
+
         fecha_compra = QDate.fromString(
             str(modelo.index(fila, 14).data()), "dd/MM/yyyy")
         fecha_baja = QDate.fromString(
             str(modelo.index(fila, 15).data()), "dd/MM/yyyy")
-        motivo_baja = modelo.index(fila, 16).data()
-        descripcion = modelo.index(fila, 17).data()
+        motivo_baja = modelo.index(fila, 17).data()
+        descripcion = modelo.index(fila, 18).data()
+
+        print(descripcion)
 
         # Cargamos los widgets
         self._view.frame.edit_id.setText(
@@ -487,13 +505,16 @@ class FiltroController(BaseController):
         self._view.frame.combo_tipo_filtro.setCurrentIndex(
             self._view.frame.combo_tipo_filtro.findText(tipo_filtro)
         )
+
+        self._view.frame.check_termofiltro.setChecked(termofiltro)
+
         self._view.frame.combo_marca.setCurrentIndex(
             self._view.frame.combo_marca.findText(marca)
         )
         self._view.frame.edit_modelo.setText(
-            str(modelo) if modelo is not None else ""
+            str(modelo_filtro) if modelo_filtro is not None else ""
         )
-        self._view.frame.edit_numero_serie.setText(
+        self._view.frame.edit_num_serie.setText(
             str(num_serie) if num_serie is not None else ""
         )
         self._view.frame.edit_vol_min_acuario.setText(
@@ -505,6 +526,7 @@ class FiltroController(BaseController):
         self._view.frame.edit_vol_max_acuario.setText(
             str(volumen_max_acuario) if volumen_max_acuario is not None else ""
         )
+
         self._view.frame.edit_consumo_filtro.setText(
             str(consumo_filtro) if consumo_filtro is not None else ""
         )
@@ -520,10 +542,11 @@ class FiltroController(BaseController):
         self._view.frame.edit_alto.setText(
             str(altura_filtro) if altura_filtro is not None else ""
         )
-        self._view.frame.edit_vol_filtrante.setText(
+
+        self._view.frame.edit_vol_material.setText(
             str(volumen_material) if volumen_material is not None else ""
         )
-        self._view.frame.edit_altura_maxima.setText(
+        self._view.frame.edit_altura_max_bombeo.setText(
             str(altura_bombeo) if altura_bombeo is not None else ""
         )
         self._view.frame.edit_caudal.setText(

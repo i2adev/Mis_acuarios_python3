@@ -242,6 +242,9 @@ class BaseView(QWidget):
             QAbstractItemView.SelectionMode.SingleSelection)
         self.data_table.setContextMenuPolicy(
             Qt.ContextMenuPolicy.CustomContextMenu)
+        self.data_table.horizontalHeader().setDefaultAlignment(
+            Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignVCenter
+        )
 
         ### Botón INSERT
         self.button_insert = QPushButton()
