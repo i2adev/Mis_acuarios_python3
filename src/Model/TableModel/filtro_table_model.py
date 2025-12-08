@@ -22,8 +22,8 @@ class FiltroTableModel(QAbstractTableModel):
 
         self._headers = ([
             "ID", "#", "MARCA", "MODELO", "TIPO FILTRO", "TERMO.",
-            "NUMERO SERIE", "VOLUMEN ACUARIO", "CAUDAL", "ALTURA BOMBEO",
-            "CONSUMO FILTRO", "CONSUMO CALENTADOR", "VOL. FILTRANTE.",
+            "NÚM. SERIE", "VOL. AC.", "CAUDAL", "A. M. B.",
+            "CONS. FILTRO", "CON. CALENTADOR", "V. M. F..",
             "DIMENSIONES (cm)", "F.COMPRA", "F. BAJA.", "DISP.", "MOTIVO BAJA",
             "DESCRIPCIÓN"
         ])
@@ -41,7 +41,7 @@ class FiltroTableModel(QAbstractTableModel):
         :param index: Índice de la column
         :param role: Rol de la _______
         """
-        
+
         if not index.isValid():
             return None
 
@@ -117,27 +117,94 @@ class FiltroTableModel(QAbstractTableModel):
         # Tooltip para cada column
         if role == Qt.ItemDataRole.ToolTipRole:
             tooltips = {
-                0: "Identificador del filtro",
-                1: "Número correlativo del filtro",
-                2: "Marca del filtro",
-                3: "Modelo del filtro",
-                4: "Tipo de filtro",
-                5: "Especifica si se trata de un termofiltro",
-                6: "Número de serie",
-                7: "Volumen de acuario recomendado por el fabricante ("
-                   "desde/hasta)",
-                8: "Caudal que es capaz de mover la bomba (litros/hora)",
-                9: "Altura a la que es capaz de levantar el agua la bomba",
-                10: "Consumo eléctrico del filtro (w)",
-                11: "Consumo eléctrico del calentador del filtro (w)",
-                12: "Volumen de material filtrante que puede albergar el "
-                    "filtro (litros)",
-                13: "Dimensiones del filtro (ancho x fondo x alto) (cm)",
-                14: "Fecha de compra dle filtro",
-                15: "Fecha de baja del filtro",
-                16: "¿Está disponible el filtro?",
-                17: "Motivo de baja del filtro",
-                18: "Descripción general"
+                0: """
+                <h2>Identificador del filtro</h2>
+                Este campo muestra el <b>ID</b> del filtro.
+                """,
+                1: """
+                <h2>Número correlativo del filtro</h2>
+                Este campo muestra el <b>número correlativo</b> del filtro.
+                """,
+                2: """
+                <h2>Marca del filtro</h2>
+                Este campo muestra la <b>marca</b> del filtro
+                """,
+                3: """
+                <h2>Modelo del filtro</h2>
+                Este campo muestra el <b>modelo del filtro</b>.
+                """,
+                4: """
+                <h2>Tipo de filtro</h2>
+                Este campo muestra el <b>tipo de filtro</b>.
+                """,
+                5: """
+                <h2>Es termofiltro</h2>
+                Este campo específica si el filtro cuenta con calentador.
+                """,
+                6: """
+                <h2>Número de serie</h2>
+                Este campo muestra el <b>número de serie</b> del filtro.
+                """,
+                7: """
+                <h2>Volumen del acuario</h2>
+                Este campo muestra el volumen mínimo y máximo de acuario 
+                recomendado por el fabricante. El primer dígito indica el 
+                volumen mínimo recomendado y el segundo dígito indica el 
+                volumen máximo de acuario recomendado. 
+                <b>(mínimo/máximo)</b>.""",
+                8: """
+                <h2>Caudal</h2>
+                Este campo muestra el caudal máximo que es capaz de mover el 
+                filtro <b>(litros/hora)</b>.
+                """,
+                9: """
+                <h2>Altura máxima de bombeo</h2>
+                Este campo muestra la altura máxima a la que es capaz de 
+                levantar el agua el filtro <b>(metros)</b>.
+                """,
+                10: """
+                <h2>Consumo del filtro</h2>
+                Este campo muestra el consumo eléctrico del filtro 
+                <b>(w)</b>.
+                """,
+                11: """
+                <h2>Consumo del calentador</h2>
+                Este campo muestra el consumo eléctrico del calentador del 
+                filtro <b>(w)</b>.
+                """,
+                12: """
+                <h2>Volumen material filtrante</h2>
+                Este campo muestra el volumen de material filtrante que puede 
+                albergar el filtro <b>(litros)</b>.
+                """,
+                13: """
+                <h2>Dimensiones</h2>
+                Este campo muestra las dimensiones del filtro 
+                <b>(ancho x fondo x alto) (cm)</b>.
+                """,
+                14: """
+                <h2>Fecha de compra</h2>
+                Este campo muestra la fecha en la que se ha comprado el filtro. 
+                """,
+                15: """
+                <h2>Fecha de baja</h2>
+                Este campo muestra la fecha en la que se ha dado de baja al 
+                filtro.
+                """,
+                16: """
+                <h2>Disponibilidad</h2>
+                Este campo muestra la disponibilidad del filtro. Si se está 
+                usando en otro acuario se muestra sin palometa, en caso 
+                contrario se muestra con palometa.
+                """,
+                17: """
+                <h2>Motivo de baja</h2>
+                Este campo muestra el motivo de la baja del filtro.
+                """,
+                18: """
+                <h2>Descripción</h2>
+                Este campo muestra la descripción general del filtro.
+                """
             }
             return tooltips.get(section, "")
 

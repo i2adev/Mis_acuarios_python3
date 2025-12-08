@@ -62,13 +62,29 @@ class SubcategoriaIncidenciaForm(QFrame):
         self.edit_id.setObjectName("edit_id")
         self.edit_id.setFixedWidth(50)
         self.edit_id.setEnabled(False)
+
         self.edit_subcategoria_incidencia = QLineEdit()
         self.edit_subcategoria_incidencia.setObjectName(
             "edit_subcategoria_incidencia"
         )
+        self.edit_subcategoria_incidencia.setToolTip(
+            """
+            <h2>Subcategoría de incidencia</h2>
+            En este campo se inserta la subcategoría a la que pertenece la 
+            incidencia. Este es un campo <b>obligatorio</b>
+            """
+        )
+
         self.text_observaciones = QPlainTextEdit()
         self.text_observaciones.setObjectName("text_descripcion")
         self.text_observaciones.setFixedHeight(75)
+        self.text_observaciones.setToolTip(
+            """
+            <h2>Observaciones de la subcategoría de incidencia</h2>
+            En este campo se insertan observaciones sobre la subcategoría de 
+            incidencia.
+            """
+        )
 
         # Combos
         self.combo_categoria_incidencia = QComboBox()
@@ -76,6 +92,14 @@ class SubcategoriaIncidenciaForm(QFrame):
         self.combo_categoria_incidencia.setEditable(True)
         self.combo_categoria_incidencia.setObjectName(
             "combo_subcategoria_acuario"
+        )
+        self.combo_categoria_incidencia.setToolTip(
+            """
+            <h2>Categoría de incidencia</h2>
+            En este campo se selecciona una categoría de incidencia (
+            problemas biológicos, problemas mecánicos, etc). Este es un campo 
+            <b>obligatorio</b>
+            """
         )
 
         # Botones

@@ -55,11 +55,28 @@ class TipoFiltroForm(QFrame):
         self.edit_id.setObjectName("edit_id")
         self.edit_id.setFixedWidth(50)
         self.edit_id.setEnabled(False)
+
         self.edit_tipo_filtro = QLineEdit()
         self.edit_tipo_filtro.setObjectName("edit_tipo_filtro")
+        self.edit_tipo_filtro.setToolTip(
+            """
+            <h2>Tipo de filtro</h2>
+            En este campo se inserta el tipo de filtro (filtro interno, 
+            filtro externo, filtro de mochila, etc). Este campo es 
+            <b>obligatorio</b>.
+            """
+        )
+
         self.text_observaciones = QPlainTextEdit()
         self.text_observaciones.setObjectName("text_descripcion")
         self.text_observaciones.setFixedHeight(75)
+        self.text_observaciones.setToolTip(
+            """
+            <h2>Observaciones de tipo de filtro</h2>
+            En este campo se insertan observaciones sobre el tipo de 
+            filtro.
+            """
+        )
 
     def build_layout(self):
         """ Construye el layout del frame. """

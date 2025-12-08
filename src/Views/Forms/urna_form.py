@@ -91,36 +91,113 @@ class UrnaForm(QFrame):
         self.edit_id.setFixedWidth(50)
         self.edit_id.setEnabled(False)
         self.edit_id.setObjectName("edit_id")
+
         self.edit_modelo = QLineEdit()
         self.edit_modelo.setObjectName("edit_modelo")
+        self.edit_modelo.setToolTip(
+            """
+            <h2>Modelo de la urna</h2>
+            En este campo se inserta el modelo de la urna. Este campo es 
+            <b>obligatorio</b>.
+            """
+        )
+
         self.edit_ancho = QLineEdit()
         self.edit_ancho.setObjectName("edit_ancho")
         self.edit_ancho.setValidator(QIntValidator())
+        self.edit_ancho.setToolTip(
+            """
+            <h2>Anchura de la urna</h2>
+            En este campo se inserta la anchura con la que cuenta la 
+            urna. La anchura se refiere a la distancia en entre 
+            las caras laterales. La anchura se expresa en <b>cm</b>.
+            """
+        )
+
         self.edit_profundo = QLineEdit()
         self.edit_profundo.setObjectName("edit_profundo")
         self.edit_profundo.setValidator(QIntValidator())
+        self.edit_profundo.setToolTip(
+            """
+            <h2>Fondo de la urna</h2>
+            En este campo se inserta El fondo con la que cuenta la 
+            urna. El fondo se refiere a la distancia en entre la cara 
+            frontal y la trasera. El fondo se expresa en <b>cm</b>.
+            """
+        )
+
         self.edit_alto = QLineEdit()
         self.edit_alto.setObjectName("edit_alto")
         self.edit_alto.setValidator(QIntValidator())
+        self.edit_alto.setToolTip(
+            """
+            <h2>Altura de la urna</h2>
+            En este campo se inserta la altura con la que cuenta la 
+            urna. La altura se refiere a la distancia entre la base 
+            del acuario y la tapa (en caso de que la urna cuente con 
+            una). La altura se expresa en <b>cm</b>.
+            """
+        )
+
         self.edit_grosor = QLineEdit()
         self.edit_grosor.setObjectName("edit_grosor")
         self.edit_grosor.setValidator(QIntValidator())
+        self.edit_grosor.setToolTip(
+            """
+            <h2>Grosor del cristal</h2>
+            En este campo se inserta el grosor del cristal de la urna.
+            """
+        )
+
         self.edit_volumen = QLineEdit()
         self.edit_volumen.setObjectName("edit_volumen")
         self.edit_volumen.setValidator(QIntValidator())
+        self.edit_volumen.setToolTip(
+            """
+            <h2>Volumen bruto de la urna</h2>
+            En este campo se inserta el volumen de la urna. El volumen total 
+            del tanque, sin grava ni ningún tipo de decoración.
+            """
+        )
+
         self.text_descripcion = QPlainTextEdit()
         self.text_descripcion.setObjectName("text_descripcion")
         self.text_descripcion.setFixedHeight(75)
+        self.text_descripcion.setToolTip(
+            """
+            <h2>Descripción de la urna</h2>
+            En este campo se inserta la descripción de la urna. Se 
+            especifican las particularidades concretas de la urna en 
+            cuestión.
+            """
+        )
 
         # Combos
         self.combo_marca = QComboBox()
         self.combo_marca.setMinimumWidth(250)
         self.combo_marca.setObjectName("combo_marca")
         self.combo_marca.setEditable(True)
+        self.combo_marca.setToolTip(
+            """
+            <h2>Marca de la urna</h2>
+            En este campo se selecciona la marca de la urna. Si en el 
+            listado no aparece la que desea, puede insertar una pulsando en 
+            el botón de la derecha. Este campo es <b>obligatorio</b>.
+            """
+        )
+
         self.combo_material = QComboBox()
         self.combo_material.setMinimumWidth(250)
         self.combo_material.setObjectName("combo_material")
         self.combo_material.setEditable(True)
+        self.combo_material.setToolTip(
+            """
+            <h2>Material de la urna</h2>
+            En este campo se selecciona el material de la urna. Si en el 
+            listado no aparece la que desea, puede insertar una pulsando en 
+            el botón de la derecha. Este campo es <b>obligatorio</b>.
+            """
+        )
 
         # Botones
         self.button_insert_marca = QPushButton("<")

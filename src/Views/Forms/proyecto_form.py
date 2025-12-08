@@ -76,31 +76,79 @@ class ProyectoForm(QFrame):
         self.edit_id.setObjectName("edit_id")
         self.edit_id.setFixedWidth(50)
         self.edit_id.setEnabled(False)
+
         self.edit_nombre_proyecto = QLineEdit()
         self.edit_nombre_proyecto.setObjectName("edit_nombre_proyecto")
+        self.edit_nombre_proyecto.setToolTip(
+            """
+            <h2>Nombre del proyecto</h2>
+            Eb este campo se inserta el nombre que se le ha asignado al 
+            proyecto. Este es un campo <b>obligatorio</b>            
+            """
+        )
+
         self.edit_motivo_cierre = QLineEdit()
         self.edit_motivo_cierre.setObjectName("edit_motivo_cierre")
+        self.edit_motivo_cierre.setToolTip(
+            """
+            <h2>Motivo de cierre</h2>
+            En este campo se inserta el motivo por el que se ha finalizado o 
+            cancelado el proyecto.
+            """
+        )
+
         self.text_descripcion = QPlainTextEdit()
         self.text_descripcion.setObjectName("text_descripcion")
         self.text_descripcion.setMinimumHeight(50)
+        self.text_descripcion.setToolTip(
+            """
+            <h2>Descripción del proyecto</h2>
+            En este campo se inserta una breve descripción del proyecto.
+            """
+        )
 
         # Combos
         self.combo_estado_proyecto = QComboBox()
         self.combo_estado_proyecto.setMinimumWidth(250)
         self.combo_estado_proyecto.setObjectName("combo_estado_proyecto")
         self.combo_estado_proyecto.setEditable(True)
+        self.combo_estado_proyecto.setToolTip(
+            """
+            <h2>Estado del proyecto</h2>
+            En este campo se selecciona el estado en que se encuentra el 
+            proyecto (Planificación, en curso, finalizado, cancelado). En 
+            caso de que el estado que desea no se encuentre en la lista, 
+            puede insertar uno pulsando en el botón de la derecha. Este 
+            es un campo <b<obligatorio</b>.
+            """
+        )
 
         # Datetimepickers
         self.date_inicio = NullableDateEdit()
         self.date_inicio.setDisplayFormat("dd/MM/yyyy")
         self.date_inicio.setObjectName("date_inicio")
         self.date_inicio.setDate(None)
+        self.date_inicio.setToolTip(
+            """
+            <h2>Fecha de inicio del proyecto</h2>
+            En este campo se inserta la fecha en la que se da inicio al 
+            proyecto. Este es un campo <b>obligatorio</b>.
+            """
+        )
+
         self.date_fin = NullableDateEdit()
         self.date_fin.setObjectName("date_fin")
         self.date_fin.edit_date.setObjectName("date_fin_proyecto")
         self.date_fin.setDisplayFormat("dd/MM/yyyy")
-        self.date_fin.setObjectName("date_fin")
+        # self.date_fin.setObjectName("date_fin")
         self.date_fin.setDate(None)
+        self.date_fin.setToolTip(
+            """
+            <h2>Fecha de finalización del proyecto</h2>
+            En este campo se inserta la fecha en la que se da por 
+            finalizado/cancelado el proyecto.
+            """
+        )
 
     def build_layout(self):
         """ Construye el layout del frame. """

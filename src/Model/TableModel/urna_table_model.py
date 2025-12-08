@@ -78,9 +78,60 @@ class UrnaTableModel(QAbstractTableModel):
     def headerData(self, section, orientation,
                    role=Qt.ItemDataRole.DisplayRole):
         """
-        Depencdiendo de la horientación de la tabla, Obtiene el encabezado
+        Depencdiendo de la orientación de la tabla, Obtiene el encabezado
         de la columna o número de fila.
         """
+        # Tooltip para cada column
+        if role == Qt.ItemDataRole.ToolTipRole:
+            tooltips = {
+                0: """
+                <h2>Identificador de la urna</h2>
+                Este campo muestra el <b>ID</b> de la urna.
+                """,
+                1: """
+                <h2>Número correlativo de la urna</h2>
+                Este campo muestra el <b>número correlativo</b> de la urna
+                """,
+                2: """
+                <h2>Marca</h2>
+                Este campo muestra la <b>marca</b> de la urna.
+                """,
+                3: """
+                <h2>Modelo</h2>
+                Este campo muestra el <b>modelo</b> de la urna.
+                """,
+                4: """
+                <h2>Ancho</h2>
+                Este campo muestra la <b>anchura</b> de la urna.
+                """,
+                5: """
+                <h2>Profundidad</h2>
+                Este campo muestra la <b>profundidad</b> de la urna.
+                """,
+                6: """
+                <h2>Altura</h2>
+                Este campo muestra la <b>altura</b> dela urna.
+                """,
+                7: """
+                <h2>Grosor del cristal</h2>
+                Este campo muestra la <b>grosor del cristal</b> de la urna.
+                """,
+                8: """
+                <h2>Volumen del tanque</h2>
+                Este campo muestra la <b>volumen bruto</b> de la urna.
+                """,
+                9: """
+                <h2>Material</h2>
+                Este campo muestra la <b>material</b> con el que se ha 
+                construido la urna.
+                """,
+                10: """
+                <h2>Descripción</h2>
+                Este campo muestra la <b>descripción</b> de la urna.
+                """
+            }
+            return tooltips.get(section, "")
+
         if role != Qt.ItemDataRole.DisplayRole:
             return None
 

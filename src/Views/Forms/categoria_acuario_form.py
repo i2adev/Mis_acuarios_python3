@@ -2,8 +2,8 @@
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      30/06/2025
 Comentarios:
-    Módulo que contiene los controles del formulario de la entidad CATE-
-    GORÍA DE ACUARIO.
+    Módulo que contiene los controles del formulario de la entidad
+    CATEGORÍA DE ACUARIO.
 """
 
 import sys
@@ -59,10 +59,26 @@ class CategoriaAcuarioForm(QFrame):
         self.edit_id.setObjectName("edit_id")
         self.edit_id.setFixedWidth(50)
         self.edit_id.setEnabled(False)
+
         self.edit_categoria_acuario = QLineEdit()
         self.edit_categoria_acuario.setObjectName("edit_categoria_acuario")
+        self.edit_categoria_acuario.setToolTip(
+            """
+            <h2>Tipo de acuario</h2><br>
+            En este campo se inserta el tipo al que pertenece el acuario 
+            (Agua dulce, agua salada, otros sistemas híbridos, etc).
+            """
+        )
+
         self.text_observaciones = QPlainTextEdit()
         self.text_observaciones.setObjectName("text_descripcion")
+        self.text_observaciones.setToolTip(
+            """
+            <h2>Observaciones</h2><br>
+            En este campo se insertan las observaciones sobre el tipo de 
+            acuario.
+            """
+        )
 
     def build_layout(self):
         """ Construye el layout del frame. """

@@ -60,9 +60,33 @@ class TipoFiltroTableModel(QAbstractTableModel):
     def headerData(self, section, orientation,
                    role=Qt.ItemDataRole.DisplayRole):
         """
-        Depencdiendo de la horientación de la tabla, Obtiene el encabezado
+        Depencdiendo de la orientación de la tabla, Obtiene el encabezado
         de la columna o número de fila.
         """
+        # Tooltip para cada column
+        if role == Qt.ItemDataRole.ToolTipRole:
+            tooltips = {
+                0: """
+                <h2>Identificador del tipo de filtro</h2>
+                Este campo muestra el <b>ID</b> del tipo de filtro.
+                """,
+                1: """
+                <h2>Número correlativo del tipo de filtro</h2>
+                Este campo muestra el <b>número correlativo</b> del tipo de 
+                filtro.
+                """,
+                2: """
+                <h2>Tipo de filtro</h2>
+                Este campo muestra la <b>tipo de filtro</b>.
+                """,
+                3: """
+                <h2>Observaciones</h2>
+                Este campo muestra las <b>observaciones</b> del tipo de 
+                filtro.
+                """,
+            }
+            return tooltips.get(section, "")
+
         if role != Qt.ItemDataRole.DisplayRole:
             return None
 

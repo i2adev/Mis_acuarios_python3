@@ -61,6 +61,31 @@ class CategoriaAcuarioTableModel(QAbstractTableModel):
         Depencdiendo de la orientación de la tabla, Obtiene el encabezado
         de la columna o número de fila.
         """
+
+        # Tooltip para cada column
+        if role == Qt.ItemDataRole.ToolTipRole:
+            tooltips = {
+                0: """
+                <h2>Identificador de la categoría de acuario</h2>
+                Este campo muestra el <b>ID</b> de la categoría de acuario.
+                """,
+                1: """
+                <h2>Número correlativo de la categoría de acuario</h2>
+                Este campo muestra el <b>número correlativo</b> de la 
+                categoría de acuario.
+                """,
+                2: """
+                <h2>Categoría de acuario</h2>
+                Este campo muestra la <b>categoría de acuario</b>.
+                """,
+                3: """
+                <h2>Observaciones</h2>
+                Este campo muestra las <b>observaciones</b> de la categoría 
+                acuario.
+                """,
+            }
+            return tooltips.get(section, "")
+
         if role != Qt.ItemDataRole.DisplayRole:
             return None
 

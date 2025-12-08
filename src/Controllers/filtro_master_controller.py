@@ -392,7 +392,8 @@ class FiltroMasterController(FiltroController):
         """ Gestiona los datos para llenar la tabla. """
 
         self._fill_tableview(self._view.data_table, self._pag.current_data)
-        self._configure_table(self._view.data_table)
+        self._configure_table(self._view.data_table, [0, 10, 11,
+                                                      14, 15])
 
     def _fill_tableview(self, table: QTableView,
                         data: list[FiltroEntity]):

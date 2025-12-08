@@ -61,18 +61,41 @@ class SubcategoriaAcuarioForm(QFrame):
         self.edit_id.setObjectName("edit_id")
         self.edit_id.setFixedWidth(50)
         self.edit_id.setEnabled(False)
+
         self.edit_subcategoria_acuario = QLineEdit()
         self.edit_subcategoria_acuario.setObjectName(
             "edit_subcategoria_acuario")
+        self.edit_subcategoria_acuario.setToolTip(
+            """
+            <h2>Subcategoría de acuario</h2>
+            En este campo se inserta la subcategoría a la que pertenece el 
+            acuario. Este es un campo <b>obligatorio</b>
+            """
+        )
+
         self.text_observaciones = QPlainTextEdit()
         self.text_observaciones.setObjectName("text_descripcion")
         self.text_observaciones.setFixedHeight(75)
-
+        self.text_observaciones.setToolTip(
+            """
+            <h2>Observaciones de la subcategoría de acuario</h2>
+            En este campo se insertan observaciones sobre la subcategoría de 
+            acuario.
+            """
+        )
+        
         # Combos
         self.combo_categoria_acuario = QComboBox()
         self.combo_categoria_acuario.setMinimumWidth(200)
         self.combo_categoria_acuario.setEditable(True)
         self.combo_categoria_acuario.setObjectName("combo_subcategoria_acuario")
+        self.combo_categoria_acuario.setToolTip(
+            """
+            <h2>Categoría de acuario</h2>
+            En este campo se selecciona una categoría de acuario (agua 
+            dulce, agua salada, etc). Este es un campo <b>obligatorio</b>
+            """
+        )
 
         # Botones
         self.button_insert_categoria_acuario = QPushButton("<")

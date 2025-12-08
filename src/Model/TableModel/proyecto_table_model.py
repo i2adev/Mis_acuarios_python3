@@ -75,9 +75,56 @@ class ProyectoTableModel(QAbstractTableModel):
     def headerData(self, section, orientation,
                    role=Qt.ItemDataRole.DisplayRole):
         """
-        Depencdiendo de la horientación de la tabla, Obtiene el encabezado
+        Depencdiendo de la orientación de la tabla, Obtiene el encabezado
         de la columna o número de fila.
         """
+        # Tooltip para cada column
+        if role == Qt.ItemDataRole.ToolTipRole:
+            tooltips = {
+                0: """
+                <h2>Identificador del proyecto</h2>
+                Este campo muestra el <b>ID</b> del proyecto.
+                """,
+                1: """
+                <h2>Identificador del usuario</h2>
+                Este campo muestra el <b>ID</b> del usuario.
+                """,
+                2: """
+                <h2>Número correlativo del proyecto</h2>
+                Este campo muestra el <b>número correlativo</b> del proyecto
+                """,
+                3: """
+                <h2>Nombre del proyecto</h2>
+                Este campo muestra el <b>nombre</b> que se le ha asignado al 
+                proyecto.
+                """,
+                4: """
+                <h2>Estado de proyecto</h2>
+                Este campo muestra el <b>estado </b> en el que se encuentra 
+                el proyecto.
+                """,
+                5: """
+                <h2>Fecha de inicio del proyecto</h2>
+                Este campo muestra la <b>fecha</b> en la que se da inicio al 
+                proyecto.
+                """,
+                6: """
+                <h2>Fecha de cierre del proyecto</h2>
+                Este campo muestra la <b>fecha</b> en la que se 
+                cierra/cancela al proyecto.
+                """,
+                7: """
+                <h2>Motivo de cierre</h2>
+                Este campo muestra el <b>motivo</b> por el que se 
+                cierra/cancela al proyecto.
+                """,
+                8: """
+                <h2>Descripción</h2>
+                Este campo muestra la <b>descripción</b> del proyecto.
+                """,
+            }
+            return tooltips.get(section, "")
+
         if role != Qt.ItemDataRole.DisplayRole:
             return None
 

@@ -138,10 +138,10 @@ class UrnaValidator:
     def validate_material(widget: QComboBox):
         """ Valida el material de lal urna. """
 
-        # Sí el texto esta vacio
+        # Sí el texto está vacío
         if not widget.currentData():
             return Result.failure(
-                "EL CAMPO 'MATERIAL DE URNA' NO PUEDE ESTAR VACIO"
+                "EL CAMPO 'MATERIAL DE URNA' NO PUEDE ESTAR VACÍO"
             )
 
         # Validación exitosa

@@ -125,24 +125,87 @@ class AcuarioTableModel(QAbstractTableModel):
         # Tooltip para cada columna
         if role == Qt.ItemDataRole.ToolTipRole:
             tooltips = {
-                0: "Identificador del acuario",
-                1: "Identificador del proyecto",
-                2: "Número interno",
-                3: "Código de color",
-                4: "Color del acuario",
-                5: "Nombre del acuario",
-                6: "Urna del acuario",
-                7: "Tipo de acuario",
-                8: "Volumen neto del acuario",
-                9: "Fecha de montaje",
-                10: "Inicio de ciclado",
-                11: "Fin de ciclado",
-                12: "Ciclado completado",
-                13: "Ubicación del acuario",
-                14: "Fecha de desmontaje",
-                15: "¿Está montado el acuario?",
-                16: "Motivo del desmontaje",
-                17: "Descripción general"
+                0: """
+                <h2>Identificador del acuario</h2>
+                Este campo muestra el ID del acuario.
+                """,
+                1: """
+                <h2>Identificador del proyecto</h2>
+                Este campo muestra el ID del proyecto.
+                """,
+                2: """
+                <h2>Número correlativo de acuario</h2>
+                Este campo muestra el número correlativo de acuario.
+                """,
+                3: """
+                <h2>Color del acuario</h2>
+                Este campo muestra el color asignado al acuario.
+                """,
+                4: """
+                <h2>Nombre del acuario</h2>
+                Este campo muestra el nombre distintivo que se le ha 
+                asignado al acuario.
+                """,
+                5: """
+                <h2>Urna del acuario</h2>
+                Este campo muestra la urna del acuario.
+                """,
+                6: """
+                <h2>Tipo de acuario</h2>
+                Este campo muestra el tipo de acuario.
+                """,
+                7: """
+                <h2>Volumen del acuario</h2>
+                Este campo muestra el volumen del acuario. La primera cifra 
+                muestra el volumen bruto del acuario, y la segunda cifra, 
+                separada por una barra, muestra el volumen neto.
+                """,
+                8: """
+                <h2>Fecha de montaje</h2>
+                Este campo muestra la fecha en la que se ha montado el 
+                acuario.
+                """,
+                9: """
+                <h2>Inicio de ciclado</h2>
+                Este campo muestra la fecha en la que se ha llenado el 
+                acuario y ha comenzado el proceso de ciclado del mismo.
+                """,
+                10: """
+                <h2>Fin de ciclado</h2>
+                Este campo muestra la fecha en la que se ha finalizado la 
+                fase de ciclado.
+                """,
+                11: """
+                <h2>Ciclado completado</h2>
+                Este campo muestra si se ha completado el ciclado del 
+                acuario. Si tiene palometa, ha finalizado el ciclado, 
+                en caso contrario, no.
+                """,
+                12: """
+                <h2>Ubicación del acuario</h2>
+                Este campo muestra en que parte de la casa se ha 
+                instalado el acuario.
+                """,
+                13: """
+                <h2>Fecha de desmontaje</h2>
+                Este campo muestra la fecha en la que se ha desmontado el 
+                acuario.
+                """,
+                14: """
+                <h2>¿Está montado el acuario?</h2>
+                Este campo muestra si el acuario se encuentra en uso, 
+                es decir que sigue montado.. Si tiene palometa, se encuentra 
+                montado y en uso, en caso contrario, no.
+                """,
+                15: """
+                <h2>Motivo del desmontaje</h2>
+                Este campo muestra el motivo por el que se ha desmontado el 
+                acuario.
+                """,
+                16: """
+                <h2>Descripción</h2>
+                Este camo muestra la descripción general del acuario.
+                """
             }
             return tooltips.get(section, "")
 

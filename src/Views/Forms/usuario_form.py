@@ -36,18 +36,46 @@ class UsuarioFOrm(QFrame):
         ## Nombre
         self.label_nombre = QLabel("NOMBRE")
         self.edit_nombre = QLineEdit()
+        self.edit_nombre.setToolTip(
+            """
+            <h2>Nombre real del usuario</h2>
+            En este campo se inserta el nombre real del usuario. Este es un 
+            campo <b>obligatorio</b>.
+            """
+        )
 
         ## Primer apellido
         self.label_apellido_1 = QLabel("PRIMER APELLIDO")
         self.edit_apellido_1 = QLineEdit()
+        self.edit_apellido_1.setToolTip(
+            """
+            <h2>Primer apellido del usuario</h2>
+            En este campo se inserta el primer apellido del usuario. 
+            Este es un campo <b>obligatorio</b>.
+            """
+        )
 
         ## Segundo apellido
         self.label_apellido_2 = QLabel("SEGUNDO APELLIDO")
         self.edit_apellido_2 = QLineEdit()
+        self.edit_apellido_2.setToolTip(
+            """
+            <h2>Segundo apellido del usuario</h2>
+            En este campo se inserta el segundo apellido del usuario. 
+            Este es un campo <b>obligatorio</b>.
+            """
+        )
 
         ## E-mail
         self.label_nick = QLabel("NICK DEL USUARIO")
         self.edit_nick = QLineEdit()
+        self.edit_nick.setToolTip(
+            """
+            <h2>Nick del usuario</h2>
+            En este campo se inserta el nick del usuario. Este es un 
+            campo <b>obligatorio</b>.
+            """
+        )
 
         # Controles con la información de la cuenta
         ## Contraseña

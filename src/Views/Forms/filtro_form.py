@@ -129,83 +129,221 @@ class FiltroForm(QFrame):
         self.edit_modelo = QLineEdit()
         self.edit_modelo.setMinimumWidth(250)
         self.edit_modelo.setObjectName("edit_modelo")
+        self.edit_modelo.setToolTip(
+            """
+            <h2>Modelo de filtro</h2><br>
+            En este campo se inserta el modelo del filtro. Este es un campo 
+            <b>obligatorio</b>.
+            """
+        )
 
         self.edit_num_serie = QLineEdit()
         self.edit_num_serie.setMinimumWidth(250)
         self.edit_num_serie.setObjectName("edit_num_serie")
+        self.edit_num_serie.setToolTip(
+            """
+            <h2>Número de serie</h2><br>
+            En este campo se inserta el número de serie del filtro. Este es un 
+            campo <b>obligatorio</b>.
+            """
+        )
 
         self.edit_vol_min_acuario = QLineEdit()
         self.edit_vol_min_acuario.setObjectName("edit_vol_min_acuario")
         self.edit_vol_min_acuario.setValidator(QIntValidator())
+        self.edit_vol_min_acuario.setToolTip(
+            """
+            <h2>Volumen mínimo de acuario</h2><br>
+            En este campo se inserta el volumen mínimo del acuario 
+            recomendado por el fabricante para instalación del filtro.
+            """
+        )
 
         self.edit_vol_max_acuario = QLineEdit()
         self.edit_vol_max_acuario.setObjectName("edit_vol_max_acuario")
         self.edit_vol_max_acuario.setValidator(QIntValidator())
+        self.edit_vol_max_acuario.setToolTip(
+            """
+            <h2>Volumen máximo de acuario</h2><br>
+            En este campo se inserta el volumen máximo del acuario 
+            recomendado por el fabricante para instalación del filtro.
+            """
+        )
 
         self.edit_consumo_filtro = QLineEdit()
         self.edit_consumo_filtro.setObjectName("edit_consumo_filtro")
         self.edit_consumo_filtro.setValidator(QIntValidator())
+        self.edit_consumo_filtro.setToolTip(
+            """
+            <h2>Consumo del filtro</h2><br>
+            En este campo se inserta el consumo de la bomba del filtro en 
+            <b>vatios</b>.
+            """
+        )
 
         self.edit_consumo_calentador = QLineEdit()
         self.edit_consumo_calentador.setObjectName("edit_consumo_calentador")
         self.edit_consumo_calentador.setValidator(QIntValidator())
+        self.edit_consumo_calentador.setToolTip(
+            """
+            <h2>Consumo del calentador del filtro</h2><br>
+            En caso de que filtro cuente con calentador, en este campo se 
+            inserta el consumo del mismo en <b>vatios</b>.
+            """
+        )
 
         self.edit_vol_material = QLineEdit()
         self.edit_vol_material.setObjectName("edit_vol_material")
         self.edit_vol_material.setFixedWidth(80)
         self.edit_vol_material.setValidator(QDoubleValidator())
+        self.edit_vol_material.setToolTip(
+            """
+            <h2>Volumen de material filtrante</h2>
+            En este campo se inserta el volumen para material filtrante con 
+            el que cuenta el filtro en <b>litros</b>.
+            """
+        )
 
         self.edit_altura_max_bombeo = QLineEdit()
         self.edit_altura_max_bombeo.setObjectName("edit_altura_max_bombeo")
         self.edit_altura_max_bombeo.setFixedWidth(80)
         self.edit_altura_max_bombeo.setValidator(QDoubleValidator())
+        self.edit_altura_max_bombeo.setToolTip(
+            """
+            <h2>Altura máxima de bombeo del filtro</h2>
+            En este campo se inserta la altura máxima que puede bombear el 
+            filtro en <b>metros</b>.
+            """
+        )
 
         self.edit_caudal = QLineEdit()
         self.edit_caudal.setObjectName("edit_caudal")
         self.edit_caudal.setFixedWidth(80)
         self.edit_caudal.setValidator(QIntValidator())
+        self.edit_caudal.setToolTip(
+            """
+            <h2>Caudal del filtro</h2>
+            En este campo se inserta el caudal máximo que puede mover el 
+            filtro en <b>litros/hora</b>.
+            """
+        )
 
         self.edit_ancho = QLineEdit()
         self.edit_ancho.setObjectName("edit_ancho")
         self.edit_ancho.setValidator(QIntValidator())
+        self.edit_ancho.setToolTip(
+            """
+            <h2>Anchura del filtro</h2>
+            En este campo se inserta la anchura del filtro. La anchura se 
+            expresa en <b>cm</b>.
+            """
+        )
 
         self.edit_fondo = QLineEdit()
         self.edit_fondo.setObjectName("edit_fondo")
         self.edit_fondo.setValidator(QIntValidator())
+        self.edit_fondo.setToolTip(
+            """
+            <h2>Fondo del filtro</h2>
+            En este campo se inserta El fondo con la que cuenta el 
+            filtro. El fondo se expresa en <b>cm</b>.
+            """
+        )
 
         self.edit_alto = QLineEdit()
         self.edit_alto.setObjectName("edit_alto")
         self.edit_alto.setValidator(QIntValidator())
+        self.edit_alto.setToolTip(
+            """
+            <h2>Altura del filtro</h2>
+            En este campo se inserta la altura con la que cuenta el 
+            filtro. La altura se expresa en <b>cm</b>.
+            """
+        )
 
         self.edit_motivo_baja = QLineEdit()
         self.edit_motivo_baja.setObjectName("edit_motivo_baja")
+        self.edit_motivo_baja.setToolTip(
+            """
+            <h2>Motivo baja del acuario</h2>
+            En este campo se inserta el motivo por el que se le ha dado de 
+            baja al acuario. En caso de que se encuentre en tono rojo, 
+            el control está deshabilitado porque no se ha insertado una 
+            fgecha de baja.
+            """
+        )
 
         self.text_descripcion = QPlainTextEdit()
         self.text_descripcion.setObjectName("text_descripcion")
         self.text_descripcion.setMinimumHeight(75)
+        self.text_descripcion.setToolTip(
+            """
+            <h2>Descripción del filtro</h2>
+            En este campo se inserta la descripción del filtro, asi como las 
+            carácteristicas mas relevantes.
+            """
+        )
 
         # Combos
         self.combo_tipo_filtro = QComboBox()
         self.combo_tipo_filtro.setObjectName("combo_tipo_filtro")
         self.combo_tipo_filtro.setMinimumWidth(250)
         self.combo_tipo_filtro.setEditable(True)
+        self.combo_tipo_filtro.setToolTip(
+            """
+            <h2>Tipo de filtro</h2>
+            En este campo se selecciona un tipo de filtro (filtro de 
+            mochila, filtro interno, filtro externo, etc). Si el tipo de 
+            filtro no se encuentra en la lista, puedes insertar uno pulsando 
+            en el botón de la derecha. Este es un campo <b>obligatorio<b>.
+            """
+        )
 
         self.combo_marca = QComboBox()
         self.combo_marca.setMinimumWidth(250)
         self.combo_marca.setObjectName("combo_marca")
         self.combo_marca.setEditable(True)
+        self.combo_marca.setToolTip(
+            """
+            <h2>Marca del filtro</h2>
+            En este campo se selecciona la marca del filtro (EHEIM, JBL, 
+            Aquael, etc). Si la marca del filtro no se encuentra en la 
+            lista, puedes insertar uno pulsando en el botón de la 
+            derecha. Este es un campo <b>obligatorio<b>.
+            """
+        )
 
         # Checkboxes
         self.check_termofiltro = QCheckBox("TERMO.")
         self.check_termofiltro.setObjectName("check_termofiltro")
         self.check_termofiltro.setChecked(False)
+        self.check_termofiltro.setToolTip(
+            """
+            <h2>Termofiltro</h2><br>
+            En este campo se específica si el filtro incorpora 
+            calentador. En caso de que este con la palometa indica que sí 
+            incorpora calentador, en caso contrario no incorpora calentador.
+            """
+        )
 
         # Date pickers
         self.fecha_compra = NullableDateEdit()
         self.fecha_compra.setObjectName("fecha_compra")
+        self.fecha_compra.setToolTip(
+            """
+            <h2>Fecha de Compra</h2>
+            En este campo se inserta la fecha de la compra del filtro.
+            """
+        )
 
         self.fecha_baja = NullableDateEdit()
         self.fecha_baja.setObjectName("fecha_baja")
+        self.fecha_baja.setToolTip(
+            """
+            <h2>Fecha de baja</h2>
+            En este campo se inserta la fecha de baja del filtro.
+            """
+        )
 
         # Botones
         self.button_insert_tipo_filtro = QPushButton("<")

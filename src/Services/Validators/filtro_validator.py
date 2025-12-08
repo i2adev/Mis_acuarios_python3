@@ -63,13 +63,14 @@ class FiltroValidator:
         # Sí el texto está vacío
         if not widget.text():
             return Result.failure(
-                "EL CAMPO 'MODELO' NO PUEDE ESTAR VACÍO"
+                "EL CAMPO 'NÚMERO DE SERIE' NO PUEDE ESTAR VACÍO"
             )
 
         # Controla la longitud del texto
         if len(widget.text()) > 32:
-            return Result.failure("EL CAMPO 'MODELO' NO PUEDE CONTENER MAS DE "
-                                  "32 CARACTERES")
+            return Result.failure(
+                "EL CAMPO 'NÚMERO DE SERIE' NO PUEDE CONTENER MAS DE "
+                "32 CARACTERES")
 
         # Validación exitosa
         return Result.success(1)

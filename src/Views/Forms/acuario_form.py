@@ -102,47 +102,144 @@ class AcuarioForm(QFrame):
         self.edit_id.setFixedWidth(50)
         self.edit_id.setEnabled(False)
         self.edit_id.setObjectName("edit_id")
+
         self.edit_cod_color = QLineEdit()
         self.edit_cod_color.setObjectName("edit_cod_color")
         self.edit_cod_color.setFixedWidth(50)
         self.edit_cod_color.setEnabled(False)
+
         self.edit_nombre_acuario = QLineEdit()
         self.edit_nombre_acuario.setObjectName("edit_nombre_acuario")
         self.edit_nombre_acuario.setMinimumWidth(250)
+        self.edit_nombre_acuario.setToolTip(
+            """
+            <h2>Nombre del acuario</h2><br>
+            Nombre descripctivo que se le asigna al acuario. En 
+            adelante al acuario se le referira con este campo."""
+        )
+
         self.edit_vol_neto = QLineEdit()
         self.edit_vol_neto.setObjectName("edit_vol_neto")
         self.edit_vol_neto.setValidator(QIntValidator())
+        self.edit_vol_neto.setToolTip(
+            """
+            <h2>Volumen del neto</h2><br>
+            Volumen de agua del acuario en litros una vez descontados la 
+            grava del fondo y los elementos decorativos (troncos, piedras, 
+            etc).
+            """
+        )
+
         self.edit_ubicacion_acuario = QLineEdit()
         self.edit_ubicacion_acuario.setObjectName("edit_ubicacion_acuario")
+        self.edit_ubicacion_acuario.setToolTip(
+            """<h2>Ubicación del acuario</h2><br>
+            En este campo se inserta el emplazamiento del acuario. Lugar de la 
+            casa en donde se instalará el acuario. 
+            """
+        )
+
         self.edit_motivo_desmontaje = QLineEdit()
         self.edit_motivo_desmontaje.setObjectName("edit_motivo_desmontaje")
-        self.edit_motivo_desmontaje = QLineEdit()
-        self.edit_motivo_desmontaje.setObjectName("edit_motivo_desmontaje")
+        self.edit_motivo_desmontaje.setToolTip(
+            """ 
+            <h2>Motivo de desmontaje</h2><br>
+            En este campo se inserta el motivo por el que se ha desmontado el 
+            acuario.
+            """
+        )
+
         self.text_descripcion = QPlainTextEdit()
         self.text_descripcion.setObjectName("text_descripcion")
         self.text_descripcion.setFixedHeight(75)
+        self.text_descripcion.setToolTip(
+            """ <h2>Descripción del acuario</h2><br>
+            En este campo se incluirá una breve descripción del acuario.
+            Se incluirán las características del mismo.
+            """
+        )
 
         # Combos
         self.combo_proyecto = QComboBox()
         self.combo_proyecto.setObjectName("combo_proyecto")
         self.combo_proyecto.setMinimumWidth(250)
+        self.combo_proyecto.setToolTip(
+            """
+            <h2>Proyecto</h2><br>
+            En este campo se seleccionará el proyecto al que pertenece el 
+            acuario. Todo acuario debe pertenecer a un proyecto. Este campo es 
+            obligatorio. Si en la lista no aparece el proyecto que desea, 
+            puede insertarlo pulsando en el botón de la derecha.
+            """
+        )
+
         self.combo_urna = QComboBox()
         self.combo_urna.setMinimumWidth(250)
         self.combo_urna.setObjectName("combo_urna")
         self.combo_urna.setEditable(True)
+        self.combo_urna.setToolTip(
+            """
+            <h2>Urna del acuario</h2><br>
+            En este campo se selecciona la urna de la que está compuesta el 
+            acuario. Este campo es obligatorio. Si en la lista no aparece la 
+            urna que desea, puede insertarla pulsando en el botón de la 
+            derecha.
+            """
+        )
+
         self.combo_tipo_acuario = QComboBox()
         self.combo_tipo_acuario.setMinimumWidth(250)
         self.combo_tipo_acuario.setObjectName("combo_tipo_acuario")
         self.combo_tipo_acuario.setEditable(True)
+        self.combo_tipo_acuario.setToolTip(
+            """
+            <h2>Tipo de acuario</h2><br>
+            En este campo se selecciona el tipo de acuario. Este campo es 
+            obligatorio. Si no encuentra el tipo de acuario que desea, 
+            puede insertarlo pulsando en el botón de la derecha.
+            """
+        )
 
         # Date pickers
         self.fecha_montaje = NullableDateEdit()
+        self.fecha_montaje.setToolTip(
+            """
+            <h2>Fecha de montaje</h2><br>
+            En este campo se inserta la fecha de montaje del acuario. La 
+            fecha en la que se ha colocado la urna en el mueble. Este campo 
+            es obligatorio. 
+            """
+        )
+
         self.fecha_inicio_ciclado = NullableDateEdit()
+        self.fecha_inicio_ciclado.setToolTip(
+            """
+            <h2>Fecha de inicio del ciclado</h2><br>
+            En este campo se inserta la fecha en la que se ha llenado el 
+            acuario y se da inicio al proceso de ciclado del mismo.
+            """
+        )
+
         self.fecha_fin_ciclado = NullableDateEdit()
+        self.fecha_fin_ciclado.setToolTip(
+            """
+            <h2>Fecha de finalización del ciclado</h2><br>
+            En este campo se inserta la fecha de finalización del proceso de 
+            ciclado del acuario.
+            """
+        )
+
         self.fecha_desmontaje = NullableDateEdit()
-        self.fecha_desmontaje.setObjectName("fecha_desmontaje")
+        # self.fecha_desmontaje.setObjectName("fecha_desmontaje")
         self.fecha_desmontaje.edit_date.setObjectName(
             "fecha_desmontaje_acuario")
+        self.fecha_desmontaje.setToolTip(
+            """
+            <h2>Fecha de desmontaje</h2><br>
+            En este campo se inserta la fecha del desmontaje del acuario.
+            """
+        )
+
         # Botones
         self.button_color = QPushButton()
         self.button_color.setFixedWidth(30)

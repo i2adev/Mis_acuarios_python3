@@ -2,8 +2,8 @@
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      24/07/2025
 Comentarios:
-    Módulo que contiene los controles del formulario de la entidad CATE-
-    GORÍA DE INCIDENCIA.
+    Módulo que contiene los controles del formulario de la entidad
+    CATEGORÍA DE INCIDENCIA.
 """
 
 import sys
@@ -55,11 +55,28 @@ class CategoriaIncidenciaForm(QFrame):
         self.edit_id.setObjectName("edit_id")
         self.edit_id.setFixedWidth(50)
         self.edit_id.setEnabled(False)
+
         self.edit_categoria_incidencia = QLineEdit()
         self.edit_categoria_incidencia.setObjectName(
             "edit_categoria_incidencia")
+        self.edit_categoria_incidencia.setToolTip(
+            """
+            <h2>Tipo de incidencia</h2><br>
+            En este campo se inserta el tipo al que pertenece la incidencia 
+            (Problemas de agua, problemas biológicos, problemas técnicos, 
+            problemas estructurales, problemas de comportamiento, etc).
+            """
+        )
+
         self.text_observaciones = QPlainTextEdit()
         self.text_observaciones.setObjectName("text_descripcion")
+        self.text_observaciones.setToolTip(
+            """
+            <h2>Observaciones</h2><br>
+            En este campo se insertan las observaciones sobre el tipo de 
+            incidencia.
+            """
+        )
 
     def build_layout(self):
         """ Construye el layout del frame. """

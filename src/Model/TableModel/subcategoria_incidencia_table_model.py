@@ -64,9 +64,37 @@ class SubcategoriaIncidenciaTableModel(QAbstractTableModel):
     def headerData(self, section, orientation,
                    role=Qt.ItemDataRole.DisplayRole):
         """
-        Depencdiendo de la horientación de la tabla, Obtiene el encabezado
+        Depencdiendo de la orientación de la tabla, Obtiene el encabezado
         de la columna o número de fila.
         """
+        # Tooltip para cada column
+        if role == Qt.ItemDataRole.ToolTipRole:
+            tooltips = {
+                0: """
+                <h2>Identificador de la subcategoría de incidencia</h2>
+                Este campo muestra el <b>ID</b> de la subcategoría de incidencia.
+                """,
+                1: """
+                <h2>Número correlativo de la subcategoría de incidencia</h2>
+                Este campo muestra el <b>número correlativo</b> de la 
+                subcategoría de incidencia.
+                """,
+                2: """
+                <h2>Categoría de incidencia</h2>
+                Este campo muestra la <b>categoría de incidencia</b>.
+                """,
+                3: """
+                <h2>Subcategoría de incidencia</h2>
+                Este campo muestra la <b>subcategoría de incidencia</b>.
+                """,
+                4: """
+                <h2>Observaciones</h2>
+                Este campo muestra las <b>observaciones</b> de la 
+                subcategoría de incidencia.
+                """,
+            }
+            return tooltips.get(section, "")
+
         if role != Qt.ItemDataRole.DisplayRole:
             return None
 

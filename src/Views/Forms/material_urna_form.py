@@ -55,11 +55,26 @@ class MaterialUrnaForm(QFrame):
         self.edit_id.setObjectName("edit_id")
         self.edit_id.setFixedWidth(50)
         self.edit_id.setEnabled(False)
+
         self.edit_material = QLineEdit()
         self.edit_material.setObjectName("edit_material")
+        self.edit_material.setToolTip(
+            """
+            <h2>Material de la urna</h2><br>
+            En este campo se inserta el material con el que se ha 
+            fabricado la urna. Este es un campo <b>
+            """
+        )
+
         self.text_descripcion = QPlainTextEdit()
         self.text_descripcion.setObjectName("text_descripcion")
         self.text_descripcion.setMaximumHeight(75)
+        self.text_descripcion.setToolTip(
+            """
+            <h2>Descripción</h2><br>
+            En este campo se introduce una breve descripción del material.
+            """
+        )
 
     def build_layout(self):
         """ Construye el layout del frame. """

@@ -89,24 +89,80 @@ class MarcaComercialForm(QFrame):
         self.edit_id.setEnabled(False)
         self.edit_id.setObjectName("edit_id")
         self.edit_id.setFixedWidth(50)
+
         self.edit_marca = QLineEdit()
         self.edit_marca.setObjectName("edit_marca")
+        self.edit_marca.setToolTip(
+            """
+            <h2>Marca comercial</h2><br>
+            En este campo se inserta el nombre comercial de la marca. Es un 
+            campo <b>obligatorio<b>.
+            """
+        )
+
         self.edit_direccion = QLineEdit()
         self.edit_direccion.setObjectName("edit_direccion")
+        self.edit_direccion.setToolTip(
+            """
+            <h2>Sede social</h2><br>
+            En este campo se inserta la dirección de la sede social de la 
+            empresa.            
+            """
+        )
+
         self.edit_cod_postal = QLineEdit()
         self.edit_cod_postal.setObjectName("edit_cod_postal")
+        self.edit_cod_postal.setToolTip(
+            """
+            <h2>Código postal</h2><br>
+            En este campo se inserta el código postal de la sede social 
+            de la empresa.
+            """
+        )
+
         self.edit_poblacion = QLineEdit()
         self.edit_poblacion.setObjectName("edit_poblacion")
+        self.edit_poblacion.setToolTip(
+            """
+            <h2>Población</h21><br>
+            En este campo se inserta la población de la sede social de la 
+            empresa.
+            """
+        )
+
         self.edit_provincia = QLineEdit()
         self.edit_provincia.setObjectName("edit_provincia")
+        self.edit_provincia.setToolTip(
+            """
+            <h2>Provincia</h2><br>
+            En este campo se inserta la provincia de la sede social de la 
+            empresa.
+            """
+        )
+
         self.text_observaciones = QPlainTextEdit()
-        self.text_observaciones.setObjectName("text_descripcion")
+        self.text_observaciones.setObjectName("text_observaciones")
         self.text_observaciones.setMaximumHeight(75)
+        self.text_observaciones.setToolTip(
+            """
+            <h2>Observaciones</h2><br>
+            En este campo se insertan las observaciones sobre la empresa. 
+            Por ejemplo se puede insertar una breve historia de la misma, 
+            algún dato que puede ser destacable, etc.
+            """
+        )
 
         # Combos
         self.combo_pais = QComboBox()
         self.combo_pais.setObjectName("combo_pais")
         self.combo_pais.setEditable(True)
+        self.combo_pais.setToolTip(
+            """
+            <h2>País</h2><br>
+            En este campo se selecciona el país donde se encuentra la sede 
+            social de la empresa. Este es un campo <b>obligatorio<b>.
+            """
+        )
 
         # Botones
         self.button_insert_pais = QPushButton("<")

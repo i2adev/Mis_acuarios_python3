@@ -73,9 +73,58 @@ class MarcaComercialTableModel(QAbstractTableModel):
     def headerData(self, section, orientation,
                    role=Qt.ItemDataRole.DisplayRole):
         """
-        Depencdiendo de la horientación de la tabla, Obtiene el encabezado
+        Depencdiendo de la orientación de la tabla, Obtiene el encabezado
         de la columna o número de fila.
         """
+        # Tooltip para cada column
+        if role == Qt.ItemDataRole.ToolTipRole:
+            tooltips = {
+                0: """
+                <h2>Identificador de la marca comercial</h2>
+                Este campo muestra el <b>ID</b> de la marca comercial.
+                """,
+                1: """
+                <h2>Número correlativo de la marca comercial</h2>
+                Este campo muestra el <b>número correlativo</b> de la 
+                marca comercial.
+                """,
+                2: """
+                <h2>Marca comercial</h2>
+                Este campo muestra la <b>marca comercial</b>.
+                """,
+                3: """
+                <h2>Dirección</h2>
+                Este campo muestra la <b>dirección</b> de la sede social de 
+                la marca comercial.
+                """,
+                4: """
+                <h2>Código postal</h2>
+                Este campo muestra el <b>código postal</b> de la población 
+                de donde se encuentra la sede social de la marca comercial.
+                """,
+                5: """
+                <h2>Población</h2>
+                Este campo muestra la <b>población</b> donde se encuentra la 
+                sede social de la marca comercial.
+                """,
+                6: """
+                <h2>Provincia</h2>
+                Este campo muestra la <b>provincia</b> donde se encuentra la 
+                sede social de la marca comercial.
+                """,
+                7: """
+                <h2>País</h2>
+                Este campo muestra el <b>páis</b> donde se encuentra la sede 
+                social de la marca comercial.
+                """,
+                8: """
+                <h2>Observaciones</h2>
+                Este campo muestra las <b>observaciones</b> de la marca 
+                comercial.
+                """,
+            }
+            return tooltips.get(section, "")
+
         if role != Qt.ItemDataRole.DisplayRole:
             return None
 

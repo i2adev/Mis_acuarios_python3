@@ -2,8 +2,8 @@
 Autor: Inigo Iturriagaetxebarria
 Fecha: 08/10/2025
 Comentarios:
-    Módulo que contiene los controles del formulario de la entidad ESTADO DE 
-    PROYECTO.
+    Módulo que contiene los controles del formulario de la entidad ESTADO
+    DE PROYECTO.
 """
 
 import sys
@@ -55,10 +55,26 @@ class EstadoProyectoForm(QFrame):
         self.edit_id.setObjectName("edit_id")
         self.edit_id.setFixedWidth(50)
         self.edit_id.setEnabled(False)
+
         self.edit_estado_proyecto = QLineEdit()
         self.edit_estado_proyecto.setObjectName("edit_estado_proyecto")
+        self.edit_estado_proyecto.setToolTip(
+            """
+            <h2>Estado del proyecto</h2><br>
+            En este campo se inserta el estado que puede tomar un proyecto (
+            Planificación, en curso, finalizado, cancelado, etc).
+            """
+        )
+
         self.text_observaciones = QPlainTextEdit()
         self.text_observaciones.setObjectName("text_descripcion")
+        self.text_observaciones.setToolTip(
+            """
+            <h2>Observaciones</h2><br>
+            En este campo se insertan las observaciones sobre el estado del 
+            proyecto.
+            """
+        )
 
     def build_layout(self):
         """ Construye el layout del frame. """
