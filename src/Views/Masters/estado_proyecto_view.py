@@ -10,8 +10,8 @@ import sys
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QApplication, QWidget
 
-from Views.Masters.base_view import BaseView
 from Views.Forms.estado_proyecto_form import EstadoProyectoForm
+from Views.Masters.base_view import BaseView
 
 
 class EstadoProyectoView(BaseView):
@@ -34,7 +34,7 @@ class EstadoProyectoView(BaseView):
         for widget in self.findChildren(QWidget):
             widget.setFocusPolicy(Qt.FocusPolicy.ClickFocus)
 
-        # Establecemos las politicas de focus
+        # Establecemos las políticas de focus
         self.frame.edit_estado_proyecto.setFocusPolicy(
             Qt.FocusPolicy.StrongFocus)
         self.frame.text_observaciones.setFocusPolicy(Qt.FocusPolicy.StrongFocus)

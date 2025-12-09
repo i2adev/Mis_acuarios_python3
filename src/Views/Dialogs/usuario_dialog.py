@@ -35,7 +35,7 @@ class UsuarioDialog(BaseDialog):
         for widget in self.findChildren(QWidget):
             widget.setFocusPolicy(Qt.FocusPolicy.ClickFocus)
 
-        # Establecemos las politicas de focus
+        # Establecemos las políticas de focus
         self.frame.edit_nombre.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
         self.frame.edit_apellido_1.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
         self.frame.edit_apellido_2.setFocusPolicy(Qt.FocusPolicy.StrongFocus)

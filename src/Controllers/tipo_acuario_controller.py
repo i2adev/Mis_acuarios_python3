@@ -269,7 +269,7 @@ class TipoAcuarioController(BaseController):
                 "NO SE HAN PODIDO OBTENER LOS 'TIPOS DE FILTRO'."
             )
 
-        # Llenamos el combo
+        # Llenas el combo
         for ent in lista.value:
             self._view.frame.combo_categoria_acuario.addItem(ent.categoria,
                                                              ent.id)
@@ -298,7 +298,7 @@ class TipoAcuarioController(BaseController):
                 "NO SE HAN PODIDO OBTENER LOS 'SUBCATEGORÍAS DE ACUARIO'."
             )
 
-        # Llenamos el combo
+        # Llenas el combo
         for ent in lista.value:
             self._view.frame.combo_subcategoria_acuario.addItem(
                 ent.subcategoria, ent.id)

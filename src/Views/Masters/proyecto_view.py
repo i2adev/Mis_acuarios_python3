@@ -45,7 +45,7 @@ class ProyectoView(BaseView):
         for widget in self.findChildren(QWidget):
             widget.setFocusPolicy(Qt.FocusPolicy.ClickFocus)
 
-        # Establecemos las politicas de focus
+        # Establecemos las políticas de focus
         self.frame.edit_nombre_proyecto.setFocusPolicy(
             Qt.FocusPolicy.StrongFocus)
         self.frame.combo_estado_proyecto.setFocusPolicy(

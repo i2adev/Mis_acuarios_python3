@@ -48,7 +48,7 @@ class FiltroController(BaseController):
         # Llamaos al constructor de la superclase
         super().__init__(view, dao, model)
 
-        # Llenamos los combos
+        # Llenas los combos
         self._fill_combos()
 
     def _entity_configuration(self) -> FiltroEntity:
@@ -372,7 +372,7 @@ class FiltroController(BaseController):
                 "NO SE HAN PODIDO OBTENER LOS 'TIPOS DE FILTRO'."
             )
 
-        # Llenamos el combo
+        # Llenas el combo
         for ent in lista.value:
             self._view.frame.combo_tipo_filtro.addItem(
                 ent.tipo_filtro, ent.id
@@ -399,7 +399,7 @@ class FiltroController(BaseController):
                 "NO SE HAN PODIDO OBTENER LAS 'MARCAS COMERCIALES'."
             )
 
-        # Llenamos el combo
+        # Llenas el combo
         for ent in lista.value:
             self._view.frame.combo_marca.addItem(
                 ent.nombre_marca, ent.id

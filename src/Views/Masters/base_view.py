@@ -150,7 +150,7 @@ class BaseView(QWidget):
         self.frame_table = QFrame()  # Frame que contiene el datatable
         self.frame_table.setLayout(self.layout_table)
         self.frame_table.setMinimumHeight(210)
-        self.layout_crud = QVBoxLayout()  # Layout donde se colocan los botones 
+        self.layout_crud = QVBoxLayout()  # Layout donde se colocan los botónes 
         # del CRUD
         self.layout_form_data = QHBoxLayout()  # Layout que contiene el frame con
         # el formulario de datos
@@ -338,7 +338,7 @@ class BaseView(QWidget):
         self.label_total_pages.setMaximumWidth(30)
 
         ## Barra de estado
-        ### Boton de filtro
+        ### Botón de filtro
         icon_filter = QIcon()
         icon_filter.addPixmap(QPixmap(":/Images/filter.png"), QIcon.Mode.Normal,
                               QIcon.State.On)
@@ -367,7 +367,7 @@ class BaseView(QWidget):
             """
         )
 
-        ### Patrón de busqueda
+        ### Patrón de búsqueda
         self.edit_patron = QLineEdit()
         self.edit_patron.setObjectName("edit_patron")
         self.edit_patron.setFixedWidth(300)

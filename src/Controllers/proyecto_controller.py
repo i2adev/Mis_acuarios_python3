@@ -44,7 +44,7 @@ class ProyectoController(BaseController):
         # Llamaos al constructor de la superclase
         super().__init__(view, dao, model)
 
-        # Llenamo los combos
+        # Llena los combos
         self._fill_combos()
 
     def _entity_configuration(self) -> ProyectoEntity:
@@ -283,7 +283,7 @@ class ProyectoController(BaseController):
                 "NO SE HAN PODIDO OBTENER LOS 'ESTADOS DE PROYECTO'."
             )
 
-        # Llenamos el combo
+        # Llenas el combo
         for ent in lista.value:
             self._view.frame.combo_estado_proyecto.addItem(
                 ent.estado, ent.id

@@ -21,7 +21,7 @@ from Model.Entities.usuario_entity import UsuarioEntity
 from Views.Dialogs.login_dialog import LoginDialog
 
 # Versión del programa
-__version__ = "0.16.2a"
+__version__ = "0.16.2b"
 
 
 def excepthook(exc_type, exc_value, exc_traceback):

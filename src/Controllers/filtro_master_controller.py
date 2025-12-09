@@ -43,7 +43,7 @@ class FiltroMasterController(FiltroController):
         self._pag.initialize_paginator()
         self._configure_status_bar(self._pag)
 
-        # Llenamos la tabla
+        # Llenas la tabla
         self._load_tableview()
         self._configure_table_foot()
 
@@ -70,7 +70,7 @@ class FiltroMasterController(FiltroController):
             if isinstance(widget, NullableDateEdit):
                 widget.edit_date.installEventFilter(self)
 
-        # Inicializa los botones
+        # Inicializa los botónes
         self._view.frame.button_insert_tipo_filtro.clicked.connect(
             self._open_tipo_filtro_dialog
         )
@@ -298,8 +298,8 @@ class FiltroMasterController(FiltroController):
         self._load_tableview()
 
         # Configura el pie de tabla
-        self.configure_table_crud(res.value)
         self.configure_table_foot("INSERT", paginator_pages)
+        self.configure_table_crud(res.value)
 
         # Configura la barra de estado
         self._configure_status_bar(self._pag)
@@ -357,10 +357,11 @@ class FiltroMasterController(FiltroController):
             # Comprobamos si al añadir un registro se ha aumentado el número
             # de páginas totales
             if self._pag.total_pages > before_pages:
-                self._view.combo_select_page.addItem(
-                    str(self._pag.total_pages),
-                    self._pag.total_pages
-                )
+                # self._view.combo_select_page.addItem(
+                #     str(self._pag.total_pages),
+                #     self._pag.total_pages
+                # )
+                self._configure_table_foot()
                 self._view.label_total_pages.setText(str(self._pag.total_pages))
 
         elif operation == "DELETE":

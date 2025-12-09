@@ -45,7 +45,7 @@ class SubcategoriaIncidenciaMasterController(SubcategoriaIncidenciaController):
         self._pag.initialize_paginator()
         self._configure_status_bar(self._pag)
 
-        # Llenamos la tabla
+        # Llenas la tabla
         self._load_tableview()
         self._configure_table_foot()
 
@@ -67,7 +67,7 @@ class SubcategoriaIncidenciaMasterController(SubcategoriaIncidenciaController):
             if isinstance(widget, QComboBox):
                 widget.installEventFilter(self)
 
-        # Inizializa los botones
+        # Inicializa los botónes
         self._view.button_insert.clicked.connect(self.button_insert_click)
         self._view.button_update.clicked.connect(self.button_update_click)
         self._view.button_load.clicked.connect(self.button_load_click)
@@ -258,7 +258,7 @@ class SubcategoriaIncidenciaMasterController(SubcategoriaIncidenciaController):
         self._configure_status_bar(self._pag)
 
     def button_load_click(self, event):
-        """ Controla el clic del boton de cargar. """
+        """ Controla el clic del botón de cargar. """
 
         self._load_record()
 
@@ -321,9 +321,9 @@ class SubcategoriaIncidenciaMasterController(SubcategoriaIncidenciaController):
         self._load_tableview()
 
         # Configura la tabla y el pie
-        self.configure_table_crud(res.value)
         self.configure_table_foot("UPDATE", None,
                                   current_page)
+        self.configure_table_crud(res.value)
 
     def configure_table_crud(self, ide: int):
         """
@@ -348,10 +348,11 @@ class SubcategoriaIncidenciaMasterController(SubcategoriaIncidenciaController):
             # Comprobamos si al añadir un registro se ha aumentado el número
             # de páginas totales
             if self._pag.total_pages > before_pages:
-                self._view.combo_select_page.addItem(
-                    str(self._pag.total_pages),
-                    self._pag.total_pages
-                )
+                # self._view.combo_select_page.addItem(
+                #     str(self._pag.total_pages),
+                #     self._pag.total_pages
+                # )
+                self._configure_table_foot()
                 self._view.label_total_pages.setText(str(self._pag.total_pages))
 
         elif operation == "DELETE":

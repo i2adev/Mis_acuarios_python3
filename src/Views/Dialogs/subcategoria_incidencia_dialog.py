@@ -35,7 +35,7 @@ class SubcategoriaIncidenciaDialog(BaseDialog):
         for widget in self.findChildren(QWidget):
             widget.setFocusPolicy(Qt.FocusPolicy.ClickFocus)
 
-        # Establecemos las politicas de focus
+        # Establecemos las políticas de focus
         self.frame.combo_categoria_incidencia.setFocusPolicy(
             Qt.FocusPolicy.StrongFocus)
         self.frame.edit_subcategoria_incidencia.setFocusPolicy(

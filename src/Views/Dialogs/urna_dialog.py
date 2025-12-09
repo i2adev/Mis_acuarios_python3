@@ -38,7 +38,7 @@ class UrnaDialog(BaseDialog):
         for widget in self.findChildren(QWidget):
             widget.setFocusPolicy(Qt.FocusPolicy.ClickFocus)
 
-        # Establecemos las politicas de focus
+        # Establecemos las políticas de focus
         self.frame.combo_marca.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
         self.frame.edit_modelo.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
         self.frame.edit_ancho.setFocusPolicy(Qt.FocusPolicy.StrongFocus)

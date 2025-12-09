@@ -11,8 +11,8 @@ import sys
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QApplication, QWidget
 
-from Views.Masters.base_view import BaseView
 from Views.Forms.subcategoria_incidencia_form import SubcategoriaIncidenciaForm
+from Views.Masters.base_view import BaseView
 
 
 class SubcategoriaIncidenciaView(BaseView):
@@ -40,7 +40,7 @@ class SubcategoriaIncidenciaView(BaseView):
         for widget in self.findChildren(QWidget):
             widget.setFocusPolicy(Qt.FocusPolicy.ClickFocus)
 
-        # Establecemos las politicas de focus
+        # Establecemos las políticas de focus
         self.frame.combo_categoria_incidencia.setFocusPolicy(
             Qt.FocusPolicy.StrongFocus
         )

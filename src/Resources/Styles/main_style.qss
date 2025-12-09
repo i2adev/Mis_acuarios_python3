@@ -31,7 +31,7 @@ QLineEdit:focus, QTextEdit:focus, QPlainTextEdit:focus {
 	padding: 2px;
 }
 
-/* Estilo de los botones */
+/* Estilo de los botónes */
 QPushButton {
 	 /* border: none; */
 	 background-color: #232323;

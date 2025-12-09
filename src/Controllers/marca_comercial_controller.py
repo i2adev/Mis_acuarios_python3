@@ -326,7 +326,7 @@ class MarcaComercialController(BaseController):
                 "NO SE HAN PODIDO OBTENER LOS 'PAISES'."
             )
 
-        # Llenamos el combo
+        # Llenas el combo
         for ent in lista.value:
             self._view.frame.combo_pais.addItem(ent.pais, ent.id)
 

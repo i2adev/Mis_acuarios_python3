@@ -1,6 +1,6 @@
 ﻿CHANGELOG:
 ================================================================================
-0.16.2a REFACTORIZACIÓNES
+0.16.2b REFACTORIZACIÓNES
         -   SE RECONFIGURA LA TABLA DE FILTROS PARA ADAPTARLO AL ESPACIO
             DISPONIBLE.
         -   SE PONEN TOOLTIPS A LAS ETIQUETAS DE LOS FORMULARIOS.

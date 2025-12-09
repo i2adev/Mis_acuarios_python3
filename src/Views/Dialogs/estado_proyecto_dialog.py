@@ -35,7 +35,7 @@ class EstadoProyectoDialog(BaseDialog):
         for widget in self.findChildren(QWidget):
             widget.setFocusPolicy(Qt.FocusPolicy.ClickFocus)
 
-        # Establecemos las politicas de focus
+        # Establecemos las políticas de focus
         self.frame.edit_estado_proyecto.setFocusPolicy(
             Qt.FocusPolicy.StrongFocus)
         self.frame.text_observaciones.setFocusPolicy(Qt.FocusPolicy.StrongFocus)

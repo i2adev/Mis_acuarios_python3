@@ -258,7 +258,7 @@ class BaseController(QObject):
             for col in columns_hide:
                 table.setColumnHidden(col, True)
 
-        # Hacer que la columna de descripcion use el espaciorestante
+        # Hacer que la columna de descripción use el espacio restante
         last_column_ix = table.model().columnCount() - 1
         header = table.horizontalHeader()
         header.setSectionResizeMode(last_column_ix,

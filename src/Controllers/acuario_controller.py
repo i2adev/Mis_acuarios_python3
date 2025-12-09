@@ -49,7 +49,7 @@ class AcuarioController(BaseController):
         # Llamaos al constructor de la superclase
         super().__init__(view, dao, model)
 
-        # Llenamos los combos
+        # Llenas los combos
         self._fill_combos()
 
     def _entity_configuration(self) -> AcuarioEntity:
@@ -387,7 +387,7 @@ class AcuarioController(BaseController):
                 "NO SE HAN PODIDO OBTENER LAS 'URNAS'."
             )
 
-        # Llenamos el combo
+        # Llenas el combo
         for ent in lista.value:
             self._view.frame.combo_proyecto.addItem(
                 ent.nombre, ent.id
@@ -414,7 +414,7 @@ class AcuarioController(BaseController):
                 "NO SE HAN PODIDO OBTENER LAS 'URNAS'."
             )
 
-        # Llenamos el combo
+        # Llenas el combo
         for ent in lista.value:
             self._view.frame.combo_urna.addItem(
                 ent.modelo, ent.id
@@ -441,7 +441,7 @@ class AcuarioController(BaseController):
                 "NO SE HAN PODIDO OBTENER LOS 'TIPOS DE ACUARIO'."
             )
 
-        # Llenamos el combo
+        # Llenas el combo
         for ent in lista.value:
             self._view.frame.combo_tipo_acuario.addItem(
                 ent.observaciones, ent.id

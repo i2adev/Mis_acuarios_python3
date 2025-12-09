@@ -8,21 +8,21 @@ from PyQt6.QtGui import QAction
 from PyQt6.QtWidgets import QMessageBox, QPushButton
 
 from Controllers.base_controller import BaseController
-from Model.DAO.marca_comercial_dao import MarcaComercialDAO
-from Views.Dialogs.marca_comercial_dialog import MarcaComercialDialog
 from Controllers.marca_comercial_dialog_controller import \
     MarcaComercialDialogController
-from Model.Entities.marca_comercial_entity import MarcaComercialEntity
-from Model.DAO.material_urna_dao import MaterialUrnaDAO
-from Views.Dialogs.material_urna_dialog import MaterialUrnaDialog
 from Controllers.material_urna_dialog_controller import \
     MaterialUrnaDialogController
-from Model.Entities.material_urna_entity import MaterialUrnaEntity
-from Services.Result.result import Result
+from Model.DAO.marca_comercial_dao import MarcaComercialDAO
+from Model.DAO.material_urna_dao import MaterialUrnaDAO
 from Model.DAO.urna_dao import UrnaDAO
-from Views.Dialogs.urna_dialog import UrnaDialog
+from Model.Entities.marca_comercial_entity import MarcaComercialEntity
+from Model.Entities.material_urna_entity import MaterialUrnaEntity
 from Model.Entities.urna_entity import UrnaEntity
+from Services.Result.result import Result
 from Services.Validators.urna_validator import UrnaValidator
+from Views.Dialogs.marca_comercial_dialog import MarcaComercialDialog
+from Views.Dialogs.material_urna_dialog import MaterialUrnaDialog
+from Views.Dialogs.urna_dialog import UrnaDialog
 from Views.Masters.urna_view import UrnaView
 
 
@@ -45,7 +45,7 @@ class UrnaController(BaseController):
         # Llamaos al constructor de la superclase
         super().__init__(view, dao, model)
 
-        # Llenamo los combos
+        # Llena los combos
         self._fill_combos()
 
     def _entity_configuration(self) -> UrnaEntity:
@@ -320,7 +320,7 @@ class UrnaController(BaseController):
                 "NO SE HAN PODIDO OBTENER LAS 'MARCAS COMERCIALES'."
             )
 
-        # Llenamos el combo
+        # Llenas el combo
         for ent in lista.value:
             self._view.frame.combo_marca.addItem(ent.nombre_marca, ent.id)
 
@@ -344,7 +344,7 @@ class UrnaController(BaseController):
                 "NO SE HAN PODIDO OBTENER LOS 'MATERIALES DE URNA'."
             )
 
-        # Llenamos el combo
+        # Llenas el combo
         for ent in lista.value:
             self._view.frame.combo_material.addItem(ent.material, ent.id)
 

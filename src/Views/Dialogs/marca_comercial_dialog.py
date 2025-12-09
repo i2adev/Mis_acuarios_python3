@@ -35,7 +35,7 @@ class MarcaComercialDialog(BaseDialog):
         for widget in self.findChildren(QWidget):
             widget.setFocusPolicy(Qt.FocusPolicy.ClickFocus)
 
-        # Establecemos las politicas de focus
+        # Establecemos las políticas de focus
         self.frame.edit_marca.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
         self.frame.edit_direccion.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
         self.frame.edit_cod_postal.setFocusPolicy(Qt.FocusPolicy.StrongFocus)

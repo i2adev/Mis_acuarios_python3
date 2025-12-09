@@ -10,8 +10,8 @@ import sys
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QApplication, QWidget
 
-from Views.Masters.base_view import BaseView
 from Views.Forms.tipo_acuario_form import TipoAcuarioForm
+from Views.Masters.base_view import BaseView
 
 
 class TipoAcuarioView(BaseView):
@@ -34,7 +34,7 @@ class TipoAcuarioView(BaseView):
         for widget in self.findChildren(QWidget):
             widget.setFocusPolicy(Qt.FocusPolicy.ClickFocus)
 
-        # Establecemos las politicas de focus
+        # Establecemos las políticas de focus
         self.frame.combo_categoria_acuario.setFocusPolicy(
             Qt.FocusPolicy.StrongFocus)
         self.frame.combo_subcategoria_acuario.setFocusPolicy(

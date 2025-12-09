@@ -271,7 +271,7 @@ class SubcategoriaAcuarioController(BaseController):
                 "NO SE HAN PODIDO OBTENER LAS 'CATEGORÍAS DE ACUARIO'."
             )
 
-        # Llenamos el combo
+        # Llenas el combo
         for ent in lista.value:
             self._view.frame.combo_categoria_acuario.addItem(ent.categoria,
                                                              ent.id)
@@ -322,7 +322,7 @@ class SubcategoriaAcuarioController(BaseController):
                 "NO SE HAN PODIDO OBTENER LOS 'CATEGORÍAS DE INCIDENCIA'."
             )
 
-        # Llenamos el combo
+        # Llenas el combo
         for ent in lista.value:
             self._view.frame.combo_categoria_acuario.addItem(
                 ent.categoria, ent.id)

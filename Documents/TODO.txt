@@ -41,12 +41,47 @@ FECHA		DESCRIPCIÓN
 
             -   SE IMPLEMENTA EL SISTEMA DE CONTROLES DESACTIVADOS: CUANDO SE
                 ENCUENTRA DESACTIVADO DEBE DE MOSTRARSE EN ROJO E INHABILITADO,
-                EN CASO CONTRARIO SE MOSTRARÁ EN COLOR POR DEFECTO.         TODO
-            -   SE SUBEN LOS MÉTODOS 'SET_TAB_ORDER' AL CONTROLADOR BASE.   TODO
+                EN CASO CONTRARIO SE MOSTRARÁ EN COLOR POR DEFECTO.
+                -   ACUARIO.                                                DONE
+                -   CATEGORÍA DE ACUARIO.                                   DONE
+                -   CATEGORÍA DE INCIDENCIA.                                DONE
+                -   ESTADO DEL PROYECTO.                                    DONE
+                -   FILTRO.                                                 DONE
+                -   IMAGEN.                                        NOT NECESSARY
+                -   MARCA COMERCIAL.                                        DONE
+                -   MATERIAL DE LA URNA.                                    DONE
+                -   PROYECTO.                                               DONE
+                -   SUBCATEGORÍA DE ACUARIO.                                DONE
+                -   SUBCATEGORÍA DE INCIDENCIA.                             DONE
+                -   TIPO DE ACUARIO.                                        DONE
+                -   TIPO DE FILTRO.                                         DONE
+                -   URNA.                                                   DONE
+
+            -   SE CONFIGURA PARA QUE CUANDO SE INSERTE UN REGISTRO, SE
+                SELECCIONE EL NUEVO REGISTRO.
+                -   ACUARIO.                                                DONE
+                -   CATEGORÍA DE ACUARIO.                                   DONE
+                -   CATEGORÍA DE INCIDENCIA.                                DONE
+                -   ESTADO DEL PROYECTO.                                    DONE
+                -   FILTRO.                                                 DONE
+                -   IMAGEN.                                        NOT NECESSARY
+                -   MARCA COMERCIAL.                                        DONE
+                -   MATERIAL DE LA URNA.                                    DONE
+                -   PROYECTO.                                               DONE
+                -   SUBCATEGORÍA DE ACUARIO.                                DONE
+                -   SUBCATEGORÍA DE INCIDENCIA.                             DONE
+                -   TIPO DE ACUARIO.                                        DONE
+                -   TIPO DE FILTRO.                                         DONE
+                -   URNA.                                                   DONE
+
+            BUGFIXES:
             -   SE CORRIGE EL ERROR QUE OCURRE EN LAS TABLAS CUANDO SE INSERTA
                 UN REGISTRO Y SE CAMBÍA DE LA PÁGINA 1 A LA 2. EL ERROR CONSISTE
                 EN QUE CUANDO SE DA DICHA SITUACIÓN EL COMBO DE LA PÁGINA ACTUAL
-                PIERDE SU VALOR.                                            TODO
+                PIERDE SU VALOR.                                            DONE
+
+            -   SE ARREGLA EL ERROR DE SELECCIÓN DE LA ÚLTIMA FILA INSERTADA.
+                                                                            DONE
 
 02/12/2025  SE REALIZA EL TESTEO MANUAL DEL FORMULARIO DE FILTRO:
      ↓      -   TEST: APERTURA DEL FORMULARIO.                              DONE
@@ -151,7 +186,7 @@ FECHA		DESCRIPCIÓN
             -   CARGA DE REGISTRO.                                          DONE
             -   ACTUALIZACIÓN DE REGISTRO.                                  DONE
             -   ELIMINACIÓN DE REGISTRO.                                    DONE
-            -   BUSQUEDA DE REGISTROS:
+            -   búsqueda DE REGISTROS:
                 SE BUSCA EN BASE A USUARIO.                                 DONE
             -   SE PROGRAMA PARA QUE LOS FORMULARIOS MAESTROS APAREZCAN
                 CENTRADOS.                                                  DONE

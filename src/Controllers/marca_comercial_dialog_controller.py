@@ -30,7 +30,7 @@ class MarcaComercialDialogController(MarcaComercialController):
         # inicializamos la vista y pasamos al constructor padre
         super().__init__(view, dao, mod)
 
-        # Llenamo los combos
+        # Llena los combos
         self._fill_combos()
 
         # Oculta el layout del ID
@@ -109,7 +109,7 @@ class MarcaComercialDialogController(MarcaComercialController):
                 "NO SE HAN PODIDO OBTENER LOS 'PAISES'."
             )
 
-        # Llenamos el combo
+        # Llenas el combo
         for ent in lista.value:
             self._view.frame.combo_pais.addItem(ent.pais, ent.id)
 

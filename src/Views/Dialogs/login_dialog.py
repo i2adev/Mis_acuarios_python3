@@ -10,10 +10,8 @@ import sys
 from PyQt6.QtCore import Qt, QSize
 from PyQt6.QtGui import QPixmap, QCursor
 from PyQt6.QtWidgets import (QDialog, QVBoxLayout, QFrame, QSizePolicy,
-                             QHBoxLayout, QPushButton, QLabel, QSpacerItem,
+                             QPushButton, QLabel, QSpacerItem,
                              QApplication, QLineEdit, QWidget)
-
-import Resources.resources_rc
 
 
 class LoginDialog(QDialog):
@@ -146,7 +144,7 @@ class LoginDialog(QDialog):
         for widget in self.findChildren(QWidget):
             widget.setFocusPolicy(Qt.FocusPolicy.ClickFocus)
 
-        # Establecemos las politicas de focus
+        # Establecemos las políticas de focus
         self.edit_nick.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
         self.edit_password.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
 

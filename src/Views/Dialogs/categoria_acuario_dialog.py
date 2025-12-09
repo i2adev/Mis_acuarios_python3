@@ -8,7 +8,7 @@ Comentarios:
 import sys
 
 from PyQt6.QtCore import Qt
-from PyQt6.QtWidgets import QDialog, QApplication, QMessageBox, QWidget
+from PyQt6.QtWidgets import QApplication, QWidget
 
 from Views.Dialogs.base_dialog import BaseDialog
 from Views.Forms.categoria_acuario_form import CategoriaAcuarioForm
@@ -35,7 +35,7 @@ class CategoriaAcuarioDialog(BaseDialog):
         for widget in self.findChildren(QWidget):
             widget.setFocusPolicy(Qt.FocusPolicy.ClickFocus)
 
-        # Establecemos las politicas de focus
+        # Establecemos las políticas de focus
         self.frame.edit_categoria_acuario.setFocusPolicy(
             Qt.FocusPolicy.StrongFocus)
         self.frame.text_observaciones.setFocusPolicy(Qt.FocusPolicy.StrongFocus)

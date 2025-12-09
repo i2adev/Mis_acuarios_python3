@@ -38,7 +38,7 @@ class MaterialUrnaView(BaseView):
         for widget in self.findChildren(QWidget):
             widget.setFocusPolicy(Qt.FocusPolicy.ClickFocus)
 
-        # Establecemos las politicas de focus
+        # Establecemos las políticas de focus
         self.frame.edit_material.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
         self.frame.text_descripcion.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
 

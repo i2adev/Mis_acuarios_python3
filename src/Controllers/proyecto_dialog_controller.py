@@ -31,7 +31,7 @@ class ProyectoDialogController(ProyectoController):
         # inicializamos la vista y pasamos al constructor padre
         super().__init__(view, dao, mod)
 
-        # Llenamo los combos
+        # Llena los combos
         self._fill_combos()
 
         # Ocultamos los controles del motivo de cierre

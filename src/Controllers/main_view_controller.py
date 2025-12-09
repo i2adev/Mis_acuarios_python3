@@ -93,7 +93,7 @@ class MainViewController(BaseController):
 
     def init_handlers(self):
         """ Inicializa los handlers. """
-        # Inicializamos los botones
+        # Inicializamos los botónes
 
         self._view.button_maestro_filtro.clicked.connect(
             self.filtro_clicked
