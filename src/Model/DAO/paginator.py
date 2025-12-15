@@ -12,14 +12,18 @@ from Model.DAO.database import DBManager
 from Model.Entities.acuario_entity import AcuarioEntity
 from Model.Entities.base_entity import BaseEntity
 from Model.Entities.categoria_acuario_entity import CategoriaAcuarioEntity
-from Model.Entities.categoria_incidencia_entity import CategoriaIncidenciaEntity
+from Model.Entities.categoria_equipamiento_entity import \
+    CategoriaEquipamientoEntity
+from Model.Entities.categoria_incidencia_entity import \
+    CategoriaIncidenciaEntity
 from Model.Entities.estado_proyecto_entity import EstadoProyectoEntity
 from Model.Entities.filtro_entity import FiltroEntity
 from Model.Entities.marca_comercial_entity import MarcaComercialEntity
 from Model.Entities.material_urna_entity import MaterialUrnaEntity
 from Model.Entities.proyecto_entity import ProyectoEntity
 from Model.Entities.search_commands import SearchCmd
-from Model.Entities.subcategoria_acuario_entity import SubcategoriaAcuarioEntity
+from Model.Entities.subcategoria_acuario_entity import \
+    SubcategoriaAcuarioEntity
 from Model.Entities.subcategoria_incidencia_entity import \
     SubcategoriaIncidenciaEntity
 from Model.Entities.tipo_acuario_entity import TipoAcuarioEntity
@@ -547,7 +551,15 @@ class Paginator:
             )
                 for f in rows
             ]
-
+        elif self.procedure == "VISTA_CATEGORIAS_EQUIPAMIENTO":
+            data_list = [CategoriaEquipamientoEntity(
+                id=f["ID"],
+                num=f["NUM"],
+                categoria=f["CATEGORIA"],
+                descripcion=f["DESCRIPCION"],
+            )
+                for f in rows
+            ]
         return data_list
 
     def get_page_number_by_num(self, num: int) -> int:
@@ -599,6 +611,8 @@ class Paginator:
             return SearchCmd.SEARCH_ACUARIO
         elif self.procedure == "VISTA_FILTROS":
             return SearchCmd.SEARCH_FILTRO
+        elif self.procedure == "VISTA_CATEGORIAS_EQUIPAMIENTO":
+            return SearchCmd.SEARCH_CATEGORIA_EQUIPAMIENTO
 
     def __str__(self):
         """ Muestra el objeto en forma de texto. """

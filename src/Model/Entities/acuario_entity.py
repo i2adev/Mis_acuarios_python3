@@ -2,7 +2,7 @@
 Autor:      Inigo Iturriagaetxebarria
 Fecha:      30/10/2025
 Comentarios:
-    Módulo que contiene la entidad ACAURIO.
+    Módulo que contiene la entidad ACUARIO.
 """
 from Model.Entities.base_entity import BaseEntity
 

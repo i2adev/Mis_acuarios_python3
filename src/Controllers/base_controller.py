@@ -7,17 +7,16 @@ Comentarios:
     elementos comunes a todas las ventanas como la barra de título.
 """
 
-# Importaciones
-from PyQt6.QtCore import Qt, QEvent, QObject
-from PyQt6.QtGui import QGuiApplication
-from PyQt6.QtWidgets import (QLineEdit, QTextEdit, QPlainTextEdit, QWidget,
-                             QTableView, QComboBox, QHeaderView, QMessageBox,
-                             QLabel, QCompleter, QHBoxLayout, QVBoxLayout,
-                             QPushButton, QCheckBox)
-
 from Model.DAO.base_dao import BaseDAO
 from Model.DAO.paginator import Paginator
 from Model.Entities.base_entity import BaseEntity
+# Importaciones
+from PyQt6.QtCore import QEvent, QObject, Qt
+from PyQt6.QtGui import QGuiApplication
+from PyQt6.QtWidgets import (QCheckBox, QComboBox, QCompleter, QHBoxLayout,
+                             QHeaderView, QLabel, QLineEdit, QMessageBox,
+                             QPlainTextEdit, QPushButton, QTableView,
+                             QTextEdit, QVBoxLayout, QWidget)
 from Services.Result.result import Result
 from Views.Forms.image_form import ImageForm
 
@@ -91,7 +90,7 @@ class BaseController(QObject):
             if widget.toPlainText():
                 widget.setPlainText(widget.toPlainText().strip())
 
-    # Maneja los diferentes tipos de eventos comunes de las diustintas
+    # Maneja los diferentes tipos de eventos comunes de las distintas
     # vistas
     def eventFilter(self, widget: QWidget, event):
         """ Maneja los eventos de la vista. """
@@ -101,35 +100,13 @@ class BaseController(QObject):
             # Controles de texto
             if isinstance(widget, self._text_widgets):
                 self._text_normalize(widget, event)
-                if (isinstance(widget, QLineEdit)
-                        and widget.objectName() == 'date_fin_proyecto'):
-                    if widget.text():
-                        self._show_layout(self._view.frame.layout_motivo_cierre)
-                    else:
-                        self._hide_layout(self._view.frame.layout_motivo_cierre)
-                elif (isinstance(widget, QLineEdit)
-                      and widget.objectName() == 'fecha_desmontaje_acuario'):
-                    if widget.text():
-                        self._view.frame.edit_motivo_desmontaje.setEnabled(
-                            True)
-                        self._view.frame.edit_motivo_desmontaje.setPlaceholderText(
-                            "")
-                    else:
-                        self._view.frame.edit_motivo_desmontaje.setEnabled(
-                            False)
-                        (self._view.frame.edit_motivo_desmontaje
-                         .setPlaceholderText("Este campo se mantiene "
-                                             "desactivado hasta que se "
-                                             "inserte una fecha de desmontaje"))
-
-                return False  # Dejamos que el widget maneje también su
-                # evento.
+                
             # Combos
             if isinstance(widget, QComboBox):
                 self._combo_out_focus(widget, event)
 
         # Gestiona los eventos de pulsación de teclas en los controles
-        # de textp.
+        # de texto.
         if event.type() == QEvent.Type.KeyPress:
             if isinstance(widget, (QTextEdit, QPlainTextEdit)):
 
@@ -359,6 +336,42 @@ class BaseController(QObject):
             QCompleter.CompletionMode.PopupCompletion)
         completer.setCaseSensitivity(Qt.CaseSensitivity.CaseInsensitive)
         combo.setCompleter(completer)
+
+    def _setDisabledControl(self, layout: QVBoxLayout, disabled: bool) -> None:
+        """ Habilita y deshabilita un control. """
+
+        for i in range(layout.count()):
+            item = layout.itemAt(i)
+            widget = item.widget()
+
+            if widget is not None:  # Solo widgets reales
+                if disabled:
+                    if isinstance(widget, QLineEdit):
+                        widget.clear()
+
+                    widget.setEnabled(False)
+                    widget.setStyleSheet("""
+                    QLabel {
+                        color: red;
+                    }
+                    QLineEdit, QTextEdit, QPlainTextEdit {
+                        border: none;
+                        background-color: transparent;
+                        border-bottom: 1px solid red; 
+                    }
+                    """)
+                else:
+                    widget.setEnabled(True)
+                    widget.setStyleSheet("""
+                    QLabel {
+                        color: white;
+                    }
+                    QLineEdit, QTextEdit, QPlainTextEdit {
+                        border: none;
+                        background-color: transparent;
+                        border-bottom: 1px solid white; 
+                    }
+                    """)
 
     def _configure_status_bar(self, pag: Paginator, total_records: int = None,
                               pattern: str = None):

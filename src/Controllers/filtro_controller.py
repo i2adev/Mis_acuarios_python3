@@ -5,20 +5,20 @@ Comentarios:
     Controlador base de filtro.
 """
 
-from PyQt6.QtCore import QDate, QDateTime, QTime, Qt
-from PyQt6.QtGui import QAction
-from PyQt6.QtWidgets import QMessageBox, QPushButton
-
 from Controllers.base_controller import BaseController
 from Controllers.marca_comercial_dialog_controller import \
     MarcaComercialDialogController
-from Controllers.tipo_filtro_dialog_controller import TipoFiltroDialogController
+from Controllers.tipo_filtro_dialog_controller import \
+    TipoFiltroDialogController
 from Model.DAO.filtro_dao import FiltroDAO
 from Model.DAO.marca_comercial_dao import MarcaComercialDAO
 from Model.DAO.tipo_filtro_dao import TipoFiltroDAO
 from Model.Entities.filtro_entity import FiltroEntity
 from Model.Entities.marca_comercial_entity import MarcaComercialEntity
 from Model.Entities.tipo_filtro_entity import TipoFiltroEntity
+from PyQt6.QtCore import QDate, QDateTime, QTime, Qt
+from PyQt6.QtGui import QAction
+from PyQt6.QtWidgets import QMessageBox, QPushButton
 from Services.Result.result import Result
 from Services.Validators.filtro_validator import FiltroValidator
 from Views.Dialogs.filtro_dialog import FiltroDialog
@@ -381,7 +381,7 @@ class FiltroController(BaseController):
         # Establecemos el autocompletado
         self._set_autocomplete(self._view.frame.combo_tipo_filtro)
 
-        # Deselecciona el valor
+        # montaje el valor
         self._view.frame.combo_tipo_filtro.setCurrentIndex(-1)
 
     def _fill_combo_marca(self):
@@ -408,7 +408,7 @@ class FiltroController(BaseController):
         # Establecemos el autocompletado
         self._set_autocomplete(self._view.frame.combo_marca)
 
-        # Deselecciona el valor
+        # montaje el valor
         self._view.frame.combo_marca.setCurrentIndex(-1)
 
     def _open_tipo_acuario_dialog(self):
@@ -652,3 +652,15 @@ class FiltroController(BaseController):
         lista = dimensions.split("x")
 
         return lista
+
+    def _on_text_changed(self):
+        """
+        Se ejecuta cuando se modifica el texto.
+        """
+
+        if self._view.frame.fecha_baja.edit_date.text():
+            self._setDisabledControl(
+                self._view.frame.layout_motivo_baja, False)
+        else:
+            self._setDisabledControl(
+                self._view.frame.layout_motivo_baja, True)

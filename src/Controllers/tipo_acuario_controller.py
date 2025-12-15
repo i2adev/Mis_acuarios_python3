@@ -277,7 +277,7 @@ class TipoAcuarioController(BaseController):
         # Establecemos el autocompletado
         self._set_autocomplete(self._view.frame.combo_categoria_acuario)
 
-        # Deseleccionamos el valor
+        # Deselecciona el valor
         self._view.frame.combo_categoria_acuario.setCurrentIndex(-1)
 
     def _fill_combo_subcategoria_acuario(self, id_ta: int):
@@ -306,7 +306,7 @@ class TipoAcuarioController(BaseController):
         # Establecemos el autocompletado
         self._set_autocomplete(self._view.frame.combo_categoria_acuario)
 
-        # Deseleccionamos el valor
+        # Deselecciona el valor
         self._view.frame.combo_subcategoria_acuario.setCurrentIndex(-1)
 
         # Establecemos el autocompletado

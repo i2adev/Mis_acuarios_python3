@@ -8,10 +8,10 @@ Comentarios:
 import sys
 
 from PyQt6.QtCore import Qt
-from PyQt6.QtGui import QIcon, QPixmap, QCursor, QFont
-from PyQt6.QtWidgets import (QApplication, QWidget, QLabel, QPushButton,
-                             QHBoxLayout, QVBoxLayout, QSpacerItem,
-                             QSizePolicy, QFrame, QSizeGrip)
+from PyQt6.QtGui import QCursor, QFont, QIcon, QPixmap
+from PyQt6.QtWidgets import (QApplication, QFrame, QHBoxLayout, QLabel,
+                             QPushButton, QSizeGrip, QSizePolicy, QSpacerItem,
+                             QVBoxLayout, QWidget)
 
 
 class MainView(QWidget):
@@ -94,6 +94,8 @@ class MainView(QWidget):
         self.maestro_layout.addWidget(self.button_maestro_subcat_incidencia)
         self.maestro_layout.addWidget(self.button_maestro_cat_producto)
         self.maestro_layout.addWidget(self.button_maestro_comercio)
+        self.maestro_layout.addWidget(self.button_maestro_equipamiento)
+        self.maestro_layout.addWidget(self.button_maestro_cat_equipamiento)
         self.maestro_layout.addWidget(self.button_maestro_facturas)
         self.maestro_layout.addWidget(self.button_maestro_filtro)
         self.maestro_layout.addWidget(self.button_maestro_tipo_filtro)
@@ -545,6 +547,50 @@ class MainView(QWidget):
         )
         self.button_maestro_urna.setFlat(True)
         self.button_maestro_urna.setCursor(
+            QCursor(Qt.CursorShape.PointingHandCursor)
+        )
+
+        self.button_maestro_equipamiento = QPushButton("EQUIPAMIENTOS")
+        self.button_maestro_equipamiento.setStyleSheet(
+            """
+            QPushButton {
+                background-color: transparent;
+                text-align: left;
+                margin-bottom: 0;
+                margin-left: 20;
+                font-family: 'Roboto'; 
+                font-size: 14px;
+            }
+            """
+        )
+        self.button_maestro_equipamiento.setObjectName(
+            "button_maestro_equipamiento"
+        )
+        self.button_maestro_equipamiento.setFlat(True)
+        self.button_maestro_equipamiento.setCursor(
+            QCursor(Qt.CursorShape.PointingHandCursor)
+        )
+
+        self.button_maestro_cat_equipamiento = QPushButton(
+            " > CAT. EQUIPAMIENTOS"
+        )
+        self.button_maestro_cat_equipamiento.setStyleSheet(
+            """
+            QPushButton {
+                background-color: transparent;
+                text-align: left;
+                margin-bottom: 0;
+                margin-left: 20;
+                font-family: 'Roboto'; 
+                font-size: 14px;
+            }
+            """
+        )
+        self.button_maestro_cat_equipamiento.setObjectName(
+            "button_maestro_equipamiento"
+        )
+        self.button_maestro_cat_equipamiento.setFlat(True)
+        self.button_maestro_cat_equipamiento.setCursor(
             QCursor(Qt.CursorShape.PointingHandCursor)
         )
 

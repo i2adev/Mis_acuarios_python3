@@ -5,13 +5,12 @@ Comentarios:
     QDateEdit personalizado que permite dejar el campo vacío (valor nulo)
     y seleccionar fecha mediante un calendario emergente integrado.
 """
-from PyQt6.QtCore import QDate, Qt, QPoint, pyqtSignal, QRegularExpression, \
-    QSize
-from PyQt6.QtGui import QRegularExpressionValidator, QIcon, QPixmap
-from PyQt6.QtWidgets import (
-    QWidget, QLineEdit, QToolButton, QCalendarWidget,
-    QHBoxLayout, QApplication, QFrame
-)
+from PyQt6.QtCore import QDate, QPoint, QRegularExpression, QSize, Qt, \
+    pyqtSignal
+from PyQt6.QtGui import QIcon, QPixmap, QRegularExpressionValidator
+from PyQt6.QtWidgets import (QApplication, QCalendarWidget, QFrame,
+                             QHBoxLayout, QLineEdit, QMessageBox, QToolButton,
+                             QWidget)
 
 
 class NullableDateEdit(QWidget):
@@ -31,9 +30,9 @@ class NullableDateEdit(QWidget):
 
         # Campo de texto (entrada manual)
         self.edit_date = QLineEdit()
-        regex = QRegularExpression(
+        self.regex = QRegularExpression(
             r"^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\d{4}$|^$")
-        validator = QRegularExpressionValidator(regex)
+        validator = QRegularExpressionValidator(self.regex)
         self.edit_date.setValidator(validator)
         self.edit_date.textChanged.connect(self._on_text_changed)
         self.edit_date.editingFinished.connect(self._on_editing_finished)
@@ -132,9 +131,17 @@ class NullableDateEdit(QWidget):
 
     def _on_focus_out(self, event):
         """Cuando el campo pierde el foco."""
-        self._has_focus = False
-        self.edit_date.setPlaceholderText("")
-        QLineEdit.focusOutEvent(self.edit_date, event)
+        date = self.edit_date.text()
+        if not self.regex.match(date).hasMatch():
+            QMessageBox.warning(self.edit_date, "ERROR DE FORMATO DE FECHA",
+                                "HA INTRODUCIDO UN FORMATO NO VALIDO PARA LA "
+                                "FECHA")
+            self.edit_date.clear()
+            self.edit_date.setFocus()
+        else:
+            self.edit_date.setPlaceholderText("")
+            self._has_focus = False
+            QLineEdit.focusOutEvent(self.edit_date, event)
 
     # ───────────────────────────────
     # LÓGICA DEL CONTROL
@@ -179,6 +186,7 @@ class NullableDateEdit(QWidget):
 
     def _on_editing_finished(self):
         """Validar texto manual."""
+
         text = self.edit_date.text()
         if text:
             date = QDate.fromString(text, self._display_format)

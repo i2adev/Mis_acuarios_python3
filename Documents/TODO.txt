@@ -1,10 +1,63 @@
 ﻿================================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
+09/12/2025  SE AÑADE LA LÓGICA DE CATEGORÍA DE EQUIPAMIENTO:
+     ↓      -   SE CREA LA ENTIDAD.                                         DONE
+15/12/2025  -   SE CREA LA VISTA EN LA BASE DE DATOS.                       DONE
+            -   SE CREA EL DAO.                                             DONE
+            -   SE CREA EL FORMULARIO.                                      DONE
+            -   SE CREA EL CUADRO DE DIÁLOGO.                               DONE
+            -   SE CREA EL FORMULARIO MAESTRO.                              DONE
+            -   SE CREA EL VALIDADOR DEL FORMULARIO.                        DONE
+            -   SE CREA EL MODELO DE TABLA.                                 DONE
+            -   SE CREAN LOS TOOLTIPS PARA LOS CONTROLES.                   DONE
+            -   SE CREAN LOS TOOLTIPS PARA LOS ENCABEZADOS DE COLUMNA DE LA
+                TABLA DE DATOS.                                             DONE
+
+            -   ACTUALIZAR EL PAGINADOR.
+                -   CREAR EL COMANDO DE BÚSQUEDA.                           DONE
+                -   SE CONFIGURA LA OBTENCIÓN DE LA LISTA DE ENTIDADES.     DONE
+                -   SE CONFIGURA LA OBTENCIÓN DEL COMANDO DE BÚSQUEDA.      DONE
+
+            -   SE CREAN LOS CONTROLADORES:
+                -   CONTROLADOR BASE.                                       DONE
+                -   CONTROLADOR DEL CUADRO DE DIÁLOGO.                      DONE
+                -   CONTROLADOR DEL FORMULARIO MAESTRO.                     DONE
+
+            -   INTEGRAR EN LA VISTA PRINCIPAL.                             DONE
+
+            REFACTORIZACION:
+            -   CUANDO UN CONTROL SE DEBA DESHABILITAR, SE MODIFICA EL
+                COMPORTAMIENTO, EN VEZ DE OCULTAR EL CONTROL, SE PONE EN COLOR
+                ROJO Y SE DESACTIVA:
+                -   SE CREA UNA FUNCIÓN PARA HABILITAR DESHABILITAR CONTROLES.
+                                                                            DONE
+                -   SE MODIFICA LA CLASE DE LA FECHA NULLABLE PARA QUE EN CASO
+                    DE INSERTAR UNA FECHA ERRONEA LANCE UN WARNING.         DONE
+                -   ACUARIO.                                                DONE
+                -   CATEGORÍA DE ACUARIO.                          NOT NECESSARY
+                -   CATEGORÍA DE INCIDENCIA.                       NOT NECESSARY
+                -   ESTADO DEL PROYECTO.                           NOT NECESSARY
+                -   FILTRO.                                                 DONE
+                -   IMAGEN.                                        NOT NECESSARY
+                -   MARCA COMERCIAL.                               NOT NECESSARY
+                -   MATERIAL DE LA URNA.                           NOT NECESSARY
+                -   PROYECTO.                                               DONE
+                -   SUBCATEGORÍA DE ACUARIO.                       NOT NECESSARY
+                -   SUBCATEGORÍA DE INCIDENCIA.                    NOT NECESSARY
+                -   TIPO DE ACUARIO.                               NOT NECESSARY
+                -   TIPO DE FILTRO.                                NOT NECESSARY
+                -   URNA.                                          NOT NECESSARY
+
+            BUG FIXES:
+            -   SE CORRIGE EL ORDEN DE TABULACIÓN DEL FORMULARIO DE ACUARIOS.
+                                                                            DONE
+            -   SE CORRIGE EL ERROR DE LA LIMPIEZA DEL ACUARIO, TRAS LIMPIAR SE
+                ENFOCA EL COMBO DEL PROYECTO, ANTES EL NOMBRE DE ACUARIO.   DONE
+
 04/12/2025  REFACTORIZACIONES:
      ↓      -   SE MODIFICA LA TABLA DE FILTROS PARA ADECUARLO AL ESPACIO
-                DISPONIBLE.                                                 DONE
-
+09/12/2025      DISPONIBLE.                                                 DONE
             -   SE PONEN TOOLTIPS A LAS ETIQUETAS DE LOS FORMULARIOS:
                 -   ACUARIO.                                                DONE
                 -   CATEGORÍA DE ACUARIO.                                   DONE

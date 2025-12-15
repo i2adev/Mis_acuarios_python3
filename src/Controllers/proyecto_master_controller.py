@@ -5,9 +5,6 @@ Comentarios:
     Controlador del formulario maestro del proyecto.
 """
 
-from PyQt6.QtGui import QIcon, QAction
-from PyQt6.QtWidgets import QMessageBox, QTableView, QWidget, QComboBox
-
 import globals
 from Controllers.proyecto_controller import ProyectoController
 from CustomControls.nullable_date_edit import NullableDateEdit
@@ -15,6 +12,8 @@ from Model.DAO.paginator import Paginator
 from Model.DAO.proyecto_dao import ProyectoDAO
 from Model.Entities.proyecto_entity import ProyectoEntity
 from Model.TableModel.proyecto_table_model import ProyectoTableModel
+from PyQt6.QtGui import QAction, QIcon
+from PyQt6.QtWidgets import QComboBox, QMessageBox, QTableView, QWidget
 from Views.Masters.proyecto_view import ProyectoView
 from Views.table_menu_contextual import TableMenuContextual
 
@@ -48,8 +47,10 @@ class ProyectoMasterController(ProyectoController):
         self._configure_table_foot()
 
         # Ocultamos los controles del motivo de cierre
-        self._hide_layout(self._view.frame.layout_motivo_cierre)
         self._hide_layout(self._view.frame.layout_id)
+
+        # Inhabilita el layout del motivo de baja
+        self._setDisabledControl(self._view.frame.layout_motivo_cierre, True)
 
         # Inicializamos los eventos
         self.init_handlers()
@@ -65,8 +66,11 @@ class ProyectoMasterController(ProyectoController):
                 widget.installEventFilter(self)
             if isinstance(widget, QComboBox):
                 widget.installEventFilter(self)
-            if isinstance(widget, NullableDateEdit):
-                widget.edit_date.installEventFilter(self)
+
+        # Textboxes
+        self._view.frame.date_fin.edit_date.textChanged.connect(
+            self._on_text_changed
+        )
 
         # Inicializa los botónes
         self._view.button_insert.clicked.connect(self.button_insert_click)
@@ -352,7 +356,8 @@ class ProyectoMasterController(ProyectoController):
                 #     self._pag.total_pages
                 # )
                 self._configure_table_foot()
-                self._view.label_total_pages.setText(str(self._pag.total_pages))
+                self._view.label_total_pages.setText(
+                    str(self._pag.total_pages))
 
         elif operation == "DELETE":
             # Comprobamos si al eliminar un registro se la disminuido el número
@@ -365,7 +370,8 @@ class ProyectoMasterController(ProyectoController):
                 if current_page <= 0:
                     current_page = 1
 
-                self._view.label_total_pages.setText(str(self._pag.total_pages))
+                self._view.label_total_pages.setText(
+                    str(self._pag.total_pages))
 
                 self._view.combo_select_page.setCurrentIndex(-1)
                 self._view.combo_select_page.setCurrentIndex(current_page - 1)

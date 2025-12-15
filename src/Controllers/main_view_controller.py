@@ -9,6 +9,8 @@ from Controllers.acuario_master_controller import AcuarioMasterController
 from Controllers.base_controller import BaseController
 from Controllers.categoria_acuario_master_controller import \
     CategoriaAcuarioMasterController
+from Controllers.categoria_equipamiento_master_dialog import \
+    CategoriaEquipamientoMasterController
 from Controllers.categoria_incidencia_master_controller import \
     CategoriaIncidenciaMasterController
 from Controllers.estado_proyecto_master_controller import \
@@ -25,10 +27,12 @@ from Controllers.subcategoria_incidencia_master_controller import \
     SubcategoriaIncidenciaMasterController
 from Controllers.tipo_acuario_master_controller import \
     TipoAcuarioMasterController
-from Controllers.tipo_filtro_master_controller import TipoFiltroMasterController
+from Controllers.tipo_filtro_master_controller import \
+    TipoFiltroMasterController
 from Controllers.urna_master_controller import UrnaMasterController
 from Model.DAO.acuario_dao import AcuarioDAO
 from Model.DAO.categoria_acuario_dao import CategoriaAcuarioDAO
+from Model.DAO.categoria_equipamiento_dao import CategoriaEquipamientoDAO
 from Model.DAO.categoria_incidencia_dao import CategoriaIncidenciaDAO
 from Model.DAO.estado_proyecto_dao import EstadoProyectoDAO
 from Model.DAO.filtro_dao import FiltroDAO
@@ -42,13 +46,17 @@ from Model.DAO.tipo_filtro_dao import TipoFiltroDAO
 from Model.DAO.urna_dao import UrnaDAO
 from Model.Entities.acuario_entity import AcuarioEntity
 from Model.Entities.categoria_acuario_entity import CategoriaAcuarioEntity
-from Model.Entities.categoria_incidencia_entity import CategoriaIncidenciaEntity
+from Model.Entities.categoria_equipamiento_entity import \
+    CategoriaEquipamientoEntity
+from Model.Entities.categoria_incidencia_entity import \
+    CategoriaIncidenciaEntity
 from Model.Entities.estado_proyecto_entity import EstadoProyectoEntity
 from Model.Entities.filtro_entity import FiltroEntity
 from Model.Entities.marca_comercial_entity import MarcaComercialEntity
 from Model.Entities.material_urna_entity import MaterialUrnaEntity
 from Model.Entities.proyecto_entity import ProyectoEntity
-from Model.Entities.subcategoria_acuario_entity import SubcategoriaAcuarioEntity
+from Model.Entities.subcategoria_acuario_entity import \
+    SubcategoriaAcuarioEntity
 from Model.Entities.subcategoria_incidencia_entity import \
     SubcategoriaIncidenciaEntity
 from Model.Entities.tipo_acuario_entity import TipoAcuarioEntity
@@ -56,6 +64,7 @@ from Model.Entities.tipo_filtro_entity import TipoFiltroEntity
 from Model.Entities.urna_entity import UrnaEntity
 from Views.Masters.acuario_view import AcuarioView
 from Views.Masters.categoria_acuario_view import CategoriaAcuarioView
+from Views.Masters.categoria_equipamiento_view import CategoriaEquipamientoView
 from Views.Masters.categoria_incidencia_view import CategoriaIncidenciaView
 from Views.Masters.estado_proyecto_view import EstadoProyectoView
 from Views.Masters.filtro_view import FiltroView
@@ -143,6 +152,10 @@ class MainViewController(BaseController):
 
         self._view.button_maestro_acuario.clicked.connect(
             self.acuario_clicked
+        )
+
+        self._view.button_maestro_cat_equipamiento.clicked.connect(
+            self.cat_equipamientto_clicked
         )
 
     def filtro_clicked(self):
@@ -319,6 +332,21 @@ class MainViewController(BaseController):
         mod = MarcaComercialEntity()
 
         ctrl = MarcaComercialMasterController(view, dao, mod)
+        ctrl.show()
+
+    def cat_equipamientto_clicked(self):
+        """
+        Cuando se presiona en el maestro de categorías de equipamiento.
+        Acción: Abre el formulario de categorías de equipamiento.
+        """
+
+        view = CategoriaEquipamientoView(
+            "MAESTRO DE CATEGORÍAS DE EQUIPAMIENTO"
+        )
+        dao = CategoriaEquipamientoDAO()
+        mod = CategoriaEquipamientoEntity()
+
+        ctrl = CategoriaEquipamientoMasterController(view, dao, mod)
         ctrl.show()
 
     def show(self):

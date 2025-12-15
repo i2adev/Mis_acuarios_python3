@@ -5,13 +5,12 @@ Comentarios:
     Controlador del cuadro de diálogo de inserción de urna.
 """
 
-from PyQt6.QtWidgets import QWidget, QMessageBox, QComboBox
-
 import globals
 from Controllers.proyecto_controller import ProyectoController
 from CustomControls.nullable_date_edit import NullableDateEdit
 from Model.DAO.proyecto_dao import ProyectoDAO
 from Model.Entities.proyecto_entity import ProyectoEntity
+from PyQt6.QtWidgets import QComboBox, QMessageBox, QWidget
 from Services.Result.result import Result
 from Views.Dialogs.proyecto_dialog import ProyectoDialog
 
@@ -34,9 +33,11 @@ class ProyectoDialogController(ProyectoController):
         # Llena los combos
         self._fill_combos()
 
-        # Ocultamos los controles del motivo de cierre
-        self._hide_layout(self._view.frame.layout_motivo_cierre)
+        # Ocultamos los layouts
         self._hide_layout(self._view.frame.layout_id)
+
+        # Inhabilita el layout del motivo de baja
+        self._setDisabledControl(self._view.frame.layout_motivo_cierre, True)
 
         # Inicializamos los eventos
         self.init_handlers()
@@ -50,8 +51,8 @@ class ProyectoDialogController(ProyectoController):
                 widget.installEventFilter(self)
             if isinstance(widget, QComboBox):
                 widget.installEventFilter(self)
-            if isinstance(widget, NullableDateEdit):
-                widget.edit_date.installEventFilter(self)
+            # if isinstance(widget, NullableDateEdit):
+            #     widget.edit_date.installEventFilter(self)
 
         # Botones
         self._view.button_accept.clicked.connect(self.dialog_accept)

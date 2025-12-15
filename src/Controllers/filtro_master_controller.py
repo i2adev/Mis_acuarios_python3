@@ -5,9 +5,6 @@ Comentarios:
     Controlador del formulario maestro del acuario.
 """
 
-from PyQt6.QtGui import QIcon, QAction
-from PyQt6.QtWidgets import QMessageBox, QTableView, QWidget, QComboBox
-
 import globals
 from Controllers.filtro_controller import FiltroController
 from CustomControls.nullable_date_edit import NullableDateEdit
@@ -15,6 +12,8 @@ from Model.DAO.filtro_dao import FiltroDAO
 from Model.DAO.paginator import Paginator
 from Model.Entities.filtro_entity import FiltroEntity
 from Model.TableModel.filtro_table_model import FiltroTableModel
+from PyQt6.QtGui import QAction, QIcon
+from PyQt6.QtWidgets import QComboBox, QMessageBox, QTableView, QWidget
 from Views.Masters.filtro_view import FiltroView
 from Views.table_menu_contextual import TableMenuContextual
 
@@ -50,8 +49,8 @@ class FiltroMasterController(FiltroController):
         # Ocultamos los layouts
         self._hide_layout(self._view.frame.layout_id)
 
-        # # Inhabilitamos el layout del motivo de desmontaje
-        # self._view.frame.edit_motivo_desmontaje.setEnabled(False)
+        # Inhabilita el layout del motivo de baja
+        self._setDisabledControl(self._view.frame.layout_motivo_baja, True)
 
         # Inicializamos los eventos
         self.init_handlers()
@@ -69,6 +68,11 @@ class FiltroMasterController(FiltroController):
                 widget.installEventFilter(self)
             if isinstance(widget, NullableDateEdit):
                 widget.edit_date.installEventFilter(self)
+
+        # Textboxes
+        self._view.frame.fecha_baja.edit_date.textChanged.connect(
+            self._on_text_changed
+        )
 
         # Inicializa los botónes
         self._view.frame.button_insert_tipo_filtro.clicked.connect(
@@ -362,7 +366,8 @@ class FiltroMasterController(FiltroController):
                 #     self._pag.total_pages
                 # )
                 self._configure_table_foot()
-                self._view.label_total_pages.setText(str(self._pag.total_pages))
+                self._view.label_total_pages.setText(
+                    str(self._pag.total_pages))
 
         elif operation == "DELETE":
             # Comprobamos si al eliminar un registro se la disminuido el número
@@ -375,7 +380,8 @@ class FiltroMasterController(FiltroController):
                 if current_page <= 0:
                     current_page = 1
 
-                self._view.label_total_pages.setText(str(self._pag.total_pages))
+                self._view.label_total_pages.setText(
+                    str(self._pag.total_pages))
 
                 self._view.combo_select_page.setCurrentIndex(-1)
                 self._view.combo_select_page.setCurrentIndex(current_page - 1)

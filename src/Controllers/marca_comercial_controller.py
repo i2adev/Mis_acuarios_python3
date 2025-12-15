@@ -333,5 +333,5 @@ class MarcaComercialController(BaseController):
         # Establecemos el autocompletado
         self._set_autocomplete(self._view.frame.combo_pais)
 
-        # Deseleccionamos el valor
+        # Deselecciona el valor
         self._view.frame.combo_pais.setCurrentIndex(-1)

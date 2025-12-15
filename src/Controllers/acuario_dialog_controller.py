@@ -36,10 +36,10 @@ class AcuarioDialogController(AcuarioController):
         # Oculta los layouts
         self._hide_layout(self._view.frame.layout_id)
         self._hide_layout(self._view.frame.layout_color)
-        # self._hide_layout(self._view.frame.layout_motivo_desmontaje)
 
         # Inhabilita el layout del motivo de desmontaje
-        self._view.frame.layout_motivo_desmontaje.setEnabled(False)
+        self._setDisabledControl(self._view.frame.layout_motivo_desmontaje,
+                                 True)
 
         # Inicializamos los eventos
         self.init_handlers()
@@ -63,12 +63,12 @@ class AcuarioDialogController(AcuarioController):
         self._view.frame.button_insert_tipo_acuario.clicked.connect(
             self._open_tipo_acuario_dialog
         )
-        self._view.frame.button_color.clicked.connect(self._choose_color)
-        self._view.button_accept.clicked.connect(self.dialog_accept)
-        self._view.button_cancel.clicked.connect(self.dialog_cancel)
         self._view.frame.button_insert_material.clicked.connect(
             self._open_material_urna_dialog
         )
+        self._view.frame.button_color.clicked.connect(self._choose_color)
+        self._view.button_accept.clicked.connect(self.dialog_accept)
+        self._view.button_cancel.clicked.connect(self.dialog_cancel)
 
     def dialog_accept(self):
         """ Se acepta el diálogo. """

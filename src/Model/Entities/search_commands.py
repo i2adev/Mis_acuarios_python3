@@ -342,3 +342,18 @@ class SearchCmd:
     )
     WHERE FIELD LIKE'%' || :pattern || '%';
     """
+
+    SEARCH_CATEGORIA_EQUIPAMIENTO = """
+    SELECT  ID, NUM, TIPO, DESCRIPCION
+    FROM
+    (
+        SELECT  ID_CATEGORIA_EQUIPAMIENTO AS ID,
+                ROW_NUMBER() OVER(ORDER BY CATEGORIA_EQUIPAMIENTO) AS NUM,
+                CATEGORIA_EQUIPAMIENTO AS TIPO,
+                DESCRIPCION AS DESCRIPCION,
+                UPPER(IFNULL(CATEGORIA_EQUIPAMIENTO, '') 
+                    || IFNULL(DESCRIPCION, '')) AS FIELD
+        FROM    CATEGORIAS_EQUIPAMIENTO
+    )
+    WHERE     FIELD LIKE '%' || :pattern || '%';
+    """

@@ -5,9 +5,6 @@ Comentarios:
     Controlador del formulario maestro del acuario.
 """
 
-from PyQt6.QtGui import QIcon, QAction
-from PyQt6.QtWidgets import QMessageBox, QTableView, QWidget, QComboBox
-
 import globals
 from Controllers.acuario_controller import AcuarioController
 from CustomControls.nullable_date_edit import NullableDateEdit
@@ -15,6 +12,8 @@ from Model.DAO.acuario_dao import AcuarioDAO
 from Model.DAO.paginator import Paginator
 from Model.Entities.acuario_entity import AcuarioEntity
 from Model.TableModel.acuario_table_model import AcuarioTableModel
+from PyQt6.QtGui import QAction, QIcon
+from PyQt6.QtWidgets import QComboBox, QMessageBox, QTableView, QWidget
 from Views.Masters.acuario_view import AcuarioView
 from Views.table_menu_contextual import TableMenuContextual
 
@@ -50,10 +49,10 @@ class AcuarioMasterController(AcuarioController):
         # Ocultamos los layouts
         self._hide_layout(self._view.frame.layout_id)
         self._hide_layout(self._view.frame.layout_color)
-        # self._hide_layout(self._view.frame.layout_motivo_desmontaje)
 
-        # Inhabilitamos el layout del motivo de desmontaje
-        self._view.frame.edit_motivo_desmontaje.setEnabled(False)
+        # Inhabilita el layout del motivo de desmontaje
+        self._setDisabledControl(self._view.frame.layout_motivo_desmontaje,
+                                 True)
 
         # Inicializamos los eventos
         self.init_handlers()
@@ -72,6 +71,11 @@ class AcuarioMasterController(AcuarioController):
             if isinstance(widget, NullableDateEdit):
                 widget.edit_date.installEventFilter(self)
 
+        # Textboxes
+        self._view.frame.fecha_desmontaje.edit_date.textChanged.connect(
+            self._on_text_changed
+        )
+
         # Inicializa los botónes
         self._view.frame.button_insert_urna.clicked.connect(
             self._open_urna_dialog
@@ -85,7 +89,7 @@ class AcuarioMasterController(AcuarioController):
         self._view.button_load.clicked.connect(self.button_load_click)
         self._view.button_delete.clicked.connect(self.delete_click)
         self._view.button_clean.clicked.connect(lambda: self._clean_view(
-            self._view.frame.edit_nombre_acuario
+            self._view.frame.combo_proyecto
         ))
         self._view.button_next.clicked.connect(self._next_page)
         self._view.button_prev.clicked.connect(self._previous_page)
@@ -368,7 +372,8 @@ class AcuarioMasterController(AcuarioController):
                 #     self._pag.total_pages
                 # )
                 self._configure_table_foot()
-                self._view.label_total_pages.setText(str(self._pag.total_pages))
+                self._view.label_total_pages.setText(
+                    str(self._pag.total_pages))
 
         elif operation == "DELETE":
             # Comprobamos si al eliminar un registro se la disminuido el número
@@ -381,7 +386,8 @@ class AcuarioMasterController(AcuarioController):
                 if current_page <= 0:
                     current_page = 1
 
-                self._view.label_total_pages.setText(str(self._pag.total_pages))
+                self._view.label_total_pages.setText(
+                    str(self._pag.total_pages))
 
                 self._view.combo_select_page.setCurrentIndex(-1)
                 self._view.combo_select_page.setCurrentIndex(current_page - 1)

@@ -5,12 +5,11 @@ Comentarios:
     Controlador del cuadro de diálogo de inserción de filtro.
 """
 
-from PyQt6.QtWidgets import QWidget, QMessageBox, QComboBox
-
 from Controllers.filtro_controller import FiltroController
 from CustomControls.nullable_date_edit import NullableDateEdit
 from Model.DAO.filtro_dao import FiltroDAO
 from Model.Entities.filtro_entity import FiltroEntity
+from PyQt6.QtWidgets import QComboBox, QMessageBox, QWidget
 from Services.Result.result import Result
 from Views.Dialogs.filtro_dialog import FiltroDialog
 
@@ -36,8 +35,8 @@ class FiltroDialogController(FiltroController):
         # Oculta los layouts
         self._hide_layout(self._view.frame.layout_id)
 
-        # # Inhabilita el layout del motivo de desmontaje
-        # self._view.frame.layout_motivo_desmontaje.setEnabled(False)
+        # Inhabilita el layout del motivo de baja
+        self._setDisabledControl(self._view.frame.layout_motivo_baja, True)
 
         # Inicializamos los eventos
         self.init_handlers()
@@ -53,6 +52,11 @@ class FiltroDialogController(FiltroController):
                 widget.installEventFilter(self)
             if isinstance(widget, NullableDateEdit):
                 widget.edit_date.installEventFilter(self)
+
+        # Textboxes
+        self._view.frame.date_fin.edit_date.textChanged.connect(
+            self._on_text_changed
+        )
 
         # Botones
         self._view.frame.button_insert_tipo_filtro.clicked.connect(

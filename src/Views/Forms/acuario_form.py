@@ -7,12 +7,11 @@ Comentarios:
 
 import sys
 
+from CustomControls.nullable_date_edit import NullableDateEdit
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QCursor, QIntValidator
-from PyQt6.QtWidgets import QFrame, QLabel, QLineEdit, QPlainTextEdit, \
-    QVBoxLayout, QHBoxLayout, QApplication, QComboBox, QPushButton, QGroupBox
-
-from CustomControls.nullable_date_edit import NullableDateEdit
+from PyQt6.QtWidgets import QApplication, QComboBox, QFrame, QGroupBox, \
+    QHBoxLayout, QLabel, QLineEdit, QPlainTextEdit, QPushButton, QVBoxLayout
 
 
 class AcuarioForm(QFrame):
@@ -58,7 +57,7 @@ class AcuarioForm(QFrame):
         self.layout_second_line = QHBoxLayout()
         self.layout_second_line.setContentsMargins(0, 0, 0, 20)
         self.layout_dates = QHBoxLayout()  # Layout para el group box
-        ### Fecha montsaje
+        ### Fecha montaje
         self.layout_fecha_montaje = QVBoxLayout()
         ### Fecha inicio ciclado
         self.layout_fecha_inicio_ciclado = QVBoxLayout()
@@ -82,7 +81,6 @@ class AcuarioForm(QFrame):
         self.label_id = QLabel("ID")
         self.label_id.setFixedWidth(50)
         self.label_proyecto = QLabel("PROYECTO")
-        self.label_proyecto.setFixedWidth(50)
         self.label_color = QLabel("COLOR")
         self.label_color.setFixedWidth(50)
         self.label_nombre = QLabel("NOMBRE")

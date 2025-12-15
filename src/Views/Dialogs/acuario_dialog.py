@@ -9,7 +9,6 @@ import sys
 
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QApplication, QWidget
-
 from Views.Dialogs.base_dialog import BaseDialog
 from Views.Forms.acuario_form import AcuarioForm
 from Views.Forms.image_form import ImageForm
@@ -43,7 +42,8 @@ class AcuarioDialog(BaseDialog):
         self.frame.edit_nombre_acuario.setFocusPolicy(
             Qt.FocusPolicy.StrongFocus)
         self.frame.combo_urna.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
-        self.frame.combo_tipo_acuario.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
+        self.frame.combo_tipo_acuario.setFocusPolicy(
+            Qt.FocusPolicy.StrongFocus)
         self.frame.edit_vol_neto.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
         self.frame.fecha_montaje.edit_date.setFocusPolicy(
             Qt.FocusPolicy.StrongFocus)

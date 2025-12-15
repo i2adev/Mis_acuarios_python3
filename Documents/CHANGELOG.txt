@@ -1,5 +1,7 @@
 ﻿CHANGELOG:
 ================================================================================
+0.17.0  SE AÑADE LA LÓGICA DE CATEGORÍAS DE EQUIPAMIENTO.
+
 0.16.2b REFACTORIZACIÓNES
         -   SE RECONFIGURA LA TABLA DE FILTROS PARA ADAPTARLO AL ESPACIO
             DISPONIBLE.

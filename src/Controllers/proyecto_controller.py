@@ -4,10 +4,6 @@ Fecha:  07/10/2025
 Comentarios:
     Controlador base de urna.
 """
-from PyQt6.QtCore import QDate, QDateTime, QTime
-from PyQt6.QtGui import QAction
-from PyQt6.QtWidgets import QMessageBox, QPushButton
-
 import globals
 from Controllers.base_controller import BaseController
 from Controllers.estado_proyecto_dialog_controller import \
@@ -16,6 +12,9 @@ from Model.DAO.estado_proyecto_dao import EstadoProyectoDAO
 from Model.DAO.proyecto_dao import ProyectoDAO
 from Model.Entities.estado_proyecto_entity import EstadoProyectoEntity
 from Model.Entities.proyecto_entity import ProyectoEntity
+from PyQt6.QtCore import QDate, QDateTime, QTime
+from PyQt6.QtGui import QAction
+from PyQt6.QtWidgets import QMessageBox, QPushButton
 from Services.Result.result import Result
 from Services.Validators.proyecto_validator import ProyectoValidator
 from Views.Dialogs.estado_proyecto_dialog import EstadoProyectoDialog
@@ -292,7 +291,7 @@ class ProyectoController(BaseController):
         # Establecemos el autocompletado
         self._set_autocomplete(self._view.frame.combo_estado_proyecto)
 
-        # Deseleccionamos el valor
+        # Deselecciona el valor
         self._view.frame.combo_estado_proyecto.setCurrentIndex(-1)
 
     def _open_estado_proyecto_dialog(self):
@@ -387,3 +386,15 @@ class ProyectoController(BaseController):
                 str(len(self.lista_fotos))
             )
             self.show_image()
+
+    def _on_text_changed(self):
+        """
+        Se ejecuta cuando se modifica el texto.
+        """
+
+        if self._view.frame.date_fin.edit_date.text():
+            self._setDisabledControl(
+                self._view.frame.layout_motivo_cierre, False)
+        else:
+            self._setDisabledControl(
+                self._view.frame.layout_motivo_cierre, True)

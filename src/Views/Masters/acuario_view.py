@@ -9,7 +9,6 @@ import sys
 
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QApplication, QWidget
-
 from Views.Forms.acuario_form import AcuarioForm
 from Views.Forms.image_form import ImageForm
 from Views.Masters.base_view import BaseView
@@ -46,10 +45,12 @@ class AcuarioView(BaseView):
             widget.setFocusPolicy(Qt.FocusPolicy.ClickFocus)
 
         # Establecemos las políticas de focus
+        self.frame.combo_proyecto.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
         self.frame.edit_nombre_acuario.setFocusPolicy(
             Qt.FocusPolicy.StrongFocus)
         self.frame.combo_urna.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
-        self.frame.combo_tipo_acuario.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
+        self.frame.combo_tipo_acuario.setFocusPolicy(
+            Qt.FocusPolicy.StrongFocus)
         self.frame.edit_vol_neto.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
         self.frame.fecha_montaje.edit_date.setFocusPolicy(
             Qt.FocusPolicy.StrongFocus)
@@ -61,9 +62,13 @@ class AcuarioView(BaseView):
             Qt.FocusPolicy.StrongFocus)
         self.frame.edit_motivo_desmontaje.setFocusPolicy(
             Qt.FocusPolicy.StrongFocus)
+        self.frame.edit_ubicacion_acuario.setFocusPolicy(
+            Qt.FocusPolicy.StrongFocus)
         self.frame.text_descripcion.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
 
         # Establecer el orden
+        self.setTabOrder(self.frame.combo_proyecto,
+                         self.frame.edit_nombre_acuario)
         self.setTabOrder(self.frame.edit_nombre_acuario, self.frame.combo_urna)
         self.setTabOrder(self.frame.combo_urna, self.frame.combo_tipo_acuario)
         self.setTabOrder(self.frame.combo_tipo_acuario,
@@ -79,6 +84,8 @@ class AcuarioView(BaseView):
         self.setTabOrder(self.frame.fecha_desmontaje.edit_date,
                          self.frame.edit_motivo_desmontaje)
         self.setTabOrder(self.frame.edit_motivo_desmontaje,
+                         self.frame.edit_ubicacion_acuario)
+        self.setTabOrder(self.frame.edit_ubicacion_acuario,
                          self.frame.text_descripcion)
 
 

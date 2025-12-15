@@ -396,7 +396,7 @@ class AcuarioController(BaseController):
         # Establecemos el autocompletado
         self._set_autocomplete(self._view.frame.combo_proyecto)
 
-        # Deseleccionamos el valor
+        # Deselecciona el valor
         self._view.frame.combo_proyecto.setCurrentIndex(-1)
 
     def _fill_combo_urna(self):
@@ -423,7 +423,7 @@ class AcuarioController(BaseController):
         # Establecemos el autocompletado
         self._set_autocomplete(self._view.frame.combo_urna)
 
-        # Deseleccionamos el valor
+        # Deselecciona el valor
         self._view.frame.combo_urna.setCurrentIndex(-1)
 
     def _fill_combo_tipo_acuario(self):
@@ -450,7 +450,7 @@ class AcuarioController(BaseController):
         # Establecemos el autocompletado
         self._set_autocomplete(self._view.frame.combo_tipo_acuario)
 
-        # Deseleccionamos el valor
+        # Deselecciona el valor
         self._view.frame.combo_tipo_acuario.setCurrentIndex(-1)
 
     def _open_urna_dialog(self):
@@ -677,3 +677,15 @@ class AcuarioController(BaseController):
         volumen_neto = lista[1]
 
         return volumen_neto
+
+    def _on_text_changed(self):
+        """
+        Se ejecuta cuando se modifica el texto.
+        """
+
+        if self._view.frame.fecha_desmontaje.edit_date.text():
+            self._setDisabledControl(
+                self._view.frame.layout_motivo_desmontaje, False)
+        else:
+            self._setDisabledControl(
+                self._view.frame.layout_motivo_desmontaje, True)

@@ -284,7 +284,7 @@ class SubcategoriaIncidenciaController(BaseController):
         # Establecemos el autocompletado
         self._set_autocomplete(self._view.frame.combo_categoria_incidencia)
 
-        # Deseleccionamos el valor
+        # Deselecciona el valor
         self._view.frame.combo_categoria_incidencia.setCurrentIndex(-1)
 
     def _open_categoria_incidencia_dialog(self):

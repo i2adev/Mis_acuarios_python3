@@ -327,7 +327,7 @@ class UrnaController(BaseController):
         # Establecemos el autocompletado
         self._set_autocomplete(self._view.frame.combo_marca)
 
-        # Deseleccionamos el valor
+        # Deselecciona el valor
         self._view.frame.combo_marca.setCurrentIndex(-1)
 
     def _fill_combo_material(self):
@@ -351,7 +351,7 @@ class UrnaController(BaseController):
         # Establecemos el autocompletado
         self._set_autocomplete(self._view.frame.combo_material)
 
-        # Deseleccionamos el valor
+        # Deselecciona el valor
         self._view.frame.combo_material.setCurrentIndex(-1)
 
     def _open_marca_comercial_dialog(self):
