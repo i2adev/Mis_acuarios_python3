@@ -1,6 +1,26 @@
 ﻿================================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
+16/12/2025  SE REALIZA EL TESTEO MANUAL DEL FORMULARIO DE FILTRO:
+     ↓      -   TEST: APERTURA DEL FORMULARIO.                              DONE
+            -   TEST: INSERCIÓN DE REGISTRO.                                DONE
+            -   TEST: CARGA DE REGISTRO.                                    DONE
+            -   TEST: ELIMINACIÓN DE REGISTRO DESDE MENÚ CONTEXTUAL.        DONE
+            -   TEST: ELIMINACIÓN DE REGISTRO DESPUÉS DE CARGAR EN EL FORMULARIO
+                                                                            DONE
+            -   TEST: MODIFICACIÓN DE REGISTRO.                             DONE
+            -   TEST: BÚSQUEDA DE REGISTROS.                                DONE
+
+            CORRECCIONES:
+            -   SE CORRIGE EL ERROR DE INSERCIÓN DE REGISTRO.               DONE
+            -   SE CORRIGE EL ERROR DE CARGA DE REGISTRO.                   DONE
+            -   SE CORRIGE EL ERROR DE ELIMINACIÓN DE  DE REGISTRO DESPUÉS DE
+                CARGARLO EN EL FORMULARIO.                                  DONE
+            -   SE CORRIGE EL ERROR DE ACTUALIZACIÓN DE REGISTRO.           DONE
+            -   SE CORRIGE EL ERROR EN LA BÚSQUEDA DE REGISTROS.            DONE
+            -   CUANDO SE INSERTAR UN REGISTRO, NO SE SELECCIONA EN LA TABLA.
+                SE CORRIGE ESTE COMPORTAMIENTO.                             DONE
+
 09/12/2025  SE AÑADE LA LÓGICA DE CATEGORÍA DE EQUIPAMIENTO:
      ↓      -   SE CREA LA ENTIDAD.                                         DONE
 15/12/2025  -   SE CREA LA VISTA EN LA BASE DE DATOS.                       DONE

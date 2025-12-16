@@ -12,18 +12,19 @@ import traceback
 from pathlib import Path
 
 from PyQt6.QtGui import QFontDatabase
-from PyQt6.QtWidgets import QApplication, QDialog
-import Resources.resources_rc
-
+from PyQt6.QtWidgets import QApplication, QDialog, QMessageBox
 
 from Controllers.login_controller import LoginDialogController
 from Controllers.main_view_controller import MainViewController
+from Model.DAO.base_dao import BaseDAO
 from Model.DAO.usuario_dao import UsuarioDAO
 from Model.Entities.usuario_entity import UsuarioEntity
 from Views.Dialogs.login_dialog import LoginDialog
 
+import Resources.resources_rc
+
 # Versión del programa
-__version__ = "0.17.0"
+__version__ = "0.17.1"
 
 
 def excepthook(exc_type, exc_value, exc_traceback):

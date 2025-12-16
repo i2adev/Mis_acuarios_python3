@@ -68,7 +68,8 @@ class InsertCmd:
 
     # Categorias de equipamiento
     INSERT_CATEGORIAS_EQUIPAMIENTO = """
-    INSERT INTO CATEGORIAS_EQUIPAMIENTO (CATEGORIA_EQUIPAMIENTO, OBSERVACIONES) VALUES
+    INSERT INTO CATEGORIAS_EQUIPAMIENTO (CATEGORIA_EQUIPAMIENTO, DESCRIPCION) 
+    VALUES
     ('Filtración', 'Filtros internos, externos, de mochila, sump y accesorios relacionados'),
     ('Iluminación', 'Pantallas LED, fluorescentes, HQI y sistemas de control'),
     ('Calefacción', 'Calentadores sumergibles, externos y termostatos'),

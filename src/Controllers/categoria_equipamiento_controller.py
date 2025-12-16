@@ -95,7 +95,7 @@ class CategoriaEquipamientoController(BaseController):
             return Result.failure(res.error_msg)
 
         # Limpiamos el formulario
-        self._clean_view(self._view.frame.edit_cat_equipamiento)
+        self._clean_view(self._view.frame.edit_categoria_equipamiento)
 
         return Result.success(ent.id)
 
@@ -143,7 +143,7 @@ class CategoriaEquipamientoController(BaseController):
             return Result.failure(res.error_msg)
 
         # Limpiamos el formulario
-        self._clean_view(self._view.frame.edit_cat_equipamiento)
+        self._clean_view(self._view.frame.edit_categoria_equipamiento)
         return Result.success(ide)
 
     # FIN DE CRUD --------------------------------------------------
@@ -157,7 +157,7 @@ class CategoriaEquipamientoController(BaseController):
         )
 
         if not res.is_success:
-            self._view.frame.edit_cat_equipamiento.setFocus()
+            self._view.frame.edit_categoria_equipamiento.setFocus()
             return res
 
         return Result.success(1)
@@ -227,7 +227,7 @@ class CategoriaEquipamientoController(BaseController):
             str(id) if id is not None else ""
         )
 
-        self._view.frame.edit_cat_equipamiento.setText(
+        self._view.frame.edit_categoria_equipamiento.setText(
             str(cat_equipamiento) if cat_equipamiento else ""
         )
 

@@ -1,5 +1,7 @@
 ﻿CHANGELOG:
 ================================================================================
+0.17.1  TESTEO MANUAL DE LA LÓGICA DE CATEGORÍA DE EQUIPAMIENTO.
+
 0.17.0  SE AÑADE LA LÓGICA DE CATEGORÍAS DE EQUIPAMIENTO.
 
 0.16.2b REFACTORIZACIÓNES

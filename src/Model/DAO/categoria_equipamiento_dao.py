@@ -137,7 +137,7 @@ class CategoriaEquipamientoDAO(BaseDAO):
         )
 
         params = {
-            "categoria": ent.categoria,
+            "categoria": ent.categoria_equipamiento,
             "descripcion": ent.descripcion,
         }
 
@@ -182,7 +182,7 @@ class CategoriaEquipamientoDAO(BaseDAO):
 
         params = {
             "id": ent.id,
-            "categoria": ent.categoria,
+            "categoria": ent.categoria_equipamiento,
             "descripcion": ent.descripcion,
         }
 
