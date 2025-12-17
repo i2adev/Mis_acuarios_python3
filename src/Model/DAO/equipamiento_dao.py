@@ -1,21 +1,21 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
-Fecha:      31/07/2025
+Fecha:      16/12/2025
 Comentarios:
-    Módulo que contiene el DAO de la URNA.
+    Módulo que contiene el DAO del EQUIPAMIENTO.
 """
 import sqlite3
 
 from Model.DAO.base_dao import BaseDAO
 from Model.DAO.database import DBManager
-from Model.Entities.filtro_entity import FiltroEntity
+from Model.Entities.equipamiento_entity import EquipamientoEntity
 from Services.Result.result import Result
 
 
-class FiltroDAO(BaseDAO):
+class EquipamientoDAO(BaseDAO):
     """
     Clase que gestiona las operaciones en la base de datos de la entidad
-    FiltroEntity.
+    EquipamientoEntity.
     """
 
     def __init__(self):
@@ -26,64 +26,48 @@ class FiltroDAO(BaseDAO):
 
     # ------------------------------------------------------------------
     def get_list(self) -> Result:
-        """Obtiene el listado completo ordenado por categoría."""
-
-        sql = (
-            """
-            SELECT    F.ID_FILTRO AS ID,
-                      ROW_NUMBER() OVER(ORDER BY MC.MARCA, F.MODELO) AS NUM,
-                      MC.MARCA AS MARCA,
-                      F.MODELO AS MODELO,
-                      TF.TIPO_FILTRO AS TIPO_FILTRO,
-                      F.ES_THERMOFILTRO AS TERMOFILTRO,
-                      F.NUMERO_SERIE AS NUMERO_SERIE,
-                      F.VOLUMEN_MIN_ACUARIO || '/' || F.VOLUMEN_MAX_ACUARIO AS 
-                      VOLUMEN_ACUARIO,
-                      F.CAUDAL AS CAUDAL,
-                      F.ALTURA_BOMBEO AS ALTURA_BOMBEO,
-                      F.CONSUMO AS CONSUMO,
-                      F.CONSUMO_CALENTADOR AS CONSUMO_CALENTADOR,
-                      F.VOLUMEN_FILTRANTE AS VOLUMEN_FILTRANTE,
-                      F.ANCHO || 'x' || F.FONDO || 'x' || F.ALTO AS DIMENSIONES,
-                      F.FECHA_INSTALACION AS FECHA_INSTALACIÓN,
-                      F.FECHA_BAJA AS FECHA_BAJA,
-                      F.MOTIVO_BAJA AS MOTIVO_BAJA,
-                      F.DESCRIPCION AS DESCRIPCIÓN
-            FROM      FILTROS F
-            LEFT JOIN MARCAS_COMERCIALES MC ON F.ID_MARCA = MC.ID_MARCA
-            LEFT JOIN TIPOS_FILTRO TF ON F.ID_TIPO = TF.ID_TIPO;
-            """
-        )
+        """Obtiene el listado completo ordenado por marca y modelo."""
 
         try:
+            sql = (
+                """
+                SELECT  E.ID_EQUIPAMIENTO AS ID,
+                        ROW_NUMBER() OVER(ORDER BY E.ID_MARCA, E.MODELO) AS NUM,
+                        C.CATEGORIA_EQUIPAMIENTO AS CATEGORIA,
+                        E.ID_MARCA AS MARCA,
+                        E.MODELO AS MODELO,
+                        E.NUMERO_SERIE AS NUMERO_SERIE,
+                        IFNULL(strftime('%d/%m/%Y', E.FECHA_ALTA, 'unixepoch', 'localtime'), '') AS FECHA_ALTA, 
+                        IFNULL(strftime('%d/%m/%Y', E.FECHA_BAJA, 'unixepoch', 'localtime'), '') AS FECHA_BAJA,
+                        E.MOTIVO_BAJA AS MOTIVO_BAJA,
+                        E.DESCRIPCION AS DESCRIPCION
+                FROM    EQUIPAMIENTOS E
+                LEFT JOIN CATEGORIAS_EQUIPAMIENTO C ON E.ID_CATEGORIA_EQUIPAMIENTO = C.ID_CATEGORIA_EQUIPAMIENTO
+                LEFT JOIN MARCAS_COMERCIALES M ON E.ID_MARCA = M.ID_MARCA;
+                """
+            )
+
             with self.db.conn as con:
                 cur = con.cursor()
                 cur.execute(sql)
                 rows = cur.fetchall()
 
                 valores = [
-                    FiltroEntity(
+                    EquipamientoEntity(
                         id=f["ID"],
                         num=f["NUM"],
+                        id_categoria=f["CATEGORIA"],
                         id_marca=f["MARCA"],
                         modelo=f["MODELO"],
-                        id_tipo=f["TIPO_FILTRO"],
-                        es_thermo=f["TERMOFILTRO"],
-                        num_serie=f["NUMERO_SERIE"],
-                        vol_min_acuario=f["VOLUMEN_ACUARIO"],
-                        caudal=f["CAUDAL"],
-                        altura_bombeo=f["ALTURA_BOMBEO"],
-                        consumo=f["CONSUMO"],
-                        consumo_calentador=f["CONSUMO_CALENTADOR"],
-                        vol_filtrante=f["VOLUMEN_FILTRANTE"],
-                        ancho=f["DIMENSIONES"],
-                        fecha_compra=f["FECHA_INSTALACION"],
+                        numero_serie=f["NUMERO_SERIE"],
+                        fecha_alta=f["FECHA_ALTA"],
                         fecha_baja=f["FECHA_BAJA"],
                         motivo_baja=f["MOTIVO_BAJA"],
                         descripcion=f["DESCRIPCION"],
                     )
                     for f in rows
                 ]
+
                 return Result.success(valores)
 
         except sqlite3.IntegrityError as e:
@@ -111,11 +95,12 @@ class FiltroDAO(BaseDAO):
 
         sql = (
             """
-            SELECT      F.ID_FILTRO AS ID,
-                        MC.MARCA || F.MODELO AS VALUE
-            FROM        FILTROS F
-            LEFT JOIN   MARCAS_COMERCIALES MC ON F.ID_MARCA = MC.ID_MARCA
-            ORDER BY    VALUE;
+            SELECT  E.ID_EQUIPAMIENTO AS ID,
+                    '(' || C.CATEGORIA_EQUIPAMIENTO || ') ' || M.MARCA || ' ' || E.MODELO AS VALUE
+            FROM    EQUIPAMIENTOS E
+            LEFT JOIN CATEGORIAS_EQUIPAMIENTO C ON E.ID_CATEGORIA_EQUIPAMIENTO = C.ID_CATEGORIA_EQUIPAMIENTO
+            LEFT JOIN MARCAS_COMERCIALES M ON E.ID_MARCA = M.ID_MARCA
+            ORDER BY  VALUE;
             """
         )
 
@@ -125,7 +110,7 @@ class FiltroDAO(BaseDAO):
                 cur.execute(sql)
                 rows = cur.fetchall()
                 valores = [
-                    FiltroEntity(
+                    EquipamientoEntity(
                         id=f["ID"],
                         modelo=f["VALUE"]
                     )
@@ -150,7 +135,7 @@ class FiltroDAO(BaseDAO):
             return Result.failure(f"[SQLITE ERROR]\n {e}")
 
     # ------------------------------------------------------------------
-    def insert(self, ent: FiltroEntity) -> Result:
+    def insert(self, ent: EquipamientoEntity) -> Result:
         """
         Inserta un nuevo registro y devuelve el ID generado.
         :param ent: Entidad derivada de BaseEntity
@@ -158,39 +143,21 @@ class FiltroDAO(BaseDAO):
 
         sql = (
             """
-            INSERT INTO FILTROS (ID_TIPO, ID_MARCA, MODELO, NUMERO_SERIE,
-                                 ES_THERMOFILTRO, VOLUMEN_MIN_ACUARIO,
-                                 VOLUMEN_MAX_ACUARIO, CAUDAL, ALTURA_BOMBEO,
-                                 CONSUMO, CONSUMO_CALENTADOR, VOLUMEN_FILTRANTE,
-                                 ANCHO, FONDO, ALTO, FECHA_INSTALACION, 
-                                 FECHA_BAJA, MOTIVO_BAJA, DESCRIPCION)
-            VALUES (:id_tipo, :id_marca, :modelo, :numero_serie, :es_thermo,
-                    :vol_min_acuario, :vol_max_acuario, 
-                    :caudal, :altura_bombeo, :consumo, :consumo_calentador, 
-                    :vol_filtrante, :ancho, :fondo, :alto, 
-                    :fecha_instalacion, :fecha_baja, :motivo_baja, 
-                    :descripcion);
+            INSERT INTO EQUIPAMIENTOS 
+                (ID_CATEGORIA_EQUIPAMIENTO, ID_MARCA, MODELO, NUMERO_SERIE,
+                 FECHA_ALTA, FECHA_BAJA, MOTIVO_BAJA, DESCRIPCION)
+            VALUES (:id_categoria, :id_marca, :modelo, :num_serie, :f_alta,
+                    :f_baja, :motivo_baja, :descripcion);
             """
         )
 
         params = {
-            "id_tipo": ent.id_tipo,
+            "id_categoria": ent.id_categoria,
             "id_marca": ent.id_marca,
             "modelo": ent.modelo,
-            "numero_serie": ent.num_serie,
-            "es_thermo": ent.es_thermo,
-            "vol_min_acuario": ent.vol_min_acuario,
-            "vol_max_acuario": ent.vol_max_acuario,
-            "caudal": ent.caudal,
-            "altura_bombeo": ent.altura_bombeo,
-            "consumo": ent.consumo,
-            "consumo_calentador": ent.consumo_calentador,
-            "vol_filtrante": ent.vol_filtrante,
-            "ancho": ent.ancho,
-            "fondo": ent.fondo,
-            "alto": ent.alto,
-            "fecha_instalacion": ent.fecha_compra,
-            "fecha_baja": ent.fecha_baja,
+            "num_serie": ent.numero_serie,
+            "f_alta": ent.fecha_alta,
+            "f_baja": ent.fecha_baja,
             "motivo_baja": ent.motivo_baja,
             "descripcion": ent.descripcion
         }
@@ -217,7 +184,7 @@ class FiltroDAO(BaseDAO):
             return Result.failure(f"[SQLITE ERROR]\n {e}")
 
     # ------------------------------------------------------------------
-    def update(self, ent: FiltroEntity) -> Result:
+    def update(self, ent: EquipamientoEntity) -> Result:
 
         """
         Actualiza el registro en la base de datos. Devuelve el ID de la entidad
@@ -227,50 +194,28 @@ class FiltroDAO(BaseDAO):
 
         sql = (
             """
-            UPDATE  FILTROS
-            SET     ID_FILTRO = :id,
-                    ID_TIPO = :id_tipo,
+            UPDATE  EQUIPAMIENTOS
+            SET     ID_EQUIPAMIENTO = :id,
+                    ID_CATEGORIA_EQUIPAMIENTO = :id_categoria,
                     ID_MARCA = :id_marca,
                     MODELO = :modelo,
-                    NUMERO_SERIE = :numero_serie,
-                    ES_THERMOFILTRO = :es_thermo,
-                    VOLUMEN_MIN_ACUARIO = :vol_min_acuario,
-                    VOLUMEN_MAX_ACUARIO = :vol_max_acuario,
-                    CAUDAL = :caudal,
-                    ALTURA_BOMBEO = :altura_bombeo,
-                    CONSUMO = :consumo,
-                    CONSUMO_CALENTADOR = :consumo_calentador,
-                    VOLUMEN_FILTRANTE = :vol_filtrante,
-                    ANCHO = :ancho,
-                    FONDO = :fondo,
-                    ALTO = :alto,
-                    FECHA_INSTALACION = :fecha_instalacion,
-                    FECHA_BAJA = :fecha_baja,
+                    NUMERO_SERIE = :num_serie,
+                    FECHA_ALTA = :f_alta,
+                    FECHA_BAJA = :f_baja,
                     MOTIVO_BAJA = :motivo_baja,
                     DESCRIPCION = :descripcion
-            WHERE ID_FILTRO = :id;
+            WHERE   ID_EQUIPAMIENTO = :id;
             """
         )
 
         params = {
             "id": ent.id,
-            "id_tipo": ent.id_tipo,
+            "id_categoria": ent.id_categoria,
             "id_marca": ent.id_marca,
             "modelo": ent.modelo,
-            "numero_serie": ent.num_serie,
-            "es_thermo": ent.es_thermo,
-            "vol_min_acuario": ent.vol_min_acuario,
-            "vol_max_acuario": ent.vol_max_acuario,
-            "caudal": ent.caudal,
-            "altura_bombeo": ent.altura_bombeo,
-            "consumo": ent.consumo,
-            "consumo_calentador": ent.consumo_calentador,
-            "vol_filtrante": ent.vol_filtrante,
-            "ancho": ent.ancho,
-            "fondo": ent.fondo,
-            "alto": ent.alto,
-            "fecha_instalacion": ent.fecha_compra,
-            "fecha_baja": ent.fecha_baja,
+            "num_serie": ent.numero_serie,
+            "f_alta": ent.fecha_alta,
+            "f_baja": ent.fecha_baja,
             "motivo_baja": ent.motivo_baja,
             "descripcion": ent.descripcion
         }
@@ -304,8 +249,8 @@ class FiltroDAO(BaseDAO):
         """
         sql = (
             """
-            DELETE FROM FILTROS
-            WHERE       ID_FILTRO = :id;
+            DELETE FROM EQUIPAMIENTOS
+            WHERE       ID_EQUIPAMIENTO = :id;
             """
         )
 
@@ -315,49 +260,6 @@ class FiltroDAO(BaseDAO):
             with self.db.conn as con:
                 cur = con.execute(sql, params)
                 return Result.success(id_)
-
-        except sqlite3.IntegrityError as e:
-            # traceback.print_exc()
-            return Result.failure(f"[INTEGRITY ERROR]\n {e}")
-        except sqlite3.OperationalError as e:
-            # traceback.print_exc()
-            return Result.failure(f"[OPERATIONAL ERROR]\n {e}")
-        except sqlite3.ProgrammingError as e:
-            # traceback.print_exc()
-            return Result.failure(f"[PROGRAMMING ERROR]\n {e}")
-        except sqlite3.DatabaseError as e:
-            # traceback.print_exc()
-            return Result.failure(f"[DATABASE ERROR]\n {e}")
-        except sqlite3.Error as e:
-            # traceback.print_exc()
-            return Result.failure(f"[SQLITE ERROR]\n {e}")
-
-    def is_mounted(self, id_urna: int) -> Result:
-        """ Determina si un filtro está montada."""
-
-        sql = (
-            """
-            SELECT  CASE
-                        WHEN FECHA_DESMONTAJE IS NULL THEN 1 ELSE 0
-                    END AS MONTADO
-            FROM    ACUARIOS
-            WHERE   ID_URNA = :id;
-            """
-        )
-
-        params = {"id": id_urna}
-
-        try:
-            with self.db.conn as con:
-                cur = con.execute(sql, params)
-                rows = cur.fetchall()
-
-                if rows is None:
-                    return Result.failure(f"NO EXISTE NINGUNA URNA CON EL ID "
-                                          f" {id_urna}")
-
-                is_mounted = any(row[0] == 1 for row in rows)
-                return Result.success(is_mounted)
 
         except sqlite3.IntegrityError as e:
             # traceback.print_exc()

@@ -334,9 +334,9 @@ class FiltroMasterController(FiltroController):
         self._load_tableview()
 
         # Configura la tabla y el pie
-        self.configure_table_crud(res.value)
         self.configure_table_foot("UPDATE", None,
                                   current_page)
+        self.configure_table_crud(res.value)
 
     def configure_table_crud(self, ide: int):
         """

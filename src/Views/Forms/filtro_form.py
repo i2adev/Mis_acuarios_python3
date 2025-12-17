@@ -88,7 +88,7 @@ class FiltroForm(QFrame):
         ## Cuarta línea
         self.layout_fouth_line = QHBoxLayout()
         ### Fecha compra
-        self.layout_fecha_compra = QVBoxLayout()
+        self.layout_fecha_instalacion = QVBoxLayout()
         ### Fecha baja
         self.layout_fecha_baja = QVBoxLayout()
         ### Motivo de baja
@@ -115,7 +115,7 @@ class FiltroForm(QFrame):
         self.label_vol_material = QLabel("VOL. MAT.")
         self.label_altura_maxima = QLabel("ALT. MAX.")
         self.label_caudal = QLabel("CAUDAL")
-        self.label_fecha_compra = QLabel("FECHA COMPRA")
+        self.label_fecha_instalacion = QLabel("FECHA INSTALACION")
         self.label_fecha_baja = QLabel("FECHA BAJA")
         self.label_motivo_baja = QLabel("MOTIVO BAJA")
         self.label_descripcion = QLabel("DESCRIPCIÓN")
@@ -327,12 +327,13 @@ class FiltroForm(QFrame):
         )
 
         # Date pickers
-        self.fecha_compra = NullableDateEdit()
-        self.fecha_compra.setObjectName("fecha_compra")
-        self.fecha_compra.setToolTip(
+        self.fecha_instalacion = NullableDateEdit()
+        self.fecha_instalacion.setObjectName("fecha_instalacion")
+        self.fecha_instalacion.setToolTip(
             """
-            <h2>Fecha de Compra</h2>
-            En este campo se inserta la fecha de la compra del filtro.
+            <h2>Fecha de instalación</h2>
+            En este campo se inserta la fecha denla que se instala el filtro en 
+            el acuario.
             """
         )
 
@@ -472,8 +473,8 @@ class FiltroForm(QFrame):
         self.layout_caudal.addWidget(self.edit_caudal)
 
         ## Fecha de compra
-        self.layout_fecha_compra.addWidget(self.label_fecha_compra)
-        self.layout_fecha_compra.addWidget(self.fecha_compra)
+        self.layout_fecha_instalacion.addWidget(self.label_fecha_instalacion)
+        self.layout_fecha_instalacion.addWidget(self.fecha_instalacion)
 
         ## Fecha de baja
         self.layout_fecha_baja.addWidget(self.label_fecha_baja)
@@ -487,7 +488,7 @@ class FiltroForm(QFrame):
         self.layout_third_line.addLayout(self.layout_volumen_material)
         self.layout_third_line.addLayout(self.layout_altura_maxima_bombeo)
         self.layout_third_line.addLayout(self.layout_caudal)
-        self.layout_third_line.addLayout(self.layout_fecha_compra)
+        self.layout_third_line.addLayout(self.layout_fecha_instalacion)
         self.layout_third_line.addLayout(self.layout_fecha_baja)
         self.layout_third_line.addLayout(self.layout_motivo_baja)
 

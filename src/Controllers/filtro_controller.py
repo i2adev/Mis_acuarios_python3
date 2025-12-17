@@ -603,6 +603,7 @@ class FiltroController(BaseController):
         for i in range(combo.count()):
             if combo.itemData(i) == res.value.id:
                 combo.setCurrentIndex(i)
+                break
 
     def _open_tipo_filtro_dialog(self):
         """ Abrimos el diálogo de tipo de acuario. """

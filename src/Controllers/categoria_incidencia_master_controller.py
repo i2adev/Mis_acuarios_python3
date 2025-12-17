@@ -5,7 +5,8 @@ from Controllers.categoria_incidencia_controller import \
     CategoriaIncidenciaController
 from Model.DAO.categoria_incidencia_dao import CategoriaIncidenciaDAO
 from Model.DAO.paginator import Paginator
-from Model.Entities.categoria_incidencia_entity import CategoriaIncidenciaEntity
+from Model.Entities.categoria_incidencia_entity import \
+    CategoriaIncidenciaEntity
 from Model.TableModel.categoria_incidencia_table_model import \
     CategoriaIncidenciaTableModel
 from Views.Masters.categoria_incidencia_view import CategoriaIncidenciaView
@@ -239,6 +240,8 @@ class CategoriaIncidenciaMasterController(CategoriaIncidenciaController):
         # Configura el pie de tabla
         self.configure_table_foot("DELETE", paginator_pages,
                                   current_page)
+        self.configure_table_crud(res.value)
+
         # Configura la barra de estado
         self._configure_status_bar(self._pag)
 
@@ -338,7 +341,8 @@ class CategoriaIncidenciaMasterController(CategoriaIncidenciaController):
                 #     self._pag.total_pages
                 # )
                 self._configure_table_foot()
-                self._view.label_total_pages.setText(str(self._pag.total_pages))
+                self._view.label_total_pages.setText(
+                    str(self._pag.total_pages))
 
         elif operation == "DELETE":
             # Comprobamos si al eliminar un registro se la disminuido el número
@@ -351,7 +355,8 @@ class CategoriaIncidenciaMasterController(CategoriaIncidenciaController):
                 if current_page <= 0:
                     current_page = 1
 
-                self._view.label_total_pages.setText(str(self._pag.total_pages))
+                self._view.label_total_pages.setText(
+                    str(self._pag.total_pages))
 
                 self._view.combo_select_page.setCurrentIndex(-1)
                 self._view.combo_select_page.setCurrentIndex(current_page - 1)

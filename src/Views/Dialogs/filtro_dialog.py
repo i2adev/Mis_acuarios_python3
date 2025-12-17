@@ -90,8 +90,8 @@ class FiltroDialog(BaseDialog):
         self.setTabOrder(self.frame.edit_altura_max_bombeo,
                          self.frame.edit_caudal)
         self.setTabOrder(self.frame.edit_caudal,
-                         self.frame.fecha_compra.edit_date)
-        self.setTabOrder(self.frame.fecha_compra.edit_date,
+                         self.frame.fecha_instalacion.edit_date)
+        self.setTabOrder(self.frame.fecha_instalacion.edit_date,
                          self.frame.fecha_baja.edit_date)
         self.setTabOrder(self.frame.fecha_baja.edit_date,
                          self.frame.edit_motivo_baja)

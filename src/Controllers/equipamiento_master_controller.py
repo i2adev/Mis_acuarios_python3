@@ -1,36 +1,34 @@
 ﻿"""
 Autor:  Inigo Iturriagaetxebarria
-Fecha:  29/09/2025
+Fecha:  17/12/2025
 Comentarios:
-    Controlador del formulario maestro de marca comercial.
+    Controlador del formulario maestro de la categoría de equipamiento.
 """
+from PyQt6.QtGui import QAction, QIcon
+from PyQt6.QtWidgets import QComboBox, QMessageBox, QTableView, QWidget
 
-from PyQt6.QtGui import QIcon, QAction
-from PyQt6.QtWidgets import QMessageBox, QTableView, QWidget, QComboBox
-
-from Controllers.subcategoria_acuario_controller import \
-    SubcategoriaAcuarioController
+import globals
+from Controllers.equipamiento_conttroller import EquipamientoController
+from CustomControls.nullable_date_edit import NullableDateEdit
+from Model.DAO.equipamiento_dao import EquipamientoDAO
 from Model.DAO.paginator import Paginator
-from Model.DAO.subcategoria_acuario_dao import SubcategoriaAcuarioDAO
-from Model.Entities.subcategoria_acuario_entity import \
-    SubcategoriaAcuarioEntity
-from Model.TableModel.subcategoria_acuario_table_model import \
-    SubcategoriaAcuarioTableModel
-from Views.Masters.subcategoria_acuario_view import SubcategoriaAcuarioView
+from Model.Entities.equipamiento_entity import EquipamientoEntity
+from Model.TableModel.equipamiento_table_model import EquipamientoTableModel
+from Views.Masters.equipamiento_view import EquipamientoView
 from Views.table_menu_contextual import TableMenuContextual
 
 
-class SubcategoriaAcuarioMasterController(SubcategoriaAcuarioController):
-    """ Controlador del formulario maestro de marca comercial. """
+class EquipamientoMasterController(EquipamientoController):
+    """ Controlador del formulario maestro de filtro. """
 
-    def __init__(self, view: SubcategoriaAcuarioView,
-                 dao: SubcategoriaAcuarioDAO,
-                 mod: SubcategoriaAcuarioEntity):
+    def __init__(self, view: EquipamientoView,
+                 dao: EquipamientoDAO,
+                 mod: EquipamientoEntity):
         """
-        Constructor base
-        :param view: Formulario maestro de la subcategoría de acuario
-        :param dao: DAO de la subcategoría de acuario
-        :param mod: Modelo dela subcategoría de acuario
+        Constructor base.
+        :param view: Formulario maestro de la categoría de equipamiento.
+        :param dao: DAO de categoría de equipamiento.
+        :param mod: Modelo de categoría de equipamiento.
         """
 
         # Constructor base
@@ -40,7 +38,7 @@ class SubcategoriaAcuarioMasterController(SubcategoriaAcuarioController):
         self._fill_combos()
 
         # Inicializamos el paginador
-        self._pag = Paginator("VISTA_SUBCATEGORIAS_ACUARIO", 5)
+        self._pag = Paginator("VISTA_EQUIPAMIENTOS", 5)
         self._pag.initialize_paginator()
         self._configure_status_bar(self._pag)
 
@@ -48,8 +46,11 @@ class SubcategoriaAcuarioMasterController(SubcategoriaAcuarioController):
         self._load_tableview()
         self._configure_table_foot()
 
-        # Oculta el layout del ID
+        # Ocultamos los layouts
         self._hide_layout(self._view.frame.layout_id)
+
+        # Inhabilita el layout del motivo de baja
+        self._setDisabledControl(self._view.frame.layout_motivo_baja, True)
 
         # Inicializamos los eventos
         self.init_handlers()
@@ -65,14 +66,27 @@ class SubcategoriaAcuarioMasterController(SubcategoriaAcuarioController):
                 widget.installEventFilter(self)
             if isinstance(widget, QComboBox):
                 widget.installEventFilter(self)
+            if isinstance(widget, NullableDateEdit):
+                widget.edit_date.installEventFilter(self)
+
+        # Textboxes
+        self._view.frame.fecha_baja.edit_date.textChanged.connect(
+            self._on_text_changed
+        )
 
         # Inicializa los botónes
+        self._view.frame.button_insert_cat_equipamiento.clicked.connect(
+            self._open_categoria_dialog
+        )
+        self._view.frame.button_insert_marca.clicked.connect(
+            self._open_marca_dialog
+        )
         self._view.button_insert.clicked.connect(self.button_insert_click)
         self._view.button_update.clicked.connect(self.button_update_click)
         self._view.button_load.clicked.connect(self.button_load_click)
         self._view.button_delete.clicked.connect(self.delete_click)
         self._view.button_clean.clicked.connect(lambda: self._clean_view(
-            self._view.frame.edit_tipo_filtro
+            self._view.frame.combo_tipo_filtro
         ))
         self._view.button_next.clicked.connect(self._next_page)
         self._view.button_prev.clicked.connect(self._previous_page)
@@ -91,9 +105,6 @@ class SubcategoriaAcuarioMasterController(SubcategoriaAcuarioController):
         # Inicializamos los combos
         self._view.combo_select_page.currentIndexChanged.connect(
             self.combo_page_indexchanged
-        )
-        self._view.frame.button_insert_categoria_acuario.clicked.connect(
-            self._open_categoria_acuario_dialog
         )
 
         # Eventos de la tabla
@@ -115,7 +126,7 @@ class SubcategoriaAcuarioMasterController(SubcategoriaAcuarioController):
             # Cargamos la tabla
             self._fill_tableview(self._view.data_table, self._pag._total_data)
             self._configure_table(self._view.data_table)
-            self._clean_view(self._view.frame.combo_categoria_acuario)
+            self._clean_view(self._view.frame.combo_categoria_equipamiento)
             self._view.label_total_pages.setText(str(self._pag.total_pages))
 
             # Configuramos la tabla
@@ -132,6 +143,7 @@ class SubcategoriaAcuarioMasterController(SubcategoriaAcuarioController):
 
         # Variables
         pattern = self._view.edit_patron.text()
+        user = globals.CURRENT_USER.id
         total_records = self._pag.records
 
         # Condiciones de salida
@@ -144,13 +156,15 @@ class SubcategoriaAcuarioMasterController(SubcategoriaAcuarioController):
             )
             return
 
+        print(f"SEARCH: {pattern}, {user}")
+
         # Obtiene los datos
-        self._pag.get_filtered_list(pattern)
+        self._pag.get_filtered_list_by_id(pattern, user)
 
         # Cargamos la tabla
         self._fill_tableview(self._view.data_table, self._pag._total_data)
         self._configure_table(self._view.data_table)
-        self._clean_view(self._view.frame.combo_categoria_acuario)
+        self._clean_view(self._view.frame.combo_categoria_equipamiento)
 
         self._view.button_filter.setIcon(QIcon(":/Images/filtered.png"))
 
@@ -242,7 +256,7 @@ class SubcategoriaAcuarioMasterController(SubcategoriaAcuarioController):
             return
 
         # Limpiamos el formulario
-        self._clean_view(self._view.frame.combo_categoria_acuario)
+        self._clean_view(self._view.frame.combo_categoria_equipamiento)
 
         # Configurar paginator
         self._pag.initialize_paginator()
@@ -276,7 +290,7 @@ class SubcategoriaAcuarioMasterController(SubcategoriaAcuarioController):
             return
 
         # Limpiamos el formulario
-        self._clean_view(self._view.frame.combo_categoria_acuario)
+        self._clean_view(self._view.frame.combo_categoria_equipamiento)
 
         # Obtenemos los datos de paginación actuales
         paginator_pages = self._pag.total_pages
@@ -311,7 +325,7 @@ class SubcategoriaAcuarioMasterController(SubcategoriaAcuarioController):
             return
 
         # Limpiamos el formulario
-        self._clean_view(self._view.frame.combo_categoria_acuario)
+        self._clean_view(self._view.frame.combo_categoria_equipamiento)
 
         # Configuramos el paginador
         self._pag.initialize_paginator()
@@ -347,10 +361,6 @@ class SubcategoriaAcuarioMasterController(SubcategoriaAcuarioController):
             # Comprobamos si al añadir un registro se ha aumentado el número
             # de páginas totales
             if self._pag.total_pages > before_pages:
-                # self._view.combo_select_page.addItem(
-                #     str(self._pag.total_pages),
-                #     self._pag.total_pages
-                # )
                 self._configure_table_foot()
                 self._view.label_total_pages.setText(
                     str(self._pag.total_pages))
@@ -385,13 +395,14 @@ class SubcategoriaAcuarioMasterController(SubcategoriaAcuarioController):
         """ Gestiona los datos para llenar la tabla. """
 
         self._fill_tableview(self._view.data_table, self._pag.current_data)
-        self._configure_table(self._view.data_table)
+        self._configure_table(self._view.data_table, [0, 10, 11,
+                                                      14, 15])
 
     def _fill_tableview(self, table: QTableView,
-                        data: list[SubcategoriaAcuarioEntity]):
+                        data: list[EquipamientoEntity]):
         """ Carga los datos en la tabla. """
 
-        tv_model = SubcategoriaAcuarioTableModel(data)
+        tv_model = EquipamientoTableModel(data)
         table.setModel(tv_model)
         table.resizeColumnsToContents()
 

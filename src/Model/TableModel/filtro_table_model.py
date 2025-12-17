@@ -98,8 +98,8 @@ class FiltroTableModel(QAbstractTableModel):
             return entidad.vol_filtrante
         elif column == 13:  # Dimensiones del acuario
             return entidad.ancho
-        elif column == 14:  # Fecha de compra del filtro
-            return entidad.fecha_compra
+        elif column == 14:  # Fecha de instalacion del filtro
+            return entidad.fecha_instalacion
         elif column == 15:  # Fecha de baja del filtro
             return entidad.fecha_baja
         elif column == 16:  # Filtro disponible?

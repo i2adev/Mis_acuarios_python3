@@ -16,6 +16,7 @@ from Model.Entities.categoria_equipamiento_entity import \
     CategoriaEquipamientoEntity
 from Model.Entities.categoria_incidencia_entity import \
     CategoriaIncidenciaEntity
+from Model.Entities.equipamiento_entity import EquipamientoEntity
 from Model.Entities.estado_proyecto_entity import EstadoProyectoEntity
 from Model.Entities.filtro_entity import FiltroEntity
 from Model.Entities.marca_comercial_entity import MarcaComercialEntity
@@ -544,7 +545,7 @@ class Paginator:
                 consumo_calentador=f["CONSUMO_CALENTADOR"],
                 vol_filtrante=f["VOLUMEN_FILTRANTE"],
                 ancho=f["DIMENSIONES"],
-                fecha_compra=f["fecha_compra"],
+                fecha_instalacion=f["fecha_instalacion"],
                 fecha_baja=f["FECHA_BAJA"],
                 motivo_baja=f["MOTIVO_BAJA"],
                 descripcion=f["DESCRIPCION"],
@@ -560,6 +561,22 @@ class Paginator:
             )
                 for f in rows
             ]
+        elif self.procedure == "VISTA_EQUIPAMIENTOS":
+            data_list = [EquipamientoEntity(
+                id=f["ID"],
+                num=f["NUM"],
+                id_categoria=f["CATEGORIA"],
+                id_marca=f["MARCA"],
+                modelo=f["MODELO"],
+                numero_serie=f["NUMERO_SERIE"],
+                fecha_alta=f["FECHA_ALTA"],
+                fecha_baja=f["FECHA_BAJA"],
+                motivo_baja=f["MOTIVO_BAJA"],
+                descripcion=f["DESCRIPCION"],
+            )
+                for f in rows
+            ]
+
         return data_list
 
     def get_page_number_by_num(self, num: int) -> int:
@@ -613,6 +630,8 @@ class Paginator:
             return SearchCmd.SEARCH_FILTRO
         elif self.procedure == "VISTA_CATEGORIAS_EQUIPAMIENTO":
             return SearchCmd.SEARCH_CATEGORIA_EQUIPAMIENTO
+        elif self.procedure == "VISTA_EQUIPAMIENTOS":
+            return SearchCmd.SEARCH_EQUIPAMIENTO
 
     def __str__(self):
         """ Muestra el objeto en forma de texto. """

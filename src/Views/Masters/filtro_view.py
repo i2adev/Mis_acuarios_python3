@@ -66,7 +66,7 @@ class FiltroView(BaseView):
         self.frame.edit_altura_max_bombeo.setFocusPolicy(
             Qt.FocusPolicy.StrongFocus)
         self.frame.edit_caudal.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
-        self.frame.fecha_compra.edit_date.setFocusPolicy(
+        self.frame.fecha_instalacion.edit_date.setFocusPolicy(
             Qt.FocusPolicy.StrongFocus)
         self.frame.fecha_baja.edit_date.setFocusPolicy(
             Qt.FocusPolicy.StrongFocus)
@@ -97,8 +97,8 @@ class FiltroView(BaseView):
         self.setTabOrder(self.frame.edit_altura_max_bombeo,
                          self.frame.edit_caudal)
         self.setTabOrder(self.frame.edit_caudal,
-                         self.frame.fecha_compra.edit_date)
-        self.setTabOrder(self.frame.fecha_compra.edit_date,
+                         self.frame.fecha_instalacion.edit_date)
+        self.setTabOrder(self.frame.fecha_instalacion.edit_date,
                          self.frame.fecha_baja.edit_date)
         self.setTabOrder(self.frame.fecha_baja.edit_date,
                          self.frame.edit_motivo_baja)

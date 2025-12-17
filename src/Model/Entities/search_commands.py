@@ -357,3 +357,35 @@ class SearchCmd:
     )
     WHERE     FIELD LIKE '%' || :pattern || '%';
     """
+
+    SEARCH_EQUIPAMIENTO = """
+    SELECT    ID, NUM, CATEGORIA, MARCA, MODELO, NUMERO_SERIE, FECHA_ALTA, FECHA_BAJA,
+          MOTIVO_BAJA, DESCRIPCION
+    FROM
+    (
+        SELECT  E.ID_EQUIPAMIENTO AS ID,
+                ROW_NUMBER() OVER(ORDER BY E.ID_MARCA, E.MODELO) AS NUM,
+                C.CATEGORIA_EQUIPAMIENTO AS CATEGORIA,
+                M.MARCA AS MARCA,
+                E.MODELO AS MODELO,
+                E.NUMERO_SERIE AS NUMERO_SERIE,
+                IFNULL(strftime('%d/%m/%Y', E.FECHA_ALTA, 'unixepoch', 'localtime'), '') AS FECHA_ALTA, 
+                IFNULL(strftime('%d/%m/%Y', E.FECHA_BAJA, 'unixepoch', 'localtime'), '') AS FECHA_BAJA,
+                E.MOTIVO_BAJA AS MOTIVO_BAJA,
+                E.DESCRIPCION AS DESCRIPCION,
+                UPPER(
+                  IFNULL( C.CATEGORIA_EQUIPAMIENTO, '')
+                  || IFNULL(M.MARCA, '')
+                  || IFNULL(E.MODELO, '')
+                  || IFNULL(E.NUMERO_SERIE, '')
+                  || IFNULL(E.MOTIVO_BAJA, '')
+                  || IFNULL(E.DESCRIPCION, '')
+               ) AS FIELD
+        FROM    EQUIPAMIENTOS E
+        LEFT JOIN CATEGORIAS_EQUIPAMIENTO C 
+            ON E.ID_CATEGORIA_EQUIPAMIENTO = C.ID_CATEGORIA_EQUIPAMIENTO
+        LEFT JOIN MARCAS_COMERCIALES M ON 
+            E.ID_MARCA = M.ID_MARCA
+    )
+    WHERE   FIELD LIKE'%' || :pattern || '%';
+    """
