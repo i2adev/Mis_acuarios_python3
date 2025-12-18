@@ -69,7 +69,7 @@ class EquipamientoController(BaseController):
 
         ent.id_marca = int(self._view.frame.combo_marca.currentData())
         ent.modelo = self._view.frame.edit_modelo.text()
-        ent.numero_serie = self._view.frame.edit_numero_serie.text()
+        ent.numero_serie = self._view.frame.edit_num_serie.text()
 
         alta = self._view.frame.fecha_alta.date()
         if alta.isValid():
@@ -319,7 +319,7 @@ class EquipamientoController(BaseController):
         # Llenas el combo
         for ent in lista.value:
             self._view.frame.combo_categoria_equipamiento.addItem(
-                ent.categoria, ent.id
+                ent.categoria_equipamiento, ent.id
             )
 
         # Establecemos el autocompletado
@@ -451,7 +451,7 @@ class EquipamientoController(BaseController):
         self._view.frame.edit_num_serie.setText(
             str(num_serie) if num_serie is not None else ""
         )
-        self._view.frame.alta.setDate(fecha_alta)
+        self._view.frame.fecha_alta.setDate(fecha_alta)
         self._view.frame.fecha_baja.setDate(fecha_baja)
         self._view.frame.edit_motivo_baja.setText(
             str(motivo_baja) if motivo_baja is not None else ""

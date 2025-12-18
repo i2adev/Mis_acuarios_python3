@@ -86,7 +86,7 @@ class EquipamientoMasterController(EquipamientoController):
         self._view.button_load.clicked.connect(self.button_load_click)
         self._view.button_delete.clicked.connect(self.delete_click)
         self._view.button_clean.clicked.connect(lambda: self._clean_view(
-            self._view.frame.combo_tipo_filtro
+            self._view.frame.combo_categoria_equipamiento
         ))
         self._view.button_next.clicked.connect(self._next_page)
         self._view.button_prev.clicked.connect(self._previous_page)

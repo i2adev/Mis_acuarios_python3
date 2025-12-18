@@ -1,5 +1,7 @@
 ﻿CHANGELOG:
 ================================================================================
+0.18.1  TESTEO MANUAL DE EQUIPAMIENTO.
+
 0.18.0  SE AÑADE LA LÓGICA DE EQUIPAMIENTO
 
 0.17.1  TESTEO MANUAL DE LA LÓGICA DE CATEGORÍA DE EQUIPAMIENTO.
