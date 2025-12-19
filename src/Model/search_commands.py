@@ -418,3 +418,20 @@ class SearchCmd:
     )
     WHERE   FIELD LIKE'%' || :pattern || '%';
     """
+
+    SEARCH_TIPO_ILUMINACION = """
+    SELECT  ID, NUM, TIPO_ILUMINACION, DESCRIPCION
+    FROM
+        (
+        SELECT  ID_TIPO_ILUMINACION AS ID,
+                ROW_NUMBER() OVER(ORDER BY TIPO_ILUMINACION) AS NUM,
+                TIPO_ILUMINACION AS TIPO_ILUMINACION,
+                DESCRIPCION AS DESCRIPCION,
+                UPPER(
+                    IFNULL(TIPO_ILUMINACION, '')
+                    || IFNULL(DESCRIPCION, '')
+                ) AS FIELD
+        FROM    TIPOS_ILUMINACION
+        )
+    WHERE   FIELD LIKE'%' || :pattern || '%';;
+    """

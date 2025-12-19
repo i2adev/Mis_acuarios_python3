@@ -1,6 +1,31 @@
 ﻿================================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
+19/12/2025  SE AÑADE LA LÓGICA DE TIPO DE ILUMINACIÓN:
+     ↓      -   DONE:   SE CREA LA ENTIDAD.
+            -   DONE:   SE CREA LA VISTA EN LA BASE DE DATOS.
+            -   DONE:   SE CREA EL DAO.
+            -   DONE:   E CREA EL FORMULARIO.
+            -   DONE:   SE CREA EL CUADRO DE DIÁLOGO.
+            -   DONE:   SE CREA EL FORMULARIO MAESTRO.
+            -   DONE:   SE CREA EL VALIDADOR DEL FORMULARIO.
+            -   DONE:   SE CREA EL MODELO DE TABLA.
+            -   DONE:   SE CREAN LOS TOOLTIPS PARA LOS CONTROLES.
+            -   DONE:   SE CREAN LOS TOOLTIPS PARA LOS ENCABEZADOS DE COLUMNA
+                        DE LA TABLA DE DATOS.
+
+            -   ACTUALIZAR EL PAGINADOR.
+                -   DONE:   CREAR EL COMANDO DE BÚSQUEDA.
+                -   DONE:   SE CONFIGURA LA OBTENCIÓN DE LA LISTA DE ENTIDADES.
+                -   DONE:   SE CONFIGURA LA OBTENCIÓN DEL COMANDO DE BÚSQUEDA.
+
+            -   SE CREAN LOS CONTROLADORES:
+                -   DONE:   CONTROLADOR BASE.
+                -   DONE:   CONTROLADOR DEL CUADRO DE DIÁLOGO.
+                -   DONE:   CONTROLADOR DEL FORMULARIO MAESTRO.
+
+            -   DONE:   INTEGRAR EN LA VISTA PRINCIPAL.
+
 19/12/2025  SE REALIZA EL TESTEO MANUAL DEL FORMULARIO DE COMERCIOS:
             -   TEST: APERTURA DEL FORMULARIO.                              DONE
             -   TEST: CARGA DE LOS COMBOS.                                  DONE

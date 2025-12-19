@@ -1,5 +1,7 @@
 ﻿CHANGELOG:
 ================================================================================
+0.20.0  SE AÑADE LA LOGICA DE TIPO DE ILUMINACIÓN.
+
 0.19.1  SE TESTEA MANUALMENTE LA LÓGICA DE COMERCIO.
 
 0.19.0  SE AÑADE LA LÓGICA DE COMERCIOS.

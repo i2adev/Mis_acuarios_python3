@@ -32,6 +32,9 @@ from Controllers.tipo_acuario_master_controller import \
     TipoAcuarioMasterController
 from Controllers.tipo_filtro_master_controller import \
     TipoFiltroMasterController
+from Controllers.tipo_iluminacion_controller import TipoIluminacionController
+from Controllers.tipo_iluminacion_master_controller import \
+    TipoIluminacionMasterController
 from Controllers.urna_master_controller import UrnaMasterController
 from Model.DAO.acuario_dao import AcuarioDAO
 from Model.DAO.categoria_acuario_dao import CategoriaAcuarioDAO
@@ -48,6 +51,7 @@ from Model.DAO.subcategoria_acuario_dao import SubcategoriaAcuarioDAO
 from Model.DAO.subcategoria_incidencia_dao import SubcategoriaIncidenciaDAO
 from Model.DAO.tipo_acuario_dao import TipoAcuarioDAO
 from Model.DAO.tipo_filtro_dao import TipoFiltroDAO
+from Model.DAO.tipo_iluminacion_dao import TipoIluminacionDAO
 from Model.DAO.urna_dao import UrnaDAO
 from Model.Entities.acuario_entity import AcuarioEntity
 from Model.Entities.categoria_acuario_entity import CategoriaAcuarioEntity
@@ -68,6 +72,7 @@ from Model.Entities.subcategoria_incidencia_entity import \
     SubcategoriaIncidenciaEntity
 from Model.Entities.tipo_acuario_entity import TipoAcuarioEntity
 from Model.Entities.tipo_filtro_entity import TipoFiltroEntity
+from Model.Entities.tipo_iluminacion_entity import TipoIluminacionEntity
 from Model.Entities.urna_entity import UrnaEntity
 from Views.Masters.acuario_view import AcuarioView
 from Views.Masters.categoria_acuario_view import CategoriaAcuarioView
@@ -85,6 +90,7 @@ from Views.Masters.subcategoria_incidencia_view import \
     SubcategoriaIncidenciaView
 from Views.Masters.tipo_acuario_view import TipoAcuarioView
 from Views.Masters.tipo_filtro_view import TipoFiltroView
+from Views.Masters.tipo_iluminacion_view import TipoIluminacionView
 from Views.Masters.urna_view import UrnaView
 from Views.main_view import MainView
 
@@ -175,6 +181,16 @@ class MainViewController(BaseController):
             self.comercio_clicked
         )
 
+    def tipo_iluminacion_clicked(self):
+        """ Cuando se pulsa el tipo de iluminacion. """
+
+        view = TipoIluminacionView("MAESTRO DE TIPOS DE ILUMINACIÓN")
+        dao = TipoIluminacionDAO()
+        mod = TipoIluminacionEntity()
+
+        ctrl = TipoIluminacionMasterController(view, dao, mod)
+        ctrl.show()
+        
     def comercio_clicked(self):
         """ Cuando se presiona en el botón comercio. """
 
