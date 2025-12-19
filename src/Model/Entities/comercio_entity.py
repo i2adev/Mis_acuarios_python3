@@ -115,12 +115,12 @@ class ComercioEntity(BaseEntity):
     @property
     def observaciones(self):
         """ Observaciones del comercio """
-        return self.__observaciones
+        return self._observaciones
 
     @observaciones.setter
     def observaciones(self, new_observaciones):
         """ Observaciones del comercio """
-        self.__observaciones = new_observaciones
+        self._observaciones = new_observaciones
 
     def __str__(self):
         return f"""

@@ -55,6 +55,7 @@ class ComercioDAO(BaseDAO):
                         id=f["ID"],
                         num=f["NUM"],
                         nombre_comercio=f["COMERCIO"],
+                        direccion=f["DIRECCION"],
                         cod_postal=f["COD_POSTAL"],
                         poblacion=f["POBLACION"],
                         provincia=f["PROVINCIA"],

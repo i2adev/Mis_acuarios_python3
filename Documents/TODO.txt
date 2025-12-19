@@ -1,9 +1,49 @@
 ﻿================================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
+19/12/2025  SE REALIZA EL TESTEO MANUAL DEL FORMULARIO DE COMERCIOS:
+            -   TEST: APERTURA DEL FORMULARIO.                              DONE
+            -   TEST: CARGA DE LOS COMBOS.                                  DONE
+            -   TEST: INSERCIÓN DE REGISTRO.                                DONE
+            -   TEST: CARGA DE REGISTRO.                                    DONE
+            -   TEST: LIMPIEZA DE FORMULARIO.                               DONE
+            -   TEST: ELIMINACIÓN DE REGISTRO DESDE MENÚ CONTEXTUAL.        DONE
+            -   TEST: ELIMINACIÓN DE REGISTRO DESPUÉS DE CARGAR EN EL
+                FORMULARIO.                                                 DONE
+            -   TEST: MODIFICACIÓN DE REGISTRO.                             DONE
+            -   TEST: BÚSQUEDA DE REGISTROS.                                DONE
+            -   TEST: GESTIÓN DE IMAGENES.                         NOT APLICABLE
+
+            REFACTORIZACIONES:
+            -   DONE:   SE OCULTAN LAS COLUMNAS DE LAS DIRECCIONES Y CÓDIGO
+                        POSTAL DE LA TABLA.
+
+            CORRECCIONES:
+            -   ERROR DE CARGA DEL PROGRAMA:
+                -   DEBIDO A QUE SE HA REORGANIZADO EL ARCHIVO QUE CONTIENE LA
+                    CONEXIÓN A LA BASE DE DATOS, AL ABRIR EL PROGRAMA, NO
+                    ENCONTRABA LA MISMA.
+
+            -   APERTURA DEL FORMULARIO:
+                -   CORREGIDO: AL ABRIR EL FORMULARIO, SE ENCONTRABA CON EL
+                    NOMBRE DE LA PROPIEDAD OBSERVACIONES ESTABA MAL ESCRITA.
+                -   CORREGIDO: CARGA EL COMBO DE LOS PAISES.
+                -   CORREGIDO: EN LA TABLA DE COMERCIOS, NO SE CARGA LA
+                    DIRECCIÓN.
+
+            -   INSERCIÓN DE REGISTRO:
+                -   CORREGIDO:  NO SE CONFIGURA CORRECTAMENTE EL ID DE LA
+                                ENTIDAD.
+                -   CORREGIDO:  NO LIMPIA EL FORMULARIO, DEBIDO A QUE EL
+                                CONTROL A ENFOCAR NO EXISTE.
+
+            -   ACTUALIZACIÓN DE REGISTRO:
+                -   CORREGIDO:  NO ACTUALIZA LAS OBSERVACIONES.
+
+
 18/12/2025  SE AÑADE LA LÓGICA DE COMERCIO:
      ↓      -   SE CREA LA ENTIDAD.                                         DONE
-            -   SE CREA LA VISTA EN LA BASE DE DATOS.                       DONE
+19/12/2025  -   SE CREA LA VISTA EN LA BASE DE DATOS.                       DONE
             -   SE CREA EL DAO.                                             DONE
             -   SE CREA EL FORMULARIO.                                      DONE
             -   SE CREA EL CUADRO DE DIÁLOGO.                               DONE

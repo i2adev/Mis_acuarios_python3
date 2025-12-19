@@ -10,6 +10,7 @@ from PyQt6.QtWidgets import QMessageBox, QPushButton
 
 from Controllers.base_controller import BaseController
 from Model.DAO.comercio_dao import ComercioDAO
+from Model.DAO.pais_dao import PaisDAO
 from Model.Entities.comercio_entity import ComercioEntity
 from Services.Result.result import Result
 from Services.Validators.comercio_validator import ComercioValidator
@@ -36,17 +37,19 @@ class ComercioController(BaseController):
         # Llamaos al constructor de la superclase
         super().__init__(view, dao, model)
 
+        # Llenas los combos
+        self._fill_combos()
+
     def _entity_configuration(self) -> ComercioEntity:
         """ Configura la entidad. """
 
         ent = ComercioEntity()
 
-        # if self._view.frame.edit_id.text():
-        #     ent.id = int(self._view.frame.edit_id.text())
-        # else:
-        #     ent.id = None
+        if self._view.frame.edit_id.text():
+            ent.id = int(self._view.frame.edit_id.text())
+        else:
+            ent.id = None
 
-        ent.id = int(self._view.frame.edit_id.text())
         ent.nombre_comercio = self._view.frame.edit_comercio.text()
         ent.direccion = self._view.frame.edit_direccion.text()
         ent.cod_postal = self._view.frame.edit_cod_postal.text()
@@ -95,7 +98,7 @@ class ComercioController(BaseController):
             return Result.failure(res.error_msg)
 
         # Limpiamos el formulario
-        self._clean_view(self._view.frame.edit_tipo_filtro)
+        self._clean_view(self._view.frame.edit_comercio)
 
         return Result.success(ent.id)
 
@@ -143,7 +146,7 @@ class ComercioController(BaseController):
             return Result.failure(res.error_msg)
 
         # Limpiamos el formulario
-        self._clean_view(self._view.frame.edit_tipo_filtro)
+        self._clean_view(self._view.frame.edit_comercio)
         return Result.success(ide)
 
     # FIN DE CRUD --------------------------------------------------
@@ -300,9 +303,41 @@ class ComercioController(BaseController):
         self._view.frame.combo_pais.setCurrentIndex(
             self._view.frame.combo_pais.findText(pais)
         )
-        
+
         self._view.frame.text_observaciones.setPlainText(
             str(observaciones) if observaciones is not None else ""
         )
 
         return Result.success(id_ta)
+
+    def _fill_combos(self):
+        """ Llena los combos del formulario"""
+
+        self._fill_combo_pais()
+
+    def _fill_combo_pais(self):
+        """ Llena el combo de paises. """
+
+        # Vaciamos el combo
+        self._view.frame.combo_pais.clear()
+
+        # Obtenemos los datos
+        dao = PaisDAO()
+        lista = dao.get_list_combo()
+
+        if not lista.is_success:
+            return Result.failure(
+                "NO SE HAN PODIDO OBTENER LOS 'PAISES'."
+            )
+
+        # Llenas el combo
+        for ent in lista.value:
+            self._view.frame.combo_pais.addItem(
+                ent.pais, ent.id
+            )
+
+        # Establecemos el autocompletado
+        self._set_autocomplete(self._view.frame.combo_pais)
+
+        # montaje el valor
+        self._view.frame.combo_pais.setCurrentIndex(-1)

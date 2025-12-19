@@ -66,7 +66,7 @@ class ComercioMasterController(ComercioController):
         self._view.button_load.clicked.connect(self.button_load_click)
         self._view.button_delete.clicked.connect(self.delete_click)
         self._view.button_clean.clicked.connect(lambda: self._clean_view(
-            self._view.frame.edit_tipo_filtro
+            self._view.frame.edit_comercio
         ))
         self._view.button_next.clicked.connect(self._next_page)
         self._view.button_prev.clicked.connect(self._previous_page)
@@ -106,7 +106,7 @@ class ComercioMasterController(ComercioController):
             # Cargamos la tabla
             self._fill_tableview(self._view.data_table, self._pag._total_data)
             self._configure_table(self._view.data_table)
-            self._clean_view(self._view.frame.edit_tipo_filtro)
+            self._clean_view(self._view.frame.edit_comercio)
             self._view.label_total_pages.setText(str(self._pag.total_pages))
 
             # Configuramos la tabla
@@ -141,7 +141,7 @@ class ComercioMasterController(ComercioController):
         # Cargamos la tabla
         self._fill_tableview(self._view.data_table, self._pag._total_data)
         self._configure_table(self._view.data_table)
-        self._clean_view(self._view.frame.edit_tipo_filtro)
+        self._clean_view(self._view.frame.edit_comercio)
 
         self._view.button_filter.setIcon(QIcon(":/Images/filtered.png"))
 
@@ -233,7 +233,7 @@ class ComercioMasterController(ComercioController):
             return
 
         # Limpiamos el formulario
-        self._clean_view(self._view.frame.edit_tipo_filtro)
+        self._clean_view(self._view.frame.edit_comercio)
 
         # Configurar paginator
         self._pag.initialize_paginator()
@@ -267,7 +267,7 @@ class ComercioMasterController(ComercioController):
             return
 
         # Limpiamos el formulario
-        self._clean_view(self._view.frame.edit_tipo_filtro)
+        self._clean_view(self._view.frame.edit_comercio)
 
         # Obtenemos los datos de paginación actuales
         paginator_pages = self._pag.total_pages
@@ -302,7 +302,7 @@ class ComercioMasterController(ComercioController):
             return
 
         # Limpiamos el formulario
-        self._clean_view(self._view.frame.edit_tipo_filtro)
+        self._clean_view(self._view.frame.edit_comercio)
 
         # Configuramos el paginador
         self._pag.initialize_paginator()
@@ -374,7 +374,7 @@ class ComercioMasterController(ComercioController):
         """ Gestiona los datos para llenar la tabla. """
 
         self._fill_tableview(self._view.data_table, self._pag.current_data)
-        self._configure_table(self._view.data_table)
+        self._configure_table(self._view.data_table, [0, 3, 4])
 
     def _fill_tableview(self, table: QTableView,
                         data: list[ComercioEntity]):

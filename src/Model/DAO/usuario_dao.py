@@ -55,12 +55,7 @@ class UsuarioDAO(BaseDAO):
                 valores = [
                     UsuarioEntity(
                         id=f["ID"],
-                        num=None,
                         nombre=f["VALUE"],
-                        apellido1=None,
-                        apellido2=None,
-                        nick=None,
-                        password=None
                     )
                     for f in rows
                 ]
@@ -241,7 +236,6 @@ class UsuarioDAO(BaseDAO):
 
                 usuario = UsuarioEntity(
                     id=row["ID"],
-                    num=None,
                     nombre=row["NOMBRE"],
                     apellido1=row["APELLIDO1"],
                     apellido2=row["APELLIDO2"],

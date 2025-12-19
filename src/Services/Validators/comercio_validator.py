@@ -99,10 +99,6 @@ class ComercioValidator:
 
         # Si el combo está vacío
         if not widget.currentText():
-            return Result.failure("")
-
-        # Válida la longitud del campo
-        if len(widget.text()) > 25:
             return Result.failure("EL CAMPO 'PAÍS' NO PUEDE ESTAR VACÍO")
 
         # Validación exitosa

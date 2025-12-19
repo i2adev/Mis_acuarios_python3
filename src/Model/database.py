@@ -29,7 +29,7 @@ class DBManager:
     def initialize_db(self):
         """ Inicializa la conexión con la base de datos. """
         try:
-            file = (Path(__file__).resolve().parent.parent.parent /
+            file = (Path(__file__).resolve().parent.parent /
                     "Services" / "Database" / "MISACUARIOS.sqlite3")
 
             if not file.exists():
