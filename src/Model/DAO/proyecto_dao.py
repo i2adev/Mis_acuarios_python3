@@ -11,7 +11,7 @@ import traceback
 
 import globals
 from Model.DAO.base_dao import BaseDAO
-from Model.DAO.database import DBManager
+from Model.database import DBManager
 from Model.Entities.proyecto_entity import ProyectoEntity
 from Services.Result.result import Result
 

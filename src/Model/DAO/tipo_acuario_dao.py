@@ -7,7 +7,7 @@ Comentarios:
 import sqlite3
 
 from Model.DAO.base_dao import BaseDAO
-from Model.DAO.database import DBManager
+from Model.database import DBManager
 from Model.Entities.tipo_acuario_entity import TipoAcuarioEntity
 from Services.Result.result import Result
 

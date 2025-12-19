@@ -11,7 +11,7 @@ import traceback
 from typing import List
 
 from Model.DAO.base_dao import BaseDAO
-from Model.DAO.database import DBManager
+from Model.database import DBManager
 from Model.Entities.categoria_acuario_entity import CategoriaAcuarioEntity
 from Services.Result.result import Result
 
@@ -94,7 +94,8 @@ class CategoriaAcuarioDAO(BaseDAO):
 
                 if row is not None:
                     return Result.success(row["NUM"])
-                return Result.failure(f"NO SE ENCONTRÓ NINGÚN RESULTADO CON EL ID '{id_}'.")
+                return Result.failure(
+                    f"NO SE ENCONTRÓ NINGÚN RESULTADO CON EL ID '{id_}'.")
 
         except sqlite3.IntegrityError as e:
             return Result.failure(f"[INTEGRITY ERROR]\n {e}")
@@ -200,7 +201,8 @@ class CategoriaAcuarioDAO(BaseDAO):
             WHERE   ID_CATEGORIA_ACUARIO = :id;
             """
         )
-        params = {"id": ent.id, "cat": ent.categoria, "descripcion": ent.observaciones}
+        params = {"id": ent.id, "cat": ent.categoria,
+                  "descripcion": ent.observaciones}
 
         try:
             with self.db.conn as con:
@@ -257,5 +259,3 @@ class CategoriaAcuarioDAO(BaseDAO):
         except sqlite3.Error as e:
             # traceback.print_exc()
             return Result.failure(f"[SQLITE ERROR]\n {e}")
-
-

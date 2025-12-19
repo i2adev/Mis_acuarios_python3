@@ -1,45 +1,46 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
-Fecha:      11/12/2025
+Fecha:      18/12/2025
 Comentarios:
-    Módulo que contiene el DAO de la CATEGORÍA DE EQUIPAMIENTO.
+    Módulo que contiene la vista de la entidad COMERCIO.
 """
 import sqlite3
+import traceback
 
 from Model.DAO.base_dao import BaseDAO
 from Model.database import DBManager
-from Model.Entities.categoria_equipamiento_entity import \
-    CategoriaEquipamientoEntity
+from Model.Entities.comercio_entity import ComercioEntity
 from Services.Result.result import Result
 
 
-class CategoriaEquipamientoDAO(BaseDAO):
+class ComercioDAO(BaseDAO):
     """
     Clase que gestiona las operaciones en la base de datos de la entidad
-    CategoriaEquipamientoEntity.
+    ComercioEntity.
     """
 
     def __init__(self):
-        """ Constructor de clase. """
+        """Constructor de clase."""
 
         self.db = DBManager()
-        self.ent = None
 
     # ------------------------------------------------------------------
     def get_list(self) -> Result:
-        """
-        Obtiene el listado completo ordenado por categoría de
-        equipamiento.
-        """
+        """Obtiene el listado completo ordenado por comercio."""
 
         sql = (
             """
-            SELECT      ID_CATEGORIA_EQUIPAMIENTO AS ID,
-                        ROW_NUMBER() OVER(ORDER BY CATEGORIA_EQUIPAMIENTO) 
-                            AS NUM,
-                        CATEGORIA_EQUIPAMIENTO AS CATEGORIA,
-                        DESCRIPCION AS DESCRIPCION
-            FROM        CATEGORIAS_EQUIPAMIENTO;
+            SELECT      C.ID_COMERCIO AS ID,
+                        ROW_NUMBER() OVER(ORDER BY C.COMERCIO) AS NUM,
+                        C.COMERCIO AS COMERCIO,
+                        C.DIRECCION AS DIRECCION,
+                        C.COD_POSTAL AS COD_POSTAL,
+                        C.POBLACION AS POBLACION,
+                        C.PROVINCIA AS PROVINCIA,
+                        P.PAIS AS PAIS,
+                        C.OBSERVACIONES AS OBSERVACIONES
+            FROM        COMERCIOS C
+            LEFT JOIN   PAISES P ON C.ID_PAIS = P.ID_PAIS;
             """
         )
 
@@ -50,11 +51,15 @@ class CategoriaEquipamientoDAO(BaseDAO):
                 rows = cur.fetchall()
 
                 valores = [
-                    CategoriaEquipamientoEntity(
+                    ComercioEntity(
                         id=f["ID"],
                         num=f["NUM"],
-                        categoria=f["CATEGORIA"],
-                        descripcion=f["DESCRIPCION"],
+                        nombre_comercio=f["COMERCIO"],
+                        cod_postal=f["COD_POSTAL"],
+                        poblacion=f["POBLACION"],
+                        provincia=f["PROVINCIA"],
+                        id_pais=f["PAIS"],
+                        observaciones=f["OBSERVACIONES"],
                     )
                     for f in rows
                 ]
@@ -75,6 +80,49 @@ class CategoriaEquipamientoDAO(BaseDAO):
         except sqlite3.Error as e:
             # traceback.print_exc()
             return Result.failure(f"[SQLITE ERROR]\n {e}")
+
+    # # ------------------------------------------------------------------
+    # def get_num_by_id(self, id_: int) -> Result(int):
+    #     """
+    #     Obtiene el valor NÚM. de la entidad dado un ID.
+    #     :param id_: ID de la entidad
+    #     """
+    #
+    #     sql = (
+    #         """
+    #         SELECT NUM
+    #         FROM   VISTA_CATEGORIAS_INCIDENCIA
+    #         WHERE  ID = :id;
+    #         """
+    #     )
+    #     params = {"id": id_}
+    #
+    #     try:
+    #         with self.db.conn as con:
+    #             cur = con.cursor()
+    #             cur.execute(sql, params)
+    #             row = cur.fetchone()
+    #
+    #             if row is not None:
+    #                 return Result.success(row["NUM"])
+    #             return Result.failure(
+    #                 f"NO SE ENCONTRÓ NINGÚN RESULTADO CON EL ID '{id_}'.")
+    #
+    #     except sqlite3.IntegrityError as e:
+    #         # traceback.print_exc()
+    #         return Result.failure(f"[INTEGRITY ERROR]\n {e}")
+    #     except sqlite3.OperationalError as e:
+    #         # traceback.print_exc()
+    #         return Result.failure(f"[OPERATIONAL ERROR]\n {e}")
+    #     except sqlite3.ProgrammingError as e:
+    #         # traceback.print_exc()
+    #         return Result.failure(f"[PROGRAMMING ERROR]\n {e}")
+    #     except sqlite3.DatabaseError as e:
+    #         # traceback.print_exc()
+    #         return Result.failure(f"[DATABASE ERROR]\n {e}")
+    #     except sqlite3.Error as e:
+    #         # traceback.print_exc()
+    #         return Result.failure(f"[SQLITE ERROR]\n {e}")
 
     # ------------------------------------------------------------------
     def get_list_combo(self) -> Result:
@@ -84,10 +132,10 @@ class CategoriaEquipamientoDAO(BaseDAO):
 
         sql = (
             """
-            SELECT      ID_CATEGORIA_EQUIPAMIENTO AS ID,
-                        CATEGORIA_EQUIPAMIENTO AS VALUE
-            FROM        CATEGORIAS_EQUIPAMIENTO
-            ORDER BY    CATEGORIA_EQUIPAMIENTO;
+            SELECT      C.ID_COMERCIO AS ID,
+                        C.COMERCIO AS VALUE
+            FROM        COMERCIOS C
+            ORDER BY    C.COMERCIO;
             """
         )
 
@@ -97,9 +145,9 @@ class CategoriaEquipamientoDAO(BaseDAO):
                 cur.execute(sql)
                 rows = cur.fetchall()
                 valores = [
-                    CategoriaEquipamientoEntity(
+                    ComercioEntity(
                         id=f["ID"],
-                        categoria=f["VALUE"]
+                        nombre_comercio=f["VALUE"],
                     )
                     for f in rows
                 ]
@@ -122,7 +170,7 @@ class CategoriaEquipamientoDAO(BaseDAO):
             return Result.failure(f"[SQLITE ERROR]\n {e}")
 
     # ------------------------------------------------------------------
-    def insert(self, ent: CategoriaEquipamientoEntity) -> Result:
+    def insert(self, ent: ComercioEntity) -> Result(int):
         """
         Inserta un nuevo registro y devuelve el ID generado.
         :param ent: Entidad derivada de BaseEntity
@@ -130,15 +178,21 @@ class CategoriaEquipamientoDAO(BaseDAO):
 
         sql = (
             """
-            INSERT INTO CATEGORIAS_EQUIPAMIENTO 
-                        (CATEGORIA_EQUIPAMIENTO, DESCRIPCION)
-            VALUES      (:categoria, :descripcion);
+            INSERT INTO COMERCIOS   (COMERCIO, DIRECCION, COD_POSTAL, 
+                                    POBLACION, PROVINCIA, ID_PAIS, 
+                                    OBSERVACIONES)
+            VALUES  (:comercio, :direccion, :cod_postal, :poblacion, :provincia, 
+                    :id_pais, :observaciones);
             """
         )
-
         params = {
-            "categoria": ent.categoria_equipamiento,
-            "descripcion": ent.descripcion,
+            "comercio": ent.nombre_comercio,
+            "direccion": ent.direccion,
+            "cod_postal": ent.cod_postal,
+            "poblacion": ent.poblacion,
+            "provincia": ent.provincia,
+            "id_pais": ent.id_pais,
+            "observaciones": ent.observaciones,
         }
 
         try:
@@ -163,8 +217,7 @@ class CategoriaEquipamientoDAO(BaseDAO):
             return Result.failure(f"[SQLITE ERROR]\n {e}")
 
     # ------------------------------------------------------------------
-    def update(self, ent: CategoriaEquipamientoEntity) -> Result:
-
+    def update(self, ent: ComercioEntity) -> Result:
         """
         Actualiza el registro en la base de datos. Devuelve el ID de la entidad
         modificada.
@@ -173,38 +226,43 @@ class CategoriaEquipamientoDAO(BaseDAO):
 
         sql = (
             """
-            UPDATE  CATEGORIAS_EQUIPAMIENTO
-                    SET CATEGORIA_EQUIPAMIENTO = :categoria,
-                    DESCRIPCION = :descripcion
-            WHERE   ID_CATEGORIA_EQUIPAMIENTO = :id;
+            UPDATE  COMERCIOS
+            SET     COMERCIO = :comercio,
+                    DIRECCION = :direccion,
+                    COD_POSTAL = :cod_postal,
+                    POBLACION = :poblacion,
+                    PROVINCIA = :provincia,
+                    ID_PAIS = :id_pais,
+                    OBSERVACIONES = :observaciones
+            WHERE   ID_COMERCIO = :id;
             """
         )
-
         params = {
             "id": ent.id,
-            "categoria": ent.categoria_equipamiento,
-            "descripcion": ent.descripcion,
+            "comercio": ent.nombre_comercio,
+            "direccion": ent.direccion,
+            "cod_postal": ent.cod_postal,
+            "poblacion": ent.poblacion,
+            "provincia": ent.provincia,
+            "id_pais": ent.id_pais,
+            "observaciones": ent.observaciones,
         }
 
         try:
             with self.db.conn as con:
-                _ = con.execute(sql, params)
+                cur = con.execute(sql, params)
                 return Result.success(ent.id)
 
         except sqlite3.IntegrityError as e:
-            # traceback.print_exc()
             return Result.failure(f"[INTEGRITY ERROR]\n {e}")
         except sqlite3.OperationalError as e:
-            # traceback.print_exc()
+            traceback.print_exc()
             return Result.failure(f"[OPERATIONAL ERROR]\n {e}")
         except sqlite3.ProgrammingError as e:
-            # traceback.print_exc()
             return Result.failure(f"[PROGRAMMING ERROR]\n {e}")
         except sqlite3.DatabaseError as e:
-            # traceback.print_exc()
             return Result.failure(f"[DATABASE ERROR]\n {e}")
         except sqlite3.Error as e:
-            # traceback.print_exc()
             return Result.failure(f"[SQLITE ERROR]\n {e}")
 
     # ------------------------------------------------------------------
@@ -215,11 +273,10 @@ class CategoriaEquipamientoDAO(BaseDAO):
         """
         sql = (
             """
-            DELETE FROM CATEGORIAS_EQUIPAMIENTO
-            WHERE       ID_CATEGORIA_EQUIPAMIENTO = :id;
+            DELETE FROM COMERCIOS
+            WHERE ID_COMERCIO = :id;
             """
         )
-
         params = {"id": id_}
 
         try:
@@ -228,17 +285,13 @@ class CategoriaEquipamientoDAO(BaseDAO):
                 return Result.success(id_)
 
         except sqlite3.IntegrityError as e:
-            # traceback.print_exc()
             return Result.failure(f"[INTEGRITY ERROR]\n {e}")
         except sqlite3.OperationalError as e:
-            # traceback.print_exc()
+            traceback.print_exc()
             return Result.failure(f"[OPERATIONAL ERROR]\n {e}")
         except sqlite3.ProgrammingError as e:
-            # traceback.print_exc()
             return Result.failure(f"[PROGRAMMING ERROR]\n {e}")
         except sqlite3.DatabaseError as e:
-            # traceback.print_exc()
             return Result.failure(f"[DATABASE ERROR]\n {e}")
         except sqlite3.Error as e:
-            # traceback.print_exc()
             return Result.failure(f"[SQLITE ERROR]\n {e}")

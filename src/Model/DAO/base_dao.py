@@ -11,9 +11,9 @@ from abc import ABC, abstractmethod
 
 from PyQt6.QtWidgets import QMessageBox
 
-from Model.DAO.database import DBManager
+from Model.database import DBManager
 from Model.Entities.base_entity import BaseEntity
-from Model.Entities.insert_commands import InsertCmd
+from Model.insert_commands import InsertCmd
 from Services.Result.result import Result
 
 
@@ -157,6 +157,7 @@ class BaseDAO(ABC):
                 cursor.execute(InsertCmd.INSERT_TIPOS_CONTROL_ILUMINACON)
                 cursor.execute(InsertCmd.INSERT_TIPOS_ILUMINACON)
                 cursor.execute(InsertCmd.INSERT_PAISES)
+                cursor.execute(InsertCmd.INSERT_COMERCIOS)
                 db.conn.commit()
                 return Result.success(1)
 

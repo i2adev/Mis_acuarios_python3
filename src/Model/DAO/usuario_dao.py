@@ -5,12 +5,11 @@ Comentarios:
     Módulo que contiene el DAO de la URNA.
 """
 import sqlite3
-import traceback
 
 import bcrypt
 
 from Model.DAO.base_dao import BaseDAO
-from Model.DAO.database import DBManager
+from Model.database import DBManager
 from Model.Entities.usuario_entity import UsuarioEntity
 from Services.Result.result import Result
 

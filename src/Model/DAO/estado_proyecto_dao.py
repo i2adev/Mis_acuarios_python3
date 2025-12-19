@@ -7,10 +7,9 @@ Comentarios:
 """
 
 import sqlite3
-import traceback
 
 from Model.DAO.base_dao import BaseDAO
-from Model.DAO.database import DBManager
+from Model.database import DBManager
 from Model.Entities.estado_proyecto_entity import EstadoProyectoEntity
 from Services.Result.result import Result
 

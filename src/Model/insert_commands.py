@@ -66,7 +66,7 @@ class InsertCmd:
     ('Nocturno', 'Más activo durante la noche y reposa durante el día.');
     """
 
-    # Categorias de equipamiento
+    # Categorías de equipamiento
     INSERT_CATEGORIAS_EQUIPAMIENTO = """
     INSERT INTO CATEGORIAS_EQUIPAMIENTO (CATEGORIA_EQUIPAMIENTO, DESCRIPCION) 
     VALUES
@@ -489,4 +489,32 @@ class InsertCmd:
     ('Yibuti', 'África'),
     ('Zambia', 'África'),
     ('Zimbabue', 'África');
+    """
+
+    # Comercios españoles
+    INSERT_COMERCIOS = """
+    INSERT INTO COMERCIOS (COMERCIO, DIRECCION, COD_POSTAL, POBLACION, PROVINCIA, 
+            ID_PAIS, OBSERVACIONES) 
+    VALUES
+    ('Kiwoko', 'Calle Serrano 45', '28001', 'Madrid', 'Madrid', 10058,
+     'Cadena nacional con sección de acuariofilia dulce y marina'),
+    ('Tiendanimal', 'Avenida de la Ilustración 51', '28029', 'Madrid', 'Madrid', 10058,
+     'Gran superficie especializada en animales y acuariofilia'),
+    ('Acuarios Amazonas', 'Carrer de Mallorca 410', '08013', 'Barcelona', 'Barcelona', 10058,
+     'Especialistas en acuarios plantados y peces tropicales'),
+    ('Nascapers', 'Carrer de Pujades 77', '08005', 'Valencia', 'Valencia', 10058,
+     'Referencia en aquascaping y productos ADA'),
+    ('Coral Reef Aquarium', 'Calle Juan XXIII 12', '29003', 'Málaga', 'Málaga', 10058,
+     'Especialistas en acuario marino y arrecife'),
+    ('Acuariofilia Madrid', 'Calle Alcalá 520', '28027', 'Madrid', 'Madrid', 10058,
+     'Tienda tradicional con peces, plantas y equipamiento'),
+    ('Reef Planet', 'Avenida de Andalucía 98', '41007', 'Sevilla', 'Sevilla', 10058,
+     'Especialistas en arrecife y sistemas marinos'),
+    ('Planeta Azul Acuarios', 'Calle San Vicente 132', '46007', 'Valencia', 'Valencia', 10058,
+     'Acuarios, peces tropicales y asesoramiento técnico'),
+    ('Tropiacuarium Bilbao', 'Calle Juan de Garay 25', '48012', 'Bilbao', 
+    'Bizkaia', 10058,
+     'Acuariofilia dulce y marina'),
+    ('Acuarios Tropical', 'Calle Aragón 215', '50010', 'Zaragoza', 'Zaragoza', 10058,
+     'Peces tropicales, plantas y material técnico');
     """

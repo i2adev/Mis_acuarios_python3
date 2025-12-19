@@ -8,8 +8,9 @@ import sqlite3
 import traceback
 
 from Model.DAO.base_dao import BaseDAO
-from Model.DAO.database import DBManager
-from Model.Entities.categoria_incidencia_entity import CategoriaIncidenciaEntity
+from Model.database import DBManager
+from Model.Entities.categoria_incidencia_entity import \
+    CategoriaIncidenciaEntity
 from Services.Result.result import Result
 
 

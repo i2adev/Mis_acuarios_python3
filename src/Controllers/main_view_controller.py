@@ -13,6 +13,7 @@ from Controllers.categoria_equipamiento_master_dialog import \
     CategoriaEquipamientoMasterController
 from Controllers.categoria_incidencia_master_controller import \
     CategoriaIncidenciaMasterController
+from Controllers.comercio_master_controller import ComercioMasterController
 from Controllers.equipamiento_master_controller import \
     EquipamientoMasterController
 from Controllers.estado_proyecto_master_controller import \
@@ -36,6 +37,7 @@ from Model.DAO.acuario_dao import AcuarioDAO
 from Model.DAO.categoria_acuario_dao import CategoriaAcuarioDAO
 from Model.DAO.categoria_equipamiento_dao import CategoriaEquipamientoDAO
 from Model.DAO.categoria_incidencia_dao import CategoriaIncidenciaDAO
+from Model.DAO.comercio_dao import ComercioDAO
 from Model.DAO.equipamiento_dao import EquipamientoDAO
 from Model.DAO.estado_proyecto_dao import EstadoProyectoDAO
 from Model.DAO.filtro_dao import FiltroDAO
@@ -53,6 +55,7 @@ from Model.Entities.categoria_equipamiento_entity import \
     CategoriaEquipamientoEntity
 from Model.Entities.categoria_incidencia_entity import \
     CategoriaIncidenciaEntity
+from Model.Entities.comercio_entity import ComercioEntity
 from Model.Entities.equipamiento_entity import EquipamientoEntity
 from Model.Entities.estado_proyecto_entity import EstadoProyectoEntity
 from Model.Entities.filtro_entity import FiltroEntity
@@ -70,6 +73,7 @@ from Views.Masters.acuario_view import AcuarioView
 from Views.Masters.categoria_acuario_view import CategoriaAcuarioView
 from Views.Masters.categoria_equipamiento_view import CategoriaEquipamientoView
 from Views.Masters.categoria_incidencia_view import CategoriaIncidenciaView
+from Views.Masters.comercio_view import ComercioView
 from Views.Masters.equipamiento_view import EquipamientoView
 from Views.Masters.estado_proyecto_view import EstadoProyectoView
 from Views.Masters.filtro_view import FiltroView
@@ -166,6 +170,20 @@ class MainViewController(BaseController):
         self._view.button_maestro_equipamiento.clicked.connect(
             self.equipamiento_clicked
         )
+
+        self._view.button_maestro_comercio.clicked.connect(
+            self.comercio_clicked
+        )
+
+    def comercio_clicked(self):
+        """ Cuando se presiona en el botón comercio. """
+
+        view = ComercioView("MAESTRO DE COMERCIOS")
+        dao = ComercioDAO()
+        mod = ComercioEntity()
+
+        ctrl = ComercioMasterController(view, dao, mod)
+        ctrl.show()
 
     def equipamiento_clicked(self):
         """ Cuando se presiona en el equipamiento. """

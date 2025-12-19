@@ -8,7 +8,8 @@ Comentarios:
 from PyQt6.QtWidgets import QMessageBox
 
 from Model.DAO.base_dao import BaseDAO
-from Model.DAO.database import DBManager
+from Model.Entities.comercio_entity import ComercioEntity
+from Model.database import DBManager
 from Model.Entities.acuario_entity import AcuarioEntity
 from Model.Entities.base_entity import BaseEntity
 from Model.Entities.categoria_acuario_entity import CategoriaAcuarioEntity
@@ -22,7 +23,7 @@ from Model.Entities.filtro_entity import FiltroEntity
 from Model.Entities.marca_comercial_entity import MarcaComercialEntity
 from Model.Entities.material_urna_entity import MaterialUrnaEntity
 from Model.Entities.proyecto_entity import ProyectoEntity
-from Model.Entities.search_commands import SearchCmd
+from Model.search_commands import SearchCmd
 from Model.Entities.subcategoria_acuario_entity import \
     SubcategoriaAcuarioEntity
 from Model.Entities.subcategoria_incidencia_entity import \
@@ -576,6 +577,19 @@ class Paginator:
             )
                 for f in rows
             ]
+        elif self.procedure == "VISTA_COMERCIOS":
+            data_list = [ComercioEntity(
+                id=f["ID"],
+                num=f["NUM"],
+                nombre_comercio=f["COMERCIO"],
+                cod_postal=f["COD_POSTAL"],
+                poblacion=f["POBLACION"],
+                provincia=f["PROVINCIA"],
+                id_pais=f["PAIS"],
+                observaciones=f["OBSERVACIONES"],
+            )
+                for f in rows
+            ]
 
         return data_list
 
@@ -632,6 +646,8 @@ class Paginator:
             return SearchCmd.SEARCH_CATEGORIA_EQUIPAMIENTO
         elif self.procedure == "VISTA_EQUIPAMIENTOS":
             return SearchCmd.SEARCH_EQUIPAMIENTO
+        elif self.procedure == "VISTA_COMERCIOS":
+            return SearchCmd.SEARCH_COMERCIO
 
     def __str__(self):
         """ Muestra el objeto en forma de texto. """

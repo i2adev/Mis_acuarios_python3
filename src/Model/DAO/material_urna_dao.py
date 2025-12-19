@@ -5,10 +5,9 @@ Comentarios:
     Módulo que contiene la vista de la entidad MATERIAL DE URNA.
 """
 import sqlite3
-import traceback
 
 from Model.DAO.base_dao import BaseDAO
-from Model.DAO.database import DBManager
+from Model.database import DBManager
 from Model.Entities.material_urna_entity import MaterialUrnaEntity
 from Services.Result.result import Result
 

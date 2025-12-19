@@ -7,7 +7,7 @@ Comentarios:
 import sqlite3
 
 from Model.DAO.base_dao import BaseDAO
-from Model.DAO.database import DBManager
+from Model.database import DBManager
 from Model.Entities.urna_entity import UrnaEntity
 from Services.Result.result import Result
 

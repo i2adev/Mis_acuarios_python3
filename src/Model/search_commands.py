@@ -389,3 +389,32 @@ class SearchCmd:
     )
     WHERE   FIELD LIKE'%' || :pattern || '%';
     """
+
+    SEARCH_COMERCIO = """
+    SELECT  ID, NUM, COMERCIO, COD_POSTAL, POBLACION,
+            PROVINCIA, PAIS, OBSERVACIONES
+    FROM
+    (
+        SELECT  C.ID_COMERCIO AS ID,
+                ROW_NUMBER() OVER(ORDER BY C.COMERCIO) AS NUM,
+                C.COMERCIO AS COMERCIO,
+                C.DIRECCION AS DIRECCION,
+                C.COD_POSTAL AS COD_POSTAL,
+                C.POBLACION AS POBLACION,
+                C.PROVINCIA AS PROVINCIA,
+                P.PAIS AS PAIS,
+                C.OBSERVACIONES AS OBSERVACIONES,
+                UPPER(
+                    IFNULL(C.COMERCIO, '')
+                    || IFNULL(C.DIRECCION, '')
+                    || IFNULL(C.COD_POSTAL, '')
+                    || IFNULL(C.POBLACION, '')
+                    || IFNULL(C.PROVINCIA, '')
+                    || IFNULL(P.PAIS, '')
+                    || IFNULL(C.OBSERVACIONES, '')
+                ) AS FIELD
+        FROM        COMERCIOS C
+        LEFT JOIN   PAISES P ON C.ID_PAIS = P.ID_PAIS
+    )
+    WHERE   FIELD LIKE'%' || :pattern || '%';
+    """

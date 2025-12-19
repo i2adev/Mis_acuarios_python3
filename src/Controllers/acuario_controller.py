@@ -21,7 +21,7 @@ from Model.Entities.acuario_entity import AcuarioEntity
 from Model.Entities.tipo_acuario_entity import TipoAcuarioEntity
 from Model.Entities.urna_entity import UrnaEntity
 from Services.Result.result import Result
-from Services.Validators.acuario_validator import AcuarioValidator
+from Services.Valídators.acuario_validator import AcuarioValidator
 from Views.Dialogs.acuario_dialog import AcuarioDialog
 from Views.Dialogs.tipo_acuario_dialog import TipoAcuarioDialog
 from Views.Dialogs.urna_dialog import UrnaDialog
