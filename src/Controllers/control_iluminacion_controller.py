@@ -1,53 +1,54 @@
 ﻿"""
 Autor:  Inigo Iturriagaetxebarria
-Fecha:  19/12/2025
+Fecha:  20/12/2025
 Comentarios:
-    Controlador base del tipo de iluminación.
+    Controlador base del control de iluminación.
 """
 
 from PyQt6.QtGui import QAction
 from PyQt6.QtWidgets import QMessageBox, QPushButton
 
 from Controllers.base_controller import BaseController
-from Model.DAO.tipo_iluminacion_dao import TipoIluminacionDAO
-from Model.Entities.tipo_iluminacion_entity import TipoIluminacionEntity
+from Model.DAO.control_iluminacion_dao import ControlIluminacionDAO
+from Model.Entities.control_iluminacion_entity import ControlIluminacionEntity
 from Services.Result.result import Result
-from Services.Validators.tipo_iluminacion_validator import \
-    TipoIluminacionValidator
-from Views.Dialogs.tipo_iluminacion_dialog import TipoIluminacionDialog
-from Views.Masters.tipo_iluminacion_view import TipoIluminacionView
+from Services.Validators.control_iluminacion_validator import \
+    ControlIluminacionValidator
+from Views.Dialogs.control_iluminacion_dialog import ControlIluminacionDialog
+from Views.Masters.control_iluminacion_view import ControlIluminacionView
 
 
-class TipoIluminacionController(BaseController):
-    """ Controlador base del formulario maestro de tipo de iluminación. """
+class ControlIluminacionController(BaseController):
+    """ Controlador base del formulario maestro de control de iluminación. """
 
-    def __init__(self, view: TipoIluminacionDialog | TipoIluminacionView,
-                 dao: TipoIluminacionDAO,
-                 model: TipoIluminacionEntity):
+    def __init__(self, view: ControlIluminacionDialog | ControlIluminacionView,
+                 dao: ControlIluminacionDAO,
+                 model: ControlIluminacionEntity):
         """
         Inicializa el controlador de tipo de filtro.
-        :param view: TipoIluminacionDialog | TipoIluminacionView
-        :param dao: TipoIluminacionDAO
-        :param model: TipoIluminacionEntity
+        :param view: ControlIluminacionDialog | ControlIluminacionView
+        :param dao: ControlIluminacionDAO
+        :param model: ControlIluminacionEntity
         """
 
         # Atributos
-        self._tipo_iluminacion_result = None
+        self._control_iluminacion_result = None
 
         # Llamaos al constructor de la superclase
         super().__init__(view, dao, model)
 
-    def _entity_configuration(self) -> TipoIluminacionEntity:
+    def _entity_configuration(self) -> ControlIluminacionEntity:
         """ Configura la entidad. """
 
-        ent = TipoIluminacionEntity()
+        ent = ControlIluminacionEntity()
 
         if self._view.frame.edit_id.text():
             ent.id = int(self._view.frame.edit_id.text())
         else:
             ent.id = None
 
-        ent.tipo_iluminacion = self._view.frame.edit_tipo_iluminacion.text()
+        ent.control_iluminacion = (
+            self._view.frame.edit_control_iluminacion.text())
         if self._view.frame.text_descripcion.toPlainText():
             ent.descripcion = self._view.frame.text_descripcion.toPlainText()
         else:
@@ -93,7 +94,7 @@ class TipoIluminacionController(BaseController):
             return Result.failure(res.error_msg)
 
         # Limpiamos el formulario
-        self._clean_view(self._view.frame.edit_tipo_iluminacion)
+        self._clean_view(self._view.frame.edit_control_iluminacion)
 
         return Result.success(ent.id)
 
@@ -141,7 +142,7 @@ class TipoIluminacionController(BaseController):
             return Result.failure(res.error_msg)
 
         # Limpiamos el formulario
-        self._clean_view(self._view.frame.edit_tipo_iluminacion)
+        self._clean_view(self._view.frame.edit_control_iluminacion)
         return Result.success(ide)
 
     # FIN DE CRUD --------------------------------------------------
@@ -150,12 +151,12 @@ class TipoIluminacionController(BaseController):
         """ Valida el formulario. """
 
         # Valida el tipo de iluminación
-        res = TipoIluminacionValidator.validate_tipo_iluminacion(
-            self._view.frame.edit_tipo_iluminacion
+        res = ControlIluminacionValidator.validate_control_iluminacion(
+            self._view.frame.edit_control_iluminacion
         )
 
         if not res.is_success:
-            self._view.frame.edit_tipo_iluminacion.setFocus()
+            self._view.frame.edit_control_iluminacion.setFocus()
             return res
 
         return Result.success(1)
@@ -192,10 +193,10 @@ class TipoIluminacionController(BaseController):
         else:
             return Result.failure("DEBE SELECCIONAR O CARGAR UN REGISTRO")
 
-    def _get_tipo_iluminacion(self):
-        """ Devuelve el tipo de iluminación resultante. """
+    def _get_control_iluminacion(self):
+        """ Devuelve el control de iluminación resultante. """
 
-        return self._tipo_iluminacion_result
+        return self._control_iluminacion_result
 
     def _load_record(self) -> Result:
         """ Carga el registro en el formulario. """
@@ -225,7 +226,7 @@ class TipoIluminacionController(BaseController):
             str(id_ta) if id_ta is not None else ""
         )
 
-        self._view.frame.edit_tipo_iluminacion.setText(
+        self._view.frame.edit_control_iluminacion.setText(
             str(tipo_iluminacion) if tipo_iluminacion else ""
         )
 

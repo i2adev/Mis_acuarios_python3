@@ -154,7 +154,7 @@ class BaseDAO(ABC):
                 cursor.execute(InsertCmd.INSERT_REQUERIMIENTOS_ILUMINACION)
                 cursor.execute(InsertCmd.INSERT_POSICIONES_ACUARIO)
                 cursor.execute(InsertCmd.INSERT_GRUPOS_TAXONOMICOS)
-                cursor.execute(InsertCmd.INSERT_TIPOS_CONTROL_ILUMINACON)
+                cursor.execute(InsertCmd.INSERT_CONTROLES_ILUMINACON)
                 cursor.execute(InsertCmd.INSERT_TIPOS_ILUMINACON)
                 cursor.execute(InsertCmd.INSERT_PAISES)
                 cursor.execute(InsertCmd.INSERT_COMERCIOS)

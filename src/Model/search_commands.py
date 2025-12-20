@@ -433,5 +433,22 @@ class SearchCmd:
                 ) AS FIELD
         FROM    TIPOS_ILUMINACION
         )
-    WHERE   FIELD LIKE'%' || :pattern || '%';;
+    WHERE   FIELD LIKE'%' || :pattern || '%';
+    """
+
+    SEARCH_CONTROL_ILUMINACION = """
+    SELECT  ID, NUM, TIPO_CONTROL, DESCRIPCION
+    FROM
+        (
+        SELECT  ID_CONTROL_ILUMINACION AS ID,
+                ROW_NUMBER() OVER(ORDER BY TIPO_CONTROL) AS NUM,
+                TIPO_CONTROL AS TIPO_CONTROL,
+                DESCRIPCION AS DESCRIPCION,
+                UPPER(
+                    IFNULL(TIPO_CONTROL, '')
+                    || IFNULL(DESCRIPCION, '')
+                ) AS FIELD
+        FROM    CONTROLES_ILUMINACION
+        )
+    WHERE    FIELD LIKE '%' || :pattern || '%';
     """

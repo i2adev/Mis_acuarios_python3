@@ -9,6 +9,7 @@ from PyQt6.QtWidgets import QMessageBox
 
 from Model.DAO.base_dao import BaseDAO
 from Model.Entities.comercio_entity import ComercioEntity
+from Model.Entities.control_iluminacion_entity import ControlIluminacionEntity
 from Model.Entities.tipo_iluminacion_entity import TipoIluminacionEntity
 from Model.database import DBManager
 from Model.Entities.acuario_entity import AcuarioEntity
@@ -601,6 +602,15 @@ class Paginator:
             )
                 for f in rows
             ]
+        elif self.procedure == "VISTA_CONTROLES_ILUMINACION":
+            data_list = [ControlIluminacionEntity(
+                id=f["ID"],
+                num=f["NUM"],
+                control_iluminación=f["TIPO_CONTROL"],
+                descripcion=f["DESCRIPCION"],
+            )
+                for f in rows
+            ]
 
         return data_list
 
@@ -661,6 +671,8 @@ class Paginator:
             return SearchCmd.SEARCH_COMERCIO
         elif self.procedure == "VISTA_TIPO_ILUMINACION":
             return SearchCmd.SEARCH_TIPO_ILUMINACION
+        elif self.procedure == "VISTA_CONTROLES_ILUMINACION":
+            return SearchCmd.SEARCH_CONTROL_ILUMINACION
 
     def __str__(self):
         """ Muestra el objeto en forma de texto. """

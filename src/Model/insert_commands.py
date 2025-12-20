@@ -267,8 +267,8 @@ class InsertCmd:
     """
 
     # Tipos de control de la iluminación
-    INSERT_TIPOS_CONTROL_ILUMINACON = """
-    INSERT INTO TIPOS_CONTROL_ILUMINACION (TIPO_CONTROL, DESCRIPCION) VALUES
+    INSERT_CONTROLES_ILUMINACON = """
+    INSERT INTO CONTROLES_ILUMINACION (TIPO_CONTROL, DESCRIPCION) VALUES
     ('Manual', 'Encendido y apagado realizado directamente por el usuario.'),
     ('Temporizador mecánico', 'Dispositivo simple que activa y desactiva la luz a horas fijas.'),
     ('Temporizador digital', 'Permite configurar múltiples franjas horarias y ciclos de luz.'),

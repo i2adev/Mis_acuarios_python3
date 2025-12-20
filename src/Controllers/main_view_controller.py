@@ -14,6 +14,8 @@ from Controllers.categoria_equipamiento_master_dialog import \
 from Controllers.categoria_incidencia_master_controller import \
     CategoriaIncidenciaMasterController
 from Controllers.comercio_master_controller import ComercioMasterController
+from Controllers.control_iluminacion_master_controller import \
+    ControlIluminacionMasterController
 from Controllers.equipamiento_master_controller import \
     EquipamientoMasterController
 from Controllers.estado_proyecto_master_controller import \
@@ -41,6 +43,7 @@ from Model.DAO.categoria_acuario_dao import CategoriaAcuarioDAO
 from Model.DAO.categoria_equipamiento_dao import CategoriaEquipamientoDAO
 from Model.DAO.categoria_incidencia_dao import CategoriaIncidenciaDAO
 from Model.DAO.comercio_dao import ComercioDAO
+from Model.DAO.control_iluminacion_dao import ControlIluminacionDAO
 from Model.DAO.equipamiento_dao import EquipamientoDAO
 from Model.DAO.estado_proyecto_dao import EstadoProyectoDAO
 from Model.DAO.filtro_dao import FiltroDAO
@@ -60,6 +63,7 @@ from Model.Entities.categoria_equipamiento_entity import \
 from Model.Entities.categoria_incidencia_entity import \
     CategoriaIncidenciaEntity
 from Model.Entities.comercio_entity import ComercioEntity
+from Model.Entities.control_iluminacion_entity import ControlIluminacionEntity
 from Model.Entities.equipamiento_entity import EquipamientoEntity
 from Model.Entities.estado_proyecto_entity import EstadoProyectoEntity
 from Model.Entities.filtro_entity import FiltroEntity
@@ -79,6 +83,7 @@ from Views.Masters.categoria_acuario_view import CategoriaAcuarioView
 from Views.Masters.categoria_equipamiento_view import CategoriaEquipamientoView
 from Views.Masters.categoria_incidencia_view import CategoriaIncidenciaView
 from Views.Masters.comercio_view import ComercioView
+from Views.Masters.control_iluminacion_view import ControlIluminacionView
 from Views.Masters.equipamiento_view import EquipamientoView
 from Views.Masters.estado_proyecto_view import EstadoProyectoView
 from Views.Masters.filtro_view import FiltroView
@@ -181,6 +186,24 @@ class MainViewController(BaseController):
             self.comercio_clicked
         )
 
+        self._view.button_maestro_tipo_iluminacion.clicked.connect(
+            self.tipo_iluminacion_clicked
+        )
+
+        self._view.button_maestro_control_iluminacion.clicked.connect(
+            self.control_iluminacion_clicked
+        )
+
+    def control_iluminacion_clicked(self):
+        """ Cuando se pulsa el control de iluminación. """
+
+        view = ControlIluminacionView("MAESTRO DE CONTROLES DE ILUMINACIÓN")
+        dao = ControlIluminacionDAO()
+        mod = ControlIluminacionEntity()
+
+        ctrl = ControlIluminacionMasterController(view, dao, mod)
+        ctrl.show()
+
     def tipo_iluminacion_clicked(self):
         """ Cuando se pulsa el tipo de iluminacion. """
 
@@ -190,7 +213,7 @@ class MainViewController(BaseController):
 
         ctrl = TipoIluminacionMasterController(view, dao, mod)
         ctrl.show()
-        
+
     def comercio_clicked(self):
         """ Cuando se presiona en el botón comercio. """
 

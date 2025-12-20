@@ -2,10 +2,58 @@
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
 19/12/2025  SE AÑADE LA LÓGICA DE TIPO DE ILUMINACIÓN:
-     ↓      -   DONE:   SE CREA LA ENTIDAD.
+            -   DONE:   SE CREA LA ENTIDAD.
             -   DONE:   SE CREA LA VISTA EN LA BASE DE DATOS.
             -   DONE:   SE CREA EL DAO.
-            -   DONE:   E CREA EL FORMULARIO.
+            -   DONE:   SE CREA EL FORMULARIO.
+            -   DONE:   SE CREA EL CUADRO DE DIÁLOGO.
+            -   DONE:   SE CREA EL FORMULARIO MAESTRO.
+            -   DONE:   SE CREA EL VALIDADOR DEL FORMULARIO.
+            -   DONE:   SE CREA EL MODELO DE TABLA.
+            -   DONE:   SE CREAN LOS TOOLTIPS PARA LOS CONTROLES.
+            -   DONE:   SE CREAN LOS TOOLTIPS PARA LOS ENCABEZADOS DE COLUMNA
+                        DE LA TABLA DE DATOS.
+
+            -   ACTUALIZAR EL PAGINADOR.
+                -   DONE:   CREAR EL COMANDO DE BÚSQUEDA.
+                -   DONE:   SE CONFIGURA LA OBTENCIÓN DE LA LISTA DE ENTIDADES.
+                -   DONE:   SE CONFIGURA LA OBTENCIÓN DEL COMANDO DE BÚSQUEDA.
+
+            -   SE CREAN LOS CONTROLADORES:
+                -   DONE:   CONTROLADOR BASE.
+                -   DONE:   CONTROLADOR DEL CUADRO DE DIÁLOGO.
+                -   DONE:   CONTROLADOR DEL FORMULARIO MAESTRO.
+
+            -   DONE:   INTEGRAR EN LA VISTA PRINCIPAL.
+
+20/12/2025  SE REALIZA EL TESTEO MANUAL DEL FORMULARIO DE TIPOS DE ILUMINACION:
+            -   DONE:   TEST -> APERTURA DEL FORMULARIO.
+            -   NO APLICABLE:   TEST -> CARGA DE LOS COMBOS.
+            -   DONE:   TEST -> INSERCIÓN DE REGISTRO.
+            -   DONE:   TEST -> CARGA DE REGISTRO.
+            -   DONE:   TEST -> LIMPIEZA DE FORMULARIO.
+            -   DONE:   TEST -> ELIMINACIÓN DE REGISTRO DESDE MENÚ CONTEXTUAL.
+            -   DONE:   TEST -> ELIMINACIÓN DE REGISTRO DESPUÉS DE CARGAR EN EL
+                        FORMULARIO.
+            -   DONE:   TEST -> MODIFICACIÓN DE REGISTRO.
+            -   DONE:   TEST -> BÚSQUEDA DE REGISTROS.
+            -   N.A.:   TEST -> GESTIÓN DE IMAGENES.
+
+            CORRECCIONES:
+            -   APERTURA DE FORMULARIO:
+                -   DONE:   CORREGIR LA APERTURA DEL MAESTRO DE TIPOS DE
+                            ILUMINACIÓN.
+                -   DONE:   SE CORRIGE LA INSERCIÓN DE DESCRIPCIÓN. EN CASO DE
+                            ESTAR VACÍO, SE INSERTA NULL.
+
+            -   BÚSQUEDA DE REGISTROS:
+                -   DONE:   CORREGIR EL ERROR DE SQL AL BUSCAR REGISTROS.
+
+19/12/2025  SE AÑADE LA LÓGICA DE TIPO DE ILUMINACIÓN:
+            -   DONE:   SE CREA LA ENTIDAD.
+            -   DONE:   SE CREA LA VISTA EN LA BASE DE DATOS.
+            -   DONE:   SE CREA EL DAO.
+            -   DONE:   SE CREA EL FORMULARIO.
             -   DONE:   SE CREA EL CUADRO DE DIÁLOGO.
             -   DONE:   SE CREA EL FORMULARIO MAESTRO.
             -   DONE:   SE CREA EL VALIDADOR DEL FORMULARIO.
