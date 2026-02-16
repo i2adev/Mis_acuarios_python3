@@ -21,6 +21,9 @@ from Controllers.equipamiento_master_controller import \
 from Controllers.estado_proyecto_master_controller import \
     EstadoProyectoMasterController
 from Controllers.filtro_master_controller import FiltroMasterController
+from Controllers.iluminacion_master_controller import \
+    IluminacionMasterController
+from Controllers.main_reports_controller import MainReportsController
 from Controllers.marca_comercial_master_controller import \
     MarcaComercialMasterController
 from Controllers.material_urna_master_controler import \
@@ -47,6 +50,7 @@ from Model.DAO.control_iluminacion_dao import ControlIluminacionDAO
 from Model.DAO.equipamiento_dao import EquipamientoDAO
 from Model.DAO.estado_proyecto_dao import EstadoProyectoDAO
 from Model.DAO.filtro_dao import FiltroDAO
+from Model.DAO.iluminacion_dao import IluminacionDAO
 from Model.DAO.marca_comercial_dao import MarcaComercialDAO
 from Model.DAO.material_urna_dao import MaterialUrnaDAO
 from Model.DAO.proyecto_dao import ProyectoDAO
@@ -67,6 +71,7 @@ from Model.Entities.control_iluminacion_entity import ControlIluminacionEntity
 from Model.Entities.equipamiento_entity import EquipamientoEntity
 from Model.Entities.estado_proyecto_entity import EstadoProyectoEntity
 from Model.Entities.filtro_entity import FiltroEntity
+from Model.Entities.iluminacion_entity import IluminacionEntity
 from Model.Entities.marca_comercial_entity import MarcaComercialEntity
 from Model.Entities.material_urna_entity import MaterialUrnaEntity
 from Model.Entities.proyecto_entity import ProyectoEntity
@@ -87,6 +92,7 @@ from Views.Masters.control_iluminacion_view import ControlIluminacionView
 from Views.Masters.equipamiento_view import EquipamientoView
 from Views.Masters.estado_proyecto_view import EstadoProyectoView
 from Views.Masters.filtro_view import FiltroView
+from Views.Masters.iluminacion_view import IluminacionView
 from Views.Masters.marca_comercial_view import MarcaComercialView
 from Views.Masters.material_urna_view import MaterialUrnaView
 from Views.Masters.proyecto_view import ProyectoView
@@ -97,6 +103,7 @@ from Views.Masters.tipo_acuario_view import TipoAcuarioView
 from Views.Masters.tipo_filtro_view import TipoFiltroView
 from Views.Masters.tipo_iluminacion_view import TipoIluminacionView
 from Views.Masters.urna_view import UrnaView
+from Views.main_reports_view import MainReportsView
 from Views.main_view import MainView
 
 
@@ -193,6 +200,30 @@ class MainViewController(BaseController):
         self._view.button_maestro_control_iluminacion.clicked.connect(
             self.control_iluminacion_clicked
         )
+
+        self._view.button_menu_reportes.clicked.connect(
+            self.reportes_click
+        )
+        self._view.button_maestro_iluminacion.clicked.connect(
+            self.iluminacion_click
+        )
+
+    def reportes_click(self):
+        """ Cuando se pulsa el control de reportes. """
+        view = MainReportsView("REPORTES")
+        ctrl = MainReportsController(view)
+
+        ctrl.show()
+
+    def iluminacion_click(self):
+        """ Cuando se pulsa el botón de iluminaciones. """
+
+        view = IluminacionView("MAESTRO DE ILUMINACIÓN")
+        dao = IluminacionDAO()
+        mod = IluminacionEntity()
+
+        ctrl = IluminacionMasterController(view, dao, mod)
+        ctrl.show()
 
     def control_iluminacion_clicked(self):
         """ Cuando se pulsa el control de iluminación. """

@@ -47,6 +47,8 @@ class ControlIluminacionController(BaseController):
         else:
             ent.id = None
 
+        print(self._view.frame.edit_control_iluminacion.text())
+
         ent.control_iluminacion = (
             self._view.frame.edit_control_iluminacion.text())
         if self._view.frame.text_descripcion.toPlainText():

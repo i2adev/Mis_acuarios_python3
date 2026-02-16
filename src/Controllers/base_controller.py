@@ -10,7 +10,7 @@ Comentarios:
 from Model.DAO.base_dao import BaseDAO
 from Model.DAO.paginator import Paginator
 from Model.Entities.base_entity import BaseEntity
-# Importaciones
+
 from PyQt6.QtCore import QEvent, QObject, Qt
 from PyQt6.QtGui import QGuiApplication
 from PyQt6.QtWidgets import (QCheckBox, QComboBox, QCompleter, QHBoxLayout,
@@ -100,7 +100,7 @@ class BaseController(QObject):
             # Controles de texto
             if isinstance(widget, self._text_widgets):
                 self._text_normalize(widget, event)
-                
+
             # Combos
             if isinstance(widget, QComboBox):
                 self._combo_out_focus(widget, event)

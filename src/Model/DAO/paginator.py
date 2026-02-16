@@ -10,6 +10,7 @@ from PyQt6.QtWidgets import QMessageBox
 from Model.DAO.base_dao import BaseDAO
 from Model.Entities.comercio_entity import ComercioEntity
 from Model.Entities.control_iluminacion_entity import ControlIluminacionEntity
+from Model.Entities.iluminacion_entity import IluminacionEntity
 from Model.Entities.tipo_iluminacion_entity import TipoIluminacionEntity
 from Model.database import DBManager
 from Model.Entities.acuario_entity import AcuarioEntity
@@ -606,7 +607,31 @@ class Paginator:
             data_list = [ControlIluminacionEntity(
                 id=f["ID"],
                 num=f["NUM"],
-                control_iluminación=f["TIPO_CONTROL"],
+                control_iluminacion=f["TIPO_CONTROL"],
+                descripcion=f["DESCRIPCION"],
+            )
+                for f in rows
+            ]
+        elif self.procedure == "VISTA_ILUMINACIONES":
+            data_list = [IluminacionEntity(
+                id=f["ID"],
+                num=f["NUM"],
+                id_tipo_iluminacion=f["TIPO_ILUMINACION"],
+                id_marca=f["MARCA"],
+                modelo=f["MODELO"],
+                num_serie=f["NUMERO_SERIE"],
+                potencia=f["POTENCIA"],
+                flujo_luminico=f["FLUJO_LUMINOSO"],
+                temperatura=f["TEMPERATURA"],
+                vida_util=f["VIDA_UTIL"],
+                longitud=f["LONGITUD"],
+                anchura=f["ANCHO"],
+                id_control_iluminacion=f["CONTROL_ILUMINACION"],
+                fecha_alta=f["FECHA_ALTA"],
+                fecha_baja=f["FECHA_BAJA"],
+                motivo_baja=f["MOTIVO_BAJA"],
+                espectro_completo=f["ESPECTRO_COMPLETO"],
+                intensidad_regulable=f["INTENSIDAD_REGULABLE"],
                 descripcion=f["DESCRIPCION"],
             )
                 for f in rows
@@ -673,6 +698,8 @@ class Paginator:
             return SearchCmd.SEARCH_TIPO_ILUMINACION
         elif self.procedure == "VISTA_CONTROLES_ILUMINACION":
             return SearchCmd.SEARCH_CONTROL_ILUMINACION
+        elif self.procedure == "VISTA_ILUMINACIONES":
+            return SearchCmd.SEARCH_ILUMINACION
 
     def __str__(self):
         """ Muestra el objeto en forma de texto. """

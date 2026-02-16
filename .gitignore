@@ -10,3 +10,6 @@ qt_env/
 Documents/*
 !Documents/CHANGELOG.txt
 !Documents/TODO.txt
+
+# Se excluyen los PDFs de la carpeta reportes
+/src/Reports/*.pdf

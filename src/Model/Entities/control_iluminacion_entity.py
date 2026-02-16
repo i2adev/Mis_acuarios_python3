@@ -11,18 +11,18 @@ class ControlIluminacionEntity(BaseEntity):
     """ Entidad control de iluminación """
 
     def __init__(self, id: int = None, num: int = None,
-                 control_iluminación: str = None, descripcion: str = None, ):
+                 control_iluminacion: str = None, descripcion: str = None, ):
         """
         Constructor base.
         :param id: ID del tipo de iluminación
         :param num: Número correlativo del tipo de iluminación
-        :param control_iluminación: Tipo de control de iluminación
+        :param control_iluminacion: Tipo de control de iluminación
         :param descripcion: Descripción del control de iluminación
         """
 
         self._id = id
         self._num = num
-        self._control_iluminación = control_iluminación
+        self._control_iluminacion = control_iluminacion
         self._descripcion = descripcion
 
     @property
@@ -46,14 +46,14 @@ class ControlIluminacionEntity(BaseEntity):
         self._num = new_num
 
     @property
-    def control_iluminación(self) -> str:
+    def control_iluminacion(self) -> str:
         """ Control de iluminación """
-        return self._control_iluminación
+        return self._control_iluminacion
 
-    @control_iluminación.setter
-    def control_iluminación(self, new_tipo_iluminación: str):
+    @control_iluminacion.setter
+    def control_iluminacion(self, new_tipo_iluminacion: str):
         """ Control de iluminación """
-        self._control_iluminación = new_tipo_iluminación
+        self._control_iluminacion = new_tipo_iluminacion
 
     @property
     def descripcion(self) -> str:

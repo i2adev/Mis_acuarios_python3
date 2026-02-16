@@ -71,7 +71,7 @@ class MainView(QWidget):
         self.menu_layout.addWidget(self.button_menu_insert)
         self.menu_layout.addWidget(self.button_menu_maestro)
         self.menu_layout.addLayout(self.maestro_layout)
-        self.menu_layout.addLayout(self.maestro_layout)
+        self.menu_layout.addWidget(self.button_menu_reportes)
         self.menu_layout.addSpacerItem(
             QSpacerItem(20, 20, QSizePolicy.Policy.Minimum,
                         QSizePolicy.Policy.Expanding)
@@ -166,6 +166,10 @@ class MainView(QWidget):
         self.button_menu_maestro = QPushButton("MAESTRO")
         self.button_menu_maestro.setObjectName("button_menu_maestro")
         self.button_menu_maestro.setFlat(True)
+
+        self.button_menu_reportes = QPushButton("REPORTES")
+        self.button_menu_reportes.setObjectName("button_menu_reportes")
+        self.button_menu_reportes.setFlat(True)
 
         ## Botones del layout maestro
         self.button_maestro_acuario = QPushButton("ACUARIOS")

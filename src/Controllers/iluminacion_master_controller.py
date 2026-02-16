@@ -1,43 +1,43 @@
 ﻿"""
 Autor:  Inigo Iturriagaetxebarria
-Fecha:  20/12/2025
+Fecha:  06/10/2025
 Comentarios:
-    Controlador del formulario maestro de control de iluminación.
+    Controlador del formulario maestro de subcategoría de incidencia.
 """
 
-from PyQt6.QtCore import QEvent
 from PyQt6.QtGui import QIcon, QAction
 from PyQt6.QtWidgets import QMessageBox, QTableView, QWidget, QComboBox
 
-from Controllers.control_iluminacion_controller import \
-    ControlIluminacionController
-from Model.DAO.control_iluminacion_dao import ControlIluminacionDAO
+from Controllers.iluminacion_controller import IluminacionController
+from Model.DAO.iluminacion_dao import IluminacionDAO
 from Model.DAO.paginator import Paginator
-from Model.Entities.control_iluminacion_entity import ControlIluminacionEntity
-from Model.TableModel.control_iluminacion_table_model import \
-    ControlIluminacionTableModel
-from Views.Masters.control_iluminacion_view import ControlIluminacionView
+from Model.Entities.iluminacion_entity import IluminacionEntity
+from Model.TableModel.iluminacion_table_model import IluminacionTableModel
+from Views.Masters.iluminacion_view import IluminacionView
 from Views.table_menu_contextual import TableMenuContextual
 
 
-class ControlIluminacionMasterController(ControlIluminacionController):
-    """ Controlador del formulario maestro de tipo de iluminación. """
+class IluminacionMasterController(IluminacionController):
+    """ Controlador del formulario maestro de marca comercial. """
 
-    def __init__(self, view: ControlIluminacionView,
-                 dao: ControlIluminacionDAO,
-                 mod: ControlIluminacionEntity):
+    def __init__(self, view: IluminacionView,
+                 dao: IluminacionDAO,
+                 mod: IluminacionEntity):
         """
         Constructor base
-        :param view: Formulario maestro de control de iluminacion
-        :param dao: DAO del control de iluminacion
-        :param mod: Modelo del control de iluminacion
+        :param view: Formulario maestro de la iluminación
+        :param dao: DAO de la iluminación
+        :param mod: Modelo de la iluminación
         """
 
         # Constructor base
         super().__init__(view, dao, mod)
 
+        # Rellena los combos
+        self._fill_combos()
+
         # Inicializamos el paginador
-        self._pag = Paginator("VISTA_CONTROLES_ILUMINACION", 5)
+        self._pag = Paginator("VISTA_ILUMINACIONES", 5)
         self._pag.initialize_paginator()
         self._configure_status_bar(self._pag)
 
@@ -69,7 +69,7 @@ class ControlIluminacionMasterController(ControlIluminacionController):
         self._view.button_load.clicked.connect(self.button_load_click)
         self._view.button_delete.clicked.connect(self.delete_click)
         self._view.button_clean.clicked.connect(lambda: self._clean_view(
-            self._view.frame.edit_control_iluminacion
+            self._view.frame.combo_marca
         ))
         self._view.button_next.clicked.connect(self._next_page)
         self._view.button_prev.clicked.connect(self._previous_page)
@@ -83,6 +83,15 @@ class ControlIluminacionMasterController(ControlIluminacionController):
         )
         self._view.button_filter.clicked.connect(
             self.button_filter_clicked
+        )
+        self._view.frame.button_insert_marca.clicked.connect(
+            self._open_marca_comercial_dialog
+        )
+        self._view.frame.button_tipo_iluminacion.clicked.connect(
+            self._open_tipo_iluminacion_dialog
+        )
+        self._view.frame.button_control_iluminacion.clicked.connect(
+            self._open_control_iluminacion_dialog
         )
 
         # Inicializamos los combos
@@ -109,7 +118,7 @@ class ControlIluminacionMasterController(ControlIluminacionController):
             # Cargamos la tabla
             self._fill_tableview(self._view.data_table, self._pag._total_data)
             self._configure_table(self._view.data_table)
-            self._clean_view(self._view.frame.edit_control_iluminacion)
+            self._clean_view(self._view.frame.combo_marca)
             self._view.label_total_pages.setText(str(self._pag.total_pages))
 
             # Configuramos la tabla
@@ -144,7 +153,7 @@ class ControlIluminacionMasterController(ControlIluminacionController):
         # Cargamos la tabla
         self._fill_tableview(self._view.data_table, self._pag._total_data)
         self._configure_table(self._view.data_table)
-        self._clean_view(self._view.frame.edit_control_iluminacion)
+        self._clean_view(self._view.frame.combo_marca)
 
         self._view.button_filter.setIcon(QIcon(":/Images/filtered.png"))
 
@@ -155,7 +164,7 @@ class ControlIluminacionMasterController(ControlIluminacionController):
         self._configure_status_bar(self._pag, total_records, pattern)
         self._configure_table_foot()
 
-    def combo_page_indexchanged(self, event: QEvent):
+    def combo_page_indexchanged(self):
         """
         Se ejecuta cuando el índice del combo de selección de página.
         """
@@ -236,7 +245,7 @@ class ControlIluminacionMasterController(ControlIluminacionController):
             return
 
         # Limpiamos el formulario
-        self._clean_view(self._view.frame.edit_control_iluminacion)
+        self._clean_view(self._view.frame.combo_marca)
 
         # Configurar paginator
         self._pag.initialize_paginator()
@@ -270,7 +279,7 @@ class ControlIluminacionMasterController(ControlIluminacionController):
             return
 
         # Limpiamos el formulario
-        self._clean_view(self._view.frame.edit_control_iluminacion)
+        self._clean_view(self._view.frame.combo_marca)
 
         # Obtenemos los datos de paginación actuales
         paginator_pages = self._pag.total_pages
@@ -305,7 +314,7 @@ class ControlIluminacionMasterController(ControlIluminacionController):
             return
 
         # Limpiamos el formulario
-        self._clean_view(self._view.frame.edit_control_iluminacion)
+        self._clean_view(self._view.frame.combo_marca)
 
         # Configuramos el paginador
         self._pag.initialize_paginator()
@@ -341,6 +350,10 @@ class ControlIluminacionMasterController(ControlIluminacionController):
             # Comprobamos si al añadir un registro se ha aumentado el número
             # de páginas totales
             if self._pag.total_pages > before_pages:
+                # self._view.combo_select_page.addItem(
+                #     str(self._pag.total_pages),
+                #     self._pag.total_pages
+                # )
                 self._configure_table_foot()
                 self._view.label_total_pages.setText(
                     str(self._pag.total_pages))
@@ -378,10 +391,10 @@ class ControlIluminacionMasterController(ControlIluminacionController):
         self._configure_table(self._view.data_table)
 
     def _fill_tableview(self, table: QTableView,
-                        data: list[ControlIluminacionEntity]):
+                        data: list[IluminacionEntity]):
         """ Carga los datos en la tabla. """
 
-        tv_model = ControlIluminacionTableModel(data)
+        tv_model = IluminacionTableModel(data)
         table.setModel(tv_model)
         table.resizeColumnsToContents()
 

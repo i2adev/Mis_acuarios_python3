@@ -158,6 +158,9 @@ class BaseDAO(ABC):
                 cursor.execute(InsertCmd.INSERT_TIPOS_ILUMINACON)
                 cursor.execute(InsertCmd.INSERT_PAISES)
                 cursor.execute(InsertCmd.INSERT_COMERCIOS)
+                cursor.execute(InsertCmd.INSERT_TIPO_CONSUBIBLE)
+                cursor.execute(InsertCmd.INSERT_FORMATO_CONSUMIBLE)
+                cursor.execute(InsertCmd.INSERTAR_UNIDAD_CONTENIDO)
                 db.conn.commit()
                 return Result.success(1)
 

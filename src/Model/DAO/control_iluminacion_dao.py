@@ -49,7 +49,7 @@ class ControlIluminacionDAO(BaseDAO):
                     ControlIluminacionEntity(
                         id=f["ID"],
                         num=f["NUM"],
-                        control_iluminación=f["TIPO_CONTROL"],
+                        _control_iluminacion=f["TIPO_CONTROL"],
                         descripcion=f["DESCRIPCION"]
                     )
                     for f in rows
@@ -95,7 +95,7 @@ class ControlIluminacionDAO(BaseDAO):
                 valores = [
                     ControlIluminacionEntity(
                         id=f["ID"],
-                        control_iluminación=f["VALUE"],
+                        _control_iluminacion=f["VALUE"],
                     )
                     for f in rows
                 ]
@@ -131,7 +131,7 @@ class ControlIluminacionDAO(BaseDAO):
             """
         )
         params = {
-            "control": ent.control_iluminación,
+            "control": ent.control_iluminacion,
             "descripcion": ent.descripcion,
         }
 
@@ -174,7 +174,7 @@ class ControlIluminacionDAO(BaseDAO):
         )
         params = {
             "id": ent.id,
-            "control": ent.control_iluminación,
+            "control": ent._control_iluminacion,
             "descripcion": ent.descripcion,
         }
 

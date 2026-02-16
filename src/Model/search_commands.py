@@ -452,3 +452,52 @@ class SearchCmd:
         )
     WHERE    FIELD LIKE '%' || :pattern || '%';
     """
+
+    SEARCH_ILUMINACION = """
+    SELECT    ID, NUM, MARCA, MODELO, NUMERO_SERIE, TIPO_ILUMINACION, POTENCIA, 
+              FLUJO_LUMINOSO, TEMPERATURA, VIDA_UTIL, LONGITUD, ANCHO, 
+              CONTROL_ILUMINACION, INTENSIDAD_REGULABLE, ESPECTRO_COMPLETO, 
+              FECHA_ALTA, FECHA_BAJA, MOTIVO_BAJA, DESCRIPCION
+    FROM
+        (SELECT I.ID_ILUMINACION AS ID, 
+                ROW_NUMBER()  OVER (ORDER BY M.MARCA, I.MODELO) AS NUM, 
+                M.MARCA AS MARCA, 
+                I.MODELO AS MODELO, 
+                I.NUMERO_SERIE AS NUMERO_SERIE, 
+                TI.TIPO_ILUMINACION AS TIPO_ILUMINACION, 
+                I.POTENCIA_W AS POTENCIA, 
+                I.FLUJO_LUMINOSO_LM AS FLUJO_LUMINOSO, 
+                I.TEMPERATURA_K AS TEMPERATURA, 
+                I.VIDA_UTIL AS VIDA_UTIL, 
+                I.LONGITUD_CM AS LONGITUD, 
+                I.ANCHO_CM AS ANCHO, 
+                CI.TIPO_CONTROL AS CONTROL_ILUMINACION, 
+                I.INTENSIDAD_REGULABLE AS INTENSIDAD_REGULABLE, 
+                I.ESPECTRO_COMPLETO AS ESPECTRO_COMPLETO, 
+                IFNULL(strftime('%d/%m/%Y', I.FECHA_ALTA, 'unixepoch', 'localtime'), '') AS FECHA_ALTA, 
+                IFNULL(strftime('%d/%m/%Y', I.FECHA_BAJA, 'unixepoch', 'localtime'), '') AS FECHA_BAJA, 
+                I.MOTIVO_BAJA AS MOTIVO_BAJA, 
+                I.DESCRIPCION AS DESCRIPCION,
+                UPPER(
+                    IFNULL(M.MARCA, '') ||
+                    IFNULL(I.MODELO, '') ||
+                    IFNULL(I.NUMERO_SERIE, '') ||
+                    IFNULL(TI.TIPO_ILUMINACION, '') ||
+                    IFNULL(I.POTENCIA_W, '') ||
+                    IFNULL(I.FLUJO_LUMINOSO_LM, '') ||
+                    IFNULL(I.TEMPERATURA_K, '') ||
+                    IFNULL(I.VIDA_UTIL, '') ||
+                    IFNULL(I.LONGITUD_CM, '') ||
+                    IFNULL(I.ANCHO_CM, '') ||
+                    IFNULL(CI.TIPO_CONTROL, '') ||
+                    IFNULL(I.FECHA_ALTA, '') ||
+                    IFNULL(I.FECHA_BAJA, '') || 
+                    IFNULL(I.MOTIVO_BAJA, '') ||
+                    IFNULL(I.DESCRIPCION, '')
+                ) AS FIELD
+        FROM    ILUMINACIONES I LEFT JOIN TIPOS_ILUMINACION TI ON I.ID_TIPO_ILUMINACION = TI.ID_TIPO_ILUMINACION 
+                LEFT JOIN MARCAS_COMERCIALES M ON I.ID_MARCA = M.ID_MARCA 
+                LEFT JOIN CONTROLES_ILUMINACION CI ON I.ID_CONTROL_ILUMINACION = CI.ID_CONTROL_ILUMINACION
+        )
+    WHERE    FIELD LIKE '%' || :pattern || '%';
+    """

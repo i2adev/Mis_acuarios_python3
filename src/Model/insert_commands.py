@@ -13,6 +13,49 @@ class InsertCmd:
     esenciales.
     """
 
+    # Unidad del contenido
+    INSERTAR_UNIDAD_CONTENIDO = """
+    INSERT INTO UNIDADES_CONTENIDO (UNIDAD, DESCRIPCION) VALUES
+    ('ml',  'Mililitros'),
+    ('l',   'Litros'),
+    ('g',   'Gramos'),
+    ('kg',  'Kilogramos'),
+    ('uds', 'Unidades'),
+    ('tabs','Pastillas'),
+    ('tiras','Tiras reactivas');
+    """
+
+    # Formato de consumible
+    INSERT_FORMATO_CONSUMIBLE = """
+    INSERT INTO FORMATOS (FORMATO, DESCRIPCION) VALUES
+    ('Líquido', 'Producto en formato líquido'),
+    ('Polvo', 'Producto en formato polvo'),
+    ('Granulado', 'Producto granulado'),
+    ('Pastillas', 'Producto en pastillas'),
+    ('Tiras', 'Tiras reactivas para test'),
+    ('Gotas', 'Reactivos en gotas'),
+    ('Gel', 'Producto en formato gel'),
+    ('Spray', 'Aplicación mediante spray');
+    """
+
+    # Tipos de consumible
+    INSERT_TIPO_CONSUBIBLE = """
+    INSERT INTO CATEGORIAS_CONSUMIBLE (CATEGORIA_CONSUMIBLE, DESCRIPCION) VALUES
+    ('Tests', 'Kits y reactivos para medir parámetros del agua'),
+    ('Acondicionadores', 'Productos para preparar y tratar el agua del acuario'),
+    ('Antialgas', 'Productos destinados al control y eliminación de algas'),
+    ('Bacterias', 'Cultivos bacterianos para filtración biológica y ciclado'),
+    ('Fertilizantes', 'Aportes nutritivos para plantas acuáticas'),
+    ('Medicacion', 'Tratamientos para enfermedades de peces e invertebrados'),
+    ('Sales', 'Sales minerales para ajuste de parámetros y remineralización'),
+    ('Reactivos', 'Sustancias químicas utilizadas en análisis o tratamientos'),
+    ('Alimentos', 'Comida para peces e invertebrados'),
+    ('Aditivos', 'Suplementos específicos como vitaminas o oligoelementos'),
+    ('Clarificadores', 'Productos para mejorar la transparencia del agua'),
+    ('Estabilizadores', 'Productos para estabilizar pH, KH, GH u otros parámetros'),
+    ('Neutralizadores', 'Productos para neutralizar cloro, cloraminas o metales');
+    """
+
     # Estados del proyecto
     INSERT_ESTADOS_PRYECTO = """
     INSERT INTO ESTADOS_PROYECTO (NOMBRE_ESTADO, DESCRIPCION) VALUES

@@ -53,7 +53,7 @@ class ControlIluminacionTableModel(QAbstractTableModel):
         elif columna == 1:
             return entidad.num
         elif columna == 2:
-            return entidad.control_iluminación
+            return entidad.control_iluminacion
         elif columna == 3:
             return entidad.descripcion
 
