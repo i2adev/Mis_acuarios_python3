@@ -66,10 +66,10 @@ class ControlIluminacionDialogController(ControlIluminacionController):
             return
 
         # Configuramos la entidad
-        self._tipo_filtro_result = ControlIluminacionEntity(
+        self._control_iluminacion_result = ControlIluminacionEntity(
             id=res.value,
             num=None,
-            control_iluminación=self._view.frame.edit_control_iluminacion
+            control_iluminacion=self._view.frame.edit_control_iluminacion
             .text(),
             descripcion=self._view.frame.text_descripcion.toPlainText()
         )

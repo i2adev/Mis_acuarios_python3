@@ -7,7 +7,7 @@ Comentarios:
 
 import sys
 
-from PyQt6.QtCore import Qt
+from PyQt6.QtCore import QLocale, Qt
 from PyQt6.QtGui import QCursor, QIntValidator, QDoubleValidator
 from PyQt6.QtWidgets import QFrame, QLabel, QLineEdit, QPlainTextEdit, \
     QVBoxLayout, QHBoxLayout, QApplication, QComboBox, QPushButton, QGroupBox, \
@@ -29,6 +29,11 @@ class IluminacionForm(QFrame):
 
     def create_widgets(self):
         """ Se encarga de crear los controles del formulario. """
+
+        # Establecemos el validador de decimales
+        decimal_validator = QDoubleValidator()
+        decimal_validator.setDecimals(1)
+        decimal_validator.setLocale(QLocale("es_ES"))
 
         # Layouts
         ## Layout del formulario
@@ -65,7 +70,7 @@ class IluminacionForm(QFrame):
         ### Temperatura de color
         self.layout_temperatura = QVBoxLayout()
         ### Color
-        self.layout_color = QVBoxLayout()
+        self.layout_vida_util = QVBoxLayout()
         ### Longitud
         self.layout_longitud = QVBoxLayout()
         ### Anchura
@@ -94,12 +99,12 @@ class IluminacionForm(QFrame):
         self.label_marca = QLabel("MARCA")
         self.label_modelo = QLabel("MODELO")
         self.label_num_serie = QLabel("NÚM. SERIE")
-        self.label_tipo_iluminacion = QLabel("TIPO ILUMINACIÓN")
-        self.label_control_iluminacion = QLabel("TIPO CONTROL")
+        self.label_tipo_iluminacion = QLabel("TIPO")
+        self.label_control_iluminacion = QLabel("CONTROL")
         self.label_potencia = QLabel("POTENCIA")
-        self.label_flujo_luminico = QLabel("FLUJO LUMÍNICO")
+        self.label_flujo_luminico = QLabel("FL. LUMÍNICO")
         self.label_temperatura = QLabel("TEMPERATURA")
-        self.label_flujo_luminico = QLabel("FLUJO LUMÍNICO")
+        self.label_vida_util = QLabel("VIDA UTIL")
         self.label_longitud = QLabel("LONGITUD")
         self.label_fecha_alta = QLabel("FECHA ALTA")
         self.label_fecha_baja = QLabel("FECHA BAJA")
@@ -143,7 +148,7 @@ class IluminacionForm(QFrame):
 
         self.edit_potencia = QLineEdit()
         self.edit_potencia.setObjectName("edit_potencia")
-        self.edit_potencia.setValidator(QIntValidator())
+        self.edit_potencia.setValidator(decimal_validator)
         self.edit_potencia.setToolTip(
             """
             <h2>Potencia de la luminaria</h2><br>
@@ -172,19 +177,19 @@ class IluminacionForm(QFrame):
             """
         )
 
-        self.edit_flujo_luminico = QLineEdit()
-        self.edit_flujo_luminico.setObjectName("edit_flujo_luminico")
-        self.edit_flujo_luminico.setValidator(QIntValidator())
-        self.edit_flujo_luminico.setToolTip(
+        self.edit_vida_util = QLineEdit()
+        self.edit_vida_util.setObjectName("edit_vida_util")
+        self.edit_vida_util.setValidator(QIntValidator())
+        self.edit_vida_util.setToolTip(
             """
-            <h2>Color</h2><br>
-            En este campo se inserta el color de la luminaria.
+            <h2>Vida util</h2><br>
+            En este campo se inserta la vida util en horas de la luminaria. 
             """
         )
 
         self.edit_longitud = QLineEdit()
         self.edit_longitud.setObjectName("edit_longitud")
-        self.edit_longitud.setValidator(QIntValidator())
+        self.edit_longitud.setValidator(decimal_validator)
         self.edit_longitud.setToolTip(
             """
             <h2>Longitud de la luminaria</h2><br>
@@ -194,7 +199,7 @@ class IluminacionForm(QFrame):
 
         self.edit_anchura = QLineEdit()
         self.edit_anchura.setObjectName("edit_anchura")
-        self.edit_anchura.setValidator(QIntValidator())
+        self.edit_anchura.setValidator(decimal_validator)
         self.edit_anchura.setToolTip(
             """
             <h2>Anchura de la luminaria</h2><br>
@@ -378,9 +383,9 @@ class IluminacionForm(QFrame):
         self.layout_temperatura.addWidget(self.label_temperatura)
         self.layout_temperatura.addWidget(self.edit_temperatura)
 
-        ## Color
-        self.layout_color.addWidget(self.label_flujo_luminico)
-        self.layout_color.addWidget(self.edit_flujo_luminico)
+        ## Vida util
+        self.layout_vida_util.addWidget(self.label_vida_util)
+        self.layout_vida_util.addWidget(self.edit_vida_util)
 
         ## Longitud
         self.layout_longitud.addWidget(self.label_longitud)
@@ -392,7 +397,7 @@ class IluminacionForm(QFrame):
 
         ## Montaje tercera linea
         self.layout_third_line.addLayout(self.layout_temperatura)
-        self.layout_third_line.addLayout(self.layout_color)
+        self.layout_third_line.addLayout(self.layout_vida_util)
         self.layout_third_line.addLayout(self.layout_longitud)
         self.layout_third_line.addLayout(self.layout_anchura)
 

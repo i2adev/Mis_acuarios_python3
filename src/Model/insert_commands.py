@@ -316,11 +316,10 @@ class InsertCmd:
     ('Temporizador mecánico', 'Dispositivo simple que activa y desactiva la luz a horas fijas.'),
     ('Temporizador digital', 'Permite configurar múltiples franjas horarias y ciclos de luz.'),
     ('Controlador externo', 'Dispositivo dedicado al control de iluminación, como TC420 o similares.'),
-    ('Control por aplicación móvil', 'Control mediante app por conexión Wi-Fi o Bluetooth.'),
+    ('Aplicación móvil', 'Control mediante app por conexión Wi-Fi o Bluetooth.'),
     ('Integración domótica', 'Sistema de automatización del hogar como Alexa, Google Home o Home Assistant.'),
     ('Sensor de luz', 'Encendido automático según nivel de luz ambiental.'),
-    ('Controlador con espectro programable', 'Permite ajustar colores y espectro de forma personalizada.'),
-    ('Controlador de acuario integrado', 'Parte de un sistema integrado que gestiona otros parámetros del acuario.');
+    ('Integrado en el acuario', 'Parte de un sistema integrado que gestiona otros parámetros del acuario.');
     """
 
     # Tipos de iluminación

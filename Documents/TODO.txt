@@ -1,6 +1,85 @@
 ﻿================================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
+--/02/2026  REFACTORIZACIONES:
+            TODO:   SE SIMPLIFICAN LAS FUNCIONES 'ENTITY_CONFIGURATION'
+                    ctrls = self._view.frame
+                    if ctrl.text_descripcion.toPlainText():
+                        ent.descripcion = ctrls.text_descripcion.toPlainText()
+                    else:
+                        ent.descripcion = None
+
+            TODO:   SE MODIFICAN LOS CONTROLES DE EDICIÓN QUE SON NÚMERICOS
+                    PARA QUE MUESTREN EL SEPARADOR DE MILES.
+
+            TODO:   MODIFICAR LOS CAMPOS NUMERICOS. REEMPLAZARO LOS QLINEEDIT
+                    POR QSINBOX PARA NUMEROS ENTEROS Y QDOUBLESPINBOX PARA
+                    NUMEROS DECIMALES.
+
+            TODO:   SE MODIFICA LA LÓGICA DE LAS IMAGENES PARA QUE SE EVITE
+                    CARGAR LAS FOTOS SI NO ESTÁ RELLENADO EL FORMULARIO.
+
+            TODO:   SE MODIFICA LA CARGA DE LOS REGISTROS QUE PUEDAN CONTENER
+                    IMAGENES.
+
+                    def _load_record(self) -> Result:
+                    """ Carga el registro en el formulario. """
+
+                    # Carga los datos del registro
+                    res_id = self._load_data()
+
+                    # SE VERIFICA SI LA OPERACIÓN HA SIDO CORRECTA
+
+                    # Carga las imágenes
+                    self._view.frame_image.load_images(res_id.value)
+
+                    # SE VERIFICA QUE LA OPERACION HA SIDO CORRECTA
+
+16/02/2026  SE REALIZA EL TESTEO MANUAL DEL FORMULARIO DE ILUMINACIONES:
+            -   DONE:   TEST -> APERTURA DEL FORMULARIO.
+            -   DONE:   TEST -> CARGA DE LOS COMBOS.
+            -   DONE:   TEST -> INSERCIÓN DE REGISTRO.
+            -   DONE:   TEST -> CARGA DE REGISTRO.
+            -   DONE:   TEST -> LIMPIEZA DE FORMULARIO.
+            -   DONE:   TEST -> ELIMINACIÓN DE REGISTRO DESDE MENÚ CONTEXTUAL.
+            -   DONE:   TEST -> ELIMINACIÓN DE REGISTRO DESPUÉS DE CARGAR EN EL
+                        FORMULARIO.
+            -   DONE:   TEST -> INSERCIÓN DE MARCA.
+            -   DONE:   TEST -> INSERCIÓN DE TIPO DE ILUMINACIÓN.
+            -   DONE:   TEST -> INSERCIÓN DE CONTROL DE ILUMINACIÓN.
+            -   DONE:   TEST -> MODIFICACIÓN DE REGISTRO.
+            -   DONE:   TEST -> BÚSQUEDA DE REGISTROS.
+            -   DONE:   TEST -> GESTIÓN DE IMAGENES.
+
+            CORRECCIONES:
+            -   DONE:   SE ARREGLA LA CARGA DEL FORMULARIO. MODIFICANDO LOS
+                        NOMBRES QUE ESTABAN MAL ESCRITOS.
+            -   DONE:   SE CORRIGE LA CARGA DE LOS COMBOS DEL FORMULARIO. SE
+                        MODIFICAN LOS NOMBRES DE LOS COMBOS.
+
+            -   INSERCIÓN DE REGISTRO:
+                -   DONE:   SE CORRIGE LA INSERCIÓN DE REGISTRO.
+                -   DONE:   SE MUESTRA EL CAMPO DE VIDA UTIL.
+                -   DONE:   CORREGIR EL MODELO DE LA TABLA.
+                -   DONE:   SE CORRIGE LA CONFIGURACIÓN DE LA ENTIDAD PARA QUE
+                            INSERTE LOS DATOS EN SU CELDA CORRESPONDIENTE.
+                -   DONE:   SE MODIFICA EL COMPORTAMIENTO DE LA INSERCIÓN DE
+                            VALORES NULOS.
+
+            -   CARGA DE REGISTRO:
+                -   DONE:   RECONFIGURAR EL METODO DE CARGA DE REGISTRO.
+
+            -   GESTION DE IMAGENES:
+                -   DONE:   SE CORRIGE LA INSERCIÓN DE IMAGENES.
+                -   DONE:   SE CORRIGE LA CARGA DE IMAGENES.
+                -   DONE:   SE CORRIGE LA ELIMINACIÓN DE IMAGENES.
+
+            -   OTROS ARREGLOS:
+                -   DONE:   SE CORRIGE EL ORDEN DE TABULACIÓN DE LOS
+                            FORMULARIOS.
+                -   DONE:   SE CORRIGE EL CAMPO POTENCIA, LONGITUD Y ANCHURA
+                            PARA QUE ACEPTEN VALORES CON DECIMALES.
+
 05/02/2026  DONE:   SE MODIFICA LA ESTRUCTURA DE LA BASE DE DATOS:
                 DONE:   SE CREA LA TABLA TIPOS DE CONSUMIBLES.
                 DONE:   SE CREA LA TABLA DE FORMATOS.

@@ -39,7 +39,7 @@ class IluminacionDAO(BaseDAO):
                        I.POTENCIA_W AS POTENCIA,
                        I.FLUJO_LUMINOSO_LM AS FLUJO_LUMINOSO,
                        I.TEMPERATURA_K AS TEMPERATURA,
-                       I.COLOR AS COLOR,
+                       I.VIDA_UTIL AS VIDA_UTIL,
                        I.LONGITUD_CM AS LONGITUD,
                        I.ANCHO_CM AS ANCHO,
                        CI.TIPO_CONTROL AS CONTROL_ILUMINACION,
@@ -78,7 +78,7 @@ class IluminacionDAO(BaseDAO):
                         potencia=f["POTENCIA"],
                         flujo_luminico=f["FLUJO_LUMINOSO"],
                         temperatura=f["TEMPERATURA"],
-                        color=f["COLOR"],
+                        vida_util=f["VIDA_UTIL"],
                         longitud=f["LONGITUD"],
                         anchura=f["CONSUMO"],
                         id_control_iluminacion=f["CONTROL_ILUMINACION"],
@@ -167,14 +167,15 @@ class IluminacionDAO(BaseDAO):
             """
             INSERT INTO ILUMINACIONES 
                         (ID_TIPO_ILUMINACION, ID_MARCA, MODELO, NUMERO_SERIE,
-                        POTENCIA_W, FLUJO_LUMINOSO_LM, TEMPERATURA_K, COLOR,
-                        LONGITUD_CM, ANCHO_CM, ID_CONTROL_ILUMINACION,
+                        POTENCIA_W, FLUJO_LUMINOSO_LM, TEMPERATURA_K, 
+                        VIDA_UTIL, LONGITUD_CM, ANCHO_CM, ID_CONTROL_ILUMINACION,
                         INTENSIDAD_REGULABLE, ESPECTRO_COMPLETO, FECHA_ALTA, 
                         FECHA_BAJA, MOTIVO_BAJA, DESCRIPCION)
             VALUES (:id_tipo, :id_marca, :modelo, :num_serie, :potencia,
-                   :flujo_luminoso, :temperatura, :color, :longitud, :anchura,
-                   :id_control, :intensidad_regulable, :espectro_completo, 
-                   :fecha_alta, :fecha_baja, :motivo_baja, :descripcion);
+                   :flujo_luminoso, :temperatura, :vida_util, :longitud, 
+                   :anchura, :id_control, :intensidad_regulable, 
+                   :espectro_completo, :fecha_alta, :fecha_baja, 
+                   :motivo_baja, :descripcion);
             """
         )
 
@@ -182,11 +183,11 @@ class IluminacionDAO(BaseDAO):
             "id_tipo": ent.id_tipo_iluminacion,
             "id_marca": ent.id_marca,
             "modelo": ent.modelo,
-            "numero_serie": ent.num_serie,
+            "num_serie": ent.num_serie,
             "potencia": ent.potencia,
             "flujo_luminoso": ent.flujo_luminico,
             "temperatura": ent.temperatura,
-            "color": ent.color,
+            "vida_util": ent.vida_util,
             "longitud": ent.longitud,
             "anchura": ent.anchura,
             "id_control": ent.id_control_iluminacion,
@@ -234,11 +235,11 @@ class IluminacionDAO(BaseDAO):
             SET     ID_TIPO_ILUMINACION = :id_tipo,
                     ID_MARCA = :id_marca,
                     MODELO = :modelo,
-                    NUMERO_SERIE = :num_serie,
-                    POTENCIA_W = :potencia
+                    NUMERO_SERIE = :numero_serie,
+                    POTENCIA_W = :potencia,
                     FLUJO_LUMINOSO_LM = :flujo_luminoso,
                     TEMPERATURA_K = :temperatura,
-                    COLOR = :color,
+                    VIDA_UTIL = :vida_util,
                     LONGITUD_CM = :longitud,
                     ANCHO_CM = :anchura,
                     ID_CONTROL_ILUMINACION = :id_control,
@@ -261,7 +262,7 @@ class IluminacionDAO(BaseDAO):
             "potencia": ent.potencia,
             "flujo_luminoso": ent.flujo_luminico,
             "temperatura": ent.temperatura,
-            "color": ent.color,
+            "vida_util": ent.vida_util,
             "longitud": ent.longitud,
             "anchura": ent.anchura,
             "id_control": ent.id_control_iluminacion,

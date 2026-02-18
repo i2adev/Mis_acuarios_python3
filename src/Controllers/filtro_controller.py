@@ -496,8 +496,6 @@ class FiltroController(BaseController):
         motivo_baja = modelo.index(fila, 17).data()
         descripcion = modelo.index(fila, 18).data()
 
-        print(descripcion)
-
         # Cargamos los widgets
         self._view.frame.edit_id.setText(
             str(id_ent) if id_ent is not None else ""

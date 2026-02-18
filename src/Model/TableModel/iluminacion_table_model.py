@@ -23,9 +23,9 @@ class IluminacionTableModel(QAbstractTableModel):
 
         # Encabezados de columna de la tabla
         self._headers = ([
-            "ID", "#", "TIPO", "MARCA", "MODELO", "NÚM. SERIE", "TIPO",
-            "POTENCIA", "FLUJO LUMINOSO", "TEMPERATURA", "VIDA UTIL",
-            "LONGITUD", "ANCHURA", "CONTROL", "DIMABLE", "ESPC. COMPL.",
+            "ID", "#", "MARCA", "MODELO", "NÚM. SERIE", "TIPO",
+            "POTENCIA", "F.L", "TEMP.", "VIDA UTIL",
+            "LONGITUD", "ANCHURA", "CONTROL", "I.R", "E.C",
             "F. ALTA", "F. BAJA", "MOTIVO BAJA", "DESCRIPCIÓN"
         ])
 

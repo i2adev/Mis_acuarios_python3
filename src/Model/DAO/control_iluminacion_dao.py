@@ -95,7 +95,7 @@ class ControlIluminacionDAO(BaseDAO):
                 valores = [
                     ControlIluminacionEntity(
                         id=f["ID"],
-                        _control_iluminacion=f["VALUE"],
+                        control_iluminacion=f["VALUE"],
                     )
                     for f in rows
                 ]

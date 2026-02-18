@@ -4,7 +4,7 @@ Fecha:  20/12/2025
 Comentarios:
     Controlador base del control de iluminación.
 """
-from PyQt6.QtCore import QDateTime, QTime
+from PyQt6.QtCore import QDate, QDateTime, QTime
 from PyQt6.QtGui import QAction
 from PyQt6.QtWidgets import QMessageBox, QPushButton
 
@@ -68,14 +68,21 @@ class IluminacionController(BaseController):
         ent.id_tipo_iluminacion = int(
             self._view.frame.combo_tipo_iluminacion.currentData())
 
-        data = self._view.frame.combo_tipo_control.currentData()
+        data = self._view.frame.combo_control_iluminacion.currentData()
         ent.id_control_iluminacion = int(data) if data else None
 
-        ent.potencia = self._view.frame.edit_potencia.text()
-        ent.flujo_luminico = self._view.frame.edit_flujo_luminico.text()
-        ent.temperatura = self._view.frame.edit_temperatura.text()
-        ent.longitud = self._view.frame.edit_longitud.text()
-        ent.anchura = self._view.frame.edit_anchura.text()
+        ent.potencia = self._view.frame.edit_potencia.text() if (
+            self._view.frame.edit_potencia.text()) else None
+        ent.flujo_luminico = self._view.frame.edit_flujo_luminico.text() \
+            if self._view.frame.edit_flujo_luminico.text() else None
+        ent.temperatura = self._view.frame.edit_temperatura.text() \
+            if self._view.frame.edit_temperatura.text() else None
+        ent.vida_util = self._view.frame.edit_vida_util.text() \
+            if self._view.frame.edit_vida_util.text() else None
+        ent.longitud = self._view.frame.edit_longitud.text() \
+            if self._view.frame.edit_longitud.text() else None
+        ent.anchura = self._view.frame.edit_anchura.text() \
+            if self._view.frame.edit_anchura.text() else None
 
         alta = self._view.frame.fecha_alta.date()
         if alta.isValid():
@@ -91,12 +98,14 @@ class IluminacionController(BaseController):
         else:
             ent.fecha_baja = None
 
-        ent.motivo_baja = self._view.frame.edit_motivo_baja.text()
+        ent.motivo_baja = self._view.frame.edit_motivo_baja.text() \
+            if self._view.frame.edit_motivo_baja.text() else None
         ent.espectro_completo = 1 if (
             self._view.frame.check_espectro_completo.isChecked()) else 0
         ent.intensidad_regulable = 1 if (
-            self._view.frame.check_intensidad_variable.isChecked()) else 0
-        ent.descripcion = self._view.frame.text_descripcion.text()
+            self._view.frame.check_intensidad_regulable.isChecked()) else 0
+        ent.descripcion = self._view.frame.text_descripcion.toPlainText() \
+            if self._view.frame.text_descripcion.toPlainText() else None
 
         return ent
 
@@ -114,11 +123,16 @@ class IluminacionController(BaseController):
         ent = self._entity_configuration()
 
         # Inserta el registro
-        res = self._dao.insert(ent)
-        if not res.is_success:
-            return res
+        res_iluminacion = self._dao.insert(ent)
+        if not res_iluminacion.is_success:
+            return res_iluminacion
 
-        return Result.success(res.value)
+        # Insertamos las fotografías
+        res_foto = self._view.frame_image.insert_images(res_iluminacion.value)
+        if not res_foto.is_success:
+            return res_foto
+
+        return Result.success(res_iluminacion.value)
 
     def _update(self) -> Result:
         """ Actualiza el registro en la base de datos. """
@@ -138,7 +152,7 @@ class IluminacionController(BaseController):
             return Result.failure(res.error_msg)
 
         # Limpiamos el formulario
-        self._clean_view(self._view.frame.edit_control_iluminacion)
+        self._clean_view(self._view.frame.combo_control_iluminacion)
 
         return Result.success(ent.id)
 
@@ -186,7 +200,7 @@ class IluminacionController(BaseController):
             return Result.failure(res.error_msg)
 
         # Limpiamos el formulario
-        self._clean_view(self._view.frame.edit_control_iluminacion)
+        self._clean_view(self._view.frame.combo_control_iluminacion)
         return Result.success(ide)
 
     # FIN DE CRUD --------------------------------------------------
@@ -209,7 +223,7 @@ class IluminacionController(BaseController):
         )
 
         if not res.is_success:
-            self._view.frame.edit_modelo.setFocus()
+            self._view.frame.edit_table_model.setFocus()
             return res
 
         # Valida el número de serie
@@ -241,11 +255,11 @@ class IluminacionController(BaseController):
 
         # Valida el flujo lumínico
         res = IluminacionValidator.validate_flujo_luminoso(
-            self._view.frame.edit_flujo_luminoso
+            self._view.frame.edit_flujo_luminico
         )
 
         if not res.is_success:
-            self._view.frame.edit_flujo_luminoso.setFocus()
+            self._view.frame.edit_flujo_luminico.setFocus()
             return res
 
         # Valida la temperatura
@@ -308,7 +322,7 @@ class IluminacionController(BaseController):
             id_row = int(self._view.frame.edit_id.text())
             return Result.success(id_row)
         elif control == "QAction":
-            # Carga el modelo de la fila seleccionada
+            # Carga el table_model de la fila seleccionada
             selection_model = self._view.data_table.selectionModel()
 
             # Chequea si se ha seleccionado una fila
@@ -319,10 +333,10 @@ class IluminacionController(BaseController):
             # Configuramos la fila
             index = selection_model.currentIndex()
             fila = index.row()
-            modelo = self._view.data_table.model()
+            table_model = self._view.data_table.model()
 
-            # Lee los datos del modelo
-            id_row = modelo.index(fila, 0).data()
+            # Lee los datos del table_model
+            id_row = table_model.index(fila, 0).data()
             return Result.success(id_row)
         else:
             return Result.failure("DEBE SELECCIONAR O CARGAR UN REGISTRO")
@@ -337,7 +351,14 @@ class IluminacionController(BaseController):
     def _load_record(self) -> Result:
         """ Carga el registro en el formulario. """
 
-        # Carga el modelo de la fila seleccionada
+        # Carga los datos del registro
+        res_id = self._load_data()
+
+        # Carga las imágenes
+        self._view.frame_image.load_images(res_id.value)
+
+    def _load_data(self) -> Result:
+        # Carga el table_model de la fila seleccionada
         selection_model = self._view.data_table.selectionModel()
 
         # Chequea si se ha seleccionado una fila
@@ -350,20 +371,90 @@ class IluminacionController(BaseController):
         # Configuramos la fila
         index = selection_model.currentIndex()
         fila = index.row()
-        modelo = self._view.data_table.model()
+        table_model = self._view.data_table.model()
 
-        # Lee los datos del modelo
-        id_ta = modelo.index(fila, 0).data()
-        tipo_iluminacion = modelo.index(fila, 2).data()
-        descripcion = modelo.index(fila, 3).data()
+        # Lee los datos del table_model
+        id_ta = table_model.index(fila, 0).data()
+        marca = table_model.index(fila, 2).data()
+        modelo = table_model.index(fila, 3).data()
+        num_serie = table_model.index(fila, 4).data()
+        tipo = table_model.index(fila, 5).data()
+        potencia = table_model.index(fila, 6).data()
+        flujo_luminico = table_model.index(fila, 7).data()
+        temperatura = table_model.index(fila, 8).data()
+        vida_util = table_model.index(fila, 9).data()
+        longitud = table_model.index(fila, 10).data()
+        anchura = table_model.index(fila, 11).data()
+        control = table_model.index(fila, 12).data()
+        regulable = table_model.index(fila, 13).data()
+        espectro_completo = table_model.index(fila, 14).data()
+
+        fecha_alta = QDate.fromString(
+            str(table_model.index(fila, 15).data()), "dd/MM/yyyy")
+        fecha_baja = QDate.fromString(
+            str(table_model.index(fila, 16).data()), "dd/MM/yyyy")
+
+        motivo_baja = table_model.index(fila, 17).data()
+        descripcion = table_model.index(fila, 18).data()
 
         # Cargamos los widgets
         self._view.frame.edit_id.setText(
             str(id_ta) if id_ta is not None else ""
         )
 
-        self._view.frame.edit_control_iluminacion.setText(
-            str(tipo_iluminacion) if tipo_iluminacion else ""
+        self._view.frame.combo_marca.setCurrentIndex(
+            self._view.frame.combo_marca.findText(marca)
+        )
+
+        self._view.frame.edit_modelo.setText(
+            str(modelo) if modelo is not None else ""
+        )
+
+        self._view.frame.edit_num_serie.setText(
+            str(num_serie) if num_serie is not None else ""
+        )
+
+        self._view.frame.combo_tipo_iluminacion.setCurrentIndex(
+            self._view.frame.combo_tipo_iluminacion.findText(tipo)
+        )
+
+        self._view.frame.edit_potencia.setText(
+            str(potencia) if potencia is not None else ""
+        )
+
+        self._view.frame.edit_flujo_luminico.setText(
+            str(flujo_luminico) if flujo_luminico is not None else ""
+        )
+
+        self._view.frame.edit_temperatura.setText(
+            str(temperatura) if temperatura is not None else ""
+        )
+
+        self._view.frame.edit_vida_util.setText(
+            str(vida_util) if vida_util is not None else ""
+        )
+
+        self._view.frame.edit_longitud.setText(
+            str(longitud) if longitud is not None else ""
+        )
+
+        self._view.frame.edit_anchura.setText(
+            str(anchura) if anchura is not None else ""
+        )
+
+        self._view.frame.check_intensidad_regulable.setChecked(regulable)
+        self._view.frame.check_espectro_completo.setChecked(
+            espectro_completo)
+
+        self._view.frame.fecha_alta.setDate(fecha_alta)
+        self._view.frame.fecha_baja.setDate(fecha_baja)
+
+        self._view.frame.edit_motivo_baja.setText(
+            str(motivo_baja) if motivo_baja is not None else ""
+        )
+
+        self._view.frame.combo_control_iluminacion.setCurrentIndex(
+            self._view.frame.combo_control_iluminacion.findText(control)
         )
 
         self._view.frame.text_descripcion.setPlainText(
@@ -379,7 +470,7 @@ class IluminacionController(BaseController):
 
         self._fill_combo_marca()
         self._fill_combo_tipo_iluminacion()
-        self._fill_combo_tipo_control()
+        self._fill_combo_control_iluminacion()
         self._fill_combo_control_iluminacion()
 
     def _fill_combo_marca(self):
@@ -433,11 +524,11 @@ class IluminacionController(BaseController):
         # Deselecciona el valor
         self._view.frame.combo_tipo_iluminacion.setCurrentIndex(-1)
 
-    def _fill_combo_tipo_control(self):
+    def _fill_combo_control_iluminacion(self):
         """ Llena el combo del tipo de iluminación. """
 
         # Vaciamos el combo
-        self._view.frame.combo_tipo_control.clear()
+        self._view.frame.combo_control_iluminacion.clear()
 
         # Obtenemos los datos
         dao = ControlIluminacionDAO()
@@ -449,14 +540,14 @@ class IluminacionController(BaseController):
 
         # Llenas el combo
         for ent in lista.value:
-            self._view.frame.combo_tipo_control.addItem(ent.material,
-                                                        ent.id)
+            self._view.frame.combo_control_iluminacion.addItem(ent.material,
+                                                               ent.id)
 
         # Establecemos el autocompletado
-        self._set_autocomplete(self._view.frame.combo_tipo_control)
+        self._set_autocomplete(self._view.frame.combo_control_iluminacion)
 
         # Deselecciona el valor
-        self._view.frame.combo_tipo_control.setCurrentIndex(-1)
+        self._view.frame.combo_control_iluminacion.setCurrentIndex(-1)
 
     def _fill_combo_control_iluminacion(self):
         """ Llena el combo del control de iluminación. """
@@ -474,8 +565,9 @@ class IluminacionController(BaseController):
 
         # Llenas el combo
         for ent in lista.value:
-            self._view.frame.combo_control_iluminacion.addItem(ent.material,
-                                                               ent.id)
+            self._view.frame.combo_control_iluminacion.addItem(
+                ent.control_iluminacion,
+                ent.id)
 
         # Establecemos el autocompletado
         self._set_autocomplete(self._view.frame.combo_control_iluminacion)
@@ -507,7 +599,7 @@ class IluminacionController(BaseController):
                 combo.setCurrentIndex(i)
 
     def _open_tipo_iluminacion_dialog(self):
-        """ Abre el dialogo de tipo iluminación. """
+        """ Abre el diálogo de tipo iluminación. """
 
         # Configuramos el CONTROLADOR
         view = TipoIluminacionDialog("INSERTAR TIPO DE ILUMINACIÓN")

@@ -1,5 +1,7 @@
 ﻿CHANGELOG:
 ================================================================================
+0.20.2  TESTEO DE LA LÓGICA DE ILUMINACIÓN EN WINDOWS.
+
 0.20.1  SE TESTA MANUALMENTE LA LÓGICA DE CONTROLES DE ILUMINACIÓN.
 
 0.21.0  SE AÑADE LA LÓGICA DEL CONTROL DE ILUMINACIÓN.

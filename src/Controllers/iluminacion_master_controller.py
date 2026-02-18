@@ -388,7 +388,8 @@ class IluminacionMasterController(IluminacionController):
         """ Gestiona los datos para llenar la tabla. """
 
         self._fill_tableview(self._view.data_table, self._pag.current_data)
-        self._configure_table(self._view.data_table)
+        self._configure_table(self._view.data_table,
+                              [0, 7, 8, 9, 10, 11, 13, 14, 18])
 
     def _fill_tableview(self, table: QTableView,
                         data: list[IluminacionEntity]):

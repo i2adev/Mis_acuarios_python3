@@ -59,23 +59,20 @@ class IluminacionView(BaseView):
         self.frame.edit_temperatura.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
         self.frame.edit_flujo_luminico.setFocusPolicy(
             Qt.FocusPolicy.StrongFocus)
+        self.frame.edit_vida_util.setFocusPolicy(
+            Qt.FocusPolicy.StrongFocus)
         self.frame.edit_longitud.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
         self.frame.edit_anchura.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
         self.frame.fecha_alta.edit_date.setFocusPolicy(
             Qt.FocusPolicy.StrongFocus)
         self.frame.fecha_baja.edit_date.setFocusPolicy(
             Qt.FocusPolicy.StrongFocus)
-        self.frame.edit_motivo_baja.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
-        self.frame.check_espectro_completo.setFocusPolicy(
-            Qt.FocusPolicy.StrongFocus)
-        self.frame.check_intensidad_regulable.setFocusPolicy(
+        self.frame.edit_motivo_baja.setFocusPolicy(
             Qt.FocusPolicy.StrongFocus)
         self.frame.text_descripcion.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
 
         # Establecer el orden
         self.setTabOrder(self.frame.combo_marca, self.frame.edit_modelo)
-        self.setTabOrder(self.frame.edit_modelo, self.frame.edit_num_serie)
-        self.setTabOrder(self.frame.edit_num_serie, self.frame.edit_modelo)
         self.setTabOrder(self.frame.edit_modelo, self.frame.edit_num_serie)
         self.setTabOrder(self.frame.edit_num_serie,
                          self.frame.combo_tipo_iluminacion)
@@ -88,8 +85,8 @@ class IluminacionView(BaseView):
         self.setTabOrder(self.frame.edit_flujo_luminico,
                          self.frame.edit_temperatura)
         self.setTabOrder(self.frame.edit_temperatura,
-                         self.frame.edit_flujo_luminico)
-        self.setTabOrder(self.frame.edit_flujo_luminico,
+                         self.frame.edit_vida_util)
+        self.setTabOrder(self.frame.edit_vida_util,
                          self.frame.edit_longitud)
         self.setTabOrder(self.frame.edit_longitud, self.frame.edit_anchura)
         self.setTabOrder(self.frame.edit_anchura,
@@ -99,10 +96,6 @@ class IluminacionView(BaseView):
         self.setTabOrder(self.frame.fecha_baja.edit_date,
                          self.frame.edit_motivo_baja)
         self.setTabOrder(self.frame.edit_motivo_baja,
-                         self.frame.check_espectro_completo)
-        self.setTabOrder(self.frame.check_espectro_completo,
-                         self.frame.check_intensidad_regulable)
-        self.setTabOrder(self.frame.check_intensidad_regulable,
                          self.frame.text_descripcion)
 
 

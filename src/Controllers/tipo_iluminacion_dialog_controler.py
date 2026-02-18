@@ -64,7 +64,7 @@ class TipoIluminacionDialogController(TipoIluminacionController):
             return
 
         # Configuramos la entidad
-        self._tipo_filtro_result = TipoIluminacionEntity(
+        self._tipo_iluminacion_result = TipoIluminacionEntity(
             id=res.value,
             num=None,
             tipo_iluminacion=self._view.frame.edit_tipo_iluminacion.text(),
@@ -84,7 +84,7 @@ class TipoIluminacionDialogController(TipoIluminacionController):
 
         if self._view.exec():
             # Obtenemos la subcategoría de acuario
-            tipo_filyto = self._get_tipo_filtro()
+            tipo_filyto = self._get_tipo_iluminacion()
             return Result.success(tipo_filyto)
         else:
             return Result.failure("EL USUARIO CANCELO LA INSERCIÓN")

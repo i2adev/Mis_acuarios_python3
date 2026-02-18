@@ -85,7 +85,7 @@ class IluminacionValidator:
             return Result.success(1)
 
         # Válida el rango del volumen
-        n = float(widget.text())
+        n = float(widget.text().replace(",", "."))
 
         if (n < 2.0) or (n > 400.0):
             return Result.failure("LA POTENCIA DE LA LUMINARIA DEBE SER "
@@ -157,7 +157,7 @@ class IluminacionValidator:
             return Result.success(1)
 
         # Válida el rango del volumen
-        n = float(widget.text())
+        n = float(widget.text().replace(",", "."))
 
         if (n < 20.0) or (n > 200.0):
             return Result.failure("LA LONGITUD DE LA LUMINARIA DEBE SER "
@@ -175,7 +175,7 @@ class IluminacionValidator:
             return Result.success(1)
 
         # Válida el rango del volumen
-        n = float(widget.text())
+        n = float(widget.text().replace(",", "."))
 
         if (n < 5.0) or (n > 100.0):
             return Result.failure("LA ANCHURA DE LA LUMINARIA DEBE SER "
