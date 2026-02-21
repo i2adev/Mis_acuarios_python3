@@ -14,7 +14,8 @@ from Controllers.categoria_acuario_dialog_controller import \
 from Model.DAO.categoria_acuario_dao import CategoriaAcuarioDAO
 from Model.DAO.subcategoria_acuario_dao import SubcategoriaAcuarioDAO
 from Model.Entities.categoria_acuario_entity import CategoriaAcuarioEntity
-from Model.Entities.subcategoria_acuario_entity import SubcategoriaAcuarioEntity
+from Model.Entities.subcategoria_acuario_entity import \
+    SubcategoriaAcuarioEntity
 from Services.Result.result import Result
 from Services.Validators.subcategoria_acuario_validator import \
     SubcategoriaAcuarioValidator
@@ -46,15 +47,31 @@ class SubcategoriaAcuarioController(BaseController):
         """ Configura la entidad. """
 
         ent = SubcategoriaAcuarioEntity()
+        ctrs = self._view.frame
 
-        if self._view.frame.edit_id.text():
-            ent.id = int(self._view.frame.edit_id.text())
+        # ID
+        if ctrs.edit_id.text():
+            ent.id = int(ctrs.edit_id.text())
         else:
             ent.id = None
 
-        ent.id_categoria = self._view.frame.combo_categoria_acuario.currentData()
-        ent.subcategoria = self._view.frame.edit_subcategoria_acuario.text()
-        ent.observaciones = self._view.frame.text_observaciones.toPlainText()
+        # Categoría de acuario
+        if ctrs.combo_categoria_acuario.currentIndex() != -1:
+            ent.id_categoria = ctrs.combo_categoria_acuario.currentData()
+        else:
+            ent.id_categoria = None
+
+        # Subcategoría de acuario
+        if ctrs.edit_subcategoria_acuario.text():
+            ent.subcategoria = ctrs.edit_subcategoria_acuario.text()
+        else:
+            ent.subcategoria = None
+
+        # Observaciones
+        if ctrs.text_observaciones.toPlainText():
+            ent.observaciones = ctrs.text_observaciones.toPlainText()
+        else:
+            ent.observaciones = None
 
         return ent
 

@@ -24,7 +24,7 @@ from Views.Dialogs.login_dialog import LoginDialog
 import Resources.resources_rc
 
 # Versión del programa
-__version__ = "0.20.2"
+__version__ = "0.23.0"
 
 
 def excepthook(exc_type, exc_value, exc_traceback):

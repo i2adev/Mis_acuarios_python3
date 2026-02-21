@@ -46,14 +46,25 @@ class CategoriaEquipamientoController(BaseController):
         """ Configura la entidad. """
 
         ent = CategoriaEquipamientoEntity()
+        ctrs = self._view.frame
 
-        if self._view.frame.edit_id.text():
-            ent.id = int(self._view.frame.edit_id.text())
+        # ID
+        if ctrs.edit_id.text():
+            ent.id = int(ctrs.edit_id.text())
         else:
             ent.id = None
 
-        ent.categoria_equipamiento = self._view.frame.edit_categoria_equipamiento.text()
-        ent.descripcion = self._view.frame.text_descripcion.toPlainText()
+        # Categoría de equipamiento
+        if ctrs.edit_categoria_equipamiento.text():
+            ent.categoria_equipamiento = ctrs.edit_categoria_equipamiento.text()
+        else:
+            ent.categoria_equipamiento = None
+
+        # Descripción
+        if ctrs.text_descripcion.toPlainText():
+            ent.descripcion = ctrs.text_descripcion.toPlainText()
+        else:
+            ent.descripcion = None
 
         return ent
 

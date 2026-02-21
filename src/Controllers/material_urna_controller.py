@@ -40,14 +40,25 @@ class MaterialUrnaController(BaseController):
         """ Configura la entidad. """
 
         ent = MaterialUrnaEntity()
+        ctrs = self._view.frame
 
-        if self._view.frame.edit_id.text():
-            ent.id = int(self._view.frame.edit_id.text())
+        # ID
+        if ctrs.edit_id.text():
+            ent.id = int(ctrs.edit_id.text())
         else:
             ent.id = None
 
-        ent.material = self._view.frame.edit_material.text()
-        ent.descripcion = self._view.frame.text_descripcion.toPlainText()
+        # Material de la urna
+        if ctrs.edit_material.text():
+            ent.material = ctrs.edit_material.text()
+        else:
+            ent.material = None
+
+        # Descripción
+        if ctrs.text_descripcion.toPlainText():
+            ent.descripcion = ctrs.text_descripcion.toPlainText()
+        else:
+            ent.descripcion = None
 
         return ent
 

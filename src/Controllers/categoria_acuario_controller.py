@@ -40,14 +40,25 @@ class CategoriaAcuarioController(BaseController):
         """ Configura la entidad. """
 
         ent = CategoriaAcuarioEntity()
+        ctrs = self._view.frame
 
-        if self._view.frame.edit_id.text():
-            ent.id = int(self._view.frame.edit_id.text())
+        # ID
+        if ctrs.edit_id.text():
+            ent.id = int(ctrs.edit_id.text())
         else:
             ent.id = None
 
-        ent.categoria = self._view.frame.edit_categoria_acuario.text()
-        ent.observaciones = self._view.frame.text_observaciones.toPlainText()
+        # Categoría de acuario
+        if ctrs.edit_categoria_acuario.text():
+            ent.categoria = ctrs.edit_categoria_acuario.text()
+        else:
+            ent.categoria = None
+
+        # Observaciones
+        if ctrs.text_observaciones.toPlainText():
+            ent.observaciones = ctrs.text_observaciones.toPlainText()
+        else:
+            ent.observaciones = None
 
         return ent
 

@@ -240,7 +240,6 @@ class CategoriaIncidenciaMasterController(CategoriaIncidenciaController):
         # Configura el pie de tabla
         self.configure_table_foot("DELETE", paginator_pages,
                                   current_page)
-        self.configure_table_crud(res.value)
 
         # Configura la barra de estado
         self._configure_status_bar(self._pag)
@@ -321,7 +320,8 @@ class CategoriaIncidenciaMasterController(CategoriaIncidenciaController):
 
         # Seleccionamos la página en la que se encuentra el registro
         self._view.combo_select_page.setCurrentIndex(-1)
-        num_reg = next(x.num for x in self._pag.total_data if x.id == ide)
+        num_reg = next((x.num for x in self._pag.total_data if x.id == ide),
+                       None)
         num_pag = self._pag.get_page_number_by_num(num_reg)
         self._view.combo_select_page.setCurrentIndex(num_pag - 1)
 
@@ -336,10 +336,6 @@ class CategoriaIncidenciaMasterController(CategoriaIncidenciaController):
             # Comprobamos si al añadir un registro se ha aumentado el número
             # de páginas totales
             if self._pag.total_pages > before_pages:
-                # self._view.combo_select_page.addItem(
-                #     str(self._pag.total_pages),
-                #     self._pag.total_pages
-                # )
                 self._configure_table_foot()
                 self._view.label_total_pages.setText(
                     str(self._pag.total_pages))

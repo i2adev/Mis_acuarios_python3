@@ -1,20 +1,201 @@
 ﻿================================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
---/02/2026  REFACTORIZACIONES:
-            TODO:   SE SIMPLIFICAN LAS FUNCIONES 'ENTITY_CONFIGURATION'
-                    ctrls = self._view.frame
-                    if ctrl.text_descripcion.toPlainText():
-                        ent.descripcion = ctrls.text_descripcion.toPlainText()
-                    else:
-                        ent.descripcion = None
+18/02/2026  REFACTORIZACIONES:
+            ====================================================================
 
-            TODO:   SE MODIFICAN LOS CONTROLES DE EDICIÓN QUE SON NÚMERICOS
-                    PARA QUE MUESTREN EL SEPARADOR DE MILES.
+            SE SIMPLIFICAN LAS FUNCIONES 'ENTITY_CONFIGURATION'
+            --------------------------------------------------------------------
+            ctrls = self._view.frame
+            if ctrl.text_descripcion.toPlainText():
+                ent.descripcion = ctrls.text_descripcion.toPlainText()
+            else:
+                ent.descripcion = None
 
-            TODO:   MODIFICAR LOS CAMPOS NUMERICOS. REEMPLAZARO LOS QLINEEDIT
-                    POR QSINBOX PARA NUMEROS ENTEROS Y QDOUBLESPINBOX PARA
-                    NUMEROS DECIMALES.
+            -   TABLA ACUARIO
+                -   DONE:   SE REALIZA LA MODIFICACIÓN.
+                -   DONE:   SE TESTEA LA INSERCION DE REGISTTRO.
+                -   DONE:   SE TESTEA LA ACTUALIZACIÓN DE REGISTRO.
+                -   DONE:   SE TESTEA LA ELIMINACIÓN DE REGISTRO DESDE MENÚ
+                            CONTEXTUAL.
+                -   DONE:   SE TESTA LA ELIMINACIÓN DE REGISTRO DESDE EL BOTÓN.
+
+            -   TABLA CATEGORIA DE ACUARIO
+                -   DONE:   SE REALIZA LA MODIFICACIÓN.
+                -   DONE:   SE TESTEA LA INSERCION DE REGISTTRO.
+                -   DONE:   SE TESTEA LA ACTUALIZACIÓN DE REGISTRO.
+                -   DONE:   SE TESTEA LA ELIMINACIÓN DE REGISTRO DESDE MENÚ
+                            CONTEXTUAL.
+                -   DONE:   SE TESTA LA ELIMINACIÓN DE REGISTRO DESDE EL BOTÓN.
+
+            -   TABLA CATEGORIA DE EQUIPAMIENTO
+                -   DONE:   SE REALIZA LA MODIFICACIÓN.
+                -   DONE:   SE TESTEA LA INSERCION DE REGISTTRO.
+                -   DONE:   SE TESTEA LA ACTUALIZACIÓN DE REGISTRO.
+                -   DONE:   SE TESTEA LA ELIMINACIÓN DE REGISTRO DESDE MENÚ
+                            CONTEXTUAL.
+                -   DONE:   SE TESTA LA ELIMINACIÓN DE REGISTRO DESDE EL BOTÓN.
+
+            -   TABLA CATEGORIA DE INCIDENCIA
+                -   DONE:   SE REALIZA LA MODIFICACIÓN.
+                -   DONE:   SE TESTEA LA INSERCION DE REGISTTRO.
+                -   DONE:   SE TESTEA LA ACTUALIZACIÓN DE REGISTRO.
+                -   DONE:   SE TESTEA LA ELIMINACIÓN DE REGISTRO DESDE MENÚ
+                            CONTEXTUAL.
+                -   DONE:   SE TESTA LA ELIMINACIÓN DE REGISTRO DESDE EL BOTÓN.
+
+            -   TABLA COMERCIO
+                -   DONE:   SE REALIZA LA MODIFICACIÓN.
+                -   DONE:   TEST -> INSERCION DE REGISTTRO.
+                -   DONE:   TEST -> ACTUALIZACIÓN DE REGISTRO.
+                -   DONE:   TEST -> ELIMINACIÓN DE REGISTRO DESDE MENÚ
+                            CONTEXTUAL.
+                -   DONE:   TEST -> ELIMINACIÓN DE REGISTRO DESDE EL BOTÓN.
+
+            -   TABLA CONTROL DE ILUMINACIÓN
+                -   DONE:   SE REALIZA LA MODIFICACIÓN.
+                -   DONE:   TEST -> INSERCION DE REGISTTRO.
+                -   DONE:   TEST -> ACTUALIZACIÓN DE REGISTRO.
+                -   DONE:   TEST -> ELIMINACIÓN DE REGISTRO DESDE MENÚ
+                            CONTEXTUAL.
+                -   DONE:   TEST -> ELIMINACIÓN DE REGISTRO DESDE EL BOTÓN.
+
+            -   TABLA EQUIPAMIENTO
+                -   DONE:   SE REALIZA LA MODIFICACIÓN.
+                -   DONE:   TEST -> INSERCION DE REGISTTRO.
+                -   DONE:   TEST -> ACTUALIZACIÓN DE REGISTRO.
+                -   DONE:   TEST -> ELIMINACIÓN DE REGISTRO DESDE MENÚ
+                            CONTEXTUAL.
+                -   DONE:   TEST -> ELIMINACIÓN DE REGISTRO DESDE EL BOTÓN.
+
+            -   TABLA ESTADO DE PROYECTO
+                -   DONE:   SE REALIZA LA MODIFICACIÓN.
+                -   DONE:   TEST -> INSERCION DE REGISTTRO.
+                -   DONE:   TEST -> ACTUALIZACIÓN DE REGISTRO.
+                -   DONE:   TEST -> ELIMINACIÓN DE REGISTRO DESDE MENÚ
+                            CONTEXTUAL.
+                -   DONE:   TEST -> ELIMINACIÓN DE REGISTRO DESDE EL BOTÓN.
+
+            -   TABLA FILTRO
+                -   DONE:   SE REALIZA LA MODIFICACIÓN.
+                -   DONE:   TEST -> INSERCION DE REGISTTRO.
+                -   DONE:   TEST -> ACTUALIZACIÓN DE REGISTRO.
+                -   DONE:   TEST -> ELIMINACIÓN DE REGISTRO DESDE MENÚ
+                            CONTEXTUAL.
+                -   DONE:   TEST -> ELIMINACIÓN DE REGISTRO DESDE EL BOTÓN.
+
+            -   TABLA ILUMINACIÓN
+                -   DONE:   SE REALIZA LA MODIFICACIÓN.
+                -   DONE:   TEST -> INSERCION DE REGISTTRO.
+                -   DONE:   TEST -> ACTUALIZACIÓN DE REGISTRO.
+                -   DONE:   TEST -> ELIMINACIÓN DE REGISTRO DESDE MENÚ
+                            CONTEXTUAL.
+                -   DONE:   TEST -> ELIMINACIÓN DE REGISTRO DESDE EL BOTÓN.
+
+            -   TABLA MARCA COMERCIAL
+                -   DONE:   SE REALIZA LA MODIFICACIÓN.
+                -   DONE:   TEST -> INSERCION DE REGISTTRO.
+                -   DONE:   TEST -> ACTUALIZACIÓN DE REGISTRO.
+                -   DONE:   TEST -> ELIMINACIÓN DE REGISTRO DESDE MENÚ
+                            CONTEXTUAL.
+                -   DONE:   TEST -> ELIMINACIÓN DE REGISTRO DESDE EL BOTÓN.
+
+            -   TABLA MATERIAL DE URNA
+                -   DONE:   SE REALIZA LA MODIFICACIÓN.
+                -   DONE:   TEST -> INSERCION DE REGISTTRO.
+                -   DONE:   TEST -> ACTUALIZACIÓN DE REGISTRO.
+                -   DONE:   TEST -> ELIMINACIÓN DE REGISTRO DESDE MENÚ
+                            CONTEXTUAL.
+                -   DONE:   TEST -> ELIMINACIÓN DE REGISTRO DESDE EL BOTÓN.
+
+            -   TABLA PROYECTO
+                -   DONE:   SE REALIZA LA MODIFICACIÓN.
+                -   DONE:   TEST -> INSERCION DE REGISTTRO.
+                -   DONE:   TEST -> ACTUALIZACIÓN DE REGISTRO.
+                -   DONE:   TEST -> ELIMINACIÓN DE REGISTRO DESDE MENÚ
+                            CONTEXTUAL.
+                -   DONE:   TEST -> ELIMINACIÓN DE REGISTRO DESDE EL BOTÓN.
+
+            -   TABLA SUBCATEGORÍA DE ACUARIO
+                -   DONE:   SE REALIZA LA MODIFICACIÓN.
+                -   DONE:   TEST -> INSERCION DE REGISTTRO.
+                -   DONE:   TEST -> ACTUALIZACIÓN DE REGISTRO.
+                -   DONE:   TEST -> ELIMINACIÓN DE REGISTRO DESDE MENÚ
+                            CONTEXTUAL.
+                -   DONE:   TEST -> ELIMINACIÓN DE REGISTRO DESDE EL BOTÓN.
+
+            -   TABLA SUBCATEGORÍA DE INCIDENCIA
+                -   DONE:   SE REALIZA LA MODIFICACIÓN.
+                -   DONE:   TEST -> INSERCION DE REGISTTRO.
+                -   DONE:   TEST -> ACTUALIZACIÓN DE REGISTRO.
+                -   DONE:   TEST -> ELIMINACIÓN DE REGISTRO DESDE MENÚ
+                            CONTEXTUAL.
+                -   DONE:   TEST -> ELIMINACIÓN DE REGISTRO DESDE EL BOTÓN.
+
+            -   TABLA TIPO DE ACUARIO
+                -   DONE:   SE REALIZA LA MODIFICACIÓN.
+                -   DONE:   TEST -> INSERCION DE REGISTTRO.
+                -   DONE:   TEST -> ACTUALIZACIÓN DE REGISTRO.
+                -   DONE:   TEST -> ELIMINACIÓN DE REGISTRO DESDE MENÚ
+                            CONTEXTUAL.
+                -   DONE:   TEST -> ELIMINACIÓN DE REGISTRO DESDE EL BOTÓN.
+
+            -   TABLA TIPO DE FILTRO
+                -   DONE:   SE REALIZA LA MODIFICACIÓN.
+                -   DONE:   TEST -> INSERCION DE REGISTTRO.
+                -   DONE:   TEST -> ACTUALIZACIÓN DE REGISTRO.
+                -   DONE:   TEST -> ELIMINACIÓN DE REGISTRO DESDE MENÚ
+                            CONTEXTUAL.
+                -   DONE:   TEST -> ELIMINACIÓN DE REGISTRO DESDE EL BOTÓN.
+
+            -   TABLA TIPO DE ILUMINACIÓN
+                -   DONE:   SE REALIZA LA MODIFICACIÓN.
+                -   DONE:   TEST -> INSERCION DE REGISTTRO.
+                -   DONE:   TEST -> ACTUALIZACIÓN DE REGISTRO.
+                -   DONE:   TEST -> ELIMINACIÓN DE REGISTRO DESDE MENÚ
+                            CONTEXTUAL.
+                -   DONE:   TEST -> ELIMINACIÓN DE REGISTRO DESDE EL BOTÓN.
+
+            -   TABLA URNA
+                -   DONE:   SE REALIZA LA MODIFICACIÓN.
+                -   DONE:   TEST -> INSERCION DE REGISTTRO.
+                -   DONE:   TEST -> ACTUALIZACIÓN DE REGISTRO.
+                -   DONE:   TEST -> ELIMINACIÓN DE REGISTRO DESDE MENÚ
+                            CONTEXTUAL.
+                -   DONE:   TEST -> ELIMINACIÓN DE REGISTRO DESDE EL BOTÓN.
+
+            CORRECCIONES:
+            -   DONE:   EN LA ATABLA, EN EL CAMPO DONDE SE INDICA SI EL ACUARIO
+                        ESTÁ MONTADO, SE MUESTRA AL REVES.
+            -   DONE:   EN EL FORMULARIO MAESTRO DE CATEGORÍAS DE INCIDENCIA,
+                        CUANDO SE ELIMINA UN REGISTRO, SE PRODUCE UN ERROR.
+            -   POST:   EN LA LÓGICA DE ILUMINACIÓNES, SE MODIFICA EL CAMPO DE
+                        FECHA DE ALTA POR EL DE FECHA DE INSTALACIÓN.
+            -   DONE:   EN LA TABLA DEL FORMULARIO MAESTRO DE PROYECTO SE HACE
+                        VISIBLE LA COLUMNA DEL ESTADO DEL PROYECTO.
+
+            MODIFICAR LOS CAMPOS NUMERICOS. REEMPLAZARO LOS QLINEEDIT POR
+            QSPINBOX PARA NUMEROS ENTEROS Y QDOUBLESPINBOX PARA NUMEROS
+            DECIMALES.
+            --------------------------------------------------------------------
+            class NullableSpinBox(QSpinBox):
+                def __init__(self, parent=None):
+                    super().__init__(parent)
+                    self.setGroupSeparatorShown(True)
+                    self.setMinimum(-1)
+                    self.setValue(-1)
+                    # Cuando el valor sea -1, el campo se verá vacío
+                    self.setSpecialValueText(" ")
+
+                def get_valued(self):
+                    """Método personalizado para obtener el valor o None"""
+                    val = self.value()
+                    return None if val == -1 else val
+
+            -   DONE:   SE CREA LA CLASE 'NULLABLESPINBOX' QUE HEREDA DE
+                        QSPINBOX.
+            -   DONE:   SE CREA LA CLASE 'NULLABLEDOUBLESPINBOX' QUE HEREDA DE
+                        QDOUBLESPINBOX.
 
             TODO:   SE MODIFICA LA LÓGICA DE LAS IMAGENES PARA QUE SE EVITE
                     CARGAR LAS FOTOS SI NO ESTÁ RELLENADO EL FORMULARIO.

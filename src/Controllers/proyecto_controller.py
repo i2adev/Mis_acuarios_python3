@@ -50,31 +50,56 @@ class ProyectoController(BaseController):
         """ Configura la entidad. """
 
         ent = ProyectoEntity()
+        ctrs = self._view.frame
 
-        if self._view.frame.edit_id.text():
-            ent.id = int(self._view.frame.edit_id.text())
+        # ID
+        if ctrs.edit_id.text():
+            ent.id = int(ctrs.edit_id.text())
         else:
             ent.ide = None
-        ent.id_usuario = globals.CURRENT_USER.id
-        ent.nombre = self._view.frame.edit_nombre_proyecto.text()
-        ent.id_estado = self._view.frame.combo_estado_proyecto.currentData()
 
-        inicio = self._view.frame.date_inicio.date()
+        # Usuario
+        ent.id_usuario = globals.CURRENT_USER.id
+
+        # Nombre asignado al proyecto
+        if ctrs.edit_nombre_proyecto.text():
+            ent.nombre = ctrs.edit_nombre_proyecto.text()
+        else:
+            ent.nombre = None
+
+        # Estado del proyecto
+        if ctrs.combo_estado_proyecto.currentIndex() != -1:
+            ent.id_estado = ctrs.combo_estado_proyecto.currentData()
+        else:
+            ent.id_estado = None
+
+        # Fecha de inicio del proyecto
+        inicio = ctrs.date_inicio.date()
         if inicio.isValid():
             time_inicio = QDateTime(inicio, QTime(0, 0))
             ent.fecha_inicio = int(time_inicio.toSecsSinceEpoch())
         else:
             ent.fecha_inicio = None
 
-        fin = self._view.frame.date_fin.date()
+        # Fecha de finalización del proyecto
+        fin = ctrs.date_fin.date()
         if fin:
             time_fin = QDateTime(fin, QTime(0, 0))
             ent.fecha_fin = int(time_fin.toSecsSinceEpoch())
         else:
             ent.fecha_fin = None
 
-        ent.motivo_cierre = self._view.frame.edit_motivo_cierre.text()
-        ent.descripcion = self._view.frame.text_descripcion.toPlainText()
+        # Motivo de finalización del proyecto
+        if ctrs.edit_motivo_cierre.text():
+            ent.motivo_cierre = ctrs.edit_motivo_cierre.text()
+        else:
+            ent.motivo_cierre = None
+
+        # Descripción del proyecto
+        if ctrs.text_descripcion.toPlainText():
+            ent.descripcion = ctrs.text_descripcion.toPlainText()
+        else:
+            ent.descripcion = None
 
         return ent
 

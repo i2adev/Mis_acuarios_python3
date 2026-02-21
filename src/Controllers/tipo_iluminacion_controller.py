@@ -41,15 +41,23 @@ class TipoIluminacionController(BaseController):
         """ Configura la entidad. """
 
         ent = TipoIluminacionEntity()
+        ctrs = self._view.frame
 
-        if self._view.frame.edit_id.text():
-            ent.id = int(self._view.frame.edit_id.text())
+        # ID
+        if ctrs.edit_id.text():
+            ent.id = int(ctrs.edit_id.text())
         else:
             ent.id = None
 
-        ent.tipo_iluminacion = self._view.frame.edit_tipo_iluminacion.text()
-        if self._view.frame.text_descripcion.toPlainText():
-            ent.descripcion = self._view.frame.text_descripcion.toPlainText()
+        # Tipo de iluminación
+        if ctrs.edit_tipo_iluminacion.text():
+            ent.tipo_iluminacion = ctrs.edit_tipo_iluminacion.text()
+        else:
+            ent.tipo_iluminacion = None
+
+        # Descripción
+        if ctrs.text_descripcion.toPlainText():
+            ent.descripcion = ctrs.text_descripcion.toPlainText()
         else:
             ent.descripcion = None
 

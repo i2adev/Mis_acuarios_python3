@@ -40,14 +40,25 @@ class TipoFiltroController(BaseController):
         """ Configura la entidad. """
 
         ent = TipoFiltroEntity()
+        ctrs = self._view.frame
 
-        if self._view.frame.edit_id.text():
-            ent.id = int(self._view.frame.edit_id.text())
+        # ID
+        if ctrs.edit_id.text():
+            ent.id = int(ctrs.edit_id.text())
         else:
             ent.id = None
 
-        ent.tipo_filtro = self._view.frame.edit_tipo_filtro.text()
-        ent.observaciones = self._view.frame.text_observaciones.toPlainText()
+        # Tipo de filtro
+        if ctrs.edit_tipo_filtro.text():
+            ent.tipo_filtro = ctrs.edit_tipo_filtro.text()
+        else:
+            ent.tipo_filtro = None
+
+        # Observaciones
+        if ctrs.text_observaciones.toPlainText():
+            ent.observaciones = ctrs.text_observaciones.toPlainText()
+        else:
+            ent.observaciones = None
 
         return ent
 

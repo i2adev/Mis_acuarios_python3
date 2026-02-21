@@ -10,7 +10,8 @@ from Model.DAO.categoria_acuario_dao import CategoriaAcuarioDAO
 from Model.DAO.subcategoria_acuario_dao import SubcategoriaAcuarioDAO
 from Model.DAO.tipo_acuario_dao import TipoAcuarioDAO
 from Model.Entities.categoria_acuario_entity import CategoriaAcuarioEntity
-from Model.Entities.subcategoria_acuario_entity import SubcategoriaAcuarioEntity
+from Model.Entities.subcategoria_acuario_entity import \
+    SubcategoriaAcuarioEntity
 from Model.Entities.tipo_acuario_entity import TipoAcuarioEntity
 from Services.Result.result import Result
 from Services.Validators.tipo_acuario_validator import TipoAcuarioValidator
@@ -43,16 +44,32 @@ class TipoAcuarioController(BaseController):
         """ Configura la entidad. """
 
         ent = TipoAcuarioEntity()
+        ctrs = self._view.frame
 
-        if self._view.frame.edit_id.text():
-            ent.id = int(self._view.frame.edit_id.text())
+        # ID
+        if ctrs.edit_id.text():
+            ent.id = int(ctrs.edit_id.text())
         else:
             ent.id = None
 
-        ent.id_categoria_acuario = self._view.frame.combo_categoria_acuario.currentData()
-        ent.id_subcategoria_acuario = (self._view.frame
-                                       .combo_subcategoria_acuario.currentData())
-        ent.observaciones = self._view.frame.text_observaciones.toPlainText()
+        # Categoría de acuario
+        if ctrs.combo_categoria_acuario.currentIndex() != -1:
+            ent.id_categoria_acuario = ctrs.combo_categoria_acuario.currentData()
+        else:
+            ent.id_categoria_acuario = None
+
+        # Subcategoría de acuario
+        if ctrs.combo_subcategoria_acuario.currentIndex() != -1:
+            ent.id_subcategoria_acuario = (
+                ctrs.combo_subcategoria_acuario.currentData())
+        else:
+            ent.id_subcategoria_acuario = None
+
+        # Observaciones
+        if ctrs.text_observaciones.toPlainText():
+            ent.observaciones = ctrs.text_observaciones.toPlainText()
+        else:
+            ent.observaciones = None
 
         return ent
 

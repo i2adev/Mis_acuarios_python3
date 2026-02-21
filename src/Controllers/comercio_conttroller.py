@@ -44,19 +44,55 @@ class ComercioController(BaseController):
         """ Configura la entidad. """
 
         ent = ComercioEntity()
+        ctrs = self._view.frame
 
-        if self._view.frame.edit_id.text():
-            ent.id = int(self._view.frame.edit_id.text())
+        # ID
+        if ctrs.edit_id.text():
+            ent.id = int(ctrs.edit_id.text())
         else:
             ent.id = None
 
-        ent.nombre_comercio = self._view.frame.edit_comercio.text()
-        ent.direccion = self._view.frame.edit_direccion.text()
-        ent.cod_postal = self._view.frame.edit_cod_postal.text()
-        ent.poblacion = self._view.frame.edit_poblacion.text()
-        ent.provincia = self._view.frame.edit_provincia.text()
-        ent.id_pais = int(self._view.frame.combo_pais.currentData())
-        ent.observaciones = self._view.frame.text_observaciones.toPlainText()
+        # Nombre del comercio
+        if ctrs.edit_comercio.text():
+            ent.nombre_comercio = ctrs.edit_comercio.text()
+        else:
+            ent.nombre_comercio = None
+
+        # Dirección del comercio
+        if ctrs.edit_direccion.text():
+            ent.direccion = ctrs.edit_direccion.text()
+        else:
+            ent.direccion = None
+
+        # Código postal
+        if ctrs.edit_cod_postal.text():
+            ent.cod_postal = ctrs.edit_cod_postal.text()
+        else:
+            ent.cod_postal = None
+
+        # Población
+        if ctrs.edit_poblacion.text():
+            ent.poblacion = ctrs.edit_poblacion.text()
+        else:
+            ent.poblacion = None
+
+        # Provincia
+        if ctrs.edit_provincia.text():
+            ent.provincia = ctrs.edit_provincia.text()
+        else:
+            ent.provincia = None
+
+        # País
+        if ctrs.combo_pais.currentIndex() != -1:
+            ent.id_pais = int(ctrs.combo_pais.currentData())
+        else:
+            ent.id_pais = None
+
+        # Observaciones
+        if ctrs.text_observaciones.toPlainText():
+            ent.observaciones = ctrs.text_observaciones.toPlainText()
+        else:
+            ent.observaciones = None
 
         return ent
 

@@ -41,18 +41,23 @@ class ControlIluminacionController(BaseController):
         """ Configura la entidad. """
 
         ent = ControlIluminacionEntity()
+        ctrs = self._view.frame
 
-        if self._view.frame.edit_id.text():
-            ent.id = int(self._view.frame.edit_id.text())
+        # ID
+        if ctrs.edit_id.text():
+            ent.id = int(ctrs.edit_id.text())
         else:
             ent.id = None
 
-        print(self._view.frame.edit_control_iluminacion.text())
+        # Control de iluminación
+        if ctrs.edit_control_iluminacion.text():
+            ent.control_iluminacion = ctrs.edit_control_iluminacion.text()
+        else:
+            ent.control_iluminacion = None
 
-        ent.control_iluminacion = (
-            self._view.frame.edit_control_iluminacion.text())
-        if self._view.frame.text_descripcion.toPlainText():
-            ent.descripcion = self._view.frame.text_descripcion.toPlainText()
+        # Descripción
+        if ctrs.text_descripcion.toPlainText():
+            ent.descripcion = ctrs.text_descripcion.toPlainText()
         else:
             ent.descripcion = None
 

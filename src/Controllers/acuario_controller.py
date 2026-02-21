@@ -56,73 +56,129 @@ class AcuarioController(BaseController):
         """ Configura la entidad. """
 
         ent = AcuarioEntity()
+        ctrs = self._view.frame
 
-        if self._view.frame.edit_id.text():
+        if ctrs.edit_id.text():
             ent.id = int(self._view.frame.edit_id.text())
         else:
             ent.id = None
 
-        ent.id_proyecto = int(self._view.frame.combo_proyecto.currentData())
+        # Proyecto
+        if ctrs.combo_proyecto.currentIndex() != -1:
+            ent.id_proyecto = int(ctrs.combo_proyecto.currentData())
+        else:
+            ent.id_proyecto = None
 
-        if self._view.frame.edit_cod_color.text():
-            ent.cod_color = self._view.frame.edit_cod_color.text()
+        # Color
+        if ctrs.edit_cod_color.text():
+            ent.cod_color = ctrs.edit_cod_color.text()
         else:
             ent.cod_color = None
 
-        ent.nombre = self._view.frame.edit_nombre_acuario.text()
-        ent.id_urna = int(self._view.frame.combo_urna.currentData())
-        ent.id_tipo = int(self._view.frame.combo_tipo_acuario.currentData())
+        # Nombre del acuario
+        if ctrs.edit_nombre_acuario.text():
+            ent.nombre = ctrs.edit_nombre_acuario.text()
+        else:
+            ent.nombre = None
 
-        if self._view.frame.edit_vol_neto.text():
-            ent.volumen_neto = self._view.frame.edit_vol_neto.text()
+        # Urna
+        if ctrs.combo_urna.currentIndex() != -1:
+            ent.id_urna = int(ctrs.combo_urna.currentData())
+        else:
+            ent.id_urna = None
+
+        # Tipo de acuario
+        if ctrs.combo_tipo_acuario.currentIndex() != -1:
+            ent.id_tipo = int(ctrs.combo_tipo_acuario.currentData())
+        else:
+            ent.id_tipo = None
+
+        # if ctrs.edit_vol_neto.text():
+        #     ent.volumen_neto = ctrs.edit_vol_neto.text()
+        # else:
+        #     ent.volumen_neto = None
+
+        # Volumen neto
+        if ctrs.edit_vol_neto.text():
+            ent.volumen_neto = int(ctrs.edit_vol_neto.text())
         else:
             ent.volumen_neto = None
 
-        if self._view.frame.edit_cod_color.text():
-            ent.cod_color = self._view.frame.edit_cod_color.text()
-        else:
-            ent.cod_color = None
+        # montaje = ctrs.fecha_montaje.date()
+        # if montaje.isValid():
+        #     time_inicio = QDateTime(montaje, QTime(0, 0))
+        #     ent.fecha_montaje = int(time_inicio.toSecsSinceEpoch())
+        # else:
+        #     ent.fecha_montaje = None
 
-        montaje = self._view.frame.fecha_montaje.date()
-        if montaje.isValid():
-            time_inicio = QDateTime(montaje, QTime(0, 0))
+        # Fecha de montaje
+        f_montaje = ctrs.fecha_montaje.date()
+        if f_montaje.isValid():
+            time_inicio = QDateTime(f_montaje, QTime(0, 0))
             ent.fecha_montaje = int(time_inicio.toSecsSinceEpoch())
         else:
             ent.fecha_montaje = None
 
-        inicio_ciclado = self._view.frame.fecha_inicio_ciclado.date()
-        if inicio_ciclado.isValid():
-            time_inicio = QDateTime(inicio_ciclado, QTime(0, 0))
+        # inicio_ciclado = ctrs.fecha_inicio_ciclado.date()
+        # if inicio_ciclado.isValid():
+        #     time_inicio = QDateTime(inicio_ciclado, QTime(0, 0))
+        #     ent.fecha_inicio_ciclado = int(time_inicio.toSecsSinceEpoch())
+        # else:
+        #     ent.fecha_inicio_ciclado = None
+
+        # Fecha de inicio de ciclado
+        f_i_ciclado = ctrs.fecha_inicio_ciclado.date()
+        if f_i_ciclado.isValid():
+            time_inicio = QDateTime(f_i_ciclado, QTime(0, 0))
             ent.fecha_inicio_ciclado = int(time_inicio.toSecsSinceEpoch())
         else:
             ent.fecha_inicio_ciclado = None
 
-        fin_ciclado = self._view.frame.fecha_fin_ciclado.date()
-        if fin_ciclado.isValid():
-            time_inicio = QDateTime(fin_ciclado, QTime(0, 0))
+        # fin_ciclado = ctrs.fecha_fin_ciclado.date()
+        # if fin_ciclado.isValid():
+        #     time_inicio = QDateTime(fin_ciclado, QTime(0, 0))
+        #     ent.fecha_fin_ciclado = int(time_inicio.toSecsSinceEpoch())
+        # else:
+        #     ent.fecha_fin_ciclado = None
+
+        # Fecha de inicio de ciclado
+        f_f_ciclado = ctrs.fecha_fin_ciclado.date()
+        if f_f_ciclado.isValid():
+            time_inicio = QDateTime(f_f_ciclado, QTime(0, 0))
             ent.fecha_fin_ciclado = int(time_inicio.toSecsSinceEpoch())
         else:
             ent.fecha_fin_ciclado = None
 
-        desmontaje = self._view.frame.fecha_desmontaje.date()
-        if desmontaje.isValid():
-            time_inicio = QDateTime(desmontaje, QTime(0, 0))
+        # desmontaje = ctrs.fecha_desmontaje.date()
+        # if desmontaje.isValid():
+        #     time_inicio = QDateTime(desmontaje, QTime(0, 0))
+        #     ent.fecha_desmontaje = int(time_inicio.toSecsSinceEpoch())
+        # else:
+        #     ent.fecha_desmontaje = None
+
+        # Fecha de desmontaje del acuario
+        f_desmontaje = ctrs.fecha_desmontaje.date()
+        if f_desmontaje.isValid():
+            time_inicio = QDateTime(f_desmontaje, QTime(0, 0))
             ent.fecha_desmontaje = int(time_inicio.toSecsSinceEpoch())
         else:
             ent.fecha_desmontaje = None
 
-        if self._view.frame.edit_motivo_desmontaje.text():
-            ent.motivo_desmontaje = self._view.frame.edit_motivo_desmontaje.text()
+        # Motivo del desmontaje
+        if ctrs.edit_motivo_desmontaje.text():
+            ent.motivo_desmontaje = ctrs.edit_motivo_desmontaje.text()
         else:
             ent.motivo_desmontaje = None
 
-        if self._view.frame.edit_ubicacion_acuario.text():
-            ent.ubicacion_acuario = self._view.frame.edit_ubicacion_acuario.text()
+        # Ubicación del acuario
+        if ctrs.edit_ubicacion_acuario.text():
+            ent.ubicacion_acuario = ctrs.edit_ubicacion_acuario.text()
         else:
             ent.ubicacion_acuario = None
 
-        if self._view.frame.text_descripcion.toPlainText():
-            ent.descripcion = self._view.frame.text_descripcion.toPlainText()
+        # Descripción del acuario
+        if ctrs.text_descripcion.toPlainText():
+            ent.descripcion = ctrs.text_descripcion.toPlainText()
         else:
             ent.descripcion = None
 

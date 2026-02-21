@@ -55,57 +55,115 @@ class IluminacionController(BaseController):
         """ Configura la entidad. """
 
         ent = IluminacionEntity()
+        ctrs = self._view.frame
 
-        if self._view.frame.edit_id.text():
-            ent.id = int(self._view.frame.edit_id.text())
+        # ID
+        if ctrs.edit_id.text():
+            ent.id = int(ctrs.edit_id.text())
         else:
             ent.id = None
 
-        ent.id_marca = int(self._view.frame.combo_marca.currentData())
-        ent.modelo = self._view.frame.edit_modelo.text()
-        ent.num_serie = self._view.frame.edit_num_serie.text()
+        # Marca
+        if ctrs.combo_marca.currentIndex() != -1:
+            ent.id_marca = int(ctrs.combo_marca.currentData())
+        else:
+            ent.id_marca = None
 
-        ent.id_tipo_iluminacion = int(
-            self._view.frame.combo_tipo_iluminacion.currentData())
+        # Modelo
+        if ctrs.edit_modelo.text():
+            ent.modelo = ctrs.edit_modelo.text()
+        else:
+            ent.modelo = None
 
-        data = self._view.frame.combo_control_iluminacion.currentData()
-        ent.id_control_iluminacion = int(data) if data else None
+        # Número de serie
+        if ctrs.edit_num_serie.text():
+            ent.num_serie = ctrs.edit_num_serie.text()
+        else:
+            ent.num_serie = None
 
-        ent.potencia = self._view.frame.edit_potencia.text() if (
-            self._view.frame.edit_potencia.text()) else None
-        ent.flujo_luminico = self._view.frame.edit_flujo_luminico.text() \
-            if self._view.frame.edit_flujo_luminico.text() else None
-        ent.temperatura = self._view.frame.edit_temperatura.text() \
-            if self._view.frame.edit_temperatura.text() else None
-        ent.vida_util = self._view.frame.edit_vida_util.text() \
-            if self._view.frame.edit_vida_util.text() else None
-        ent.longitud = self._view.frame.edit_longitud.text() \
-            if self._view.frame.edit_longitud.text() else None
-        ent.anchura = self._view.frame.edit_anchura.text() \
-            if self._view.frame.edit_anchura.text() else None
+        # Tipo de iluminación
+        if ctrs.combo_tipo_iluminacion.currentIndex() != -1:
+            ent.id_tipo_iluminacion = int(
+                ctrs.combo_tipo_iluminacion.currentData())
+        else:
+            ent.id_tipo_iluminacion = None
 
-        alta = self._view.frame.fecha_alta.date()
-        if alta.isValid():
-            time_inicio = QDateTime(alta, QTime(0, 0))
+        # Control de laa iluminación
+        if ctrs.combo_control_iluminacion.currentIndex() != -1:
+            ent.id_control_iluminacion = int(
+                ctrs.combo_control_iluminacion.currentData())
+        else:
+            ent.id_control_iluminacion = None
+
+        # Potencia de la luminaria
+        if ctrs.edit_potencia.text():
+            ent.potencia = int(ctrs.edit_potencia.text())
+        else:
+            ent.potencia = None
+
+        # Flujo luminico
+        if ctrs.edit_flujo_luminico.text():
+            ent.flujo_luminico = int(ctrs.edit_flujo_luminico.text())
+        else:
+            ent.flujo_luminico = None
+
+        # Temperatura de color
+        if ctrs.edit_temperatura.text():
+            ent.temperatura = int(ctrs.edit_temperatura.text())
+        else:
+            ent.temperatura = None
+
+        # Vida útil de la luminaria
+        if ctrs.edit_vida_util.text():
+            ent.vida_util = int(ctrs.edit_vida_util.text())
+        else:
+            ent.vida_util = None
+
+        # Dimensiones: Longitud
+        if ctrs.edit_longitud.text():
+            ent.longitud = float(ctrs.edit_longitud.text())
+        else:
+            ent.longitud = None
+
+        # Dimensiones: Anchura
+        if ctrs.edit_anchura.text():
+            ent.anchura = float(ctrs.edit_anchura.text())
+        else:
+            ent.anchura = None
+
+        # Fecha de instalación
+        instalacion = ctrs.fecha_alta.date()
+        if instalacion.isValid():
+            time_inicio = QDateTime(instalacion, QTime(0, 0))
             ent.fecha_alta = int(time_inicio.toSecsSinceEpoch())
         else:
             ent.fecha_alta = None
 
-        baja = self._view.frame.fecha_baja.date()
+        # Fecha de baja
+        baja = ctrs.fecha_baja.date()
         if baja.isValid():
             time_inicio = QDateTime(baja, QTime(0, 0))
             ent.fecha_baja = int(time_inicio.toSecsSinceEpoch())
         else:
             ent.fecha_baja = None
 
-        ent.motivo_baja = self._view.frame.edit_motivo_baja.text() \
-            if self._view.frame.edit_motivo_baja.text() else None
+        # Motivo de la baja
+        if ctrs.edit_motivo_baja.text():
+            ent.motivo_baja = ctrs.edit_motivo_baja.text()
+        else:
+            ent.motivo_baja = None
+
+        # Espectro completo
         ent.espectro_completo = 1 if (
-            self._view.frame.check_espectro_completo.isChecked()) else 0
+            ctrs.check_espectro_completo.isChecked()) else 0
+
+        # Intensidad regulable
         ent.intensidad_regulable = 1 if (
-            self._view.frame.check_intensidad_regulable.isChecked()) else 0
-        ent.descripcion = self._view.frame.text_descripcion.toPlainText() \
-            if self._view.frame.text_descripcion.toPlainText() else None
+            ctrs.check_intensidad_regulable.isChecked()) else 0
+
+        # Descripción
+        ent.descripcion = ctrs.text_descripcion.toPlainText() if (
+            ctrs.text_descripcion.toPlainText()) else None
 
         return ent
 

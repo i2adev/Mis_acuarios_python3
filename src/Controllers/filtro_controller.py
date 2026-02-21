@@ -55,101 +55,130 @@ class FiltroController(BaseController):
         """ Configura la entidad. """
 
         ent = FiltroEntity()
+        ctrs = self._view.frame
 
-        if self._view.frame.edit_id.text():
-            ent.id = int(self._view.frame.edit_id.text())
+        # ID
+        if ctrs.edit_id.text():
+            ent.id = int(ctrs.edit_id.text())
         else:
             ent.id = None
 
-        ent.id_tipo = int(self._view.frame.combo_tipo_filtro.currentData())
-        ent.es_thermo = 1 if self._view.frame.check_termofiltro.isChecked() else 0
-        ent.id_marca = int(self._view.frame.combo_marca.currentData())
-        ent.modelo = self._view.frame.edit_modelo.text()
+        # Tipo de filtro
+        if ctrs.combo_tipo_filtro.currentIndex() != -1:
+            ent.id_tipo = int(ctrs.combo_tipo_filtro.currentData())
+        else:
+            ent.id_tipo = None
 
-        if self._view.frame.edit_num_serie.text():
-            ent.num_serie = self._view.frame.edit_num_serie.text()
+        # Específica sí cuenta con calentador
+        ent.es_thermo = 1 if ctrs.check_termofiltro.isChecked() else 0
+
+        # Marca
+        if ctrs.combo_marca.currentIndex() != -1:
+            ent.id_marca = int(ctrs.combo_marca.currentData())
+        else:
+            ent.id_marca = None
+
+        # Modelo
+        if ctrs.edit_modelo.text():
+            ent.modelo = ctrs.edit_modelo.text()
+        else:
+            ent.modelo = None
+
+        # Número de serie
+        if ctrs.edit_num_serie.text():
+            ent.num_serie = ctrs.edit_num_serie.text()
         else:
             ent.num_serie = None
 
-        if self._view.frame.edit_vol_min_acuario.text():
-            ent.vol_min_acuario = (
-                int(self._view.frame.edit_vol_min_acuario.text()))
+        # Volumen mínimo del acuario
+        if ctrs.edit_vol_min_acuario.text():
+            ent.vol_min_acuario = (int(ctrs.edit_vol_min_acuario.text()))
         else:
             ent.vol_min_acuario = None
 
-        if self._view.frame.edit_vol_max_acuario.text():
-            ent.vol_max_acuario = (
-                int(self._view.frame.edit_vol_max_acuario.text()))
+        # Volumen máximo del acuario
+        if ctrs.edit_vol_max_acuario.text():
+            ent.vol_max_acuario = (int(ctrs.edit_vol_max_acuario.text()))
         else:
             ent.vol_max_acuario = None
 
-        if self._view.frame.edit_consumo_filtro.text():
-            ent.consumo = int(self._view.frame.edit_consumo_filtro.text())
+        # Consumo eléctrico del filtro
+        if ctrs.edit_consumo_filtro.text():
+            ent.consumo = int(ctrs.edit_consumo_filtro.text())
         else:
             ent.consumo = None
 
-        if self._view.frame.edit_consumo_calentador.text():
-            ent.consumo_calentador = int(
-                self._view.frame.edit_consumo_calentador.text())
+        # Consumo eléctrico del calentador del filtro
+        if ctrs.edit_consumo_calentador.text():
+            ent.consumo_calentador = int(ctrs.edit_consumo_calentador.text())
         else:
             ent.consumo_calentador = None
 
-        if self._view.frame.edit_ancho.text():
-            ent.ancho = int(self._view.frame.edit_ancho.text())
+        # Dimensiones: Ancho
+        if ctrs.edit_ancho.text():
+            ent.ancho = int(ctrs.edit_ancho.text())
         else:
             ent.ancho = None
 
-        if self._view.frame.edit_fondo.text():
-            ent.fondo = int(self._view.frame.edit_fondo.text())
+        # Dimensiones: Fondo
+        if ctrs.edit_fondo.text():
+            ent.fondo = int(ctrs.edit_fondo.text())
         else:
             ent.fondo = None
 
-        if self._view.frame.edit_alto.text():
-            ent.alto = int(self._view.frame.edit_alto.text())
+        # Dimensiones: Alto
+        if ctrs.edit_alto.text():
+            ent.alto = int(ctrs.edit_alto.text())
         else:
             ent.alto = None
 
-        if self._view.frame.edit_vol_material.text():
-            vol_material = self._view.frame.edit_vol_material.text()
+        # Capacidad de carga filtrante
+        if ctrs.edit_vol_material.text():
+            vol_material = ctrs.edit_vol_material.text()
             vol_material = vol_material.replace(',', '.')
             ent.vol_filtrante = float(vol_material)
         else:
             ent.vol_filtrante = None
 
-        if self._view.frame.edit_altura_max_bombeo.text():
-            altura_max_bombeo = self._view.frame.edit_altura_max_bombeo.text()
+        # Altura máxima de bombeo
+        if ctrs.edit_altura_max_bombeo.text():
+            altura_max_bombeo = ctrs.edit_altura_max_bombeo.text()
             altura_max_bombeo = altura_max_bombeo.replace(',', '.')
             ent.altura_bombeo = float(altura_max_bombeo)
         else:
             ent.altura_bombeo = None
 
-        if self._view.frame.edit_caudal.text():
-            ent.caudal = float(
-                self._view.frame.edit_caudal.text())
+        # Caudal del filtro
+        if ctrs.edit_caudal.text():
+            ent.caudal = float(ctrs.edit_caudal.text())
         else:
             ent.caudal = None
 
-        compra = self._view.frame.fecha_compra.date()
-        if compra.isValid():
-            time_compra = QDateTime(compra, QTime(0, 0))
+        # Fecha de instalación
+        instalacion = ctrs.fecha_instalacion.date()
+        if instalacion.isValid():
+            time_compra = QDateTime(instalacion, QTime(0, 0))
             ent.fecha_compra = int(time_compra.toSecsSinceEpoch())
         else:
             ent.fecha_compra = None
 
-        baja = self._view.frame.fecha_baja.date()
+        # Fecha de baja
+        baja = ctrs.fecha_baja.date()
         if baja.isValid():
             time_baja = QDateTime(baja, QTime(0, 0))
             ent.fecha_baja = int(time_baja.toSecsSinceEpoch())
         else:
             ent.fecha_baja = None
 
-        if self._view.frame.edit_motivo_baja.text():
-            ent.motivo_baja = self._view.frame.edit_motivo_baja.text()
+        # Motivo de la baja
+        if ctrs.edit_motivo_baja.text():
+            ent.motivo_baja = ctrs.edit_motivo_baja.text()
         else:
             ent.motivo_baja = None
 
-        if self._view.frame.text_descripcion.toPlainText():
-            ent.descripcion = self._view.frame.text_descripcion.toPlainText()
+        # Descripción
+        if ctrs.text_descripcion.toPlainText():
+            ent.descripcion = ctrs.text_descripcion.toPlainText()
         else:
             ent.descripcion = None
 
@@ -489,7 +518,7 @@ class FiltroController(BaseController):
             fondo_filtro = None
             altura_filtro = None
 
-        fecha_compra = QDate.fromString(
+        fecha_instalacion = QDate.fromString(
             str(modelo.index(fila, 14).data()), "dd/MM/yyyy")
         fecha_baja = QDate.fromString(
             str(modelo.index(fila, 15).data()), "dd/MM/yyyy")
@@ -550,7 +579,7 @@ class FiltroController(BaseController):
         self._view.frame.edit_caudal.setText(
             str(caudal) if caudal is not None else ""
         )
-        self._view.frame.fecha_compra.setDate(fecha_compra)
+        self._view.frame.fecha_instalacion.setDate(fecha_instalacion)
         self._view.frame.fecha_baja.setDate(fecha_baja)
         self._view.frame.edit_motivo_baja.setText(
             str(motivo_baja) if motivo_baja is not None else ""

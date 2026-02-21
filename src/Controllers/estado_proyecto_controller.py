@@ -43,14 +43,25 @@ class EstadoProyectoController(BaseController):
         """ Configura la entidad. """
 
         ent = EstadoProyectoEntity()
+        ctrs = self._view.frame
 
-        if self._view.frame.edit_id.text():
-            ent.id = int(self._view.frame.edit_id.text())
+        # ID
+        if ctrs.edit_id.text():
+            ent.id = int(ctrs.edit_id.text())
         else:
             ent.id = None
 
-        ent.estado = self._view.frame.edit_estado_proyecto.text()
-        ent.descripcion = self._view.frame.text_observaciones.toPlainText()
+        # Estado del proyecto
+        if ctrs.edit_estado_proyecto.text():
+            ent.estado = ctrs.edit_estado_proyecto.text()
+        else:
+            ent.estado = None
+
+        # Descripción del estado
+        if ctrs.text_observaciones.toPlainText():
+            ent.descripcion = ctrs.text_observaciones.toPlainText()
+        else:
+            ent.descripcion = None
 
         return ent
 

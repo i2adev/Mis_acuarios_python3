@@ -3,7 +3,8 @@ from PyQt6.QtWidgets import QPushButton, QMessageBox
 
 from Controllers.base_controller import BaseController
 from Model.DAO.categoria_incidencia_dao import CategoriaIncidenciaDAO
-from Model.Entities.categoria_incidencia_entity import CategoriaIncidenciaEntity
+from Model.Entities.categoria_incidencia_entity import \
+    CategoriaIncidenciaEntity
 from Services.Result.result import Result
 from Services.Validators.categoria_incidencia_validator import \
     CategoriaIncidenciaValidator
@@ -37,14 +38,25 @@ class CategoriaIncidenciaController(BaseController):
         """ Configura la entidad. """
 
         ent = CategoriaIncidenciaEntity()
+        ctrs = self._view.frame
 
-        if self._view.frame.edit_id.text():
-            ent.id = int(self._view.frame.edit_id.text())
+        # ID
+        if ctrs.edit_id.text():
+            ent.id = int(ctrs.edit_id.text())
         else:
             ent.id = None
 
-        ent.categoria_incidencia = self._view.frame.edit_categoria_incidencia.text()
-        ent.observaciones = self._view.frame.text_observaciones.toPlainText()
+        # Categoría de incidencia
+        if ctrs.edit_categoria_incidencia.text():
+            ent.categoria_incidencia = ctrs.edit_categoria_incidencia.text()
+        else:
+            ent.categoria_incidencia = None
+
+        # Observaciones
+        if ctrs.text_observaciones.toPlainText():
+            ent.observaciones = ctrs.text_observaciones.toPlainText()
+        else:
+            ent.observaciones = None
 
         return ent
 

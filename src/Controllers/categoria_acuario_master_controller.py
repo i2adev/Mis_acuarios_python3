@@ -243,6 +243,7 @@ class CategoriaAcuarioMasterController(CategoriaAcuarioController):
         # Configura el pie de tabla
         self.configure_table_foot("DELETE", paginator_pages,
                                   current_page)
+        
         # Configura la barra de estado
         self._configure_status_bar(self._pag)
 
@@ -342,7 +343,8 @@ class CategoriaAcuarioMasterController(CategoriaAcuarioController):
                 #     self._pag.total_pages
                 # )
                 self._configure_table_foot()
-                self._view.label_total_pages.setText(str(self._pag.total_pages))
+                self._view.label_total_pages.setText(
+                    str(self._pag.total_pages))
 
         elif operation == "DELETE":
             # Comprobamos si al eliminar un registro se la disminuido el número
@@ -355,7 +357,8 @@ class CategoriaAcuarioMasterController(CategoriaAcuarioController):
                 if current_page <= 0:
                     current_page = 1
 
-                self._view.label_total_pages.setText(str(self._pag.total_pages))
+                self._view.label_total_pages.setText(
+                    str(self._pag.total_pages))
 
                 self._view.combo_select_page.setCurrentIndex(-1)
                 self._view.combo_select_page.setCurrentIndex(current_page - 1)

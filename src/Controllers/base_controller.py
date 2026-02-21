@@ -236,7 +236,7 @@ class BaseController(QObject):
                 table.setColumnHidden(col, True)
 
         # Hacer que la columna de descripción use el espacio restante
-        last_column_ix = table.model().columnCount() - 2
+        last_column_ix = table.model().columnCount() - 1
         header = table.horizontalHeader()
         header.setSectionResizeMode(last_column_ix,
                                     QHeaderView.ResizeMode.Stretch)

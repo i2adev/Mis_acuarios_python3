@@ -57,36 +57,66 @@ class EquipamientoController(BaseController):
         """ Configura la entidad. """
 
         ent = EquipamientoEntity()
+        ctrs = self._view.frame
 
-        if self._view.frame.edit_id.text():
-            ent.id = int(self._view.frame.edit_id.text())
+        # ID
+        if ctrs.edit_id.text():
+            ent.id = int(ctrs.edit_id.text())
         else:
             ent.id = None
 
-        ent.id_categoria = int(
-            self._view.frame.combo_categoria_equipamiento.currentData()
-        )
+        # Categoría
+        if ctrs.combo_categoria_equipamiento.currentIndex() != -1:
+            ent.id_categoria = int(
+                ctrs.combo_categoria_equipamiento.currentData())
+        else:
+            ent.id_categoria = None
 
-        ent.id_marca = int(self._view.frame.combo_marca.currentData())
-        ent.modelo = self._view.frame.edit_modelo.text()
-        ent.numero_serie = self._view.frame.edit_num_serie.text()
+        # Marca
+        if ctrs.combo_marca.currentIndex() != -1:
+            ent.id_marca = int(ctrs.combo_marca.currentData())
+        else:
+            ent.id_marca = None
 
-        alta = self._view.frame.fecha_alta.date()
+        # Modelo
+        if ctrs.edit_modelo.text():
+            ent.modelo = ctrs.edit_modelo.text()
+        else:
+            ent.modelo = None
+
+        # Número de serie
+        if ctrs.edit_num_serie.text():
+            ent.numero_serie = ctrs.edit_num_serie.text()
+        else:
+            ent.numero_serie = None
+
+        # Fecha de alta
+        alta = ctrs.fecha_alta.date()
         if alta.isValid():
             time_alta = QDateTime(alta, QTime(0, 0))
             ent.fecha_alta = int(time_alta.toSecsSinceEpoch())
         else:
             ent.fecha_alta = None
 
-        baja = self._view.frame.fecha_baja.date()
+        # Fecha de baja
+        baja = ctrs.fecha_baja.date()
         if baja.isValid():
             time_baja = QDateTime(baja, QTime(0, 0))
             ent.fecha_baja = int(time_baja.toSecsSinceEpoch())
         else:
             ent.fecha_baja = None
 
-        ent.motivo_baja = self._view.frame.edit_motivo_baja.text()
-        ent.descripcion = self._view.frame.text_descripcion.toPlainText()
+        # Motivo de bbaja
+        if ctrs.edit_motivo_baja.text():
+            ent.motivo_baja = ctrs.edit_motivo_baja.text()
+        else:
+            ent.motivo_baja = None
+
+        # Descripción
+        if ctrs.text_descripcion.toPlainText():
+            ent.descripcion = ctrs.text_descripcion.toPlainText()
+        else:
+            ent.descripcion = None
 
         return ent
 

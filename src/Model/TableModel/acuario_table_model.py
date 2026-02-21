@@ -56,10 +56,10 @@ class AcuarioTableModel(QAbstractTableModel):
                 return Qt.CheckState.Checked if ciclado else Qt.CheckState.Unchecked
             return None
 
-        # === Columna del CHECKBOX (CICL. = col 11) ===
+        # === Columna del CHECKBOX (MONT. = col 11) ===
         if col == 14:
             if role == Qt.ItemDataRole.CheckStateRole:
-                mounted = entidad.fecha_desmontaje not in (None, "")
+                mounted = entidad.fecha_desmontaje in (None, "")
                 return Qt.CheckState.Checked if mounted else Qt.CheckState.Unchecked
             return None
 

@@ -50,15 +50,31 @@ class SubcategoriaIncidenciaController(BaseController):
         """ Configura la entidad. """
 
         ent = SubcategoriaIncidenciaEntity()
+        ctrs = self._view.frame
 
-        if self._view.frame.edit_id.text():
-            ent.id = int(self._view.frame.edit_id.text())
+        # ID
+        if ctrs.edit_id.text():
+            ent.id = int(ctrs.edit_id.text())
         else:
             ent.id = None
 
-        ent.id_categoria = self._view.frame.combo_categoria_incidencia.currentData()
-        ent.subcategoria = self._view.frame.edit_subcategoria_incidencia.text()
-        ent.observaciones = self._view.frame.text_observaciones.toPlainText()
+        # Categoría de incidencia
+        if ctrs.combo_categoria_incidencia.currentIndex() != -1:
+            ent.id_categoria = ctrs.combo_categoria_incidencia.currentData()
+        else:
+            ent.id_categoria = None
+
+        # Subcategoría de incidencia
+        if ctrs.edit_subcategoria_incidencia.text():
+            ent.subcategoria = ctrs.edit_subcategoria_incidencia.text()
+        else:
+            ent.subcategoria = None
+
+        # Observaciones
+        if ctrs.text_observaciones.toPlainText():
+            ent.observaciones = ctrs.text_observaciones.toPlainText()
+        else:
+            ent.observaciones = None
 
         return ent
 
