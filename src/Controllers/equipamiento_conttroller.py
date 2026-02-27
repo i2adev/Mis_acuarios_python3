@@ -276,7 +276,7 @@ class EquipamientoController(BaseController):
             self._view.frame.edit_motivo_baja.setFocus()
             return res
 
-        return Result.success(1)
+        return Result.success(0)
 
     def _get_row_id(self, sender: QPushButton | QAction) -> Result:
         """ Obtiene el ID del registro seleccionado."""

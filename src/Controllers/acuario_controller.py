@@ -93,23 +93,8 @@ class AcuarioController(BaseController):
         else:
             ent.id_tipo = None
 
-        # if ctrs.edit_vol_neto.text():
-        #     ent.volumen_neto = ctrs.edit_vol_neto.text()
-        # else:
-        #     ent.volumen_neto = None
-
         # Volumen neto
-        if ctrs.edit_vol_neto.text():
-            ent.volumen_neto = int(ctrs.edit_vol_neto.text())
-        else:
-            ent.volumen_neto = None
-
-        # montaje = ctrs.fecha_montaje.date()
-        # if montaje.isValid():
-        #     time_inicio = QDateTime(montaje, QTime(0, 0))
-        #     ent.fecha_montaje = int(time_inicio.toSecsSinceEpoch())
-        # else:
-        #     ent.fecha_montaje = None
+        ent.volumen_neto = ctrs.edit_vol_neto.value()
 
         # Fecha de montaje
         f_montaje = ctrs.fecha_montaje.date()
@@ -119,13 +104,6 @@ class AcuarioController(BaseController):
         else:
             ent.fecha_montaje = None
 
-        # inicio_ciclado = ctrs.fecha_inicio_ciclado.date()
-        # if inicio_ciclado.isValid():
-        #     time_inicio = QDateTime(inicio_ciclado, QTime(0, 0))
-        #     ent.fecha_inicio_ciclado = int(time_inicio.toSecsSinceEpoch())
-        # else:
-        #     ent.fecha_inicio_ciclado = None
-
         # Fecha de inicio de ciclado
         f_i_ciclado = ctrs.fecha_inicio_ciclado.date()
         if f_i_ciclado.isValid():
@@ -134,13 +112,6 @@ class AcuarioController(BaseController):
         else:
             ent.fecha_inicio_ciclado = None
 
-        # fin_ciclado = ctrs.fecha_fin_ciclado.date()
-        # if fin_ciclado.isValid():
-        #     time_inicio = QDateTime(fin_ciclado, QTime(0, 0))
-        #     ent.fecha_fin_ciclado = int(time_inicio.toSecsSinceEpoch())
-        # else:
-        #     ent.fecha_fin_ciclado = None
-
         # Fecha de inicio de ciclado
         f_f_ciclado = ctrs.fecha_fin_ciclado.date()
         if f_f_ciclado.isValid():
@@ -148,13 +119,6 @@ class AcuarioController(BaseController):
             ent.fecha_fin_ciclado = int(time_inicio.toSecsSinceEpoch())
         else:
             ent.fecha_fin_ciclado = None
-
-        # desmontaje = ctrs.fecha_desmontaje.date()
-        # if desmontaje.isValid():
-        #     time_inicio = QDateTime(desmontaje, QTime(0, 0))
-        #     ent.fecha_desmontaje = int(time_inicio.toSecsSinceEpoch())
-        # else:
-        #     ent.fecha_desmontaje = None
 
         # Fecha de desmontaje del acuario
         f_desmontaje = ctrs.fecha_desmontaje.date()
@@ -336,15 +300,6 @@ class AcuarioController(BaseController):
             self._view.frame.combo_tipo_acuario.setFocus()
             return res
 
-        # Valida el volumen neto
-        res = AcuarioValidator.validate_vol_neto(
-            self._view.frame.edit_vol_neto
-        )
-
-        if not res.is_success:
-            self._view.frame.edit_vol_neto.setFocus()
-            return res
-
         # Valida la fecha de montaje
         res = AcuarioValidator.validate_fecha_montaje(
             self._view.frame.fecha_montaje
@@ -354,25 +309,7 @@ class AcuarioController(BaseController):
             self._view.frame.fecha_montaje.edit_date.setFocus()
             return res
 
-        # Valida el motivo de desmontaje
-        res = AcuarioValidator.validate_motivo_desmontaje(
-            self._view.frame.edit_motivo_desmontaje
-        )
-
-        if not res.is_success:
-            self._view.frame.edit_fecha_montaje.setFocus()
-            return res
-
-        # Valida la ubicación del acuario
-        res = AcuarioValidator.validate_ubicación_acuarfio(
-            self._view.frame.edit_ubicacion_acuario
-        )
-
-        if not res.is_success:
-            self._view.frame.edit_ubicacion_acuario.setFocus()
-            return res
-
-        return Result.success(1)
+        return Result.success(0)
 
     def _get_row_id(self, sender: QPushButton | QAction) -> Result:
         """ Obtiene el ID del registro seleccionado."""
@@ -621,9 +558,12 @@ class AcuarioController(BaseController):
         self._view.frame.combo_tipo_acuario.setCurrentIndex(
             self._view.frame.combo_tipo_acuario.findText(tipo)
         )
-        self._view.frame.edit_vol_neto.setText(
-            str(volumen) if volumen is not None else ""
-        )
+
+        if volumen:
+            self._view.frame.edit_vol_neto.setValue(int(volumen))
+        else:
+            self._view.frame.edit_vol_neto.setValue(None)
+
         self._view.frame.fecha_montaje.setDate(fecha_montaje)
         self._view.frame.fecha_inicio_ciclado.setDate(fecha_inicio_ciclado)
         self._view.frame.fecha_fin_ciclado.setDate(fecha_fin_ciclado)

@@ -26,7 +26,7 @@ class ComercioValidator:
                 "EL CAMPO 'COMERCIO' NO PUEDE CONTENER MAS DE 32 CARÁCTERES")
 
         # Validación exitosa
-        return Result.success(1)
+        return Result.success(0)
 
     @staticmethod
     def validate_direccion(widget: QLineEdit):
@@ -34,7 +34,7 @@ class ComercioValidator:
 
         # Si el combo está vacío
         if not widget.text():
-            return Result.success(1)
+            return Result.success(0)
 
         # Válida la longitud del campo
         if len(widget.text()) > 64:
@@ -42,7 +42,7 @@ class ComercioValidator:
                 "EL CAMPO 'DIRECCIÓN' NO PUEDE CONTENER MAS DE 64 CARÁCTERES")
 
         # Validación exitosa
-        return Result.success(1)
+        return Result.success(0)
 
     @staticmethod
     def validate_cod_postal(widget: QLineEdit):
@@ -50,7 +50,7 @@ class ComercioValidator:
 
         # Si el combo está vacío
         if not widget.text():
-            return Result.success(1)
+            return Result.success(0)
 
         # Válida la longitud del campo
         if len(widget.text()) > 15:
@@ -59,7 +59,7 @@ class ComercioValidator:
                 "CARÁCTERES")
 
         # Validación exitosa
-        return Result.success(1)
+        return Result.success(0)
 
     @staticmethod
     def validate_poblacion(widget: QLineEdit):
@@ -67,7 +67,7 @@ class ComercioValidator:
 
         # Si el combo está vacío
         if not widget.text():
-            return Result.success(1)
+            return Result.success(0)
 
         # Válida la longitud del campo
         if len(widget.text()) > 25:
@@ -75,7 +75,7 @@ class ComercioValidator:
                 "EL CAMPO 'POBLACIÓN' NO PUEDE CONTENER MAS DE 25 CARÁCTERES")
 
         # Validación exitosa
-        return Result.success(1)
+        return Result.success(0)
 
     @staticmethod
     def validate_provincia(widget: QLineEdit):
@@ -83,7 +83,7 @@ class ComercioValidator:
 
         # Si el combo está vacío
         if not widget.text():
-            return Result.success(1)
+            return Result.success(0)
 
         # Válida la longitud del campo
         if len(widget.text()) > 25:
@@ -91,7 +91,7 @@ class ComercioValidator:
                 "EL CAMPO 'PROVINCIA' NO PUEDE CONTENER MAS DE 25 CARÁCTERES")
 
         # Validación exitosa
-        return Result.success(1)
+        return Result.success(0)
 
     @staticmethod
     def validate_pais(widget: QComboBox):
@@ -102,4 +102,4 @@ class ComercioValidator:
             return Result.failure("EL CAMPO 'PAÍS' NO PUEDE ESTAR VACÍO")
 
         # Validación exitosa
-        return Result.success(1)
+        return Result.success(0)

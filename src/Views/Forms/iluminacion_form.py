@@ -13,6 +13,8 @@ from PyQt6.QtWidgets import QFrame, QLabel, QLineEdit, QPlainTextEdit, \
     QVBoxLayout, QHBoxLayout, QApplication, QComboBox, QPushButton, QGroupBox, \
     QCheckBox
 
+from CustomControls.double_line_edit import DoubleLineEdit
+from CustomControls.int_line_edit import IntLineEdit
 from CustomControls.nullable_date_edit import NullableDateEdit
 
 
@@ -146,7 +148,12 @@ class IluminacionForm(QFrame):
             """
         )
 
-        self.edit_potencia = QLineEdit()
+        self.edit_potencia = DoubleLineEdit(
+            control_name="POTENCIA",
+            min_value=2,
+            max_value=400,
+            units="VATIOS"
+        )
         self.edit_potencia.setObjectName("edit_potencia")
         self.edit_potencia.setValidator(decimal_validator)
         self.edit_potencia.setToolTip(
@@ -156,7 +163,12 @@ class IluminacionForm(QFrame):
             """
         )
 
-        self.edit_flujo_luminico = QLineEdit()
+        self.edit_flujo_luminico = IntLineEdit(
+            control_name="FLUJO LUMÍNICO",
+            min_value=5,
+            max_value=200,
+            units="LÚMENES"
+        )
         self.edit_flujo_luminico.setObjectName("edit_flujo_luminico")
         self.edit_flujo_luminico.setValidator(QIntValidator())
         self.edit_flujo_luminico.setToolTip(
@@ -166,7 +178,12 @@ class IluminacionForm(QFrame):
             """
         )
 
-        self.edit_temperatura = QLineEdit()
+        self.edit_temperatura = IntLineEdit(
+            control_name="TEMPERATURA",
+            min_value=4_000,
+            max_value=12_000,
+            units="GRADOS KELVIN"
+        )
         self.edit_temperatura.setObjectName("edit_temperatura")
         self.edit_temperatura.setValidator(QIntValidator())
         self.edit_temperatura.setToolTip(
@@ -177,7 +194,12 @@ class IluminacionForm(QFrame):
             """
         )
 
-        self.edit_vida_util = QLineEdit()
+        self.edit_vida_util = IntLineEdit(
+            control_name="VIDA UTIL",
+            min_value=1_000,
+            max_value=200_000,
+            units="HORAS"
+        )
         self.edit_vida_util.setObjectName("edit_vida_util")
         self.edit_vida_util.setValidator(QIntValidator())
         self.edit_vida_util.setToolTip(
@@ -187,7 +209,12 @@ class IluminacionForm(QFrame):
             """
         )
 
-        self.edit_longitud = QLineEdit()
+        self.edit_longitud = IntLineEdit(
+            control_name="LONGITUD",
+            min_value=5,
+            max_value=200,
+            units="CMS"
+        )
         self.edit_longitud.setObjectName("edit_longitud")
         self.edit_longitud.setValidator(decimal_validator)
         self.edit_longitud.setToolTip(
@@ -197,7 +224,12 @@ class IluminacionForm(QFrame):
             """
         )
 
-        self.edit_anchura = QLineEdit()
+        self.edit_anchura = IntLineEdit(
+            control_name="ANCHURA",
+            min_value=5,
+            max_value=200,
+            units="CMS"
+        )
         self.edit_anchura.setObjectName("edit_anchura")
         self.edit_anchura.setValidator(decimal_validator)
         self.edit_anchura.setToolTip(

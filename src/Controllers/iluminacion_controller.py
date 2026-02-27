@@ -302,51 +302,6 @@ class IluminacionController(BaseController):
             self._view.frame.combo_tipo_iluminacion.setFocus()
             return res
 
-        # Valida la potencia de la luminaria
-        res = IluminacionValidator.validate_potencia(
-            self._view.frame.edit_potencia
-        )
-
-        if not res.is_success:
-            self._view.frame.edit_potencia.setFocus()
-            return res
-
-        # Valida el flujo lumínico
-        res = IluminacionValidator.validate_flujo_luminoso(
-            self._view.frame.edit_flujo_luminico
-        )
-
-        if not res.is_success:
-            self._view.frame.edit_flujo_luminico.setFocus()
-            return res
-
-        # Valida la temperatura
-        res = IluminacionValidator.validate_temperatura(
-            self._view.frame.edit_temperatura
-        )
-
-        if not res.is_success:
-            self._view.frame.edit_temperatura.setFocus()
-            return res
-
-        # Valida la longitud
-        res = IluminacionValidator.validate_longitud(
-            self._view.frame.edit_longitud
-        )
-
-        if not res.is_success:
-            self._view.frame.edit_longitud.setFocus()
-            return res
-
-        # Valida la anchura
-        res = IluminacionValidator.validate_anchura(
-            self._view.frame.edit_anchura
-        )
-
-        if not res.is_success:
-            self._view.frame.edit_anchura.setFocus()
-            return res
-
         # Valida la fecha de alta
         res = IluminacionValidator.validate_fecha_alta(
             self._view.frame.fecha_alta
@@ -356,16 +311,7 @@ class IluminacionController(BaseController):
             self._view.frame.fecha_alta.setFocus()
             return res
 
-        # Valida el motivo de la baja
-        res = IluminacionValidator.validate_motivo_baja(
-            self._view.frame.edit_motivo_baja
-        )
-
-        if not res.is_success:
-            self._view.frame.edit_motivo_baja.setFocus()
-            return res
-
-        return Result.success(1)
+        return Result.success(0)
 
     def _get_row_id(self, sender: QPushButton | QAction) -> Result:
         control = type(sender).__name__

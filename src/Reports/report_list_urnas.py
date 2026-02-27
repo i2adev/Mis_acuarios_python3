@@ -132,7 +132,7 @@ class ReportListUrnasPDF(FPDF):
         """ Guarda el reporte en formato PDF. """
         try:
             self.output(f"{self._titulo}.pdf")
-            return Result.success(1)
+            return Result.success(0)
         except FPDFException as e:
             return Result.failure(f"Error interno de FPDF:\n {e}")
         except OSError as e:

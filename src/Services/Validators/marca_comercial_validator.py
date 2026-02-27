@@ -29,7 +29,7 @@ class MarcaComercialValidator:
                                   "CONTENER MAS DE 32 CARACTERES")
 
             # Validación exitosa
-        return Result.success(1)
+        return Result.success(0)
 
     @staticmethod
     def validate_direccion(widget: QLineEdit):
@@ -41,7 +41,7 @@ class MarcaComercialValidator:
                                   "CONTENER MAS DE 128 CARACTERES")
 
         # Validación exitosa
-        return Result.success(1)
+        return Result.success(0)
 
     @staticmethod
     def validate_cod_postal(widget: QLineEdit):
@@ -53,7 +53,7 @@ class MarcaComercialValidator:
                                   "CONTENER MAS DE 16 CARACTERES")
 
         # Validación exitosa
-        return Result.success(1)
+        return Result.success(0)
 
     @staticmethod
     def validate_poblacion(widget: QLineEdit):
@@ -65,7 +65,7 @@ class MarcaComercialValidator:
                                   "CONTENER MAS DE 32 CARACTERES")
 
         # Validación exitosa
-        return Result.success(1)
+        return Result.success(0)
 
     @staticmethod
     def validate_provincia(widget: QLineEdit):
@@ -77,7 +77,7 @@ class MarcaComercialValidator:
                                   "CONTENER MAS DE 32 CARACTERES")
 
         # Validación exitosa
-        return Result.success(1)
+        return Result.success(0)
 
     @staticmethod
     def validate_pais(widget: QComboBox):
@@ -90,4 +90,4 @@ class MarcaComercialValidator:
             )
 
         # Validación exitosa
-        return Result.success(1)
+        return Result.success(0)

@@ -165,7 +165,7 @@ class TipoFiltroController(BaseController):
             self._view.frame.edit_tipo_filtro.setFocus()
             return res
 
-        return Result.success(1)
+        return Result.success(0)
 
     def _get_row_id(self, sender: QPushButton | QAction) -> Result:
         control = type(sender).__name__

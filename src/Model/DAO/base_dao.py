@@ -162,7 +162,7 @@ class BaseDAO(ABC):
                 cursor.execute(InsertCmd.INSERT_FORMATO_CONSUMIBLE)
                 cursor.execute(InsertCmd.INSERTAR_UNIDAD_CONTENIDO)
                 db.conn.commit()
-                return Result.success(1)
+                return Result.success(0)
 
             except sqlite3.OperationalError as e:
                 traceback.print_exc()

@@ -7,6 +7,7 @@ Comentarios:
 
 from PyQt6.QtWidgets import QLineEdit, QComboBox
 
+from CustomControls.int_line_edit import IntLineEdit
 from CustomControls.nullable_date_edit import NullableDateEdit
 from Model.DAO.acuario_dao import AcuarioDAO
 from Model.DAO.urna_dao import UrnaDAO
@@ -37,7 +38,7 @@ class AcuarioValidator:
                 )
 
         # Validación exitosa
-        return Result.success(1)
+        return Result.success(0)
 
     @staticmethod
     def validate_proyecto(widget: QComboBox) -> Result:
@@ -50,7 +51,7 @@ class AcuarioValidator:
             )
 
         # Validación exitosa
-        return Result.success(1)
+        return Result.success(0)
 
     @staticmethod
     def validate_nombre(widget: QLineEdit) -> Result:
@@ -62,16 +63,12 @@ class AcuarioValidator:
                 "EL CAMPO 'NOMBRE DEL ACUARIO' NO PUEDE ESTAR VACÍO"
             )
 
-        # Controla la longitud del texto
-        if len(widget.text()) > 32:
-            return Result.failure("EL CAMPO 'NOMBRE DEL ACUARIO' NO "
-                                  "PUEDE CONTENER MAS DE 32 CARACTERES")
-
         # Validación exitosa
-        return Result.success(1)
+        return Result.success(0)
 
     @staticmethod
-    def validate_urna(widget: QComboBox, val_is_mounted: bool = True) -> Result:
+    def validate_urna(widget: QComboBox,
+                      val_is_mounted: bool = True) -> Result:
         """ Válida la urna. """
 
         # Sí el combo está vacío
@@ -91,7 +88,7 @@ class AcuarioValidator:
                 )
 
         # Validación exitosa
-        return Result.success(1)
+        return Result.success(0)
 
     @staticmethod
     def validate_tipo_acuario(widget: QComboBox) -> Result:
@@ -104,25 +101,7 @@ class AcuarioValidator:
             )
 
         # Validación exitosa
-        return Result.success(1)
-
-    @staticmethod
-    def validate_vol_neto(widget: QLineEdit) -> Result:
-        """ Válida el volumen neto. """
-
-        # Sí el texto está vacío
-        if not widget.text():
-            return Result.success(1)
-
-        # Valida el rango del volumen
-        n = int(widget.text())
-
-        if (n < 10) or (n > 2_000):
-            return Result.failure("EL VOLUMEN NETO DEL ACUARIO DEBE SER "
-                                  "DE 10 A 1.0000 cm.")
-
-            # Validación exitosa
-        return Result.success(1)
+        return Result.success(0)
 
     @staticmethod
     def validate_fecha_montaje(widget: NullableDateEdit) -> Result:
@@ -134,36 +113,4 @@ class AcuarioValidator:
                                   "VACÍO.")
 
         # Validación exitosa
-        return Result.success(1)
-
-    @staticmethod
-    def validate_motivo_desmontaje(widget: QLineEdit) -> Result:
-        """ Válida el motivo de desmontaje. """
-
-        # Sí el texto está vacío
-        if not widget.text():
-            return Result.success(1)
-
-        # Controla la longitud del texto
-        if len(widget.text()) > 32:
-            return Result.failure("EL CAMPO 'MOTIVO DE DESMONTAJE' NO "
-                                  "PUEDE CONTENER MAS DE 32 CARACTERES")
-
-        # Validación exitosa
-        return Result.success(1)
-
-    @staticmethod
-    def validate_ubicación_acuarfio(widget: QLineEdit) -> Result:
-        """ Válida la ubicación del acuario. """
-
-        # Sí el texto está vacío
-        if not widget.text():
-            return Result.success(1)
-
-        # Controla la longitud del texto
-        if len(widget.text()) > 32:
-            return Result.failure("EL CAMPO 'UBICACIÓN DE ACUARIO' NO "
-                                  "PUEDE CONTENER MAS DE 32 CARACTERES")
-
-        # Validación exitosa
-        return Result.success(1)
+        return Result.success(0)

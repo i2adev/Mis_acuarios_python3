@@ -25,7 +25,7 @@ class SubcategoriaAcuarioValidator:
             )
 
         # Validación exitosa
-        return Result.success(1)
+        return Result.success(0)
 
     @staticmethod
     def validate_subcategoria_acuario(widget: QLineEdit):
@@ -43,4 +43,4 @@ class SubcategoriaAcuarioValidator:
                                   "CONTENER MAS DE 32 CARACTERES")
 
         # Validación exitosa
-        return Result.success(1)
+        return Result.success(0)

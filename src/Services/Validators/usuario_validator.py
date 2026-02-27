@@ -32,7 +32,7 @@ class UsuarioValidator:
                                   "PUEDE CONTENER MAS DE 32 CARACTERES")
 
         # Validación exitosa
-        return Result.success(1)
+        return Result.success(0)
 
     @staticmethod
     def validate_primer_apellido(widget: QLineEdit):
@@ -50,7 +50,7 @@ class UsuarioValidator:
                                   "PUEDE CONTENER MAS DE 32 CARACTERES")
 
         # Validación exitosa
-        return Result.success(1)
+        return Result.success(0)
 
     @staticmethod
     def validate_segundo_apellido(widget: QLineEdit):
@@ -68,7 +68,7 @@ class UsuarioValidator:
                                   "PUEDE CONTENER MAS DE 32 CARACTERES")
 
         # Validación exitosa
-        return Result.success(1)
+        return Result.success(0)
 
     @staticmethod
     def validate_nick(widget: QLineEdit):
@@ -79,7 +79,7 @@ class UsuarioValidator:
             return Result.failure("EL CAMPO 'NICK DE USUARIO' NO "
                                   "PUEDE CONTENER MAS DE 32 CARACTERES")
 
-        return Result.success(1)
+        return Result.success(0)
 
     @staticmethod
     def validate_mail(widget: QLineEdit):
@@ -107,7 +107,7 @@ class UsuarioValidator:
                                   "TIENE EL FORMATO CORRECTO")
 
         # Validación exitosa
-        return Result.success(1)
+        return Result.success(0)
 
     @staticmethod
     def validate_password(widget1: QLineEdit, widget2: QLineEdit):
@@ -124,4 +124,4 @@ class UsuarioValidator:
             return Result.failure("LA LONGITUD DE LA CONTRASEÑA HA DE ESTAR "
                                   "ENTRE 6 Y 8 CARÁCTERES")
 
-        return Result.success(1)
+        return Result.success(0)

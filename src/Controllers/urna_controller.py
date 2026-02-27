@@ -234,60 +234,6 @@ class UrnaController(BaseController):
             self._view.frame.edit_modelo.setFocus()
             return res
 
-        # Valida la anchura de la urna
-        res = UrnaValidator.validate_anchura(
-            self._view.frame.edit_ancho
-        )
-
-        if not res.is_success:
-            self._view.frame.edit_ancho.setFocus()
-            return res
-
-        # Valida la profundidad de la urna
-        res = UrnaValidator.validate_profundidad(
-            self._view.frame.edit_profundo
-        )
-
-        if not res.is_success:
-            self._view.frame.edit_profundo.setFocus()
-            return res
-
-        # Valida la altura de la urna
-        res = UrnaValidator.validate_altura(
-            self._view.frame.edit_alto
-        )
-
-        if not res.is_success:
-            self._view.frame.edit_alto.setFocus()
-            return res
-
-        # Válida el grosor del cristal
-        res = UrnaValidator.validate_grosor(
-            self._view.frame.edit_grosor
-        )
-
-        if not res.is_success:
-            self._view.frame.edit_grosor.setFocus()
-            return res
-
-        # Válida el volumen del tanque
-        res = UrnaValidator.validate_volumen(
-            self._view.frame.edit_volumen
-        )
-
-        if not res.is_success:
-            self._view.frame.edit_volumen.setFocus()
-            return res
-
-        # Válida el volumen del tanque
-        res = UrnaValidator.validate_volumen(
-            self._view.frame.edit_volumen
-        )
-
-        if not res.is_success:
-            self._view.frame.edit_volumen.setFocus()
-            return res
-
         # Valida el material de la urna
         res = UrnaValidator.validate_material(
             self._view.frame.combo_material
@@ -297,7 +243,7 @@ class UrnaController(BaseController):
             self._view.frame.combo_material.setFocus()
             return res
 
-        return Result.success(1)
+        return Result.success(0)
 
     def _get_row_id(self, sender: QPushButton | QAction) -> Result:
         control = type(sender).__name__

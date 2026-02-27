@@ -189,7 +189,7 @@ class SubcategoriaIncidenciaController(BaseController):
             self._view.frame.edit_subcategoria_incidencia.setFocus()
             return val
 
-        return Result.success(1)
+        return Result.success(0)
 
     def _get_row_id(self, sender: QPushButton | QAction) -> Result:
         control = type(sender).__name__

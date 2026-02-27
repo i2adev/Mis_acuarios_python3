@@ -23,7 +23,7 @@ class EquipamientoValidator:
             )
 
         # Validación exitosa
-        return Result.success(1)
+        return Result.success(0)
 
     @staticmethod
     def validate_marca(widget: QComboBox) -> Result:
@@ -36,7 +36,7 @@ class EquipamientoValidator:
             )
 
         # Validación exitosa
-        return Result.success(1)
+        return Result.success(0)
 
     @staticmethod
     def validate_modelo(widget: QLineEdit) -> Result:
@@ -54,7 +54,7 @@ class EquipamientoValidator:
                                   "32 CARACTERES")
 
         # Validación exitosa
-        return Result.success(1)
+        return Result.success(0)
 
     @staticmethod
     def validate_numero_serie(widget: QLineEdit) -> Result:
@@ -73,7 +73,7 @@ class EquipamientoValidator:
                 "32 CARACTERES")
 
         # Validación exitosa
-        return Result.success(1)
+        return Result.success(0)
 
     @staticmethod
     def validate_fecha_alta(widget: QLineEdit) -> Result:
@@ -83,7 +83,7 @@ class EquipamientoValidator:
                 """EL CAMPO 'FECHA DE ALTA' NO PUEDE ESTAR VACÍO"""
             )
 
-        return Result.success(1)
+        return Result.success(0)
 
     @staticmethod
     def validate_motivo_baja(widget: QLineEdit) -> Result:
@@ -91,7 +91,7 @@ class EquipamientoValidator:
 
         # Sí el texto está vacío
         if not widget.text():
-            return Result.success(1)
+            return Result.success(0)
 
         # Controla la longitud del texto
         if len(widget.text()) > 32:
@@ -99,4 +99,4 @@ class EquipamientoValidator:
                                   "CONTENER MAS DE 32 CARACTERES")
 
         # Validación exitosa
-        return Result.success(1)
+        return Result.success(0)

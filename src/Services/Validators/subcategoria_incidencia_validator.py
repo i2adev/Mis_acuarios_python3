@@ -25,7 +25,7 @@ class SubcategoriaIncidenciaValidator:
             )
 
         # Validación exitosa
-        return Result.success(1)
+        return Result.success(0)
 
     @staticmethod
     def validate_subcategoria_incidencia(widget: QLineEdit):
@@ -43,4 +43,4 @@ class SubcategoriaIncidenciaValidator:
                                   "PUEDE CONTENER MAS DE 32 CARACTERES")
 
         # Validación exitosa
-        return Result.success(1)
+        return Result.success(0)

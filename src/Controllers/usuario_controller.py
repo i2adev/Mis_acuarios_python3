@@ -164,7 +164,7 @@ class UsuarioDialogController(BaseController):
             self._view.frame.edit_password.setFocus()
             return res
 
-        return Result.success(1)
+        return Result.success(0)
 
     def dialog_accept(self):
         """ Se acepta el diálogo. """

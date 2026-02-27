@@ -24,7 +24,7 @@ class TipoAcuarioValidator:
             )
 
         # Validación exitosa
-        return Result.success(1)
+        return Result.success(0)
 
     @staticmethod
     def ValidateSubcategoriaAcuario(widget: QComboBox):
@@ -37,4 +37,4 @@ class TipoAcuarioValidator:
             )
 
         # Validación exitosa
-        return Result.success(1)
+        return Result.success(0)

@@ -175,27 +175,263 @@ FECHA		DESCRIPCIÓN
                         VISIBLE LA COLUMNA DEL ESTADO DEL PROYECTO.
 
             MODIFICAR LOS CAMPOS NUMERICOS. REEMPLAZARO LOS QLINEEDIT POR
-            QSPINBOX PARA NUMEROS ENTEROS Y QDOUBLESPINBOX PARA NUMEROS
+            INTLINEEDIT PARA NUMEROS ENTEROS Y DOUBLELINEEDIT PARA NUMEROS
             DECIMALES.
             --------------------------------------------------------------------
-            class NullableSpinBox(QSpinBox):
+            class IntLineEdit(QLineEdit):
+                """
+                QLineEdit que solo admite enteros.
+                Máximo 7 dígitos mientras escribes.
+                Al perder el foco, muestra el valor con separador de miles en
+                español.
+                """
+
+                MAX_DIGITS = 7  # máximo de dígitos permitidos
+
                 def __init__(self, parent=None):
                     super().__init__(parent)
-                    self.setGroupSeparatorShown(True)
-                    self.setMinimum(-1)
-                    self.setValue(-1)
-                    # Cuando el valor sea -1, el campo se verá vacío
-                    self.setSpecialValueText(" ")
+                    self._locale = QLocale(QLocale.Language.Spanish,
+                    QLocale.Country.Spain)
+                    self.setAlignment(Qt.AlignmentFlag.AlignRight)
+                    self._value = None
 
-                def get_valued(self):
-                    """Método personalizado para obtener el valor o None"""
-                    val = self.value()
-                    return None if val == -1 else val
+                def value(self):
+                    """Devuelve el valor como int o None si está vacío."""
+                    return self._value
 
-            -   DONE:   SE CREA LA CLASE 'NULLABLESPINBOX' QUE HEREDA DE
-                        QSPINBOX.
-            -   DONE:   SE CREA LA CLASE 'NULLABLEDOUBLESPINBOX' QUE HEREDA DE
-                        QDOUBLESPINBOX.
+                def setValue(self, value: int | None):
+                    """Establece un valor y actualiza la visualización."""
+                    if value is None:
+                        self._value = None
+                        self.setText("")
+                    else:
+                        self._value = value
+                        self.setText(self._locale.toString(value))
+
+                def focusOutEvent(self, event):
+                    """Valida y formatea al perder el foco."""
+                    text = self.text().strip()
+
+                    if not text:
+                        self._value = None
+                        self.setText("")
+                    else:
+                        # Convertir a entero
+                        try:
+                            val = int(text)
+                            self._value = val
+                            # Formatear con separador de miles
+                            self.setText(self._locale.toString(val))
+                        except ValueError:
+                            QMessageBox.warning(
+                                None,
+                                "ERROR DE FORMATO",
+                                f"ESTE CAMPO SOLO AMDINE NÚMEROS ENTEROS"
+                            )
+                            self._value = None
+                            self.setText("")
+                            self.setFocus()
+
+                    super().focusOutEvent(event)
+
+                def keyPressEvent(self, event):
+                    """
+                    Permite solo dígitos y teclas de control, limita el
+                    número de dígitos.
+                    """
+                    # Teclas de control permitidas
+                    if event.key() in (
+                            Qt.Key.Key_Backspace,
+                            Qt.Key.Key_Delete,
+                            Qt.Key.Key_Left,
+                            Qt.Key.Key_Right,
+                            Qt.Key.Key_Home,
+                            Qt.Key.Key_End,
+                    ):
+                        super().keyPressEvent(event)
+                        return
+
+                    # Solo permitir dígitos
+                    if event.text().isdigit():
+                        digits_only = ''.join(filter(str.isdigit, self.text()))
+                        if len(digits_only) >= self.MAX_DIGITS:
+                            # Ignorar si ya alcanzamos el máximo
+                            event.ignore()
+                        else:
+                            super().keyPressEvent(event)
+                    else:
+                        event.ignore()
+
+            -   DONE:   SE CREA LA CLASE 'INTLINEDIT' QUE HEREDA DE QLINEEDIT.
+            -   DONE:   SE CREA LA CLASE 'DOUBLELINEEDIT' QUE HEREDA DE
+                        QLINEEDIT.
+
+            -   FORMULARIO ACUARIO:
+                -   DONE:   VOLUMEN NETO -> SE CAMBIA EL CONTROL.
+                -   DONE:   SE MODIFICA LA 'ENTITY_CONFIGURATION'.
+                -   DONE:   SE MODIFICA LA VALIDACIÓN DEL REGISTRO PARA QUE
+                            ELIMINE EL PUNTO DE LOS MILES EN EL CAMPO NÚMERICO.
+                            n = int(widget.text().replace('.', ''))
+                -   DONE:   SE CORRIGE EL ERROR QUE SE PRODUCE DURANTE LA CARGA
+                            DEL REGISTRO CUANDO EL ACUARIO NO TIENE UN COLUMEN
+                            NETO.
+                -   DONE:   TEST -> INSERCION DE REGISTTRO.
+                -   DONE:   TEST -> ACTUALIZACIÓN DE REGISTRO.
+                -   DONE:   TEST -> ELIMINACIÓN DE REGISTRO DESDE MENÚ
+                            CONTEXTUAL.
+                -   DONE:   TEST -> ELIMINACIÓN DE REGISTRO DESDE EL BOTÓN.
+                -   DONE:   SE MODIFICA EL VALIDADOR DEL FORMULARIO.
+                -   DONE:   SE MODIFICA EL CONTROLADOR PARA ADECUAR AL NUEVO
+                            SISTEMA DE VALIDACIÓN.
+
+            -   FORMULARIO FILTRO:
+                SE MODIFICAN LOS CONTROLES EN LA VISTA.
+                -   DONE:   VOLUMEN MINIMO ACUARIO -> SE CAMBIA EL CONTROL A
+                            INTLINEEDIT (ENTERO).
+                -   DONE:   VOLUMEN MÁXIMO ACUARIO -> SE CAMBIA EL CONTROL A
+                            INTLINEEDIT (ENTERO).
+                -   DONE:   CONSUMO FILTRO -> SE CAMBIA EL CONTROL A
+                            INTLINEEDIT (ENTERO).
+                -   DONE:   CONSUMO CALENTADOR -> SE CAMBIA EL CONTROL A
+                            INTLINEEDIT (ENTERO).
+                -   DONE:   DIMENSIONES: ANCHO -> SE CAMBIA EL CONTROL A
+                            DOUBLELINEEDIT (FLOAT).
+                -   DONE:   DIMENSIONES: FONDO -> SE CAMBIA EL CONTROL A
+                            DOUBLELINEEDIT (FLOAT).
+                -   DONE:   DIMENSIONES: ALTO -> SE CAMBIA EL CONTROL A
+                            DOUBLELINEEDIT (FLOAT).
+                -   DONE:   VOLUMEN MATERIAL -> SE CAMBIA EL CONTROL A
+                            DOUBLELINEEDIT (FLOAT).
+                -   DONE:   ANTURA MÁXIMA DE BOMBEO -> SE CAMBIA EL CONTROL A
+                            DOUBLELINEEDIT (FLOAT).
+                -   DONE:   CAUDAL DE LA BOMBA -> SE CAMBIA EL CONTROL A
+                            INTLINEEDIT (ENTERO).
+                -   DONE:   SE MODIFICA EL VALIDADOR DEL FORMULARIO.
+                -   DONE:   SE MODIFICA EL CONTROLADOR PARA ADECUAR AL NUEVO
+                            SISTEMA DE VALIDACIÓN.
+
+            -   FORMULARIO ILUMINACIÓN:
+                SE MODIFICAN LOS CONTROLES DE LA VISTA.
+                -   DONE:   POTENCIA.
+                    -   DONE:   SE CAMBIA EL CONTROL A DOUBLELINEEDIT
+                                (FLOAT).
+                    -   DONE:   SE MODIFICA EL VALIDADOR.
+
+                -   DONE:   FLUJO LUMINICO.
+                    -   DONE:   SE CAMBIA EL CONTROL A INTLINEEDIT (ENTERO).
+                    -   DONE:   SE MODIFICA EL VALIDADOR.
+
+                -   DONE:   TEMPERATURA.
+                    -   DONE:   SE CAMBIA EL CONTROL A INTLINEEDIT (ENTERO).
+                    -   DONE:   SE MODIFICA EL VALIDADOR.
+
+                -   DONE:   VIDA UTIL.
+                    -   DONE:   SE CAMBIA EL CONTROL A INTLINEEDIT (ENTERO).
+                    -   DONE:   SE MODIFICA EL VALIDADOR.
+
+                -   DONE:   LONGITUD.
+                    -   DONE:   SE CAMBIA EL CONTROL A DOUBLELINEEDIT
+                                (FLOAT).
+                    -   DONE:   SE MODIFICA EL VALIDADOR.
+
+                -   DONE:   ANCHURA.
+                    -   DONE:   SE CAMBIA EL CONTROL A DOUBLELINEEDIT
+                                (FLOAT).
+                    -   DONE:   SE MODIFICA EL VALIDADOR.
+
+                -   DONE:   SE MODIFICA EL CONTROLADOR PARA ADECUAR AL NUEVO
+                            SISTEMA DE VALIDACIÓN.
+
+            -   FORMULARIO URNAS:
+                SE MODIFICAN LOS CONTROLES DE LA VISTA.
+                -   DONE:   ANCHURA.
+                    -   DONE:   SE CAMBIA EL CONTROL A INTLINEEDIT (ENTERO).
+                    -   DONE:   SE MODIFICA EL VALIDADOR.
+
+                -   DONE:   PROFUNDO.
+                    -   DONE:   SE CAMBIA EL CONTROL A INTLINEEDIT (ENTERO).
+                    -   DONE:   SE MODIFICA EL VALIDADOR.
+
+                -   DONE:   ALTO.
+                    -   DONE:   SE CAMBIA EL CONTROL A INTLINEEDIT (ENTERO).
+                    -   DONE:   SE MODIFICA EL VALIDADOR.
+
+                -   DONE:   GROSOR CRISTAL.
+                    -   DONE:   SE CAMBIA EL CONTROL A INTLINEEDIT (ENTERO).
+                    -   DONE:   SE MODIFICA EL VALIDADOR.
+
+                -   DONE:   VOLUMEN TANQUE.
+                    -   DONE:   SE CAMBIA EL CONTROL A INTLINEEDIT (ENTERO).
+                    -   DONE:   SE MODIFICA EL VALIDADOR.
+
+                -   DONE:   SE MODIFICA EL CONTROLADOR PARA ADECUAR AL NUEVO
+                            SISTEMA DE VALIDACIÓN.
+
+                SE MODIFICA LA 'ENTITY_CONFIGURATION'.
+                -   DONE:   VOLUMEN MINIMO ACUARIO -> SE MODIFICA LA
+                            CONFIGURACIÓN.
+                -   DONE:   VOLUMEN MÁXIMO ACUARIO -> SE MODIFICA LA
+                            CONFIGURACIÓN.
+                -   DONE:   CONSUMO FILTRO -> SE MODIFICA LA
+                            CONFIGURACIÓN.
+                -   DONE:   CONSUMO CALENTADOR -> SE MODIFICA LA
+                            CONFIGURACIÓN.
+                -   DONE:   DIMENSIONES: ANCHO -> SE MODIFICA LA
+                            CONFIGURACIÓN.
+                -   DONE:   DIMENSIONES: FONDO -> SE MODIFICA LA
+                            CONFIGURACIÓN.
+                -   DONE:   DIMENSIONES: ALTO -> SE MODIFICA LA
+                            CONFIGURACIÓN.
+                -   DONE:   VOLUMEN MATERIAL -> SE MODIFICA LA
+                            CONFIGURACIÓN.
+                -   DONE:   ANTURA MÁXIMA DE BOMBEO -> SE MODIFICA LA
+                            CONFIGURACIÓN.
+                -   DONE:   CAUDAL DE LA BOMBA -> SE MODIFICA LA
+                            CONFIGURACIÓN.
+
+                SE MODIFICA LA VALIDACIÓN DEL REGISTRO PARA QUE ELIMINE EL
+                PUNTO DE LOS MILES EN EL CAMPO NUMÉRICO.
+                n = int(widget.text().replace('.', ''))
+                -   UNDO:   VOLUMEN MINIMO ACUARIO -> SE MODIFICA LA
+                            VALIDACIÓN.
+                -   UNDO:   VOLUMEN MÁXIMO ACUARIO -> SE MODIFICA LA
+                            VALIDACIÓN.
+                -   UNDO:   CONSUMO FILTRO -> SE MODIFICA LA
+                            VALIDACIÓN.
+                -   UNDO:   CONSUMO CALENTADOR -> SE MODIFICA LA
+                            VALIDACIÓN.
+                -   UNDO:   DIMENSIONES: ANCHO -> SE MODIFICA LA
+                            VALIDACIÓN.
+                -   UNDO:   DIMENSIONES: FONDO -> SE MODIFICA LA
+                            VALIDACIÓN.
+                -   UNDO:   DIMENSIONES: ALTO -> SE MODIFICA LA
+                            VALIDACIÓN.
+                -   UNDO:   VOLUMEN MATERIAL -> SE MODIFICA LA
+                            VALIDACIÓN.
+                -   UNDO:   ANTURA MÁXIMA DE BOMBEO -> SE MODIFICA LA
+                            VALIDACIÓN.
+                -   UNDO:   CAUDAL DE LA BOMBA -> SE MODIFICA LA
+                            VALIDACIÓN.
+
+                -   POST:   TEST -> INSERCION DE REGISTTRO.
+                -   POST:   TEST -> ACTUALIZACIÓN DE REGISTRO.
+                -   POST:   TEST -> ELIMINACIÓN DE REGISTRO DESDE MENÚ
+                            CONTEXTUAL.
+                -   POST:   TEST -> ELIMINACIÓN DE REGISTRO DESDE EL BOTÓN.
+
+            SE MODIFICA EL MÉTODO DE LAS VALIDACIONES:
+            -   TODAS LAS VALIDACIONES DE NUMEROS SE REDUCEN A UNA SOLA CLASE.
+            -   TODAS LAS VALIDACIONES SE REALIZAN AL PERDER EL FOCO EL CONTROL
+                DEL FORMULARIO.
+            --------------------------------------------------------------------
+            -   TODO:   FORMULARIO ACUARIO.
+
+
+            OTRAS CORRECCIONES:
+            -   UNDO:   SE ELIMINAN LAS FLECHAS DE LOS NULLABLESPINBOX Y
+                        NULLABLEDOUBLESPINBOX.
+            -   UNDO:   EN LOS SQPINBOX, CUANDO SE BORRA EL CONTENIDO Y PIERDE
+                        EL FOCO PONER EL VALOR MÍNIMO.
 
             TODO:   SE MODIFICA LA LÓGICA DE LAS IMAGENES PARA QUE SE EVITE
                     CARGAR LAS FOTOS SI NO ESTÁ RELLENADO EL FORMULARIO.

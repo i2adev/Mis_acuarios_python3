@@ -12,6 +12,8 @@ from PyQt6.QtGui import QIntValidator, QCursor
 from PyQt6.QtWidgets import QFrame, QLabel, QLineEdit, QPlainTextEdit, \
     QVBoxLayout, QHBoxLayout, QApplication, QComboBox, QPushButton
 
+from CustomControls.int_line_edit import IntLineEdit
+
 
 class UrnaForm(QFrame):
     """
@@ -102,7 +104,12 @@ class UrnaForm(QFrame):
             """
         )
 
-        self.edit_ancho = QLineEdit()
+        self.edit_ancho = IntLineEdit(
+            control_name="ANCHO",
+            min_value=10,
+            max_value=1_000,
+            units="CMS"
+        )
         self.edit_ancho.setObjectName("edit_ancho")
         self.edit_ancho.setValidator(QIntValidator())
         self.edit_ancho.setToolTip(
@@ -114,7 +121,12 @@ class UrnaForm(QFrame):
             """
         )
 
-        self.edit_profundo = QLineEdit()
+        self.edit_profundo = IntLineEdit(
+            control_name="PROFUNDIDAD",
+            min_value=10,
+            max_value=1_000,
+            units="CMS"
+        )
         self.edit_profundo.setObjectName("edit_profundo")
         self.edit_profundo.setValidator(QIntValidator())
         self.edit_profundo.setToolTip(
@@ -126,7 +138,12 @@ class UrnaForm(QFrame):
             """
         )
 
-        self.edit_alto = QLineEdit()
+        self.edit_alto = IntLineEdit(
+            control_name="ALTO",
+            min_value=10,
+            max_value=1_000,
+            units="CMS"
+        )
         self.edit_alto.setObjectName("edit_alto")
         self.edit_alto.setValidator(QIntValidator())
         self.edit_alto.setToolTip(
@@ -139,7 +156,12 @@ class UrnaForm(QFrame):
             """
         )
 
-        self.edit_grosor = QLineEdit()
+        self.edit_grosor = IntLineEdit(
+            control_name="GROSOR CRISTAL",
+            min_value=2,
+            max_value=1_000,
+            units="MMS"
+        )
         self.edit_grosor.setObjectName("edit_grosor")
         self.edit_grosor.setValidator(QIntValidator())
         self.edit_grosor.setToolTip(
@@ -149,7 +171,12 @@ class UrnaForm(QFrame):
             """
         )
 
-        self.edit_volumen = QLineEdit()
+        self.edit_volumen = IntLineEdit(
+            control_name="VOLUMEN TANQUE",
+            min_value=10,
+            max_value=1_000,
+            units="LITROS"
+        )
         self.edit_volumen.setObjectName("edit_volumen")
         self.edit_volumen.setValidator(QIntValidator())
         self.edit_volumen.setToolTip(

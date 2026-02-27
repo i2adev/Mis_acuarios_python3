@@ -91,68 +91,34 @@ class FiltroController(BaseController):
             ent.num_serie = None
 
         # Volumen mínimo del acuario
-        if ctrs.edit_vol_min_acuario.text():
-            ent.vol_min_acuario = (int(ctrs.edit_vol_min_acuario.text()))
-        else:
-            ent.vol_min_acuario = None
+        ent.vol_min_acuario = ctrs.edit_vol_min_acuario.value()
 
         # Volumen máximo del acuario
-        if ctrs.edit_vol_max_acuario.text():
-            ent.vol_max_acuario = (int(ctrs.edit_vol_max_acuario.text()))
-        else:
-            ent.vol_max_acuario = None
+        ent.vol_max_acuario = ctrs.edit_vol_max_acuario.value()
 
         # Consumo eléctrico del filtro
-        if ctrs.edit_consumo_filtro.text():
-            ent.consumo = int(ctrs.edit_consumo_filtro.text())
-        else:
-            ent.consumo = None
+        ent.consumo = ctrs.edit_consumo_filtro.value()
 
         # Consumo eléctrico del calentador del filtro
-        if ctrs.edit_consumo_calentador.text():
-            ent.consumo_calentador = int(ctrs.edit_consumo_calentador.text())
-        else:
-            ent.consumo_calentador = None
+        ent.consumo_calentador = ctrs.edit_consumo_calentador.value()
 
         # Dimensiones: Ancho
-        if ctrs.edit_ancho.text():
-            ent.ancho = int(ctrs.edit_ancho.text())
-        else:
-            ent.ancho = None
+        ent.ancho = ctrs.edit_ancho.value()
 
         # Dimensiones: Fondo
-        if ctrs.edit_fondo.text():
-            ent.fondo = int(ctrs.edit_fondo.text())
-        else:
-            ent.fondo = None
+        ent.fondo = ctrs.edit_fondo.value()
 
         # Dimensiones: Alto
-        if ctrs.edit_alto.text():
-            ent.alto = int(ctrs.edit_alto.text())
-        else:
-            ent.alto = None
+        ent.alto = ctrs.edit_alto.value()
 
         # Capacidad de carga filtrante
-        if ctrs.edit_vol_material.text():
-            vol_material = ctrs.edit_vol_material.text()
-            vol_material = vol_material.replace(',', '.')
-            ent.vol_filtrante = float(vol_material)
-        else:
-            ent.vol_filtrante = None
+        ent.vol_filtrante = ctrs.edit_vol_material.value()
 
         # Altura máxima de bombeo
-        if ctrs.edit_altura_max_bombeo.text():
-            altura_max_bombeo = ctrs.edit_altura_max_bombeo.text()
-            altura_max_bombeo = altura_max_bombeo.replace(',', '.')
-            ent.altura_bombeo = float(altura_max_bombeo)
-        else:
-            ent.altura_bombeo = None
+        ent.altura_bombeo = ctrs.edit_altura_max_bombeo.value()
 
         # Caudal del filtro
-        if ctrs.edit_caudal.text():
-            ent.caudal = float(ctrs.edit_caudal.text())
-        else:
-            ent.caudal = None
+        ent.caudal = ctrs.edit_caudal.value()
 
         # Fecha de instalación
         instalacion = ctrs.fecha_instalacion.date()
@@ -322,16 +288,7 @@ class FiltroController(BaseController):
             self._view.frame.edit_num_serie.setFocus()
             return res
 
-        # Valida el motivo de la baja del filtro
-        res = FiltroValidator.validate_motivo_baja(
-            self._view.frame.edit_motivo_baja
-        )
-
-        if not res.is_success:
-            self._view.frame.edit_motivo_baja.setFocus()
-            return res
-
-        return Result.success(1)
+        return Result.success(0)
 
     def _get_row_id(self, sender: QPushButton | QAction) -> Result:
         """ Obtiene el ID del registro seleccionado."""
@@ -502,21 +459,33 @@ class FiltroController(BaseController):
             volumen_max_acuario = None
 
         caudal = modelo.index(fila, 8).data()
-        altura_bombeo = modelo.index(fila, 9).data()
+        if modelo.index(fila, 9).data():
+            altura_bombeo = str(modelo.index(fila, 9).data()).replace('.', ',')
+        else:
+            altura_bombeo = None
+
         consumo_filtro = modelo.index(fila, 10).data()
         consumo_calentador = modelo.index(fila, 11).data()
 
-        volumen_material = modelo.index(fila, 12).data()
+        if modelo.index(fila, 12).data():
+            volumen_material = str(modelo.index(fila, 12).data()) \
+                .replace('.', ',')
+        else:
+            volumen_material = None
 
         dimensions = self.brakdown_dimensions(modelo.index(fila, 13).data())
-        if dimensions and len(dimensions) == 3:
-            ancho_filtro = dimensions[0]
-            fondo_filtro = dimensions[1]
-            altura_filtro = dimensions[2]
-        else:
-            ancho_filtro = None
-            fondo_filtro = None
-            altura_filtro = None
+        # if dimensions and len(dimensions) == 3:
+        ancho_filtro = dimensions[0].replace('.', ',')
+        fondo_filtro = dimensions[1].replace('.', ',')
+        altura_filtro = dimensions[2].replace('.', ',')
+        # else:
+        #     ancho_filtro = None
+        #     fondo_filtro = None
+        #     altura_filtro = None
+
+        # print(f"Ancho filtro: {ancho_filtro}")
+        # print(f"Fondo filtro: {fondo_filtro}")
+        # print(f"Altura filtro: {altura_filtro}")
 
         fecha_instalacion = QDate.fromString(
             str(modelo.index(fila, 14).data()), "dd/MM/yyyy")

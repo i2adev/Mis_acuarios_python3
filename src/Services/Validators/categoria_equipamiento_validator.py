@@ -28,4 +28,4 @@ class CategoriaEquipamientoValidator:
                                   "PUEDE CONTENER MAS DE 32 CARACTERES")
 
         # Validación exitosa
-        return Result.success(1)
+        return Result.success(0)

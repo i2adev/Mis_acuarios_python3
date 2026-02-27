@@ -29,4 +29,4 @@ class MaterialUrnaValidator:
                                   "CONTENER MAS DE 32 CARÁCTERES")
 
         # Validación exitosa
-        return Result.success(1)
+        return Result.success(0)

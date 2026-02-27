@@ -13,6 +13,8 @@ from PyQt6.QtWidgets import QFrame, QLabel, QLineEdit, QPlainTextEdit, \
     QVBoxLayout, QHBoxLayout, QApplication, QComboBox, QPushButton, QGroupBox, \
     QCheckBox
 
+from CustomControls.double_line_edit import DoubleLineEdit
+from CustomControls.int_line_edit import IntLineEdit
 from CustomControls.nullable_date_edit import NullableDateEdit
 
 
@@ -148,9 +150,12 @@ class FiltroForm(QFrame):
             """
         )
 
-        self.edit_vol_min_acuario = QLineEdit()
+        self.edit_vol_min_acuario = IntLineEdit(
+            control_name="VOLUMEN MÍNIMO DEL ACUARIO",
+            units="LITROS",
+            min_value=5,
+            max_value=2_000)
         self.edit_vol_min_acuario.setObjectName("edit_vol_min_acuario")
-        self.edit_vol_min_acuario.setValidator(QIntValidator())
         self.edit_vol_min_acuario.setToolTip(
             """
             <h2>Volumen mínimo de acuario</h2><br>
@@ -159,9 +164,12 @@ class FiltroForm(QFrame):
             """
         )
 
-        self.edit_vol_max_acuario = QLineEdit()
+        self.edit_vol_max_acuario = IntLineEdit(
+            control_name="VOLUMEN MÁXIMO DEL ACUARIO",
+            units="LITROS",
+            min_value=10,
+            max_value=3_000)
         self.edit_vol_max_acuario.setObjectName("edit_vol_max_acuario")
-        self.edit_vol_max_acuario.setValidator(QIntValidator())
         self.edit_vol_max_acuario.setToolTip(
             """
             <h2>Volumen máximo de acuario</h2><br>
@@ -170,9 +178,12 @@ class FiltroForm(QFrame):
             """
         )
 
-        self.edit_consumo_filtro = QLineEdit()
+        self.edit_consumo_filtro = IntLineEdit(
+            control_name="CONSUMO DEL FILTRO",
+            units="VATIOS",
+            min_value=5,
+            max_value=80)
         self.edit_consumo_filtro.setObjectName("edit_consumo_filtro")
-        self.edit_consumo_filtro.setValidator(QIntValidator())
         self.edit_consumo_filtro.setToolTip(
             """
             <h2>Consumo del filtro</h2><br>
@@ -181,9 +192,12 @@ class FiltroForm(QFrame):
             """
         )
 
-        self.edit_consumo_calentador = QLineEdit()
+        self.edit_consumo_calentador = IntLineEdit(
+            control_name="CONSUMO DEL CALENTADOR",
+            units="VATIOS",
+            min_value=15,
+            max_value=800)
         self.edit_consumo_calentador.setObjectName("edit_consumo_calentador")
-        self.edit_consumo_calentador.setValidator(QIntValidator())
         self.edit_consumo_calentador.setToolTip(
             """
             <h2>Consumo del calentador del filtro</h2><br>
@@ -192,10 +206,13 @@ class FiltroForm(QFrame):
             """
         )
 
-        self.edit_vol_material = QLineEdit()
+        self.edit_vol_material = DoubleLineEdit(
+            control_name="VOLUMEN DEL MATERIAL FILTRANTE",
+            units="LITROS",
+            min_value=1,
+            max_value=50)
         self.edit_vol_material.setObjectName("edit_vol_material")
         self.edit_vol_material.setFixedWidth(80)
-        self.edit_vol_material.setValidator(QDoubleValidator())
         self.edit_vol_material.setToolTip(
             """
             <h2>Volumen de material filtrante</h2>
@@ -204,10 +221,13 @@ class FiltroForm(QFrame):
             """
         )
 
-        self.edit_altura_max_bombeo = QLineEdit()
+        self.edit_altura_max_bombeo = DoubleLineEdit(
+            control_name="ALTURA MÁXIMA DE BOMBEO",
+            units="METROS",
+            min_value=1,
+            max_value=50)
         self.edit_altura_max_bombeo.setObjectName("edit_altura_max_bombeo")
         self.edit_altura_max_bombeo.setFixedWidth(80)
-        self.edit_altura_max_bombeo.setValidator(QDoubleValidator())
         self.edit_altura_max_bombeo.setToolTip(
             """
             <h2>Altura máxima de bombeo del filtro</h2>
@@ -216,10 +236,13 @@ class FiltroForm(QFrame):
             """
         )
 
-        self.edit_caudal = QLineEdit()
+        self.edit_caudal = IntLineEdit(
+            control_name="CAUDAL DEL FILTRO",
+            units="LITROS/HORA",
+            min_value=50,
+            max_value=8_000)
         self.edit_caudal.setObjectName("edit_caudal")
         self.edit_caudal.setFixedWidth(80)
-        self.edit_caudal.setValidator(QIntValidator())
         self.edit_caudal.setToolTip(
             """
             <h2>Caudal del filtro</h2>
@@ -228,9 +251,13 @@ class FiltroForm(QFrame):
             """
         )
 
-        self.edit_ancho = QLineEdit()
+        self.edit_ancho = DoubleLineEdit(
+            control_name="ANCHURA",
+            units="CENTÍMETROS",
+            min_value=10,
+            max_value=500
+        )
         self.edit_ancho.setObjectName("edit_ancho")
-        self.edit_ancho.setValidator(QIntValidator())
         self.edit_ancho.setToolTip(
             """
             <h2>Anchura del filtro</h2>
@@ -239,9 +266,13 @@ class FiltroForm(QFrame):
             """
         )
 
-        self.edit_fondo = QLineEdit()
+        self.edit_fondo = DoubleLineEdit(
+            control_name="FONDO",
+            units="CENTÍMETROS",
+            min_value=10,
+            max_value=500
+        )
         self.edit_fondo.setObjectName("edit_fondo")
-        self.edit_fondo.setValidator(QIntValidator())
         self.edit_fondo.setToolTip(
             """
             <h2>Fondo del filtro</h2>
@@ -250,9 +281,13 @@ class FiltroForm(QFrame):
             """
         )
 
-        self.edit_alto = QLineEdit()
+        self.edit_alto = DoubleLineEdit(
+            control_name="ALTO",
+            units="CENTÍMETROS",
+            min_value=10,
+            max_value=500
+        )
         self.edit_alto.setObjectName("edit_alto")
-        self.edit_alto.setValidator(QIntValidator())
         self.edit_alto.setToolTip(
             """
             <h2>Altura del filtro</h2>

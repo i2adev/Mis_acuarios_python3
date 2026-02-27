@@ -23,7 +23,7 @@ class FiltroValidator:
             )
 
         # Validación exitosa
-        return Result.success(1)
+        return Result.success(0)
 
     @staticmethod
     def validate_marca(widget: QComboBox) -> Result:
@@ -36,7 +36,7 @@ class FiltroValidator:
             )
 
         # Validación exitosa
-        return Result.success(1)
+        return Result.success(0)
 
     @staticmethod
     def validate_modelo(widget: QLineEdit) -> Result:
@@ -48,13 +48,8 @@ class FiltroValidator:
                 "EL CAMPO 'MODELO' NO PUEDE ESTAR VACÍO"
             )
 
-        # Controla la longitud del texto
-        if len(widget.text()) > 32:
-            return Result.failure("EL CAMPO 'MODELO' NO PUEDE CONTENER MAS DE "
-                                  "32 CARACTERES")
-
         # Validación exitosa
-        return Result.success(1)
+        return Result.success(0)
 
     @staticmethod
     def validate_numero_serie(widget: QLineEdit) -> Result:
@@ -66,27 +61,5 @@ class FiltroValidator:
                 "EL CAMPO 'NÚMERO DE SERIE' NO PUEDE ESTAR VACÍO"
             )
 
-        # Controla la longitud del texto
-        if len(widget.text()) > 32:
-            return Result.failure(
-                "EL CAMPO 'NÚMERO DE SERIE' NO PUEDE CONTENER MAS DE "
-                "32 CARACTERES")
-
         # Validación exitosa
-        return Result.success(1)
-
-    @staticmethod
-    def validate_motivo_baja(widget: QLineEdit) -> Result:
-        """ Válida el motivo de la baja del filtro. """
-
-        # Sí el texto está vacío
-        if not widget.text():
-            return Result.success(1)
-
-        # Controla la longitud del texto
-        if len(widget.text()) > 32:
-            return Result.failure("EL CAMPO 'MOTIVO DE LA BAJA' NO PUEDE "
-                                  "CONTENER MAS DE 32 CARACTERES")
-
-        # Validación exitosa
-        return Result.success(1)
+        return Result.success(0)

@@ -25,7 +25,7 @@ class ProyectoValidator:
             )
 
         # Validación exitosa
-        return Result.success(1)
+        return Result.success(0)
 
     @staticmethod
     def validate_nombre_proyecto(widget: QLineEdit):
@@ -43,7 +43,7 @@ class ProyectoValidator:
                                   "PUEDE CONTENER MAS DE 32 CARACTERES")
 
         # Validación exitosa
-        return Result.success(1)
+        return Result.success(0)
 
     @staticmethod
     def validate_fecha_inicio(widget: NullableDateEdit):
@@ -55,7 +55,7 @@ class ProyectoValidator:
                                   "VACÍO.")
 
         # Validación exitosa
-        return Result.success(1)
+        return Result.success(0)
 
     @staticmethod
     def validate_motivo_cierre(widget: QLineEdit):
@@ -63,7 +63,7 @@ class ProyectoValidator:
 
         # Sí el texto está vacío
         if not widget.text():
-            return Result.success(1)
+            return Result.success(0)
 
         # Controla la longitud del texto
         if len(widget.text()) > 64:
@@ -71,4 +71,4 @@ class ProyectoValidator:
                                   "PUEDE CONTENER MAS DE 64 CARACTERES")
 
         # Validación exitosa
-        return Result.success(1)
+        return Result.success(0)

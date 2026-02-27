@@ -184,7 +184,7 @@ class TipoAcuarioController(BaseController):
             self._view.frame.combo_subcategoria_acuario.setFocus()
             return res
 
-        return Result.success(1)
+        return Result.success(0)
 
     def _get_row_id(self, sender: QPushButton | QAction) -> Result:
         control = type(sender).__name__

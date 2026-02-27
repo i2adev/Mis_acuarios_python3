@@ -7,6 +7,7 @@ Comentarios:
 
 import sys
 
+from CustomControls.int_line_edit import IntLineEdit
 from CustomControls.nullable_date_edit import NullableDateEdit
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QCursor, QIntValidator
@@ -116,9 +117,11 @@ class AcuarioForm(QFrame):
             adelante al acuario se le referira con este campo."""
         )
 
-        self.edit_vol_neto = QLineEdit()
+        self.edit_vol_neto = IntLineEdit(control_name="VOLUMEN NETO",
+                                         units="LITROS",
+                                         min_value=10,
+                                         max_value=2_000)
         self.edit_vol_neto.setObjectName("edit_vol_neto")
-        self.edit_vol_neto.setValidator(QIntValidator())
         self.edit_vol_neto.setToolTip(
             """
             <h2>Volumen del neto</h2><br>
