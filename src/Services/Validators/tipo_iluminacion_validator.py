@@ -22,10 +22,5 @@ class TipoIluminacionValidator:
             return Result.failure("EL CAMPO 'TIPO DE ILUMINACIÓN' NO PUEDE "
                                   "ESTAR VACÍO")
 
-        # Se valida la longitud del texto
-        if len(widget.text()) > 32:
-            return Result.failure("EL CAMPO 'TIPO DE ILUMINACIÓN' NO PUEDE "
-                                  "CONTENER MAS DE 32 CARACTERES")
-
         # Validación exitosa
         return Result.success(0)

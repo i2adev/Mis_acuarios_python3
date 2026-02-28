@@ -49,10 +49,7 @@ class MaterialUrnaController(BaseController):
             ent.id = None
 
         # Material de la urna
-        if ctrs.edit_material.text():
-            ent.material = ctrs.edit_material.text()
-        else:
-            ent.material = None
+        ent.material = ctrs.edit_material.value()
 
         # Descripción
         if ctrs.text_descripcion.toPlainText():

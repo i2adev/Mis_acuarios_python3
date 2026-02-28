@@ -70,16 +70,10 @@ class IluminacionController(BaseController):
             ent.id_marca = None
 
         # Modelo
-        if ctrs.edit_modelo.text():
-            ent.modelo = ctrs.edit_modelo.text()
-        else:
-            ent.modelo = None
+        ent.modelo = ctrs.edit_modelo.value()
 
         # Número de serie
-        if ctrs.edit_num_serie.text():
-            ent.num_serie = ctrs.edit_num_serie.text()
-        else:
-            ent.num_serie = None
+        ent.num_serie = ctrs.edit_num_serie.value()
 
         # Tipo de iluminación
         if ctrs.combo_tipo_iluminacion.currentIndex() != -1:
@@ -96,40 +90,22 @@ class IluminacionController(BaseController):
             ent.id_control_iluminacion = None
 
         # Potencia de la luminaria
-        if ctrs.edit_potencia.text():
-            ent.potencia = int(ctrs.edit_potencia.text())
-        else:
-            ent.potencia = None
+        ent.potencia = ctrs.edit_potencia.value()
 
         # Flujo luminico
-        if ctrs.edit_flujo_luminico.text():
-            ent.flujo_luminico = int(ctrs.edit_flujo_luminico.text())
-        else:
-            ent.flujo_luminico = None
+        ent.flujo_luminico = ctrs.edit_flujo_luminico.value()
 
         # Temperatura de color
-        if ctrs.edit_temperatura.text():
-            ent.temperatura = int(ctrs.edit_temperatura.text())
-        else:
-            ent.temperatura = None
+        ent.temperatura = ctrs.edit_temperatura.value()
 
         # Vida útil de la luminaria
-        if ctrs.edit_vida_util.text():
-            ent.vida_util = int(ctrs.edit_vida_util.text())
-        else:
-            ent.vida_util = None
+        ent.vida_util = ctrs.edit_vida_util.text()
 
         # Dimensiones: Longitud
-        if ctrs.edit_longitud.text():
-            ent.longitud = float(ctrs.edit_longitud.text())
-        else:
-            ent.longitud = None
+        ent.longitud = ctrs.edit_longitud.value()
 
         # Dimensiones: Anchura
-        if ctrs.edit_anchura.text():
-            ent.anchura = float(ctrs.edit_anchura.text())
-        else:
-            ent.anchura = None
+        ent.anchura = ctrs.edit_anchura.text()
 
         # Fecha de instalación
         instalacion = ctrs.fecha_alta.date()
@@ -148,10 +124,7 @@ class IluminacionController(BaseController):
             ent.fecha_baja = None
 
         # Motivo de la baja
-        if ctrs.edit_motivo_baja.text():
-            ent.motivo_baja = ctrs.edit_motivo_baja.text()
-        else:
-            ent.motivo_baja = None
+        ent.motivo_baja = ctrs.edit_motivo_baja.value()
 
         # Espectro completo
         ent.espectro_completo = 1 if (

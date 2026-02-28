@@ -12,6 +12,8 @@ from PyQt6.QtWidgets import QComboBox, QFrame, QVBoxLayout, QHBoxLayout, \
     QLineEdit, \
     QPlainTextEdit, QApplication, QSpacerItem, QSizePolicy
 
+from CustomControls.str_line_edit import StrLineEdit
+
 
 class ComercioForm(QFrame):
     """
@@ -76,7 +78,10 @@ class ComercioForm(QFrame):
         self.edit_id.setFixedWidth(50)
         self.edit_id.setEnabled(False)
 
-        self.edit_comercio = QLineEdit()
+        self.edit_comercio = StrLineEdit(
+            control_name="COMERCIO",
+            max_length=32,
+        )
         self.edit_comercio.setObjectName("edit_comercio")
         self.edit_comercio.setToolTip(
             """
@@ -86,7 +91,10 @@ class ComercioForm(QFrame):
             """
         )
 
-        self.edit_direccion = QLineEdit()
+        self.edit_direccion = StrLineEdit(
+            control_name="DIRECCIÓN",
+            max_length=64,
+        )
         self.edit_direccion.setObjectName("edit_direccion")
         self.edit_direccion.setMinimumWidth(300)
         self.edit_direccion.setToolTip(
@@ -96,7 +104,10 @@ class ComercioForm(QFrame):
             """
         )
 
-        self.edit_cod_postal = QLineEdit()
+        self.edit_cod_postal = StrLineEdit(
+            control_name="COD. POSTAL",
+            max_length=15,
+        )
         self.edit_cod_postal.setObjectName("edit_cod_postal")
         self.edit_cod_postal.setToolTip(
             """
@@ -106,7 +117,10 @@ class ComercioForm(QFrame):
             """
         )
 
-        self.edit_poblacion = QLineEdit()
+        self.edit_poblacion = StrLineEdit(
+            control_name="POBLACIÓN",
+            max_length=25,
+        )
         self.edit_poblacion.setObjectName("edit_poblacion")
         self.edit_poblacion.setToolTip(
             """
@@ -116,7 +130,10 @@ class ComercioForm(QFrame):
             """
         )
 
-        self.edit_provincia = QLineEdit()
+        self.edit_provincia = StrLineEdit(
+            control_name="PROVINCIA",
+            max_length=25,
+        )
         self.edit_provincia.setObjectName("edit_provincia")
         self.edit_provincia.setToolTip(
             """

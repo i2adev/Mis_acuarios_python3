@@ -55,10 +55,7 @@ class CategoriaEquipamientoController(BaseController):
             ent.id = None
 
         # Categoría de equipamiento
-        if ctrs.edit_categoria_equipamiento.text():
-            ent.categoria_equipamiento = ctrs.edit_categoria_equipamiento.text()
-        else:
-            ent.categoria_equipamiento = None
+        ent.categoria_equipamiento = ctrs.edit_categoria_equipamiento.value()
 
         # Descripción
         if ctrs.text_descripcion.toPlainText():

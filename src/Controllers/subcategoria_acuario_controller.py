@@ -62,10 +62,7 @@ class SubcategoriaAcuarioController(BaseController):
             ent.id_categoria = None
 
         # Subcategoría de acuario
-        if ctrs.edit_subcategoria_acuario.text():
-            ent.subcategoria = ctrs.edit_subcategoria_acuario.text()
-        else:
-            ent.subcategoria = None
+        ent.subcategoria = ctrs.edit_subcategoria_acuario.value()
 
         # Observaciones
         if ctrs.text_observaciones.toPlainText():

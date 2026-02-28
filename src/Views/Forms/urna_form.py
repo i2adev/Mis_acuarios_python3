@@ -13,6 +13,7 @@ from PyQt6.QtWidgets import QFrame, QLabel, QLineEdit, QPlainTextEdit, \
     QVBoxLayout, QHBoxLayout, QApplication, QComboBox, QPushButton
 
 from CustomControls.int_line_edit import IntLineEdit
+from CustomControls.str_line_edit import StrLineEdit
 
 
 class UrnaForm(QFrame):
@@ -78,8 +79,8 @@ class UrnaForm(QFrame):
         # Etiquetas
         self.label_id = QLabel("ID")
         self.label_id.setFixedWidth(50)
-        self.label_marca = QLabel("MARCA ACUARIO")
-        self.label_modelo = QLabel("MODELO ACUARIO")
+        self.label_marca = QLabel("MARCA")
+        self.label_modelo = QLabel("MODELO")
         self.label_ancho = QLabel("ANCHO")
         self.label_profundo = QLabel("PROFUNDIDAD")
         self.label_alto = QLabel("ALTO")
@@ -94,7 +95,10 @@ class UrnaForm(QFrame):
         self.edit_id.setEnabled(False)
         self.edit_id.setObjectName("edit_id")
 
-        self.edit_modelo = QLineEdit()
+        self.edit_modelo = StrLineEdit(
+            control_name="MODELO",
+            max_length=32,
+        )
         self.edit_modelo.setObjectName("edit_modelo")
         self.edit_modelo.setToolTip(
             """

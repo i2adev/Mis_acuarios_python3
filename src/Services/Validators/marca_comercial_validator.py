@@ -23,59 +23,6 @@ class MarcaComercialValidator:
                 "EL CAMPO 'MARCA COMERCIAL' NO PUEDE ESTAR VACÍO"
             )
 
-        # Si el texto contiene más de 32 carácteres
-        if len(widget.text()) > 32:
-            return Result.failure("EL CAMPO 'MARCA COMERCIAL' NO PUEDE "
-                                  "CONTENER MAS DE 32 CARACTERES")
-
-            # Validación exitosa
-        return Result.success(0)
-
-    @staticmethod
-    def validate_direccion(widget: QLineEdit):
-        """ Valida la dirección. """
-
-        # Si el texto contiene más de 128 carácteres
-        if len(widget.text()) > 128:
-            return Result.failure("EL CAMPO 'DIRECCIÓN' NO PUEDE "
-                                  "CONTENER MAS DE 128 CARACTERES")
-
-        # Validación exitosa
-        return Result.success(0)
-
-    @staticmethod
-    def validate_cod_postal(widget: QLineEdit):
-        """ Valida el código postal. """
-
-        # Si el texto contiene más de 16 carácteres
-        if len(widget.text()) > 16:
-            return Result.failure("EL CAMPO 'CÓDIGO POSTAL' NO PUEDE "
-                                  "CONTENER MAS DE 16 CARACTERES")
-
-        # Validación exitosa
-        return Result.success(0)
-
-    @staticmethod
-    def validate_poblacion(widget: QLineEdit):
-        """ Valida la población. """
-
-        # Si el texto contiene más de 32 carácteres
-        if len(widget.text()) > 32:
-            return Result.failure("EL CAMPO 'POBLACIÓN' NO PUEDE "
-                                  "CONTENER MAS DE 32 CARACTERES")
-
-        # Validación exitosa
-        return Result.success(0)
-
-    @staticmethod
-    def validate_provincia(widget: QLineEdit):
-        """ Valida la población. """
-
-        # Si el texto contiene más de 32 carácteres
-        if len(widget.text()) > 32:
-            return Result.failure("EL CAMPO 'PROVINCIA' NO PUEDE "
-                                  "CONTENER MAS DE 32 CARACTERES")
-
         # Validación exitosa
         return Result.success(0)
 

@@ -22,10 +22,5 @@ class TipoFiltroValidator:
             return Result.failure("EL CAMPO 'TIPO DE FILTRO' NO PUEDE ESTAR "
                                   "VACIO")
 
-        # Si el texto contiene más de 32 carácteres
-        if len(widget.text()) > 32:
-            return Result.failure("EL CAMPO 'TIPO DE FILTRO' NO PUEDE "
-                                  "CONTENER MAS DE 32 CARACTERES")
-
         # Validación exitosa
         return Result.success(0)

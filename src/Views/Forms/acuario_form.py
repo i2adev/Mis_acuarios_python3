@@ -14,6 +14,8 @@ from PyQt6.QtGui import QCursor, QIntValidator
 from PyQt6.QtWidgets import QApplication, QComboBox, QFrame, QGroupBox, \
     QHBoxLayout, QLabel, QLineEdit, QPlainTextEdit, QPushButton, QVBoxLayout
 
+from CustomControls.str_line_edit import StrLineEdit
+
 
 class AcuarioForm(QFrame):
     """
@@ -107,7 +109,10 @@ class AcuarioForm(QFrame):
         self.edit_cod_color.setFixedWidth(50)
         self.edit_cod_color.setEnabled(False)
 
-        self.edit_nombre_acuario = QLineEdit()
+        self.edit_nombre_acuario = StrLineEdit(
+            control_name="NOMBRE",
+            max_length=32,
+        )
         self.edit_nombre_acuario.setObjectName("edit_nombre_acuario")
         self.edit_nombre_acuario.setMinimumWidth(250)
         self.edit_nombre_acuario.setToolTip(
@@ -131,7 +136,10 @@ class AcuarioForm(QFrame):
             """
         )
 
-        self.edit_ubicacion_acuario = QLineEdit()
+        self.edit_ubicacion_acuario = StrLineEdit(
+            control_name="UBICACION ACUARIO",
+            max_length=32,
+        )
         self.edit_ubicacion_acuario.setObjectName("edit_ubicacion_acuario")
         self.edit_ubicacion_acuario.setToolTip(
             """<h2>Ubicación del acuario</h2><br>
@@ -140,7 +148,10 @@ class AcuarioForm(QFrame):
             """
         )
 
-        self.edit_motivo_desmontaje = QLineEdit()
+        self.edit_motivo_desmontaje = StrLineEdit(
+            control_name="MOTIVO DESMONTAJE",
+            max_length=32,
+        )
         self.edit_motivo_desmontaje.setObjectName("edit_motivo_desmontaje")
         self.edit_motivo_desmontaje.setToolTip(
             """ 

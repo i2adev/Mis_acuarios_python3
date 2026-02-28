@@ -65,10 +65,7 @@ class SubcategoriaIncidenciaController(BaseController):
             ent.id_categoria = None
 
         # Subcategoría de incidencia
-        if ctrs.edit_subcategoria_incidencia.text():
-            ent.subcategoria = ctrs.edit_subcategoria_incidencia.text()
-        else:
-            ent.subcategoria = None
+        ent.subcategoria = ctrs.edit_subcategoria_incidencia.value()
 
         # Observaciones
         if ctrs.text_observaciones.toPlainText():

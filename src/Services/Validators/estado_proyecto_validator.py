@@ -23,10 +23,5 @@ class EstadoProyectoValidator:
                 "EL CAMPO 'ESTADO DE PROYECTO' NO PUEDE ESTAR "
                 "VACÍO")
 
-        # Si el texto contiene más de 32 carácteres
-        if len(widget.text()) > 32:
-            return Result.failure("EL CAMPO 'ESTADO DE PROYECTO' NO PUEDE "
-                                  "CONTENER MAS DE 32 CARACTERES")
-
         # Validación exitosa
         return Result.success(0)

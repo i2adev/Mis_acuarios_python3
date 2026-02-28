@@ -53,34 +53,19 @@ class ComercioController(BaseController):
             ent.id = None
 
         # Nombre del comercio
-        if ctrs.edit_comercio.text():
-            ent.nombre_comercio = ctrs.edit_comercio.text()
-        else:
-            ent.nombre_comercio = None
+        ent.nombre_comercio = ctrs.edit_comercio.value()
 
         # Dirección del comercio
-        if ctrs.edit_direccion.text():
-            ent.direccion = ctrs.edit_direccion.text()
-        else:
-            ent.direccion = None
+        ent.direccion = ctrs.edit_direccion.value()
 
         # Código postal
-        if ctrs.edit_cod_postal.text():
-            ent.cod_postal = ctrs.edit_cod_postal.text()
-        else:
-            ent.cod_postal = None
+        ent.cod_postal = ctrs.edit_cod_postal.value()
 
         # Población
-        if ctrs.edit_poblacion.text():
-            ent.poblacion = ctrs.edit_poblacion.text()
-        else:
-            ent.poblacion = None
+        ent.poblacion = ctrs.edit_poblacion.value()
 
         # Provincia
-        if ctrs.edit_provincia.text():
-            ent.provincia = ctrs.edit_provincia.text()
-        else:
-            ent.provincia = None
+        ent.provincia = ctrs.edit_provincia.value()
 
         # País
         if ctrs.combo_pais.currentIndex() != -1:
@@ -197,42 +182,6 @@ class ComercioController(BaseController):
 
         if not res.is_success:
             self._view.frame.edit_comercio.setFocus()
-            return res
-
-        # Valida la dirección
-        res = ComercioValidator.validate_direccion(
-            self._view.frame.edit_direccion
-        )
-
-        if not res.is_success:
-            self._view.frame.edit_direccion.setFocus()
-            return res
-
-        # Valida la código postal
-        res = ComercioValidator.validate_cod_postal(
-            self._view.frame.edit_cod_postal
-        )
-
-        if not res.is_success:
-            self._view.frame.edit_cod_postal.setFocus()
-            return res
-
-        # Valida la población
-        res = ComercioValidator.validate_poblacion(
-            self._view.frame.edit_poblacion
-        )
-
-        if not res.is_success:
-            self._view.frame.edit_poblacion.setFocus()
-            return res
-
-        # Valida la provincia
-        res = ComercioValidator.validate_provincia(
-            self._view.frame.edit_provincia
-        )
-
-        if not res.is_success:
-            self._view.frame.edit_provincia.setFocus()
             return res
 
         # Valida el país

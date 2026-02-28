@@ -50,34 +50,19 @@ class MarcaComercialController(BaseController):
             ent.id = None
 
         # Marca
-        if ctrs.edit_marca.text():
-            ent.nombre_marca = ctrs.edit_marca.text()
-        else:
-            ent.nombre_marca = None
+        ent.nombre_marca = ctrs.edit_marca.value()
 
         # Dirección
-        if ctrs.edit_direccion.text():
-            ent.direccion = ctrs.edit_direccion.text()
-        else:
-            ent.direccion = None
+        ent.direccion = ctrs.edit_direccion.value()
 
         # Código postal
-        if ctrs.edit_cod_postal.text():
-            ent.cod_postal = ctrs.edit_cod_postal.text()
-        else:
-            ent.cod_postal = None
+        ent.cod_postal = ctrs.edit_cod_postal.value()
 
         # Población
-        if ctrs.edit_poblacion.text():
-            ent.poblacion = ctrs.edit_poblacion.text()
-        else:
-            ent.poblacion = None
+        ent.poblacion = ctrs.edit_poblacion.value()
 
         # Provincia
-        if ctrs.edit_provincia.text():
-            ent.provincia = ctrs.edit_provincia.text()
-        else:
-            ent.provincia = None
+        ent.provincia = ctrs.edit_provincia.value()
 
         # País
         if ctrs.combo_pais.currentIndex() != -1:
@@ -193,42 +178,6 @@ class MarcaComercialController(BaseController):
 
         if not val.is_success:
             self._view.frame.edit_marca.setFocus()
-            return val
-
-        # Valida la dirección
-        val = MarcaComercialValidator.validate_direccion(
-            self._view.frame.edit_direccion
-        )
-
-        if not val.is_success:
-            self._view.frame.edit_direccion.setFocus()
-            return val
-
-        # Valida el código postal
-        val = MarcaComercialValidator.validate_cod_postal(
-            self._view.frame.edit_cod_postal
-        )
-
-        if not val.is_success:
-            self._view.frame.edit_cod_postal.setFocus()
-            return val
-
-        # Valida población
-        val = MarcaComercialValidator.validate_poblacion(
-            self._view.frame.edit_poblacion
-        )
-
-        if not val.is_success:
-            self._view.frame.edit_poblacion.setFocus()
-            return val
-
-        # Valida la provincia
-        val = MarcaComercialValidator.validate_provincia(
-            self._view.frame.edit_provincia
-        )
-
-        if not val.is_success:
-            self._view.frame.edit_provincia.setFocus()
             return val
 
         # Valida el país

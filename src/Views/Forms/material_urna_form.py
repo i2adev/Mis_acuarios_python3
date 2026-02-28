@@ -8,8 +8,11 @@ Comentarios:
 
 import sys
 
-from PyQt6.QtWidgets import QFrame, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, \
+from PyQt6.QtWidgets import QFrame, QVBoxLayout, QHBoxLayout, QLabel, \
+    QLineEdit, \
     QPlainTextEdit, QApplication
+
+from CustomControls.str_line_edit import StrLineEdit
 
 
 class MaterialUrnaForm(QFrame):
@@ -56,7 +59,10 @@ class MaterialUrnaForm(QFrame):
         self.edit_id.setFixedWidth(50)
         self.edit_id.setEnabled(False)
 
-        self.edit_material = QLineEdit()
+        self.edit_material = StrLineEdit(
+            control_name="MATERIAL DE LA URNA",
+            max_length=32,
+        )
         self.edit_material.setObjectName("edit_material")
         self.edit_material.setToolTip(
             """

@@ -48,11 +48,6 @@ class EquipamientoValidator:
                 "EL CAMPO 'MODELO' NO PUEDE ESTAR VACÍO"
             )
 
-        # Controla la longitud del texto
-        if len(widget.text()) > 32:
-            return Result.failure("EL CAMPO 'MODELO' NO PUEDE CONTENER MAS DE "
-                                  "32 CARACTERES")
-
         # Validación exitosa
         return Result.success(0)
 
@@ -66,12 +61,6 @@ class EquipamientoValidator:
                 "EL CAMPO 'NÚMERO DE SERIE' NO PUEDE ESTAR VACÍO"
             )
 
-        # Controla la longitud del texto
-        if len(widget.text()) > 32:
-            return Result.failure(
-                "EL CAMPO 'NÚMERO DE SERIE' NO PUEDE CONTENER MAS DE "
-                "32 CARACTERES")
-
         # Validación exitosa
         return Result.success(0)
 
@@ -83,20 +72,4 @@ class EquipamientoValidator:
                 """EL CAMPO 'FECHA DE ALTA' NO PUEDE ESTAR VACÍO"""
             )
 
-        return Result.success(0)
-
-    @staticmethod
-    def validate_motivo_baja(widget: QLineEdit) -> Result:
-        """ Válida el motivo de la baja del equipo. """
-
-        # Sí el texto está vacío
-        if not widget.text():
-            return Result.success(0)
-
-        # Controla la longitud del texto
-        if len(widget.text()) > 32:
-            return Result.failure("EL CAMPO 'MOTIVO DE LA BAJA' NO PUEDE "
-                                  "CONTENER MAS DE 32 CARACTERES")
-
-        # Validación exitosa
         return Result.success(0)

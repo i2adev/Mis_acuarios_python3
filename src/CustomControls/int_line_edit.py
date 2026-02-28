@@ -16,7 +16,7 @@ from globals import LOCALE
 
 class IntLineEdit(QLineEdit):
     """
-    QLineEdit que solo admite enteros..
+    QLineEdit que solo admite enteros.
     """
 
     MAX_DIGITS = 8
@@ -40,12 +40,12 @@ class IntLineEdit(QLineEdit):
         self.editingFinished.connect(self._on_edit_finished)
 
     def value(self):
-        """Devuelve el valor como int o None si está vacío."""
+        """ Devuelve el valor como int o None si está vacío. """
 
         return self._value
 
     def setValue(self, value: int | None):
-        """Establece un valor y actualiza la visualización."""
+        """ Establece un valor y actualiza la visualización. """
 
         if value is None:
             self._value = None

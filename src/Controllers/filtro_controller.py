@@ -79,16 +79,10 @@ class FiltroController(BaseController):
             ent.id_marca = None
 
         # Modelo
-        if ctrs.edit_modelo.text():
-            ent.modelo = ctrs.edit_modelo.text()
-        else:
-            ent.modelo = None
+        ent.modelo = ctrs.edit_modelo.value()
 
         # Número de serie
-        if ctrs.edit_num_serie.text():
-            ent.num_serie = ctrs.edit_num_serie.text()
-        else:
-            ent.num_serie = None
+        ent.num_serie = ctrs.edit_num_serie.value()
 
         # Volumen mínimo del acuario
         ent.vol_min_acuario = ctrs.edit_vol_min_acuario.value()
@@ -137,10 +131,7 @@ class FiltroController(BaseController):
             ent.fecha_baja = None
 
         # Motivo de la baja
-        if ctrs.edit_motivo_baja.text():
-            ent.motivo_baja = ctrs.edit_motivo_baja.text()
-        else:
-            ent.motivo_baja = None
+        ent.motivo_baja = ctrs.edit_motivo_baja.value()
 
         # Descripción
         if ctrs.text_descripcion.toPlainText():

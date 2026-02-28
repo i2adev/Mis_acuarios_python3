@@ -49,10 +49,7 @@ class TipoFiltroController(BaseController):
             ent.id = None
 
         # Tipo de filtro
-        if ctrs.edit_tipo_filtro.text():
-            ent.tipo_filtro = ctrs.edit_tipo_filtro.text()
-        else:
-            ent.tipo_filtro = None
+        ent.tipo_filtro = ctrs.edit_tipo_filtro.value()
 
         # Observaciones
         if ctrs.text_observaciones.toPlainText():

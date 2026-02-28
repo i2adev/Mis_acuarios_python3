@@ -8,8 +8,11 @@ Comentarios:
 
 import sys
 
-from PyQt6.QtWidgets import QFrame, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, \
+from PyQt6.QtWidgets import QFrame, QVBoxLayout, QHBoxLayout, QLabel, \
+    QLineEdit, \
     QPlainTextEdit, QApplication, QSpacerItem, QSizePolicy
+
+from CustomControls.str_line_edit import StrLineEdit
 
 
 class CategoriaIncidenciaForm(QFrame):
@@ -56,7 +59,10 @@ class CategoriaIncidenciaForm(QFrame):
         self.edit_id.setFixedWidth(50)
         self.edit_id.setEnabled(False)
 
-        self.edit_categoria_incidencia = QLineEdit()
+        self.edit_categoria_incidencia = StrLineEdit(
+            control_name="TIPO INCIDENCIA",
+            max_length=32,
+        )
         self.edit_categoria_incidencia.setObjectName(
             "edit_categoria_incidencia")
         self.edit_categoria_incidencia.setToolTip(

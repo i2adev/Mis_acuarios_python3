@@ -47,10 +47,7 @@ class CategoriaIncidenciaController(BaseController):
             ent.id = None
 
         # Categoría de incidencia
-        if ctrs.edit_categoria_incidencia.text():
-            ent.categoria_incidencia = ctrs.edit_categoria_incidencia.text()
-        else:
-            ent.categoria_incidencia = None
+        ent.categoria_incidencia = ctrs.edit_categoria_incidencia.value()
 
         # Observaciones
         if ctrs.text_observaciones.toPlainText():

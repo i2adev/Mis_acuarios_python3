@@ -8,8 +8,11 @@ Comentarios:
 
 import sys
 
-from PyQt6.QtWidgets import QFrame, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, \
+from PyQt6.QtWidgets import QFrame, QVBoxLayout, QHBoxLayout, QLabel, \
+    QLineEdit, \
     QPlainTextEdit, QApplication, QSpacerItem, QSizePolicy
+
+from CustomControls.str_line_edit import StrLineEdit
 
 
 class EstadoProyectoForm(QFrame):
@@ -56,7 +59,10 @@ class EstadoProyectoForm(QFrame):
         self.edit_id.setFixedWidth(50)
         self.edit_id.setEnabled(False)
 
-        self.edit_estado_proyecto = QLineEdit()
+        self.edit_estado_proyecto = StrLineEdit(
+            control_name="ESTADO DE PROYECTO",
+            max_length=32,
+        )
         self.edit_estado_proyecto.setObjectName("edit_estado_proyecto")
         self.edit_estado_proyecto.setToolTip(
             """

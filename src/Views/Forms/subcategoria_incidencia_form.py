@@ -13,6 +13,8 @@ from PyQt6.QtGui import QCursor
 from PyQt6.QtWidgets import QFrame, QLabel, QLineEdit, QPlainTextEdit, \
     QVBoxLayout, QHBoxLayout, QApplication, QComboBox, QPushButton
 
+from CustomControls.str_line_edit import StrLineEdit
+
 
 class SubcategoriaIncidenciaForm(QFrame):
     """
@@ -63,7 +65,10 @@ class SubcategoriaIncidenciaForm(QFrame):
         self.edit_id.setFixedWidth(50)
         self.edit_id.setEnabled(False)
 
-        self.edit_subcategoria_incidencia = QLineEdit()
+        self.edit_subcategoria_incidencia = StrLineEdit(
+            control_name="SUBCATEGORIA INCIDENCIA",
+            max_length=32,
+        )
         self.edit_subcategoria_incidencia.setObjectName(
             "edit_subcategoria_incidencia"
         )

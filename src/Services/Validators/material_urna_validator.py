@@ -23,10 +23,5 @@ class MaterialUrnaValidator:
             return Result.failure("EL CAMPO 'MATERIAL' NO PUEDE ESTAR "
                                   "VACÍO")
 
-        # Sí contiene más de 32 caracteres
-        if len(widget.text()) > 32:
-            return Result.failure("EL CAMPO 'MATERIAL' NO PUEDE "
-                                  "CONTENER MAS DE 32 CARÁCTERES")
-
         # Validación exitosa
         return Result.success(0)

@@ -13,6 +13,8 @@ from PyQt6.QtGui import QCursor
 from PyQt6.QtWidgets import QFrame, QLabel, QLineEdit, QPlainTextEdit, \
     QVBoxLayout, QHBoxLayout, QApplication, QComboBox, QPushButton
 
+from CustomControls.str_line_edit import StrLineEdit
+
 
 class SubcategoriaAcuarioForm(QFrame):
     """
@@ -62,7 +64,10 @@ class SubcategoriaAcuarioForm(QFrame):
         self.edit_id.setFixedWidth(50)
         self.edit_id.setEnabled(False)
 
-        self.edit_subcategoria_acuario = QLineEdit()
+        self.edit_subcategoria_acuario = StrLineEdit(
+            control_name="SUBCATEGORÍA ACUARIO",
+            max_length=32,
+        )
         self.edit_subcategoria_acuario.setObjectName(
             "edit_subcategoria_acuario")
         self.edit_subcategoria_acuario.setToolTip(
@@ -83,12 +88,13 @@ class SubcategoriaAcuarioForm(QFrame):
             acuario.
             """
         )
-        
+
         # Combos
         self.combo_categoria_acuario = QComboBox()
         self.combo_categoria_acuario.setMinimumWidth(200)
         self.combo_categoria_acuario.setEditable(True)
-        self.combo_categoria_acuario.setObjectName("combo_subcategoria_acuario")
+        self.combo_categoria_acuario.setObjectName(
+            "combo_subcategoria_acuario")
         self.combo_categoria_acuario.setToolTip(
             """
             <h2>Categoría de acuario</h2>

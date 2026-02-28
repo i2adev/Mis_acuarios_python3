@@ -37,10 +37,5 @@ class SubcategoriaIncidenciaValidator:
                 "EL CAMPO 'SUBCATEGORÍA DE INCIDENCIA' NO PUEDE ESTAR VACIO"
             )
 
-        # Si el texto contiene más de 32 carácteres
-        if len(widget.text()) > 32:
-            return Result.failure("EL CAMPO 'SUBCATEGORÍA DE INCIDENCIA' NO "
-                                  "PUEDE CONTENER MAS DE 32 CARACTERES")
-
         # Validación exitosa
         return Result.success(0)

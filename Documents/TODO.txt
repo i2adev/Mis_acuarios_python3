@@ -1,9 +1,145 @@
 ﻿================================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
-18/02/2026  REFACTORIZACIONES:
+27/02/2026  REFACTORIZACIONES:
             ====================================================================
+            SE MODIFICA EL METODO DE LAS VALIDACIONES:
+            -   TODAS LAS VALIDACIONES DE NUMEROS SE REDUCEN A UNA SOLA CLASE.
+            -   LAS VALIDACIONES DE LOS TEXTOS SE REALIZAN EN LA MISMA CLASE.
+            -   TODAS LAS VALIDACIONES SE REALIZAN AL PERDER EL FOCO EL CONTROL
+                DEL FORMULARIO.
+            --------------------------------------------------------------------
+            -   DONE:   SE CREA LA CLASE STRLINEEDIT.
+            -   DONE:   DOCUMENTAR LAS SUBCLASES DE QLINEEDIT (INTLINEEDIT,
+                        DOUBLELINEEDIT Y STRLINEEDIT).
 
+            FORMULARIO ACUARIO.
+            -   DONE:   NOMBRE DE ACUARIO -> SE CAMBIA EL CONTROL A UN
+                        STRLINEEDIT.
+            -   DONE:   UBICACIÓN ACUARIO -> SE CAMBIA EL CONTROL A UN
+                        STRLINEEDIT.
+            -   DONE:   MOTIVO DESMONTAJE -> SE CAMBIA EL CONTROL A UN
+                        STRLINEEDIT.
+            -   DONE:   SE MODIFICA LA 'ENTITY CONFIGURATION'.
+
+            FORMULARIO CATEGORÍAS DE ACUARIO.
+            -   DONE:   TIPO DE ACUARIO -> SE CAMBIA EL CONTROL A UN
+                        STRLINEEDIT.
+            -   DONE:   SE MODIFICA LA 'ENTITY CONFIGURATION'.
+            -   DONE:   SE MODIFICA EL VALIDADOR.
+
+            FORMULARIO SUBCATEGORÍAS DE ACUARIO.
+            -   DONE:   SUBCATEGORÍA DE ACUARIO -> SE CAMBIA EL CONTROL A UN
+                        STRLINEEDIT.
+            -   DONE:   SE MODIFICA LA 'ENTITY CONFIGURATION'.
+            -   DONE:   SE MODIFICA EL VALIDADOR.
+
+            FORMULARIO CATEGORÍAS DE EQUIPAMIENTO.
+            -   DONE:   CATEGORÍA DE EQUIPAMIENTO -> SE CAMBIA EL CONTROL A UN
+                        STRLINEEDIT.
+            -   DONE:   SE MODIFICA LA 'ENTITY CONFIGURATION'.
+            -   DONE:   SE MODIFICA EL VALIDADOR.
+
+            FORMULARIO CATEGORÍAS DE INCIDENCIA.
+            -   DONE:   CATEGORÍA DE INCIDENCIA -> SE CAMBIA EL CONTROL A UN
+                        STRLINEEDIT.
+            -   DONE:   SE MODIFICA LA 'ENTITY CONFIGURATION'.
+            -   DONE:   SE MODIFICA EL VALIDADOR.
+
+            FORMULARIO COMERCIOS.
+            -   DONE:   COMERCIO -> SE CAMBIA EL CONTROL A UN STRLINEEDIT.
+            -   DONE:   DIRECCION -> SE CAMBIA EL CONTROL A UN STRLINEEDIT.
+            -   DONE:   CODIGO POSTAL -> SE CAMBIA EL CONTROL A UN STRLINEEDIT.
+            -   DONE:   POBLACION -> SE CAMBIA EL CONTROL A UN STRLINEEDIT.
+            -   DONE:   PROVINCIA -> SE CAMBIA EL CONTROL A UN STRLINEEDIT.
+            -   DONE:   SE MODIFICA LA 'ENTITY CONFIGURATION'.
+            -   DONE:   SE MODIFICA EL VALIDADOR.
+            -   DONE:   SE MODIFICA EL CONTROLADOR.
+
+            FORMULARIO EQUIPAMIENTO.
+            -   DONE:   MODELO -> SE CAMBIA EL CONTROL A UN STRLINEEDIT.
+            -   DONE:   NÚMERO DE SERIE -> SE CAMBIA EL CONTROL A UN
+                        STRLINEEDIT.
+            -   DONE:   MOTIVO DE BAJA -> SE CAMBIA EL CONTROL A UN STRLINEEDIT
+            -   DONE:   SE MODIFICA LA 'ENTITY CONFIGURATION'.
+            -   DONE:   SE MODIFICA EL VALIDADOR.
+            -   DONE:   SE MODIFICA EL CONTROLADOR.
+
+            FORMULARIO ESTADO DEL PROYECTO.
+            -   DONE:   ESTADO PROYECTO -> SE CAMBIA EL CONTROL A UN
+                        STRLINEEDIT.
+            -   DONE:   SE MODIFICA LA 'ENTITY CONFIGURATION'.
+            -   DONE:   SE MODIFICA EL VALIDADOR.
+
+            FORMULARIO FILTRO.
+            -   DONE:   MODELO -> SE CAMBIA EL CONTROL A UN STRLINEEDIT.
+            -   DONE:   NÚMERO DE SERIE -> SE CAMBIA EL CONTROL A UN
+                        STRLINEEDIT.
+            -   DONE:   MOTIVO DE BAJA -> SE CAMBIA EL CONTROL A UN STRLINEEDIT
+            -   DONE:   SE MODIFICA LA 'ENTITY CONFIGURATION'.
+            -   DONE:   SE MODIFICA EL VALIDADOR.
+
+            FORMULARIO ILUMINACIÓN.
+            -   DONE:   MODELO -> SE CAMBIA EL CONTROL A UN STRLINEEDIT.
+            -   DONE:   NÚMERO DE SERIE -> SE CAMBIA EL CONTROL A UN
+                        STRLINEEDIT.
+            -   DONE:   MOTIVO DE BAJA -> SE CAMBIA EL CONTROL A UN STRLINEEDIT
+            -   DONE:   SE MODIFICA LA 'ENTITY CONFIGURATION'.
+            -   DONE:   SE MODIFICA EL VALIDADOR.
+
+            FORMULARIO MARCA COMERCIAL.
+            -   DONE:   COMERCIO -> SE CAMBIA EL CONTROL A UN STRLINEEDIT.
+            -   DONE:   DIRECCION -> SE CAMBIA EL CONTROL A UN STRLINEEDIT.
+            -   DONE:   CODIGO POSTAL -> SE CAMBIA EL CONTROL A UN STRLINEEDIT.
+            -   DONE:   POBLACION -> SE CAMBIA EL CONTROL A UN STRLINEEDIT.
+            -   DONE:   PROVINCIA -> SE CAMBIA EL CONTROL A UN STRLINEEDIT.
+            -   DONE:   SE MODIFICA LA 'ENTITY CONFIGURATION'.
+            -   DONE:   SE MODIFICA EL VALIDADOR.
+
+            FORMULARIO MATERIAL DE URNA.
+            -   DONE:   MATERIAL DE LA URNA -> SE CAMBIA EL CONTROL A UN
+                        STRLINEEDIT.
+            -   DONE:   SE MODIFICA LA 'ENTITY CONFIGURATION'.
+            -   DONE:   SE MODIFICA EL VALIDADOR.
+
+            FORMULARIO PROYECTO.
+            -   DONE:   NOMBRE DEL PROYECTO -> SE CAMBIA EL CONTROL A UN
+                        STRLINEEDIT.
+            -   DONE:   MOTIVO DE CIERRE/CANCELACIÓN -> SE CAMBIA EL CONTROL A
+                        UN STRLINEEDIT.
+            -   DONE:   SE MODIFICA LA 'ENTITY CONFIGURATION'.
+            -   DONE:   SE MODIFICA EL VALIDADOR.
+
+            FORMULARIO SUBCATEGORÍA DE INCIDENCIA.
+            -   DONE:   SUBCATEGORÍA DE INCIDENCIA -> SE CAMBIA EL CONTROL A UN
+                        STRLINEEDIT.
+            -   DONE:   SE MODIFICA LA 'ENTITY CONFIGURATION'.
+            -   DONE:   SE MODIFICA EL VALIDADOR.
+
+            FORMULARIO TIPO DE FILTRO.
+            -   DONE:   TIPO FILTRO -> SE CAMBIA EL CONTROL A UN STRLINEEDIT.
+            -   DONE:   SE MODIFICA LA 'ENTITY CONFIGURATION'.
+            -   DONE:   SE MODIFICA EL VALIDADOR.
+
+            FORMULARIO TIPO DE ILUMINACIÓN.
+            -   DONE:   TIPO DE ILUMINACIÓN -> SE CAMBIA EL CONTROL A UN
+                        STRLINEEDIT.
+            -   DONE:   SE MODIFICA LA 'ENTITY CONFIGURATION'.
+            -   DONE:   SE MODIFICA EL VALIDADOR.
+
+            FORMULARIO URNA.
+            -   DONE:   MODELO -> SE CAMBIA EL CONTROL A UN
+                        STRLINEEDIT.
+            -   DONE:   SE MODIFICA LA 'ENTITY CONFIGURATION'.
+            -   DONE:   SE MODIFICA EL VALIDADOR.
+
+           OTRAS CORRECCIONES.
+           -    DONE:  SE MODIFCA EL CONTROL STRLINEEDIT, TENIA UN ERROR DE
+                       LÓGICA QUE IMPEDIA GUARDAR LA INFORMACIÓN EN LA ENTIDAD.
+
+18/02/2026  REFACTORIZACIONES:
+    ↓       ====================================================================
+27/02/2026
             SE SIMPLIFICAN LAS FUNCIONES 'ENTITY_CONFIGURATION'
             --------------------------------------------------------------------
             ctrls = self._view.frame
@@ -419,24 +555,16 @@ FECHA		DESCRIPCIÓN
                             CONTEXTUAL.
                 -   POST:   TEST -> ELIMINACIÓN DE REGISTRO DESDE EL BOTÓN.
 
-            SE MODIFICA EL MÉTODO DE LAS VALIDACIONES:
-            -   TODAS LAS VALIDACIONES DE NUMEROS SE REDUCEN A UNA SOLA CLASE.
-            -   TODAS LAS VALIDACIONES SE REALIZAN AL PERDER EL FOCO EL CONTROL
-                DEL FORMULARIO.
-            --------------------------------------------------------------------
-            -   TODO:   FORMULARIO ACUARIO.
-
-
             OTRAS CORRECCIONES:
             -   UNDO:   SE ELIMINAN LAS FLECHAS DE LOS NULLABLESPINBOX Y
                         NULLABLEDOUBLESPINBOX.
             -   UNDO:   EN LOS SQPINBOX, CUANDO SE BORRA EL CONTENIDO Y PIERDE
                         EL FOCO PONER EL VALOR MÍNIMO.
 
-            TODO:   SE MODIFICA LA LÓGICA DE LAS IMAGENES PARA QUE SE EVITE
+            POST:   SE MODIFICA LA LÓGICA DE LAS IMAGENES PARA QUE SE EVITE
                     CARGAR LAS FOTOS SI NO ESTÁ RELLENADO EL FORMULARIO.
 
-            TODO:   SE MODIFICA LA CARGA DE LOS REGISTROS QUE PUEDAN CONTENER
+            POST:   SE MODIFICA LA CARGA DE LOS REGISTROS QUE PUEDAN CONTENER
                     IMAGENES.
 
                     def _load_record(self) -> Result:

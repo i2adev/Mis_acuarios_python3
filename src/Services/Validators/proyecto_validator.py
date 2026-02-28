@@ -37,11 +37,6 @@ class ProyectoValidator:
                 "EL CAMPO 'NOMBRE DEL PROYECTO' NO PUEDE ESTAR VACÍO"
             )
 
-        # Controla la longitud del texto
-        if len(widget.text()) > 32:
-            return Result.failure("EL CAMPO 'NOMBRE DEL PROYECTO' NO "
-                                  "PUEDE CONTENER MAS DE 32 CARACTERES")
-
         # Validación exitosa
         return Result.success(0)
 
@@ -64,11 +59,6 @@ class ProyectoValidator:
         # Sí el texto está vacío
         if not widget.text():
             return Result.success(0)
-
-        # Controla la longitud del texto
-        if len(widget.text()) > 64:
-            return Result.failure("EL CAMPO 'MOTIVO DE CIERRE' NO "
-                                  "PUEDE CONTENER MAS DE 64 CARACTERES")
 
         # Validación exitosa
         return Result.success(0)

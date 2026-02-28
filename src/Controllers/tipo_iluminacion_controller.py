@@ -50,10 +50,7 @@ class TipoIluminacionController(BaseController):
             ent.id = None
 
         # Tipo de iluminación
-        if ctrs.edit_tipo_iluminacion.text():
-            ent.tipo_iluminacion = ctrs.edit_tipo_iluminacion.text()
-        else:
-            ent.tipo_iluminacion = None
+        ent.tipo_iluminacion = ctrs.edit_tipo_iluminacion.value()
 
         # Descripción
         if ctrs.text_descripcion.toPlainText():

@@ -67,10 +67,7 @@ class UrnaController(BaseController):
             ent.id_marca = None
 
         # Modelo de la urna
-        if ctrs.edit_modelo.text():
-            ent.modelo = ctrs.edit_modelo.text()
-        else:
-            ent.modelo = None
+        ent.modelo = ctrs.edit_modelo.value()
 
         # Dimensiones: Anchura
         if ctrs.edit_ancho.text():

@@ -62,10 +62,7 @@ class ProyectoController(BaseController):
         ent.id_usuario = globals.CURRENT_USER.id
 
         # Nombre asignado al proyecto
-        if ctrs.edit_nombre_proyecto.text():
-            ent.nombre = ctrs.edit_nombre_proyecto.text()
-        else:
-            ent.nombre = None
+        ent.nombre = ctrs.edit_nombre_proyecto.value()
 
         # Estado del proyecto
         if ctrs.combo_estado_proyecto.currentIndex() != -1:
@@ -90,10 +87,7 @@ class ProyectoController(BaseController):
             ent.fecha_fin = None
 
         # Motivo de finalización del proyecto
-        if ctrs.edit_motivo_cierre.text():
-            ent.motivo_cierre = ctrs.edit_motivo_cierre.text()
-        else:
-            ent.motivo_cierre = None
+        ent.motivo_cierre = ctrs.edit_motivo_cierre.value()
 
         # Descripción del proyecto
         if ctrs.text_descripcion.toPlainText():

@@ -79,16 +79,10 @@ class EquipamientoController(BaseController):
             ent.id_marca = None
 
         # Modelo
-        if ctrs.edit_modelo.text():
-            ent.modelo = ctrs.edit_modelo.text()
-        else:
-            ent.modelo = None
+        ent.modelo = ctrs.edit_modelo.value()
 
         # Número de serie
-        if ctrs.edit_num_serie.text():
-            ent.numero_serie = ctrs.edit_num_serie.text()
-        else:
-            ent.numero_serie = None
+        ent.numero_serie = ctrs.edit_num_serie.value()
 
         # Fecha de alta
         alta = ctrs.fecha_alta.date()
@@ -106,11 +100,8 @@ class EquipamientoController(BaseController):
         else:
             ent.fecha_baja = None
 
-        # Motivo de bbaja
-        if ctrs.edit_motivo_baja.text():
-            ent.motivo_baja = ctrs.edit_motivo_baja.text()
-        else:
-            ent.motivo_baja = None
+        # Motivo de baja
+        ent.motivo_baja = ctrs.edit_motivo_baja.value()
 
         # Descripción
         if ctrs.text_descripcion.toPlainText():
@@ -265,15 +256,6 @@ class EquipamientoController(BaseController):
 
         if not res.is_success:
             self._view.frame.fecha_alta.edit_date.setFocus()
-            return res
-
-        # Valida el motivo de la baja del filtro
-        res = EquipamientoValidator.validate_motivo_baja(
-            self._view.frame.edit_motivo_baja
-        )
-
-        if not res.is_success:
-            self._view.frame.edit_motivo_baja.setFocus()
             return res
 
         return Result.success(0)

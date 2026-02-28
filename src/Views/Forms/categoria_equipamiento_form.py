@@ -11,6 +11,8 @@ import sys
 from PyQt6.QtWidgets import QApplication, QFrame, QHBoxLayout, QLabel, \
     QLineEdit, QPlainTextEdit, QVBoxLayout
 
+from CustomControls.str_line_edit import StrLineEdit
+
 
 class CategoriaEquipamientoForm(QFrame):
     """
@@ -56,7 +58,10 @@ class CategoriaEquipamientoForm(QFrame):
         self.edit_id.setFixedWidth(50)
         self.edit_id.setEnabled(False)
 
-        self.edit_categoria_equipamiento = QLineEdit()
+        self.edit_categoria_equipamiento = StrLineEdit(
+            control_name="CATEGORÍA DE EQUIPÀMIENTO",
+            max_length=32,
+        )
         self.edit_categoria_equipamiento.setObjectName(
             "edit_categoria_equipamiento")
         self.edit_categoria_equipamiento.setToolTip(

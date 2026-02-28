@@ -76,10 +76,7 @@ class AcuarioController(BaseController):
             ent.cod_color = None
 
         # Nombre del acuario
-        if ctrs.edit_nombre_acuario.text():
-            ent.nombre = ctrs.edit_nombre_acuario.text()
-        else:
-            ent.nombre = None
+        ent.nombre = ctrs.edit_nombre_acuario.value()
 
         # Urna
         if ctrs.combo_urna.currentIndex() != -1:
@@ -129,16 +126,10 @@ class AcuarioController(BaseController):
             ent.fecha_desmontaje = None
 
         # Motivo del desmontaje
-        if ctrs.edit_motivo_desmontaje.text():
-            ent.motivo_desmontaje = ctrs.edit_motivo_desmontaje.text()
-        else:
-            ent.motivo_desmontaje = None
+        ent.motivo_desmontaje = ctrs.edit_motivo_desmontaje.value()
 
         # Ubicación del acuario
-        if ctrs.edit_ubicacion_acuario.text():
-            ent.ubicacion_acuario = ctrs.edit_ubicacion_acuario.text()
-        else:
-            ent.ubicacion_acuario = None
+        ent.ubicacion_acuario = ctrs.edit_ubicacion_acuario.value()
 
         # Descripción del acuario
         if ctrs.text_descripcion.toPlainText():

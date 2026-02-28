@@ -7,10 +7,12 @@ Comentarios:
 
 import sys
 
-from PyQt6.QtWidgets import QFrame, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, \
+from PyQt6.QtWidgets import QFrame, QVBoxLayout, QHBoxLayout, QLabel, \
+    QLineEdit, \
     QPlainTextEdit, QApplication, QComboBox
 
 from CustomControls.nullable_date_edit import NullableDateEdit
+from CustomControls.str_line_edit import StrLineEdit
 
 
 class ProyectoForm(QFrame):
@@ -77,7 +79,10 @@ class ProyectoForm(QFrame):
         self.edit_id.setFixedWidth(50)
         self.edit_id.setEnabled(False)
 
-        self.edit_nombre_proyecto = QLineEdit()
+        self.edit_nombre_proyecto = StrLineEdit(
+            control_name="NOMBRE DEL PROYECTO",
+            max_length=32,
+        )
         self.edit_nombre_proyecto.setObjectName("edit_nombre_proyecto")
         self.edit_nombre_proyecto.setToolTip(
             """
@@ -87,7 +92,10 @@ class ProyectoForm(QFrame):
             """
         )
 
-        self.edit_motivo_cierre = QLineEdit()
+        self.edit_motivo_cierre = StrLineEdit(
+            control_name="MOTIVO DE CIERRE/CANCELACIÓN",
+            max_length=32,
+        )
         self.edit_motivo_cierre.setObjectName("edit_motivo_cierre")
         self.edit_motivo_cierre.setToolTip(
             """

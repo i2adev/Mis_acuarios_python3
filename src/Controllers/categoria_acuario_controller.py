@@ -49,10 +49,7 @@ class CategoriaAcuarioController(BaseController):
             ent.id = None
 
         # Categoría de acuario
-        if ctrs.edit_categoria_acuario.text():
-            ent.categoria = ctrs.edit_categoria_acuario.text()
-        else:
-            ent.categoria = None
+        ent.categoria = ctrs.edit_categoria_acuario.value()
 
         # Observaciones
         if ctrs.text_observaciones.toPlainText():

@@ -12,6 +12,8 @@ from PyQt6.QtWidgets import (QFrame, QVBoxLayout, QHBoxLayout, QLabel,
                              QLineEdit, QPlainTextEdit, QApplication,
                              QSpacerItem, QSizePolicy)
 
+from CustomControls.str_line_edit import StrLineEdit
+
 
 class TipoIluminacionForm(QFrame):
     """
@@ -57,7 +59,10 @@ class TipoIluminacionForm(QFrame):
         self.edit_id.setFixedWidth(50)
         self.edit_id.setEnabled(False)
 
-        self.edit_tipo_iluminacion = QLineEdit()
+        self.edit_tipo_iluminacion = StrLineEdit(
+            control_name="TIPO DE ILUMINACIÓN",
+            max_length=32,
+        )
         self.edit_tipo_iluminacion.setObjectName("edit_tipo_iluminacion")
         self.edit_tipo_iluminacion.setToolTip(
             """

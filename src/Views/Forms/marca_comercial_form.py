@@ -11,8 +11,11 @@ import sys
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QCursor
 from PyQt6.QtWidgets import QFrame, QLabel, QLineEdit, QPlainTextEdit, \
-    QVBoxLayout, QHBoxLayout, QApplication, QComboBox, QPushButton, QSpacerItem, \
+    QVBoxLayout, QHBoxLayout, QApplication, QComboBox, QPushButton, \
+    QSpacerItem, \
     QSizePolicy
+
+from CustomControls.str_line_edit import StrLineEdit
 
 
 class MarcaComercialForm(QFrame):
@@ -78,7 +81,7 @@ class MarcaComercialForm(QFrame):
         self.label_id.setFixedWidth(50)
         self.label_marca = QLabel("MARCA COMERCIAL")
         self.label_direccion = QLabel("DIRECCIÓN POSTAL")
-        self.label_cod_postal = QLabel("COD. POSTAL")
+        self.label_cod_postal = QLabel("CÓDIGO POSTAL")
         self.label_poblacion = QLabel("POBLACIÓN")
         self.label_provincia = QLabel("PROVINCIA")
         self.label_pais = QLabel("PAÍS")
@@ -90,7 +93,10 @@ class MarcaComercialForm(QFrame):
         self.edit_id.setObjectName("edit_id")
         self.edit_id.setFixedWidth(50)
 
-        self.edit_marca = QLineEdit()
+        self.edit_marca = StrLineEdit(
+            control_name="MARCA COMERCIAL",
+            max_length=32,
+        )
         self.edit_marca.setObjectName("edit_marca")
         self.edit_marca.setToolTip(
             """
@@ -100,7 +106,10 @@ class MarcaComercialForm(QFrame):
             """
         )
 
-        self.edit_direccion = QLineEdit()
+        self.edit_direccion = StrLineEdit(
+            control_name="DIRECCIÓN",
+            max_length=64,
+        )
         self.edit_direccion.setObjectName("edit_direccion")
         self.edit_direccion.setToolTip(
             """
@@ -110,7 +119,10 @@ class MarcaComercialForm(QFrame):
             """
         )
 
-        self.edit_cod_postal = QLineEdit()
+        self.edit_cod_postal = StrLineEdit(
+            control_name="CÓDIGO POSTAL",
+            max_length=15,
+        )
         self.edit_cod_postal.setObjectName("edit_cod_postal")
         self.edit_cod_postal.setToolTip(
             """
@@ -120,7 +132,10 @@ class MarcaComercialForm(QFrame):
             """
         )
 
-        self.edit_poblacion = QLineEdit()
+        self.edit_poblacion = StrLineEdit(
+            control_name="POBLACION",
+            max_length=25,
+        )
         self.edit_poblacion.setObjectName("edit_poblacion")
         self.edit_poblacion.setToolTip(
             """
@@ -130,7 +145,10 @@ class MarcaComercialForm(QFrame):
             """
         )
 
-        self.edit_provincia = QLineEdit()
+        self.edit_provincia = StrLineEdit(
+            control_name="PROVINCIA",
+            max_length=25,
+        )
         self.edit_provincia.setObjectName("edit_provincia")
         self.edit_provincia.setToolTip(
             """

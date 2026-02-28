@@ -8,8 +8,11 @@ Comentarios:
 
 import sys
 
-from PyQt6.QtWidgets import QFrame, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, \
+from PyQt6.QtWidgets import QFrame, QVBoxLayout, QHBoxLayout, QLabel, \
+    QLineEdit, \
     QPlainTextEdit, QApplication, QSpacerItem, QSizePolicy
+
+from CustomControls.str_line_edit import StrLineEdit
 
 
 class TipoFiltroForm(QFrame):
@@ -56,7 +59,10 @@ class TipoFiltroForm(QFrame):
         self.edit_id.setFixedWidth(50)
         self.edit_id.setEnabled(False)
 
-        self.edit_tipo_filtro = QLineEdit()
+        self.edit_tipo_filtro = StrLineEdit(
+            control_name="TIPO FILTRO",
+            max_length=32,
+        )
         self.edit_tipo_filtro.setObjectName("edit_tipo_filtro")
         self.edit_tipo_filtro.setToolTip(
             """

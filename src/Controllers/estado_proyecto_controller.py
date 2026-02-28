@@ -52,10 +52,7 @@ class EstadoProyectoController(BaseController):
             ent.id = None
 
         # Estado del proyecto
-        if ctrs.edit_estado_proyecto.text():
-            ent.estado = ctrs.edit_estado_proyecto.text()
-        else:
-            ent.estado = None
+        ent.estado = ctrs.edit_estado_proyecto.value()
 
         # Descripción del estado
         if ctrs.text_observaciones.toPlainText():

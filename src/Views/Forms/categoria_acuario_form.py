@@ -8,8 +8,11 @@ Comentarios:
 
 import sys
 
-from PyQt6.QtWidgets import QFrame, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, \
+from PyQt6.QtWidgets import QFrame, QVBoxLayout, QHBoxLayout, QLabel, \
+    QLineEdit, \
     QPlainTextEdit, QApplication, QSpacerItem, QSizePolicy
+
+from CustomControls.str_line_edit import StrLineEdit
 
 
 class CategoriaAcuarioForm(QFrame):
@@ -60,7 +63,10 @@ class CategoriaAcuarioForm(QFrame):
         self.edit_id.setFixedWidth(50)
         self.edit_id.setEnabled(False)
 
-        self.edit_categoria_acuario = QLineEdit()
+        self.edit_categoria_acuario = StrLineEdit(
+            control_name="TIPO DE ACUARIO",
+            max_length=32,
+        )
         self.edit_categoria_acuario.setObjectName("edit_categoria_acuario")
         self.edit_categoria_acuario.setToolTip(
             """

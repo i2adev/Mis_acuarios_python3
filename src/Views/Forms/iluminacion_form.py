@@ -16,6 +16,7 @@ from PyQt6.QtWidgets import QFrame, QLabel, QLineEdit, QPlainTextEdit, \
 from CustomControls.double_line_edit import DoubleLineEdit
 from CustomControls.int_line_edit import IntLineEdit
 from CustomControls.nullable_date_edit import NullableDateEdit
+from CustomControls.str_line_edit import StrLineEdit
 
 
 class IluminacionForm(QFrame):
@@ -100,7 +101,7 @@ class IluminacionForm(QFrame):
         self.label_id = QLabel("ID")
         self.label_marca = QLabel("MARCA")
         self.label_modelo = QLabel("MODELO")
-        self.label_num_serie = QLabel("NÚM. SERIE")
+        self.label_num_serie = QLabel("NÚMERO DE SERIE")
         self.label_tipo_iluminacion = QLabel("TIPO")
         self.label_control_iluminacion = QLabel("CONTROL")
         self.label_potencia = QLabel("POTENCIA")
@@ -126,7 +127,10 @@ class IluminacionForm(QFrame):
         self.edit_id.setEnabled(False)
         self.edit_id.setObjectName("edit_id")
 
-        self.edit_modelo = QLineEdit()
+        self.edit_modelo = StrLineEdit(
+            control_name="MODELO",
+            max_length=32,
+        )
         self.edit_modelo.setMinimumWidth(250)
         self.edit_modelo.setObjectName("edit_modelo")
         self.edit_modelo.setToolTip(
@@ -137,7 +141,10 @@ class IluminacionForm(QFrame):
             """
         )
 
-        self.edit_num_serie = QLineEdit()
+        self.edit_num_serie = StrLineEdit(
+            control_name="NÚMERO DE SERIE",
+            max_length=32,
+        )
         self.edit_num_serie.setMinimumWidth(250)
         self.edit_num_serie.setObjectName("edit_num_serie")
         self.edit_num_serie.setToolTip(
@@ -239,7 +246,10 @@ class IluminacionForm(QFrame):
             """
         )
 
-        self.edit_motivo_baja = QLineEdit()
+        self.edit_motivo_baja = StrLineEdit(
+            control_name="MOTIVO DE BAJA",
+            max_length=32,
+        )
         self.edit_motivo_baja.setMinimumWidth(250)
         self.edit_motivo_baja.setObjectName("edit_motivo_baja")
         self.edit_motivo_baja.setToolTip(

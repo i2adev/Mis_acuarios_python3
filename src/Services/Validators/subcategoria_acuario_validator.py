@@ -37,10 +37,5 @@ class SubcategoriaAcuarioValidator:
                 "EL CAMPO 'SUBCATEGORÍA DE ACUARIO' NO PUEDE ESTAR VACIO"
             )
 
-        # Si el texto contiene más de 32 carácteres
-        if len(widget.text()) > 32:
-            return Result.failure("EL CAMPO 'TIPO DE ACUARIO' NO PUEDE "
-                                  "CONTENER MAS DE 32 CARACTERES")
-
         # Validación exitosa
         return Result.success(0)
