@@ -11,6 +11,7 @@ from PyQt6.QtWidgets import QFrame, QVBoxLayout, QHBoxLayout, QLabel, \
     QLineEdit, \
     QPlainTextEdit, QApplication, QComboBox
 
+from CustomControls.combo_box import ComboBox
 from CustomControls.nullable_date_edit import NullableDateEdit
 from CustomControls.str_line_edit import StrLineEdit
 
@@ -116,7 +117,7 @@ class ProyectoForm(QFrame):
         )
 
         # Combos
-        self.combo_estado_proyecto = QComboBox()
+        self.combo_estado_proyecto = ComboBox("ESTADO DEL PROYECTO")
         self.combo_estado_proyecto.setMinimumWidth(250)
         self.combo_estado_proyecto.setObjectName("combo_estado_proyecto")
         self.combo_estado_proyecto.setEditable(True)

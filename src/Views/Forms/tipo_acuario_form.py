@@ -13,6 +13,8 @@ from PyQt6.QtGui import QCursor
 from PyQt6.QtWidgets import QFrame, QLabel, QLineEdit, QPlainTextEdit, \
     QVBoxLayout, QHBoxLayout, QApplication, QComboBox, QPushButton
 
+from CustomControls.combo_box import ComboBox
+
 
 class TipoAcuarioForm(QFrame):
     """
@@ -53,8 +55,8 @@ class TipoAcuarioForm(QFrame):
         # Etiquetas
         self.label_id = QLabel("ID")
         self.label_id.setFixedWidth(50)
-        self.label_tipo_acuario = QLabel("TIPO ACUARIO")
-        self.label_subtipo_acuario = QLabel("SUBTIPO ACUARIO")
+        self.label_tipo_acuario = QLabel("TIPO DE ACUARIO")
+        self.label_subtipo_acuario = QLabel("SUBTIPO DE ACUARIO")
         self.label_observaciones = QLabel("OBSERVACIONES")
 
         # Textos
@@ -75,7 +77,7 @@ class TipoAcuarioForm(QFrame):
         )
 
         # Combos
-        self.combo_categoria_acuario = QComboBox()
+        self.combo_categoria_acuario = ComboBox("TIPO DE ACUARIO")
         self.combo_categoria_acuario.setEditable(True)
         self.combo_categoria_acuario.setObjectName("combo_categoria_acuario")
         self.combo_categoria_acuario.setToolTip(
@@ -92,7 +94,7 @@ class TipoAcuarioForm(QFrame):
             QCursor(Qt.CursorShape.PointingHandCursor)
         )
 
-        self.combo_subcategoria_acuario = QComboBox()
+        self.combo_subcategoria_acuario = ComboBox("SUBTIPO DE ACUARIO")
         self.combo_subcategoria_acuario.setEditable(True)
         self.combo_subcategoria_acuario.setObjectName(
             "combo_subcategoria_acuario"
@@ -121,7 +123,8 @@ class TipoAcuarioForm(QFrame):
 
         ## Tipo de acuario
         self.layout_edit_tipo_acuario.addWidget(self.combo_categoria_acuario)
-        self.layout_edit_tipo_acuario.addWidget(self.button_insert_tipo_acuario)
+        self.layout_edit_tipo_acuario.addWidget(
+            self.button_insert_tipo_acuario)
         self.layout_tipo_acuario.addWidget(self.label_tipo_acuario)
         self.layout_tipo_acuario.addLayout(self.layout_edit_tipo_acuario)
 

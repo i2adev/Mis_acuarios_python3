@@ -64,10 +64,7 @@ class AcuarioController(BaseController):
             ent.id = None
 
         # Proyecto
-        if ctrs.combo_proyecto.currentIndex() != -1:
-            ent.id_proyecto = int(ctrs.combo_proyecto.currentData())
-        else:
-            ent.id_proyecto = None
+        ent.id_proyecto = int(ctrs.combo_proyecto.value())
 
         # Color
         if ctrs.edit_cod_color.text():
@@ -79,16 +76,10 @@ class AcuarioController(BaseController):
         ent.nombre = ctrs.edit_nombre_acuario.value()
 
         # Urna
-        if ctrs.combo_urna.currentIndex() != -1:
-            ent.id_urna = int(ctrs.combo_urna.currentData())
-        else:
-            ent.id_urna = None
+        ent.id_urna = int(ctrs.combo_urna.value())
 
         # Tipo de acuario
-        if ctrs.combo_tipo_acuario.currentIndex() != -1:
-            ent.id_tipo = int(ctrs.combo_tipo_acuario.currentData())
-        else:
-            ent.id_tipo = None
+        ent.id_tipo = int(ctrs.combo_tipo_acuario.value())
 
         # Volumen neto
         ent.volumen_neto = ctrs.edit_vol_neto.value()

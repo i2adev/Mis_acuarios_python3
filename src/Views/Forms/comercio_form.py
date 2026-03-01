@@ -12,6 +12,7 @@ from PyQt6.QtWidgets import QComboBox, QFrame, QVBoxLayout, QHBoxLayout, \
     QLineEdit, \
     QPlainTextEdit, QApplication, QSpacerItem, QSizePolicy
 
+from CustomControls.combo_box import ComboBox
 from CustomControls.str_line_edit import StrLineEdit
 
 
@@ -154,7 +155,7 @@ class ComercioForm(QFrame):
         )
 
         # Comboboxes
-        self.combo_pais = QComboBox()
+        self.combo_pais = ComboBox("PAÍS")
         self.combo_pais.setObjectName("combo_pais")
         self.combo_pais.setMinimumWidth(250)
         self.combo_pais.setEditable(True)

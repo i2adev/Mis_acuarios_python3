@@ -15,6 +15,7 @@ from PyQt6.QtWidgets import QFrame, QLabel, QLineEdit, QPlainTextEdit, \
     QSpacerItem, \
     QSizePolicy
 
+from CustomControls.combo_box import ComboBox
 from CustomControls.str_line_edit import StrLineEdit
 
 
@@ -171,7 +172,7 @@ class MarcaComercialForm(QFrame):
         )
 
         # Combos
-        self.combo_pais = QComboBox()
+        self.combo_pais = ComboBox("PAÍS")
         self.combo_pais.setObjectName("combo_pais")
         self.combo_pais.setEditable(True)
         self.combo_pais.setToolTip(

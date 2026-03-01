@@ -64,10 +64,7 @@ class IluminacionController(BaseController):
             ent.id = None
 
         # Marca
-        if ctrs.combo_marca.currentIndex() != -1:
-            ent.id_marca = int(ctrs.combo_marca.currentData())
-        else:
-            ent.id_marca = None
+        ent.id_marca = ctrs.combo_marca.value()
 
         # Modelo
         ent.modelo = ctrs.edit_modelo.value()
@@ -76,18 +73,10 @@ class IluminacionController(BaseController):
         ent.num_serie = ctrs.edit_num_serie.value()
 
         # Tipo de iluminación
-        if ctrs.combo_tipo_iluminacion.currentIndex() != -1:
-            ent.id_tipo_iluminacion = int(
-                ctrs.combo_tipo_iluminacion.currentData())
-        else:
-            ent.id_tipo_iluminacion = None
+        ent.id_tipo_iluminacion = ctrs.combo_tipo_iluminacion.value()
 
-        # Control de laa iluminación
-        if ctrs.combo_control_iluminacion.currentIndex() != -1:
-            ent.id_control_iluminacion = int(
-                ctrs.combo_control_iluminacion.currentData())
-        else:
-            ent.id_control_iluminacion = None
+        # Control de la iluminación
+        ent.id_control_iluminacion = ctrs.combo_control_iluminacion.value()
 
         # Potencia de la luminaria
         ent.potencia = ctrs.edit_potencia.value()

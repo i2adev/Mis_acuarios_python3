@@ -70,9 +70,9 @@ class StrLineEdit(QLineEdit):
         if len(text) > self.max_length:
             QMessageBox.warning(self, "ERROR DE VALIDACIÓN",
                                 f"EL CAMPO '{self.control_name}' ADMITE UN "
-                                f"MÁXIMO DE {self.max_length} CARACTERES.'")
-            self.setFocus()
-            return
+                                f"MÁXIMO DE {self.max_length} CARACTERES.\n"
+                                "SE REDUCIRÁ EL CAMPO AL MÁXIMO PERMITIDO.")
+            self._value = text[:self.max_length - 3] + ("...")
 
         # Establecemos el texto
         self._value = text if not self.is_capital else text.upper()

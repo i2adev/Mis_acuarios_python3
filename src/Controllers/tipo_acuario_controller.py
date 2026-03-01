@@ -53,17 +53,10 @@ class TipoAcuarioController(BaseController):
             ent.id = None
 
         # Categoría de acuario
-        if ctrs.combo_categoria_acuario.currentIndex() != -1:
-            ent.id_categoria_acuario = ctrs.combo_categoria_acuario.currentData()
-        else:
-            ent.id_categoria_acuario = None
+        ent.id_categoria_acuario = ctrs.combo_categoria_acuario.value()
 
         # Subcategoría de acuario
-        if ctrs.combo_subcategoria_acuario.currentIndex() != -1:
-            ent.id_subcategoria_acuario = (
-                ctrs.combo_subcategoria_acuario.currentData())
-        else:
-            ent.id_subcategoria_acuario = None
+        ent.id_subcategoria_acuario = ctrs.combo_subcategoria_acuario.value()
 
         # Observaciones
         if ctrs.text_observaciones.toPlainText():

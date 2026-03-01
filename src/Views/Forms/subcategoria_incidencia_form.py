@@ -13,6 +13,7 @@ from PyQt6.QtGui import QCursor
 from PyQt6.QtWidgets import QFrame, QLabel, QLineEdit, QPlainTextEdit, \
     QVBoxLayout, QHBoxLayout, QApplication, QComboBox, QPushButton
 
+from CustomControls.combo_box import ComboBox
 from CustomControls.str_line_edit import StrLineEdit
 
 
@@ -55,7 +56,7 @@ class SubcategoriaIncidenciaForm(QFrame):
         # Etiquetas
         self.label_id = QLabel("ID")
         self.label_id.setFixedWidth(50)
-        self.label_categoria_incidencia = QLabel("CATEGORÍA INCIDENCIA")
+        self.label_categoria_incidencia = QLabel("CATEGORÍA DE INCIDENCIA")
         self.label_subcategoria_incidencia = QLabel("SUBCATEGORÍA INCIDENCIA")
         self.label_observaciones = QLabel("OBSERVACIONES")
 
@@ -92,7 +93,7 @@ class SubcategoriaIncidenciaForm(QFrame):
         )
 
         # Combos
-        self.combo_categoria_incidencia = QComboBox()
+        self.combo_categoria_incidencia = ComboBox("CATEGORÍA DE INCIDENCIA")
         self.combo_categoria_incidencia.setMinimumWidth(200)
         self.combo_categoria_incidencia.setEditable(True)
         self.combo_categoria_incidencia.setObjectName(

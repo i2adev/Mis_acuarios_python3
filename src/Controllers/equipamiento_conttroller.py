@@ -66,17 +66,10 @@ class EquipamientoController(BaseController):
             ent.id = None
 
         # Categoría
-        if ctrs.combo_categoria_equipamiento.currentIndex() != -1:
-            ent.id_categoria = int(
-                ctrs.combo_categoria_equipamiento.currentData())
-        else:
-            ent.id_categoria = None
+        ent.id_categoria = ctrs.combo_categoria_equipamiento.value()
 
         # Marca
-        if ctrs.combo_marca.currentIndex() != -1:
-            ent.id_marca = int(ctrs.combo_marca.currentData())
-        else:
-            ent.id_marca = None
+        ent.id_marca = int(ctrs.combo_marca.value())
 
         # Modelo
         ent.modelo = ctrs.edit_modelo.value()

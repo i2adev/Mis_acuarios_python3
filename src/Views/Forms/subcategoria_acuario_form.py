@@ -13,6 +13,7 @@ from PyQt6.QtGui import QCursor
 from PyQt6.QtWidgets import QFrame, QLabel, QLineEdit, QPlainTextEdit, \
     QVBoxLayout, QHBoxLayout, QApplication, QComboBox, QPushButton
 
+from CustomControls.combo_box import ComboBox
 from CustomControls.str_line_edit import StrLineEdit
 
 
@@ -54,7 +55,7 @@ class SubcategoriaAcuarioForm(QFrame):
         # Etiquetas
         self.label_id = QLabel("ID")
         self.label_id.setFixedWidth(50)
-        self.label_categoria_acuario = QLabel("CATEGORÍA ACUARIO")
+        self.label_categoria_acuario = QLabel("CATEGORÍA DE ACUARIO")
         self.label_subcategoria_acuario = QLabel("SUBCATEGORÍA ACUARIO")
         self.label_observaciones = QLabel("OBSERVACIONES")
 
@@ -90,7 +91,7 @@ class SubcategoriaAcuarioForm(QFrame):
         )
 
         # Combos
-        self.combo_categoria_acuario = QComboBox()
+        self.combo_categoria_acuario = ComboBox("CATEGORÍA DE ACUARIO")
         self.combo_categoria_acuario.setMinimumWidth(200)
         self.combo_categoria_acuario.setEditable(True)
         self.combo_categoria_acuario.setObjectName(

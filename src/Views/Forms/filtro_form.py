@@ -13,6 +13,7 @@ from PyQt6.QtWidgets import QFrame, QLabel, QLineEdit, QPlainTextEdit, \
     QVBoxLayout, QHBoxLayout, QApplication, QComboBox, QPushButton, QGroupBox, \
     QCheckBox
 
+from CustomControls.combo_box import ComboBox
 from CustomControls.double_line_edit import DoubleLineEdit
 from CustomControls.int_line_edit import IntLineEdit
 from CustomControls.nullable_date_edit import NullableDateEdit
@@ -330,7 +331,7 @@ class FiltroForm(QFrame):
         )
 
         # Combos
-        self.combo_tipo_filtro = QComboBox()
+        self.combo_tipo_filtro = ComboBox("TIPO DE FILTRO")
         self.combo_tipo_filtro.setObjectName("combo_tipo_filtro")
         self.combo_tipo_filtro.setMinimumWidth(250)
         self.combo_tipo_filtro.setEditable(True)
@@ -344,7 +345,7 @@ class FiltroForm(QFrame):
             """
         )
 
-        self.combo_marca = QComboBox()
+        self.combo_marca = ComboBox("MARCA")
         self.combo_marca.setMinimumWidth(250)
         self.combo_marca.setObjectName("combo_marca")
         self.combo_marca.setEditable(True)

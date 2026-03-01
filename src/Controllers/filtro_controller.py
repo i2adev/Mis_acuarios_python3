@@ -64,19 +64,13 @@ class FiltroController(BaseController):
             ent.id = None
 
         # Tipo de filtro
-        if ctrs.combo_tipo_filtro.currentIndex() != -1:
-            ent.id_tipo = int(ctrs.combo_tipo_filtro.currentData())
-        else:
-            ent.id_tipo = None
+        ent.id_tipo = ctrs.combo_tipo_filtro.value()
 
         # Específica sí cuenta con calentador
         ent.es_thermo = 1 if ctrs.check_termofiltro.isChecked() else 0
 
         # Marca
-        if ctrs.combo_marca.currentIndex() != -1:
-            ent.id_marca = int(ctrs.combo_marca.currentData())
-        else:
-            ent.id_marca = None
+        ent.id_marca = ctrs.combo_marca.currentData()
 
         # Modelo
         ent.modelo = ctrs.edit_modelo.value()

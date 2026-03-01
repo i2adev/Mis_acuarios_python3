@@ -65,10 +65,7 @@ class ProyectoController(BaseController):
         ent.nombre = ctrs.edit_nombre_proyecto.value()
 
         # Estado del proyecto
-        if ctrs.combo_estado_proyecto.currentIndex() != -1:
-            ent.id_estado = ctrs.combo_estado_proyecto.currentData()
-        else:
-            ent.id_estado = None
+        ent.id_estado = ctrs.combo_estado_proyecto.value()
 
         # Fecha de inicio del proyecto
         inicio = ctrs.date_inicio.date()

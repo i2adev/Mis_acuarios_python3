@@ -59,10 +59,7 @@ class SubcategoriaIncidenciaController(BaseController):
             ent.id = None
 
         # Categoría de incidencia
-        if ctrs.combo_categoria_incidencia.currentIndex() != -1:
-            ent.id_categoria = ctrs.combo_categoria_incidencia.currentData()
-        else:
-            ent.id_categoria = None
+        ent.id_categoria = ctrs.combo_categoria_incidencia.value()
 
         # Subcategoría de incidencia
         ent.subcategoria = ctrs.edit_subcategoria_incidencia.value()

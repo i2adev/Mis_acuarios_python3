@@ -1,6 +1,91 @@
 ﻿================================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
+28/02/2026  REFACTORIZACIONES:
+    ↓       ====================================================================
+            SE MODIFICA LA LÓGICA DE LOS QCOMBOBOXES:
+            -   SE CREA UNA CLASE DERIVADA DE QCOMBOBOX QUE DEVUELVE VALORES
+                NONE EN CASO DE QUE NO HAYA NADA SELECCIONADO.
+            -   SE MODIFICA LA LÓGICA DE LOS VALIDADORES PARA ADAPTAR A LA
+                MODIFICACIÓN DE LOS COMBOS.
+            -   SE MODIFICAN LOS 'ENTITY CONFIGURATION' PARA ADAPTARLOS A LA
+                MODIFICACIÓN DE LOS COMBOS.
+            --------------------------------------------------------------------
+            -   DONE:   SE CREA LA CLASE COMBOBOX QUE HEREDA DE LA CLASE
+                        QCOMBOBOX.
+
+            -   FORMULARIO ACUARIO:
+                -   DONE:   PROYECTO -> SE CAMBIA EL CONTROL A UN COMBOBOX.
+                -   DONE:   URNA -> SE CAMBIA EL CONTROL A UN COMBOBOX.
+                -   DONE:   TIPO ACUARIO -> SE CAMBIA EL CONTROL A UN COMBOBOX.
+                -   DONE:   SE MODIFICA LA 'ENTITY CONFIGURATION'.
+                -   UNDO:   SE MODIFICA EL VALIDADOR.
+
+            -   FORMULARIO COMERCIO:
+                -   DONE:   PAÍS -> SE CAMBIA EL CONTROL A UN COMBOBOX.
+                -   DONE:   SE MODIFICA LA 'ENTITY CONFIGURATION'.
+                -   UNDO:   SE MODIFICA EL VALIDADOR.
+
+            -   FORMULARIO EQUIPAMIENTO:
+                -   DONE:   CATEGORÍA -> SE CAMBIA EL CONTROL A UN COMBOBOX.
+                -   DONE:   MARCA -> SE CAMBIA EL CONTROL A UN COMBOBOX.
+                -   DONE:   SE MODIFICA LA 'ENTITY CONFIGURATION'.
+                -   UNDO:   SE MODIFICA EL VALIDADOR.
+
+            -   FORMULARIO FILTRO:
+                -   DONE:   MARCA -> SE CAMBIA EL CONTROL A UN COMBOBOX.
+                -   DONE:   SE MODIFICA LA 'ENTITY CONFIGURATION'.
+                -   UNDO:   SE MODIFICA EL VALIDADOR.
+
+            -   FORMULARIO ILUMINACIONES:
+                -   DONE:   MARCA -> SE CAMBIA EL CONTROL A UN COMBOBOX.
+                -   DONE:   SE MODIFICA LA 'ENTITY CONFIGURATION'.
+                -   UNDO:   SE MODIFICA EL VALIDADOR.
+
+            -   FORMULARIO MARCA COMERCIAL:
+                -   DONE:   PAÍS -> SE CAMBIA EL CONTROL A UN COMBOBOX.
+                -   DONE:   SE MODIFICA LA 'ENTITY CONFIGURATION'.
+                -   UNDO:   SE MODIFICA EL VALIDADOR.
+
+            -   FORMULARIO PROYECTO:
+                -   DONE:   ESTADO DEL PROYECTO -> SE CAMBIA EL CONTROL A UN
+                            COMBOBOX.
+                -   DONE:   SE MODIFICA LA 'ENTITY CONFIGURATION'.
+                -   UNDO:   SE MODIFICA EL VALIDADOR.
+
+            -   FORMULARIO SUBCATEGORÍA DE ACUARIO:
+                -   DONE:   CATEGORÍA DE ACUARIO -> SE CAMBIA EL CONTROL A UN
+                            COMBOBOX.
+                -   DONE:   SE MODIFICA LA 'ENTITY CONFIGURATION'.
+                -   UNDO:   SE MODIFICA EL VALIDADOR.
+
+            -   FORMULARIO SUBCATEGORÍA DE INCIDENCIA:
+                -   DONE:   CATEGORÍA DE INCIDENCIA -> SE CAMBIA EL CONTROL A
+                            UN COMBOBOX.
+                -   DONE:   SE MODIFICA LA 'ENTITY CONFIGURATION'.
+                -   UNDO:   SE MODIFICA EL VALIDADOR.
+
+            -   FORMULARIO TIPO DE ACUARIO:
+                -   DONE:   CATEGORÍA DE ACUARIO -> SE CAMBIA EL CONTROL A
+                            UN COMBOBOX.
+                -   DONE:   SUBCATEGORÍA DE ACUARIO -> SE CAMBIA EL CONTROL A
+                            UN COMBOBOX.
+                -   DONE:   SE MODIFICA LA 'ENTITY CONFIGURATION'.
+                -   UNDO:   SE MODIFICA EL VALIDADOR.
+
+            -   FORMULARIO URNA:
+                -   DONE:   MARCA -> SE CAMBIA EL CONTROL A UN COMBOBOX.
+                -   DONE:   MATERIAL -> SE CAMBIA EL CONTROL A UN COMBOBOX.
+                -   DONE:   SUBCATEGORÍA DE ACUARIO -> SE CAMBIA EL CONTROL A
+                            UN COMBOBOX.
+                -   DONE:   SE MODIFICA LA 'ENTITY CONFIGURATION'.
+                -   UNDO:   SE MODIFICA EL VALIDADOR.
+
+            OTRAS REFACTORIZACIONES:
+            -   DONE:   SE MODIFICA EL CONTROL STRLINEEDIT PARA QUE EN CASO DE
+                        EXCEDER DE LA LONGITUD MÁXIMA, SE ACORTE EL TEXTO.
+
+
 27/02/2026  REFACTORIZACIONES:
             ====================================================================
             SE MODIFICA EL METODO DE LAS VALIDACIONES:

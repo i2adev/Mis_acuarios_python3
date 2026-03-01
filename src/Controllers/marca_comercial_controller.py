@@ -65,10 +65,7 @@ class MarcaComercialController(BaseController):
         ent.provincia = ctrs.edit_provincia.value()
 
         # País
-        if ctrs.combo_pais.currentIndex() != -1:
-            ent.id_pais = int(ctrs.combo_pais.currentData())
-        else:
-            ent.id_pais = None
+        ent.id_pais = ctrs.combo_pais.value()
 
         # Observaciones
         if ctrs.text_observaciones.toPlainText():

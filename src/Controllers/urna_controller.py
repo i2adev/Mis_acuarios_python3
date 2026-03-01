@@ -61,49 +61,28 @@ class UrnaController(BaseController):
             ent.id = None
 
         # Marca de la urna
-        if ctrs.combo_marca.currentIndex() != -1:
-            ent.id_marca = ctrs.combo_marca.currentData()
-        else:
-            ent.id_marca = None
+        ent.id_marca = ctrs.combo_marca.value()
 
         # Modelo de la urna
         ent.modelo = ctrs.edit_modelo.value()
 
         # Dimensiones: Anchura
-        if ctrs.edit_ancho.text():
-            ent.anchura = ctrs.edit_ancho.text()
-        else:
-            ent.anchura = None
+        ent.anchura = ctrs.edit_ancho.value()
 
         # Dimensiones: Profundidad
-        if ctrs.edit_profundo.text():
-            ent.profundidad = ctrs.edit_profundo.text()
-        else:
-            ent.profundidad = None
+        ent.profundidad = ctrs.edit_profundo.value()
 
         # Dimensiones: Altura
-        if ctrs.edit_alto.text():
-            ent.altura = ctrs.edit_alto.text()
-        else:
-            ent.altura = None
+        ent.altura = ctrs.edit_alto.value()
 
         # Dimensiones: Grososr del cristal
-        if ctrs.edit_grosor.text():
-            ent.grosor_cristal = ctrs.edit_grosor.text()
-        else:
-            ent.grosor_cristal = None
+        ent.grosor_cristal = ctrs.edit_grosor.value()
 
         # Volumen del tanque
-        if ctrs.edit_volumen.text():
-            ent.volumen_tanque = ctrs.edit_volumen.text()
-        else:
-            ent.volumen_tanque = None
+        ent.volumen_tanque = ctrs.edit_volumen.value()
 
         # Material de la urna
-        if ctrs.combo_material.currentIndex() != -1:
-            ent.id_material = ctrs.combo_material.currentData()
-        else:
-            ent.id_material = None
+        ent.id_material = ctrs.combo_material.value()
 
         # Descripción
         if ctrs.text_descripcion.toPlainText():

@@ -13,6 +13,7 @@ from PyQt6.QtWidgets import QFrame, QLabel, QLineEdit, QPlainTextEdit, \
     QVBoxLayout, QHBoxLayout, QApplication, QComboBox, QPushButton, QGroupBox, \
     QCheckBox
 
+from CustomControls.combo_box import ComboBox
 from CustomControls.nullable_date_edit import NullableDateEdit
 from CustomControls.str_line_edit import StrLineEdit
 
@@ -148,7 +149,7 @@ class EquipamientoForm(QFrame):
         )
 
         # Combos
-        self.combo_categoria_equipamiento = QComboBox()
+        self.combo_categoria_equipamiento = ComboBox("CATEGORÍA")
         self.combo_categoria_equipamiento.setObjectName(
             "combo_categoria_equipamiento")
         self.combo_categoria_equipamiento.setMinimumWidth(250)
@@ -161,7 +162,7 @@ class EquipamientoForm(QFrame):
             """
         )
 
-        self.combo_marca = QComboBox()
+        self.combo_marca = ComboBox("MARCA")
         self.combo_marca.setMinimumWidth(250)
         self.combo_marca.setObjectName("combo_marca")
         self.combo_marca.setEditable(True)

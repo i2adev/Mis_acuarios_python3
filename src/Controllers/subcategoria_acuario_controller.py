@@ -56,10 +56,7 @@ class SubcategoriaAcuarioController(BaseController):
             ent.id = None
 
         # Categoría de acuario
-        if ctrs.combo_categoria_acuario.currentIndex() != -1:
-            ent.id_categoria = ctrs.combo_categoria_acuario.currentData()
-        else:
-            ent.id_categoria = None
+        ent.id_categoria = ctrs.combo_categoria_acuario.value()
 
         # Subcategoría de acuario
         ent.subcategoria = ctrs.edit_subcategoria_acuario.value()

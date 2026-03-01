@@ -13,6 +13,7 @@ from PyQt6.QtWidgets import QFrame, QLabel, QLineEdit, QPlainTextEdit, \
     QVBoxLayout, QHBoxLayout, QApplication, QComboBox, QPushButton, QGroupBox, \
     QCheckBox
 
+from CustomControls.combo_box import ComboBox
 from CustomControls.double_line_edit import DoubleLineEdit
 from CustomControls.int_line_edit import IntLineEdit
 from CustomControls.nullable_date_edit import NullableDateEdit
@@ -237,6 +238,7 @@ class IluminacionForm(QFrame):
             max_value=200,
             units="CMS"
         )
+        
         self.edit_anchura.setObjectName("edit_anchura")
         self.edit_anchura.setValidator(decimal_validator)
         self.edit_anchura.setToolTip(
@@ -292,7 +294,7 @@ class IluminacionForm(QFrame):
         )
 
         ## Combos
-        self.combo_marca = QComboBox()
+        self.combo_marca = ComboBox("MARCA")
         self.combo_marca.setObjectName("combo_marca")
         self.combo_marca.setMinimumWidth(250)
         self.combo_marca.setEditable(True)
@@ -305,7 +307,7 @@ class IluminacionForm(QFrame):
             """
         )
 
-        self.combo_tipo_iluminacion = QComboBox()
+        self.combo_tipo_iluminacion = ComboBox("TIPO")
         self.combo_tipo_iluminacion.setMinimumWidth(250)
         self.combo_tipo_iluminacion.setObjectName("combo_tipo_iluminacion")
         self.combo_tipo_iluminacion.setEditable(True)
@@ -318,7 +320,7 @@ class IluminacionForm(QFrame):
             """
         )
 
-        self.combo_control_iluminacion = QComboBox()
+        self.combo_control_iluminacion = ComboBox("CONTROL")
         self.combo_control_iluminacion.setMinimumWidth(250)
         self.combo_control_iluminacion.setObjectName(
             "combo_control_iluminacion")

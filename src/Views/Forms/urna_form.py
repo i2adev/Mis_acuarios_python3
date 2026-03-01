@@ -12,6 +12,7 @@ from PyQt6.QtGui import QIntValidator, QCursor
 from PyQt6.QtWidgets import QFrame, QLabel, QLineEdit, QPlainTextEdit, \
     QVBoxLayout, QHBoxLayout, QApplication, QComboBox, QPushButton
 
+from CustomControls.combo_box import ComboBox
 from CustomControls.int_line_edit import IntLineEdit
 from CustomControls.str_line_edit import StrLineEdit
 
@@ -204,7 +205,7 @@ class UrnaForm(QFrame):
         )
 
         # Combos
-        self.combo_marca = QComboBox()
+        self.combo_marca = ComboBox("MARCA")
         self.combo_marca.setMinimumWidth(250)
         self.combo_marca.setObjectName("combo_marca")
         self.combo_marca.setEditable(True)
@@ -217,7 +218,7 @@ class UrnaForm(QFrame):
             """
         )
 
-        self.combo_material = QComboBox()
+        self.combo_material = ComboBox("MATERIAL DE LA URNA")
         self.combo_material.setMinimumWidth(250)
         self.combo_material.setObjectName("combo_material")
         self.combo_material.setEditable(True)

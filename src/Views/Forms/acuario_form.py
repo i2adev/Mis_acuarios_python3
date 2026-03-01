@@ -7,10 +7,11 @@ Comentarios:
 
 import sys
 
+from CustomControls.combo_box import ComboBox
 from CustomControls.int_line_edit import IntLineEdit
 from CustomControls.nullable_date_edit import NullableDateEdit
 from PyQt6.QtCore import Qt
-from PyQt6.QtGui import QCursor, QIntValidator
+from PyQt6.QtGui import QCursor
 from PyQt6.QtWidgets import QApplication, QComboBox, QFrame, QGroupBox, \
     QHBoxLayout, QLabel, QLineEdit, QPlainTextEdit, QPushButton, QVBoxLayout
 
@@ -172,7 +173,7 @@ class AcuarioForm(QFrame):
         )
 
         # Combos
-        self.combo_proyecto = QComboBox()
+        self.combo_proyecto = ComboBox("PROYECTO")
         self.combo_proyecto.setObjectName("combo_proyecto")
         self.combo_proyecto.setMinimumWidth(250)
         self.combo_proyecto.setToolTip(
@@ -185,7 +186,7 @@ class AcuarioForm(QFrame):
             """
         )
 
-        self.combo_urna = QComboBox()
+        self.combo_urna = ComboBox("URNA")
         self.combo_urna.setMinimumWidth(250)
         self.combo_urna.setObjectName("combo_urna")
         self.combo_urna.setEditable(True)
@@ -199,7 +200,7 @@ class AcuarioForm(QFrame):
             """
         )
 
-        self.combo_tipo_acuario = QComboBox()
+        self.combo_tipo_acuario = ComboBox("TIPO ACUARIO")
         self.combo_tipo_acuario.setMinimumWidth(250)
         self.combo_tipo_acuario.setObjectName("combo_tipo_acuario")
         self.combo_tipo_acuario.setEditable(True)
