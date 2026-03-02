@@ -6,7 +6,8 @@ Comentarios:
     controladores. Estra clase contiene los comportamientos de los
     elementos comunes a todas las ventanas como la barra de título.
 """
-
+from CustomControls.double_line_edit import DoubleLineEdit
+from CustomControls.int_line_edit import IntLineEdit
 from Model.DAO.base_dao import BaseDAO
 from Model.DAO.paginator import Paginator
 from Model.Entities.base_entity import BaseEntity
@@ -41,6 +42,7 @@ class BaseController(QObject):
         self._mod = mod
 
         self._text_widgets = (QLineEdit, QTextEdit, QPlainTextEdit)
+        self._numeric_widgets = (IntLineEdit, DoubleLineEdit)
 
     """
     ********************************************************************
@@ -160,6 +162,11 @@ class BaseController(QObject):
             # Control de imagen
             if isinstance(widget, ImageForm):
                 self._clean_photografy(widget)
+
+            # Controles de edición numéricos
+            if isinstance(widget, self._numeric_widgets):
+                widget.clear()
+                widget._value = None
 
             # En caso de que sean controles de edición de texto
             if isinstance(widget, self._text_widgets):

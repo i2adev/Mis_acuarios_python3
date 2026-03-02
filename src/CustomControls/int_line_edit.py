@@ -52,7 +52,8 @@ class IntLineEdit(QLineEdit):
             self.setText("")
         else:
             self._value = value
-            self.setText(LOCALE.toString(self._value))
+            formatted = "{:,}".format(value).replace(",", ".")
+            self.setText(formatted)
 
     def keyPressEvent(self, event):
         """

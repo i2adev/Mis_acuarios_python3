@@ -9,6 +9,7 @@ from PyQt6.QtGui import QIcon, QAction
 from PyQt6.QtWidgets import QMessageBox, QTableView, QWidget, QComboBox
 
 from Controllers.iluminacion_controller import IluminacionController
+from CustomControls.nullable_date_edit import NullableDateEdit
 from Model.DAO.iluminacion_dao import IluminacionDAO
 from Model.DAO.paginator import Paginator
 from Model.Entities.iluminacion_entity import IluminacionEntity
@@ -33,9 +34,6 @@ class IluminacionMasterController(IluminacionController):
         # Constructor base
         super().__init__(view, dao, mod)
 
-        # Rellena los combos
-        self._fill_combos()
-
         # Inicializamos el paginador
         self._pag = Paginator("VISTA_ILUMINACIONES", 5)
         self._pag.initialize_paginator()
@@ -47,6 +45,10 @@ class IluminacionMasterController(IluminacionController):
 
         # Oculta el layout del ID
         self._hide_layout(self._view.frame.layout_id)
+
+        # Inhabilita el layout del motivo de desmontaje
+        self._setDisabledControl(self._view.frame.layout_motivo_baja,
+                                 True)
 
         # Inicializamos los eventos
         self.init_handlers()
@@ -62,6 +64,13 @@ class IluminacionMasterController(IluminacionController):
                 widget.installEventFilter(self)
             if isinstance(widget, QComboBox):
                 widget.installEventFilter(self)
+            if isinstance(widget, NullableDateEdit):
+                widget.edit_date.installEventFilter(self)
+
+        # Textboxes
+        self._view.frame.fecha_baja.edit_date.textChanged.connect(
+            self._on_text_changed
+        )
 
         # Inicializa los botónes
         self._view.button_insert.clicked.connect(self.button_insert_click)
@@ -389,7 +398,7 @@ class IluminacionMasterController(IluminacionController):
 
         self._fill_tableview(self._view.data_table, self._pag.current_data)
         self._configure_table(self._view.data_table,
-                              [0, 7, 8, 9, 10, 11, 13, 14, 18])
+                              [0, 7, 8, 9, 10, 11, 13, 14])
 
     def _fill_tableview(self, table: QTableView,
                         data: list[IluminacionEntity]):

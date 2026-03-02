@@ -52,7 +52,11 @@ class DoubleLineEdit(QLineEdit):
             self.setText("")
         else:
             self._value = value
-            self.setText(LOCALE.toString(self._value))
+            formatted = ("{:,.1f}".format(value)
+                         .replace(",", "X")
+                         .replace(".", ",")
+                         .replace("X", "."))
+            self.setText(formatted)
 
     def keyPressEvent(self, event):
         """

@@ -51,6 +51,9 @@ class IluminacionController(BaseController):
         # Llamaos al constructor de la superclase
         super().__init__(view, dao, model)
 
+        # Llenas los combos
+        self._fill_combos()
+
     def _entity_configuration(self) -> IluminacionEntity:
         """ Configura la entidad. """
 
@@ -88,13 +91,13 @@ class IluminacionController(BaseController):
         ent.temperatura = ctrs.edit_temperatura.value()
 
         # Vida útil de la luminaria
-        ent.vida_util = ctrs.edit_vida_util.text()
+        ent.vida_util = ctrs.edit_vida_util.value()
 
         # Dimensiones: Longitud
         ent.longitud = ctrs.edit_longitud.value()
 
         # Dimensiones: Anchura
-        ent.anchura = ctrs.edit_anchura.text()
+        ent.anchura = ctrs.edit_anchura.value()
 
         # Fecha de instalación
         instalacion = ctrs.fecha_alta.date()
@@ -372,52 +375,25 @@ class IluminacionController(BaseController):
             self._view.frame.combo_marca.findText(marca)
         )
 
-        self._view.frame.edit_modelo.setText(
-            str(modelo) if modelo is not None else ""
-        )
-
-        self._view.frame.edit_num_serie.setText(
-            str(num_serie) if num_serie is not None else ""
-        )
+        self._view.frame.edit_modelo.setValue(modelo)
+        self._view.frame.edit_num_serie.setValue(num_serie)
 
         self._view.frame.combo_tipo_iluminacion.setCurrentIndex(
             self._view.frame.combo_tipo_iluminacion.findText(tipo)
         )
 
-        self._view.frame.edit_potencia.setText(
-            str(potencia) if potencia is not None else ""
-        )
-
-        self._view.frame.edit_flujo_luminico.setText(
-            str(flujo_luminico) if flujo_luminico is not None else ""
-        )
-
-        self._view.frame.edit_temperatura.setText(
-            str(temperatura) if temperatura is not None else ""
-        )
-
-        self._view.frame.edit_vida_util.setText(
-            str(vida_util) if vida_util is not None else ""
-        )
-
-        self._view.frame.edit_longitud.setText(
-            str(longitud) if longitud is not None else ""
-        )
-
-        self._view.frame.edit_anchura.setText(
-            str(anchura) if anchura is not None else ""
-        )
-
+        self._view.frame.edit_potencia.setValue(potencia)
+        self._view.frame.edit_flujo_luminico.setValue(flujo_luminico)
+        self._view.frame.edit_temperatura.setValue(temperatura)
+        self._view.frame.edit_vida_util.setValue(vida_util)
+        self._view.frame.edit_longitud.setValue(longitud)
+        self._view.frame.edit_anchura.setValue(anchura)
         self._view.frame.check_intensidad_regulable.setChecked(regulable)
-        self._view.frame.check_espectro_completo.setChecked(
-            espectro_completo)
+        self._view.frame.check_espectro_completo.setChecked(espectro_completo)
 
         self._view.frame.fecha_alta.setDate(fecha_alta)
         self._view.frame.fecha_baja.setDate(fecha_baja)
-
-        self._view.frame.edit_motivo_baja.setText(
-            str(motivo_baja) if motivo_baja is not None else ""
-        )
+        self._view.frame.edit_motivo_baja.setValue(motivo_baja)
 
         self._view.frame.combo_control_iluminacion.setCurrentIndex(
             self._view.frame.combo_control_iluminacion.findText(control)
@@ -609,3 +585,15 @@ class IluminacionController(BaseController):
         for i in range(combo.count()):
             if combo.itemData(i) == res.value.id:
                 combo.setCurrentIndex(i)
+
+    def _on_text_changed(self):
+        """
+        Se ejecuta cuando se modifica el texto.
+        """
+
+        if self._view.frame.fecha_baja.edit_date.text():
+            self._setDisabledControl(
+                self._view.frame.layout_motivo_baja, False)
+        else:
+            self._setDisabledControl(
+                self._view.frame.layout_motivo_baja, True)

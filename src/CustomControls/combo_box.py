@@ -19,7 +19,13 @@ class ComboBox(QComboBox):
     def setValue(self, value: str):
         pass
 
-    def values(self) -> int | None:
+    def value(self) -> int | None:
         """ Devuelve el valor del item seleccionado en el combobox. """
 
         return int(self.currentData()) if self.currentIndex() != -1 else None
+
+    def indexByText(self, text: str) -> int | None:
+        """ Obtiene el índice del item con el texto pasado como parámetro."""
+
+        index = self.findText(text)
+        return index if index != -1 else None

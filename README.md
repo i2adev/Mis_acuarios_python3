@@ -17,6 +17,19 @@ Esta aplicación tiene los siguientes requerimientos:
   acuarios. Se implementará un scheduler con capacidades visuales para
   identificar fácilmente las tareas de mantenimiento.
 
+La aplicación se dividida en los siguientes módulos:
+
+- **Módulo maestro**: En este módulo se podrán gestionar los distintos
+  elementos que componen la aplicación.
+- **Módulo proyecto**: En este módulo se gestionarán los distintos proyectos y
+  acuarios.
+- **Módulo mantenimiento**: En este módulo se gestionará las distintas
+  operaciones del mantenimiento correspondiente a los distintos acuarios.
+- **Módulo inventario**: En este módulo se gestionará el inventario de los
+  distintos componentes que se necesitan en la gestión de una fishroom.
+- **Módulo reportes**: En este módulo se gestionará el sistema de reportes de
+  la aplicación.
+
 ## 3. VERSIONES
 
 ### 0.16.2b

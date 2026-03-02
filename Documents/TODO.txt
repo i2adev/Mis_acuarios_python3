@@ -1,9 +1,123 @@
 ﻿================================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
+01/03/2026  TESTEO MANUAL DE LOS FORMULARIOS:
+    ↓       ====================================================================
+02/03/2026  FORMULARIO ACUARIOS:
+            -   DONE:   TESTEO DE LA CARGA DE REGISTRO.
+            -   DONE:   TESTEO DE INSERCIÓN.
+            -   DONE:   TESTEO DE MODIFICACIÓN.
+            -   DONE:   TESTEO DE ELIMINACIÓN.
+
+            FORMULARIO CATEGORÍAS DE ACUARIO:
+            -   DONE:   TESTEO DE LA CARGA DE REGISTRO.
+            -   DONE:   TESTEO DE INSERCIÓN.
+            -   DONE:   TESTEO DE MODIFICACIÓN.
+            -   DONE:   TESTEO DE ELIMINACIÓN.
+
+            FORMULARIO CATEGORÍAS DE INCIDENCIA:
+            -   DONE:   TESTEO DE LA CARGA DE REGISTRO.
+            -   DONE:   TESTEO DE INSERCIÓN.
+            -   DONE:   TESTEO DE MODIFICACIÓN.
+            -   DONE:   TESTEO DE ELIMINACIÓN.
+
+            FORMULARIO COMERCIOS:
+            -   DONE:   TESTEO DE LA CARGA DE REGISTRO.
+            -   DONE:   TESTEO DE INSERCIÓN.
+            -   DONE:   TESTEO DE MODIFICACIÓN.
+            -   DONE:   TESTEO DE ELIMINACIÓN.
+
+            FORMULARIO CONTROLES DE ILUMINACIÓN:
+            -   DONE:   TESTEO DE LA CARGA DE REGISTRO.
+            -   DONE:   TESTEO DE INSERCIÓN.
+            -   DONE:   TESTEO DE MODIFICACIÓN.
+            -   DONE:   TESTEO DE ELIMINACIÓN.
+
+            FORMULARIO EQUIPAMIENTOS:
+            -   DONE:   TESTEO DE LA CARGA DE REGISTRO.
+            -   DONE:   TESTEO DE INSERCIÓN.
+            -   DONE:   TESTEO DE MODIFICACIÓN.
+            -   DONE:   TESTEO DE ELIMINACIÓN.
+
+            FORMULARIO ESTADOS DE PROYECTO:
+            -   DONE:   TESTEO DE LA CARGA DE REGISTRO.
+            -   DONE:   TESTEO DE INSERCIÓN.
+            -   DONE:   TESTEO DE MODIFICACIÓN.
+            -   DONE:   TESTEO DE ELIMINACIÓN.
+
+            FORMULARIO FILTROS:
+            -   DONE:   TESTEO DE LA CARGA DE REGISTRO.
+            -   DONE:   TESTEO DE INSERCIÓN.
+            -   DONE:   TESTEO DE MODIFICACIÓN.
+            -   DONE:   TESTEO DE ELIMINACIÓN.
+
+            FORMULARIO ILUMINACIONES:
+            -   DONE:   TESTEO DE LA CARGA DE REGISTRO.
+            -   DONE:   TESTEO DE INSERCIÓN.
+            -   DONE:   TESTEO DE MODIFICACIÓN.
+            -   DONE:   TESTEO DE ELIMINACIÓN.
+
+            FORMULARIO MARCAS COMERCIALES:
+            -   DONE:   TESTEO DE LA CARGA DE REGISTRO.
+            -   DONE:   TESTEO DE INSERCIÓN.
+            -   DONE:   TESTEO DE MODIFICACIÓN.
+            -   DONE:   TESTEO DE ELIMINACIÓN.
+
+            FORMULARIO MATERIALES DE URNA:
+            -   DONE:   TESTEO DE LA CARGA DE REGISTRO.
+            -   DONE:   TESTEO DE INSERCIÓN.
+            -   DONE:   TESTEO DE MODIFICACIÓN.
+            -   DONE:   TESTEO DE ELIMINACIÓN.
+
+            FORMULARIO PROYECTOS:
+            -   DONE:   TESTEO DE LA CARGA DE REGISTRO.
+            -   DONE:   TESTEO DE INSERCIÓN.
+            -   DONE:   TESTEO DE MODIFICACIÓN.
+            -   DONE:   TESTEO DE ELIMINACIÓN.
+
+            FORMULARIO SUBCATEGORÍAS DE ACUARIO:
+            -   DONE:   TESTEO DE LA CARGA DE REGISTRO.
+            -   DONE:   TESTEO DE INSERCIÓN.
+            -   DONE:   TESTEO DE MODIFICACIÓN.
+            -   DONE:   TESTEO DE ELIMINACIÓN.
+
+            FORMULARIO SUBCATEGORÍAS DE INCIDENCIA:
+            -   DONE:   TESTEO DE LA CARGA DE REGISTRO.
+            -   DONE:   TESTEO DE INSERCIÓN.
+            -   DONE:   TESTEO DE MODIFICACIÓN.
+            -   DONE:   TESTEO DE ELIMINACIÓN.
+
+            FORMULARIO TIPOS DE ACUARIO:
+            -   DONE:   TESTEO DE LA CARGA DE REGISTRO.
+            -   DONE:   TESTEO DE INSERCIÓN.
+            -   DONE:   TESTEO DE MODIFICACIÓN.
+            -   DONE:   TESTEO DE ELIMINACIÓN.
+
+            FORMULARIO TIPOS DE ILUMINACIÓN:
+            -   DONE:   TESTEO DE LA CARGA DE REGISTRO.
+            -   DONE:   TESTEO DE INSERCIÓN.
+            -   DONE:   TESTEO DE MODIFICACIÓN.
+            -   DONE:   TESTEO DE ELIMINACIÓN.
+
+            FORMULARIO URNAS:
+            -   DONE:   TESTEO DE LA CARGA DE REGISTRO.
+            -   DONE:   TESTEO DE INSERCIÓN.
+            -   DONE:   TESTEO DE MODIFICACIÓN.
+            -   DONE:   TESTEO DE ELIMINACIÓN.
+
+            CORRECCIÓN DE ERRORES:
+            FORMULARIO ILUMINACIONES:
+            -   DONE:   SE CORRIGE EL ERROR DE VALIDACIÓN QUE OCURRE EN LOS
+                        CAMPOS NUMÉRICOS.
+
+            OTRAS MEJORAS:
+            FORMULARIO ILUMINACIONES:
+            -   DONE:   SE CORRIGE EL COMPORTAMIENTO DEL MOTIVO DE LA BAJA, SE
+                        INUTILIZA MIENTRAS LA FECHA DE BAJA SEA NONE.
+
 28/02/2026  REFACTORIZACIONES:
     ↓       ====================================================================
-            SE MODIFICA LA LÓGICA DE LOS QCOMBOBOXES:
+01/03/2026  SE MODIFICA LA LÓGICA DE LOS QCOMBOBOXES:
             -   SE CREA UNA CLASE DERIVADA DE QCOMBOBOX QUE DEVUELVE VALORES
                 NONE EN CASO DE QUE NO HAYA NADA SELECCIONADO.
             -   SE MODIFICA LA LÓGICA DE LOS VALIDADORES PARA ADAPTAR A LA

@@ -8,9 +8,9 @@ Comentarios:
 import sys
 
 from PyQt6.QtCore import QLocale, Qt
-from PyQt6.QtGui import QCursor, QIntValidator, QDoubleValidator
+from PyQt6.QtGui import QCursor
 from PyQt6.QtWidgets import QFrame, QLabel, QLineEdit, QPlainTextEdit, \
-    QVBoxLayout, QHBoxLayout, QApplication, QComboBox, QPushButton, QGroupBox, \
+    QVBoxLayout, QHBoxLayout, QApplication, QPushButton, QGroupBox, \
     QCheckBox
 
 from CustomControls.combo_box import ComboBox
@@ -33,11 +33,6 @@ class IluminacionForm(QFrame):
 
     def create_widgets(self):
         """ Se encarga de crear los controles del formulario. """
-
-        # Establecemos el validador de decimales
-        decimal_validator = QDoubleValidator()
-        decimal_validator.setDecimals(1)
-        decimal_validator.setLocale(QLocale("es_ES"))
 
         # Layouts
         ## Layout del formulario
@@ -163,7 +158,6 @@ class IluminacionForm(QFrame):
             units="VATIOS"
         )
         self.edit_potencia.setObjectName("edit_potencia")
-        self.edit_potencia.setValidator(decimal_validator)
         self.edit_potencia.setToolTip(
             """
             <h2>Potencia de la luminaria</h2><br>
@@ -178,7 +172,6 @@ class IluminacionForm(QFrame):
             units="LÚMENES"
         )
         self.edit_flujo_luminico.setObjectName("edit_flujo_luminico")
-        self.edit_flujo_luminico.setValidator(QIntValidator())
         self.edit_flujo_luminico.setToolTip(
             """
             <h2>Flujo lumínico de la luminaria</h2><br>
@@ -193,7 +186,6 @@ class IluminacionForm(QFrame):
             units="GRADOS KELVIN"
         )
         self.edit_temperatura.setObjectName("edit_temperatura")
-        self.edit_temperatura.setValidator(QIntValidator())
         self.edit_temperatura.setToolTip(
             """
             <h2>Temperatura de color</h2><br>
@@ -209,7 +201,6 @@ class IluminacionForm(QFrame):
             units="HORAS"
         )
         self.edit_vida_util.setObjectName("edit_vida_util")
-        self.edit_vida_util.setValidator(QIntValidator())
         self.edit_vida_util.setToolTip(
             """
             <h2>Vida util</h2><br>
@@ -217,14 +208,13 @@ class IluminacionForm(QFrame):
             """
         )
 
-        self.edit_longitud = IntLineEdit(
+        self.edit_longitud = DoubleLineEdit(
             control_name="LONGITUD",
             min_value=5,
             max_value=200,
             units="CMS"
         )
         self.edit_longitud.setObjectName("edit_longitud")
-        self.edit_longitud.setValidator(decimal_validator)
         self.edit_longitud.setToolTip(
             """
             <h2>Longitud de la luminaria</h2><br>
@@ -232,15 +222,14 @@ class IluminacionForm(QFrame):
             """
         )
 
-        self.edit_anchura = IntLineEdit(
+        self.edit_anchura = DoubleLineEdit(
             control_name="ANCHURA",
             min_value=5,
             max_value=200,
             units="CMS"
         )
-        
+
         self.edit_anchura.setObjectName("edit_anchura")
-        self.edit_anchura.setValidator(decimal_validator)
         self.edit_anchura.setToolTip(
             """
             <h2>Anchura de la luminaria</h2><br>

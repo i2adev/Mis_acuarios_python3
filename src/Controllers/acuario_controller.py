@@ -64,7 +64,7 @@ class AcuarioController(BaseController):
             ent.id = None
 
         # Proyecto
-        ent.id_proyecto = int(ctrs.combo_proyecto.value())
+        ent.id_proyecto = ctrs.combo_proyecto.value()
 
         # Color
         if ctrs.edit_cod_color.text():
@@ -516,6 +516,7 @@ class AcuarioController(BaseController):
         self._view.frame.edit_id.setText(
             str(id_ent) if id_ent is not None else ""
         )
+
         self._view.frame.combo_proyecto.setCurrentIndex(
             self._view.frame.combo_proyecto.findText(proyecto)
         )

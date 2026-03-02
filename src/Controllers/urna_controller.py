@@ -405,24 +405,13 @@ class UrnaController(BaseController):
         self._view.frame.combo_marca.setCurrentIndex(
             self._view.frame.combo_marca.findText(marca)
         )
-        self._view.frame.edit_modelo.setText(
-            str(modelo_urna) if modelo_urna is not None else ""
-        )
-        self._view.frame.edit_ancho.setText(
-            str(ancho) if ancho is not None else ""
-        )
-        self._view.frame.edit_profundo.setText(
-            str(profundo) if profundo is not None else ""
-        )
-        self._view.frame.edit_alto.setText(
-            str(alto) if alto is not None else ""
-        )
-        self._view.frame.edit_grosor.setText(
-            str(grosor) if grosor is not None else ""
-        )
-        self._view.frame.edit_volumen.setText(
-            str(volumen) if volumen is not None else ""
-        )
+        self._view.frame.edit_modelo.setValue(modelo_urna)
+        self._view.frame.edit_ancho.setValue(ancho)
+        self._view.frame.edit_profundo.setValue(profundo)
+        self._view.frame.edit_alto.setValue(alto)
+        self._view.frame.edit_grosor.setValue(grosor)
+        self._view.frame.edit_volumen.setValue(volumen)
+        
         self._view.frame.combo_material.setCurrentIndex(
             self._view.frame.combo_material.findText(material)
         )

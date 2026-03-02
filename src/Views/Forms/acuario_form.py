@@ -12,8 +12,9 @@ from CustomControls.int_line_edit import IntLineEdit
 from CustomControls.nullable_date_edit import NullableDateEdit
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QCursor
-from PyQt6.QtWidgets import QApplication, QComboBox, QFrame, QGroupBox, \
-    QHBoxLayout, QLabel, QLineEdit, QPlainTextEdit, QPushButton, QVBoxLayout
+from PyQt6.QtWidgets import (QApplication, QFrame, QGroupBox, QHBoxLayout,
+                             QLabel, QLineEdit, QPlainTextEdit, QPushButton,
+                             QVBoxLayout)
 
 from CustomControls.str_line_edit import StrLineEdit
 
@@ -243,7 +244,6 @@ class AcuarioForm(QFrame):
         )
 
         self.fecha_desmontaje = NullableDateEdit()
-        # self.fecha_desmontaje.setObjectName("fecha_desmontaje")
         self.fecha_desmontaje.edit_date.setObjectName(
             "fecha_desmontaje_acuario")
         self.fecha_desmontaje.setToolTip(

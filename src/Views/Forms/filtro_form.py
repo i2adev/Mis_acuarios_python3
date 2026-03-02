@@ -148,6 +148,7 @@ class FiltroForm(QFrame):
             control_name="NÚMERO DE SERIE",
             max_length=32,
         )
+
         self.edit_num_serie.setMinimumWidth(250)
         self.edit_num_serie.setObjectName("edit_num_serie")
         self.edit_num_serie.setToolTip(

@@ -8,6 +8,7 @@ Comentarios:
 from PyQt6.QtWidgets import QWidget, QMessageBox, QComboBox
 
 from Controllers.iluminacion_controller import IluminacionController
+from CustomControls.nullable_date_edit import NullableDateEdit
 from Model.DAO.iluminacion_dao import IluminacionDAO
 from Model.Entities.iluminacion_entity import IluminacionEntity
 from Services.Result.result import Result
@@ -29,11 +30,12 @@ class IluminacionDialogController(IluminacionController):
         # inicializamos la vista y pasamos al constructor padre
         super().__init__(view, dao, mod)
 
-        # Llena los combos
-        self._fill_combos()
-
         # Oculta el layout del ID
         self._hide_layout(self._view.frame.layout_id)
+
+        # Inhabilita el layout del motivo de desmontaje
+        self._setDisabledControl(self._view.frame.layout_motivo_baja,
+                                 True)
 
         # Inicializamos los eventos
         self.init_handlers()
@@ -47,6 +49,13 @@ class IluminacionDialogController(IluminacionController):
                 widget.installEventFilter(self)
             if isinstance(widget, QComboBox):
                 widget.installEventFilter(self)
+            if isinstance(widget, NullableDateEdit):
+                widget.edit_date.installEventFilter(self)
+
+        # Textboxes
+        self._view.frame.fecha_baja.edit_date.textChanged.connect(
+            self._on_text_changed
+        )
 
         # Botones
         self._view.button_accept.clicked.connect(self.dialog_accept)
