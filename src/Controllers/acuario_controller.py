@@ -532,9 +532,7 @@ class AcuarioController(BaseController):
                 "background-color: transparent;"
             )
 
-        self._view.frame.edit_nombre_acuario.setText(
-            str(nombre) if nombre is not None else ""
-        )
+        self._view.frame.edit_nombre_acuario.setValue(nombre)
         self._view.frame.combo_urna.setCurrentIndex(
             self._view.frame.combo_urna.findText(urna)
         )
@@ -554,9 +552,7 @@ class AcuarioController(BaseController):
             str(ubicacion) if ubicacion is not None else ""
         )
         self._view.frame.fecha_desmontaje.setDate(fecha_desmontaje)
-        self._view.frame.edit_motivo_desmontaje.setText(
-            str(motivo_desmontaje) if motivo_desmontaje is not None else ""
-        )
+        self._view.frame.edit_motivo_desmontaje.setValue(motivo_desmontaje)
         self._view.frame.text_descripcion.setPlainText(
             str(descripcion) if descripcion is not None else ""
         )

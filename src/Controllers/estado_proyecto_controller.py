@@ -233,9 +233,7 @@ class EstadoProyectoController(BaseController):
             str(ide) if ide is not None else ""
         )
 
-        self._view.frame.edit_estado_proyecto.setText(
-            str(estado) if estado else ""
-        )
+        self._view.frame.edit_estado_proyecto.setValue(estado)
 
         self._view.frame.text_observaciones.setPlainText(
             str(observaciones) if observaciones is not None else ""

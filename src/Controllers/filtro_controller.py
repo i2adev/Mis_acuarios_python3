@@ -437,40 +437,50 @@ class FiltroController(BaseController):
 
         volumes = self.brakdown_volumes(modelo.index(fila, 7).data())
         if volumes and len(volumes) == 2:
-            volumen_min_acuario = volumes[0]
-            volumen_max_acuario = volumes[1]
+            volumen_min_acuario = int(volumes[0])
+            volumen_max_acuario = int(volumes[1])
         else:
             volumen_min_acuario = None
             volumen_max_acuario = None
 
-        caudal = modelo.index(fila, 8).data()
+        if modelo.index(fila, 8).data():
+            caudal = int(modelo.index(fila, 8).data())
+        else:
+            caudal = None
+
         if modelo.index(fila, 9).data():
-            altura_bombeo = str(modelo.index(fila, 9).data()).replace('.', ',')
+            altura_bombeo = float(modelo.index(fila, 9).data())
         else:
             altura_bombeo = None
 
-        consumo_filtro = modelo.index(fila, 10).data()
-        consumo_calentador = modelo.index(fila, 11).data()
+        if modelo.index(fila, 10).data():
+            consumo_filtro = int(modelo.index(fila, 10).data())
+        else:
+            consumo_filtro = None
+
+        if modelo.index(fila, 11).data():
+            consumo_calentador = int(modelo.index(fila, 11).data())
+        else:
+            consumo_calentador = None
 
         if modelo.index(fila, 12).data():
-            volumen_material = str(modelo.index(fila, 12).data()) \
-                .replace('.', ',')
+            volumen_material = float(modelo.index(fila, 12).data())
         else:
             volumen_material = None
 
         dimensions = self.brakdown_dimensions(modelo.index(fila, 13).data())
-        # if dimensions and len(dimensions) == 3:
-        ancho_filtro = dimensions[0].replace('.', ',')
-        fondo_filtro = dimensions[1].replace('.', ',')
-        altura_filtro = dimensions[2].replace('.', ',')
-        # else:
-        #     ancho_filtro = None
-        #     fondo_filtro = None
-        #     altura_filtro = None
-
-        # print(f"Ancho filtro: {ancho_filtro}")
-        # print(f"Fondo filtro: {fondo_filtro}")
-        # print(f"Altura filtro: {altura_filtro}")
+        if dimensions[0]:
+            ancho_filtro = float(dimensions[0])
+        else:
+            ancho_filtro = None
+        if dimensions[1]:
+            fondo_filtro = float(dimensions[1])
+        else:
+            fondo_filtro = None
+        if dimensions[2]:
+            altura_filtro = float(dimensions[2])
+        else:
+            altura_filtro = None
 
         fecha_instalacion = QDate.fromString(
             str(modelo.index(fila, 14).data()), "dd/MM/yyyy")
@@ -492,52 +502,21 @@ class FiltroController(BaseController):
         self._view.frame.combo_marca.setCurrentIndex(
             self._view.frame.combo_marca.findText(marca)
         )
-        self._view.frame.edit_modelo.setText(
-            str(modelo_filtro) if modelo_filtro is not None else ""
-        )
-        self._view.frame.edit_num_serie.setText(
-            str(num_serie) if num_serie is not None else ""
-        )
-        self._view.frame.edit_vol_min_acuario.setText(
-            str(volumen_min_acuario) if volumen_min_acuario is not None else ""
-        )
-        self._view.frame.edit_vol_max_acuario.setText(
-            str(volumen_max_acuario) if volumen_max_acuario is not None else ""
-        )
-        self._view.frame.edit_vol_max_acuario.setText(
-            str(volumen_max_acuario) if volumen_max_acuario is not None else ""
-        )
-
-        self._view.frame.edit_consumo_filtro.setText(
-            str(consumo_filtro) if consumo_filtro is not None else ""
-        )
-        self._view.frame.edit_consumo_calentador.setText(
-            str(consumo_calentador) if consumo_calentador is not None else ""
-        )
-        self._view.frame.edit_ancho.setText(
-            str(ancho_filtro) if ancho_filtro is not None else ""
-        )
-        self._view.frame.edit_fondo.setText(
-            str(fondo_filtro) if fondo_filtro is not None else ""
-        )
-        self._view.frame.edit_alto.setText(
-            str(altura_filtro) if altura_filtro is not None else ""
-        )
-
-        self._view.frame.edit_vol_material.setText(
-            str(volumen_material) if volumen_material is not None else ""
-        )
-        self._view.frame.edit_altura_max_bombeo.setText(
-            str(altura_bombeo) if altura_bombeo is not None else ""
-        )
-        self._view.frame.edit_caudal.setText(
-            str(caudal) if caudal is not None else ""
-        )
+        self._view.frame.edit_modelo.setValue(modelo_filtro)
+        self._view.frame.edit_num_serie.setValue(num_serie)
+        self._view.frame.edit_vol_min_acuario.setValue(volumen_min_acuario)
+        self._view.frame.edit_vol_max_acuario.setValue(volumen_max_acuario)
+        self._view.frame.edit_consumo_filtro.setValue(consumo_filtro)
+        self._view.frame.edit_consumo_calentador.setValue(consumo_calentador)
+        self._view.frame.edit_ancho.setValue(ancho_filtro)
+        self._view.frame.edit_fondo.setValue(fondo_filtro)
+        self._view.frame.edit_alto.setValue(altura_filtro)
+        self._view.frame.edit_vol_material.setValue(volumen_material)
+        self._view.frame.edit_altura_max_bombeo.setValue(altura_bombeo)
+        self._view.frame.edit_caudal.setValue(caudal)
         self._view.frame.fecha_instalacion.setDate(fecha_instalacion)
         self._view.frame.fecha_baja.setDate(fecha_baja)
-        self._view.frame.edit_motivo_baja.setText(
-            str(motivo_baja) if motivo_baja is not None else ""
-        )
+        self._view.frame.edit_motivo_baja.setValue(motivo_baja)
         self._view.frame.text_descripcion.setPlainText(
             str(descripcion) if descripcion is not None else ""
         )

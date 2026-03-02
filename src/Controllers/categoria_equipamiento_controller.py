@@ -235,9 +235,7 @@ class CategoriaEquipamientoController(BaseController):
             str(id) if id is not None else ""
         )
 
-        self._view.frame.edit_categoria_equipamiento.setText(
-            str(cat_equipamiento) if cat_equipamiento else ""
-        )
+        self._view.frame.edit_categoria_equipamiento.setValue(cat_equipamiento)
 
         self._view.frame.text_descripcion.setPlainText(
             str(descripcion) if descripcion is not None else ""

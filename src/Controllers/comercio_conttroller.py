@@ -262,25 +262,11 @@ class ComercioController(BaseController):
             str(id_ta) if id_ta is not None else ""
         )
 
-        self._view.frame.edit_comercio.setText(
-            str(comercio) if comercio else ""
-        )
-
-        self._view.frame.edit_direccion.setText(
-            str(direccion) if direccion else ""
-        )
-
-        self._view.frame.edit_cod_postal.setText(
-            str(cod_postal) if cod_postal else ""
-        )
-
-        self._view.frame.edit_poblacion.setText(
-            str(poblacion) if poblacion else ""
-        )
-
-        self._view.frame.edit_provincia.setText(
-            str(provincia) if provincia else ""
-        )
+        self._view.frame.edit_comercio.setValue(comercio)
+        self._view.frame.edit_direccion.setValue(direccion)
+        self._view.frame.edit_cod_postal.setValue(cod_postal)
+        self._view.frame.edit_poblacion.setValue(poblacion)
+        self._view.frame.edit_provincia.setValue(provincia)
 
         self._view.frame.combo_pais.setCurrentIndex(
             self._view.frame.combo_pais.findText(pais)

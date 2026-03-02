@@ -227,9 +227,7 @@ class CategoriaIncidenciaController(BaseController):
             str(id_ci) if id_ci is not None else ""
         )
 
-        self._view.frame.edit_categoria_incidencia.setText(
-            str(cat_incidencia) if cat_incidencia else ""
-        )
+        self._view.frame.edit_categoria_incidencia.setValue(cat_incidencia)
 
         self._view.frame.text_observaciones.setPlainText(
             str(observaciones) if observaciones is not None else ""

@@ -1,6 +1,31 @@
 ﻿================================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
+02/03/2026  MODIFICAR LA CARGA DE LOS REGISTROS:
+            -   DONE:   TABLA ACUARIO.
+            -   DONE:   TABLA CATEGORÍA DE ACUARIO.
+            -   DONE:   TABLA CATEGORÍA DE EQUIPAMIENTO.
+            -   DONE:   TABLA CATEGORÍA DE INCIDENCIA.
+            -   DONE:   TABLA COMERCIO.
+            -   DONE:   TABLA CONTROL DE ILUMINACIÓN.
+            -   DONE:   TABLA EQUIPAMIENTO.
+            -   DONE:   TABLA ESTADO PROYECTO.
+            -   DONE:   TABLA FILTRO.
+            -   DONE:   TABLA ILUMINACIÓN.
+            -   DONE:   TABLA MARCA COMERCIAL.
+            -   DONE:   TABLA MARCA COMERCIAL.
+            -   DONE:   TABLA PROYECTO.
+            -   DONE:   TABLA SUBCATEGORÍA DE ACUARIO.
+            -   DONE:   TABLA SUBCATEGORÍA DE INCIDENCIA.
+            -   DONE:   TABLA TIPO DE ACUARIO.
+            -   DONE:   TABLA TIPO DE FILTRO.
+            -   DONE:   TABLA TIPO DE ILUMINACIÓN.
+            -   DONE:   TABLA URNA.
+
+            CORRECCIONES:
+            -   DONE:   SE CORRIGE EL ERROR DE QUE LOS CONTROLES NUMÉRICOS DEL
+                        FORMULARIO URNA.
+
 01/03/2026  TESTEO MANUAL DE LOS FORMULARIOS:
     ↓       ====================================================================
 02/03/2026  FORMULARIO ACUARIOS:

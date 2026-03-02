@@ -233,9 +233,7 @@ class ControlIluminacionController(BaseController):
             str(id_ta) if id_ta is not None else ""
         )
 
-        self._view.frame.edit_control_iluminacion.setText(
-            str(tipo_iluminacion) if tipo_iluminacion else ""
-        )
+        self._view.frame.edit_control_iluminacion.setValue(tipo_iluminacion)
 
         self._view.frame.text_descripcion.setPlainText(
             str(descripcion) if descripcion is not None else ""

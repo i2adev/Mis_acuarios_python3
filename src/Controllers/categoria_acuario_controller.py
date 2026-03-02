@@ -227,9 +227,7 @@ class CategoriaAcuarioController(BaseController):
         self._view.frame.edit_id.setText(
             str(id_cat) if id_cat is not None else ""
         )
-        self._view.frame.edit_categoria_acuario.setText(
-            str(categoria) if categoria is not None else ""
-        )
+        self._view.frame.edit_categoria_acuario.setValue(categoria)
         self._view.frame.text_observaciones.setPlainText(
             str(observaciones) if observaciones is not None else ""
         )

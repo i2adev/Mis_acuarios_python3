@@ -450,17 +450,11 @@ class EquipamientoController(BaseController):
         self._view.frame.combo_marca.setCurrentIndex(
             self._view.frame.combo_marca.findText(marca)
         )
-        self._view.frame.edit_modelo.setText(
-            str(modelo_equipo) if modelo_equipo is not None else ""
-        )
-        self._view.frame.edit_num_serie.setText(
-            str(num_serie) if num_serie is not None else ""
-        )
+        self._view.frame.edit_modelo.setValue(modelo_equipo)
+        self._view.frame.edit_num_serie.setValue(num_serie)
         self._view.frame.fecha_alta.setDate(fecha_alta)
         self._view.frame.fecha_baja.setDate(fecha_baja)
-        self._view.frame.edit_motivo_baja.setText(
-            str(motivo_baja) if motivo_baja is not None else ""
-        )
+        self._view.frame.edit_motivo_baja.setValue(motivo_baja)
         self._view.frame.text_descripcion.setPlainText(
             str(descripcion) if descripcion is not None else ""
         )
