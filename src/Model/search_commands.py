@@ -470,6 +470,20 @@ class SearchCmd:
     WHERE    FIELD LIKE '%' || :pattern || '%';
     """
 
+    SEARCH_FORMATO_CONSUMIBLE = """
+    SELECT    ID, NUM, FORMATO, DESCRIPCION
+    FROM
+    (
+        SELECT    ID_FORMATO_CONSUMIBLE AS ID,
+                  ROW_NUMBER() OVER (ORDER BY FORMATO) AS NUM,
+                  FORMATO AS FORMATO,
+                  DESCRIPCION AS DESCRIPCION,
+                  UPPER(IFNULL(FORMATO, '') || IFNULL(DESCRIPCION, '')) AS FIELD
+        FROM      FORMATOS_CONSUMIBLE
+    )
+    WHERE     FIELD LIKE '%' || :pattern || '%';
+    """
+
     SEARCH_ILUMINACION = """
     SELECT    ID, NUM, MARCA, MODELO, NUMERO_SERIE, TIPO_ILUMINACION, POTENCIA, 
               FLUJO_LUMINOSO, TEMPERATURA, VIDA_UTIL, LONGITUD, ANCHO, 

@@ -23,6 +23,8 @@ from Controllers.equipamiento_master_controller import \
 from Controllers.estado_proyecto_master_controller import \
     EstadoProyectoMasterController
 from Controllers.filtro_master_controller import FiltroMasterController
+from Controllers.formato_consumible_master_controller import \
+    FormatoConsumibleMasterController
 from Controllers.iluminacion_master_controller import \
     IluminacionMasterController
 from Controllers.main_reports_controller import MainReportsController
@@ -53,6 +55,7 @@ from Model.DAO.control_iluminacion_dao import ControlIluminacionDAO
 from Model.DAO.equipamiento_dao import EquipamientoDAO
 from Model.DAO.estado_proyecto_dao import EstadoProyectoDAO
 from Model.DAO.filtro_dao import FiltroDAO
+from Model.DAO.formato_consumible_dao import FormatoConsumibleDAO
 from Model.DAO.iluminacion_dao import IluminacionDAO
 from Model.DAO.marca_comercial_dao import MarcaComercialDAO
 from Model.DAO.material_urna_dao import MaterialUrnaDAO
@@ -76,6 +79,7 @@ from Model.Entities.control_iluminacion_entity import ControlIluminacionEntity
 from Model.Entities.equipamiento_entity import EquipamientoEntity
 from Model.Entities.estado_proyecto_entity import EstadoProyectoEntity
 from Model.Entities.filtro_entity import FiltroEntity
+from Model.Entities.formato_consumible_entity import FormatoConsumibleEntity
 from Model.Entities.iluminacion_entity import IluminacionEntity
 from Model.Entities.marca_comercial_entity import MarcaComercialEntity
 from Model.Entities.material_urna_entity import MaterialUrnaEntity
@@ -98,6 +102,7 @@ from Views.Masters.control_iluminacion_view import ControlIluminacionView
 from Views.Masters.equipamiento_view import EquipamientoView
 from Views.Masters.estado_proyecto_view import EstadoProyectoView
 from Views.Masters.filtro_view import FiltroView
+from Views.Masters.formato_consumible_view import FormatoConsumibleView
 from Views.Masters.iluminacion_view import IluminacionView
 from Views.Masters.marca_comercial_view import MarcaComercialView
 from Views.Masters.material_urna_view import MaterialUrnaView
@@ -216,6 +221,9 @@ class MainViewController(BaseController):
         self._view.button_maestro_cat_consumible.clicked.connect(
             self.categorias_cosumible_click
         )
+        self._view.button_maestro_formato_consumible.clicked.connect(
+            self.formatos_cosumible_click
+        )
 
     def reportes_click(self):
         """ Cuando se pulsa el control de reportes. """
@@ -232,6 +240,16 @@ class MainViewController(BaseController):
         mod = IluminacionEntity()
 
         ctrl = IluminacionMasterController(view, dao, mod)
+        ctrl.show()
+
+    def formatos_cosumible_click(self):
+        """ Cuando se pulsa el botón de formatos de consumible. """
+
+        view = FormatoConsumibleView("MAESTRO DE FORMATOS DE CONSUMIBLE")
+        dao = FormatoConsumibleDAO()
+        mod = FormatoConsumibleEntity()
+
+        ctrl = FormatoConsumibleMasterController(view, dao, mod)
         ctrl.show()
 
     def categorias_cosumible_click(self):

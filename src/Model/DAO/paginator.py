@@ -12,6 +12,7 @@ from Model.Entities.categoria_consumible_entity import \
     CategoriaConsumibleEntity
 from Model.Entities.comercio_entity import ComercioEntity
 from Model.Entities.control_iluminacion_entity import ControlIluminacionEntity
+from Model.Entities.formato_consumible_entity import FormatoConsumibleEntity
 from Model.Entities.iluminacion_entity import IluminacionEntity
 from Model.Entities.tipo_iluminacion_entity import TipoIluminacionEntity
 from Model.database import DBManager
@@ -510,6 +511,15 @@ class Paginator:
             )
                 for f in rows
             ]
+        elif self.procedure == "VISTA_FORMATOS_CONSUMIBLE":
+            data_list = [FormatoConsumibleEntity(
+                id=f["ID"],
+                num=f["NUM"],
+                formato=f["FORMATO"],
+                descripcion=f["DESCRIPCION"]
+            )
+                for f in rows
+            ]
         elif self.procedure == "VISTA_PROYECTOS":
             data_list = [ProyectoEntity(
                 id=f["ID"],
@@ -669,7 +679,7 @@ class Paginator:
 
         return page
 
-    def get_sql_command(self) -> str:
+    def get_sql_command(self) -> str | None:
         """ Obtiene la instrucción sql dependiendo del procedimiento. """
 
         # Configuramos la lista total
@@ -713,6 +723,8 @@ class Paginator:
             return SearchCmd.SEARCH_CONTROL_ILUMINACION
         elif self.procedure == "VISTA_ILUMINACIONES":
             return SearchCmd.SEARCH_ILUMINACION
+        elif self.procedure == "VISTA_FORMATOS_CONSUMIBLE":
+            return SearchCmd.SEARCH_FORMATO_CONSUMIBLE
 
     def __str__(self):
         """ Muestra el objeto en forma de texto. """

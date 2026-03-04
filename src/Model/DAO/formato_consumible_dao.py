@@ -1,30 +1,28 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
-Fecha:      03/03/2026
+Fecha:      04/03/2026
 Comentarios:
-    DAO para la entidad CategoriaCunsumibleEntity.
+    DAO para la entidad FormatoCunsumibleEntity.
 """
-from __future__ import annotations
 
 import sqlite3
 import traceback
-from typing import List
 
 from Model.DAO.base_dao import BaseDAO
-from Model.Entities.categoria_consumible_entity import \
-    CategoriaConsumibleEntity
+from Model.Entities.formato_consumible_entity import FormatoConsumibleEntity
 from Model.database import DBManager
 from Services.Result.result import Result
 
 
-class CategoriaConsumibleDAO(BaseDAO):
+class FormatoConsumibleDAO(BaseDAO):
     """
     Clase que gestiona las operaciones en la base de datos de la entidad
-    CategoriaCunsumibleEntity.
+    FormatoCunsumibleEntity.
     """
 
     def __init__(self) -> None:
         """Constructor de clase."""
+
         self.db = DBManager()
 
     # ------------------------------------------------------------------
@@ -33,11 +31,11 @@ class CategoriaConsumibleDAO(BaseDAO):
 
         sql = (
             """
-            SELECT     ID_CATEGORIA AS ID,
-                       ROW_NUMBER() OVER(ORDER BY CATEGORIA_CONSUMIBLE) AS NUM,
-                       CATEGORIA_CONSUMIBLE AS CATEGORIA,
-                       DESCRIPCION AS DESCRIPCION
-            FROM       CATEGORIAS_CONSUMIBLE;
+            SELECT  ID_FORMATO_CONSUMIBLE AS ID,
+                    ROW_NUMBER() OVER(ORDER BY FORMATO) AS NUM,
+                    FORMATO AS FORMATO,
+                    DESCRIPCION AS DESCRIPCION
+            FROM    FORMATOS_CONSUMIBLE;
             """
         )
 
@@ -48,11 +46,11 @@ class CategoriaConsumibleDAO(BaseDAO):
                 rows = cur.fetchall()
 
                 valores = [
-                    CategoriaConsumibleEntity(
+                    FormatoConsumibleEntity(
                         id=f["ID"],
                         num=f["NUM"],
-                        categoria=f["CATEGORIA"],
-                        observaciones=f["OBSERVACIONES"],
+                        formato=f["CATEGORIA"],
+                        descripcion=f["DESCRIPCION"],
                     )
                     for f in rows
                 ]
@@ -73,14 +71,13 @@ class CategoriaConsumibleDAO(BaseDAO):
     # ------------------------------------------------------------------
     def get_num_by_id(self, id_: int) -> Result:
         """
-        Obtiene el valor NÚM. de la vista VISTA_CATEGORIAS_CONSUMIBLE dado
+        Obtiene el valor NÚM. de la vista VISTA_FORMATOS_CONSUMIBLE dado
         un ID.
-        :param id_: ID de la entidad a eliminar
         """
         sql = (
             """
             SELECT NUM
-            FROM   VISTA_CATEGORIAS_CONSUMIBLE
+            FROM   VISTA_FORMATOS_CONSUMIBLE
             WHERE  ID = :id;
             """
         )
@@ -114,12 +111,13 @@ class CategoriaConsumibleDAO(BaseDAO):
         """
         Obtiene una lista ligera para combos (ID y texto visible).
         """
+        
         sql = (
             """
-            SELECT     ID_CATEGORIA AS ID,
-                       CATEGORIA_CONSUMIBLE AS VALUE
-            FROM       CATEGORIAS_CONSUMIBLE
-            ORDER BY   CATEGORIA_CONSUMIBLE;
+            SELECT     ID_FORMATO_CONSUMIBLE AS ID,
+                       FORMATO AS VALUE
+            FROM       FORMATOS_CONSUMIBLE
+            ORDER BY   FORMATO;
             """
         )
 
@@ -129,11 +127,9 @@ class CategoriaConsumibleDAO(BaseDAO):
                 cur.execute(sql)
                 rows = cur.fetchall()
                 valores = [
-                    CategoriaConsumibleEntity(
+                    FormatoConsumibleEntity(
                         id=f["ID"],
-                        num=None,
-                        categoria=f["VALUE"],
-                        observaciones=None
+                        descripcion=f["VALUE"],
                     )
                     for f in rows
                 ]
@@ -156,16 +152,16 @@ class CategoriaConsumibleDAO(BaseDAO):
             return Result.failure(f"[SQLITE ERROR]\n {e}")
 
     # ------------------------------------------------------------------
-    def insert(self, ent: CategoriaConsumibleEntity) -> Result:
+    def insert(self, ent: FormatoConsumibleEntity) -> Result:
         """Inserta un nuevo registro y devuelve el ID generado."""
 
         sql = (
             """
-            INSERT INTO CATEGORIAS_CONSUMIBLE (CATEGORIA_CONSUMIBLE, DESCRIPCION)
-            VALUES (:cat, :descripcion);
+            INSERT INTO FORMATOS_CONSUMIBLE (FORMATO, DESCRIPCION)
+            VALUES (:formato, :descripcion);
             """
         )
-        params = {"cat": ent.categoria, "descripcion": ent.observaciones}
+        params = {"formato": ent.formato, "descripcion": ent.descripcion}
 
         try:
             with self.db.conn as con:
@@ -189,19 +185,19 @@ class CategoriaConsumibleDAO(BaseDAO):
             return Result.failure(f"[SQLITE ERROR]\n {e}")
 
     # ------------------------------------------------------------------
-    def update(self, ent: CategoriaConsumibleEntity) -> Result:
+    def update(self, ent: FormatoConsumibleEntity) -> Result:
         """Actualiza un registro. Devuelve el ID de la entidad modificada."""
 
         sql = (
             """
-            UPDATE  CATEGORIAS_CONSUMIBLE
-                    SET CATEGORIA_CONSUMIBLE = :cat,
+            UPDATE  FORMATOS_CONSUMIBLE
+                    SET FORMATO = :formato,
                     DESCRIPCION     = :descripcion
             WHERE   ID_CATEGORIA = :id;
             """
         )
-        params = {"id": ent.id, "cat": ent.categoria,
-                  "descripcion": ent.observaciones}
+        params = {"id": ent.id, "formato": ent.formato,
+                  "descripcion": ent.descripcion}
 
         try:
             with self.db.conn as con:
@@ -232,7 +228,7 @@ class CategoriaConsumibleDAO(BaseDAO):
         """
         sql = (
             """
-            DELETE FROM CATEGORIAS_CONSUMIBLE
+            DELETE FROM FORMATOS_CONSUMIBLE
             WHERE ID_CATEGORIA = :id;
             """
         )

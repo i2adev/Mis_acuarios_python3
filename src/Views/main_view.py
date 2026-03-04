@@ -106,6 +106,7 @@ class MainView(QWidget):
         self.maestro_layout.addWidget(self.button_maestro_tipo_iluminacion)
         self.maestro_layout.addWidget(self.button_maestro_incidencia)
         self.maestro_layout.addWidget(self.button_maestro_cat_incidencia)
+        self.maestro_layout.addWidget(self.button_maestro_formato_consumible)
         self.maestro_layout.addWidget(self.button_maestro_subcat_incidencia)
         self.maestro_layout.addWidget(self.button_maestro_marca)
         self.maestro_layout.addWidget(self.button_maestro_proyecto)
@@ -330,6 +331,29 @@ class MainView(QWidget):
         )
         self.button_maestro_cat_consumible.setFlat(True)
         self.button_maestro_cat_consumible.setCursor(
+            QCursor(Qt.CursorShape.PointingHandCursor)
+        )
+
+        self.button_maestro_formato_consumible = QPushButton(
+            " > FORMATOS CONSUMIBLE"
+        )
+        self.button_maestro_formato_consumible.setStyleSheet(
+            """
+            QPushButton {
+                background-color: transparent;
+                text-align: left;
+                margin-bottom: 0;
+                margin-left: 20;
+                font-family: 'Roboto'; 
+                font-size: 14px;
+            }
+            """
+        )
+        self.button_maestro_formato_consumible.setObjectName(
+            "button_maestro_formato_consumible"
+        )
+        self.button_maestro_formato_consumible.setFlat(True)
+        self.button_maestro_formato_consumible.setCursor(
             QCursor(Qt.CursorShape.PointingHandCursor)
         )
 
