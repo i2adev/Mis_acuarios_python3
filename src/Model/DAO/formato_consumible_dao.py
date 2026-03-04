@@ -111,7 +111,7 @@ class FormatoConsumibleDAO(BaseDAO):
         """
         Obtiene una lista ligera para combos (ID y texto visible).
         """
-        
+
         sql = (
             """
             SELECT     ID_FORMATO_CONSUMIBLE AS ID,
@@ -193,7 +193,7 @@ class FormatoConsumibleDAO(BaseDAO):
             UPDATE  FORMATOS_CONSUMIBLE
                     SET FORMATO = :formato,
                     DESCRIPCION     = :descripcion
-            WHERE   ID_CATEGORIA = :id;
+            WHERE   ID_FORMATO_CONSUMIBLE = :id;
             """
         )
         params = {"id": ent.id, "formato": ent.formato,
@@ -229,7 +229,7 @@ class FormatoConsumibleDAO(BaseDAO):
         sql = (
             """
             DELETE FROM FORMATOS_CONSUMIBLE
-            WHERE ID_CATEGORIA = :id;
+            WHERE ID_FORMATO_CONSUMIBLE = :id;
             """
         )
         params = {"id": id_}

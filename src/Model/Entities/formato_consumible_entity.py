@@ -58,7 +58,7 @@ class FormatoConsumibleEntity(BaseEntity):
     def formato(self) -> str:
         """ Categoríaa del consumible. """
 
-        return self.__categoria
+        return self.__formato
 
     @formato.setter
     def formato(self, new_formato: str):

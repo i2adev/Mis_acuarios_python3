@@ -1,6 +1,22 @@
 ﻿================================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
+04/03/2026  TESTEO MANUAL DE LA LÓGICA DE CATEGORÍAS DE CONSUMIBLE.
+            -   DONE:   TEST -> APERTURA DEL FORMULARIO.
+            -   N.A,:   TEST -> CARGA DE LOS COMBOS.
+            -   DONE:   TEST -> INSERCIÓN DE REGISTRO.
+            -   DONE:   TEST -> CARGA DE REGISTRO.
+            -   DONE:   TEST -> LIMPIEZA DE FORMULARIO.
+            -   DONE    TEST -> ELIMINACIÓN DE REGISTRO DESDE MENÚ CONTEXTUAL.
+            -   DONE:   TEST -> ELIMINACIÓN DE REGISTRO DESPUÉS DE CARGAR EN EL
+                        FORMULARIO.
+            -   DONE:   TEST -> MODIFICACIÓN DE REGISTRO.
+            -   DONE:   TEST -> BÚSQUEDA DE REGISTROS.
+
+            CORRECCIONES:
+            -   DONE:   CORREGIDO ERROR DE CARGA DE FORMULARIO.
+            -   DONE:   CORREGIDO ERROR DE ACTUALIZACIÓN.
+
 03/03/2026  SE AÑADE LA LÓGICA DE FORMATOS DE CONSUMIBLE:
             -   DONE:   SE CREA LA ENTIDAD.
             -   DONE:   SE CREA LA VISTA EN LA BASE DE DATOS.
