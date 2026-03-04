@@ -49,7 +49,7 @@ class DoubleLineEdit(QLineEdit):
 
         if value is None:
             self._value = None
-            self.setText("")
+            self.clear()
         else:
             self._value = value
             formatted = ("{:,.1f}".format(value)
@@ -128,8 +128,9 @@ class DoubleLineEdit(QLineEdit):
                                 "ERROR DE FORMATO",
                                 f"EL '{self.control_name}' SOLO ADMITE "
                                 f"NÚMEROS DECIMALES.")
-            self.clear()
+
             self._value = None
+            self.clear()
             return
 
         # Validar el campo

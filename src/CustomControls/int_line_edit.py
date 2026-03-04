@@ -111,8 +111,8 @@ class IntLineEdit(QLineEdit):
                                 "ERROR DE FORMATO",
                                 f"EL '{self.control_name}' SOLO ADMITE "
                                 f"NÚMEROS ENTEROS.")
-            self.clear()
             self._value = None
+            self.clear()
             return
 
         # Validar el campo
@@ -127,6 +127,5 @@ class IntLineEdit(QLineEdit):
             QMessageBox.warning(self,
                                 "ERROR DE VALIDACIÓN",
                                 res.error_msg)
-            self.clear()
-            self.setFocus()
             self._value = None
+            self.setFocus()

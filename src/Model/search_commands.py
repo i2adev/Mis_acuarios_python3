@@ -210,6 +210,23 @@ class SearchCmd:
     WHERE     FIELD LIKE '%' || :pattern || '%';
     """
 
+    ## Estado del proyecto
+    SEARCH_CATEGORIA_CONSUMIBLE = """
+    SELECT    ID, NUM, CATEGORIA, DESCRIPCION
+    FROM
+    (
+        SELECT    ID_CATEGORIA AS ID,
+                  ROW_NUMBER() OVER (ORDER BY CATEGORIA_CONSUMIBLE) AS NUM,
+                  CATEGORIA_CONSUMIBLE AS CATEGORIA,
+                  DESCRIPCION AS DESCRIPCION,
+                  UPPER(
+                    IFNULL(CATEGORIA_CONSUMIBLE, '') 
+                    || IFNULL(DESCRIPCION, '')) AS FIELD
+        FROM      CATEGORIAS_CONSUMIBLE
+    )
+    WHERE     FIELD LIKE '%' || :pattern || '%';
+    """
+
     ## Proyecto
     SEARCH_PROYECTO = """
     SELECT  ID, NUM, ID_USUARIO, NOMBRE, ESTADO, FECHA_INICIO, FECHA_FIN, 

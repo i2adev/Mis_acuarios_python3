@@ -29,6 +29,7 @@ La aplicación se dividida en los siguientes módulos:
   distintos componentes que se necesitan en la gestión de una fishroom.
 - **Módulo reportes**: En este módulo se gestionará el sistema de reportes de
   la aplicación.
+- **Módulo compras**: En este módulo se gestionarán las compras realizadas.
 
 ## 3. VERSIONES
 

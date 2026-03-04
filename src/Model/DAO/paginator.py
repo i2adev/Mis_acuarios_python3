@@ -499,6 +499,15 @@ class Paginator:
             )
                 for f in rows
             ]
+        elif self.procedure == "VISTA_CATEGORIAS_CONSUMIBLE":
+            data_list = [EstadoProyectoEntity(
+                id=f["ID"],
+                num=f["NUM"],
+                estado=f["CATEGORIA"],
+                descripcion=f["DESCRIPCION"]
+            )
+                for f in rows
+            ]
         elif self.procedure == "VISTA_PROYECTOS":
             data_list = [ProyectoEntity(
                 id=f["ID"],
@@ -684,6 +693,8 @@ class Paginator:
             return SearchCmd.SEARCH_ESTADO_PROYECTO
         elif self.procedure == "VISTA_PROYECTOS":
             return SearchCmd.SEARCH_PROYECTO
+        elif self.procedure == "VISTA_CATEGORIAS_CONSUMIBLE":
+            return SearchCmd.SEARCH_CATEGORIA_CONSUMIBLE
         elif self.procedure == "VISTA_ACUARIOS":
             return SearchCmd.SEARCH_ACUARIO
         elif self.procedure == "VISTA_FILTROS":

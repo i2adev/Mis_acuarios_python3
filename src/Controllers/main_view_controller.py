@@ -9,7 +9,9 @@ from Controllers.acuario_master_controller import AcuarioMasterController
 from Controllers.base_controller import BaseController
 from Controllers.categoria_acuario_master_controller import \
     CategoriaAcuarioMasterController
-from Controllers.categoria_equipamiento_master_dialog import \
+from Controllers.categoria_consumible_master_controller import \
+    CategoriaConsumibleMasterController
+from Controllers.categoria_equipamiento_master_controller import \
     CategoriaEquipamientoMasterController
 from Controllers.categoria_incidencia_master_controller import \
     CategoriaIncidenciaMasterController
@@ -43,6 +45,7 @@ from Controllers.tipo_iluminacion_master_controller import \
 from Controllers.urna_master_controller import UrnaMasterController
 from Model.DAO.acuario_dao import AcuarioDAO
 from Model.DAO.categoria_acuario_dao import CategoriaAcuarioDAO
+from Model.DAO.categoria_consumible_dao import CategoriaConsumibleDAO
 from Model.DAO.categoria_equipamiento_dao import CategoriaEquipamientoDAO
 from Model.DAO.categoria_incidencia_dao import CategoriaIncidenciaDAO
 from Model.DAO.comercio_dao import ComercioDAO
@@ -62,6 +65,8 @@ from Model.DAO.tipo_iluminacion_dao import TipoIluminacionDAO
 from Model.DAO.urna_dao import UrnaDAO
 from Model.Entities.acuario_entity import AcuarioEntity
 from Model.Entities.categoria_acuario_entity import CategoriaAcuarioEntity
+from Model.Entities.categoria_consumible_entity import \
+    CategoriaConsumibleEntity
 from Model.Entities.categoria_equipamiento_entity import \
     CategoriaEquipamientoEntity
 from Model.Entities.categoria_incidencia_entity import \
@@ -85,6 +90,7 @@ from Model.Entities.tipo_iluminacion_entity import TipoIluminacionEntity
 from Model.Entities.urna_entity import UrnaEntity
 from Views.Masters.acuario_view import AcuarioView
 from Views.Masters.categoria_acuario_view import CategoriaAcuarioView
+from Views.Masters.categoria_consumible_view import CategoriaConsumibleView
 from Views.Masters.categoria_equipamiento_view import CategoriaEquipamientoView
 from Views.Masters.categoria_incidencia_view import CategoriaIncidenciaView
 from Views.Masters.comercio_view import ComercioView
@@ -207,6 +213,9 @@ class MainViewController(BaseController):
         self._view.button_maestro_iluminacion.clicked.connect(
             self.iluminacion_click
         )
+        self._view.button_maestro_cat_consumible.clicked.connect(
+            self.categorias_cosumible_click
+        )
 
     def reportes_click(self):
         """ Cuando se pulsa el control de reportes. """
@@ -223,6 +232,16 @@ class MainViewController(BaseController):
         mod = IluminacionEntity()
 
         ctrl = IluminacionMasterController(view, dao, mod)
+        ctrl.show()
+
+    def categorias_cosumible_click(self):
+        """ Cuando se pulsa el botón de categorías de consumible. """
+
+        view = CategoriaConsumibleView("MAESTRO DE CATEGORÍAS DE CONSUMIBLE")
+        dao = CategoriaConsumibleDAO()
+        mod = CategoriaConsumibleEntity()
+
+        ctrl = CategoriaConsumibleMasterController(view, dao, mod)
         ctrl.show()
 
     def control_iluminacion_clicked(self):

@@ -94,6 +94,8 @@ class MainView(QWidget):
         self.maestro_layout.addWidget(self.button_maestro_subcat_incidencia)
         self.maestro_layout.addWidget(self.button_maestro_cat_producto)
         self.maestro_layout.addWidget(self.button_maestro_comercio)
+        self.maestro_layout.addWidget(self.button_maestro_consumible)
+        self.maestro_layout.addWidget(self.button_maestro_cat_consumible)
         self.maestro_layout.addWidget(self.button_maestro_equipamiento)
         self.maestro_layout.addWidget(self.button_maestro_cat_equipamiento)
         self.maestro_layout.addWidget(self.button_maestro_facturas)
@@ -282,6 +284,52 @@ class MainView(QWidget):
         )
         self.button_maestro_comercio.setFlat(True)
         self.button_maestro_comercio.setCursor(
+            QCursor(Qt.CursorShape.PointingHandCursor)
+        )
+
+        self.button_maestro_consumible = QPushButton(
+            "CONSUMIBLES"
+        )
+        self.button_maestro_consumible.setStyleSheet(
+            """
+            QPushButton {
+                background-color: transparent;
+                text-align: left;
+                margin-bottom: 0;
+                margin-left: 20;
+                font-family: 'Roboto'; 
+                font-size: 14px;
+            }
+            """
+        )
+        self.button_maestro_consumible.setObjectName(
+            "button_maestro_consumible"
+        )
+        self.button_maestro_consumible.setFlat(True)
+        self.button_maestro_consumible.setCursor(
+            QCursor(Qt.CursorShape.PointingHandCursor)
+        )
+
+        self.button_maestro_cat_consumible = QPushButton(
+            " > CAT. CONSUMIBLES"
+        )
+        self.button_maestro_cat_consumible.setStyleSheet(
+            """
+            QPushButton {
+                background-color: transparent;
+                text-align: left;
+                margin-bottom: 0;
+                margin-left: 20;
+                font-family: 'Roboto'; 
+                font-size: 14px;
+            }
+            """
+        )
+        self.button_maestro_cat_consumible.setObjectName(
+            "button_maestro_cat_consumible"
+        )
+        self.button_maestro_cat_consumible.setFlat(True)
+        self.button_maestro_cat_consumible.setCursor(
             QCursor(Qt.CursorShape.PointingHandCursor)
         )
 
