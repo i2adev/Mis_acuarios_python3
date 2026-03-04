@@ -58,9 +58,9 @@ class CategoriaConsumibleController(BaseController):
 
         # Descripción de la categoría
         if ctrs.text_observaciones.toPlainText():
-            ent.descripcion = ctrs.text_observaciones.toPlainText()
+            ent.observaciones = ctrs.text_observaciones.toPlainText()
         else:
-            ent.descripcion = None
+            ent.observaciones = None
 
         return ent
 
@@ -102,7 +102,7 @@ class CategoriaConsumibleController(BaseController):
             return Result.failure(res.error_msg)
 
         # Limpiamos el formulario
-        self._clean_view(self._view.frame.edit_estado_proyecto)
+        self._clean_view(self._view.frame.edit_categoria_consumible)
 
         return Result.success(ent.id)
 
@@ -150,7 +150,7 @@ class CategoriaConsumibleController(BaseController):
             return Result.failure(res.error_msg)
 
         # Limpiamos el formulario
-        self._clean_view(self._view.frame.edit_estado_proyecto)
+        self._clean_view(self._view.frame.edit_categoria_consumible)
         return Result.success(ide)
 
     # FIN DE CRUD --------------------------------------------------

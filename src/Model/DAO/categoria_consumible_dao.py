@@ -71,7 +71,7 @@ class CategoriaConsumibleDAO(BaseDAO):
             return Result.failure(f"[SQLITE ERROR]\n {e}")
 
     # ------------------------------------------------------------------
-    def get_num_by_id(self, id_: int) -> Result(int):
+    def get_num_by_id(self, id_: int) -> Result:
         """
         Obtiene el valor NÚM. de la vista VISTA_CATEGORIAS_CONSUMIBLE dado
         un ID.
@@ -110,7 +110,7 @@ class CategoriaConsumibleDAO(BaseDAO):
             return Result.failure(f"[SQLITE ERROR]\n {e}")
 
     # ------------------------------------------------------------------
-    def get_list_combo(self) -> Result(List[CategoriaConsumibleEntity]):
+    def get_list_combo(self) -> Result:
         """
         Obtiene una lista ligera para combos (ID y texto visible).
         """
@@ -156,7 +156,7 @@ class CategoriaConsumibleDAO(BaseDAO):
             return Result.failure(f"[SQLITE ERROR]\n {e}")
 
     # ------------------------------------------------------------------
-    def insert(self, ent: CategoriaConsumibleEntity) -> Result(int):
+    def insert(self, ent: CategoriaConsumibleEntity) -> Result:
         """Inserta un nuevo registro y devuelve el ID generado."""
 
         sql = (
@@ -189,13 +189,13 @@ class CategoriaConsumibleDAO(BaseDAO):
             return Result.failure(f"[SQLITE ERROR]\n {e}")
 
     # ------------------------------------------------------------------
-    def update(self, ent: CategoriaConsumibleEntity) -> Result(int):
+    def update(self, ent: CategoriaConsumibleEntity) -> Result:
         """Actualiza un registro. Devuelve el ID de la entidad modificada."""
 
         sql = (
             """
             UPDATE  CATEGORIAS_CONSUMIBLE
-                    SET ID_CATEGORIA = = :cat,
+                    SET CATEGORIA_CONSUMIBLE = :cat,
                     DESCRIPCION     = :descripcion
             WHERE   ID_CATEGORIA = :id;
             """
@@ -225,7 +225,7 @@ class CategoriaConsumibleDAO(BaseDAO):
             return Result.failure(f"[SQLITE ERROR]\n {e}")
 
     # ------------------------------------------------------------------
-    def delete(self, id_: int) -> Result(int):
+    def delete(self, id_: int) -> Result:
         """
         Elimina el registro. Devuelve el ID de la entidad eliminada.
         :param id_: ID de la entidad a eliminar

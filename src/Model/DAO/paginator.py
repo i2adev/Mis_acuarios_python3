@@ -8,6 +8,8 @@ Comentarios:
 from PyQt6.QtWidgets import QMessageBox
 
 from Model.DAO.base_dao import BaseDAO
+from Model.Entities.categoria_consumible_entity import \
+    CategoriaConsumibleEntity
 from Model.Entities.comercio_entity import ComercioEntity
 from Model.Entities.control_iluminacion_entity import ControlIluminacionEntity
 from Model.Entities.iluminacion_entity import IluminacionEntity
@@ -500,11 +502,11 @@ class Paginator:
                 for f in rows
             ]
         elif self.procedure == "VISTA_CATEGORIAS_CONSUMIBLE":
-            data_list = [EstadoProyectoEntity(
+            data_list = [CategoriaConsumibleEntity(
                 id=f["ID"],
                 num=f["NUM"],
-                estado=f["CATEGORIA"],
-                descripcion=f["DESCRIPCION"]
+                categoria=f["CATEGORIA"],
+                observaciones=f["DESCRIPCION"]
             )
                 for f in rows
             ]

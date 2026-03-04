@@ -1,5 +1,7 @@
 ﻿CHANGELOG:
 ================================================================================
+0.24.1  TESTEO MANUAL DE LA LÓGICA DE CATEGORÍAS DE CONSUMIBLE.
+
 0.24.0  SE AÑADE LA LÓGICA DE CATEGORÍAS DE CONSUMIBLE.
 
 0.23.3  REVISAR LAS CARGAS DE LOS DATOS EN EL FORMULARIO.
