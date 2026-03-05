@@ -53,7 +53,7 @@ class UnidadContenidoController(BaseController):
             ent.id = None
 
         # Categoría de consumible
-        ent.formato = ctrs.edit_unidad_contenido.value()
+        ent.unidad = ctrs.edit_unidad_contenido.value()
 
         # Descripción de la categoría
         if ctrs.text_descripcion.toPlainText():
