@@ -97,6 +97,7 @@ class MainView(QWidget):
         self.maestro_layout.addWidget(self.button_maestro_consumible)
         self.maestro_layout.addWidget(self.button_maestro_cat_consumible)
         self.maestro_layout.addWidget(self.button_maestro_formato_consumible)
+        self.maestro_layout.addWidget(self.button_maestro_unidad_contenido)
         self.maestro_layout.addWidget(self.button_maestro_equipamiento)
         self.maestro_layout.addWidget(self.button_maestro_cat_equipamiento)
         self.maestro_layout.addWidget(self.button_maestro_facturas)
@@ -354,6 +355,29 @@ class MainView(QWidget):
         )
         self.button_maestro_formato_consumible.setFlat(True)
         self.button_maestro_formato_consumible.setCursor(
+            QCursor(Qt.CursorShape.PointingHandCursor)
+        )
+
+        self.button_maestro_unidad_contenido = QPushButton(
+            " > UNIDAD DE CONTENIDO"
+        )
+        self.button_maestro_unidad_contenido.setStyleSheet(
+            """
+            QPushButton {
+                background-color: transparent;
+                text-align: left;
+                margin-bottom: 0;
+                margin-left: 20;
+                font-family: 'Roboto'; 
+                font-size: 14px;
+            }
+            """
+        )
+        self.button_maestro_unidad_contenido.setObjectName(
+            "button_maestro_unidad_contenido"
+        )
+        self.button_maestro_unidad_contenido.setFlat(True)
+        self.button_maestro_unidad_contenido.setCursor(
             QCursor(Qt.CursorShape.PointingHandCursor)
         )
 

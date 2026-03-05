@@ -483,6 +483,19 @@ class SearchCmd:
     )
     WHERE     FIELD LIKE '%' || :pattern || '%';
     """
+    SEARCH_UNIDAD_CONTENIDO = """
+    SELECT    ID, NUM, UNIDAD, DESCRIPCION
+    FROM
+    (
+        SELECT    ID_UNIDAD_CONTENIDO AS ID,
+                  ROW_NUMBER() OVER (ORDER BY ID_UNIDAD_CONTENIDO) AS NUM,
+                  UNIDAD AS UNIDAD,
+                  DESCRIPCION AS DESCRIPCION,
+                  UPPER(IFNULL(UNIDAD, '') || IFNULL(DESCRIPCION, '')) AS FIELD
+        FROM      UNIDADES_CONTENIDO
+    )
+    WHERE     FIELD LIKE '%' || :pattern || '%';
+    """
 
     SEARCH_ILUMINACION = """
     SELECT    ID, NUM, MARCA, MODELO, NUMERO_SERIE, TIPO_ILUMINACION, POTENCIA, 

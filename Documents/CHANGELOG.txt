@@ -1,5 +1,7 @@
 ﻿CHANGELOG:
 ================================================================================
+0.26.0  SE AÑADE LA LÓGICA DE UNIDADES DE CONTENIDO.
+
 0.25.1  TESTEO MANUAL DE LA LÓGICA DE FORMATOS DE CONSUMIBLE.
 
 0.25.0  SE AÑADE LA LÓGICA DE FORMATOS DE CONSUMIBLE.

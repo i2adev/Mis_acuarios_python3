@@ -15,6 +15,7 @@ from Model.Entities.control_iluminacion_entity import ControlIluminacionEntity
 from Model.Entities.formato_consumible_entity import FormatoConsumibleEntity
 from Model.Entities.iluminacion_entity import IluminacionEntity
 from Model.Entities.tipo_iluminacion_entity import TipoIluminacionEntity
+from Model.Entities.unidades_contenido_entity import UnidadContenidoEntity
 from Model.database import DBManager
 from Model.Entities.acuario_entity import AcuarioEntity
 from Model.Entities.base_entity import BaseEntity
@@ -633,6 +634,15 @@ class Paginator:
             )
                 for f in rows
             ]
+        elif self.procedure == "VISTA_UNIDAD_CONTENIDO":
+            data_list = [UnidadContenidoEntity(
+                id=f["ID"],
+                num=f["NUM"],
+                unidad=f["UNIDAD"],
+                descripcion=f["DESCRIPCION"],
+            )
+                for f in rows
+            ]
         elif self.procedure == "VISTA_ILUMINACIONES":
             data_list = [IluminacionEntity(
                 id=f["ID"],
@@ -725,6 +735,8 @@ class Paginator:
             return SearchCmd.SEARCH_ILUMINACION
         elif self.procedure == "VISTA_FORMATOS_CONSUMIBLE":
             return SearchCmd.SEARCH_FORMATO_CONSUMIBLE
+        elif self.procedure == "VISTA_UNIDAD_CONTENIDO":
+            return SearchCmd.SEARCH_UNIDAD_CONTENIDO
 
     def __str__(self):
         """ Muestra el objeto en forma de texto. """
