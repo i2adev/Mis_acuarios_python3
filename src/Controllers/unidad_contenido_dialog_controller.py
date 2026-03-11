@@ -65,10 +65,10 @@ class UnidadContenidoDialogController(UnidadContenidoController):
             return
 
         # Configuramos la entidad
-        self._formato_consumible_result = UnidadContenidoEntity(
+        self._unidad_contenido_result = UnidadContenidoEntity(
             id=res.value,
             num=None,
-            unidad=self._view.frame.edit_unidad_consumible.text(),
+            unidad=self._view.frame.edit_unidad_contenido.text(),
             descripcion=self._view.frame.text_descripcion.toPlainText()
             if self._view.frame.text_descripcion.toPlainText()
             else ""

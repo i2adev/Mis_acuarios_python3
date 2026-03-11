@@ -67,10 +67,10 @@ class CategoriaConsumibleDialogController(CategoriaConsumibleController):
             return
 
         # Configuramos la entidad
-        self._tipo_filtro_result = CategoriaConsumibleEntity(
+        self._categoria_consumible_result = CategoriaConsumibleEntity(
             id=res.value,
             num=None,
-            categoria=self._view.frame.edit_estado_proyecto.text(),
+            categoria=self._view.frame.edit_categoria_consumible.value(),
             observaciones=self._view.frame.text_observaciones.toPlainText()
             if self._view.frame.text_observaciones.toPlainText()
             else ""

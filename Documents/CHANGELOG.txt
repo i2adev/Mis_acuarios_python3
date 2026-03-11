@@ -1,5 +1,7 @@
 ﻿CHANGELOG:
 ================================================================================
+0.27.1  TESTEO MANUAL DE LA LÓGICA DE CONSUMIBLES.
+
 0.27.0  SE AÑADE LA LÓGICA DE CONSUMIBLES.
 
 0.26.1  TESTEO MANUAL DE LA LÓGICA DE UNIDADES DE CONTENIDO.

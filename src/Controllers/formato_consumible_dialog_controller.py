@@ -7,15 +7,15 @@ Comentarios:
 
 from PyQt6.QtWidgets import QWidget, QMessageBox, QComboBox
 
-from Controllers.categoria_consumible_controller import \
-    CategoriaConsumibleController
+from Controllers.formato_consumible_controller import \
+    FormatoConsumibleController
 from Model.DAO.formato_consumible_dao import FormatoConsumibleDAO
 from Model.Entities.formato_consumible_entity import FormatoConsumibleEntity
 from Services.Result.result import Result
 from Views.Dialogs.formato_consumible_dialog import FormatoConsumibleDialog
 
 
-class FormatoConsumibleDialogController(CategoriaConsumibleController):
+class FormatoConsumibleDialogController(FormatoConsumibleController):
     """ Controlador del cuadro de diálogo formato de consumible. """
 
     def __init__(self, view: FormatoConsumibleDialog,
@@ -88,7 +88,7 @@ class FormatoConsumibleDialogController(CategoriaConsumibleController):
 
         if self._view.exec():
             # Obtenemos la subcategoría de acuario
-            formato_consumible = self._get_categoria_consumible()
+            formato_consumible = self._get_formato_consumible()
             return Result.success(formato_consumible)
         else:
             return Result.failure("EL USUARIO CANCELO LA INSERCIÓN")

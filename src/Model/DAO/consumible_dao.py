@@ -235,6 +235,7 @@ CunsumibleEntity.
             """
         )
         params = {"id": ent.id,
+                  "marca": ent.id_marca,
                   "producto": ent.producto,
                   "categoria": ent.id_categoria,
                   "formato": ent.id_formato,

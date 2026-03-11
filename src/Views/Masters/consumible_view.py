@@ -7,7 +7,7 @@ Comentarios:
 
 import sys
 
-from PyQt6.QtCore import Qt
+from PyQt6.QtCore import QSize, Qt
 from PyQt6.QtWidgets import QApplication, QWidget
 
 from Views.Forms.consumible_form import ConsumibleForm
@@ -28,7 +28,7 @@ class ConsumibleView(BaseView):
         # Configuramos el formulario
         self.frame = ConsumibleForm()
         self.frame_image = ImageForm(self, "FOTOGRAFIAS_CONSUMIBLE")
-        self.frame_image.setFixedWidth(850)
+        self.frame_image.setFixedWidth(400)
         self.layout_form_data.addWidget(self.frame)
         self.layout_form_data.addWidget(self.frame_image)
 

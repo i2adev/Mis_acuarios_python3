@@ -158,13 +158,13 @@ class CategoriaConsumibleController(BaseController):
     def _validate_view(self) -> Result:
         """ Valida el formulario. """
 
-        # Valida el tipo de filtro
+        # Valida la categoría de consumible
         res = CategoriaConsumibleValidator.validate_categoria_consumible(
-            self._view.frame.edit_categoria_consumible
+            self._view.frame.combo_categoría
         )
 
         if not res.is_success:
-            self._view.frame.edit_categoria_consumible.setFocus()
+            self._view.frame.combo_categoría.setFocus()
             return res
 
         return Result.success(0)

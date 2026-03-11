@@ -27,7 +27,7 @@ class InsertCmd:
 
     # Formato de consumible
     INSERT_FORMATO_CONSUMIBLE = """
-    INSERT INTO FORMATOS (FORMATO, DESCRIPCION) VALUES
+    INSERT INTO FORMATOS_CONSUMIBLE (FORMATO, DESCRIPCION) VALUES
     ('Líquido', 'Producto en formato líquido'),
     ('Polvo', 'Producto en formato polvo'),
     ('Granulado', 'Producto granulado'),

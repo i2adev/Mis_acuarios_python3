@@ -1,7 +1,44 @@
 ﻿================================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
-06/03/2026  SE AÑADE LA LÓGICA DE CONSUMIBLES:
+11/03/2026  TESTEO MANUAL DE LA LÓGICA DE CATEGORÍAS DE CONSUMIBLE.
+            -   DONE:   TEST -> APERTURA DEL FORMULARIO.
+            -   DONE:   TEST -> CARGA DE LOS COMBOS.
+            -   DONE:   TEST -> INSERCIÓN DE REGISTRO.
+            -   DONE:   TEST -> INSERCIÓN DE REGISTRO CON IMAGEN.
+            -   DONE:   TEST -> CARGA DE REGISTRO.
+            -   DONE:   TEST -> CARGA DE REGISTRO CON IMAGEN.
+            -   DONE:   TEST -> LIMPIEZA DE FORMULARIO.
+            -   DONE:   TEST -> LIMPIEZA DE FORMULARIO CON IMAGEN.
+            -   DONE    TEST -> ELIMINACIÓN DE REGISTRO DESDE MENÚ CONTEXTUAL.
+            -   DONE:   TEST -> ELIMINACIÓN DE REGISTRO DESPUÉS DE CARGAR EN EL
+                                FORMULARIO.
+            -   DONE:   TEST -> INSERCIÓN DE MARCA A TRAVES DE DIALOGO.
+            -   DONE:   TEST -> INSERCIÓN DE CATEGORÍA A TRAVES DE DIALOGO.
+            -   DONE:   TEST -> INSERCIÓN DE FORMATO A TRAVES DE DIALOGO.
+            -   DONE:   TEST -> INSERCIÓN DE UNIDAD A TRAVES DE DIALOGO.
+            -   DONE:   TEST -> MODIFICACIÓN DE REGISTRO.
+            -   DONE:   TEST -> BÚSQUEDA DE REGISTROS.
+
+            CORRECCIONES:
+            -   DONE:   SE CORRIGE LA APERTURA DEL FORMULARIO.
+            -   DONE:   SE CORRIGE EL COMBO DE MARCA PARA QUE SEA EDITABLE Y
+                        FUNCIONE EL AUTOCOMPLETADO.
+            -   DONE:   CORREGIDO LA INSEFCIÓN DE REGISTRO:
+                -   DONE:   CORREGIR EL NOMBRE DEL CONTROL DEL PRODUCTO.
+                -   DONE:   LA CONFIGURACIÓN DE LA ENTIDAD FALLA EN CUANTO A
+                            LOS COMBOS.
+            -   DONE:   SE CORRIGE LA INSERCIÓN DE CATEGORÍA DE CONSUMIBLE
+                        DESDE EL DIÁLOGO.
+            -   DONE:   SE CORRIGE LA INSERCIÓN DE FORMATO DE CONSUMIBLE
+                        DESDE EL DIÁLOGO.
+            -   DONE:   SE CORRIGE LA CARGA DE LAS UNIDADES DE CONTENIDO. EL
+                        PROBLEMA  SE SOLUCIONA RESIDE EN QUE LA CARGA DEL COMBO
+                        USANDO FINDTEXT CON EL FLAG MATCHSTARTSWITH.
+            -   DONE:   CORRECCIÓN DE MODIFICACIÓN DE REGISTRO.
+
+
+10/03/2026  SE AÑADE LA LÓGICA DE CONSUMIBLES:
             -   DONE:   SE CREA LA ENTIDAD.
             -   DONE:   SE CREA LA VISTA EN LA BASE DE DATOS.
             -   DONE:   SE CREA EL DAO.

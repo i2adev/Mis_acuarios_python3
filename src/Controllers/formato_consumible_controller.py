@@ -28,7 +28,7 @@ class FormatoConsumibleController(BaseController):
                  dao: FormatoConsumibleDAO,
                  model: FormatoConsumibleEntity):
         """
-        Inicializa el controlador de tipo de filtro.
+        Inicializa el controlador de formato de consumible.
         :param view: FormatoConsumibleDialog | FormatoConsumibleView
         :param dao: FormatoConsumibleDAO
         :param model: FormatoConsumibleDAO

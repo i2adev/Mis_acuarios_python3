@@ -48,10 +48,6 @@ class ConsumibleMasterController(ConsumibleController):
         # Ocultamos los layouts
         self._hide_layout(self._view.frame.layout_id)
 
-        # Inhabilita el layout del motivo de desmontaje
-        self._setDisabledControl(self._view.frame.layout_motivo_desmontaje,
-                                 True)
-
         # Inicializamos los eventos
         self.init_handlers()
 
@@ -80,7 +76,6 @@ class ConsumibleMasterController(ConsumibleController):
         self._view.frame.button_insert_unidad.clicked.connect(
             self._open_unidad_dialog
         )
-        self._view.frame.button_color.clicked.connect(self._choose_color)
         self._view.button_insert.clicked.connect(self.button_insert_click)
         self._view.button_update.clicked.connect(self.button_update_click)
         self._view.button_load.clicked.connect(self.button_load_click)

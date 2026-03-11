@@ -16,6 +16,7 @@ from Controllers.categoria_equipamiento_master_controller import \
 from Controllers.categoria_incidencia_master_controller import \
     CategoriaIncidenciaMasterController
 from Controllers.comercio_master_controller import ComercioMasterController
+from Controllers.consumible_master_controller import ConsumibleMasterController
 from Controllers.control_iluminacion_master_controller import \
     ControlIluminacionMasterController
 from Controllers.equipamiento_master_controller import \
@@ -253,7 +254,7 @@ class MainViewController(BaseController):
         dao = ConsumibleDAO()
         mod = ConsumibleEntity()
 
-        ctrl = IluminacionMasterController(view, dao, mod)
+        ctrl = ConsumibleMasterController(view, dao, mod)
         ctrl.show()
 
     def iluminacion_click(self):

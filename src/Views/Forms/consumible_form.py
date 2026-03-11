@@ -95,7 +95,7 @@ class ConsumibleForm(QFrame):
         )
 
         self.edit_contenido = DoubleLineEdit(control_name="CONTENIDO",
-                                             units="---",
+                                             units=None,
                                              min_value=10,
                                              max_value=2_000)
         self.edit_contenido.setObjectName("edit_contenido")
@@ -120,6 +120,7 @@ class ConsumibleForm(QFrame):
         # Combos
         self.combo_marca = ComboBox("MARCA")
         self.combo_marca.setObjectName("combo_marca")
+        self.combo_marca.setEditable(True)
         self.combo_marca.setMinimumWidth(200)
         self.combo_marca.setToolTip(
             """

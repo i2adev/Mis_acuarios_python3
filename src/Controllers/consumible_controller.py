@@ -4,7 +4,7 @@ Fecha:  11/03/2026
 Comentarios:
     Controlador base de consumible.
 """
-
+from PyQt6 import QtCore
 from PyQt6.QtGui import QAction
 from PyQt6.QtWidgets import QMessageBox, QPushButton
 
@@ -77,19 +77,19 @@ class ConsumibleController(BaseController):
         ent.id_marca = ctrs.combo_marca.value()
 
         # Producto
-        ent.producto = ctrs.producto.value()
+        ent.producto = ctrs.edit_producto.value()
 
         # Categoría
-        ent.id_unidad = ctrs.combo_categoria.value()
+        ent.id_categoria = ctrs.combo_categoria.value()
 
         # Formato
-        ent.id_unidad_contenido = ctrs.combo_formato.value()
+        ent.id_formato = ctrs.combo_formato.value()
 
         # Contenido
         ent.contenido = ctrs.edit_contenido.value()
 
         # Unidad
-        ent.id_contenido = ctrs.combo_unidad.value()
+        ent.id_unidad = ctrs.combo_unidad.value()
 
         # Descripción del acuario
         if ctrs.text_descripcion.toPlainText():
@@ -128,7 +128,7 @@ class ConsumibleController(BaseController):
         """ Actualiza el registro en la base de datos. """
 
         # Valida el formulario
-        val = self._validate_view(False, False)
+        val = self._validate_view()
 
         if not val.is_success:
             return val
@@ -443,9 +443,15 @@ class ConsumibleController(BaseController):
             self._view.frame.combo_formato.findText(formato)
         )
         self._view.frame.edit_contenido.setValue(contenido)
-        self._view.frame.combo_unidad.setCurrentIndex(
-            self._view.frame.combo_unidad.findText(unidad)
-        )
+
+        if unidad:
+            self._view.frame.combo_unidad.setCurrentIndex(
+                self._view.frame.combo_unidad.findText(
+                    unidad, flags=QtCore.Qt.MatchFlag.MatchStartsWith)
+            )
+        else:
+            self._view.frame.combo_unidad.setCurrentIndex(-1)
+
         self._view.frame.text_descripcion.setPlainText(
             str(descripcion) if descripcion is not None else ""
         )
@@ -511,7 +517,7 @@ class ConsumibleController(BaseController):
         # Configuramos el combo
         combo = self._view.frame.combo_categoria
 
-        self._fill_combo_marca()
+        self._fill_combo_categoria()
         for i in range(combo.count()):
             if combo.itemData(i) == res.value.id:
                 combo.setCurrentIndex(i)
@@ -532,9 +538,9 @@ class ConsumibleController(BaseController):
             return
 
         # Configuramos el combo
-        combo = self._view.frame.combo_categoria
+        combo = self._view.frame.combo_formato
 
-        self._fill_combo_categoria()
+        self._fill_combo_formato()
         for i in range(combo.count()):
             if combo.itemData(i) == res.value.id:
                 combo.setCurrentIndex(i)
@@ -557,7 +563,7 @@ class ConsumibleController(BaseController):
         # Configuramos el combo
         combo = self._view.frame.combo_unidad
 
-        self._fill_combo_categoria()
+        self._fill_combo_unidad()
         for i in range(combo.count()):
             if combo.itemData(i) == res.value.id:
                 combo.setCurrentIndex(i)
