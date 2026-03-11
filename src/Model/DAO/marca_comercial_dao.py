@@ -85,7 +85,7 @@ class MarcaComercialDAO(BaseDAO):
             return Result.failure(f"[SQLITE ERROR]\n {e}")
 
     # ------------------------------------------------------------------
-    def get_list_combo(self) -> Result(list[MarcaComercialEntity]):
+    def get_list_combo(self) -> Result:
         """
         Obtiene una lista ligera para combos (ID y texto visible).
         """

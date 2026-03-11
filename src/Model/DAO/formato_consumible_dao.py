@@ -129,7 +129,7 @@ class FormatoConsumibleDAO(BaseDAO):
                 valores = [
                     FormatoConsumibleEntity(
                         id=f["ID"],
-                        descripcion=f["VALUE"],
+                        formato=f["VALUE"],
                     )
                     for f in rows
                 ]

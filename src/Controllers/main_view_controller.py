@@ -53,6 +53,7 @@ from Model.DAO.categoria_consumible_dao import CategoriaConsumibleDAO
 from Model.DAO.categoria_equipamiento_dao import CategoriaEquipamientoDAO
 from Model.DAO.categoria_incidencia_dao import CategoriaIncidenciaDAO
 from Model.DAO.comercio_dao import ComercioDAO
+from Model.DAO.consumible_dao import ConsumibleDAO
 from Model.DAO.control_iluminacion_dao import ControlIluminacionDAO
 from Model.DAO.equipamiento_dao import EquipamientoDAO
 from Model.DAO.estado_proyecto_dao import EstadoProyectoDAO
@@ -78,6 +79,7 @@ from Model.Entities.categoria_equipamiento_entity import \
 from Model.Entities.categoria_incidencia_entity import \
     CategoriaIncidenciaEntity
 from Model.Entities.comercio_entity import ComercioEntity
+from Model.Entities.consumible_entity import ConsumibleEntity
 from Model.Entities.control_iluminacion_entity import ControlIluminacionEntity
 from Model.Entities.equipamiento_entity import EquipamientoEntity
 from Model.Entities.estado_proyecto_entity import EstadoProyectoEntity
@@ -102,6 +104,7 @@ from Views.Masters.categoria_consumible_view import CategoriaConsumibleView
 from Views.Masters.categoria_equipamiento_view import CategoriaEquipamientoView
 from Views.Masters.categoria_incidencia_view import CategoriaIncidenciaView
 from Views.Masters.comercio_view import ComercioView
+from Views.Masters.consumible_view import ConsumibleView
 from Views.Masters.control_iluminacion_view import ControlIluminacionView
 from Views.Masters.equipamiento_view import EquipamientoView
 from Views.Masters.estado_proyecto_view import EstadoProyectoView
@@ -232,12 +235,25 @@ class MainViewController(BaseController):
         self._view.button_maestro_unidad_contenido.clicked.connect(
             self.unidad_contenido_click
         )
+        self._view.button_maestro_consumible.clicked.connect(
+            self.consumible_click
+        )
 
     def reportes_click(self):
         """ Cuando se pulsa el control de reportes. """
         view = MainReportsView("REPORTES")
         ctrl = MainReportsController(view)
 
+        ctrl.show()
+
+    def consumible_click(self):
+        """ Cuando se pulsa el botón de sonsumibvles. """
+
+        view = ConsumibleView("MAESTRO DE CONSUMIBLES")
+        dao = ConsumibleDAO()
+        mod = ConsumibleEntity()
+
+        ctrl = IluminacionMasterController(view, dao, mod)
         ctrl.show()
 
     def iluminacion_click(self):

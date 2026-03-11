@@ -545,3 +545,40 @@ class SearchCmd:
         )
     WHERE    FIELD LIKE '%' || :pattern || '%';
     """
+
+    SEARCH_CONSUMIBLE = """
+    SELECT ID, NUM, MARCA, PRODUCTO, CATEGORIA, FORMATO, CONTENIDO,
+       UNIDAD, DESCRIPCION
+    FROM
+    (
+        SELECT C.ID_CONSUMIBLE AS ID,
+               ROW_NUMBER() OVER(ORDER BY M.MARCA, C.PRODUCTO, 
+                                 C.CONTENIDO, C.DESCRIPCION) AS NUM,
+               M.MARCA AS MARCA,
+               C.PRODUCTO AS PRODUCTO,
+               T.CATEGORIA_CONSUMIBLE AS CATEGORIA,
+               F.FORMATO AS FORMATO,
+               C.CONTENIDO AS CONTENIDO,
+               U.UNIDAD AS UNIDAD,
+               C.DESCRIPCION AS DESCRIPCION,
+               UPPER(
+                   IFNULL(M.MARCA, '') ||
+                   IFNULL(C.PRODUCTO, '') ||
+                   IFNULL(T.CATEGORIA_CONSUMIBLE, '') ||
+                   IFNULL(F.FORMATO, '') ||
+                   IFNULL(C.CONTENIDO, '') ||
+                   IFNULL(U.UNIDAD, '') ||
+                   IFNULL(C.DESCRIPCION, '')
+               ) AS FIELD
+        FROM   CONSUMIBLES AS C
+        LEFT JOIN MARCAS_COMERCIALES AS M
+            ON    C.ID_MARCA = M.ID_MARCA
+        LEFT JOIN CATEGORIAS_CONSUMIBLE AS T
+            ON    C.ID_CATEGORIA = T.ID_CATEGORIA
+        LEFT JOIN FORMATOS_CONSUMIBLE AS F
+            ON    C.ID_FORMATO_CONSUMIBLE = F.ID_FORMATO_CONSUMIBLE
+        LEFT JOIN UNIDADES_CONTENIDO AS U
+            ON    C.ID_UNIDAD_CONTENIDO = U.ID_UNIDAD_CONTENIDO
+    )
+    WHERE FIELD LIKE '%' || :pattern || '%';
+    """

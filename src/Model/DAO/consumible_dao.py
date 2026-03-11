@@ -1,27 +1,27 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
-Fecha:      05/03/2026
+Fecha:      04/03/2026
 Comentarios:
-    DAO para la entidad UnidadContenidoEntity.
+    DAO para la entidad FormatoCunsumibleEntity.
 """
 
 import sqlite3
 import traceback
 
 from Model.DAO.base_dao import BaseDAO
-from Model.Entities.unidades_contenido_entity import UnidadContenidoEntity
+from Model.Entities.consumible_entity import ConsumibleEntity
 from Model.database import DBManager
 from Services.Result.result import Result
 
 
-class UnidadContenidoDAO(BaseDAO):
+class ConsumibleDAO(BaseDAO):
     """
     Clase que gestiona las operaciones en la base de datos de la entidad
-    UnidadContenidoEntity.
+CunsumibleEntity.
     """
 
     def __init__(self) -> None:
-        """ Constructor de clase. """
+        """Constructor de clase."""
 
         self.db = DBManager()
 
@@ -31,11 +31,25 @@ class UnidadContenidoDAO(BaseDAO):
 
         sql = (
             """
-            SELECT ID_UNIDAD_CONTENIDO AS ID,
-                   ROW_NUMBER() OVER(ORDER BY ID_UNIDAD_CONTENIDO) AS NUM,
-                   UNIDAD AS UNIDAD,
-                   DESCRIPCION AS DESCRIPCION
-            FROM   UNIDADES_CONTENIDO;
+            SELECT C.ID_CONSUMIBLE AS ID,
+                   ROW_NUMBER() OVER(ORDER BY M.MARCA, C.PRODUCTO, 
+                                     C.CONTENIDO, C.DESCRIPCION) AS NUM,
+                   M.MARCA AS MARCA,
+                   C.PRODUCTO AS PRODUCTO,
+                   T.CATEGORIA_CONSUMIBLE AS CATEGORIA,
+                   F.FORMATO AS FORMATO,
+                   C.CONTENIDO AS CONTENIDO,
+                   U.UNIDAD AS UNIDAD,
+                   C.DESCRIPCION AS DESCRIPCION
+            FROM   CONSUMIBLES AS C
+            LEFT JOIN MARCAS_COMERCIALES AS M
+                ON    C.ID_MARCA = M.ID_MARCA
+            LEFT JOIN CATEGORIAS_CONSUMIBLE AS T
+                ON    C.ID_CATEGORIA = T.ID_CATEGORIA
+            LEFT JOIN FORMATOS_CONSUMIBLE AS F
+                ON    C.ID_FORMATO_CONSUMIBLE = F.ID_FORMATO_CONSUMIBLE
+            LEFT JOIN UNIDADES_CONTENIDO AS U
+                ON    C.ID_UNIDAD_CONTENIDO = U.ID_UNIDAD_CONTENIDO
             """
         )
 
@@ -46,10 +60,15 @@ class UnidadContenidoDAO(BaseDAO):
                 rows = cur.fetchall()
 
                 valores = [
-                    UnidadContenidoEntity(
+                    ConsumibleEntity(
                         id=f["ID"],
                         num=f["NUM"],
-                        unidad=f["UNIDAD"],
+                        id_marca=f["MARCA"],
+                        producto=f["PRODUCTO"],
+                        id_categoria=f["CATEGORIA"],
+                        id_formato=f["FORMATO"],
+                        contenido=f["CONTENIDO"],
+                        id_unidad=f["UNIDAD"],
                         descripcion=f["DESCRIPCION"],
                     )
                     for f in rows
@@ -71,14 +90,14 @@ class UnidadContenidoDAO(BaseDAO):
     # ------------------------------------------------------------------
     def get_num_by_id(self, id_: int) -> Result:
         """
-        Obtiene el valor NÚM. de la vista VISTA_UNIDAD_CONTENIDO dado
+        Obtiene el valor NÚM. de la vista VISTA_FORMATOS_CONSUMIBLE dado
         un ID.
         """
         sql = (
             """
             SELECT NUM
-            FROM   VISTA_UNIDAD_CONTENIDO
-            WHERE  ID = :id;
+            FROM   VISTA_CONSUMIBLE
+            WHERE  ID_CONSUMIBLE = :id;
             """
         )
         params = {"id": id_}
@@ -114,10 +133,15 @@ class UnidadContenidoDAO(BaseDAO):
 
         sql = (
             """
-            SELECT    ID_UNIDAD_CONTENIDO AS ID,
-                      UNIDAD || ' (' || DESCRIPCION || ')' AS VALUE
-            FROM      UNIDADES_CONTENIDO
-            ORDER BY  ID_UNIDAD_CONTENIDO;
+            SELECT C.ID_CONSUMIBLE AS ID,
+                   M.MARCA || ' ' || C.PRODUCTO || ' (' 
+                   || C.CONTENIDO || ' ' || U.UNIDAD || ')' AS VALUE
+            FROM   CONSUMIBLES AS C
+            LEFT JOIN MARCAS_COMERCIALES AS M
+                ON    C.ID_MARCA = M.ID_MARCA
+            LEFT JOIN UNIDADES_CONTENIDO AS U
+                ON    C.ID_UNIDAD_CONTENIDO = U.ID_UNIDAD_CONTENIDO
+            ORDER BY  VALUE;
             """
         )
 
@@ -127,9 +151,9 @@ class UnidadContenidoDAO(BaseDAO):
                 cur.execute(sql)
                 rows = cur.fetchall()
                 valores = [
-                    UnidadContenidoEntity(
+                    ConsumibleEntity(
                         id=f["ID"],
-                        unidad=f["VALUE"],
+                        descripcion=f["VALUE"],
                     )
                     for f in rows
                 ]
@@ -152,16 +176,25 @@ class UnidadContenidoDAO(BaseDAO):
             return Result.failure(f"[SQLITE ERROR]\n {e}")
 
     # ------------------------------------------------------------------
-    def insert(self, ent: UnidadContenidoEntity) -> Result:
+    def insert(self, ent: ConsumibleEntity) -> Result:
         """Inserta un nuevo registro y devuelve el ID generado."""
 
         sql = (
             """
-            INSERT INTO UNIDADES_CONTENIDO (UNIDAD, DESCRIPCION)
-            VALUES (:unidad, :descripcion);
+            INSERT INTO CONSUMIBLES (ID_MARCA, PRODUCTO, ID_CATEGORIA, 
+                                    ID_FORMATO_CONSUMIBLE, CONTENIDO, 
+                                    ID_UNIDAD_CONTENIDO, DESCRIPCION)
+            VALUES (:marca, :producto, :categoria, :formato, :contenido, 
+                    :unidad, :descripcion);
             """
         )
-        params = {"unidad": ent.unidad, "descripcion": ent.descripcion}
+        params = {"marca": ent.id_marca,
+                  "producto": ent.producto,
+                  "categoria": ent.id_categoria,
+                  "formato": ent.id_formato,
+                  "contenido": ent.contenido,
+                  "unidad": ent.id_unidad,
+                  "descripcion": ent.descripcion}
 
         try:
             with self.db.conn as con:
@@ -185,18 +218,28 @@ class UnidadContenidoDAO(BaseDAO):
             return Result.failure(f"[SQLITE ERROR]\n {e}")
 
     # ------------------------------------------------------------------
-    def update(self, ent: UnidadContenidoEntity) -> Result:
+    def update(self, ent: ConsumibleEntity) -> Result:
         """Actualiza un registro. Devuelve el ID de la entidad modificada."""
 
         sql = (
             """
-            UPDATE  UNIDADES_CONTENIDO
-            SET     UNIDAD = :unidad,
+            UPDATE  CONSUMIBLES
+            SET     ID_MARCA = :marca,
+                    PRODUCTO = :producto,
+                    ID_CATEGORIA = :categoria,
+                    ID_FORMATO_CONSUMIBLE = :formato,
+                    CONTENIDO = :contenido,
+                    ID_UNIDAD_CONTENIDO = :unidad,
                     DESCRIPCION = :descripcion
-            WHERE   ID_UNIDAD_CONTENIDO = :id;
+             WHERE  ID_CONSUMIBLE = :id;
             """
         )
-        params = {"id": ent.id, "unidad": ent.unidad,
+        params = {"id": ent.id,
+                  "producto": ent.producto,
+                  "categoria": ent.id_categoria,
+                  "formato": ent.id_formato,
+                  "contenido": ent.contenido,
+                  "unidad": ent.id_unidad,
                   "descripcion": ent.descripcion}
 
         try:
@@ -228,8 +271,8 @@ class UnidadContenidoDAO(BaseDAO):
         """
         sql = (
             """
-            DELETE FROM UNIDADES_CONTENIDO
-            WHERE       ID_UNIDAD_CONTENIDO = :id;
+            DELETE FROM CONSUMIBLES
+            WHERE       ID_CONSUMIBLE = :id;
             """
         )
         params = {"id": id_}

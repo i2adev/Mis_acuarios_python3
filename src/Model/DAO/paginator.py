@@ -11,6 +11,7 @@ from Model.DAO.base_dao import BaseDAO
 from Model.Entities.categoria_consumible_entity import \
     CategoriaConsumibleEntity
 from Model.Entities.comercio_entity import ComercioEntity
+from Model.Entities.consumible_entity import ConsumibleEntity
 from Model.Entities.control_iluminacion_entity import ControlIluminacionEntity
 from Model.Entities.formato_consumible_entity import FormatoConsumibleEntity
 from Model.Entities.iluminacion_entity import IluminacionEntity
@@ -667,6 +668,20 @@ class Paginator:
             )
                 for f in rows
             ]
+        elif self.procedure == "VISTA_CONSUMIBLES":
+            data_list = [ConsumibleEntity(
+                id=f["ID"],
+                num=f["NUM"],
+                id_marca=f["MARCA"],
+                producto=f["PRODUCTO"],
+                id_categoria=f["CATEGORIA"],
+                id_formato=f["FORMATO"],
+                contenido=f["CONTENIDO"],
+                id_unidad=f["UNIDAD"],
+                descripcion=f["DESCRIPCION"],
+            )
+                for f in rows
+            ]
 
         return data_list
 
@@ -737,6 +752,8 @@ class Paginator:
             return SearchCmd.SEARCH_FORMATO_CONSUMIBLE
         elif self.procedure == "VISTA_UNIDAD_CONTENIDO":
             return SearchCmd.SEARCH_UNIDAD_CONTENIDO
+        elif self.procedure == "VISTA_CONSUMIBLES":
+            return SearchCmd.SEARCH_CONSUMIBLE
 
     def __str__(self):
         """ Muestra el objeto en forma de texto. """
