@@ -582,3 +582,20 @@ class SearchCmd:
     )
     WHERE FIELD LIKE '%' || :pattern || '%';
     """
+
+    SEARCH_COMPORTAMIENTO_FAUNA = """
+    SELECT ID, NUM, COMPORTAMIENTO, DESCRIPCION
+    FROM
+    (
+    SELECT ID_COMPORTAMIENTO AS ID,
+           ROW_NUMBER() OVER(ORDER BY COMPORTAMIENTO) AS NUM,
+           COMPORTAMIENTO AS COMPORTAMIENTO,
+           DESCRIPCION AS DESCRIPCION,
+           UPPER(
+               IFNULL(COMPORTAMIENTO, '') ||
+               IFNULL(DESCRIPCION, '')
+           ) AS FIELD
+    FROM COMPORTAMIENTOS_FAUNA
+    )
+    WHERE     FIELD LIKE '%' || :pattern || '%';
+    """

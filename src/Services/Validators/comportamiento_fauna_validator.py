@@ -10,17 +10,17 @@ from PyQt6.QtWidgets import QLineEdit
 from Services.Result.result import Result
 
 
-class CategoriaAcuarioValidator:
-    """ Valida el formulario de categoría de acuario. """
+class ComportamientoFaunaValidator:
+    """ Valida el formulario de comportamiento de fauna. """
 
     @staticmethod
-    def validate_categoria_acuario(widget: QLineEdit):
-        """ Valida la categoría de acuario. """
+    def validate_comportamiento(widget: QLineEdit):
+        """ Valida el comportamiento.. """
 
         # Sí el texto esta vacio
         if not widget.text():
             return Result.failure(
-                "EL CAMPO 'CATEGORÍA DE ACUARIO' NO PUEDE ESTAR VACIO"
+                "EL CAMPO 'COMPORTAMIENTO' NO PUEDE ESTAR VACÍO"
             )
 
         # Validación exitosa

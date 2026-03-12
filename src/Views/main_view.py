@@ -101,6 +101,8 @@ class MainView(QWidget):
         self.maestro_layout.addWidget(self.button_maestro_equipamiento)
         self.maestro_layout.addWidget(self.button_maestro_cat_equipamiento)
         self.maestro_layout.addWidget(self.button_maestro_facturas)
+        self.maestro_layout.addWidget(self.button_maestro_fauna)
+        self.maestro_layout.addWidget(self.button_maestro_comportamiento)
         self.maestro_layout.addWidget(self.button_maestro_filtro)
         self.maestro_layout.addWidget(self.button_maestro_tipo_filtro)
         self.maestro_layout.addWidget(self.button_maestro_iluminacion)
@@ -286,6 +288,52 @@ class MainView(QWidget):
         )
         self.button_maestro_comercio.setFlat(True)
         self.button_maestro_comercio.setCursor(
+            QCursor(Qt.CursorShape.PointingHandCursor)
+        )
+
+        self.button_maestro_fauna = QPushButton(
+            "FAUNA"
+        )
+        self.button_maestro_fauna.setStyleSheet(
+            """
+            QPushButton {
+                background-color: transparent;
+                text-align: left;
+                margin-bottom: 0;
+                margin-left: 20;
+                font-family: 'Roboto'; 
+                font-size: 14px;
+            }
+            """
+        )
+        self.button_maestro_fauna.setObjectName(
+            "button_maestro_fauna"
+        )
+        self.button_maestro_fauna.setFlat(True)
+        self.button_maestro_fauna.setCursor(
+            QCursor(Qt.CursorShape.PointingHandCursor)
+        )
+
+        self.button_maestro_comportamiento = QPushButton(
+            " > COMPORTAMIENTO"
+        )
+        self.button_maestro_comportamiento.setStyleSheet(
+            """
+            QPushButton {
+                background-color: transparent;
+                text-align: left;
+                margin-bottom: 0;
+                margin-left: 20;
+                font-family: 'Roboto'; 
+                font-size: 14px;
+            }
+            """
+        )
+        self.button_maestro_comportamiento.setObjectName(
+            "button_maestro_comportamiento"
+        )
+        self.button_maestro_comportamiento.setFlat(True)
+        self.button_maestro_comportamiento.setCursor(
             QCursor(Qt.CursorShape.PointingHandCursor)
         )
 

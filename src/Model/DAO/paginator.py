@@ -11,6 +11,7 @@ from Model.DAO.base_dao import BaseDAO
 from Model.Entities.categoria_consumible_entity import \
     CategoriaConsumibleEntity
 from Model.Entities.comercio_entity import ComercioEntity
+from Model.Entities.comprtamiento_fauna_entity import ComportamientoFaunaEntity
 from Model.Entities.consumible_entity import ConsumibleEntity
 from Model.Entities.control_iluminacion_entity import ControlIluminacionEntity
 from Model.Entities.formato_consumible_entity import FormatoConsumibleEntity
@@ -683,6 +684,16 @@ class Paginator:
                 for f in rows
             ]
 
+        elif self.procedure == "VISTA_COMPORTAMIENTOS_FAUNA":
+            data_list = [ComportamientoFaunaEntity(
+                id=f["ID"],
+                num=f["NUM"],
+                comportamiento=f["COMPORTAMIENTO"],
+                descripcion=f["DESCRIPCION"],
+            )
+                for f in rows
+            ]
+
         return data_list
 
     def get_page_number_by_num(self, num: int) -> int:
@@ -754,6 +765,8 @@ class Paginator:
             return SearchCmd.SEARCH_UNIDAD_CONTENIDO
         elif self.procedure == "VISTA_CONSUMIBLES":
             return SearchCmd.SEARCH_CONSUMIBLE
+        elif self.procedure == "VISTA_COMPORTAMIENTOS_FAUNA":
+            return SearchCmd.SEARCH_COMPORTAMIENTO_FAUNA
 
     def __str__(self):
         """ Muestra el objeto en forma de texto. """

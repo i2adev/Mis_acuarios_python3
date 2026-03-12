@@ -16,6 +16,8 @@ from Controllers.categoria_equipamiento_master_controller import \
 from Controllers.categoria_incidencia_master_controller import \
     CategoriaIncidenciaMasterController
 from Controllers.comercio_master_controller import ComercioMasterController
+from Controllers.comportamiento_fauna_master_controller import \
+    ComportamientoFaunaMasterController
 from Controllers.consumible_master_controller import ConsumibleMasterController
 from Controllers.control_iluminacion_master_controller import \
     ControlIluminacionMasterController
@@ -54,6 +56,7 @@ from Model.DAO.categoria_consumible_dao import CategoriaConsumibleDAO
 from Model.DAO.categoria_equipamiento_dao import CategoriaEquipamientoDAO
 from Model.DAO.categoria_incidencia_dao import CategoriaIncidenciaDAO
 from Model.DAO.comercio_dao import ComercioDAO
+from Model.DAO.comportamiento_fauna_dao import ComportamientoFaunaDAO
 from Model.DAO.consumible_dao import ConsumibleDAO
 from Model.DAO.control_iluminacion_dao import ControlIluminacionDAO
 from Model.DAO.equipamiento_dao import EquipamientoDAO
@@ -80,6 +83,7 @@ from Model.Entities.categoria_equipamiento_entity import \
 from Model.Entities.categoria_incidencia_entity import \
     CategoriaIncidenciaEntity
 from Model.Entities.comercio_entity import ComercioEntity
+from Model.Entities.comprtamiento_fauna_entity import ComportamientoFaunaEntity
 from Model.Entities.consumible_entity import ConsumibleEntity
 from Model.Entities.control_iluminacion_entity import ControlIluminacionEntity
 from Model.Entities.equipamiento_entity import EquipamientoEntity
@@ -105,6 +109,7 @@ from Views.Masters.categoria_consumible_view import CategoriaConsumibleView
 from Views.Masters.categoria_equipamiento_view import CategoriaEquipamientoView
 from Views.Masters.categoria_incidencia_view import CategoriaIncidenciaView
 from Views.Masters.comercio_view import ComercioView
+from Views.Masters.comportamiento_fauna_view import ComportamientoFaunaView
 from Views.Masters.consumible_view import ConsumibleView
 from Views.Masters.control_iluminacion_view import ControlIluminacionView
 from Views.Masters.equipamiento_view import EquipamientoView
@@ -239,6 +244,9 @@ class MainViewController(BaseController):
         self._view.button_maestro_consumible.clicked.connect(
             self.consumible_click
         )
+        self._view.button_maestro_comportamiento.clicked.connect(
+            self.comportamiento_click()
+        )
 
     def reportes_click(self):
         """ Cuando se pulsa el control de reportes. """
@@ -255,6 +263,16 @@ class MainViewController(BaseController):
         mod = ConsumibleEntity()
 
         ctrl = ConsumibleMasterController(view, dao, mod)
+        ctrl.show()
+
+    def comportamiento_click(self):
+        """ Cuando se pulsa el botón de comportamientos de fauna. """
+
+        view = ComportamientoFaunaView("MAESTRO DE COMPORTAMIENTOS")
+        dao = ComportamientoFaunaDAO()
+        mod = ComportamientoFaunaEntity()
+
+        ctrl = ComportamientoFaunaMasterController(view, dao, mod)
         ctrl.show()
 
     def iluminacion_click(self):
