@@ -14,6 +14,7 @@ from Model.Entities.comercio_entity import ComercioEntity
 from Model.Entities.comprtamiento_fauna_entity import ComportamientoFaunaEntity
 from Model.Entities.consumible_entity import ConsumibleEntity
 from Model.Entities.control_iluminacion_entity import ControlIluminacionEntity
+from Model.Entities.dieta_fauna_entity import DietaFaunaEntity
 from Model.Entities.formato_consumible_entity import FormatoConsumibleEntity
 from Model.Entities.iluminacion_entity import IluminacionEntity
 from Model.Entities.tipo_iluminacion_entity import TipoIluminacionEntity
@@ -398,6 +399,9 @@ class Paginator:
         :param rows: Lista a mapear
         """
 
+        # Creamos la lista a devolver
+        data_list = []
+
         # Configuramos la lista total
         if self.procedure == "VISTA_TIPOS_FILTRO":
             data_list = [TipoFiltroEntity(
@@ -683,12 +687,21 @@ class Paginator:
             )
                 for f in rows
             ]
-
         elif self.procedure == "VISTA_COMPORTAMIENTOS_FAUNA":
             data_list = [ComportamientoFaunaEntity(
                 id=f["ID"],
                 num=f["NUM"],
                 comportamiento=f["COMPORTAMIENTO"],
+                descripcion=f["DESCRIPCION"],
+            )
+                for f in rows
+            ]
+
+        elif self.procedure == "VISTA_DIETAS_FAUNA":
+            data_list = [DietaFaunaEntity(
+                id=f["ID"],
+                num=f["NUM"],
+                dieta=f["DIETA"],
                 descripcion=f["DESCRIPCION"],
             )
                 for f in rows
@@ -767,6 +780,8 @@ class Paginator:
             return SearchCmd.SEARCH_CONSUMIBLE
         elif self.procedure == "VISTA_COMPORTAMIENTOS_FAUNA":
             return SearchCmd.SEARCH_COMPORTAMIENTO_FAUNA
+        elif self.procedure == "VISTA_DIETAS_FAUNA":
+            return SearchCmd.SEARCH_DIETA_FAUNA
 
     def __str__(self):
         """ Muestra el objeto en forma de texto. """

@@ -21,6 +21,8 @@ from Controllers.comportamiento_fauna_master_controller import \
 from Controllers.consumible_master_controller import ConsumibleMasterController
 from Controllers.control_iluminacion_master_controller import \
     ControlIluminacionMasterController
+from Controllers.dieta_fauna_master_controller import \
+    DietaFaunaMasterController
 from Controllers.equipamiento_master_controller import \
     EquipamientoMasterController
 from Controllers.estado_proyecto_master_controller import \
@@ -59,6 +61,7 @@ from Model.DAO.comercio_dao import ComercioDAO
 from Model.DAO.comportamiento_fauna_dao import ComportamientoFaunaDAO
 from Model.DAO.consumible_dao import ConsumibleDAO
 from Model.DAO.control_iluminacion_dao import ControlIluminacionDAO
+from Model.DAO.dieta_fauna_dao import DietaFaunaDAO
 from Model.DAO.equipamiento_dao import EquipamientoDAO
 from Model.DAO.estado_proyecto_dao import EstadoProyectoDAO
 from Model.DAO.filtro_dao import FiltroDAO
@@ -86,6 +89,7 @@ from Model.Entities.comercio_entity import ComercioEntity
 from Model.Entities.comprtamiento_fauna_entity import ComportamientoFaunaEntity
 from Model.Entities.consumible_entity import ConsumibleEntity
 from Model.Entities.control_iluminacion_entity import ControlIluminacionEntity
+from Model.Entities.dieta_fauna_entity import DietaFaunaEntity
 from Model.Entities.equipamiento_entity import EquipamientoEntity
 from Model.Entities.estado_proyecto_entity import EstadoProyectoEntity
 from Model.Entities.filtro_entity import FiltroEntity
@@ -112,6 +116,7 @@ from Views.Masters.comercio_view import ComercioView
 from Views.Masters.comportamiento_fauna_view import ComportamientoFaunaView
 from Views.Masters.consumible_view import ConsumibleView
 from Views.Masters.control_iluminacion_view import ControlIluminacionView
+from Views.Masters.dieta_fauna_view import DietaFaunaView
 from Views.Masters.equipamiento_view import EquipamientoView
 from Views.Masters.estado_proyecto_view import EstadoProyectoView
 from Views.Masters.filtro_view import FiltroView
@@ -245,7 +250,10 @@ class MainViewController(BaseController):
             self.consumible_click
         )
         self._view.button_maestro_comportamiento.clicked.connect(
-            self.comportamiento_click()
+            self.comportamiento_click
+        )
+        self._view.button_maestro_dieta.clicked.connect(
+            self.dieta_click
         )
 
     def reportes_click(self):
@@ -263,6 +271,16 @@ class MainViewController(BaseController):
         mod = ConsumibleEntity()
 
         ctrl = ConsumibleMasterController(view, dao, mod)
+        ctrl.show()
+
+    def dieta_click(self):
+        """ Cuando se pulsa el botón de dieta. """
+
+        view = DietaFaunaView("MAESTRO DE DIETAS")
+        dao = DietaFaunaDAO()
+        mod = DietaFaunaEntity()
+
+        ctrl = DietaFaunaMasterController(view, dao, mod)
         ctrl.show()
 
     def comportamiento_click(self):

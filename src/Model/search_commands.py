@@ -599,3 +599,19 @@ class SearchCmd:
     )
     WHERE     FIELD LIKE '%' || :pattern || '%';
     """
+    SEARCH_DIETA_FAUNA = """
+    SELECT ID, NUM, DIETA, DESCRIPCION
+    FROM
+    (
+        SELECT ID_DIETA AS ID,
+               ROW_NUMBER() OVER(ORDER BY DIETA) AS NUM,
+               DIETA AS DIETA,
+               DESCRIPCION AS DESCRIPCION,
+               UPPER(
+                   IFNULL(DIETA, '') ||
+                   IFNULL(DESCRIPCION, '')
+               ) AS FIELD
+        FROM   DIETAS_FAUNA
+    )
+    WHERE     FIELD LIKE '%' || :pattern || '%';
+    """

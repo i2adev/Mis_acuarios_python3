@@ -103,6 +103,7 @@ class MainView(QWidget):
         self.maestro_layout.addWidget(self.button_maestro_facturas)
         self.maestro_layout.addWidget(self.button_maestro_fauna)
         self.maestro_layout.addWidget(self.button_maestro_comportamiento)
+        self.maestro_layout.addWidget(self.button_maestro_dieta)
         self.maestro_layout.addWidget(self.button_maestro_filtro)
         self.maestro_layout.addWidget(self.button_maestro_tipo_filtro)
         self.maestro_layout.addWidget(self.button_maestro_iluminacion)
@@ -334,6 +335,29 @@ class MainView(QWidget):
         )
         self.button_maestro_comportamiento.setFlat(True)
         self.button_maestro_comportamiento.setCursor(
+            QCursor(Qt.CursorShape.PointingHandCursor)
+        )
+
+        self.button_maestro_dieta = QPushButton(
+            " > DIETA"
+        )
+        self.button_maestro_dieta.setStyleSheet(
+            """
+            QPushButton {
+                background-color: transparent;
+                text-align: left;
+                margin-bottom: 0;
+                margin-left: 20;
+                font-family: 'Roboto'; 
+                font-size: 14px;
+            }
+            """
+        )
+        self.button_maestro_dieta.setObjectName(
+            "button_maestro_dieta"
+        )
+        self.button_maestro_dieta.setFlat(True)
+        self.button_maestro_dieta.setCursor(
             QCursor(Qt.CursorShape.PointingHandCursor)
         )
 
