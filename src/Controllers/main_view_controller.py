@@ -62,6 +62,7 @@ from Model.DAO.comportamiento_fauna_dao import ComportamientoFaunaDAO
 from Model.DAO.consumible_dao import ConsumibleDAO
 from Model.DAO.control_iluminacion_dao import ControlIluminacionDAO
 from Model.DAO.dieta_fauna_dao import DietaFaunaDAO
+from Model.DAO.dificultad_plantas_dao import DificultadPlantaDAO
 from Model.DAO.equipamiento_dao import EquipamientoDAO
 from Model.DAO.estado_proyecto_dao import EstadoProyectoDAO
 from Model.DAO.filtro_dao import FiltroDAO
@@ -90,6 +91,7 @@ from Model.Entities.comprtamiento_fauna_entity import ComportamientoFaunaEntity
 from Model.Entities.consumible_entity import ConsumibleEntity
 from Model.Entities.control_iluminacion_entity import ControlIluminacionEntity
 from Model.Entities.dieta_fauna_entity import DietaFaunaEntity
+from Model.Entities.dificultad_planta_entity import DificultadPlantaEntity
 from Model.Entities.equipamiento_entity import EquipamientoEntity
 from Model.Entities.estado_proyecto_entity import EstadoProyectoEntity
 from Model.Entities.filtro_entity import FiltroEntity
@@ -117,6 +119,7 @@ from Views.Masters.comportamiento_fauna_view import ComportamientoFaunaView
 from Views.Masters.consumible_view import ConsumibleView
 from Views.Masters.control_iluminacion_view import ControlIluminacionView
 from Views.Masters.dieta_fauna_view import DietaFaunaView
+from Views.Masters.dificultad_planta_view import DificultadPlantaView
 from Views.Masters.equipamiento_view import EquipamientoView
 from Views.Masters.estado_proyecto_view import EstadoProyectoView
 from Views.Masters.filtro_view import FiltroView
@@ -256,6 +259,10 @@ class MainViewController(BaseController):
             self.dieta_click
         )
 
+        self._view.button_maestro_dificultad_planta.clicked.connect(
+            self.dificultad_click
+        )
+
     def reportes_click(self):
         """ Cuando se pulsa el control de reportes. """
         view = MainReportsView("REPORTES")
@@ -269,6 +276,16 @@ class MainViewController(BaseController):
         view = ConsumibleView("MAESTRO DE CONSUMIBLES")
         dao = ConsumibleDAO()
         mod = ConsumibleEntity()
+
+        ctrl = ConsumibleMasterController(view, dao, mod)
+        ctrl.show()
+
+    def dificultad_click(self):
+        """ Cuando se pulsa el botón de dificultad de planta. """
+
+        view = DificultadPlantaView("MAESTRO DE DIFICULTAD DE PLANTAS")
+        dao = DificultadPlantaDAO()
+        mod = DificultadPlantaEntity()
 
         ctrl = ConsumibleMasterController(view, dao, mod)
         ctrl.show()

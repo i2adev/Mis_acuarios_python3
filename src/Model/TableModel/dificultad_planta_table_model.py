@@ -1,31 +1,35 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
-Fecha:      13/03/2026
+Fecha:      14/03/2026
 Comentarios:
-    Módulo que contiene el modelo de visualización de la tabla de DIETAS DE 
-    FAUNA. Este módulo se encarga de dar formato a los datos de la tabla.
+    Módulo que contiene el modelo de visualización de la tabla de 
+    DIFICULTADES DE PLANTA. Este módulo se encarga de dar formato a los datos 
+    de la tabla.
 """
 
 from PyQt6.QtCore import QAbstractTableModel, Qt, QModelIndex
 
-from Model.Entities.dieta_fauna_entity import DietaFaunaEntity
+from Model.Entities.dificultad_planta_entity import DificultadPlantaEntity
 
 
-class DietaFaunaTableModel(QAbstractTableModel):
+class DificultadPlantaTableModel(QAbstractTableModel):
     """
-    Clase que controla la visualización de la lista de comportamientos de
-    fauna.
+    Clase que controla la visualización de la lista de dificultades de 
+    mantenimiento de plantas.
     """
 
-    def __init__(self, data: list[DietaFaunaEntity]):
+    def __init__(self, data: list[DificultadPlantaEntity]):
         """ Constructor de la clase. """
 
         super().__init__()
         self.data = data
-        self._headers = ["ID", "#", "DIETA", "DESCRIPCIÓN"]
+        self._headers = ["ID", "#", "NIVEL", "DIFICULTAD", "DESCRIPCIÓN"]
 
     def rowCount(self, parent=QModelIndex()):
-        """ Devuelve el número de filas de la lista de tipos de filtro. """
+        """
+        Devuelve el número de filas de la lista de dificultades de
+        plantas.
+        """
 
         return len(self.data)
 
@@ -53,8 +57,10 @@ class DietaFaunaTableModel(QAbstractTableModel):
         elif columna == 1:
             return entidad.num  # Número de la fila
         elif columna == 2:
-            return entidad.dieta  # Id de
+            return entidad.nivel
         elif columna == 3:
+            return entidad.dificultad
+        elif columna == 4:
             return entidad.descripcion
 
     def headerData(self, section, orientation,
@@ -68,22 +74,28 @@ class DietaFaunaTableModel(QAbstractTableModel):
         if role == Qt.ItemDataRole.ToolTipRole:
             tooltips = {
                 0: """
-                <h2>Identificador del comportamiento</h2>
+                <h2>Identificador de la dificultad</h2>
                 Este campo muestra el <b>ID</b> de la entidad 
-                dieta del animal.
+                dificultad de mantenimiento de la planta.
                 """,
                 1: """
-                <h2>Número correlativo del comportamiento</h2>
+                <h2>Número correlativo de la dificultad</h2>
                 Este campo muestra el <b>número correlativo</b> de la 
-                dieta del animal.
+                dificultad de mantenimiento de la planta.
                 """,
                 2: """
-                <h2>Dieta</h2>
-                Este campo muestra la <b>dieta del animal</b>.
+                <h2>Nivel</h2>
+                Este campo muestra el nivel de <b>dificultad de 
+                mantenimiento</b> de la planta.
                 """,
                 3: """
+                <h2>Dificultad de mantenimiento de la planta</h2>
+                Este campo muestra la <b>dificultad de mantenimiento</b> 
+                de las plantas.
+                """,
+                4: """
                 <h2>Descripción</h2>
-                Este campo muestra la <b>descripción</b> de la dieta.
+                Este campo muestra la <b>descripción</b> del comportamiento.
                 """,
             }
             return tooltips.get(section, "")

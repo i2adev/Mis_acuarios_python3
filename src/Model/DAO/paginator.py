@@ -15,6 +15,7 @@ from Model.Entities.comprtamiento_fauna_entity import ComportamientoFaunaEntity
 from Model.Entities.consumible_entity import ConsumibleEntity
 from Model.Entities.control_iluminacion_entity import ControlIluminacionEntity
 from Model.Entities.dieta_fauna_entity import DietaFaunaEntity
+from Model.Entities.dificultad_planta_entity import DificultadPlantaEntity
 from Model.Entities.formato_consumible_entity import FormatoConsumibleEntity
 from Model.Entities.iluminacion_entity import IluminacionEntity
 from Model.Entities.tipo_iluminacion_entity import TipoIluminacionEntity
@@ -696,12 +697,21 @@ class Paginator:
             )
                 for f in rows
             ]
-
         elif self.procedure == "VISTA_DIETAS_FAUNA":
             data_list = [DietaFaunaEntity(
                 id=f["ID"],
                 num=f["NUM"],
                 dieta=f["DIETA"],
+                descripcion=f["DESCRIPCION"],
+            )
+                for f in rows
+            ]
+        elif self.procedure == "VISTA_DIFICULTAD_PLANTAS":
+            data_list = [DificultadPlantaEntity(
+                id=f["ID"],
+                num=f["NUM"],
+                nivel=f["DIETA"],
+                dificultad=f["DIFICULTAD"],
                 descripcion=f["DESCRIPCION"],
             )
                 for f in rows
@@ -782,6 +792,8 @@ class Paginator:
             return SearchCmd.SEARCH_COMPORTAMIENTO_FAUNA
         elif self.procedure == "VISTA_DIETAS_FAUNA":
             return SearchCmd.SEARCH_DIETA_FAUNA
+        elif self.procedure == "VISTA_DIFICULTAD_PLANTAS":
+            return SearchCmd.SEARCH_DIFICULTAD_PLANTA
 
     def __str__(self):
         """ Muestra el objeto en forma de texto. """

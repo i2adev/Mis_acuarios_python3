@@ -1,39 +1,40 @@
 ﻿"""
 Autor:  Inigo Iturriagaetxebarria
-Fecha:  13/03/2026
+Fecha:  12/03/2026
 Comentarios:
-    Controlador del formulario maestro de dieta de fauna.
+    Controlador del formulario maestro de comportamiento de fauna.
 """
 from PyQt6.QtGui import QIcon, QAction
 from PyQt6.QtWidgets import QMessageBox, QTableView, QWidget, QComboBox
 
-from Controllers.dieta_fauna_controller import DietaFaunaController
-from Model.DAO.dieta_fauna_dao import DietaFaunaDAO
+from Controllers.dificultad_planta_controller import DificultadPlantaController
+from Model.DAO.dificultad_plantas_dao import DificultadPlantaDAO
 from Model.DAO.paginator import Paginator
-from Model.Entities.dieta_fauna_entity import DietaFaunaEntity
-from Model.TableModel.dieta_fauna_table_model import DietaFaunaTableModel
-from Views.Masters.dieta_fauna_view import DietaFaunaView
+from Model.Entities.dificultad_planta_entity import DificultadPlantaEntity
+from Model.TableModel.dificultad_planta_table_model import \
+    DificultadPlantaTableModel
+from Views.Masters.dificultad_planta_view import DificultadPlantaView
 from Views.table_menu_contextual import TableMenuContextual
 
 
-class DietaFaunaMasterController(DietaFaunaController):
-    """ Controlador del formulario maestro de comportamineto de fauna. """
+class DificultadPlantaMasterController(DificultadPlantaController):
+    """ Controlador del formulario maestro de dificultad de planta. """
 
-    def __init__(self, view: DietaFaunaView,
-                 dao: DietaFaunaDAO,
-                 mod: DietaFaunaEntity):
+    def __init__(self, view: DificultadPlantaView,
+                 dao: DificultadPlantaDAO,
+                 mod: DificultadPlantaEntity):
         """
         Constructor base
-        :param view: Formulario maestro de dieta de fauna
-        :param dao: DAO de dieta de fauna
-        :param mod: Modelo de dieta de fauna
+        :param view: Formulario maestro de dificultad de planta
+        :param dao: DAO de dificultad de planta
+        :param mod: Modelo de dificultad de planta
         """
 
         # Constructor base
         super().__init__(view, dao, mod)
 
         # Inicializamos el paginador
-        self._pag = Paginator("VISTA_DIETAS_FAUNA", 5)
+        self._pag = Paginator("VISTA_DIFICULTAD_PLANTAS", 5)
         self._pag.initialize_paginator()
         self._configure_status_bar(self._pag)
 
@@ -65,7 +66,7 @@ class DietaFaunaMasterController(DietaFaunaController):
         self._view.button_load.clicked.connect(self.button_load_click)
         self._view.button_delete.clicked.connect(self.delete_click)
         self._view.button_clean.clicked.connect(lambda: self._clean_view(
-            self._view.frame.edit_dieta
+            self._view.frame.edit_comportamiento
         ))
         self._view.button_next.clicked.connect(self._next_page)
         self._view.button_prev.clicked.connect(self._previous_page)
@@ -105,7 +106,7 @@ class DietaFaunaMasterController(DietaFaunaController):
             # Cargamos la tabla
             self._fill_tableview(self._view.data_table, self._pag._total_data)
             self._configure_table(self._view.data_table)
-            self._clean_view(self._view.frame.edit_dieta)
+            self._clean_view(self._view.frame.edit_comportamiento)
             self._view.label_total_pages.setText(str(self._pag.total_pages))
 
             # Configuramos la tabla
@@ -140,7 +141,7 @@ class DietaFaunaMasterController(DietaFaunaController):
         # Cargamos la tabla
         self._fill_tableview(self._view.data_table, self._pag._total_data)
         self._configure_table(self._view.data_table)
-        self._clean_view(self._view.frame.edit_dieta)
+        self._clean_view(self._view.frame.edit_comportamiento)
 
         self._view.button_filter.setIcon(QIcon(":/Images/filtered.png"))
 
@@ -232,7 +233,7 @@ class DietaFaunaMasterController(DietaFaunaController):
             return
 
         # Limpiamos el formulario
-        self._clean_view(self._view.frame.edit_dieta)
+        self._clean_view(self._view.frame.edit_comportamiento)
 
         # Configurar paginator
         self._pag.initialize_paginator()
@@ -267,7 +268,7 @@ class DietaFaunaMasterController(DietaFaunaController):
             return
 
         # Limpiamos el formulario
-        self._clean_view(self._view.frame.edit_dieta)
+        self._clean_view(self._view.frame.edit_comportamiento)
 
         # Obtenemos los datos de paginación actuales
         paginator_pages = self._pag.total_pages
@@ -302,7 +303,7 @@ class DietaFaunaMasterController(DietaFaunaController):
             return
 
         # Limpiamos el formulario
-        self._clean_view(self._view.frame.edit_dieta)
+        self._clean_view(self._view.frame.edit_comportamiento)
 
         # Configuramos el paginador
         self._pag.initialize_paginator()
@@ -368,10 +369,10 @@ class DietaFaunaMasterController(DietaFaunaController):
             pass
 
     def _fill_tableview(self, table: QTableView,
-                        data: list[DietaFaunaEntity]):
+                        data: list[DificultadPlantaEntity]):
         """ Carga los datos en la tabla. """
 
-        tv_model = DietaFaunaTableModel(data)
+        tv_model = DificultadPlantaTableModel(data)
         table.setModel(tv_model)
         table.resizeColumnsToContents()
 

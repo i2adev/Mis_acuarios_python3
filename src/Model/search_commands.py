@@ -615,3 +615,22 @@ class SearchCmd:
     )
     WHERE     FIELD LIKE '%' || :pattern || '%';
     """
+
+    SEARCH_DIFICULTAD_PLANTA = """
+    SELECT ID, NUM, NIVEL, DIFICULTAD, DESCRIPCION
+    FROM
+    (
+        SELECT  ID_DIFICULTAD AS ID,
+                ROW_NUMBER() OVER(ORDER BY NIVEL) AS NUM,
+                NIVEL AS NIVEL,
+                DIFICULTAD_PLANTA AS DIFICULTAD,
+                DESCRIPCION AS DESCRIPCION,
+                UPPER(
+                    IFNULL(NIVEL, '') ||
+                    IFNULL(DIFICULTAD_PLANTA, '') ||
+                    IFNULL(DESCRIPCION, '')
+                ) AS FIELD
+    FROM    DIFICULTADES_PLANTAS
+    )
+    WHERE FIELD LIKE '%' || :pattern || '%';
+    """

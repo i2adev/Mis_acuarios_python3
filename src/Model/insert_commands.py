@@ -560,3 +560,12 @@ class InsertCmd:
     ('Acuarios Tropical', 'Calle Aragón 215', '50010', 'Zaragoza', 'Zaragoza', 10058,
      'Peces tropicales, plantas y material técnico');
     """
+
+    INSERT_DIFICULTAD_PLANTAS = """
+    INSERT INTO DIFICULTADES_PLANTAS (NIVEL, DIFICULTAD_PLANTA, DESCRIPCION) VALUES
+    (1, 'Muy fácil', 'Plantas extremadamente resistentes que toleran baja iluminación y no requieren CO2 ni fertilización estricta.'),
+    (2, 'Fácil', 'Plantas poco exigentes que crecen bien con iluminación moderada y fertilización básica.'),
+    (3, 'Media', 'Plantas con requerimientos moderados de luz y nutrientes; el CO2 mejora su crecimiento.'),
+    (4, 'Difícil', 'Plantas exigentes que requieren iluminación intensa, fertilización controlada y normalmente CO2.'),
+    (5, 'Muy difícil', 'Plantas muy sensibles destinadas a acuarios avanzados con control preciso de luz, CO2 y nutrientes.');
+    """
