@@ -23,6 +23,8 @@ from Controllers.control_iluminacion_master_controller import \
     ControlIluminacionMasterController
 from Controllers.dieta_fauna_master_controller import \
     DietaFaunaMasterController
+from Controllers.dificultad_planta_master_controller import \
+    DificultadPlantaMasterController
 from Controllers.equipamiento_master_controller import \
     EquipamientoMasterController
 from Controllers.estado_proyecto_master_controller import \
@@ -237,28 +239,35 @@ class MainViewController(BaseController):
         self._view.button_menu_reportes.clicked.connect(
             self.reportes_click
         )
+
         self._view.button_maestro_iluminacion.clicked.connect(
             self.iluminacion_click
         )
+
         self._view.button_maestro_cat_consumible.clicked.connect(
             self.categorias_cosumible_click
         )
+
         self._view.button_maestro_formato_consumible.clicked.connect(
             self.formatos_cosumible_click
         )
+
         self._view.button_maestro_unidad_contenido.clicked.connect(
             self.unidad_contenido_click
         )
+
         self._view.button_maestro_consumible.clicked.connect(
             self.consumible_click
         )
+
         self._view.button_maestro_comportamiento.clicked.connect(
             self.comportamiento_click
         )
+
         self._view.button_maestro_dieta.clicked.connect(
             self.dieta_click
         )
-
+        
         self._view.button_maestro_dificultad_planta.clicked.connect(
             self.dificultad_click
         )
@@ -287,7 +296,7 @@ class MainViewController(BaseController):
         dao = DificultadPlantaDAO()
         mod = DificultadPlantaEntity()
 
-        ctrl = ConsumibleMasterController(view, dao, mod)
+        ctrl = DificultadPlantaMasterController(view, dao, mod)
         ctrl.show()
 
     def dieta_click(self):

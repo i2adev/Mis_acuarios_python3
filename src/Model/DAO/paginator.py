@@ -710,7 +710,7 @@ class Paginator:
             data_list = [DificultadPlantaEntity(
                 id=f["ID"],
                 num=f["NUM"],
-                nivel=f["DIETA"],
+                nivel=f["NIVEL"],
                 dificultad=f["DIFICULTAD"],
                 descripcion=f["DESCRIPCION"],
             )

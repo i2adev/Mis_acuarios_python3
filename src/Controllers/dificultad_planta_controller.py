@@ -101,7 +101,7 @@ class DificultadPlantaController(BaseController):
             return Result.failure(res.error_msg)
 
         # Limpiamos el formulario
-        self._clean_view(self._view.frame.edit_comportamiento)
+        self._clean_view(self._view.frame.edit_nivel)
 
         return Result.success(ent.id)
 
@@ -149,7 +149,7 @@ class DificultadPlantaController(BaseController):
             return Result.failure(res.error_msg)
 
         # Limpiamos el formulario
-        self._clean_view(self._view.frame.edit_comportamiento)
+        self._clean_view(self._view.frame.edit_nivel)
         return Result.success(ide)
 
     # FIN DE CRUD --------------------------------------------------
