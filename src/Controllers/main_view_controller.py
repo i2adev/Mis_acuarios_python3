@@ -39,6 +39,7 @@ from Controllers.marca_comercial_master_controller import \
     MarcaComercialMasterController
 from Controllers.material_urna_master_controler import \
     MaterialUrnaMasterController
+from Controllers.nivel_nado_master_controller import NivelNadoMasterController
 from Controllers.proyecto_master_controller import ProyectoMasterController
 from Controllers.subcategoria_acuario_master_controller import \
     SubcategoriaAcuarioMasterController
@@ -72,6 +73,7 @@ from Model.DAO.formato_consumible_dao import FormatoConsumibleDAO
 from Model.DAO.iluminacion_dao import IluminacionDAO
 from Model.DAO.marca_comercial_dao import MarcaComercialDAO
 from Model.DAO.material_urna_dao import MaterialUrnaDAO
+from Model.DAO.niveles_nado_dao import NivelNadoDAO
 from Model.DAO.proyecto_dao import ProyectoDAO
 from Model.DAO.subcategoria_acuario_dao import SubcategoriaAcuarioDAO
 from Model.DAO.subcategoria_incidencia_dao import SubcategoriaIncidenciaDAO
@@ -101,6 +103,7 @@ from Model.Entities.formato_consumible_entity import FormatoConsumibleEntity
 from Model.Entities.iluminacion_entity import IluminacionEntity
 from Model.Entities.marca_comercial_entity import MarcaComercialEntity
 from Model.Entities.material_urna_entity import MaterialUrnaEntity
+from Model.Entities.nivel_nado_entity import NivelNadoEntity
 from Model.Entities.proyecto_entity import ProyectoEntity
 from Model.Entities.subcategoria_acuario_entity import \
     SubcategoriaAcuarioEntity
@@ -129,6 +132,7 @@ from Views.Masters.formato_consumible_view import FormatoConsumibleView
 from Views.Masters.iluminacion_view import IluminacionView
 from Views.Masters.marca_comercial_view import MarcaComercialView
 from Views.Masters.material_urna_view import MaterialUrnaView
+from Views.Masters.nivel_nado_view import NivelNadoView
 from Views.Masters.proyecto_view import ProyectoView
 from Views.Masters.subcategoria_acuario_view import SubcategoriaAcuarioView
 from Views.Masters.subcategoria_incidencia_view import \
@@ -267,9 +271,13 @@ class MainViewController(BaseController):
         self._view.button_maestro_dieta.clicked.connect(
             self.dieta_click
         )
-        
+
         self._view.button_maestro_dificultad_planta.clicked.connect(
             self.dificultad_click
+        )
+
+        self._view.button_maestro_nivel_nado.clicked.connect(
+            self.nivel_nado_click
         )
 
     def reportes_click(self):
@@ -287,6 +295,16 @@ class MainViewController(BaseController):
         mod = ConsumibleEntity()
 
         ctrl = ConsumibleMasterController(view, dao, mod)
+        ctrl.show()
+
+    def nivel_nado_click(self):
+        """ Cuando se pulsa el botón de nivel de nado. """
+
+        view = NivelNadoView("MAESTRO DE NIVELES DE NADO")
+        dao = NivelNadoDAO()
+        mod = NivelNadoEntity()
+
+        ctrl = NivelNadoMasterController(view, dao, mod)
         ctrl.show()
 
     def dificultad_click(self):
