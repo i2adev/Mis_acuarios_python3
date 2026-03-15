@@ -162,6 +162,7 @@ class BaseDAO(ABC):
                 cursor.execute(InsertCmd.INSERT_FORMATO_CONSUMIBLE)
                 cursor.execute(InsertCmd.INSERTAR_UNIDAD_CONTENIDO)
                 cursor.execute(InsertCmd.INSERT_DIFICULTAD_PLANTAS)
+                cursor.execute(InsertCmd.INSERT_PERIODICIDADES)
                 db.conn.commit()
                 return Result.success(0)
 

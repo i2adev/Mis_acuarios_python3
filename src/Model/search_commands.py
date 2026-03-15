@@ -634,3 +634,20 @@ class SearchCmd:
     )
     WHERE FIELD LIKE '%' || :pattern || '%';
     """
+
+    SEARCH_NIVEL_NADO = """
+    SELECT ID, NUM, NIVEL, DESCRIPCION
+    FROM
+    (
+    SELECT ID_NIVEL_NADO AS ID,
+           ROW_NUMBER() OVER(ORDER BY ID_NIVEL_NADO) AS NUM,
+           NIVEL_NADO AS NIVEL,
+           DESCRIPCION AS DESCRIPCION,
+           UPPER(
+               IFNULL(NIVEL_NADO, '') ||
+               IFNULL(DESCRIPCION, '')
+           ) AS FIELD
+    FROM   NIVELES_NADO
+    )
+    WHERE FIELD LIKE '%' || :pattern || '%';
+    """

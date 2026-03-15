@@ -561,6 +561,7 @@ class InsertCmd:
      'Peces tropicales, plantas y material técnico');
     """
 
+    # Inserta dificultad de plantas
     INSERT_DIFICULTAD_PLANTAS = """
     INSERT INTO DIFICULTADES_PLANTAS (NIVEL, DIFICULTAD_PLANTA, DESCRIPCION) VALUES
     (1, 'Muy fácil', 'Plantas extremadamente resistentes que toleran baja iluminación y no requieren CO2 ni fertilización estricta.'),
@@ -568,4 +569,15 @@ class InsertCmd:
     (3, 'Media', 'Plantas con requerimientos moderados de luz y nutrientes; el CO2 mejora su crecimiento.'),
     (4, 'Difícil', 'Plantas exigentes que requieren iluminación intensa, fertilización controlada y normalmente CO2.'),
     (5, 'Muy difícil', 'Plantas muy sensibles destinadas a acuarios avanzados con control preciso de luz, CO2 y nutrientes.');
+    """
+
+    # Inserta periodicidades
+    INSERT_PERIODICIDADES = """
+    INSERT INTO PERIODICIDADES (PERIODICIDAD) VALUES
+    ('hora(s)'),
+    ('veces al día'),
+    ('día(s)'),
+    ('semana(s)'),
+    ('mes(es)'),
+    ('año(s)');
     """
