@@ -651,3 +651,20 @@ class SearchCmd:
     )
     WHERE FIELD LIKE '%' || :pattern || '%';
     """
+
+    SEARCH_GRUPO_TAXONOMICO = """
+    SELECT ID, NUM, GRUPO, DESCRIPCION
+    FROM
+    (
+    SELECT ID_GRUPO_TAXONOMICO AS ID,
+           ROW_NUMBER() OVER(ORDER BY GRUPO_TAXONOMICO) AS NUM,
+           GRUPO_TAXONOMICO AS GRUPO,
+           DESCRIPCION AS DESCRIPCION,
+           UPPER(
+               IFNULL(GRUPO_TAXONOMICO, '') ||
+               IFNULL(DESCRIPCION, '')
+           ) AS FIELD
+    FROM   GRUPOS_TAXONOMICOS
+    )
+    WHERE FIELD LIKE '%' || :pattern || '%';
+    """

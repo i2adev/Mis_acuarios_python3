@@ -32,6 +32,8 @@ from Controllers.estado_proyecto_master_controller import \
 from Controllers.filtro_master_controller import FiltroMasterController
 from Controllers.formato_consumible_master_controller import \
     FormatoConsumibleMasterController
+from Controllers.grupo_taxonomico_master_controller import \
+    GrupoTaxonomicoMasterController
 from Controllers.iluminacion_master_controller import \
     IluminacionMasterController
 from Controllers.main_reports_controller import MainReportsController
@@ -70,6 +72,7 @@ from Model.DAO.equipamiento_dao import EquipamientoDAO
 from Model.DAO.estado_proyecto_dao import EstadoProyectoDAO
 from Model.DAO.filtro_dao import FiltroDAO
 from Model.DAO.formato_consumible_dao import FormatoConsumibleDAO
+from Model.DAO.grupo_taxonomico_dao import GrupoTaxonomicoDAO
 from Model.DAO.iluminacion_dao import IluminacionDAO
 from Model.DAO.marca_comercial_dao import MarcaComercialDAO
 from Model.DAO.material_urna_dao import MaterialUrnaDAO
@@ -100,6 +103,7 @@ from Model.Entities.equipamiento_entity import EquipamientoEntity
 from Model.Entities.estado_proyecto_entity import EstadoProyectoEntity
 from Model.Entities.filtro_entity import FiltroEntity
 from Model.Entities.formato_consumible_entity import FormatoConsumibleEntity
+from Model.Entities.grupo_taxonomico_entity import GrupoTaxonomicoEntity
 from Model.Entities.iluminacion_entity import IluminacionEntity
 from Model.Entities.marca_comercial_entity import MarcaComercialEntity
 from Model.Entities.material_urna_entity import MaterialUrnaEntity
@@ -129,6 +133,7 @@ from Views.Masters.equipamiento_view import EquipamientoView
 from Views.Masters.estado_proyecto_view import EstadoProyectoView
 from Views.Masters.filtro_view import FiltroView
 from Views.Masters.formato_consumible_view import FormatoConsumibleView
+from Views.Masters.grupo_taxonomico_view import GrupoTaxonomicoView
 from Views.Masters.iluminacion_view import IluminacionView
 from Views.Masters.marca_comercial_view import MarcaComercialView
 from Views.Masters.material_urna_view import MaterialUrnaView
@@ -279,6 +284,9 @@ class MainViewController(BaseController):
         self._view.button_maestro_nivel_nado.clicked.connect(
             self.nivel_nado_click
         )
+        self._view.button_maestro_grupo_taxonomico.clicked.connect(
+            self.grupo_taxonomico_click
+        )
 
     def reportes_click(self):
         """ Cuando se pulsa el control de reportes. """
@@ -295,6 +303,16 @@ class MainViewController(BaseController):
         mod = ConsumibleEntity()
 
         ctrl = ConsumibleMasterController(view, dao, mod)
+        ctrl.show()
+
+    def grupo_taxonomico_click(self):
+        """ Cuando se pulsa el botón de grupo taxonómico. """
+
+        view = GrupoTaxonomicoView("MAESTRO DE GRUPOS TAXONÓMICOS")
+        dao = GrupoTaxonomicoDAO()
+        mod = GrupoTaxonomicoEntity()
+
+        ctrl = GrupoTaxonomicoMasterController(view, dao, mod)
         ctrl.show()
 
     def nivel_nado_click(self):

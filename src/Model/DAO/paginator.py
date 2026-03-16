@@ -17,6 +17,7 @@ from Model.Entities.control_iluminacion_entity import ControlIluminacionEntity
 from Model.Entities.dieta_fauna_entity import DietaFaunaEntity
 from Model.Entities.dificultad_planta_entity import DificultadPlantaEntity
 from Model.Entities.formato_consumible_entity import FormatoConsumibleEntity
+from Model.Entities.grupo_taxonomico_entity import GrupoTaxonomicoEntity
 from Model.Entities.iluminacion_entity import IluminacionEntity
 from Model.Entities.nivel_nado_entity import NivelNadoEntity
 from Model.Entities.tipo_iluminacion_entity import TipoIluminacionEntity
@@ -726,6 +727,15 @@ class Paginator:
             )
                 for f in rows
             ]
+        elif self.procedure == "VISTA_GRUPOS_TAXONOMICOS":
+            data_list = [GrupoTaxonomicoEntity(
+                id=f["ID"],
+                num=f["NUM"],
+                grupo_taxo=f["GRUPO"],
+                descripcion=f["DESCRIPCION"],
+            )
+                for f in rows
+            ]
 
         return data_list
 
@@ -806,6 +816,8 @@ class Paginator:
             return SearchCmd.SEARCH_DIFICULTAD_PLANTA
         elif self.procedure == "VISTA_NIVELES_NADO":
             return SearchCmd.SEARCH_NIVEL_NADO
+        elif self.procedure == "VISTA_GRUPOS_TAXONOMICOS":
+            return SearchCmd.SEARCH_GRUPO_TAXONOMICO
 
     def __str__(self):
         """ Muestra el objeto en forma de texto. """

@@ -20,11 +20,18 @@ from Model.DAO.base_dao import BaseDAO
 from Model.DAO.usuario_dao import UsuarioDAO
 from Model.Entities.usuario_entity import UsuarioEntity
 from Views.Dialogs.login_dialog import LoginDialog
-
+import os
 import Resources.resources_rc
+import globals
 
+"""
+# Declaramos las variables globales
+BASE_PATH = Path(__file__).resolve().parent
+BASE_RESOURCES = BASE_PATH / "Resources"
+PATH_IMGES = BASE_RESOURCES / "Images" 
+"""
 # Versión del programa
-__version__ = "0.31.1"
+__version__ = "0.32.0"
 
 
 def excepthook(exc_type, exc_value, exc_traceback):
@@ -45,6 +52,9 @@ sys.excepthook = excepthook
 def main():
     """ Punto de entrada a la aplicación """
 
+    # ELimina la carácteristica de de DirectDraw en windows
+    os.environ["QT_QPA_PLATFORM"] = "windows:nodirectwrite"
+
     app = QApplication(sys.argv)
 
     def resource_path(relative_path):
@@ -59,10 +69,7 @@ def main():
         app.setStyleSheet(style)
 
     # Carga las fuentes desde el recurso
-    QFontDatabase.addApplicationFont(":/Fonts/Roboto-Bold.ttf")
-    QFontDatabase.addApplicationFont(":/Fonts/Roboto-Medium.ttf")
-    QFontDatabase.addApplicationFont(":/Fonts/Roboto-Regular.ttf")
-    QFontDatabase.addApplicationFont(":/Fonts/Roboto-Medium.ttf")
+    _ = load_directory_fonts(globals.PATH_FONTS)
 
     # # Limpia la base de datos
     # msg = BaseDAO.clean_database()
@@ -128,6 +135,33 @@ def main():
         # Cancelado → salir de la aplicación
         sys.exit(0)
 
+
+def load_directory_fonts(dir_path: str) -> list:
+    directory = Path(dir_path)
+    loaded_fonts = []
+
+    # 1. Verificar si la carpeta existe para evitar errores previos
+    if not directory.exists():
+        print(f"⚠️ La carpeta no existe: {dir_path}")
+        return []
+
+    for file in directory.glob("*.[to]tf"):
+        # 2. Usar resolve() para enviar la ruta absoluta completa y evitar fallos de lectura
+        absolute_path = str(file.resolve())
+        font_id = QFontDatabase.addApplicationFont(absolute_path)
+
+        if font_id != -1:
+            families = QFontDatabase.applicationFontFamilies(font_id)
+            if families:
+                family = families[0]
+                loaded_fonts.append(family)
+                print(f"✅ Fuente cargada: {family}")
+        else:
+            # Si el error persiste aquí, el archivo .ttf está corrupto o bloqueado
+            print(f"❌ Error al cargar: {file.name}")
+
+    # 3. EL RETURN DEBE IR FUERA DEL BUCLE FOR
+    return loaded_fonts
 
 if __name__ == "__main__":
     main()

@@ -105,6 +105,7 @@ class MainView(QWidget):
         self.maestro_layout.addWidget(self.button_maestro_comportamiento)
         self.maestro_layout.addWidget(self.button_maestro_dieta)
         self.maestro_layout.addWidget(self.button_maestro_nivel_nado)
+        self.maestro_layout.addWidget(self.button_maestro_grupo_taxonomico)
         self.maestro_layout.addWidget(self.button_maestro_filtro)
         self.maestro_layout.addWidget(self.button_maestro_tipo_filtro)
         self.maestro_layout.addWidget(self.button_maestro_flora)
@@ -361,6 +362,28 @@ class MainView(QWidget):
         )
         self.button_maestro_nivel_nado.setFlat(True)
         self.button_maestro_nivel_nado.setCursor(
+            QCursor(Qt.CursorShape.PointingHandCursor)
+        )
+        self.button_maestro_grupo_taxonomico = QPushButton(
+            " > GRUPO TAXONÓMICO"
+        )
+        self.button_maestro_nivel_nado.setStyleSheet(
+            """
+            QPushButton {
+                background-color: transparent;
+                text-align: left;
+                margin-bottom: 0;
+                margin-left: 20;
+                font-family: 'Roboto'; 
+                font-size: 14px;
+            }
+            """
+        )
+        self.button_maestro_grupo_taxonomico.setObjectName(
+            "button_maestro_grupo_taxonomico"
+        )
+        self.button_maestro_grupo_taxonomico.setFlat(True)
+        self.button_maestro_grupo_taxonomico.setCursor(
             QCursor(Qt.CursorShape.PointingHandCursor)
         )
 
