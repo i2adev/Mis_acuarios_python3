@@ -24,14 +24,8 @@ import os
 import Resources.resources_rc
 import globals
 
-"""
-# Declaramos las variables globales
-BASE_PATH = Path(__file__).resolve().parent
-BASE_RESOURCES = BASE_PATH / "Resources"
-PATH_IMGES = BASE_RESOURCES / "Images" 
-"""
 # Versión del programa
-__version__ = "0.32.0"
+__version__ = "0.32.1"
 
 
 def excepthook(exc_type, exc_value, exc_traceback):
@@ -162,6 +156,7 @@ def load_directory_fonts(dir_path: str) -> list:
 
     # 3. EL RETURN DEBE IR FUERA DEL BUCLE FOR
     return loaded_fonts
+
 
 if __name__ == "__main__":
     main()

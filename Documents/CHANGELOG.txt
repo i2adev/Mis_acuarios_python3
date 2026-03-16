@@ -1,5 +1,7 @@
 ﻿CHANGELOG:
 ================================================================================
+0.32.1  TESTEO MANUAL DE LA LÓGICA DE GRUPOS TAXONÓMICOS.
+
 0.32.0  SE AÑADE LA LÓGICA DE GRUPOS TAXONÓMICOS.
 
 0.31.1  TESTEO MANUAL DE LA LÓGICA DE NIVEL DE NADO.

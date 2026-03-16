@@ -367,7 +367,7 @@ class MainView(QWidget):
         self.button_maestro_grupo_taxonomico = QPushButton(
             " > GRUPO TAXONÓMICO"
         )
-        self.button_maestro_nivel_nado.setStyleSheet(
+        self.button_maestro_grupo_taxonomico.setStyleSheet(
             """
             QPushButton {
                 background-color: transparent;

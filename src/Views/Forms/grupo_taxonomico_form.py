@@ -78,7 +78,7 @@ class GrupoTaxonomicoForm(QFrame):
         self.text_descripcion.setToolTip(
             """
             <h2>Descripción</h2><br>
-            En este campo se insertan la <b>descricíon</b> del 
+            En este campo se insertan la <b>descripción</b> del 
             grupo taxonómico. 
             """
         )

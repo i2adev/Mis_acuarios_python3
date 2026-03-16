@@ -1,6 +1,26 @@
 ﻿================================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
+16/03/2026  TESTEO MANUAL DE LA LÓGICA DE DIETAS DE LA FAUNA:
+            -   DONE:   TEST -> APERTURA DEL FORMULARIO.
+            -   N.A.:   TEST -> CARGA DE LOS COMBOS.
+            -   DONE:   TEST -> INSERCIÓN DE REGISTRO.
+            -   N.A.:   TEST -> INSERCIÓN DE REGISTRO CON IMAGEN.
+            -   DONE:   TEST -> CARGA DE REGISTRO.
+            -   N.A.:   TEST -> CARGA DE REGISTRO CON IMAGEN.
+            -   DONE:   TEST -> LIMPIEZA DE FORMULARIO.
+            -   N.A.:   TEST -> LIMPIEZA DE FORMULARIO CON IMAGEN.
+            -   DONE    TEST -> ELIMINACIÓN DE REGISTRO DESDE MENÚ CONTEXTUAL.
+            -   DONE:   TEST -> ELIMINACIÓN DE REGISTRO DESPUÉS DE CARGAR EN EL
+                                FORMULARIO.
+            -   DONE:   TEST -> MODIFICACIÓN DE REGISTRO.
+            -   DONE:   TEST -> BÚSQUEDA DE REGISTROS.
+            -   DONE:   REVISAR LOS TIPS DE LOS CONTROLES.
+            -   DONE:   REVISAR LOS TIPS DE LA TABLA.
+
+            CORRECCIONES:
+            -   DONE:   SE CORRIGE EL TEXTO DEL TIP DEL CONTROL DE DESCRIPCIÓN.
+
 16/03/2026  SE AÑADE LA LÓGICA DE GRUPOS TAXONÓMICOS.
             -   DONE:   SE CREA LA ENTIDAD.
             -   DONE:   SE CREA LA VISTA EN LA BASE DE DATOS.
