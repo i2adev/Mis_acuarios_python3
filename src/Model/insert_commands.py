@@ -70,17 +70,22 @@ class InsertCmd:
     INSERT INTO SEXO_ANIMAL (SEXO_ANIMAL, DESCRIPCION) VALUES
     ('Macho', 'Animal de sexo masculino.'),
     ('Hembra', 'Animal de sexo femenino.'),
-    ('Hermafrodita', 'Animal que posee órganos reproductores masculinos y femeninos.'),
+    ('Hermafrodita', 'Animal con órganos reproductores masculinos y femeninos.'),
+    ('Intersexual', 'Individuo con características sexuales mixtas o no definidas claramente.'),
     ('Desconocido', 'Sexo del animal no identificado.');
     """
 
     # Niveles de nado
     INSERT_NIVELES_NADO = """
-    INSERT INTO NIVEL_NADO (NIVEL_NADO, DESCRIPCION) VALUES
-    ('Superior', 'Peces que nadan principalmente en la zona superficial del acuario, cerca de la superficie del agua'),
-    ('Medio', 'Peces que ocupan mayormente la zona central del acuario'),
-    ('Inferior', 'Peces que nadan y se alimentan en la parte baja del acuario, cerca del sustrato'),
-    ('Todo el acuario', 'Peces que nadan y se alimentan en todos los niveles del acuario');
+    INSERT INTO NIVELES_NADO (NIVEL_NADO, DESCRIPCION) VALUES
+    ('Superficie', 'Peces que permanecen prácticamente en la lámina superficial del agua.'),
+    ('Superior', 'Peces que nadan en la zona alta del acuario, cerca de la superficie.'),
+    ('Medio-superior', 'Peces que se mueven entre la zona media y la superior.'),
+    ('Medio', 'Peces que ocupan principalmente la zona central del acuario.'),
+    ('Medio-inferior', 'Peces que se mueven entre la zona media y la inferior.'),
+    ('Inferior', 'Peces que nadan en la parte baja del acuario.'),
+    ('Fondo', 'Peces que permanecen en contacto directo con el sustrato o muy próximos a él.'),
+    ('Todo el acuario', 'Peces que utilizan todos los niveles del acuario.');
     """
 
     # Dieta de la fauna
@@ -263,33 +268,43 @@ class InsertCmd:
     # Tasas de crecimiento
     INSERT_TASAS_CRECIMIENTO = """
     INSERT INTO TASAS_CRECIMIENTO (CRECIMIENTO, DESCRIPCION) VALUES
-    ('Lenta', 'Crecimiento muy pausado, requiere poco mantenimiento y poda.'),
-    ('Media', 'Crecimiento moderado, equilibrado para acuarios comunitarios.'),
-    ('Rápida', 'Crecimiento veloz, ideal para controlar nutrientes, requiere podas frecuentes.');
+    ('Lenta', 'Crecimiento muy pausado, requiere poco mantenimiento y poda mínima.'),
+    ('Media-lenta', 'Crecimiento moderadamente lento, mantenimiento bajo.'),
+    ('Media', 'Crecimiento equilibrado, adecuado para la mayoría de acuarios.'),
+    ('Media-rápida', 'Crecimiento activo, ayuda al control de nutrientes.'),
+    ('Rápida', 'Crecimiento muy veloz, requiere podas frecuentes y control constante.');
     """
 
     # Requerimientos de CO2
     INSERT_REQUERIMIENTOS_CO2 = """
     INSERT INTO REQUERIMIENTOS_CO2 (REQUERIMIENTO_CO2, DESCRIPCION) VALUES
-    ('Ninguno', 'No requiere adición de CO₂ para su desarrollo.'),
-    ('Bajo', 'Puede beneficiarse de CO₂ adicional, pero no es imprescindible.'),
-    ('Medio', 'Desarrolla mejor con aporte moderado de CO₂.'),
-    ('Alto', 'Necesita aporte constante de CO₂ para crecer adecuadamente.');
+    ('Ninguno', 'No requiere adición de CO2 para su desarrollo.'),
+    ('Bajo', 'Puede beneficiarse ligeramente de CO2, pero no es necesario.'),
+    ('Medio-bajo', 'Requiere pequeñas cantidades de CO2 para un crecimiento óptimo.'),
+    ('Medio', 'Desarrolla mejor con un aporte moderado de CO2.'),
+    ('Medio-alto', 'Necesita un aporte constante de CO2 para un crecimiento adecuado.'),
+    ('Alto', 'Requiere niveles elevados y estables de CO2 para prosperar.');
     """
 
     # Requerimientos de iluminación
     INSERT_REQUERIMIENTOS_ILUMINACION = """
     INSERT INTO REQUERIMIENTOS_ILUMINACION (REQUERIMIENTO_ILUMINACION, DESCRIPCION) VALUES
-    ('Baja', 'Requiere poca luz; ideal para acuarios con iluminación tenue o sin CO₂.'),
-    ('Media', 'Requiere luz moderada; se recomienda buena iluminación estable.'),
-    ('Alta', 'Necesita luz intensa; idealmente con CO₂ y fotoperiodo controlado.');
+    ('Baja', 'Requiere poca luz; ideal para acuarios con iluminación tenue o sin CO2.'),
+    ('Media-baja', 'Tolera iluminación moderada-baja; crecimiento lento pero estable.'),
+    ('Media', 'Requiere luz moderada; se recomienda iluminación estable.'),
+    ('Media-alta', 'Necesita buena intensidad lumínica para un desarrollo óptimo.'),
+    ('Alta', 'Requiere luz intensa; idealmente con CO2 y fotoperiodo controlado.');
     """
 
     # Posiciones den el acuario
     INSERT_POSICIONES_ACUARIO = """
-    INSERT INTO POSICIONES_ACUARIO (POSICION, OBSERVACIONES) VALUES
+    INSERT INTO POSICIONES_PLANTAS_ACUARIO (POSICION, OBSERVACIONES) VALUES
     ('Primer plano', 'Plantas que se colocan en la parte frontal del acuario.'),
+    ('Transición frontal', 'Zona entre el primer plano y el área media, usada para transiciones suaves de altura.'),
+    ('Medio bajo', 'Parte delantera de la zona media del acuario.'),
     ('Medio', 'Plantas ubicadas en la zona central del acuario.'),
+    ('Medio alto', 'Parte trasera de la zona media, cercana al fondo.'),
+    ('Transición trasera', 'Zona entre el área media y el fondo del acuario.'),
     ('Fondo', 'Plantas que se sitúan en la parte trasera o fondo del acuario.'),
     ('Flotante', 'Plantas que flotan en la superficie del agua.'),
     ('Adherida', 'Plantas que se adhieren a piedras, troncos u otras superficies.');
@@ -299,14 +314,16 @@ class InsertCmd:
     INSERT_GRUPOS_TAXONOMICOS = """
     INSERT INTO GRUPOS_TAXONOMICOS (GRUPO_TAXONOMICO, DESCRIPCION) VALUES
     ('Pez', 'Animales vertebrados acuáticos con aletas y branquias.'),
-    ('Invertebrado', 'Animales sin columna vertebral, como caracoles y medusas.'),
-    ('Crustáceo', 'Invertebrados con exoesqueleto, como camarones y cangrejos.'),
-    ('Molusco', 'Invertebrados de cuerpo blando, como caracoles y almejas.'),
-    ('Anfibio', 'Vertebrados con ciclo de vida acuático y terrestre, como los ajolotes.'),
+    ('Anfibio', 'Vertebrados con ciclo de vida acuático y terrestre, como ajolotes o ranas.'),
     ('Reptil', 'Vertebrados con escamas, como tortugas acuáticas.'),
-    ('Cnidario', 'Invertebrados con células urticantes, como anémonas.'),
-    ('Equinodermo', 'Invertebrados marinos como estrellas de mar.'),
-    ('Otro', 'Organismo no clasificado en los grupos anteriores.');
+    ('Crustáceo', 'Invertebrados con exoesqueleto, como gambas y cangrejos.'),
+    ('Molusco', 'Invertebrados de cuerpo blando, como caracoles y almejas.'),
+    ('Cnidario', 'Invertebrados con células urticantes, como anémonas y corales.'),
+    ('Equinodermo', 'Invertebrados marinos como estrellas de mar y erizos.'),
+    ('Anélido', 'Invertebrados segmentados como gusanos acuáticos.'),
+    ('Porífero', 'Esponjas acuáticas filtradoras, principalmente marinas.'),
+    ('Briozoo', 'Colonias de pequeños invertebrados filtradores.'),
+    ('Otro', 'Animal no clasificado en los grupos anteriores.');
     """
 
     # Tipos de control de la iluminación
@@ -566,14 +583,16 @@ class InsertCmd:
     INSERT INTO DIFICULTADES_PLANTAS (NIVEL, DIFICULTAD_PLANTA, DESCRIPCION) VALUES
     (1, 'Muy fácil', 'Plantas extremadamente resistentes que toleran baja iluminación y no requieren CO2 ni fertilización estricta.'),
     (2, 'Fácil', 'Plantas poco exigentes que crecen bien con iluminación moderada y fertilización básica.'),
-    (3, 'Media', 'Plantas con requerimientos moderados de luz y nutrientes; el CO2 mejora su crecimiento.'),
-    (4, 'Difícil', 'Plantas exigentes que requieren iluminación intensa, fertilización controlada y normalmente CO2.'),
-    (5, 'Muy difícil', 'Plantas muy sensibles destinadas a acuarios avanzados con control preciso de luz, CO2 y nutrientes.');
+    (3, 'Media-fácil', 'Plantas con pocos requerimientos adicionales, aptas para aficionados con algo de experiencia.'),
+    (4, 'Media', 'Plantas con requerimientos moderados de luz y nutrientes; el CO2 mejora su crecimiento.'),
+    (5, 'Media-difícil', 'Plantas que requieren cierto control de parámetros, iluminación y fertilización.'),
+    (6, 'Difícil', 'Plantas exigentes que requieren iluminación intensa, fertilización controlada y normalmente CO2.'),
+    (7, 'Muy difícil', 'Plantas muy sensibles destinadas a acuarios avanzados con control preciso de luz, CO2 y nutrientes.');
     """
 
     # Inserta periodicidades
     INSERT_PERIODICIDADES = """
-    INSERT INTO PERIODICIDADES (PERIODICIDAD) VALUES
+    INSERT INTO PERIODOS (PERIODO) VALUES
     ('hora(s)'),
     ('veces al día'),
     ('día(s)'),

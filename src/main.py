@@ -25,7 +25,7 @@ import os
 import globals
 
 # Versión del programa
-__version__ = "0.33.0"
+__version__ = "0.33.1"
 
 
 def excepthook(exc_type, exc_value, exc_traceback):
@@ -62,32 +62,41 @@ def main():
         style = f.read()
         app.setStyleSheet(style)
 
+    # Mostramos las rutas de los recursos
+    print("\nRutas de recursos:")
+    print(f"✅ {globals.PATH_RESOURCES}")
+    print(f"✅ {globals.PATH_IMAGES}")
+    print(f"✅ {globals.PATH_FONTS}")
+    print(f"✅ {globals.PATH_STYLES}")
+    print(f"✅ {globals.PATH_STYLES}")
+    print()
+
     # Carga las fuentes desde el recurso
     _ = load_directory_fonts(globals.PATH_FONTS)
 
-    # # Limpia la base de datos
-    # msg = BaseDAO.clean_database()
-    # if msg.is_success:
-    #     res = BaseDAO.fill_essential_info()
-    #     if not res.is_success:
-    #         QMessageBox.information(
-    #             None,
-    #             "LIMPIEZA DE BASE DE DATOS",
-    #             res.error_msg
-    #         )
-    #         return
-    #
-    #     QMessageBox.information(
-    #         None,
-    #         "LIMPIEZA DE BASE DE DATOS",
-    #         msg.value
-    #     )
-    # else:
-    #     QMessageBox.warning(
-    #         None,
-    #         "LIMPIEZA DE BASE DE DATOS",
-    #         msg.error_msg
-    #     )
+    # Limpia la base de datos
+    msg = BaseDAO.clean_database()
+    if msg.is_success:
+        res = BaseDAO.fill_essential_info()
+        if not res.is_success:
+            QMessageBox.information(
+                None,
+                "LIMPIEZA DE BASE DE DATOS",
+                res.error_msg
+            )
+            return
+
+        QMessageBox.information(
+            None,
+            "LIMPIEZA DE BASE DE DATOS",
+            msg.value
+        )
+    else:
+        QMessageBox.warning(
+            None,
+            "LIMPIEZA DE BASE DE DATOS",
+            msg.error_msg
+        )
 
     # # Se implementa la copia de la base de datos a fiche sql
     # origen = str(Path(__file__).resolve().parent /
@@ -139,6 +148,8 @@ def load_directory_fonts(dir_path: str) -> list:
         print(f"⚠️ La carpeta no existe: {dir_path}")
         return []
 
+    print("Tipos de letra cargados:")
+    # Carga las fuentes del directorio
     for file in directory.glob("*.[to]tf"):
         # 2. Usar resolve() para enviar la ruta absoluta completa y evitar fallos de lectura
         absolute_path = str(file.resolve())
@@ -154,7 +165,7 @@ def load_directory_fonts(dir_path: str) -> list:
             # Si el error persiste aquí, el archivo .ttf está corrupto o bloqueado
             print(f"❌ Error al cargar: {file.name}")
 
-    # 3. EL RETURN DEBE IR FUERA DEL BUCLE FOR
+    # 3. Devuelve la lista de fuentes
     return loaded_fonts
 
 

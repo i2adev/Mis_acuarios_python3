@@ -137,7 +137,7 @@ class LoginDialogController(BaseController):
 
         self._view.reject()
 
-    def show_modal(self) -> None:
+    def show_modal(self):
         """ Abre la ventana. """
 
         return self._view.exec()
