@@ -4,6 +4,7 @@ Fecha:  19/12/2025
 Comentarios:
     Controlador del formulario maestro de comercio.
 """
+from pathlib import Path
 
 from PyQt6.QtCore import QEvent
 from PyQt6.QtGui import QIcon, QAction
@@ -16,6 +17,8 @@ from Model.Entities.comercio_entity import ComercioEntity
 from Model.TableModel.comercio_table_model import ComercioTableModel
 from Views.Masters.comercio_view import ComercioView
 from Views.table_menu_contextual import TableMenuContextual
+
+import globals
 
 
 class ComercioMasterController(ComercioController):
@@ -99,7 +102,7 @@ class ComercioMasterController(ComercioController):
             self._pag.status = "UNFILTERED"
             self._pag.initialize_paginator()
             self._view.button_filter.setIcon(
-                QIcon(":/Images/filter.png")
+                QIcon(str(Path(globals.PATH_IMAGES) / "filter.png"))
             )
             self._configure_status_bar(self._pag)
 
@@ -143,7 +146,8 @@ class ComercioMasterController(ComercioController):
         self._configure_table(self._view.data_table)
         self._clean_view(self._view.frame.edit_comercio)
 
-        self._view.button_filter.setIcon(QIcon(":/Images/filtered.png"))
+        self._view.button_filter.setIcon(
+            QIcon(str(Path(globals.PATH_IMAGES) / "filtered.png")))
 
         self._pag.status = "FILTERED"
         self._view.label_total_pages.setText(str(self._pag.total_pages))

@@ -4,6 +4,7 @@ Fecha:  07/10/2025
 Comentarios:
     Controlador del formulario maestro de tipo de acuario.
 """
+from pathlib import Path
 
 from PyQt6.QtGui import QIcon, QAction
 from PyQt6.QtWidgets import QMessageBox, QTableView, QWidget, QComboBox
@@ -15,6 +16,8 @@ from Model.Entities.tipo_acuario_entity import TipoAcuarioEntity
 from Model.TableModel.tipo_acuario_table_model import TipoAcuarioTableModel
 from Views.Masters.tipo_acuario_view import TipoAcuarioView
 from Views.table_menu_contextual import TableMenuContextual
+
+import globals
 
 
 class TipoAcuarioMasterController(TipoAcuarioController):
@@ -113,7 +116,7 @@ class TipoAcuarioMasterController(TipoAcuarioController):
             self._pag.status = "UNFILTERED"
             self._pag.initialize_paginator()
             self._view.button_filter.setIcon(
-                QIcon(":/Images/filter.png")
+                QIcon(str(Path(globals.PATH_IMAGES) / "filter.png"))
             )
             self._configure_status_bar(self._pag)
 
@@ -157,7 +160,8 @@ class TipoAcuarioMasterController(TipoAcuarioController):
         self._configure_table(self._view.data_table)
         self._clean_view(self._view.frame.combo_categoria_acuario)
 
-        self._view.button_filter.setIcon(QIcon(":/Images/filtered.png"))
+        self._view.button_filter.setIcon(
+            QIcon(str(Path(globals.PATH_IMAGES) / "filtered.png")))
 
         self._pag.status = "FILTERED"
         self._view.label_total_pages.setText(str(self._pag.total_pages))

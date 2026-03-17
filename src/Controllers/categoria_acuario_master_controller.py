@@ -4,6 +4,8 @@ Fecha:  02/10/2025
 Comentarios:
     Controlador del formulario maestro de categoría de filtro.
 """
+from pathlib import Path
+
 from PyQt6.QtGui import QIcon, QAction
 from PyQt6.QtWidgets import QMessageBox, QTableView, QWidget, QComboBox
 
@@ -15,6 +17,8 @@ from Model.TableModel.categoria_acuario_table_model import \
     CategoriaAcuarioTableModel
 from Views.Masters.categoria_acuario_view import CategoriaAcuarioView
 from Views.table_menu_contextual import TableMenuContextual
+
+import globals
 
 
 class CategoriaAcuarioMasterController(CategoriaAcuarioController):
@@ -98,7 +102,7 @@ class CategoriaAcuarioMasterController(CategoriaAcuarioController):
             self._pag.status = "UNFILTERED"
             self._pag.initialize_paginator()
             self._view.button_filter.setIcon(
-                QIcon(":/Images/filter.png")
+                QIcon(str(Path(globals.PATH_IMAGES) / "filter.png"))
             )
             self._configure_status_bar(self._pag)
 
@@ -142,7 +146,8 @@ class CategoriaAcuarioMasterController(CategoriaAcuarioController):
         self._configure_table(self._view.data_table)
         self._clean_view(self._view.frame.edit_categoria_acuario)
 
-        self._view.button_filter.setIcon(QIcon(":/Images/filtered.png"))
+        self._view.button_filter.setIcon(
+            QIcon(str(Path(globals.PATH_IMAGES) / "filtered.png")))
 
         self._pag.status = "FILTERED"
         self._view.label_total_pages.setText(str(self._pag.total_pages))
@@ -243,7 +248,7 @@ class CategoriaAcuarioMasterController(CategoriaAcuarioController):
         # Configura el pie de tabla
         self.configure_table_foot("DELETE", paginator_pages,
                                   current_page)
-        
+
         # Configura la barra de estado
         self._configure_status_bar(self._pag)
 

@@ -4,6 +4,7 @@ Fecha:  06/10/2025
 Comentarios:
     Controlador del formulario maestro de subcategoría de incidencia.
 """
+from pathlib import Path
 
 from PyQt6.QtGui import QIcon, QAction
 from PyQt6.QtWidgets import QMessageBox, QTableView, QWidget, QComboBox
@@ -15,6 +16,8 @@ from Model.Entities.urna_entity import UrnaEntity
 from Model.TableModel.urna_table_model import UrnaTableModel
 from Views.Masters.urna_view import UrnaView
 from Views.table_menu_contextual import TableMenuContextual
+
+import globals
 
 
 class UrnaMasterController(UrnaController):
@@ -108,7 +111,7 @@ class UrnaMasterController(UrnaController):
             self._pag.status = "UNFILTERED"
             self._pag.initialize_paginator()
             self._view.button_filter.setIcon(
-                QIcon(":/Images/filter.png")
+                QIcon(str(Path(globals.PATH_IMAGES) / "filter.png"))
             )
             self._configure_status_bar(self._pag)
 
@@ -152,7 +155,8 @@ class UrnaMasterController(UrnaController):
         self._configure_table(self._view.data_table)
         self._clean_view(self._view.frame.combo_marca)
 
-        self._view.button_filter.setIcon(QIcon(":/Images/filtered.png"))
+        self._view.button_filter.setIcon(
+            QIcon(str(Path(globals.PATH_IMAGES) / "filtered.png")))
 
         self._pag.status = "FILTERED"
         self._view.label_total_pages.setText(str(self._pag.total_pages))

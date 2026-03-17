@@ -4,6 +4,7 @@ Fecha:  06/10/2025
 Comentarios:
     Controlador del formulario maestro de subcategoría de incidencia.
 """
+from pathlib import Path
 
 from PyQt6.QtGui import QIcon, QAction
 from PyQt6.QtWidgets import QMessageBox, QTableView, QWidget, QComboBox
@@ -16,6 +17,8 @@ from Model.Entities.iluminacion_entity import IluminacionEntity
 from Model.TableModel.iluminacion_table_model import IluminacionTableModel
 from Views.Masters.iluminacion_view import IluminacionView
 from Views.table_menu_contextual import TableMenuContextual
+
+import globals
 
 
 class IluminacionMasterController(IluminacionController):
@@ -120,7 +123,7 @@ class IluminacionMasterController(IluminacionController):
             self._pag.status = "UNFILTERED"
             self._pag.initialize_paginator()
             self._view.button_filter.setIcon(
-                QIcon(":/Images/filter.png")
+                QIcon(str(Path(globals.PATH_IMAGES) / "filter.png"))
             )
             self._configure_status_bar(self._pag)
 
@@ -164,7 +167,8 @@ class IluminacionMasterController(IluminacionController):
         self._configure_table(self._view.data_table)
         self._clean_view(self._view.frame.combo_marca)
 
-        self._view.button_filter.setIcon(QIcon(":/Images/filtered.png"))
+        self._view.button_filter.setIcon(
+            QIcon(str(Path(globals.PATH_IMAGES) / "filtered.png")))
 
         self._pag.status = "FILTERED"
         self._view.label_total_pages.setText(str(self._pag.total_pages))

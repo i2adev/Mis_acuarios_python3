@@ -1,7 +1,42 @@
 ﻿================================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
-16/03/2026  TESTEO MANUAL DE LA LÓGICA DE DIETAS DE LA FAUNA:
+16/03/2026  REFACTORIZACIONES:  SE MODIFICA EL CÓDIGO PARA ELIMINAR LA
+                                COMPILACIÓN DE RECURSOS. SE ADAPTA A LA FORMA
+                                CLASICA DE PYTHON
+            -   DONE:   SE REFACTORIZA EL DIALOGO BASE.
+            -   DONE:   SE REFACTORIZA EL FORMULARIO BASE DEL MAESTRO.
+            -   DONE:   SE MODIFICAN LOS ICONOS DE FILTRADO.
+                -   DONE:   MAESTRO DE ACUARIO.
+                -   DONE:   MAESTRO CATEGORÍA DE ACUARIO.
+                -   DONE:   MAESTRO CATEGORÍA DE CONSUMIBLE.
+                -   DONE:   MAESTRO CATEGORÍA DE EQUIPAMIENTO.
+                -   DONE:   MAESTRO CATEGORÍA DE INCIDENCIA.
+                -   DONE:   MAESTRO COMERCIO.
+                -   DONE:   MAESTRO COMPORTAMIENTO DE FAUNA.
+                -   DONE:   MAESTRO CONSUMIBLE.
+                -   DONE:   MAESTRO CONTROL DE ILUMINACIÓN.
+                -   DONE:   MAESTRO DIETA FAUNA.
+                -   DONE:   MAESTRO DIFICULTAD PLANTA.
+                -   DONE:   MAESTRO EQUIPAMIENTO.
+                -   DONE:   MAESTRO ESTADO DEL PROYECTO.
+                -   DONE:   MAESTRO FILTRO.
+                -   DONE:   MAESTRO FORMATO CONSUMIBLE.
+                -   DONE:   MAESTRO GRUPO TAXONÓMICO.
+                -   DONE:   MAESTRO ILUMINACIÓN.
+                -   DONE:   MAESTRO MARCA COMERCIAL.
+                -   DONE:   MAESTRO MATERIAL DE LA URNA.
+                -   DONE:   MAESTRO NIVEL DE NADO.
+                -   DONE:   MAESTRO PROYECTO.
+                -   DONE:   MAESTRO SUBCATEGORÍA DE ACUARIO.
+                -   DONE:   MAESTRO SUBCATEGORÍA DE INCIDENCIA.
+                -   DONE:   MAESTRO TIPO DE ACUARIO.
+                -   DONE:   MAESTRO TIPO DE FILTRO.
+                -   DONE:   MAESTRO TIPO DE ILUMINACIÓN.
+                -   DONE:   MAESTRO UNIDAD DE CONTENIDO.
+                -   DONE:   MAESTRO URNA.
+
+16/03/2026  TESTEO MANUAL DE LA LÓGICA DE DE GRUPOS TAXONÓMICOS:
             -   DONE:   TEST -> APERTURA DEL FORMULARIO.
             -   N.A.:   TEST -> CARGA DE LOS COMBOS.
             -   DONE:   TEST -> INSERCIÓN DE REGISTRO.

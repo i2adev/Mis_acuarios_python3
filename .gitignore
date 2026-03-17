@@ -2,7 +2,9 @@
 build/
 dist/
 .idea/
-qt_env/
+.vs
+.venv
+__pycache__
 *.pyc
 
 

@@ -6,11 +6,14 @@ Comentarios:
 """
 
 import sys
+from pathlib import Path
 
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QIcon, QPixmap, QCursor
 from PyQt6.QtWidgets import QDialog, QSizeGrip, QVBoxLayout, QFrame, \
     QSizePolicy, QHBoxLayout, QPushButton, QLabel, QSpacerItem, QApplication
+
+import globals
 
 
 class BaseDialog(QDialog):
@@ -126,8 +129,10 @@ class BaseDialog(QDialog):
 
         ## Botón de cerrar
         icon = QIcon()
-        icon.addPixmap(QPixmap(":/Images/close.png"), QIcon.Mode.Normal,
-                       QIcon.State.On)
+        icon.addPixmap(
+            QPixmap(str(Path(globals.PATH_IMAGES) / "close.png")),
+            QIcon.Mode.Normal,
+            QIcon.State.On)
         self.button_tb_close = QPushButton()
         self.button_tb_close.setIcon(icon)
         self.button_tb_close.setObjectName("button_bt_close")
@@ -138,8 +143,10 @@ class BaseDialog(QDialog):
 
         ## Botón de maximizar
         icon2 = QIcon()
-        icon2.addPixmap(QPixmap(":/Images/maximize.png"), QIcon.Mode.Normal,
-                        QIcon.State.On)
+        icon2.addPixmap(
+            QPixmap(str(Path(globals.PATH_IMAGES) / "maximize.png")),
+            QIcon.Mode.Normal,
+            QIcon.State.On)
         self.button_tb_maximize = QPushButton()
         self.button_tb_maximize.setIcon(icon2)
         self.button_tb_maximize.setObjectName("button_bt_maximize")
@@ -151,8 +158,10 @@ class BaseDialog(QDialog):
 
         ## Pripiedades del botón restaurar
         icon3 = QIcon()
-        icon3.addPixmap(QPixmap(":/Images/restore.png"), QIcon.Mode.Normal,
-                        QIcon.State.On)
+        icon3.addPixmap(
+            QPixmap(str(Path(globals.PATH_IMAGES) / "restore.png")),
+            QIcon.Mode.Normal,
+            QIcon.State.On)
         self.button_tb_restore = QPushButton()
         self.button_tb_restore.setIcon(icon3)
         self.button_tb_restore.setObjectName("button_bt_restore")
@@ -164,8 +173,10 @@ class BaseDialog(QDialog):
 
         ## Propiedades del botón minimizar
         icon4 = QIcon()
-        icon4.addPixmap(QPixmap(":/Images/minimize.png"), QIcon.Mode.Normal,
-                        QIcon.State.On)
+        icon4.addPixmap(
+            QPixmap(str(Path(globals.PATH_IMAGES) / "minimize.png")),
+            QIcon.Mode.Normal,
+            QIcon.State.On)
         self.button_tb_minimize = QPushButton()
         self.button_tb_minimize.setIcon(icon4)
         self.button_tb_minimize.setObjectName("button_tb_minimize")
@@ -179,18 +190,20 @@ class BaseDialog(QDialog):
 
         ## Icono de la ventana
         self.label_icon = QLabel()
-        icon5 = QPixmap(":/Images/Window_icon.png")
+        icon5 = QPixmap(str(Path(globals.PATH_IMAGES) / "Window_icon.png"))
         self.label_icon.setPixmap(icon5)
 
         ## Botón Aceptar
         self.button_accept = QPushButton("&ACEPTAR")
         self.button_accept.setFlat(True)
-        self.button_accept.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.button_accept.setCursor(
+            QCursor(Qt.CursorShape.PointingHandCursor))
 
         ## Botón Cancelar
         self.button_cancel = QPushButton("&&CANCELAR")
         self.button_cancel.setFlat(True)
-        self.button_cancel.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.button_cancel.setCursor(
+            QCursor(Qt.CursorShape.PointingHandCursor))
 
     """
     El comportamiento básico de la barra de titulo que hemos creado
@@ -245,7 +258,7 @@ if __name__ == "__main__":
     ventana = BaseDialog("BASE DIALOG")
 
     # Cargar el archivo .qss
-    with open("../../Resources/Styles/main_style.qss", "r",
+    with open(str(Path(globals.PATH_STYLES) / "main_style.qss"), "r",
               encoding="utf-8-sig") as f:
         estilo = f.read()
         app.setStyleSheet(estilo)

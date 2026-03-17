@@ -4,6 +4,7 @@ Fecha:  29/09/2025
 Comentarios:
     Controlador del formulario maestro de tipo de filtro.
 """
+from pathlib import Path
 
 from PyQt6.QtCore import QEvent
 from PyQt6.QtGui import QAction, QIcon
@@ -19,6 +20,8 @@ from Model.TableModel.tipo_equipamiento_table_model import \
     TipoEquipamientoTableModel
 from Views.Masters.categoria_equipamiento_view import CategoriaEquipamientoView
 from Views.table_menu_contextual import TableMenuContextual
+
+import globals
 
 
 class CategoriaEquipamientoMasterController(CategoriaEquipamientoController):
@@ -105,7 +108,7 @@ class CategoriaEquipamientoMasterController(CategoriaEquipamientoController):
             self._pag.status = "UNFILTERED"
             self._pag.initialize_paginator()
             self._view.button_filter.setIcon(
-                QIcon(":/Images/filter.png")
+                QIcon(str(Path(globals.PATH_IMAGES) / "filter.png"))
             )
             self._configure_status_bar(self._pag)
 
@@ -149,7 +152,8 @@ class CategoriaEquipamientoMasterController(CategoriaEquipamientoController):
         self._configure_table(self._view.data_table)
         self._clean_view(self._view.frame.edit_categoria_equipamiento)
 
-        self._view.button_filter.setIcon(QIcon(":/Images/filtered.png"))
+        self._view.button_filter.setIcon(
+            QIcon(str(Path(globals.PATH_IMAGES) / "filtered.png")))
 
         self._pag.status = "FILTERED"
         self._view.label_total_pages.setText(str(self._pag.total_pages))

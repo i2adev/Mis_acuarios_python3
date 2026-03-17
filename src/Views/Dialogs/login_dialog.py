@@ -6,12 +6,14 @@ Comentarios:
 """
 
 import sys
+from pathlib import Path
 
 from PyQt6.QtCore import Qt, QSize
 from PyQt6.QtGui import QPixmap, QCursor
 from PyQt6.QtWidgets import (QDialog, QVBoxLayout, QFrame, QSizePolicy,
                              QPushButton, QLabel, QSpacerItem,
                              QApplication, QLineEdit, QWidget)
+import globals
 
 
 class LoginDialog(QDialog):
@@ -58,13 +60,16 @@ class LoginDialog(QDialog):
         ## Imagen
         self.label_image = QLabel()
         self.label_image.setPixmap(
-            # QPixmap("../../Resources/Images/cuenta.png").scaled(
-            QPixmap(":/Images/cuenta.png").scaled(
+            #
+            # print(f"Existe el archivo: "
+            #       f"{(Path(globals.PATH_IMAGES) / "cuenta.png").exists()}"))
+
+            QPixmap(str(Path(globals.PATH_IMAGES) / "cuenta.png")).scaled(
                 QSize(100, 100),
                 Qt.AspectRatioMode.KeepAspectRatio,
-                Qt.TransformationMode.SmoothTransformation
-            )
+                Qt.TransformationMode.SmoothTransformation)
         )
+
         self.label_image.setAlignment(Qt.AlignmentFlag.AlignHCenter)
         self.label_image.setFixedHeight(100)
 
@@ -87,12 +92,14 @@ class LoginDialog(QDialog):
         ## Botón Aceptar
         self.button_entrar = QPushButton("&ENTRAR")
         self.button_entrar.setFlat(True)
-        self.button_entrar.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.button_entrar.setCursor(
+            QCursor(Qt.CursorShape.PointingHandCursor))
 
         ## Botón Cancelar
         self.button_cancel = QPushButton("&CANCELAR")
         self.button_cancel.setFlat(True)
-        self.button_cancel.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.button_cancel.setCursor(
+            QCursor(Qt.CursorShape.PointingHandCursor))
 
         ## Botón Crear usuario
         self.button_crear_usuario = QPushButton("CREAR NUEVO USUARIO")
