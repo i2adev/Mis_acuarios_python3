@@ -16,6 +16,7 @@ from Model.Entities.consumible_entity import ConsumibleEntity
 from Model.Entities.control_iluminacion_entity import ControlIluminacionEntity
 from Model.Entities.dieta_fauna_entity import DietaFaunaEntity
 from Model.Entities.dificultad_planta_entity import DificultadPlantaEntity
+from Model.Entities.especie_animal_entity import EspecieAnimalEntity
 from Model.Entities.formato_consumible_entity import FormatoConsumibleEntity
 from Model.Entities.grupo_taxonomico_entity import GrupoTaxonomicoEntity
 from Model.Entities.iluminacion_entity import IluminacionEntity
@@ -736,6 +737,35 @@ class Paginator:
             )
                 for f in rows
             ]
+        elif self.procedure == "VISTA_ESPECIES_ANIMALES":
+            data_list = [EspecieAnimalEntity(
+                id=f["ID"],
+                num=f["NUM"],
+                reino=f["REINO"],
+                filo=f["FILO"],
+                clase=f["CLASE"],
+                orden=f["ORDEN"],
+                familia=f["FAMILIA"],
+                genero=f["GENERO"],
+                especie=f["ESPECIE"],
+                nombre_cientifico=f["NOMBRE_CIENTIFICO"],
+                nombre_comun=f["NOMBRE_COMUN"],
+                es_hibrida=f["HIBRIDADA"],
+                nombre_especie_hibrida=f["NOMBRE_ESPECIE_HIBRIDADA"],
+                id_grupo_taxonomico=f["GRUPO_TAXONOMICO"],
+                ph_min=f["PH"],
+                kh_min=f["KH"],
+                gh_min=f["GH"],
+                temp_min=f["TEMPERATURA"],
+                origen=f["ORIGEN"],
+                tamano_cm=f["TAMANO"],
+                id_comportamiento=f["COMPORTAMIENTO"],
+                id_dieta=f["DIETA"],
+                id_nivel_nado=f["NIVEL_NADO"],
+                descripcion=f["DESCRIPCION"],
+            )
+                for f in rows
+            ]
 
         return data_list
 
@@ -818,6 +848,8 @@ class Paginator:
             return SearchCmd.SEARCH_NIVEL_NADO
         elif self.procedure == "VISTA_GRUPOS_TAXONOMICOS":
             return SearchCmd.SEARCH_GRUPO_TAXONOMICO
+        elif self.procedure == "VISTA_ESPECIES_ANIMALES":
+            return SearchCmd.SEARCH_ESPECIE_ANIMAL
 
     def __str__(self):
         """ Muestra el objeto en forma de texto. """

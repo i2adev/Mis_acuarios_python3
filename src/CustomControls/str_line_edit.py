@@ -19,7 +19,7 @@ class StrLineEdit(QLineEdit):
     QLineEdit para textos
     """
 
-    MAX_DIGITS = 8
+    # MAX_DIGITS = 8
 
     def __init__(self, control_name: str, max_length: int,
                  is_nullable: bool = True, is_capital: bool = False,

@@ -16,8 +16,18 @@ class ComboBox(QComboBox):
 
         self.control_name = control_name
 
-    def setValue(self, value: str):
-        pass
+    def setValue(self, value: int):
+        """
+        Establece el valor del combo pasandole el valor.
+        :param value: Valor a seleccionar en el combo
+        """
+
+        idx = self.findData(value)
+
+        if idx >= 0:
+            self.setCurrentIndex(idx)
+        else:
+            self.setCurrentIndex(-1)
 
     def value(self) -> int | None:
         """ Devuelve el valor del item seleccionado en el combobox. """

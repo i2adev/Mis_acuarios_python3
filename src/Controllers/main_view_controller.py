@@ -287,12 +287,25 @@ class MainViewController(BaseController):
         self._view.button_maestro_grupo_taxonomico.clicked.connect(
             self.grupo_taxonomico_click
         )
+        self._view.button_maestro_especies_animales.clicked.connect(
+            self.fauna_click
+        )
 
     def reportes_click(self):
         """ Cuando se pulsa el control de reportes. """
         view = MainReportsView("REPORTES")
         ctrl = MainReportsController(view)
 
+        ctrl.show()
+
+    def fauna_click(self):
+        """ Cuando se pulsa el botón de fauna. """
+
+        view = ConsumibleView("MAESTRO DE ESPECIES ANIMALES")
+        dao = ConsumibleDAO()
+        mod = ConsumibleEntity()
+
+        ctrl = ConsumibleMasterController(view, dao, mod)
         ctrl.show()
 
     def consumible_click(self):

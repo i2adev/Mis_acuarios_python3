@@ -21,7 +21,7 @@ class DoubleLineEdit(QLineEdit):
 
     MAX_DIGITS = 8
 
-    def __init__(self, control_name: str, min_value: int, max_value: int,
+    def __init__(self, control_name: str, min_value: float, max_value: float,
                  units: str | None, is_nullable: bool = True, parent=None):
 
         # Llama al constructor padre

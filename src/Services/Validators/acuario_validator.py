@@ -7,7 +7,6 @@ Comentarios:
 
 from PyQt6.QtWidgets import QLineEdit, QComboBox
 
-from CustomControls.int_line_edit import IntLineEdit
 from CustomControls.nullable_date_edit import NullableDateEdit
 from Model.DAO.acuario_dao import AcuarioDAO
 from Model.DAO.urna_dao import UrnaDAO

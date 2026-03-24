@@ -668,3 +668,112 @@ class SearchCmd:
     )
     WHERE FIELD LIKE '%' || :pattern || '%';
     """
+
+    SEARCH_ESPECIE_ANIMAL = """
+    SELECT ID, REINO, FILO, CLASE, ORDEN, FAMILIA, GENERO, ESPECIE,
+           NOMBRE_CIENTIFICO, NOMBRE_COMUN, HIBRIDADA, NOMBRE_ESPECIE_HIBRIDADA,
+           GRUPO_TAXONOMICO, PH, KH, GH, TEMPERATURA, ORIGEN, TAMANO, COMPORTAMIENTO,
+           DIETA, NIVEL_NADO, DESCRIPCION
+    FROM
+    (
+    SELECT E.ID_ESPECIE AS ID,
+           E.REINO AS REINO,
+           E.FILO AS FILO,
+           E.CLASE AS CLASE,
+           E.ORDEN AS ORDEN,
+           E.FAMILIA AS FAMILIA,
+           E.GENERO AS GENERO,
+           E.ESPECIE AS ESPECIE,
+           E.NOMBRE_CIENTIFICO AS NOMBRE_CIENTIFICO,
+           E.NOMBRE_COMUN AS NOMBRE_COMUN,
+           CASE E.ES_HIBRIDADA
+               WHEN 0 THEN 'Sí'
+               WHEN 1 THEN 'No'
+           END AS HIBRIDADA,
+           E.NOMBRE_ESPECIE_HIBRIDADA AS NOMBRE_ESPECIE_HIBRIDADA,
+           T.GRUPO_TAXONOMICO AS GRUPO_TAXONOMICO,
+           CASE
+               WHEN E.PH_MINIMO IS NULL AND E.PH_MAXIMO IS NULL THEN NULL
+               WHEN E.PH_MINIMO IS NOT NULL AND E.PH_MAXIMO IS NULL THEN 'Mín. ' || E.PH_MINIMO
+               WHEN E.PH_MINIMO IS NULL AND E.PH_MAXIMO IS NOT NULL THEN 'Máx. ' || E.PH_MAXIMO
+               ELSE E.PH_MINIMO || ' - ' || E.PH_MAXIMO
+           END AS PH,
+           CASE
+               WHEN E.KH_MINIMO IS NULL AND E.KH_MAXIMO IS NULL THEN NULL
+               WHEN E.KH_MINIMO IS NOT NULL AND E.KH_MAXIMO IS NULL THEN 'Mín. ' || E.KH_MINIMO
+               WHEN E.KH_MINIMO IS NULL AND E.KH_MAXIMO IS NOT NULL THEN 'Máx. ' || E.KH_MAXIMO
+               ELSE E.KH_MINIMO || ' - ' || E.KH_MAXIMO
+           END AS KH,
+           CASE
+               WHEN E.GH_MINIMO IS NULL AND E.GH_MAXIMO IS NULL THEN NULL
+               WHEN E.GH_MINIMO IS NOT NULL AND E.GH_MAXIMO IS NULL THEN 'Mín. ' || E.GH_MINIMO
+               WHEN E.GH_MINIMO IS NULL AND E.GH_MAXIMO IS NOT NULL THEN 'Máx. ' || E.GH_MAXIMO
+               ELSE E.GH_MINIMO || ' - ' || E.GH_MAXIMO
+           END AS GH,
+           CASE
+               WHEN E.TEMPERATURA_MIN IS NULL AND E.TEMPERATURA_MAX IS NULL THEN NULL
+               WHEN E.TEMPERATURA_MIN IS NOT NULL AND E.TEMPERATURA_MAX IS NULL THEN 'Mín. ' || E.TEMPERATURA_MIN
+               WHEN E.TEMPERATURA_MIN IS NULL AND E.TEMPERATURA_MAX IS NOT NULL THEN 'Máx. ' || E.TEMPERATURA_MAX
+               ELSE E.TEMPERATURA_MIN || ' - ' || E.TEMPERATURA_MAX
+           END AS TEMPERATURA,
+           E.ORIGEN AS ORIGEN,
+           E.TAMANO_ADULTO_CM AS TAMANO,
+           C.COMPORTAMIENTO AS COMPORTAMIENTO,
+           D.DIETA AS DIETA,
+           N.NIVEL_NADO AS NIVEL_NADO,
+           E.DESCRIPCION AS DESCRIPCION,
+           UPPER(
+               IFNULL(REINO, '') || IFNULL(FILO, '') || IFNULL(CLASE, '') ||
+               IFNULL(ORDEN, '') || IFNULL(FAMILIA, '') || IFNULL(GENERO, '') ||
+               IFNULL(ESPECIE, '') || IFNULL(NOMBRE_COMUN, '') ||
+               IFNULL(
+                   CASE E.ES_HIBRIDADA
+                       WHEN 0 THEN 'Sí'
+                       WHEN 1 THEN 'No'
+                   END, '') ||
+               IFNULL(NOMBRE_ESPECIE_HIBRIDADA, '') ||
+               IFNULL(GRUPO_TAXONOMICO, '') ||
+               IFNULL(
+                   CASE
+                       WHEN E.PH_MINIMO IS NULL AND E.PH_MAXIMO IS NULL THEN NULL
+                       WHEN E.PH_MINIMO IS NOT NULL AND E.PH_MAXIMO IS NULL THEN 'Mín. ' || E.PH_MINIMO
+                       WHEN E.PH_MINIMO IS NULL AND E.PH_MAXIMO IS NOT NULL THEN 'Máx. ' || E.PH_MAXIMO
+                       ELSE E.PH_MINIMO || ' - ' || E.PH_MAXIMO
+                   END, '') ||
+               IFNULL(
+                   CASE
+                       WHEN E.GH_MINIMO IS NULL AND E.GH_MAXIMO IS NULL THEN NULL
+                       WHEN E.GH_MINIMO IS NOT NULL AND E.GH_MAXIMO IS NULL THEN 'Mín. ' || E.GH_MINIMO
+                       WHEN E.GH_MINIMO IS NULL AND E.GH_MAXIMO IS NOT NULL THEN 'Máx. ' || E.GH_MAXIMO
+                       ELSE E.GH_MINIMO || ' - ' || E.GH_MAXIMO
+                   END, '') ||
+               IFNULL(
+                   CASE
+                       WHEN E.GH_MINIMO IS NULL AND E.GH_MAXIMO IS NULL THEN NULL
+                       WHEN E.GH_MINIMO IS NOT NULL AND E.GH_MAXIMO IS NULL THEN 'Mín. ' || E.GH_MINIMO
+                       WHEN E.GH_MINIMO IS NULL AND E.GH_MAXIMO IS NOT NULL THEN 'Máx. ' || E.GH_MAXIMO
+                       ELSE E.GH_MINIMO || ' - ' || E.GH_MAXIMO
+                   END, '') ||
+               IFNULL(       
+                   CASE
+                       WHEN E.TEMPERATURA_MIN IS NULL AND E.TEMPERATURA_MAX IS NULL THEN NULL
+                       WHEN E.TEMPERATURA_MIN IS NOT NULL AND E.TEMPERATURA_MAX IS NULL THEN 'Mín. ' || E.TEMPERATURA_MIN
+                       WHEN E.TEMPERATURA_MIN IS NULL AND E.TEMPERATURA_MAX IS NOT NULL THEN 'Máx. ' || E.TEMPERATURA_MAX
+                       ELSE E.TEMPERATURA_MIN || ' - ' || E.TEMPERATURA_MAX
+                   END, '') ||
+               IFNULL(ORIGEN, '') || IFNULL(E.TAMANO_ADULTO_CM, '') ||
+               IFNULL(COMPORTAMIENTO, '') || IFNULL(DIETA, '') || IFNULL(NIVEL_NADO, '') ||
+               IFNULL(E.DESCRIPCION, '')
+           ) AS FIELD
+    FROM   ESPECIES_ANIMALES E
+    LEFT JOIN GRUPOS_TAXONOMICOS T
+           ON E.ID_GRUPO_TAXONOMICO = T.ID_GRUPO_TAXONOMICO
+    LEFT JOIN COMPORTAMIENTOS_FAUNA C
+           ON E.ID_COMPORTAMIENTO = C.ID_COMPORTAMIENTO
+    LEFT JOIN DIETAS_FAUNA D
+           ON E.ID_DIETA = D.ID_DIETA
+    LEFT JOIN NIVELES_NADO N
+           ON E.ID_NIVEL_NADO = N.ID_NIVEL_NADO
+    )
+    WHERE FIELD LIKE '%' || :pattern || '%';
+    """

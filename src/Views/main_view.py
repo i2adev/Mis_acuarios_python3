@@ -6,12 +6,15 @@ Comentarios:
 """
 
 import sys
+from pathlib import Path
 
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QCursor, QFont, QIcon, QPixmap
 from PyQt6.QtWidgets import (QApplication, QFrame, QHBoxLayout, QLabel,
                              QPushButton, QSizeGrip, QSizePolicy, QSpacerItem,
                              QVBoxLayout, QWidget)
+
+import globals
 
 
 class MainView(QWidget):
@@ -316,6 +319,29 @@ class MainView(QWidget):
         )
         self.button_maestro_fauna.setFlat(True)
         self.button_maestro_fauna.setCursor(
+            QCursor(Qt.CursorShape.PointingHandCursor)
+        )
+
+        self.button_maestro_especies_animales = QPushButton(
+            " > ESPECIES ANIMALES"
+        )
+        self.button_maestro_especies_animales.setStyleSheet(
+            """
+            QPushButton {
+                background-color: transparent;
+                text-align: left;
+                margin-bottom: 0;
+                margin-left: 20;
+                font-family: 'Roboto'; 
+                font-size: 14px;
+            }
+            """
+        )
+        self.button_maestro_especies_animales.setObjectName(
+            "button_maestro_especies_animales"
+        )
+        self.button_maestro_especies_animales.setFlat(True)
+        self.button_maestro_especies_animales.setCursor(
             QCursor(Qt.CursorShape.PointingHandCursor)
         )
 
@@ -953,8 +979,10 @@ class MainView(QWidget):
 
         ## Botón de cerrar
         icon = QIcon()
-        icon.addPixmap(QPixmap(":/Images/close.png"), QIcon.Mode.Normal,
-                       QIcon.State.On)
+        icon.addPixmap(
+            QPixmap(str(Path(globals.PATH_IMAGES) / "close.png")),
+            QIcon.Mode.Normal,
+            QIcon.State.On)
         self.button_tb_close = QPushButton()
         self.button_tb_close.setIcon(icon)
         self.button_tb_close.setObjectName("button_bt_close")
@@ -965,8 +993,10 @@ class MainView(QWidget):
 
         ## Botón de maximizar
         icon2 = QIcon()
-        icon2.addPixmap(QPixmap(":/Images/maximize.png"), QIcon.Mode.Normal,
-                        QIcon.State.On)
+        icon2.addPixmap(
+            QPixmap(str(Path(globals.PATH_IMAGES) / "maximize.png")),
+            QIcon.Mode.Normal,
+            QIcon.State.On)
         self.button_tb_maximize = QPushButton()
         self.button_tb_maximize.setIcon(icon2)
         self.button_tb_maximize.setObjectName("button_bt_maximize")
@@ -977,8 +1007,10 @@ class MainView(QWidget):
 
         ## Pripiedades del botón restaurar
         icon3 = QIcon()
-        icon3.addPixmap(QPixmap(":/Images/restore.png"), QIcon.Mode.Normal,
-                        QIcon.State.On)
+        icon3.addPixmap(
+            QPixmap(str(Path(globals.PATH_IMAGES) / "restore.png")),
+            QIcon.Mode.Normal,
+            QIcon.State.On)
         self.button_tb_restore = QPushButton()
         self.button_tb_restore.setIcon(icon3)
         self.button_tb_restore.setObjectName("button_bt_restore")
@@ -990,8 +1022,10 @@ class MainView(QWidget):
 
         ## Propiedades del botón minimizar
         icon4 = QIcon()
-        icon4.addPixmap(QPixmap(":/Images/minimize.png"), QIcon.Mode.Normal,
-                        QIcon.State.On)
+        icon4.addPixmap(
+            QPixmap(str(Path(globals.PATH_IMAGES) / "minimize.png")),
+            QIcon.Mode.Normal,
+            QIcon.State.On)
         self.button_tb_minimize = QPushButton()
         self.button_tb_minimize.setIcon(icon4)
         self.button_tb_minimize.setObjectName("button_tb_minimize")
