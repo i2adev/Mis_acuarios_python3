@@ -8,9 +8,9 @@ Comentarios:
 import sys
 
 from PyQt6.QtCore import Qt
-from PyQt6.QtGui import QCursor, QIntValidator, QDoubleValidator
+from PyQt6.QtGui import QCursor
 from PyQt6.QtWidgets import QFrame, QLabel, QLineEdit, QPlainTextEdit, \
-    QVBoxLayout, QHBoxLayout, QApplication, QComboBox, QPushButton, QGroupBox, \
+    QVBoxLayout, QHBoxLayout, QApplication, QPushButton, QGroupBox, \
     QCheckBox
 
 from CustomControls.combo_box import ComboBox

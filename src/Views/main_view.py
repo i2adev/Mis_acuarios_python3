@@ -105,6 +105,7 @@ class MainView(QWidget):
         self.maestro_layout.addWidget(self.button_maestro_cat_equipamiento)
         self.maestro_layout.addWidget(self.button_maestro_facturas)
         self.maestro_layout.addWidget(self.button_maestro_fauna)
+        self.maestro_layout.addWidget(self.button_maestro_especies_animales)
         self.maestro_layout.addWidget(self.button_maestro_comportamiento)
         self.maestro_layout.addWidget(self.button_maestro_dieta)
         self.maestro_layout.addWidget(self.button_maestro_nivel_nado)

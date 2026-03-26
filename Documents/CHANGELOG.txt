@@ -1,5 +1,7 @@
 ﻿CHANGELOG:
 ================================================================================
+0.34.1  TESTEO MANUAL DE LA LÓGICA DE ESPECIES ANIMALES.
+
 0.34.0  SE AÑADE LA LÓGICA DE ESPECIES ANIMALES.
 
 0.33.1  SE MODIFICAN LOS COMANDOS DE INSERCIÓN DE LA BASE DE DATOS.

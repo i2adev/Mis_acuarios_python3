@@ -67,7 +67,7 @@ class NivelNadoDialogController(NivelNadoController):
             return
 
         # Configuramos la entidad
-        self._comportamiento_result = NivelNadoEntity(
+        self._nivel_result = NivelNadoEntity(
             id=res.value,
             num=None,
             nivel_nado=self._view.frame.edit_nivel.value(),

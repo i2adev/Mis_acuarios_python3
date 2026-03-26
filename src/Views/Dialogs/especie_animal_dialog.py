@@ -11,7 +11,7 @@ from PyQt6.QtCore import QSize, Qt
 from PyQt6.QtWidgets import QApplication, QSizePolicy, QSpacerItem, \
     QVBoxLayout, QWidget
 from Views.Dialogs.base_dialog import BaseDialog
-from Views.Forms.especie_acimal_form import EspecieAnimalForm
+from Views.Forms.especie_animal_form import EspecieAnimalForm
 from Views.Forms.image_form import ImageForm
 
 

@@ -29,6 +29,7 @@ class StrLineEdit(QLineEdit):
         super().__init__(parent)
 
         # Configura el control
+        self.setAlignment(Qt.AlignmentFlag.AlignLeft)
         self.control_name = control_name
         self.max_length = max_length
         self.is_nullable = is_nullable

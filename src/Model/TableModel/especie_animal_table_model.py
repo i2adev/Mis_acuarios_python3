@@ -21,9 +21,9 @@ class EspecieAnimalTableModel(QAbstractTableModel):
         super().__init__()
         self.data = data
         self._headers = ["ID", "#", "REINO", "FILO", "CLASE", "ORDEN",
-                         "FAMILIA", "GÉNERO", "ESPECIE", "NOMBRE CIENTÍFICO",
-                         "NOMBRE COMÚN", "HIBRIDA", "NOMBRE HIBRIDA",
-                         "GRUPO TAXONÓMICO", "PH", "KH", "GH", "TEMPERATURA",
+                         "FAMILIA", "GÉNERO", "ESPECIE", "NOMBRE CIENT.",
+                         "NOMBRE COMÚN", "HIB.", "NOMBRE HIBRIDA",
+                         "GR. TAXO..", "PH", "KH", "GH", "TEMP.",
                          "ORIGEN", "TAMAÑO", "COMPORTAMIENTO", "DIETA",
                          "NIVEL NADO", "DESCRIPCIÓN"]
 
@@ -76,9 +76,9 @@ class EspecieAnimalTableModel(QAbstractTableModel):
         elif columna == 11:
             return entidad.es_hibrida
         elif columna == 12:
-            return entidad.nombre_especie_hirida
+            return entidad.nombre_especie_hibrida
         elif columna == 13:
-            return entidad.id_grupo_taxonomicvo
+            return entidad.id_grupo_taxonomico
         elif columna == 14:
             return entidad.ph_min
         elif columna == 15:

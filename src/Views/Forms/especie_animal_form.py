@@ -202,7 +202,7 @@ class EspecieAnimalForm(QFrame):
             max_length=32
         )
         self.edit_n_cientifico.setObjectName("edit_n_cientifico")
-        self.edit_n_cientifico.setFixedWidth(150)
+        self.edit_n_cientifico.setFixedWidth(300)
         self.edit_n_cientifico.setToolTip(
             """
             <h1>Nombre científico</h1>
@@ -220,7 +220,7 @@ class EspecieAnimalForm(QFrame):
             max_length=32
         )
         self.edit_n_comun.setObjectName("edit_n_comun")
-        self.edit_n_comun.setFixedWidth(150)
+        self.edit_n_comun.setFixedWidth(200)
         self.edit_n_comun.setToolTip(
             """
             <h1>Nombre común</h1>
@@ -585,7 +585,7 @@ class EspecieAnimalForm(QFrame):
         self.label_descripcion = QLabel("DESCRIPTION")
         self.text_descripcion = QPlainTextEdit()
         self.text_descripcion.setObjectName("text_descripcion")
-        self.text_descripcion.setMinimumHeight(150)
+        self.text_descripcion.setMinimumHeight(75)
         self.text_descripcion.setToolTip(
             """ <h2>Descripción</h2><br>
             En este campo se incluirá una breve descripción de la especie.

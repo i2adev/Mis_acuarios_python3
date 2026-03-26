@@ -14,7 +14,11 @@ class ComboBox(QComboBox):
     def __init__(self, control_name: str, parent=None):
         super(ComboBox, self).__init__(parent)
 
+        # Se inicializan las variables
         self.control_name = control_name
+
+        # Se modifica el comportamiento
+        self.setEditable(True)
 
     def setValue(self, value: int):
         """

@@ -35,6 +35,10 @@ class EspecieAnimalMasterController(EspecieAnimalController):
         # Constructor base
         super().__init__(view, dao, mod)
 
+        # Deshabilitamos los controles
+        self._setDisabledControl(self._view.frame.layout_n_cientifico, True)
+        self._setDisabledControl(self._view.frame.layout_n_e_hibrida, True)
+
         # Rellena los combos
         self._fill_combos()
 
@@ -49,10 +53,6 @@ class EspecieAnimalMasterController(EspecieAnimalController):
 
         # Ocultamos los layouts
         self._hide_layout(self._view.frame.layout_id)
-
-        # Inhabilita el layout del motivo de desmontaje
-        # self._setDisabledControl(self._view.frame.layout_motivo_desmontaje,
-        #                          True)
 
         # Inicializamos los eventos
         self.init_handlers()
@@ -69,10 +69,10 @@ class EspecieAnimalMasterController(EspecieAnimalController):
             if isinstance(widget, QComboBox):
                 widget.installEventFilter(self)
 
-        # Textboxes
-        # self._view.frame.fecha_desmontaje.edit_date.textChanged.connect(
-        #     self._on_text_changed
-        # )
+        # Checboxes
+        self._view.frame.check_hibrida.stateChanged.connect(
+            self._check_state_changed
+        )
 
         # Inicializa los botónes
         self._view.frame.button_insert_grupo_taxo.clicked.connect(
@@ -405,8 +405,7 @@ class EspecieAnimalMasterController(EspecieAnimalController):
 
         self._fill_tableview(self._view.data_table, self._pag.current_data)
         self._configure_table(self._view.data_table,
-                              # [0, 3, 9, 10, 12, 13, 15, ]
-                              )
+                              [0, 2, 3, 4, 5, 6, 7, 8, 12, ])
 
     def _fill_tableview(self, table: QTableView,
                         data: list[EspecieAnimalEntity]):

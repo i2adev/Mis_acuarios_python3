@@ -4,9 +4,9 @@ Fecha:  23/03/2026
 Comentarios:
     Controlador base de especie animal.
 """
-
+from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QAction
-from PyQt6.QtWidgets import QMessageBox, QPushButton, QColorDialog
+from PyQt6.QtWidgets import QCheckBox, QMessageBox, QPushButton
 
 from Controllers.base_controller import BaseController
 from Controllers.comportamiento_fauna_dialog_controller import \
@@ -31,6 +31,7 @@ from Services.Validators.especie_animal_validator import EspecieAnimalValidator
 from Views.Dialogs.comportamiento_fauna_dialog import ComportamientoFaunaDialog
 from Views.Dialogs.dieta_fauna_dialog import DietaFaunaDialog
 from Views.Dialogs.especie_animal_dialog import EspecieAnimalDialog
+from Views.Dialogs.grupo_taxonomico_dialog import GrupoTaxonomicoDialog
 from Views.Dialogs.nivel_nado_dialog import NivelNadoDialog
 from Views.Masters.especie_animal_view import EspecieAnimalView
 
@@ -92,7 +93,7 @@ class EspecieAnimalController(BaseController):
         ent.especie = ctrs.edit_especie.value()
 
         # Nombre común
-        ent.nombre = ctrs.edit_nombre_comun.value()
+        ent.nombre_comun = ctrs.edit_n_comun.value()
 
         # ¿Es una especie híbrida?
         ent.es_hibrida = 1 if ctrs.check_hibrida.isChecked() else 0
@@ -101,7 +102,7 @@ class EspecieAnimalController(BaseController):
         ent.nombre_especie_hibrida = ctrs.edit_n_e_hibrida.value()
 
         # Grupo taxonómico
-        ent.id_grupo_taxonomico = ctrs.combo_grupo_taxonomico.value()
+        ent.id_grupo_taxonomico = ctrs.combo_grupo_taxo.value()
 
         # PH mínimo i máximo
         ent.ph_min = ctrs.edit_ph_min.value()
@@ -129,16 +130,14 @@ class EspecieAnimalController(BaseController):
         ent.id_comportamiento = ctrs.combo_comportamiento.value()
 
         # Dieta
-        ent.id_dietario = ctrs.combo_dieta.value()
+        ent.id_dieta = ctrs.combo_dieta.value()
 
         # Nivel de nado
-        ent.nivel = ctrs.combo_nivel_nado.value()
+        ent.id_nivel_nado = ctrs.combo_nivel_nado.value()
 
         # Descripción del acuario
-        if ctrs.text_descripcion.toPlainText():
-            ent.descripcion = ctrs.text_descripcion.toPlainText()
-        else:
-            ent.descripcion = None
+        ent.descripcion = ctrs.text_descripcion.toPlainText() if (
+            ctrs.text_descripcion.toPlainText()) else None
 
         return ent
 
@@ -171,7 +170,7 @@ class EspecieAnimalController(BaseController):
         """ Actualiza el registro en la base de datos. """
 
         # Valida el formulario
-        val = self._validate_view(False, False)
+        val = self._validate_view()
 
         if not val.is_success:
             return val
@@ -239,8 +238,7 @@ class EspecieAnimalController(BaseController):
 
     # FIN DE CRUD --------------------------------------------------
 
-    def _validate_view(self, val_color: bool = True,
-                       val_is_mounted: bool = True) -> Result:
+    def _validate_view(self) -> Result:
         """
         Valida el formulario.
         :param val_color: Indica si valida el color.
@@ -403,7 +401,7 @@ class EspecieAnimalController(BaseController):
         # Llenas el combo
         for ent in lista.value:
             self._view.frame.combo_grupo_taxo.addItem(
-                ent.grupo_taxo, ent.id
+                ent.grupo_taxonomico, ent.id
             )
 
         # Establecemos el autocompletado
@@ -416,7 +414,7 @@ class EspecieAnimalController(BaseController):
         """ Llena el combo del comportamiento de la fauna. """
 
         # Vaciamos el combo
-        self._view.frame.combo_comportamioento.clear()
+        self._view.frame.combo_comportamiento.clear()
 
         # Obtenemos los datos
         dao = ComportamientoFaunaDAO()
@@ -429,15 +427,15 @@ class EspecieAnimalController(BaseController):
 
         # Llenas el combo
         for ent in lista.value:
-            self._view.frame.combo_comportamioento.addItem(
+            self._view.frame.combo_comportamiento.addItem(
                 ent.comportamiento, ent.id
             )
 
         # Establecemos el autocompletado
-        self._set_autocomplete(self._view.frame.combo_comportamioento)
+        self._set_autocomplete(self._view.frame.combo_comportamiento)
 
         # Deselecciona el valor
-        self._view.frame.combo_comportamioento.setCurrentIndex(-1)
+        self._view.frame.combo_comportamiento.setCurrentIndex(-1)
 
     def _open_grupo_taxo_dialog(self):
         """ Abrimos el diálogo del grupo taxonómico. """
@@ -526,7 +524,7 @@ class EspecieAnimalController(BaseController):
         # Configuramos el combo
         combo = self._view.frame.combo_nivel_nado
 
-        self._fill_combo_dieta()
+        self._fill_combo_nivel_nado()
         for i in range(combo.count()):
             if combo.itemData(i) == res.value.id:
                 combo.setCurrentIndex(i)
@@ -570,7 +568,8 @@ class EspecieAnimalController(BaseController):
         self._view.frame.edit_genero.setValue(ent.genero)
         self._view.frame.edit_especie.setValue(ent.especie)
         self._view.frame.edit_n_cientifico.setValue(ent.nombre_cientifico)
-        self._view.frame.check_hibrida.setChecked(ent.hibrida)
+        self._view.frame.edit_n_comun.setValue(ent.nombre_comun)
+        self._view.frame.check_hibrida.setChecked(ent.es_hibrida)
         self._view.frame.edit_n_e_hibrida.setValue(ent.nombre_especie_hibrida)
         self._view.frame.combo_grupo_taxo.setValue(ent.id_grupo_taxonomico)
         self._view.frame.edit_ph_min.setValue(ent.ph_min)
@@ -587,7 +586,9 @@ class EspecieAnimalController(BaseController):
         self._view.frame.combo_comportamiento.setValue(ent.id_comportamiento)
         self._view.frame.combo_dieta.setValue(ent.id_dieta)
         self._view.frame.combo_nivel_nado.setValue(ent.id_nivel_nado)
-        self._view.frame.text_descripcion.setValue(ent.descripcion)
+        self._view.frame.text_descripcion.setPlainText(
+            ent.descripcion if ent.descripcion is not None else ""
+        )
 
         return Result.success(id_ent)
 
@@ -608,3 +609,13 @@ class EspecieAnimalController(BaseController):
                 str(len(self.lista_fotos))
             )
             self.show_image()
+
+    def _check_state_changed(self, state):
+        """ Se ejecuta cuando el estado del checkbox cambia"""
+
+        if state == Qt.CheckState.Checked.value:
+            self._setDisabledControl(self._view.frame.layout_n_e_hibrida,
+                                     False)
+        else:
+            self._setDisabledControl(self._view.frame.layout_n_e_hibrida,
+                                     True)

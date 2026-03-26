@@ -10,7 +10,7 @@ import sys
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QApplication, QWidget
 
-from Views.Forms.especie_acimal_form import EspecieAnimalForm
+from Views.Forms.especie_animal_form import EspecieAnimalForm
 from Views.Forms.image_form import ImageForm
 from Views.Masters.base_view import BaseView
 
@@ -67,7 +67,7 @@ class EspecieAnimalView(BaseView):
         self.frame.edit_temp_max.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
         self.frame.edit_origen.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
         self.frame.edit_tamano.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
-        self.frame.combo_comportamioento.setFocusPolicy(
+        self.frame.combo_comportamiento.setFocusPolicy(
             Qt.FocusPolicy.StrongFocus)
         self.frame.combo_dieta.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
         self.frame.combo_nivel_nado.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
@@ -96,8 +96,8 @@ class EspecieAnimalView(BaseView):
         self.setTabOrder(self.frame.edit_temp_max, self.frame.edit_origen)
         self.setTabOrder(self.frame.edit_origen, self.frame.edit_tamano)
         self.setTabOrder(self.frame.edit_tamano,
-                         self.frame.combo_comportamioento)
-        self.setTabOrder(self.frame.combo_comportamioento,
+                         self.frame.combo_comportamiento)
+        self.setTabOrder(self.frame.combo_comportamiento,
                          self.frame.combo_dieta)
         self.setTabOrder(self.frame.combo_dieta, self.frame.combo_nivel_nado)
         self.setTabOrder(self.frame.combo_nivel_nado,

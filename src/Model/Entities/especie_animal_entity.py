@@ -349,6 +349,7 @@ class EspecieAnimalEntity(BaseEntity):
     @id_dieta.setter
     def id_dieta(self, new_id_dieta: int) -> None:
         """ ID de la dieta de la especie """
+        self.__id_dieta = new_id_dieta
 
     @property
     def id_nivel_nado(self) -> int:

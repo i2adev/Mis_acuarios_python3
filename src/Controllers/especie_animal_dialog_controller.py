@@ -35,6 +35,10 @@ class EspecieAnimalDialogController(EspecieAnimalController):
         # Oculta los layouts
         self._hide_layout(self._view.frame.layout_id)
 
+        # Deshabilitamos los controles
+        self._setDisabledControl(self._view.frame.layout_n_cientifico, True)
+        self._setDisabledControl(self._view.frame.layout_n_e_hibrida, True)
+
         # Inicializamos los eventos
         self.init_handlers()
 
@@ -47,6 +51,11 @@ class EspecieAnimalDialogController(EspecieAnimalController):
                 widget.installEventFilter(self)
             if isinstance(widget, QComboBox):
                 widget.installEventFilter(self)
+
+        # Checboxes
+        self._view.frame.check_hibrida.stateChanged.connect(
+            self._check_state_changed
+        )
 
         # Botones
         self._view.frame.button_insert_grupo_taxo.clicked.connect(
