@@ -77,7 +77,7 @@ class PosicionPlantaAcuarioForm(QFrame):
         self.text_descripcion.setToolTip(
             """
             <h2>Descripción</h2><br>
-            En este campo se inserta la <b>descricíon</b> de la posición de la 
+            En este campo se inserta la <b>descripción</b> de la posición de la 
             planta en el acuario.
             """
         )

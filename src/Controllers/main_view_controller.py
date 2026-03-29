@@ -27,8 +27,6 @@ from Controllers.dificultad_planta_master_controller import \
     DificultadPlantaMasterController
 from Controllers.equipamiento_master_controller import \
     EquipamientoMasterController
-from Controllers.especie_animal_master_controller import \
-    PosicionPlantaAcuarioMasterController
 from Controllers.estado_proyecto_master_controller import \
     EstadoProyectoMasterController
 from Controllers.filtro_master_controller import FiltroMasterController
@@ -44,6 +42,8 @@ from Controllers.marca_comercial_master_controller import \
 from Controllers.material_urna_master_controler import \
     MaterialUrnaMasterController
 from Controllers.nivel_nado_master_controller import NivelNadoMasterController
+from Controllers.posicion_planta_acuario_master_controller import \
+    PosicionPlantaAcuarioMasterController
 from Controllers.proyecto_master_controller import ProyectoMasterController
 from Controllers.subcategoria_acuario_master_controller import \
     SubcategoriaAcuarioMasterController
@@ -53,7 +53,6 @@ from Controllers.tipo_acuario_master_controller import \
     TipoAcuarioMasterController
 from Controllers.tipo_filtro_master_controller import \
     TipoFiltroMasterController
-from Controllers.tipo_iluminacion_controller import TipoIluminacionController
 from Controllers.tipo_iluminacion_master_controller import \
     TipoIluminacionMasterController
 from Controllers.unidad_contenido_master_controller import \
@@ -71,7 +70,6 @@ from Model.DAO.control_iluminacion_dao import ControlIluminacionDAO
 from Model.DAO.dieta_fauna_dao import DietaFaunaDAO
 from Model.DAO.dificultad_plantas_dao import DificultadPlantaDAO
 from Model.DAO.equipamiento_dao import EquipamientoDAO
-from Model.DAO.especie_animal_dao import PosicionPlantaAcuarioDAO
 from Model.DAO.estado_proyecto_dao import EstadoProyectoDAO
 from Model.DAO.filtro_dao import FiltroDAO
 from Model.DAO.formato_consumible_dao import FormatoConsumibleDAO
@@ -80,6 +78,7 @@ from Model.DAO.iluminacion_dao import IluminacionDAO
 from Model.DAO.marca_comercial_dao import MarcaComercialDAO
 from Model.DAO.material_urna_dao import MaterialUrnaDAO
 from Model.DAO.niveles_nado_dao import NivelNadoDAO
+from Model.DAO.posicion_planta_acuario_dao import PosicionPlantaAcuarioDAO
 from Model.DAO.proyecto_dao import ProyectoDAO
 from Model.DAO.subcategoria_acuario_dao import SubcategoriaAcuarioDAO
 from Model.DAO.subcategoria_incidencia_dao import SubcategoriaIncidenciaDAO
@@ -103,7 +102,6 @@ from Model.Entities.control_iluminacion_entity import ControlIluminacionEntity
 from Model.Entities.dieta_fauna_entity import DietaFaunaEntity
 from Model.Entities.dificultad_planta_entity import DificultadPlantaEntity
 from Model.Entities.equipamiento_entity import EquipamientoEntity
-from Model.Entities.especie_animal_entity import PosicionPlantaAcuarioEntity
 from Model.Entities.estado_proyecto_entity import EstadoProyectoEntity
 from Model.Entities.filtro_entity import FiltroEntity
 from Model.Entities.formato_consumible_entity import FormatoConsumibleEntity
@@ -112,6 +110,8 @@ from Model.Entities.iluminacion_entity import IluminacionEntity
 from Model.Entities.marca_comercial_entity import MarcaComercialEntity
 from Model.Entities.material_urna_entity import MaterialUrnaEntity
 from Model.Entities.nivel_nado_entity import NivelNadoEntity
+from Model.Entities.posicion_planta_acuario_entity import \
+    PosicionPlantaAcuarioEntity
 from Model.Entities.proyecto_entity import ProyectoEntity
 from Model.Entities.subcategoria_acuario_entity import \
     SubcategoriaAcuarioEntity
@@ -134,7 +134,6 @@ from Views.Masters.control_iluminacion_view import ControlIluminacionView
 from Views.Masters.dieta_fauna_view import DietaFaunaView
 from Views.Masters.dificultad_planta_view import DificultadPlantaView
 from Views.Masters.equipamiento_view import EquipamientoView
-from Views.Masters.especie_animal_view import PosicionPlantaAcuarioView
 from Views.Masters.estado_proyecto_view import EstadoProyectoView
 from Views.Masters.filtro_view import FiltroView
 from Views.Masters.formato_consumible_view import FormatoConsumibleView
@@ -143,6 +142,8 @@ from Views.Masters.iluminacion_view import IluminacionView
 from Views.Masters.marca_comercial_view import MarcaComercialView
 from Views.Masters.material_urna_view import MaterialUrnaView
 from Views.Masters.nivel_nado_view import NivelNadoView
+from Views.Masters.posicion_pnalta_acuario_view import \
+    PosicionPlantaAcuarioView
 from Views.Masters.proyecto_view import ProyectoView
 from Views.Masters.subcategoria_acuario_view import SubcategoriaAcuarioView
 from Views.Masters.subcategoria_incidencia_view import \
