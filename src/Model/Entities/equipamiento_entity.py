@@ -97,12 +97,12 @@ class EquipamientoEntity(BaseEntity):
 
     @property
     def numero_serie(self) -> str:
-        """ Numero de serie del equipamiento. """
+        """ Número de serie del equipamiento. """
         return self._numero_serie
 
     @numero_serie.setter
     def numero_serie(self, new_numero_serie: str) -> None:
-        """ Numero de serie del equipamiento. """
+        """ Número de serie del equipamiento. """
         self._numero_serie = new_numero_serie
 
     @property

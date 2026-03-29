@@ -36,12 +36,12 @@ class EstadoProyectoEntity(BaseEntity):
 
     @property
     def num(self) -> int | None:
-        """ Numero de estado de proyecto. """
+        """ Número de estado de proyecto. """
         return self.__num
 
     @num.setter
     def num(self, new_num: int) -> None:
-        """ Numero de estado de proyecto. """
+        """ Número de estado de proyecto. """
         self.__num = new_num
 
     @property

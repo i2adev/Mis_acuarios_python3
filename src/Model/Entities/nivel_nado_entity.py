@@ -18,7 +18,7 @@ class NivelNadoEntity(BaseEntity):
         """
         Constructor de la clase NivelNadoEntity.
         :param id: ID del nivel de nado.
-        :param num: Numero del nivel de nado.
+        :param num: Número del nivel de nado.
         :param nivel_nado: Nivel de nado.
         :param descripcion: Descripción del nivel de nado.
         """
@@ -41,12 +41,12 @@ class NivelNadoEntity(BaseEntity):
 
     @property
     def num(self) -> int:
-        """ Numero del nivel de nado. """
+        """ Número del nivel de nado. """
         return self.__num
 
     @num.setter
     def num(self, new_num: int) -> None:
-        """ Numero del nivel de nado. """
+        """ Número del nivel de nado. """
         self.__num = new_num
 
     @property

@@ -46,7 +46,7 @@ class FiltroEntity(BaseEntity):
         """
         Constructor de clase.
         :param id: ID de la entidad filtro.
-        :param num: Numero de la entidad filtro.
+        :param num: Número de la entidad filtro.
         :param id_tipo: ID de la tipo de filtro.
         :param id_marca: ID de la marca de filtro.
         :param modelo: Modelo de filtro.
@@ -103,12 +103,12 @@ class FiltroEntity(BaseEntity):
 
     @property
     def num(self) -> int | None:
-        """ Numero de la entidad filtro. """
+        """ Número de la entidad filtro. """
         return self._num
 
     @num.setter
     def num(self, new_num: int) -> None:
-        """ Numero de la entidad filtro. """
+        """ Número de la entidad filtro. """
         self._num = new_num
 
     @property

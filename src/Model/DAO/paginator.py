@@ -21,6 +21,8 @@ from Model.Entities.formato_consumible_entity import FormatoConsumibleEntity
 from Model.Entities.grupo_taxonomico_entity import GrupoTaxonomicoEntity
 from Model.Entities.iluminacion_entity import IluminacionEntity
 from Model.Entities.nivel_nado_entity import NivelNadoEntity
+from Model.Entities.posicion_planta_acuario_entity import \
+    PosicionPlantaAcuarioEntity
 from Model.Entities.tipo_iluminacion_entity import TipoIluminacionEntity
 from Model.Entities.unidades_contenido_entity import UnidadContenidoEntity
 from Model.database import DBManager
@@ -69,7 +71,7 @@ class Paginator:
         self._records = None  # Registros totales.
         self._total_pages = None  # Número de páginas totales.
         self._current_page = None  # Número de página actual.
-        self._start = None  # Numero inicial de registro.
+        self._start = None  # Número inicial de registro.
         self._end = None  # Número final de registro.
         self._page_index = None  # Ïndice de página.
 
@@ -766,6 +768,15 @@ class Paginator:
             )
                 for f in rows
             ]
+        elif self.procedure == "VISTA_POSICIONES_PLANTAS_ACUARIO":
+            data_list = [PosicionPlantaAcuarioEntity(
+                id=f["ID"],
+                num=f["NUM"],
+                posicion=f["POSICION"],
+                descripcion=f["DESCRIPCION"],
+            )
+                for f in rows
+            ]
 
         return data_list
 
@@ -850,6 +861,8 @@ class Paginator:
             return SearchCmd.SEARCH_GRUPO_TAXONOMICO
         elif self.procedure == "VISTA_ESPECIES_ANIMALES":
             return SearchCmd.SEARCH_ESPECIE_ANIMAL
+        elif self.procedure == "VISTA_POSICIONES_PLANTAS_ACUARIO":
+            return SearchCmd.SEARCH_POSICION_PLANTA
 
     def __str__(self):
         """ Muestra el objeto en forma de texto. """

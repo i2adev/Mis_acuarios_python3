@@ -16,7 +16,7 @@ class DificultadPlantaEntity(BaseEntity):
         """
         Constructor de la clase Dificultad de planta.
         :param id: ID de la dificultad de planta
-        :param num: Numero de la dificultad de planta
+        :param num: Número de la dificultad de planta
         :param nivel: Nivel de la dificultad de planta
         :param dificultad: Dificultad de planta
         :param descripcion: Descripcion de la dificultad de planta
@@ -41,12 +41,12 @@ class DificultadPlantaEntity(BaseEntity):
 
     @property
     def num(self) -> int | None:
-        """ Numero de la dificultad de planta """
+        """ Número de la dificultad de planta """
         return self.__num
 
     @num.setter
     def num(self, new_num: int | None) -> None:
-        """ Numero de la dificultad de planta """
+        """ Número de la dificultad de planta """
         self.__num = new_num
 
     @property

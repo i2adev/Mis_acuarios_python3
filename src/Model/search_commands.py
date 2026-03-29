@@ -778,3 +778,20 @@ class SearchCmd:
     )
     WHERE FIELD LIKE '%' || :pattern || '%';
     """
+
+    SEARCH_POSICION_PLANTA = """
+    SELECT ID, NUM, POSICION, DESCRIPCION
+    FROM
+    (
+        SELECT ID_POSICION_ACUARIO AS ID,
+               ROW_NUMBER() OVER(ORDER BY ID_POSICION_ACUARIO) AS NUM,
+               POSICION AS POSICION,
+               DESCRIPCION AS DESCRIPCION,
+               UPPER(
+                   IFNULL(POSICION, '') ||
+                   IFNULL(DESCRIPCION, '')
+               ) AS FIELD
+        FROM   POSICIONES_PLANTAS_ACUARIO
+    )
+    WHERE FIELD LIKE '%' || :pattern || '%';
+    """

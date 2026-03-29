@@ -19,7 +19,7 @@ class ComportamientoFaunaEntity(BaseEntity):
 
         Parámetros:
         :param id: Id de la entidad.
-        :param num: Numero de la entidad.
+        :param num: Número de la entidad.
         :param comportamiento: Comportamiento del animal.
         :param descripcion: Descripción del comportamiento.
         """
