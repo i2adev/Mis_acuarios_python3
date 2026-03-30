@@ -52,7 +52,7 @@ class RequerimientoCO2Controller(BaseController):
             ent.id = None
 
         # Comportamiento
-        ent.posicion = ctrs.edit_requerimiento.value()
+        ent.requerimiento = ctrs.edit_requerimiento.value()
 
         # Descripción
         if ctrs.text_descripcion.toPlainText():
