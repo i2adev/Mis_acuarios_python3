@@ -23,6 +23,7 @@ from Model.Entities.iluminacion_entity import IluminacionEntity
 from Model.Entities.nivel_nado_entity import NivelNadoEntity
 from Model.Entities.posicion_planta_acuario_entity import \
     PosicionPlantaAcuarioEntity
+from Model.Entities.requerimiento_co2_entity import RequerimientoCO2Entity
 from Model.Entities.tipo_iluminacion_entity import TipoIluminacionEntity
 from Model.Entities.unidades_contenido_entity import UnidadContenidoEntity
 from Model.database import DBManager
@@ -777,6 +778,15 @@ class Paginator:
             )
                 for f in rows
             ]
+        elif self.procedure == "VISTA_REQUERIMIENTOS_CO2":
+            data_list = [RequerimientoCO2Entity(
+                id=f["ID"],
+                num=f["NUM"],
+                requerimiento=f["REQUERIMIENTO_CO2"],
+                descripcion=f["DESCRIPCION"],
+            )
+                for f in rows
+            ]
 
         return data_list
 
@@ -863,6 +873,8 @@ class Paginator:
             return SearchCmd.SEARCH_ESPECIE_ANIMAL
         elif self.procedure == "VISTA_POSICIONES_PLANTAS_ACUARIO":
             return SearchCmd.SEARCH_POSICION_PLANTA
+        elif self.procedure == "VISTA_REQUERIMIENTOS_CO2":
+            return SearchCmd.SEARCH_REQUERIMIENTO_CO2
 
     def __str__(self):
         """ Muestra el objeto en forma de texto. """

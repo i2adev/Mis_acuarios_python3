@@ -115,6 +115,7 @@ class MainView(QWidget):
         self.maestro_layout.addWidget(self.button_maestro_flora)
         self.maestro_layout.addWidget(self.button_maestro_dificultad_planta)
         self.maestro_layout.addWidget(self.button_maestro_posición_planta)
+        self.maestro_layout.addWidget(self.button_maestro_requerimiento_co2)
         self.maestro_layout.addWidget(self.button_maestro_iluminacion)
         self.maestro_layout.addWidget(self.button_maestro_control_iluminacion)
         self.maestro_layout.addWidget(self.button_maestro_tipo_iluminacion)
@@ -481,6 +482,29 @@ class MainView(QWidget):
         )
         self.button_maestro_posición_planta.setFlat(True)
         self.button_maestro_posición_planta.setCursor(
+            QCursor(Qt.CursorShape.PointingHandCursor)
+        )
+
+        self.button_maestro_requerimiento_co2 = QPushButton(
+            " > REQUERIMIENTOS DE CO2"
+        )
+        self.button_maestro_requerimiento_co2.setStyleSheet(
+            """
+            QPushButton {
+                background-color: transparent;
+                text-align: left;
+                margin-bottom: 0;
+                margin-left: 20;
+                font-family: 'Roboto'; 
+                font-size: 14px;
+            }
+            """
+        )
+        self.button_maestro_requerimiento_co2.setObjectName(
+            "button_maestro_requerimiento_co2"
+        )
+        self.button_maestro_requerimiento_co2.setFlat(True)
+        self.button_maestro_requerimiento_co2.setCursor(
             QCursor(Qt.CursorShape.PointingHandCursor)
         )
 

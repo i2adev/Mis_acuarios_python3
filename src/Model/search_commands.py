@@ -795,3 +795,20 @@ class SearchCmd:
     )
     WHERE FIELD LIKE '%' || :pattern || '%';
     """
+
+    SEARCH_REQUERIMIENTO_CO2 = """
+    SELECT ID, NUM, REQUERIMIENTO_CO2, DESCRIPCION
+    FROM
+    (
+        SELECT ID_REQUERIMIENTO_CO2 AS ID,
+               ROW_NUMBER() OVER(ORDER BY ID_REQUERIMIENTO_CO2) AS NUM,
+               REQUERIMIENTO_CO2 AS REQUERIMIENTO_CO2,
+               DESCRIPCION AS DESCRIPCION,
+               UPPER(
+                   IFNULL(REQUERIMIENTO_CO2, '') ||
+                   IFNULL(DESCRIPCION, '')
+               ) AS FIELD
+        FROM   REQUERIMIENTOS_CO2
+    )
+    WHERE FIELD LIKE '%' || :pattern || '%';
+    """
