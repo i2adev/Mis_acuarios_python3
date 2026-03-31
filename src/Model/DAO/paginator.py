@@ -787,6 +787,15 @@ class Paginator:
             )
                 for f in rows
             ]
+        elif self.procedure == "VISTA_REQUERIMIENTOS_ILUMINACION":
+            data_list = [RequerimientoCO2Entity(
+                id=f["ID"],
+                num=f["NUM"],
+                requerimiento=f["REQUERIMIENTO_ILUMINACION"],
+                descripcion=f["DESCRIPCION"],
+            )
+                for f in rows
+            ]
 
         return data_list
 
@@ -875,6 +884,8 @@ class Paginator:
             return SearchCmd.SEARCH_POSICION_PLANTA
         elif self.procedure == "VISTA_REQUERIMIENTOS_CO2":
             return SearchCmd.SEARCH_REQUERIMIENTO_CO2
+        elif self.procedure == "VISTA_REQUERIMIENTOS_ILUMINACION":
+            return SearchCmd.SEARCH_REQUERIMIENTO_ILUMINACION
 
     def __str__(self):
         """ Muestra el objeto en forma de texto. """

@@ -1,5 +1,7 @@
 ﻿CHANGELOG:
 ================================================================================
+0.37.0  SE AÑADE LA LÓGICA DE LOS REQUERIMIENTO DE ILUMINACIÓN.
+
 0.36.1  TESTEO MANUAL DE LA LÓGICA DE LOS REQUERIMIENTO DE CO2.
 
 0.36.0  SE AÑADE LA LÓGICA DE LOS REQUERIMIENTO DE CO2.

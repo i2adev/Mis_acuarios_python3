@@ -508,6 +508,29 @@ class MainView(QWidget):
             QCursor(Qt.CursorShape.PointingHandCursor)
         )
 
+        self.button_maestro_requerimiento_iluminacion = QPushButton(
+            " > REQUERIMIENTOS DE ILUMINACIÓN"
+        )
+        self.button_maestro_requerimiento_iluminacion.setStyleSheet(
+            """
+            QPushButton {
+                background-color: transparent;
+                text-align: left;
+                margin-bottom: 0;
+                margin-left: 20;
+                font-family: 'Roboto'; 
+                font-size: 14px;
+            }
+            """
+        )
+        self.button_maestro_requerimiento_iluminacion.setObjectName(
+            "button_maestro_requerimiento_iluminacion"
+        )
+        self.button_maestro_requerimiento_iluminacion.setFlat(True)
+        self.button_maestro_requerimiento_iluminacion.setCursor(
+            QCursor(Qt.CursorShape.PointingHandCursor)
+        )
+
         self.button_maestro_dieta = QPushButton(
             " > DIETA"
         )

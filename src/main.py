@@ -24,7 +24,7 @@ import os
 import globals
 
 # Versión del programa
-__version__ = "0.36.1"
+__version__ = "0.37.0"
 
 
 def excepthook(exc_type, exc_value, exc_traceback):

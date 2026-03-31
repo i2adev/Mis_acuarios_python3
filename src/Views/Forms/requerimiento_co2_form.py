@@ -50,7 +50,7 @@ class RequerimientoCO2Form(QFrame):
         # Etiquetas
         self.label_id = QLabel("ID")
         self.label_id.setFixedWidth(50)
-        self.label_requerimiento = QLabel("REQUERIMIENTO")
+        self.label_requerimiento = QLabel("REQUERIMIENTO CO2")
         self.label_descripcion = QLabel("DESCRIPCIÓN")
 
         # Textos
@@ -60,7 +60,7 @@ class RequerimientoCO2Form(QFrame):
         self.edit_id.setEnabled(False)
 
         self.edit_requerimiento = StrLineEdit(
-            control_name="REQUERIMIENTO",
+            control_name="REQUERIMIENTO CO2",
             max_length=32,
         )
         self.edit_requerimiento.setObjectName("edit_requerimiento")
