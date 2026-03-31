@@ -116,6 +116,8 @@ class MainView(QWidget):
         self.maestro_layout.addWidget(self.button_maestro_dificultad_planta)
         self.maestro_layout.addWidget(self.button_maestro_posición_planta)
         self.maestro_layout.addWidget(self.button_maestro_requerimiento_co2)
+        self.maestro_layout.addWidget(
+            self.button_maestro_requerimiento_iluminacion)
         self.maestro_layout.addWidget(self.button_maestro_iluminacion)
         self.maestro_layout.addWidget(self.button_maestro_control_iluminacion)
         self.maestro_layout.addWidget(self.button_maestro_tipo_iluminacion)

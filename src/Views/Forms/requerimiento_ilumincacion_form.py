@@ -66,7 +66,7 @@ class RequerimientoIluminacionForm(QFrame):
         self.edit_requerimiento.setObjectName("edit_requerimiento")
         self.edit_requerimiento.setToolTip(
             """
-            <h2>Requerimiento de iluminación<br>
+            <h2>Requerimiento de iluminación</h2><br>
             En este campo se inserta el <b>requerimiento</b> de iluminación.
             """
         )
