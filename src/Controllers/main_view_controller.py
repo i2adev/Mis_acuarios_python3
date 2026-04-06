@@ -47,8 +47,10 @@ from Controllers.posicion_planta_acuario_master_controller import \
 from Controllers.proyecto_master_controller import ProyectoMasterController
 from Controllers.requerimiento_co2_master_controller import \
     RequerimientoCO2MasterController
-from Controllers.requerimiento_iluminacion_master_dialog import \
+from Controllers.requerimiento_iluminacion_master_controller import \
     RequerimientoIluminacionMasterController
+from Controllers.sexo_animal_master_controller import \
+    SexoAnimalMasterController
 from Controllers.subcategoria_acuario_master_controller import \
     SubcategoriaAcuarioMasterController
 from Controllers.subcategoria_incidencia_master_controller import \
@@ -86,6 +88,7 @@ from Model.DAO.posicion_planta_acuario_dao import PosicionPlantaAcuarioDAO
 from Model.DAO.proyecto_dao import ProyectoDAO
 from Model.DAO.requerimiento_co2_dao import RequerimientoCO2DAO
 from Model.DAO.requerimiento_iluminacion_dao import RequerimientoIluminacionDAO
+from Model.DAO.sexo_animal_dao import SexoAnimalDAO
 from Model.DAO.subcategoria_acuario_dao import SubcategoriaAcuarioDAO
 from Model.DAO.subcategoria_incidencia_dao import SubcategoriaIncidenciaDAO
 from Model.DAO.tipo_acuario_dao import TipoAcuarioDAO
@@ -122,6 +125,7 @@ from Model.Entities.proyecto_entity import ProyectoEntity
 from Model.Entities.requerimiento_co2_entity import RequerimientoCO2Entity
 from Model.Entities.requerimiento_iluminacion_entity import \
     RequerimientoIluminacionEntity
+from Model.Entities.sexo_animal_entity import SexoAnimalEntity
 from Model.Entities.subcategoria_acuario_entity import \
     SubcategoriaAcuarioEntity
 from Model.Entities.subcategoria_incidencia_entity import \
@@ -157,6 +161,7 @@ from Views.Masters.proyecto_view import ProyectoView
 from Views.Masters.requerimiento_co2_view import RequerimientoCO2View
 from Views.Masters.requerimiento_iluminacion_view import \
     RequerimientoIluminacionView
+from Views.Masters.sexo_animal_view import SexoAnimalView
 from Views.Masters.subcategoria_acuario_view import SubcategoriaAcuarioView
 from Views.Masters.subcategoria_incidencia_view import \
     SubcategoriaIncidenciaView
@@ -315,7 +320,10 @@ class MainViewController(BaseController):
             self.posicion_requerimiento_co2__click
         )
         self._view.button_maestro_requerimiento_iluminacion.clicked.connect(
-            self.posicion_requerimiento_iluminacion_click
+            self.requerimiento_iluminacion_click
+        )
+        self._view.button_maestro_sexo.clicked.connect(
+            self.sexo_click
         )
 
     def reportes_click(self):
@@ -325,7 +333,17 @@ class MainViewController(BaseController):
 
         ctrl.show()
 
-    def posicion_requerimiento_iluminacion_click(self):
+    def sexo_click(self):
+        """ Cuando se pulsa el botón del sexo del animal. """
+
+        view = SexoAnimalView("MAESTRO DE SEXOS")
+        dao = SexoAnimalDAO()
+        mod = SexoAnimalEntity()
+
+        ctrl = SexoAnimalMasterController(view, dao, mod)
+        ctrl.show()
+
+    def requerimiento_iluminacion_click(self):
         """ Cuando se pulsa el botón de requerimientos de iluminación. """
 
         view = RequerimientoIluminacionView("MAESTRO DE REQUERIMIENTOS DE "

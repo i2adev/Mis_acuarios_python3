@@ -24,6 +24,9 @@ from Model.Entities.nivel_nado_entity import NivelNadoEntity
 from Model.Entities.posicion_planta_acuario_entity import \
     PosicionPlantaAcuarioEntity
 from Model.Entities.requerimiento_co2_entity import RequerimientoCO2Entity
+from Model.Entities.requerimiento_iluminacion_entity import \
+    RequerimientoIluminacionEntity
+from Model.Entities.sexo_animal_entity import SexoAnimalEntity
 from Model.Entities.tipo_iluminacion_entity import TipoIluminacionEntity
 from Model.Entities.unidades_contenido_entity import UnidadContenidoEntity
 from Model.database import DBManager
@@ -788,10 +791,19 @@ class Paginator:
                 for f in rows
             ]
         elif self.procedure == "VISTA_REQUERIMIENTOS_ILUMINACION":
-            data_list = [RequerimientoCO2Entity(
+            data_list = [RequerimientoIluminacionEntity(
                 id=f["ID"],
                 num=f["NUM"],
                 requerimiento=f["REQUERIMIENTO_ILUMINACION"],
+                descripcion=f["DESCRIPCION"],
+            )
+                for f in rows
+            ]
+        elif self.procedure == "VISTA_SEXO_ANIMAL":
+            data_list = [SexoAnimalEntity(
+                id=f["ID"],
+                num=f["NUM"],
+                sexo=f["SEXO_ANIMAL"],
                 descripcion=f["DESCRIPCION"],
             )
                 for f in rows
@@ -886,6 +898,8 @@ class Paginator:
             return SearchCmd.SEARCH_REQUERIMIENTO_CO2
         elif self.procedure == "VISTA_REQUERIMIENTOS_ILUMINACION":
             return SearchCmd.SEARCH_REQUERIMIENTO_ILUMINACION
+        elif self.procedure == "VISTA_SEXO_ANIMAL":
+            return SearchCmd.SEARCH_SEXO_ANIMAL
 
     def __str__(self):
         """ Muestra el objeto en forma de texto. """

@@ -829,3 +829,20 @@ class SearchCmd:
     )
     WHERE FIELD LIKE '%' || :pattern || '%';
     """
+
+    SEARCH_SEXO_ANIMAL = """
+    SELECT ID, NUM, SEXO_ANIMAL, DESCRIPCION
+    FROM
+    (
+        SELECT ID_SEXO_ANIMAL AS ID,
+               ROW_NUMBER() OVER(ORDER BY SEXO_ANIMAL) AS NUM,
+               SEXO_ANIMAL AS SEXO_ANIMAL,
+               DESCRIPCION AS DESCRIPCION,
+               UPPER(
+                   IFNULL(SEXO_ANIMAL, '') ||
+                   IFNULL(DESCRIPCION, '')
+               ) AS FIELD
+        FROM   SEXO_ANIMAL
+    )
+    WHERE FIELD LIKE '%' || :pattern || '%';
+    """

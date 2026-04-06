@@ -1,5 +1,7 @@
 ﻿CHANGELOG:
 ================================================================================
+0.38.0  SE AÑADE LA LÓGICA DEL SEXO DEL ANIMAL.
+
 0.37.1  TESTEO MANUAL DE LA LÓGICA DE LOS REQUERIMIENTO DE ILUMINACIÓN.
 
 0.37.0  SE AÑADE LA LÓGICA DE LOS REQUERIMIENTO DE ILUMINACIÓN.

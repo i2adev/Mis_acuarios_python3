@@ -110,6 +110,7 @@ class MainView(QWidget):
         self.maestro_layout.addWidget(self.button_maestro_dieta)
         self.maestro_layout.addWidget(self.button_maestro_nivel_nado)
         self.maestro_layout.addWidget(self.button_maestro_grupo_taxonomico)
+        self.maestro_layout.addWidget(self.button_maestro_sexo)
         self.maestro_layout.addWidget(self.button_maestro_filtro)
         self.maestro_layout.addWidget(self.button_maestro_tipo_filtro)
         self.maestro_layout.addWidget(self.button_maestro_flora)
@@ -553,6 +554,29 @@ class MainView(QWidget):
         )
         self.button_maestro_dieta.setFlat(True)
         self.button_maestro_dieta.setCursor(
+            QCursor(Qt.CursorShape.PointingHandCursor)
+        )
+
+        self.button_maestro_sexo = QPushButton(
+            " > SEXO"
+        )
+        self.button_maestro_sexo.setStyleSheet(
+            """
+            QPushButton {
+                background-color: transparent;
+                text-align: left;
+                margin-bottom: 0;
+                margin-left: 20;
+                font-family: 'Roboto'; 
+                font-size: 14px;
+            }
+            """
+        )
+        self.button_maestro_sexo.setObjectName(
+            "button_maestro_sexo"
+        )
+        self.button_maestro_sexo.setFlat(True)
+        self.button_maestro_sexo.setCursor(
             QCursor(Qt.CursorShape.PointingHandCursor)
         )
 
