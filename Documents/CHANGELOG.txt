@@ -1,5 +1,7 @@
 ﻿CHANGELOG:
 ================================================================================
+0.39.1  TESTEO MANUAL DEL PERIODO.
+
 0.39.0  SE AÑADE LA LÓGICA DEL PERIODO.
 
 0.38.1  TESTEO MANUAL DE LA LÓGICA DEL SEXO DEL ANIMAL.

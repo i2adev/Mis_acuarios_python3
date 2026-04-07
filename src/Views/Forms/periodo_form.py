@@ -78,6 +78,10 @@ class PeriodoForm(QFrame):
         ## Montamos la primera linea
         self.layout_first_line.addLayout(self.layout_id)
         self.layout_first_line.addLayout(self.layout_periodo)
+        self.layout_first_line.addSpacerItem(
+            QSpacerItem(20, 20, QSizePolicy.Policy.Expanding,
+                        QSizePolicy.Policy.Expanding)
+        )
 
         # Montamos el frame
         self.layout_form.addLayout(self.layout_first_line)
