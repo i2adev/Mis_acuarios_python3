@@ -21,6 +21,7 @@ from Model.Entities.formato_consumible_entity import FormatoConsumibleEntity
 from Model.Entities.grupo_taxonomico_entity import GrupoTaxonomicoEntity
 from Model.Entities.iluminacion_entity import IluminacionEntity
 from Model.Entities.nivel_nado_entity import NivelNadoEntity
+from Model.Entities.periodo_entity import PeriodoEntity
 from Model.Entities.posicion_planta_acuario_entity import \
     PosicionPlantaAcuarioEntity
 from Model.Entities.requerimiento_co2_entity import RequerimientoCO2Entity
@@ -808,6 +809,14 @@ class Paginator:
             )
                 for f in rows
             ]
+        elif self.procedure == "VISTA_PERIODOS":
+            data_list = [PeriodoEntity(
+                id=f["ID"],
+                num=f["NUM"],
+                periodo=f["PERIODO"],
+            )
+                for f in rows
+            ]
 
         return data_list
 
@@ -900,6 +909,8 @@ class Paginator:
             return SearchCmd.SEARCH_REQUERIMIENTO_ILUMINACION
         elif self.procedure == "VISTA_SEXO_ANIMAL":
             return SearchCmd.SEARCH_SEXO_ANIMAL
+        elif self.procedure == "VISTA_PERIODOS":
+            return SearchCmd.SEARCH_PERIODO
 
     def __str__(self):
         """ Muestra el objeto en forma de texto. """

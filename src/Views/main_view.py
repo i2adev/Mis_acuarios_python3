@@ -126,6 +126,7 @@ class MainView(QWidget):
         self.maestro_layout.addWidget(self.button_maestro_cat_incidencia)
         self.maestro_layout.addWidget(self.button_maestro_subcat_incidencia)
         self.maestro_layout.addWidget(self.button_maestro_marca)
+        self.maestro_layout.addWidget(self.button_maestro_periodos)
         self.maestro_layout.addWidget(self.button_maestro_proyecto)
         self.maestro_layout.addWidget(self.button_maestro_estado_proyecto)
         self.maestro_layout.addWidget(self.button_maestro_urna)
@@ -692,6 +693,29 @@ class MainView(QWidget):
         )
         self.button_maestro_facturas.setFlat(True)
         self.button_maestro_facturas.setCursor(
+            QCursor(Qt.CursorShape.PointingHandCursor)
+        )
+
+        self.button_maestro_periodos = QPushButton(
+            "PERIODOS"
+        )
+        self.button_maestro_periodos.setStyleSheet(
+            """
+            QPushButton {
+                background-color: transparent;
+                text-align: left;
+                margin-bottom: 0;
+                margin-left: 20;
+                font-family: 'Roboto'; 
+                font-size: 14px;
+            }
+            """
+        )
+        self.button_maestro_periodos.setObjectName(
+            "button_maestro_periodos"
+        )
+        self.button_maestro_periodos.setFlat(True)
+        self.button_maestro_periodos.setCursor(
             QCursor(Qt.CursorShape.PointingHandCursor)
         )
 

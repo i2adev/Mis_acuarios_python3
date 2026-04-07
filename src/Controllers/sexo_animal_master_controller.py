@@ -68,7 +68,7 @@ class SexoAnimalMasterController(SexoAnimalController):
         self._view.button_load.clicked.connect(self.button_load_click)
         self._view.button_delete.clicked.connect(self.delete_click)
         self._view.button_clean.clicked.connect(lambda: self._clean_view(
-            self._view.frame.edit_requerimiento
+            self._view.frame.edit_sexo
         ))
         self._view.button_next.clicked.connect(self._next_page)
         self._view.button_prev.clicked.connect(self._previous_page)
@@ -108,7 +108,7 @@ class SexoAnimalMasterController(SexoAnimalController):
             # Cargamos la tabla
             self._fill_tableview(self._view.data_table, self._pag._total_data)
             self._configure_table(self._view.data_table)
-            self._clean_view(self._view.frame.edit_requerimiento)
+            self._clean_view(self._view.frame.edit_sexo)
             self._view.label_total_pages.setText(str(self._pag.total_pages))
 
             # Configuramos la tabla
@@ -143,7 +143,7 @@ class SexoAnimalMasterController(SexoAnimalController):
         # Cargamos la tabla
         self._fill_tableview(self._view.data_table, self._pag._total_data)
         self._configure_table(self._view.data_table)
-        self._clean_view(self._view.frame.edit_requerimiento)
+        self._clean_view(self._view.frame.edit_sexo)
 
         self._view.button_filter.setIcon(
             QIcon(str(Path(globals.PATH_IMAGES) / "filtered.png")))
@@ -236,7 +236,7 @@ class SexoAnimalMasterController(SexoAnimalController):
             return
 
         # Limpiamos el formulario
-        self._clean_view(self._view.frame.edit_requerimiento)
+        self._clean_view(self._view.frame.edit_sexo)
 
         # Configurar paginator
         self._pag.initialize_paginator()
@@ -271,7 +271,7 @@ class SexoAnimalMasterController(SexoAnimalController):
             return
 
         # Limpiamos el formulario
-        self._clean_view(self._view.frame.edit_requerimiento)
+        self._clean_view(self._view.frame.edit_sexo)
 
         # Obtenemos los datos de paginación actuales
         paginator_pages = self._pag.total_pages
@@ -306,7 +306,7 @@ class SexoAnimalMasterController(SexoAnimalController):
             return
 
         # Limpiamos el formulario
-        self._clean_view(self._view.frame.edit_requerimiento)
+        self._clean_view(self._view.frame.edit_sexo)
 
         # Configuramos el paginador
         self._pag.initialize_paginator()

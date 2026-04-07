@@ -245,7 +245,7 @@ class BaseView(QWidget):
         ## Controles de tabla y CRUD
         ### Tabla
         self.data_table = QTableView()
-        self.data_table.setMinimumWidth(600)
+        # self.data_table.setMinimumWidth(600)
         self.data_table.verticalHeader().setVisible(False)
         self.data_table.setSelectionBehavior(
             QAbstractItemView.SelectionBehavior.SelectRows)

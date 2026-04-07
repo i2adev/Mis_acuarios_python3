@@ -27,6 +27,8 @@ from Controllers.dificultad_planta_master_controller import \
     DificultadPlantaMasterController
 from Controllers.equipamiento_master_controller import \
     EquipamientoMasterController
+from Controllers.especie_animal_master_controller import \
+    EspecieAnimalMasterController
 from Controllers.estado_proyecto_master_controller import \
     EstadoProyectoMasterController
 from Controllers.filtro_master_controller import FiltroMasterController
@@ -42,6 +44,7 @@ from Controllers.marca_comercial_master_controller import \
 from Controllers.material_urna_master_controler import \
     MaterialUrnaMasterController
 from Controllers.nivel_nado_master_controller import NivelNadoMasterController
+from Controllers.periodo_master_controller import PeriodoMasterController
 from Controllers.posicion_planta_acuario_master_controller import \
     PosicionPlantaAcuarioMasterController
 from Controllers.proyecto_master_controller import ProyectoMasterController
@@ -76,6 +79,7 @@ from Model.DAO.control_iluminacion_dao import ControlIluminacionDAO
 from Model.DAO.dieta_fauna_dao import DietaFaunaDAO
 from Model.DAO.dificultad_plantas_dao import DificultadPlantaDAO
 from Model.DAO.equipamiento_dao import EquipamientoDAO
+from Model.DAO.especie_animal_dao import EspecieAnimalDAO
 from Model.DAO.estado_proyecto_dao import EstadoProyectoDAO
 from Model.DAO.filtro_dao import FiltroDAO
 from Model.DAO.formato_consumible_dao import FormatoConsumibleDAO
@@ -84,6 +88,7 @@ from Model.DAO.iluminacion_dao import IluminacionDAO
 from Model.DAO.marca_comercial_dao import MarcaComercialDAO
 from Model.DAO.material_urna_dao import MaterialUrnaDAO
 from Model.DAO.niveles_nado_dao import NivelNadoDAO
+from Model.DAO.periodo_dao import PeriodoDAO
 from Model.DAO.posicion_planta_acuario_dao import PosicionPlantaAcuarioDAO
 from Model.DAO.proyecto_dao import ProyectoDAO
 from Model.DAO.requerimiento_co2_dao import RequerimientoCO2DAO
@@ -111,6 +116,7 @@ from Model.Entities.control_iluminacion_entity import ControlIluminacionEntity
 from Model.Entities.dieta_fauna_entity import DietaFaunaEntity
 from Model.Entities.dificultad_planta_entity import DificultadPlantaEntity
 from Model.Entities.equipamiento_entity import EquipamientoEntity
+from Model.Entities.especie_animal_entity import EspecieAnimalEntity
 from Model.Entities.estado_proyecto_entity import EstadoProyectoEntity
 from Model.Entities.filtro_entity import FiltroEntity
 from Model.Entities.formato_consumible_entity import FormatoConsumibleEntity
@@ -119,6 +125,7 @@ from Model.Entities.iluminacion_entity import IluminacionEntity
 from Model.Entities.marca_comercial_entity import MarcaComercialEntity
 from Model.Entities.material_urna_entity import MaterialUrnaEntity
 from Model.Entities.nivel_nado_entity import NivelNadoEntity
+from Model.Entities.periodo_entity import PeriodoEntity
 from Model.Entities.posicion_planta_acuario_entity import \
     PosicionPlantaAcuarioEntity
 from Model.Entities.proyecto_entity import ProyectoEntity
@@ -147,6 +154,7 @@ from Views.Masters.control_iluminacion_view import ControlIluminacionView
 from Views.Masters.dieta_fauna_view import DietaFaunaView
 from Views.Masters.dificultad_planta_view import DificultadPlantaView
 from Views.Masters.equipamiento_view import EquipamientoView
+from Views.Masters.especie_animal_view import EspecieAnimalView
 from Views.Masters.estado_proyecto_view import EstadoProyectoView
 from Views.Masters.filtro_view import FiltroView
 from Views.Masters.formato_consumible_view import FormatoConsumibleView
@@ -155,6 +163,7 @@ from Views.Masters.iluminacion_view import IluminacionView
 from Views.Masters.marca_comercial_view import MarcaComercialView
 from Views.Masters.material_urna_view import MaterialUrnaView
 from Views.Masters.nivel_nado_view import NivelNadoView
+from Views.Masters.periodo_view import PeriodoView
 from Views.Masters.posicion_pnalta_acuario_view import \
     PosicionPlantaAcuarioView
 from Views.Masters.proyecto_view import ProyectoView
@@ -311,7 +320,7 @@ class MainViewController(BaseController):
             self.grupo_taxonomico_click
         )
         self._view.button_maestro_especies_animales.clicked.connect(
-            self.fauna_click
+            self.especie_animal_click
         )
         self._view.button_maestro_posición_planta.clicked.connect(
             self.posicion_planta_click
@@ -324,6 +333,9 @@ class MainViewController(BaseController):
         )
         self._view.button_maestro_sexo.clicked.connect(
             self.sexo_click
+        )
+        self._view.button_maestro_periodos.clicked.connect(
+            self.periodo_click
         )
 
     def reportes_click(self):
@@ -343,6 +355,16 @@ class MainViewController(BaseController):
         ctrl = SexoAnimalMasterController(view, dao, mod)
         ctrl.show()
 
+    def periodo_click(self):
+        """ Cuando se pulsa el botón del periodo. """
+
+        view = PeriodoView("MAESTRO DE PERIODOS")
+        dao = PeriodoDAO()
+        mod = PeriodoEntity()
+
+        ctrl = PeriodoMasterController(view, dao, mod)
+        ctrl.show()
+
     def requerimiento_iluminacion_click(self):
         """ Cuando se pulsa el botón de requerimientos de iluminación. """
 
@@ -354,14 +376,14 @@ class MainViewController(BaseController):
         ctrl = RequerimientoIluminacionMasterController(view, dao, mod)
         ctrl.show()
 
-    def fauna_click(self):
+    def especie_animal_click(self):
         """ Cuando se pulsa el botón de fauna. """
 
-        view = PosicionPlantaAcuarioView("MAESTRO DE ESPECIES ANIMALES")
-        dao = PosicionPlantaAcuarioDAO()
-        mod = PosicionPlantaAcuarioEntity()
+        view = EspecieAnimalView("MAESTRO DE ESPECIES ANIMALES")
+        dao = EspecieAnimalDAO()
+        mod = EspecieAnimalEntity()
 
-        ctrl = PosicionPlantaAcuarioMasterController(view, dao, mod)
+        ctrl = EspecieAnimalMasterController(view, dao, mod)
         ctrl.show()
 
     def posicion_requerimiento_co2__click(self):

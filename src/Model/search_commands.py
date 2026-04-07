@@ -846,3 +846,11 @@ class SearchCmd:
     )
     WHERE FIELD LIKE '%' || :pattern || '%';
     """
+
+    SEARCH_PERIODO = """
+    SELECT  ID_PERIODO AS ID, 
+            ROW_NUMBER()  OVER (ORDER BY ID_PERIODO) AS NUM, 
+            PERIODO AS PERIODO 
+    FROM    PERIODOS
+    WHERE   PERIODO LIKE '%' || :pattern || '%';
+    """

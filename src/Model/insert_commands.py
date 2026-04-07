@@ -593,11 +593,14 @@ class InsertCmd:
     # Inserta periodicidades
     INSERT_PERIODICIDADES = """
     INSERT INTO PERIODOS (PERIODO) VALUES
-    ('veces al día'),
-    ('hora(s)'),
-    ('día(s)'),
-    ('semana(s)'),
-    ('mes(es)'),
-    ('año(s)')
+    ('Hora(s)'),
+    ('Día(s)'),
+    ('Semana(s)'),
+    ('Mes(es)'),
+    ('Año(s)')
     ('Según necesidad');
+    ('Veces al día'),
+    ('Veces a la semana'),
+    ('Veces al mes'),
+    ('Veces al año');
     """
