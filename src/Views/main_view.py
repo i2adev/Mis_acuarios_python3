@@ -114,11 +114,13 @@ class MainView(QWidget):
         self.maestro_layout.addWidget(self.button_maestro_filtro)
         self.maestro_layout.addWidget(self.button_maestro_tipo_filtro)
         self.maestro_layout.addWidget(self.button_maestro_flora)
+        self.maestro_layout.addWidget(self.button_maestro_especie_vegetal)
         self.maestro_layout.addWidget(self.button_maestro_dificultad_planta)
         self.maestro_layout.addWidget(self.button_maestro_posición_planta)
         self.maestro_layout.addWidget(self.button_maestro_requerimiento_co2)
         self.maestro_layout.addWidget(
             self.button_maestro_requerimiento_iluminacion)
+        self.maestro_layout.addWidget(self.button_maestro_tasa_crecimiento)
         self.maestro_layout.addWidget(self.button_maestro_iluminacion)
         self.maestro_layout.addWidget(self.button_maestro_control_iluminacion)
         self.maestro_layout.addWidget(self.button_maestro_tipo_iluminacion)
@@ -463,6 +465,51 @@ class MainView(QWidget):
         )
         self.button_maestro_dificultad_planta.setFlat(True)
         self.button_maestro_dificultad_planta.setCursor(
+            QCursor(Qt.CursorShape.PointingHandCursor)
+        )
+        self.button_maestro_especie_vegetal = QPushButton(
+            " > ESPECIE VEGETAL"
+        )
+        self.button_maestro_especie_vegetal.setStyleSheet(
+            """
+            QPushButton {
+                background-color: transparent;
+                text-align: left;
+                margin-bottom: 0;
+                margin-left: 20;
+                font-family: 'Roboto'; 
+                font-size: 14px;
+            }
+            """
+        )
+        self.button_maestro_especie_vegetal.setObjectName(
+            "button_maestro_especie_vegetal"
+        )
+        self.button_maestro_especie_vegetal.setFlat(True)
+        self.button_maestro_especie_vegetal.setCursor(
+            QCursor(Qt.CursorShape.PointingHandCursor)
+        )
+
+        self.button_maestro_tasa_crecimiento = QPushButton(
+            " > TASAS DE CRECIMIENTO"
+        )
+        self.button_maestro_tasa_crecimiento.setStyleSheet(
+            """
+            QPushButton {
+                background-color: transparent;
+                text-align: left;
+                margin-bottom: 0;
+                margin-left: 20;
+                font-family: 'Roboto'; 
+                font-size: 14px;
+            }
+            """
+        )
+        self.button_maestro_tasa_crecimiento.setObjectName(
+            "button_maestro_tasa_crecimiento"
+        )
+        self.button_maestro_tasa_crecimiento.setFlat(True)
+        self.button_maestro_tasa_crecimiento.setCursor(
             QCursor(Qt.CursorShape.PointingHandCursor)
         )
 

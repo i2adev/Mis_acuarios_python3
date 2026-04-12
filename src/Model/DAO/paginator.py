@@ -17,6 +17,7 @@ from Model.Entities.control_iluminacion_entity import ControlIluminacionEntity
 from Model.Entities.dieta_fauna_entity import DietaFaunaEntity
 from Model.Entities.dificultad_planta_entity import DificultadPlantaEntity
 from Model.Entities.especie_animal_entity import EspecieAnimalEntity
+from Model.Entities.especie_vegetal_entity import EspecieVegetalEntity
 from Model.Entities.formato_consumible_entity import FormatoConsumibleEntity
 from Model.Entities.grupo_taxonomico_entity import GrupoTaxonomicoEntity
 from Model.Entities.iluminacion_entity import IluminacionEntity
@@ -28,6 +29,7 @@ from Model.Entities.requerimiento_co2_entity import RequerimientoCO2Entity
 from Model.Entities.requerimiento_iluminacion_entity import \
     RequerimientoIluminacionEntity
 from Model.Entities.sexo_animal_entity import SexoAnimalEntity
+from Model.Entities.tasa_crecimiento_entity import TasaCrecimientoEntity
 from Model.Entities.tipo_iluminacion_entity import TipoIluminacionEntity
 from Model.Entities.unidades_contenido_entity import UnidadContenidoEntity
 from Model.database import DBManager
@@ -817,6 +819,42 @@ class Paginator:
             )
                 for f in rows
             ]
+        elif self.procedure == "VISTA_ESPECIES_VEGETALES":
+            data_list = [EspecieVegetalEntity(
+                id=f["ID"],
+                num=f["NUM"],
+                reino=f["REINO"],
+                division=f["FILO"],
+                clase=f["CLASE"],
+                orden=f["ORDEN"],
+                familia=f["FAMILIA"],
+                genero=f["GENERO"],
+                especie=f["ESPECIE"],
+                nombre_cientifico=f["NOMBRE_CIENTIFICO"],
+                nombre_comun=f["NOMBRE_COMUN"],
+                ph_min=f["PH"],
+                kh_min=f["KH"],
+                gh_min=f["GH"],
+                temp_min=f["TEMPERATURA"],
+                origen=f["ORIGEN"],
+                id_posicion_acuario=f["POSICION_ACUARIO"],
+                id_req_iluminacion=f["REQUERIMIENTO_ILUMINACION"],
+                id_req_co2=f["REQUERIMIENTO_CO2"],
+                id_tasa_crecimiento=f["TASA_CRECIMIENTO"],
+                id_dificultad=f["DIFICULTAD"],
+                descripcion=f["DESCRIPCION"],
+            )
+                for f in rows
+            ]
+        elif self.procedure == "VISTA_TASAS_CRECIMIENTO":
+            data_list = [TasaCrecimientoEntity(
+                id=f["ID"],
+                num=f["NUM"],
+                tasa_crecimiento=f["CRECIMIENTO"],
+                descripcion=f["DESCRIPCION"],
+            )
+                for f in rows
+            ]
 
         return data_list
 
@@ -911,6 +949,10 @@ class Paginator:
             return SearchCmd.SEARCH_SEXO_ANIMAL
         elif self.procedure == "VISTA_PERIODOS":
             return SearchCmd.SEARCH_PERIODO
+        elif self.procedure == "VISTA_ESPECIES_VEGETALES":
+            return SearchCmd.SEARCH_ESPECIE_VEGETAL
+        elif self.procedure == "VISTA_TASAS_CRECIMIENTO":
+            return SearchCmd.SEARCH_TASA_CRECIMIENTO
 
     def __str__(self):
         """ Muestra el objeto en forma de texto. """

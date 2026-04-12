@@ -237,7 +237,7 @@ class EspecieAnimalForm(QFrame):
         self.check_hibrida = QCheckBox(" ESPECIE HÍBRIDA")
         self.check_hibrida.setObjectName("check_hibrida")
         self.check_hibrida.setChecked(False)
-        self.setToolTip(
+        self.check_hibrida.setToolTip(
             """
             <h1>Especie híbrida</h1>
             En este campo se especifica sí la especie es el resultado de la 
