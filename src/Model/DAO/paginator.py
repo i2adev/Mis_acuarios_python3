@@ -824,7 +824,7 @@ class Paginator:
                 id=f["ID"],
                 num=f["NUM"],
                 reino=f["REINO"],
-                division=f["FILO"],
+                division=f["DIVISION"],
                 clase=f["CLASE"],
                 orden=f["ORDEN"],
                 familia=f["FAMILIA"],

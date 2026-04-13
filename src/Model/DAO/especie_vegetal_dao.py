@@ -141,7 +141,7 @@ class EspecieVegetalDAO(BaseDAO):
                        C.REQUERIMIENTO_CO2 AS REQUERIMIENTO_CO2,
                        T.CRECIMIENTO AS TASA_CRECIMIENTO,
                        D.DIFICULTAD_PLANTA AS DIFICULTAD,
-                       E.OBSERVACIONES AS OBSERVACIONES
+                       E.DESCRIPCION AS DESCRIPCION
                 FROM   ESPECIES_VEGETALES E
                 LEFT JOIN POSICIONES_PLANTAS_ACUARIO P
                     ON    E.ID_POSICION_ACUARIO = P.ID_POSICION_ACUARIO
@@ -272,13 +272,13 @@ class EspecieVegetalDAO(BaseDAO):
                  KH_MINIMO, KH_MAXIMO, GH_MINIMO, GH_MAXIMO,
                  TEMPERATURA_MIN, TEMPERATURA_MAX, ORIGEN, ID_POSICION_ACUARIO,
                  ID_REQUERIMIENTO_ILUMINACION, ID_REQUERIMIENTO_CO2, 
-                 ID_TASA_CRECIMIENTO, ID_DIFICULTAD, OBSERVACIONES)
+                 ID_TASA_CRECIMIENTO, ID_DIFICULTAD, DESCRIPCION)
             VALUES 
                 (:reino, :division, :clase, :orden, :familia,
                  :genero, :especie, :n_comun, :ph_min, :ph_max, :kh_min, 
                  :kh_max, :gh_min, :gh_max, :temp_min, :temp_max, :origen, 
                  :id_posicion, :id_req_ilum, :id_req_co2, :id_crecimiento, 
-                 :id_dificultad, :observaciones);
+                 :id_dificultad, :descripcion);
             """
         )
 
@@ -347,7 +347,7 @@ class EspecieVegetalDAO(BaseDAO):
                     FAMILIA = :familia,
                     GENERO = :genero,
                     ESPECIE = :especie,
-                    NOMBRE_COMUN = n_comun,
+                    NOMBRE_COMUN = :n_comun,
                     PH_MINIMO = :ph_min,
                     PH_MAXIMO = :ph_max,
                     KH_MINIMO = :kh_min,
@@ -362,7 +362,7 @@ class EspecieVegetalDAO(BaseDAO):
                     ID_REQUERIMIENTO_CO2 = :id_req_co2,
                     ID_TASA_CRECIMIENTO = :id_crecimiento,
                     ID_DIFICULTAD = :id_dificultad,
-                    OBSERVACIONES = :observaciones
+                    DESCRIPCION = :descripcion
             WHERE   ID_ESPECIE = :id;
             """
         )

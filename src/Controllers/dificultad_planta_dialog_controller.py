@@ -70,7 +70,7 @@ class DificultadPlantaDialogController(DificultadPlantaController):
             return
 
         # Configuramos la entidad
-        self._comportamiento_result = DificultadPlantaEntity(
+        self._dificultad_result = DificultadPlantaEntity(
             id=res.value,
             num=None,
             nivel=self._view.frame.edit_nivel.value(),

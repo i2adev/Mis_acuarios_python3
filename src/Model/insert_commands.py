@@ -298,7 +298,7 @@ class InsertCmd:
 
     # Posiciones den el acuario
     INSERT_POSICIONES_ACUARIO = """
-    INSERT INTO POSICIONES_PLANTAS_ACUARIO (POSICION, OBSERVACIONES) VALUES
+    INSERT INTO POSICIONES_PLANTAS_ACUARIO (POSICION, DESCRIPCION) VALUES
     ('Primer plano', 'Plantas que se colocan en la parte frontal del acuario.'),
     ('Transición frontal', 'Zona entre el primer plano y el área media, usada para transiciones suaves de altura.'),
     ('Medio bajo', 'Parte delantera de la zona media del acuario.'),
@@ -597,8 +597,8 @@ class InsertCmd:
     ('Día(s)'),
     ('Semana(s)'),
     ('Mes(es)'),
-    ('Año(s)')
-    ('Según necesidad');
+    ('Año(s)'),
+    ('Según necesidad'),
     ('Veces al día'),
     ('Veces a la semana'),
     ('Veces al mes'),

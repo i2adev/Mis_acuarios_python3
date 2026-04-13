@@ -90,20 +90,20 @@ class EspecieVegetalForm(QFrame):
         ## División
         self.layout_división = QVBoxLayout()
         self.label_división = QLabel("DIVISIÓN")
-        self.edit_división = StrLineEdit(
+        self.edit_division = StrLineEdit(
             control_name="DIVISIÓN",
             max_length=32
         )
-        self.edit_división.setObjectName("edit_división")
-        self.edit_división.setFixedWidth(150)
-        self.edit_división.setToolTip(
+        self.edit_division.setObjectName("edit_division")
+        self.edit_division.setFixedWidth(150)
+        self.edit_division.setToolTip(
             """
             <h1>División</h1>
             Taxonomía: División al que pertenece la especie.
             """
         )
         self.layout_división.addWidget(self.label_división)
-        self.layout_división.addWidget(self.edit_división)
+        self.layout_división.addWidget(self.edit_division)
 
         ## Clase
         self.layout_clase = QVBoxLayout()
@@ -451,9 +451,9 @@ class EspecieVegetalForm(QFrame):
         self.combo_req_iluminacion.setFixedWidth(200)
         self.combo_req_iluminacion.setToolTip(
             """
-            <h1>Dieta</h1>
-            En este campo se inserta la <b>dieta</b> con la que se alimenta
-            la especie.
+            <h1>Reqerimiento de iluminación</h1>
+            En este campo se inserta la <b>Requerimiento de iluminación</b> 
+            de la planta.
             """
         )
         self.button_insert_req_iuminacion = QPushButton("<")
@@ -539,7 +539,7 @@ class EspecieVegetalForm(QFrame):
         self.combo_dificultad.setFixedWidth(200)
         self.combo_dificultad.setToolTip(
             """
-            <h1>Dificultad/h1>
+            <h1>Dificultad</h1>
             En este campo se inserta la <b>dificultad de mantenimiento</b> 
             de la planta.
             """

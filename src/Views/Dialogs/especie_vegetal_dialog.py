@@ -43,7 +43,7 @@ class EspecieVegetalDialog(BaseDialog):
 
         # Establecemos las políticas de focus
         self.frame.edit_reino.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
-        self.frame.edit_división.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
+        self.frame.edit_division.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
         self.frame.edit_clase.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
         self.frame.edit_orden.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
         self.frame.edit_familia.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
@@ -69,8 +69,8 @@ class EspecieVegetalDialog(BaseDialog):
         self.frame.text_descripcion.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
 
         # Establecer el orden
-        self.setTabOrder(self.frame.edit_reino, self.frame.edit_división)
-        self.setTabOrder(self.frame.edit_división, self.frame.edit_clase)
+        self.setTabOrder(self.frame.edit_reino, self.frame.edit_division)
+        self.setTabOrder(self.frame.edit_division, self.frame.edit_clase)
         self.setTabOrder(self.frame.edit_clase, self.frame.edit_orden)
         self.setTabOrder(self.frame.edit_orden, self.frame.edit_familia)
         self.setTabOrder(self.frame.edit_familia, self.frame.edit_genero)

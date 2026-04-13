@@ -1,5 +1,7 @@
 ﻿CHANGELOG:
 ================================================================================
+0.40.1  TESTEO MANUAL DE LA LÓGICA DE ESPECIE VEGETAL.
+
 0.40.0  SE AÑADE LA LÓGICA DE ESPECIE VEGETAL.
 
 0.39.1  TESTEO MANUAL DEL PERIODO.

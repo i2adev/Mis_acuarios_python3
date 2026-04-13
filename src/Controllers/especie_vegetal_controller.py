@@ -106,9 +106,6 @@ class EspecieVegetalController(BaseController):
         # Nombre común
         ent.nombre_comun = ctrs.edit_n_comun.value()
 
-        # ¿Es una especie híbrida?
-        ent.es_hibrida = 1 if ctrs.check_hibrida.isChecked() else 0
-
         # PH mínimo i máximo
         ent.ph_min = ctrs.edit_ph_min.value()
         ent.ph_max = ctrs.edit_ph_max.value()
@@ -574,9 +571,9 @@ class EspecieVegetalController(BaseController):
             return
 
         # Configuramos el combo
-        combo = self._view.frame.combo_crecimiento
+        combo = self._view.frame.combo_dificultad
 
-        self._fill_combo_crecimiento()
+        self._fill_combo_dificultad()
         for i in range(combo.count()):
             if combo.itemData(i) == res.value.id:
                 combo.setCurrentIndex(i)
@@ -613,7 +610,7 @@ class EspecieVegetalController(BaseController):
             str(id_ent) if id_ent is not None else ""
         )
         self._view.frame.edit_reino.setValue(ent.reino)
-        self._view.frame.edit_filo.setValue(ent.division)
+        self._view.frame.edit_division.setValue(ent.division)
         self._view.frame.edit_clase.setValue(ent.clase)
         self._view.frame.edit_orden.setValue(ent.orden)
         self._view.frame.edit_familia.setValue(ent.familia)

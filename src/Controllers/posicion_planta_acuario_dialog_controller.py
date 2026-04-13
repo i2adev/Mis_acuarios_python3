@@ -70,7 +70,7 @@ class PosicionPlantaAcuarioDialogController(PosicionPlantaAcuarioController):
             return
 
         # Configuramos la entidad
-        self._comportamiento_result = PosicionPlantaAcuarioEntity(
+        self._posicion_result = PosicionPlantaAcuarioEntity(
             id=res.value,
             num=None,
             posicion=self._view.frame.edit_posicion.value(),
