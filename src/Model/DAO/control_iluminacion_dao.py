@@ -174,7 +174,7 @@ class ControlIluminacionDAO(BaseDAO):
         )
         params = {
             "id": ent.id,
-            "control": ent._control_iluminacion,
+            "control": ent.control_iluminacion,
             "descripcion": ent.descripcion,
         }
 

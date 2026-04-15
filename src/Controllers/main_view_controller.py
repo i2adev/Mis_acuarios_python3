@@ -148,7 +148,7 @@ from Model.Entities.tasa_crecimiento_entity import TasaCrecimientoEntity
 from Model.Entities.tipo_acuario_entity import TipoAcuarioEntity
 from Model.Entities.tipo_filtro_entity import TipoFiltroEntity
 from Model.Entities.tipo_iluminacion_entity import TipoIluminacionEntity
-from Model.Entities.unidades_contenido_entity import UnidadContenidoEntity
+from Model.Entities.unidad_contenido_entity import UnidadContenidoEntity
 from Model.Entities.urna_entity import UrnaEntity
 from Views.Masters.acuario_view import AcuarioView
 from Views.Masters.categoria_acuario_view import CategoriaAcuarioView

@@ -132,9 +132,7 @@ class CategoriaAcuarioDAO(BaseDAO):
                 valores = [
                     CategoriaAcuarioEntity(
                         id=f["ID"],
-                        num=None,
                         categoria=f["VALUE"],
-                        observaciones=None
                     )
                     for f in rows
                 ]

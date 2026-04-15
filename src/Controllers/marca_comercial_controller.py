@@ -65,7 +65,10 @@ class MarcaComercialController(BaseController):
         ent.provincia = ctrs.edit_provincia.value()
 
         # País
-        ent.id_pais = ctrs.combo_pais.value()
+        if ctrs.combo_pais.currentData():
+            ent.id_pais = ctrs.combo_pais.currentData()
+        else:
+            ent.id_pais = None
 
         # Observaciones
         if ctrs.text_observaciones.toPlainText():
@@ -259,30 +262,14 @@ class MarcaComercialController(BaseController):
             str(id_ma) if id_ma is not None else None
         )
 
-        self._view.frame.edit_marca.setText(
-            str(marca) if marca is not None else None
-        )
-
-        self._view.frame.edit_direccion.setText(
-            str(direccion) if direccion is not None else None
-        )
-
-        self._view.frame.edit_cod_postal.setText(
-            str(cod_postal) if cod_postal is not None else None
-        )
-
-        self._view.frame.edit_poblacion.setText(
-            str(poblacion) if poblacion is not None else None
-        )
-
-        self._view.frame.edit_provincia.setText(
-            str(provincia) if provincia is not None else None
-        )
-
+        self._view.frame.edit_marca.setValue(marca)
+        self._view.frame.edit_direccion.setValue(direccion)
+        self._view.frame.edit_cod_postal.setValue(cod_postal)
+        self._view.frame.edit_poblacion.setValue(poblacion)
+        self._view.frame.edit_provincia.setValue(provincia)
         self._view.frame.combo_pais.setCurrentIndex(
             self._view.frame.combo_pais.findText(pais)
         )
-
         self._view.frame.text_observaciones.setPlainText(
             str(observaciones) if observaciones is not None else ""
         )

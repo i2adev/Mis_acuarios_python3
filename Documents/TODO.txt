@@ -7,9 +7,203 @@ FECHA		DESCRIPCIÓN
                         EL ID SUMINISTRADO.
             -   POST:   SE CARGAN LOS COMBOS DE FORMA ASIMÉTRICA.
             -   POST:   SE MUEVEN LOS ARCHIVOS A LA CARPETA DE 'MAESTRO'.
-            -   POST:   SE CONVIERTEN LAS ENTIDADES A DATACLASS.
+
             -   POST:   SE ELIMINAN LOS IF-ELSEIF-ELSE DEL PAGINADOR PARA
                         ADAPTARLOS AL MAS MODERNO MATCH.
+
+14/04/2026  REFACTORIZACIÓN:
+            -   TODO:   SE CONVIERTEN LAS ENTIDADES A DATACLASS.
+                -   DONE:   ENTIDAD ACUARIO:
+                    -   DONE:   MODIFICAR LA ENTIDAD.
+                    -   DONE:   TESTEAR LA LÓGICA.
+
+                -   DONE:   ENTIDAD CATEGORÍA DE ACUARIO:
+                    -   DONE:   MODIFICAR LA ENTIDAD.
+                    -   DONE:   TESTEAR LA LÓGICA.
+
+                -   DONE:   ENTIDAD CATEGORÍA DE CONSUMIBLE:
+                    -   DONE:   MODIFICAR LA ENTIDAD.
+                    -   DONE:   TESTEAR LA LÓGICA.
+
+                -   DONE:   ENTIDAD CATEGORÍA DE EQUIPAMIENTO:
+                    -   DONE:   MODIFICAR LA ENTIDAD.
+                    -   DONE:   TESTEAR LA LÓGICA.
+
+                -   DONE:   ENTIDAD CATEGORÍA DE INCIDENCIA:
+                    -   DONE:   MODIFICAR LA ENTIDAD.
+                    -   DONE:   TESTEAR LA LÓGICA.
+
+                -   DONE:   ENTIDAD COMERCIO:
+                    -   DONE:   MODIFICAR LA ENTIDAD.
+                    -   DONE:   TESTEAR LA LÓGICA.
+
+                -   DONE:   ENTIDAD COMPORTAMIENTO DE FAUNA:
+                    -   DONE:   MODIFICAR LA ENTIDAD.
+                    -   DONE:   TESTEAR LA LÓGICA.
+
+                -   DONE:   ENTIDAD CONSUMIBLE:
+                    -   DONE:   MODIFICAR LA ENTIDAD.
+                    -   DONE:   TESTEAR LA LÓGICA.
+
+                -   DONE:   ENTIDAD CONTROL DE ILUMINACION:
+                    -   DONE:   MODIFICAR LA ENTIDAD.
+                    -   DONE:   TESTEAR LA LÓGICA.
+
+                -   DONE:   ENTIDAD DIETA FAUNA:
+                    -   DONE:   MODIFICAR LA ENTIDAD.
+                    -   DONE:   TESTEAR LA LÓGICA.
+
+                -   DONE:   ENTIDAD DIFICULTAD PLANTA:
+                    -   DONE:   MODIFICAR LA ENTIDAD.
+                    -   DONE:   TESTEAR LA LÓGICA.
+
+                -   DONE:   ENTIDAD EQUIPAMIENTO:
+                    -   DONE:   MODIFICAR LA ENTIDAD.
+                    -   DONE:   TESTEAR LA LÓGICA.
+
+                -   DONE:   ENTIDAD ESPECIE ANIMAL:
+                    -   DONE:   MODIFICAR LA ENTIDAD.
+                    -   DONE:   TESTEAR LA LÓGICA.
+
+                -   N.A.:   ENTIDAD ESPECIE VEGETAL:
+                    -   N.A.:   MODIFICAR LA ENTIDAD.
+                    -   N.A.:   TESTEAR LA LÓGICA.
+
+                -   DONE:   ENTIDAD ESTADO PROYECTO:
+                    -   DONE:   MODIFICAR LA ENTIDAD.
+                    -   DONE:   TESTEAR LA LÓGICA.
+
+                -   DONE:   ENTIDAD FILTRO:
+                    -   DONE:   MODIFICAR LA ENTIDAD.
+                    -   DONE:   TESTEAR LA LÓGICA.
+
+                -   DONE:   ENTIDAD FORMATO CONSUMIBLE:
+                    -   DONE:   MODIFICAR LA ENTIDAD.
+                    -   DONE:   TESTEAR LA LÓGICA.
+
+                -   DONE:   ENTIDAD FOTOGRAFÍA:
+                    -   DONE:   MODIFICAR LA ENTIDAD.
+                    -   N.A.:   TESTEAR LA LÓGICA.
+
+                -   DONE:   ENTIDAD GRUPO TAXONÓMICO:
+                    -   DONE:   MODIFICAR LA ENTIDAD.
+                    -   DONE:   TESTEAR LA LÓGICA.
+
+                -   DONE:   ENTIDAD ILUMINACIÓN:
+                    -   DONE:   MODIFICAR LA ENTIDAD.
+                    -   DONE:   TESTEAR LA LÓGICA.
+
+                -   DONE:   ENTIDAD MARCA COMERCIAL:
+                    -   DONE:   MODIFICAR LA ENTIDAD.
+                    -   DONE:   TESTEAR LA LÓGICA.
+
+                -   DONE:   ENTIDAD MATERIAL DE URNA:
+                    -   DONE:   MODIFICAR LA ENTIDAD.
+                    -   DONE:   TESTEAR LA LÓGICA.
+
+                -   DONE:   ENTIDAD NIVEL NADO:
+                    -   DONE:   MODIFICAR LA ENTIDAD.
+                    -   DONE:   TESTEAR LA LÓGICA.
+                    -   N.A.:   SE CARGAN LOS CONTROLES CON 'SETVALUE'.
+                    -   N.A.:   SE CONFIGURA LA ENTIDAD CON 'VALUE'.
+
+                -   DONE:   ENTIDAD PERIODO:
+                    -   DONE:   MODIFICAR LA ENTIDAD.
+                    -   DONE:   TESTEAR LA LÓGICA.
+                    -   N.A.:   SE CARGAN LOS CONTROLES CON 'SETVALUE'.
+                    -   N.A.:   SE CONFIGURA LA ENTIDAD CON 'VALUE'.
+
+                -   DONE:   ENTIDAD POSICIÓN PLANTA ACUARIO:
+                    -   DONE:   MODIFICAR LA ENTIDAD.
+                    -   DONE:   TESTEAR LA LÓGICA.
+                    -   N.A.:   SE CARGAN LOS CONTROLES CON 'SETVALUE'.
+                    -   N.A.:   SE CONFIGURA LA ENTIDAD CON 'VALUE'.
+
+                -   DONE:   ENTIDAD PROYECTO:
+                    -   DONE:   MODIFICAR LA ENTIDAD.
+                    -   DONE:   TESTEAR LA LÓGICA.
+                    -   N.A.:   SE CARGAN LOS CONTROLES CON 'SETVALUE'.
+                    -   N.A.:   SE CONFIGURA LA ENTIDAD CON 'VALUE'.
+
+                -   DONE:   ENTIDAD REQUERIMIENTO CO2:
+                    -   DONE:   MODIFICAR LA ENTIDAD.
+                    -   DONE:   TESTEAR LA LÓGICA.
+                    -   N.A.:   SE CARGAN LOS CONTROLES CON 'SETVALUE'.
+                    -   N.A.:   SE CONFIGURA LA ENTIDAD CON 'VALUE'.
+
+                -   DONE:   ENTIDAD REQUERIMIENTO ILUMINACIÓN:
+                    -   DONE:   MODIFICAR LA ENTIDAD.
+                    -   DONE:   TESTEAR LA LÓGICA.
+                    -   N.A.:   SE CARGAN LOS CONTROLES CON 'SETVALUE'.
+                    -   N.A.:   SE CONFIGURA LA ENTIDAD CON 'VALUE'.
+
+                -   DONE:   ENTIDAD SEXO ANIMAL:
+                    -   DONE:   MODIFICAR LA ENTIDAD.
+                    -   DONE:   TESTEAR LA LÓGICA.
+                    -   N.A.:   SE CARGAN LOS CONTROLES CON 'SETVALUE'.
+                    -   N.A.:   SE CONFIGURA LA ENTIDAD CON 'VALUE'.
+
+                -   DONE:   ENTIDAD SUBCATEGORÍA ACUARIO:
+                    -   DONE:   MODIFICAR LA ENTIDAD.
+                    -   DONE:   TESTEAR LA LÓGICA.
+                    -   N.A.:   SE CARGAN LOS CONTROLES CON 'SETVALUE'.
+                    -   N.A.:   SE CONFIGURA LA ENTIDAD CON 'VALUE'.
+
+                -   DONE:   ENTIDAD SUBCATEGORÍA INCIDENCIA:
+                    -   DONE:   MODIFICAR LA ENTIDAD.
+                    -   DONE:   TESTEAR LA LÓGICA.
+                    -   N.A.:   SE CARGAN LOS CONTROLES CON 'SETVALUE'.
+                    -   N.A.:   SE CONFIGURA LA ENTIDAD CON 'VALUE'.
+
+                -    N.A.:   ENTIDAD TASA CRECIMIENTO:
+                    -   N.A.:   MODIFICAR LA ENTIDAD.
+                    -   N.A.:   TESTEAR LA LÓGICA.
+                    -   N.A.:   SE CARGAN LOS CONTROLES CON 'SETVALUE'.
+                    -   N.A.:   SE CONFIGURA LA ENTIDAD CON 'VALUE'.
+
+                -    DONE:   ENTIDAD TIPO ACUARIO:
+                    -   DONE:   MODIFICAR LA ENTIDAD.
+                    -   DONE:   TESTEAR LA LÓGICA.
+                    -   N.A.:   SE CARGAN LOS CONTROLES CON 'SETVALUE'.
+                    -   N.A.:   SE CONFIGURA LA ENTIDAD CON 'VALUE'.
+
+                -    DONE:   ENTIDAD TIPO FILTRO:
+                    -   DONE:   MODIFICAR LA ENTIDAD.
+                    -   DONE:   TESTEAR LA LÓGICA.
+                    -   N.A.:   SE CARGAN LOS CONTROLES CON 'SETVALUE'.
+                    -   N.A.:   SE CONFIGURA LA ENTIDAD CON 'VALUE'.
+
+                -    DONE:   ENTIDAD TIPO ILUMINACION:
+                    -   DONE:   MODIFICAR LA ENTIDAD.
+                    -   DONE:   TESTEAR LA LÓGICA.
+                    -   N.A.:   SE CARGAN LOS CONTROLES CON 'SETVALUE'.
+                    -   N.A.:   SE CONFIGURA LA ENTIDAD CON 'VALUE'.
+
+                -    DONE:   ENTIDAD UNIDAD CONTENIDO:
+                    -   DONE:   MODIFICAR LA ENTIDAD.
+                    -   DONE:   TESTEAR LA LÓGICA.
+                    -   N.A.:   SE CARGAN LOS CONTROLES CON 'SETVALUE'.
+                    -   N.A.:   SE CONFIGURA LA ENTIDAD CON 'VALUE'.
+
+                -    DONE:   ENTIDAD URNA:
+                    -   DONE:   MODIFICAR LA ENTIDAD.
+                    -   DONE:   TESTEAR LA LÓGICA.
+                    -   N.A.:   SE CARGAN LOS CONTROLES CON 'SETVALUE'.
+                    -   N.A.:   SE CONFIGURA LA ENTIDAD CON 'VALUE'.
+
+                -    DONE:   ENTIDAD USUARIO:
+                    -   DONE:   MODIFICAR LA ENTIDAD.
+                    -   DONE:   TESTEAR LA LÓGICA.
+                    -   N.A.:   SE CARGAN LOS CONTROLES CON 'SETVALUE'.
+                    -   N.A.:   SE CONFIGURA LA ENTIDAD CON 'VALUE'.
+
+            CORRECCIONES:
+            -   DONE:   SE CORRIGE EL COMPORTAMIENTO DE INSERTAR EL TIPO DE
+                        ACUARIO.
+            -   DONE:   SE CORRIGE EL ERROR DEL ICONO DE LOS CONTROLES
+                        PERSONALIZADOS DE FECHA.
+            -   DONE:   SE CORRIGE EL ERROR DE RESTRICCIÓN NO NULO DE LA
+                        ENTIDAD MARCA COMERCIAL.
 
 12/04/2026  TESTEO MANUAL DE LA ESPECIE VEGETAL:
             -   DONE:   TEST -> APERTURA DEL FORMULARIO.

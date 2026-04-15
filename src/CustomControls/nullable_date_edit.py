@@ -5,6 +5,10 @@ Comentarios:
     QDateEdit personalizado que permite dejar el campo vacío (valor nulo)
     y seleccionar fecha mediante un calendario emergente integrado.
 """
+
+from pathlib import Path
+import globals
+
 from PyQt6.QtCore import QDate, QPoint, QRegularExpression, QSize, Qt, \
     pyqtSignal
 from PyQt6.QtGui import QIcon, QPixmap, QRegularExpressionValidator
@@ -43,12 +47,13 @@ class NullableDateEdit(QWidget):
 
         # Botón calendario
         self.button_calendar = QToolButton()
-        # self.button_calendar.setText("📅")
 
         icon_calendar = QIcon()
-        icon_calendar.addPixmap(QPixmap(":/Images/calendario.png"),
-                                QIcon.Mode.Normal,
-                                QIcon.State.On)
+        icon_calendar.addPixmap(
+            QPixmap(str(Path(globals.PATH_IMAGES) / "calendario.png")),
+            QIcon.Mode.Normal,
+            QIcon.State.On)
+
         self.button_calendar.setIcon(icon_calendar)
         self.button_calendar.setIconSize(QSize(16, 16))
         self.button_calendar.setCursor(Qt.CursorShape.PointingHandCursor)

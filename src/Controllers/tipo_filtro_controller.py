@@ -229,11 +229,7 @@ class TipoFiltroController(BaseController):
         self._view.frame.edit_id.setText(
             str(id_ta) if id_ta is not None else ""
         )
-
-        self._view.frame.edit_tipo_filtro.setText(
-            str(tipo_filtro) if tipo_filtro else ""
-        )
-
+        self._view.frame.edit_tipo_filtro.setValue(tipo_filtro)
         self._view.frame.text_observaciones.setPlainText(
             str(observaciones) if observaciones is not None else ""
         )

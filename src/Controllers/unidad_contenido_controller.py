@@ -10,7 +10,7 @@ from PyQt6.QtWidgets import QMessageBox, QPushButton
 
 from Controllers.base_controller import BaseController
 from Model.DAO.unidad_contenido_dao import UnidadContenidoDAO
-from Model.Entities.unidades_contenido_entity import UnidadContenidoEntity
+from Model.Entities.unidad_contenido_entity import UnidadContenidoEntity
 from Services.Result.result import Result
 from Services.Validators.unidad_contenido_validator import \
     UnidadContenidoValidator

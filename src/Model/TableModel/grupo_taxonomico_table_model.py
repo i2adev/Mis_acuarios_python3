@@ -52,7 +52,7 @@ class GrupoTaxonomicoTableModel(QAbstractTableModel):
         elif columna == 1:
             return entidad.num  # Número de la fila
         elif columna == 2:
-            return entidad.grupo_taxonomico  # Id de
+            return entidad.grupo_taxo
         elif columna == 3:
             return entidad.descripcion
 

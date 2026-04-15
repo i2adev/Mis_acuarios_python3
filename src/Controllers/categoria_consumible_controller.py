@@ -160,11 +160,11 @@ class CategoriaConsumibleController(BaseController):
 
         # Valida la categoría de consumible
         res = CategoriaConsumibleValidator.validate_categoria_consumible(
-            self._view.frame.combo_categoría
+            self._view.frame.edit_categoria_consumible
         )
 
         if not res.is_success:
-            self._view.frame.combo_categoría.setFocus()
+            self._view.frame.edit_categoria_consumible.setFocus()
             return res
 
         return Result.success(0)

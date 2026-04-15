@@ -27,7 +27,7 @@ from Model.Entities.categoria_consumible_entity import \
 from Model.Entities.consumible_entity import ConsumibleEntity
 from Model.Entities.formato_consumible_entity import FormatoConsumibleEntity
 from Model.Entities.marca_comercial_entity import MarcaComercialEntity
-from Model.Entities.unidades_contenido_entity import UnidadContenidoEntity
+from Model.Entities.unidad_contenido_entity import UnidadContenidoEntity
 from Services.Result.result import Result
 from Services.Validators.consumible_validator import ConsumibleValidator
 from Views.Dialogs.categoria_consumible_dialog import CategoriaConsumibleDialog

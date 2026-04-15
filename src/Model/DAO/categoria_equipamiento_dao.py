@@ -99,7 +99,7 @@ class CategoriaEquipamientoDAO(BaseDAO):
                 valores = [
                     CategoriaEquipamientoEntity(
                         id=f["ID"],
-                        categoria=f["VALUE"]
+                        categoria_equipamiento=f["VALUE"]
                     )
                     for f in rows
                 ]

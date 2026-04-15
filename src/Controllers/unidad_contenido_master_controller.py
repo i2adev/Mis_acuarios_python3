@@ -13,7 +13,7 @@ from PyQt6.QtWidgets import QMessageBox, QTableView, QWidget, QComboBox
 from Controllers.unidad_contenido_controller import UnidadContenidoController
 from Model.DAO.paginator import Paginator
 from Model.DAO.unidad_contenido_dao import UnidadContenidoDAO
-from Model.Entities.unidades_contenido_entity import UnidadContenidoEntity
+from Model.Entities.unidad_contenido_entity import UnidadContenidoEntity
 from Model.TableModel.unidad_contenido_table_model import \
     UnidadContenidoTableModel
 from Views.Masters.unidad_contenido_master import UnidadContenidoView

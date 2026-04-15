@@ -226,9 +226,7 @@ class MaterialUrnaController(BaseController):
             str(id_row) if id_row is not None else None
         )
 
-        self._view.frame.edit_material.setText(
-            str(material) if material else None
-        )
+        self._view.frame.edit_material.setValue(material)
 
         self._view.frame.text_descripcion.setPlainText(
             str(descripcion) if descripcion is not None else None

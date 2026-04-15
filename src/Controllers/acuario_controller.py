@@ -469,7 +469,7 @@ class AcuarioController(BaseController):
         # Configuramos el combo
         combo = self._view.frame.combo_tipo_acuario
 
-        self._fill_combo_urna()
+        self._fill_combo_tipo_acuario()
         for i in range(combo.count()):
             if combo.itemData(i) == res.value.id:
                 combo.setCurrentIndex(i)

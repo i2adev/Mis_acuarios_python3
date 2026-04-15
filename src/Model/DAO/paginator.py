@@ -31,7 +31,7 @@ from Model.Entities.requerimiento_iluminacion_entity import \
 from Model.Entities.sexo_animal_entity import SexoAnimalEntity
 from Model.Entities.tasa_crecimiento_entity import TasaCrecimientoEntity
 from Model.Entities.tipo_iluminacion_entity import TipoIluminacionEntity
-from Model.Entities.unidades_contenido_entity import UnidadContenidoEntity
+from Model.Entities.unidad_contenido_entity import UnidadContenidoEntity
 from Model.database import DBManager
 from Model.Entities.acuario_entity import AcuarioEntity
 from Model.Entities.base_entity import BaseEntity
@@ -429,7 +429,7 @@ class Paginator:
             data_list = [TipoAcuarioEntity(
                 id=f["ID"],
                 num=f["NUM"],
-                id_cat_acuario=f["CATEGORIA"],
+                id_categoria_acuario=f["CATEGORIA"],
                 id_subcat_acuario=f["SUBCATEGORIA"],
                 observaciones=f["OBSERVACIONES"]
             )
@@ -449,7 +449,7 @@ class Paginator:
             data_list = [SubcategoriaAcuarioEntity(
                 id=f["ID"],
                 num=f["NUM"],
-                id_cat=f["CATEGORIA"],
+                id_categoria=f["CATEGORIA"],
                 subcategoria=f["SUBCATEGORIA"],
                 observaciones=f["OBSERVACIONES"]
             )
@@ -601,7 +601,7 @@ class Paginator:
             data_list = [CategoriaEquipamientoEntity(
                 id=f["ID"],
                 num=f["NUM"],
-                categoria=f["CATEGORIA"],
+                categoria_equipamiento=f["CATEGORIA"],
                 descripcion=f["DESCRIPCION"],
             )
                 for f in rows

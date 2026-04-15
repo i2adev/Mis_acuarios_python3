@@ -367,18 +367,14 @@ class ProyectoController(BaseController):
         self._view.frame.edit_id.setText(
             str(id_ent) if id_ent is not None else ""
         )
-        self._view.frame.edit_nombre_proyecto.setText(
-            str(nombre) if nombre is not None else ""
-        )
+        self._view.frame.edit_nombre_proyecto.setValue(nombre)
         self._view.frame.combo_estado_proyecto.setCurrentIndex(
             self._view.frame.combo_estado_proyecto.findText(estado)
         )
         self._view.frame.date_inicio.setDate(fecha_inicio)
         self._view.frame.date_fin.setDate(fecha_fin)
 
-        self._view.frame.edit_motivo_cierre.setText(
-            str(motivo_cierre) if motivo_cierre is not None else ""
-        )
+        self._view.frame.edit_motivo_cierre.setValue(motivo_cierre)
         self._view.frame.text_descripcion.setPlainText(
             str(descripcion) if descripcion is not None else ""
         )

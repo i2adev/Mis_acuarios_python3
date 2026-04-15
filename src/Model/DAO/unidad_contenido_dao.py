@@ -9,7 +9,7 @@ import sqlite3
 import traceback
 
 from Model.DAO.base_dao import BaseDAO
-from Model.Entities.unidades_contenido_entity import UnidadContenidoEntity
+from Model.Entities.unidad_contenido_entity import UnidadContenidoEntity
 from Model.database import DBManager
 from Services.Result.result import Result
 

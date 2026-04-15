@@ -10,7 +10,7 @@ Comentarios:
 # Importaciones
 from PyQt6.QtCore import Qt, QAbstractTableModel, QModelIndex
 
-from Model.Entities.unidades_contenido_entity import UnidadContenidoEntity
+from Model.Entities.unidad_contenido_entity import UnidadContenidoEntity
 
 
 class UnidadContenidoTableModel(QAbstractTableModel):

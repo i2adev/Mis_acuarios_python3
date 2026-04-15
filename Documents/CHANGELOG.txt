@@ -1,5 +1,7 @@
 ﻿CHANGELOG:
 ================================================================================
+0.40.2  REFACTORIZACIÓN: SE CONVIERTEN TODAS A ENTIDADES A DATACLASAS.
+
 0.40.1  TESTEO MANUAL DE LA LÓGICA DE ESPECIE VEGETAL.
 
 0.40.0  SE AÑADE LA LÓGICA DE ESPECIE VEGETAL.

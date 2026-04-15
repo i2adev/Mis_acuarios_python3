@@ -9,7 +9,7 @@ from PyQt6.QtWidgets import QWidget, QMessageBox, QComboBox
 
 from Controllers.unidad_contenido_controller import UnidadContenidoController
 from Model.DAO.unidad_contenido_dao import UnidadContenidoDAO
-from Model.Entities.unidades_contenido_entity import UnidadContenidoEntity
+from Model.Entities.unidad_contenido_entity import UnidadContenidoEntity
 from Services.Result.result import Result
 from Views.Dialogs.unidad_contenido_dialog import UnidadContenidoDialog
 
