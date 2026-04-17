@@ -50,16 +50,10 @@ class ControlIluminacionController(BaseController):
             ent.id = None
 
         # Control de iluminación
-        if ctrs.edit_control_iluminacion.text():
-            ent.control_iluminacion = ctrs.edit_control_iluminacion.text()
-        else:
-            ent.control_iluminacion = None
+        ent.control_iluminacion = ctrs.edit_control_iluminacion.value()
 
         # Descripción
-        if ctrs.text_descripcion.toPlainText():
-            ent.descripcion = ctrs.text_descripcion.toPlainText()
-        else:
-            ent.descripcion = None
+        ent.descripcion = ctrs.text_descripcion.value()
 
         return ent
 
@@ -234,9 +228,6 @@ class ControlIluminacionController(BaseController):
         )
 
         self._view.frame.edit_control_iluminacion.setValue(tipo_iluminacion)
-
-        self._view.frame.text_descripcion.setPlainText(
-            str(descripcion) if descripcion is not None else ""
-        )
+        self._view.frame.text_descripcion.setValue(descripcion)
 
         return Result.success(id_ta)

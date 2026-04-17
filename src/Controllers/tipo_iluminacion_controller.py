@@ -53,10 +53,7 @@ class TipoIluminacionController(BaseController):
         ent.tipo_iluminacion = ctrs.edit_tipo_iluminacion.value()
 
         # Descripción
-        if ctrs.text_descripcion.toPlainText():
-            ent.descripcion = ctrs.text_descripcion.toPlainText()
-        else:
-            ent.descripcion = None
+        ent.descripcion = ctrs.text_descripcion.value()
 
         return ent
 
@@ -231,8 +228,6 @@ class TipoIluminacionController(BaseController):
         )
 
         self._view.frame.edit_tipo_iluminacion.setValue(tipo_iluminacion)
-        self._view.frame.text_descripcion.setPlainText(
-            str(descripcion) if descripcion is not None else ""
-        )
+        self._view.frame.text_descripcion.setValue(descripcion)
 
         return Result.success(id_ta)

@@ -18,6 +18,7 @@ from PyQt6.QtWidgets import (QApplication, QCheckBox, QFrame, QGroupBox,
                              QPushButton,
                              QSizePolicy, QSpacerItem, QVBoxLayout)
 
+from CustomControls.plain_text_edit import PlainTextEdit
 from CustomControls.str_line_edit import StrLineEdit
 
 
@@ -583,7 +584,7 @@ class EspecieAnimalForm(QFrame):
         ## Descripción
         self.layout_descripcion = QVBoxLayout()
         self.label_descripcion = QLabel("DESCRIPTION")
-        self.text_descripcion = QPlainTextEdit()
+        self.text_descripcion = PlainTextEdit("DESCRIPCIÓN")
         self.text_descripcion.setObjectName("text_descripcion")
         self.text_descripcion.setMinimumHeight(75)
         self.text_descripcion.setToolTip(

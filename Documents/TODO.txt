@@ -11,8 +11,191 @@ FECHA		DESCRIPCIÓN
             -   POST:   SE ELIMINAN LOS IF-ELSEIF-ELSE DEL PAGINADOR PARA
                         ADAPTARLOS AL MAS MODERNO MATCH.
 
+15/03/2026  REFACTORIZACIÓN: SE MODIFICAN LOS CAMPOS DE OBSERVACIONES
+            / DESCRIPCIÓN PARA ADAPTARLO AL NUEVO CONTROL.
+
+            -   DONE:   ACUARIO.
+                -   DONE:   SE MODIFICA EL FORMULARIO.
+                -   DONE:   SE MODIFICA LA CONFIGURACIÓN DE LA ENTIDAD.
+                -   DONE:   SE MODIFICA LA CARGA DEL REGISTRO.
+
+            -   DONE:   CATEGORÍA ACUARIO.
+                -   DONE:   SE MODIFICA EL FORMULARIO.
+                -   DONE:   SE MODIFICA LA CONFIGURACIÓN DE LA ENTIDAD.
+                -   DONE:   SE MODIFICA LA CARGA DEL REGISTRO.
+
+            -   DONE:   CATEGORÍA CONSUMIBLE.
+                -   DONE:   SE MODIFICA EL FORMULARIO.
+                -   DONE:   SE MODIFICA LA CONFIGURACIÓN DE LA ENTIDAD.
+                -   DONE:   SE MODIFICA LA CARGA DEL REGISTRO.
+
+            -   DONE:   CATEGORÍA EQUIPAMIENTO.
+                -   DONE:   SE MODIFICA EL FORMULARIO.
+                -   DONE:   SE MODIFICA LA CONFIGURACIÓN DE LA ENTIDAD.
+                -   DONE:   SE MODIFICA LA CARGA DEL REGISTRO.
+
+            -   DONE:   CATEGORÍA INCIDENCIA.
+                -   DONE:   SE MODIFICA EL FORMULARIO.
+                -   DONE:   SE MODIFICA LA CONFIGURACIÓN DE LA ENTIDAD.
+                -   DONE:   SE MODIFICA LA CARGA DEL REGISTRO.
+
+            -   DONE:   COMERCIO.
+                -   DONE:   SE MODIFICA EL FORMULARIO.
+                -   DONE:   SE MODIFICA LA CONFIGURACIÓN DE LA ENTIDAD.
+                -   DONE:   SE MODIFICA LA CARGA DEL REGISTRO.
+
+            -   DONE:   COMPORTAMIENTO FAUNA.
+                -   DONE:   SE MODIFICA EL FORMULARIO.
+                -   DONE:   SE MODIFICA LA CONFIGURACIÓN DE LA ENTIDAD.
+                -   DONE:   SE MODIFICA LA CARGA DEL REGISTRO.
+
+            -   DONE:   CONSUMIBLE.
+                -   DONE:   SE MODIFICA EL FORMULARIO.
+                -   DONE:   SE MODIFICA LA CONFIGURACIÓN DE LA ENTIDAD.
+                -   DONE:   SE MODIFICA LA CARGA DEL REGISTRO.
+
+            -   DONE:   CONTROL ILUMINACIÓN.
+                -   DONE:   SE MODIFICA EL FORMULARIO.
+                -   DONE:   SE MODIFICA LA CONFIGURACIÓN DE LA ENTIDAD.
+                -   DONE:   SE MODIFICA LA CARGA DEL REGISTRO.
+
+            -   DONE:   DIETA FAUNA.
+                -   DONE:   SE MODIFICA EL FORMULARIO.
+                -   DONE:   SE MODIFICA LA CONFIGURACIÓN DE LA ENTIDAD.
+                -   DONE:   SE MODIFICA LA CARGA DEL REGISTRO.
+
+            -   DONE:   DIFICULTAD PLANTA.
+                -   DONE:   SE MODIFICA EL FORMULARIO.
+                -   DONE:   SE MODIFICA LA CONFIGURACIÓN DE LA ENTIDAD.
+                -   DONE:   SE MODIFICA LA CARGA DEL REGISTRO.
+
+            -   DONE:   EQUIPAMIENTO.
+                -   DONE:   SE MODIFICA EL FORMULARIO.
+                -   DONE:   SE MODIFICA LA CONFIGURACIÓN DE LA ENTIDAD.
+                -   DONE:   SE MODIFICA LA CARGA DEL REGISTRO.
+
+            -   DONE:   ESPECIE ANIMAL.
+                -   DONE:   SE MODIFICA EL FORMULARIO.
+                -   DONE:   SE MODIFICA LA CONFIGURACIÓN DE LA ENTIDAD.
+                -   DONE:   SE MODIFICA LA CARGA DEL REGISTRO.
+
+            -   DONE:   ESPECIE VEGETAL.
+                -   DONE:   SE MODIFICA EL FORMULARIO.
+                -   DONE:   SE MODIFICA LA CONFIGURACIÓN DE LA ENTIDAD.
+                -   DONE:   SE MODIFICA LA CARGA DEL REGISTRO.
+
+            -   DONE:   ESTADO PROYECTO.
+                -   DONE:   SE MODIFICA EL FORMULARIO.
+                -   DONE:   SE MODIFICA LA CONFIGURACIÓN DE LA ENTIDAD.
+                -   DONE:   SE MODIFICA LA CARGA DEL REGISTRO.
+
+            -   DONE:   FILTRO.
+                -   DONE:   SE MODIFICA EL FORMULARIO.
+                -   DONE:   SE MODIFICA LA CONFIGURACIÓN DE LA ENTIDAD.
+                -   DONE:   SE MODIFICA LA CARGA DEL REGISTRO.
+
+            -   DONE:   FORMATO CONSUMIBLE.
+                -   DONE:   SE MODIFICA EL FORMULARIO.
+                -   DONE:   SE MODIFICA LA CONFIGURACIÓN DE LA ENTIDAD.
+                -   DONE:   SE MODIFICA LA CARGA DEL REGISTRO.
+
+            -   DONE:   GRUPO TAXONÓMICO.
+                -   DONE:   SE MODIFICA EL FORMULARIO.
+                -   DONE:   SE MODIFICA LA CONFIGURACIÓN DE LA ENTIDAD.
+                -   DONE:   SE MODIFICA LA CARGA DEL REGISTRO.
+
+            -   DONE:   ILUMINACIÓN.
+                -   DONE:   SE MODIFICA EL FORMULARIO.
+                -   DONE:   SE MODIFICA LA CONFIGURACIÓN DE LA ENTIDAD.
+                -   DONE:   SE MODIFICA LA CARGA DEL REGISTRO.
+
+            -   DONE:   MARCA COMERCIAL.
+                -   DONE:   SE MODIFICA EL FORMULARIO.
+                -   DONE:   SE MODIFICA LA CONFIGURACIÓN DE LA ENTIDAD.
+                -   DONE:   SE MODIFICA LA CARGA DEL REGISTRO.
+
+            -   DONE:   MATERIAL URNA.
+                -   DONE:   SE MODIFICA EL FORMULARIO.
+                -   DONE:   SE MODIFICA LA CONFIGURACIÓN DE LA ENTIDAD.
+                -   DONE:   SE MODIFICA LA CARGA DEL REGISTRO.
+
+            -   DONE:   NIVEL NADO.
+                -   DONE:   SE MODIFICA EL FORMULARIO.
+                -   DONE:   SE MODIFICA LA CONFIGURACIÓN DE LA ENTIDAD.
+                -   DONE:   SE MODIFICA LA CARGA DEL REGISTRO.
+
+            -   DONE:   POSICIÓN PLANTA ACUARIO.
+                -   DONE:   SE MODIFICA EL FORMULARIO.
+                -   DONE:   SE MODIFICA LA CONFIGURACIÓN DE LA ENTIDAD.
+                -   DONE:   SE MODIFICA LA CARGA DEL REGISTRO.
+
+            -   DONE:   PROYECTO.
+                -   DONE:   SE MODIFICA EL FORMULARIO.
+                -   DONE:   SE MODIFICA LA CONFIGURACIÓN DE LA ENTIDAD.
+                -   DONE:   SE MODIFICA LA CARGA DEL REGISTRO.
+
+            -   DONE:   REQUERIMIENTO CO2.
+                -   DONE:   SE MODIFICA EL FORMULARIO.
+                -   DONE:   SE MODIFICA LA CONFIGURACIÓN DE LA ENTIDAD.
+                -   DONE:   SE MODIFICA LA CARGA DEL REGISTRO.
+
+            -   DONE:   REQUERIMIENTO ILUMINACIÓN.
+                -   DONE:   SE MODIFICA EL FORMULARIO.
+                -   DONE:   SE MODIFICA LA CONFIGURACIÓN DE LA ENTIDAD.
+                -   DONE:   SE MODIFICA LA CARGA DEL REGISTRO.
+
+            -   DONE:   SEXO ANIMAL.
+                -   DONE:   SE MODIFICA EL FORMULARIO.
+                -   DONE:   SE MODIFICA LA CONFIGURACIÓN DE LA ENTIDAD.
+                -   DONE:   SE MODIFICA LA CARGA DEL REGISTRO.
+
+            -   DONE:   SUBCATEGORÍA ACUARIO.
+                -   DONE:   SE MODIFICA EL FORMULARIO.
+                -   DONE:   SE MODIFICA LA CONFIGURACIÓN DE LA ENTIDAD.
+                -   DONE:   SE MODIFICA LA CARGA DEL REGISTRO.
+
+            -   DONE:   SUBCATEGORÍA INCIDENCIA.
+                -   DONE:   SE MODIFICA EL FORMULARIO.
+                -   DONE:   SE MODIFICA LA CONFIGURACIÓN DE LA ENTIDAD.
+                -   DONE:   SE MODIFICA LA CARGA DEL REGISTRO.
+
+            -   DONE:   TASA CRECIMIENTO.
+                -   DONE:   SE MODIFICA EL FORMULARIO.
+                -   DONE:   SE MODIFICA LA CONFIGURACIÓN DE LA ENTIDAD.
+                -   DONE:   SE MODIFICA LA CARGA DEL REGISTRO.
+
+            -   DONE:   TIPO ACUARIO.
+                -   DONE:   SE MODIFICA EL FORMULARIO.
+                -   DONE:   SE MODIFICA LA CONFIGURACIÓN DE LA ENTIDAD.
+                -   DONE:   SE MODIFICA LA CARGA DEL REGISTRO.
+
+            -   DONE:   TIPO FILTRO.
+                -   DONE:   SE MODIFICA EL FORMULARIO.
+                -   DONE:   SE MODIFICA LA CONFIGURACIÓN DE LA ENTIDAD.
+                -   DONE:   SE MODIFICA LA CARGA DEL REGISTRO.
+
+            -   DONE:   TIPO ILUMINACIÓN.
+                -   DONE:   SE MODIFICA EL FORMULARIO.
+                -   DONE:   SE MODIFICA LA CONFIGURACIÓN DE LA ENTIDAD.
+                -   DONE:   SE MODIFICA LA CARGA DEL REGISTRO.
+
+            -   DONE:   TIPO ILUMINACIÓN.
+                -   DONE:   SE MODIFICA EL FORMULARIO.
+                -   DONE:   SE MODIFICA LA CONFIGURACIÓN DE LA ENTIDAD.
+                -   DONE:   SE MODIFICA LA CARGA DEL REGISTRO.
+
+            -   DONE:   UNIDAD CONTENIDO.
+                -   DONE:   SE MODIFICA EL FORMULARIO.
+                -   DONE:   SE MODIFICA LA CONFIGURACIÓN DE LA ENTIDAD.
+                -   DONE:   SE MODIFICA LA CARGA DEL REGISTRO.
+
+            -   DONE:   URNA.
+                -   DONE:   SE MODIFICA EL FORMULARIO.
+                -   DONE:   SE MODIFICA LA CONFIGURACIÓN DE LA ENTIDAD.
+                -   DONE:   SE MODIFICA LA CARGA DEL REGISTRO.
+
 14/04/2026  REFACTORIZACIÓN:
-            -   TODO:   SE CONVIERTEN LAS ENTIDADES A DATACLASS.
+            -   DONE:   SE CONVIERTEN LAS ENTIDADES A DATACLASS.
                 -   DONE:   ENTIDAD ACUARIO:
                     -   DONE:   MODIFICAR LA ENTIDAD.
                     -   DONE:   TESTEAR LA LÓGICA.

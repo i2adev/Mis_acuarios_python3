@@ -71,10 +71,7 @@ class MarcaComercialController(BaseController):
             ent.id_pais = None
 
         # Observaciones
-        if ctrs.text_observaciones.toPlainText():
-            ent.observaciones = ctrs.text_observaciones.toPlainText()
-        else:
-            ent.observaciones = None
+        ent.observaciones = ctrs.text_observaciones.value()
 
         return ent
 
@@ -270,9 +267,7 @@ class MarcaComercialController(BaseController):
         self._view.frame.combo_pais.setCurrentIndex(
             self._view.frame.combo_pais.findText(pais)
         )
-        self._view.frame.text_observaciones.setPlainText(
-            str(observaciones) if observaciones is not None else ""
-        )
+        self._view.frame.text_observaciones.setValue(observaciones)
 
         return Result.success(id_ma)
 

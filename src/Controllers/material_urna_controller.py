@@ -52,10 +52,7 @@ class MaterialUrnaController(BaseController):
         ent.material = ctrs.edit_material.value()
 
         # Descripción
-        if ctrs.text_descripcion.toPlainText():
-            ent.descripcion = ctrs.text_descripcion.toPlainText()
-        else:
-            ent.descripcion = None
+        ent.descripcion = ctrs.text_descripcion.value()
 
         return ent
 
@@ -227,9 +224,6 @@ class MaterialUrnaController(BaseController):
         )
 
         self._view.frame.edit_material.setValue(material)
-
-        self._view.frame.text_descripcion.setPlainText(
-            str(descripcion) if descripcion is not None else None
-        )
+        self._view.frame.text_descripcion.setValue(descripcion)
 
         return Result.success(id_row)

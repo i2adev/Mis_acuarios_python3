@@ -128,10 +128,7 @@ class FiltroController(BaseController):
         ent.motivo_baja = ctrs.edit_motivo_baja.value()
 
         # Descripción
-        if ctrs.text_descripcion.toPlainText():
-            ent.descripcion = ctrs.text_descripcion.toPlainText()
-        else:
-            ent.descripcion = None
+        ent.descripcion = ctrs.text_descripcion.value()
 
         return ent
 
@@ -517,9 +514,7 @@ class FiltroController(BaseController):
         self._view.frame.fecha_instalacion.setDate(fecha_instalacion)
         self._view.frame.fecha_baja.setDate(fecha_baja)
         self._view.frame.edit_motivo_baja.setValue(motivo_baja)
-        self._view.frame.text_descripcion.setPlainText(
-            str(descripcion) if descripcion is not None else ""
-        )
+        self._view.frame.text_descripcion.setValue(descripcion)
 
         return Result.success(id_ent)
 

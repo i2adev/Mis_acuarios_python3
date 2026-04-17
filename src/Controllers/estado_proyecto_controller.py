@@ -55,10 +55,7 @@ class EstadoProyectoController(BaseController):
         ent.estado = ctrs.edit_estado_proyecto.value()
 
         # Descripción del estado
-        if ctrs.text_observaciones.toPlainText():
-            ent.descripcion = ctrs.text_observaciones.toPlainText()
-        else:
-            ent.descripcion = None
+        ent.descripcion = ctrs.text_observaciones.value()
 
         return ent
 
@@ -224,19 +221,14 @@ class EstadoProyectoController(BaseController):
 
         # Lee los datos del modelo
         ide = modelo.index(fila, 0).data()
-        estado = modelo.index(fila, 2).data()  # La columna 1 es el
-        # númer correlativo.
+        estado = modelo.index(fila, 2).data()
         observaciones = modelo.index(fila, 3).data()
 
         # Cargamos los widgets
         self._view.frame.edit_id.setText(
             str(ide) if ide is not None else ""
         )
-
         self._view.frame.edit_estado_proyecto.setValue(estado)
-
-        self._view.frame.text_observaciones.setPlainText(
-            str(observaciones) if observaciones is not None else ""
-        )
+        self._view.frame.text_observaciones.setValue(observaciones)
 
         return Result.success(ide)

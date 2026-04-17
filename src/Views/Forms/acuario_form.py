@@ -13,9 +13,9 @@ from CustomControls.nullable_date_edit import NullableDateEdit
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QCursor
 from PyQt6.QtWidgets import (QApplication, QFrame, QGroupBox, QHBoxLayout,
-                             QLabel, QLineEdit, QPlainTextEdit, QPushButton,
-                             QVBoxLayout)
+                             QLabel, QLineEdit, QPushButton, QVBoxLayout)
 
+from CustomControls.plain_text_edit import PlainTextEdit
 from CustomControls.str_line_edit import StrLineEdit
 
 
@@ -163,7 +163,7 @@ class AcuarioForm(QFrame):
             """
         )
 
-        self.text_descripcion = QPlainTextEdit()
+        self.text_descripcion = PlainTextEdit("DESCRIPCIÓN")
         self.text_descripcion.setObjectName("text_descripcion")
         self.text_descripcion.setFixedHeight(75)
         self.text_descripcion.setToolTip(

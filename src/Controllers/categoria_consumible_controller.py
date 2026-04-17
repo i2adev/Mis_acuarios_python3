@@ -57,10 +57,7 @@ class CategoriaConsumibleController(BaseController):
         ent.categoria = ctrs.edit_categoria_consumible.value()
 
         # Descripción de la categoría
-        if ctrs.text_observaciones.toPlainText():
-            ent.observaciones = ctrs.text_observaciones.toPlainText()
-        else:
-            ent.observaciones = None
+        ent.observaciones = ctrs.text_observaciones.value()
 
         return ent
 
@@ -236,9 +233,6 @@ class CategoriaConsumibleController(BaseController):
         )
 
         self._view.frame.edit_categoria_consumible.setValue(categoria)
-
-        self._view.frame.text_observaciones.setPlainText(
-            str(observaciones) if observaciones is not None else ""
-        )
+        self._view.frame.text_observaciones.setValue(observaciones)
 
         return Result.success(ide)

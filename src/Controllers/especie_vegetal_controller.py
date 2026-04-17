@@ -141,8 +141,7 @@ class EspecieVegetalController(BaseController):
         ent.id_dificultad = ctrs.combo_dificultad.value()
 
         # Descripción del acuario
-        ent.descripcion = ctrs.text_descripcion.toPlainText() if (
-            ctrs.text_descripcion.toPlainText()) else None
+        ent.descripcion = ctrs.text_descripcion.value()
 
         return ent
 
@@ -633,9 +632,7 @@ class EspecieVegetalController(BaseController):
         self._view.frame.combo_req_co2.setValue(ent.id_req_co2)
         self._view.frame.combo_crecimiento.setValue(ent.id_tasa_crecimiento)
         self._view.frame.combo_dificultad.setValue(ent.id_dificultad)
-        self._view.frame.text_descripcion.setPlainText(
-            ent.descripcion if ent.descripcion is not None else ""
-        )
+        self._view.frame.text_descripcion.setValue(ent.descripcion)
 
         return Result.success(id_ent)
 

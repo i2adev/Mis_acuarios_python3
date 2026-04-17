@@ -12,6 +12,7 @@ from PyQt6.QtWidgets import QFrame, QVBoxLayout, QHBoxLayout, QLabel, \
     QLineEdit, \
     QPlainTextEdit, QApplication, QSpacerItem, QSizePolicy
 
+from CustomControls.plain_text_edit import PlainTextEdit
 from CustomControls.str_line_edit import StrLineEdit
 
 
@@ -73,7 +74,7 @@ class TipoFiltroForm(QFrame):
             """
         )
 
-        self.text_observaciones = QPlainTextEdit()
+        self.text_observaciones = PlainTextEdit("OBSERVACIONES")
         self.text_observaciones.setObjectName("text_descripcion")
         self.text_observaciones.setFixedHeight(75)
         self.text_observaciones.setToolTip(

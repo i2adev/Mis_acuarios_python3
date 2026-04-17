@@ -52,10 +52,7 @@ class DietaFaunaController(BaseController):
         ent.dieta = ctrs.edit_dieta.value()
 
         # Descripción
-        if ctrs.text_descripcion.toPlainText():
-            ent.descripcion = ctrs.text_descripcion.toPlainText()
-        else:
-            ent.descripcion = None
+        ent.descripcion = ctrs.text_descripcion.value()
 
         return ent
 
@@ -228,8 +225,6 @@ class DietaFaunaController(BaseController):
             str(id_cat) if id_cat is not None else ""
         )
         self._view.frame.edit_dieta.setValue(dieta)
-        self._view.frame.text_descripcion.setPlainText(
-            str(descripcion) if descripcion is not None else ""
-        )
+        self._view.frame.text_descripcion.setValue(descripcion)
 
         return Result.success(id_cat)

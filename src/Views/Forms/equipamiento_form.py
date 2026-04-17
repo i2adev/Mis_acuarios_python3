@@ -15,6 +15,7 @@ from PyQt6.QtWidgets import QFrame, QLabel, QLineEdit, QPlainTextEdit, \
 
 from CustomControls.combo_box import ComboBox
 from CustomControls.nullable_date_edit import NullableDateEdit
+from CustomControls.plain_text_edit import PlainTextEdit
 from CustomControls.str_line_edit import StrLineEdit
 
 
@@ -137,7 +138,7 @@ class EquipamientoForm(QFrame):
             """
         )
 
-        self.text_descripcion = QPlainTextEdit()
+        self.text_descripcion = PlainTextEdit("DESCRIPCIÓN")
         self.text_descripcion.setObjectName("text_descripcion")
         self.text_descripcion.setMinimumHeight(75)
         self.text_descripcion.setToolTip(

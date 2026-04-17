@@ -56,10 +56,7 @@ class UnidadContenidoController(BaseController):
         ent.unidad = ctrs.edit_unidad_contenido.value()
 
         # Descripción de la categoría
-        if ctrs.text_descripcion.toPlainText():
-            ent.descripcion = ctrs.text_descripcion.toPlainText()
-        else:
-            ent.descripcion = None
+        ent.descripcion = ctrs.text_descripcion.value()
 
         return ent
 
@@ -235,9 +232,6 @@ class UnidadContenidoController(BaseController):
         )
 
         self._view.frame.edit_unidad_contenido.setValue(unidad)
-
-        self._view.frame.text_descripcion.setPlainText(
-            str(descripcion) if descripcion is not None else ""
-        )
+        self._view.frame.text_descripcion.setValue(descripcion)
 
         return Result.success(ide)

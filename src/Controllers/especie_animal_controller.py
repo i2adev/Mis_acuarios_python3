@@ -136,8 +136,7 @@ class EspecieAnimalController(BaseController):
         ent.id_nivel_nado = ctrs.combo_nivel_nado.value()
 
         # Descripción del acuario
-        ent.descripcion = ctrs.text_descripcion.toPlainText() if (
-            ctrs.text_descripcion.toPlainText()) else None
+        ent.descripcion = ctrs.text_descripcion.value()
 
         return ent
 
@@ -586,9 +585,7 @@ class EspecieAnimalController(BaseController):
         self._view.frame.combo_comportamiento.setValue(ent.id_comportamiento)
         self._view.frame.combo_dieta.setValue(ent.id_dieta)
         self._view.frame.combo_nivel_nado.setValue(ent.id_nivel_nado)
-        self._view.frame.text_descripcion.setPlainText(
-            ent.descripcion if ent.descripcion is not None else ""
-        )
+        self._view.frame.text_descripcion.setValue(ent.descripcion)
 
         return Result.success(id_ent)
 

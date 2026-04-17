@@ -127,8 +127,7 @@ class IluminacionController(BaseController):
             ctrs.check_intensidad_regulable.isChecked()) else 0
 
         # Descripción
-        ent.descripcion = ctrs.text_descripcion.toPlainText() if (
-            ctrs.text_descripcion.toPlainText()) else None
+        ent.descripcion = ctrs.text_descripcion.value()
 
         return ent
 
@@ -399,9 +398,7 @@ class IluminacionController(BaseController):
             self._view.frame.combo_control_iluminacion.findText(control)
         )
 
-        self._view.frame.text_descripcion.setPlainText(
-            str(descripcion) if descripcion is not None else ""
-        )
+        self._view.frame.text_descripcion.setValue(descripcion)
 
         return Result.success(id_ta)
 

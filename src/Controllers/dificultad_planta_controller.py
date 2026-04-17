@@ -56,10 +56,7 @@ class DificultadPlantaController(BaseController):
         ent.dificultad = ctrs.edit_dificultad.value()
 
         # Descripción
-        if ctrs.text_descripcion.toPlainText():
-            ent.descripcion = ctrs.text_descripcion.toPlainText()
-        else:
-            ent.descripcion = None
+        ent.descripcion = ctrs.text_descripcion.value()
 
         return ent
 
@@ -247,8 +244,6 @@ class DificultadPlantaController(BaseController):
         )
         self._view.frame.edit_nivel.setValue(nivel)
         self._view.frame.edit_dificultad.setValue(dificultad)
-        self._view.frame.text_descripcion.setPlainText(
-            str(descripcion) if descripcion is not None else ""
-        )
+        self._view.frame.text_descripcion.setValue(descripcion)
 
         return Result.success(idc)

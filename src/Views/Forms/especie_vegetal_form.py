@@ -11,6 +11,7 @@ import sys
 from CustomControls.combo_box import ComboBox
 from CustomControls.double_line_edit import DoubleLineEdit
 from CustomControls.int_line_edit import IntLineEdit
+from CustomControls.plain_text_edit import PlainTextEdit
 from CustomControls.str_line_edit import StrLineEdit
 
 from PyQt6.QtCore import Qt
@@ -560,7 +561,7 @@ class EspecieVegetalForm(QFrame):
         ## Descripción
         self.layout_descripcion = QVBoxLayout()
         self.label_descripcion = QLabel("DESCRIPTION")
-        self.text_descripcion = QPlainTextEdit()
+        self.text_descripcion = PlainTextEdit("DESCRIPCIÓN")
         self.text_descripcion.setObjectName("text_descripcion")
         self.text_descripcion.setMinimumHeight(75)
         self.text_descripcion.setToolTip(

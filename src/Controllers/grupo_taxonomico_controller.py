@@ -53,11 +53,8 @@ class GrupoTaxonomicoController(BaseController):
         ent.grupo_taxonomico = ctrs.edit_grupo.value()
 
         # Descripción
-        if ctrs.text_descripcion.toPlainText():
-            ent.descripcion = ctrs.text_descripcion.toPlainText()
-        else:
-            ent.descripcion = None
-
+        ent.descripcion = ctrs.text_descripcion.value()
+        
         return ent
 
     # INICIO DE CRUD ---------------------------------------------------
@@ -229,8 +226,6 @@ class GrupoTaxonomicoController(BaseController):
             str(id_cat) if id_cat is not None else ""
         )
         self._view.frame.edit_grupo.setValue(grupo)
-        self._view.frame.text_descripcion.setPlainText(
-            str(descripcion) if descripcion is not None else ""
-        )
+        self._view.frame.text_descripcion.setValue(descripcion)
 
         return Result.success(id_cat)

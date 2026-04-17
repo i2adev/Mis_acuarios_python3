@@ -14,6 +14,7 @@ from PyQt6.QtWidgets import QFrame, QLabel, QLineEdit, QPlainTextEdit, \
 
 from CustomControls.combo_box import ComboBox
 from CustomControls.int_line_edit import IntLineEdit
+from CustomControls.plain_text_edit import PlainTextEdit
 from CustomControls.str_line_edit import StrLineEdit
 
 
@@ -187,7 +188,7 @@ class UrnaForm(QFrame):
             """
         )
 
-        self.text_descripcion = QPlainTextEdit()
+        self.text_descripcion = PlainTextEdit("DESCRIPCIÓN")
         self.text_descripcion.setObjectName("text_descripcion")
         self.text_descripcion.setFixedHeight(75)
         self.text_descripcion.setToolTip(

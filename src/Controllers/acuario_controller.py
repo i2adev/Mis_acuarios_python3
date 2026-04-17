@@ -123,10 +123,7 @@ class AcuarioController(BaseController):
         ent.ubicacion_acuario = ctrs.edit_ubicacion_acuario.value()
 
         # Descripción del acuario
-        if ctrs.text_descripcion.toPlainText():
-            ent.descripcion = ctrs.text_descripcion.toPlainText()
-        else:
-            ent.descripcion = None
+        ent.descripcion = ctrs.text_descripcion.value()
 
         return ent
 
@@ -553,9 +550,7 @@ class AcuarioController(BaseController):
         )
         self._view.frame.fecha_desmontaje.setDate(fecha_desmontaje)
         self._view.frame.edit_motivo_desmontaje.setValue(motivo_desmontaje)
-        self._view.frame.text_descripcion.setPlainText(
-            str(descripcion) if descripcion is not None else ""
-        )
+        self._view.frame.text_descripcion.setValue(descripcion)
 
         return Result.success(id_ent)
 

@@ -14,6 +14,7 @@ from PyQt6.QtWidgets import QFrame, QLabel, QLineEdit, QPlainTextEdit, \
     QVBoxLayout, QHBoxLayout, QApplication, QComboBox, QPushButton
 
 from CustomControls.combo_box import ComboBox
+from CustomControls.plain_text_edit import PlainTextEdit
 
 
 class TipoAcuarioForm(QFrame):
@@ -65,8 +66,8 @@ class TipoAcuarioForm(QFrame):
         self.edit_id.setFixedWidth(50)
         self.edit_id.setEnabled(False)
 
-        self.text_observaciones = QPlainTextEdit()
-        self.text_observaciones.setObjectName("text_descripcion")
+        self.text_observaciones = PlainTextEdit("OBSERVACIONES")
+        self.text_observaciones.setObjectName("text_observaciones")
         self.text_observaciones.setFixedHeight(75)
         self.text_observaciones.setToolTip(
             """

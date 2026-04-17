@@ -12,6 +12,7 @@ from PyQt6.QtWidgets import (QFrame, QVBoxLayout, QHBoxLayout, QLabel,
                              QLineEdit, QPlainTextEdit, QApplication,
                              QSpacerItem, QSizePolicy)
 
+from CustomControls.plain_text_edit import PlainTextEdit
 from CustomControls.str_line_edit import StrLineEdit
 
 
@@ -73,7 +74,7 @@ class GrupoTaxonomicoForm(QFrame):
             """
         )
 
-        self.text_descripcion = QPlainTextEdit()
+        self.text_descripcion = PlainTextEdit("DESCRIPCIÓN")
         self.text_descripcion.setObjectName("text_descripcion")
         self.text_descripcion.setToolTip(
             """

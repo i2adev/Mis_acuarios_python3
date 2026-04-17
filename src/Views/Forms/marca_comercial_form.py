@@ -16,6 +16,7 @@ from PyQt6.QtWidgets import QFrame, QLabel, QLineEdit, QPlainTextEdit, \
     QSizePolicy
 
 from CustomControls.combo_box import ComboBox
+from CustomControls.plain_text_edit import PlainTextEdit
 from CustomControls.str_line_edit import StrLineEdit
 
 
@@ -159,7 +160,7 @@ class MarcaComercialForm(QFrame):
             """
         )
 
-        self.text_observaciones = QPlainTextEdit()
+        self.text_observaciones = PlainTextEdit("OBSERVACIONES")
         self.text_observaciones.setObjectName("text_observaciones")
         self.text_observaciones.setMaximumHeight(75)
         self.text_observaciones.setToolTip(

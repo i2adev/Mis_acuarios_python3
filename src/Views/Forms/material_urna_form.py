@@ -12,6 +12,7 @@ from PyQt6.QtWidgets import QFrame, QVBoxLayout, QHBoxLayout, QLabel, \
     QLineEdit, \
     QPlainTextEdit, QApplication
 
+from CustomControls.plain_text_edit import PlainTextEdit
 from CustomControls.str_line_edit import StrLineEdit
 
 
@@ -72,7 +73,7 @@ class MaterialUrnaForm(QFrame):
             """
         )
 
-        self.text_descripcion = QPlainTextEdit()
+        self.text_descripcion = PlainTextEdit("DESCRIPCIÓN")
         self.text_descripcion.setObjectName("text_descripcion")
         self.text_descripcion.setMaximumHeight(75)
         self.text_descripcion.setToolTip(

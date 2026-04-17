@@ -62,10 +62,7 @@ class SubcategoriaAcuarioController(BaseController):
         ent.subcategoria = ctrs.edit_subcategoria_acuario.value()
 
         # Observaciones
-        if ctrs.text_observaciones.toPlainText():
-            ent.observaciones = ctrs.text_observaciones.toPlainText()
-        else:
-            ent.observaciones = None
+        ent.observaciones = ctrs.text_observaciones.value()
 
         return ent
 
@@ -257,9 +254,7 @@ class SubcategoriaAcuarioController(BaseController):
             self._view.frame.combo_categoria_acuario.findText(categoria)
         )
 
-        self._view.frame.text_observaciones.setPlainText(
-            str(observaciones) if observaciones is not None else ""
-        )
+        self._view.frame.text_observaciones.setValue(observaciones)
 
         return Result.success(id_cat)
 
