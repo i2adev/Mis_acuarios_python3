@@ -66,19 +66,11 @@ class EquipamientoController(BaseController):
         else:
             ent.id = None
 
-        # Categoría
         ent.id_categoria = ctrs.combo_categoria_equipamiento.value()
-
-        # Marca
         ent.id_marca = int(ctrs.combo_marca.value())
-
-        # Modelo
         ent.modelo = ctrs.edit_modelo.value()
-
-        # Número de serie
         ent.numero_serie = ctrs.edit_num_serie.value()
 
-        # Fecha de alta
         alta = ctrs.fecha_alta.date()
         if alta.isValid():
             time_alta = QDateTime(alta, QTime(0, 0))
@@ -86,7 +78,6 @@ class EquipamientoController(BaseController):
         else:
             ent.fecha_alta = None
 
-        # Fecha de baja
         baja = ctrs.fecha_baja.date()
         if baja.isValid():
             time_baja = QDateTime(baja, QTime(0, 0))
@@ -94,10 +85,7 @@ class EquipamientoController(BaseController):
         else:
             ent.fecha_baja = None
 
-        # Motivo de baja
         ent.motivo_baja = ctrs.edit_motivo_baja.value()
-
-        # Descripción
         ent.descripcion = ctrs.text_descripcion.value()
 
         return ent
@@ -438,13 +426,9 @@ class EquipamientoController(BaseController):
         self._view.frame.edit_id.setText(
             str(ent.id) if ent.id is not None else ""
         )
-        self._view.frame.combo_categoria_equipamiento.setCurrentIndex(
-            self._view.frame.combo_categoria_equipamiento.findData(
-                ent.id_categoria)
-        )
-        self._view.frame.combo_marca.setCurrentIndex(
-            self._view.frame.combo_marca.findData(ent.id_marca)
-        )
+        self._view.frame.combo_categoria_equipamiento.setValue(
+            ent.id_categoria)
+        self._view.frame.combo_marca.setValue(ent.id_marca)
         self._view.frame.edit_modelo.setValue(ent.modelo)
         self._view.frame.edit_num_serie.setValue(ent.num_series)
         self._view.frame.fecha_alta.setDate(BaseDAO._seconds_to_date(

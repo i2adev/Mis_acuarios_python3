@@ -396,19 +396,14 @@ class UrnaController(BaseController):
         self._view.frame.edit_id.setText(
             str(ent.id) if ent.id is not None else ""
         )
-        self._view.frame.combo_marca.setCurrentIndex(
-            self._view.frame.combo_marca.findData(ent.id_marca)
-        )
+        self._view.frame.combo_marca.setValue(ent.id_marca)
         self._view.frame.edit_modelo.setValue(ent.modelo)
         self._view.frame.edit_ancho.setValue(ent.anchura)
         self._view.frame.edit_profundo.setValue(ent.profundidad)
         self._view.frame.edit_alto.setValue(ent.alto)
         self._view.frame.edit_grosor.setValue(ent.grosor)
         self._view.frame.edit_volumen.setValue(ent.volumen)
-
-        self._view.frame.combo_material.setCurrentIndex(
-            self._view.frame.combo_material.findData(ent.id_material)
-        )
+        self._view.frame.combo_material.setValue(ent.id_material)
         self._view.frame.text_descripcion.setValue(ent.descripcion)
 
         return Result.success(ent.id)

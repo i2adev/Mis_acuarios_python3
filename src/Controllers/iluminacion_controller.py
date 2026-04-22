@@ -337,35 +337,6 @@ class IluminacionController(BaseController):
                 "SELECCIONAR UN REGISTRO EN LA TABLA."
             )
 
-        # # Configuramos la fila
-        # index = selection_model.currentIndex()
-        # fila = index.row()
-        # table_model = self._view.data_table.model()
-        #
-        # # Lee los datos del table_model
-        # id_ta = table_model.index(fila, 0).data()
-        # marca = table_model.index(fila, 2).data()
-        # modelo = table_model.index(fila, 3).data()
-        # num_serie = table_model.index(fila, 4).data()
-        # tipo = table_model.index(fila, 5).data()
-        # potencia = table_model.index(fila, 6).data()
-        # flujo_luminico = table_model.index(fila, 7).data()
-        # temperatura = table_model.index(fila, 8).data()
-        # vida_util = table_model.index(fila, 9).data()
-        # longitud = table_model.index(fila, 10).data()
-        # anchura = table_model.index(fila, 11).data()
-        # control = table_model.index(fila, 12).data()
-        # regulable = table_model.index(fila, 13).data()
-        # espectro_completo = table_model.index(fila, 14).data()
-        #
-        # fecha_alta = QDate.fromString(
-        #     str(table_model.index(fila, 15).data()), "dd/MM/yyyy")
-        # fecha_baja = QDate.fromString(
-        #     str(table_model.index(fila, 16).data()), "dd/MM/yyyy")
-        #
-        # motivo_baja = table_model.index(fila, 17).data()
-        # descripcion = table_model.index(fila, 18).data()
-
         # Configuramos la fila
         index = selection_model.currentIndex()
         fila = index.row()
@@ -391,12 +362,8 @@ class IluminacionController(BaseController):
 
         self._view.frame.edit_modelo.setValue(ent.modelo)
         self._view.frame.edit_num_serie.setValue(ent.num_serie)
-
-        self._view.frame.combo_tipo_iluminacion.setCurrentIndex(
-            self._view.frame.combo_tipo_iluminacion.findData(
-                ent.id_tipo_iluminacion)
-        )
-
+        self._view.frame.combo_tipo_iluminacion.setValue(
+            ent.id_tipo_iluminacion)
         self._view.frame.edit_potencia.setValue(ent.potencia)
         self._view.frame.edit_flujo_luminico.setValue(ent.flujo_luminico)
         self._view.frame.edit_temperatura.setValue(ent.temperatura)
@@ -407,18 +374,13 @@ class IluminacionController(BaseController):
             ent.intensidad_regulable)
         self._view.frame.check_espectro_completo.setChecked(
             ent.espectro_completo)
-
         self._view.frame.fecha_alta.setDate(
             BaseDAO._seconds_to_date(ent.fecha_alta))
         self._view.frame.fecha_baja.setDate(
             BaseDAO._seconds_to_date(ent.fecha_baja))
         self._view.frame.edit_motivo_baja.setValue(ent.motivo_baja)
-
-        self._view.frame.combo_control_iluminacion.setCurrentIndex(
-            self._view.frame.combo_control_iluminacion.findData(
-                ent.id_control_iluminacion)
-        )
-
+        self._view.frame.combo_control_iluminacion.setValue(
+            ent.id_control_iluminacion)
         self._view.frame.text_descripcion.setValue(ent.descripcion)
 
         return Result.success(ent.id)

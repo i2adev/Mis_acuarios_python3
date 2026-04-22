@@ -49,19 +49,12 @@ class SubcategoriaAcuarioController(BaseController):
         ent = SubcategoriaAcuarioEntity()
         ctrs = self._view.frame
 
-        # ID
         if ctrs.edit_id.text():
             ent.id = int(ctrs.edit_id.text())
         else:
             ent.id = None
-
-        # Categoría de acuario
         ent.id_categoria = ctrs.combo_categoria_acuario.value()
-
-        # Subcategoría de acuario
         ent.subcategoria = ctrs.edit_subcategoria_acuario.value()
-
-        # Observaciones
         ent.observaciones = ctrs.text_observaciones.value()
 
         return ent
@@ -248,10 +241,7 @@ class SubcategoriaAcuarioController(BaseController):
             str(ent.id) if ent.id is not None else ""
         )
 
-        self._view.frame.combo_categoria_acuario.setCurrentIndex(
-            self._view.frame.combo_categoria_acuario.findData(ent.id_categoria)
-        )
-
+        self._view.frame.combo_categoria_acuario.setValue(ent.id_categoria)
         self._view.frame.edit_subcategoria_acuario.setValue(ent.subcategoria)
         self._view.frame.text_observaciones.setValue(ent.observaciones)
 

@@ -250,15 +250,9 @@ class SubcategoriaIncidenciaController(BaseController):
         self._view.frame.edit_id.setText(
             str(ent.id) if ent.id is not None else ""
         )
-
-        self._view.frame.combo_categoria_incidencia.setCurrentIndex(
-            self._view.frame.combo_categoria_incidencia.findData(
-                ent.id_categoria)
-        )
-
+        self._view.frame.combo_categoria_incidencia.setValue(ent.id_categoria)
         self._view.frame.edit_subcategoria_incidencia.setValue(
             ent.subcategoria)
-
         self._view.frame.text_observaciones.setValue(ent.observaciones)
 
         return Result.success(ent.id)

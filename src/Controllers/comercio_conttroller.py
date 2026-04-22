@@ -263,11 +263,7 @@ class ComercioController(BaseController):
         self._view.frame.edit_cod_postal.setValue(ent.cod_postal)
         self._view.frame.edit_poblacion.setValue(ent.poblacion)
         self._view.frame.edit_provincia.setValue(ent.provincia)
-
-        self._view.frame.combo_pais.setCurrentIndex(
-            self._view.frame.combo_pais.findData(ent.id_pais)
-        )
-
+        self._view.frame.combo_pais.setValue(ent.id_pais)
         self._view.frame.text_observaciones.setValue(ent.observaciones)
 
         return Result.success(ent.id)

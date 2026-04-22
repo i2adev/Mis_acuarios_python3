@@ -71,71 +71,30 @@ class EspecieAnimalController(BaseController):
         else:
             ent.id = None
 
-        # Reino
         ent.reino = ctrs.edit_reino.value()
-
-        # Filo
         ent.filo = ctrs.edit_filo.value()
-
-        # Clase
         ent.clase = ctrs.edit_clase.value()
-
-        # Orden
         ent.orden = ctrs.edit_orden.value()
-
-        # Familia
         ent.familia = ctrs.edit_familia.value()
-
-        # Genero
         ent.genero = ctrs.edit_genero.value()
-
-        # Especie
         ent.especie = ctrs.edit_especie.value()
-
-        # Nombre común
         ent.nombre_comun = ctrs.edit_n_comun.value()
-
-        # ¿Es una especie híbrida?
-        ent.es_hibrida = 1 if ctrs.check_hibrida.isChecked() else 0
-
-        # Nombre de la especie híbrida
+        ent.es_hibrida = True if ctrs.check_hibrida.isChecked() else False
         ent.nombre_especie_hibrida = ctrs.edit_n_e_hibrida.value()
-
-        # Grupo taxonómico
         ent.id_grupo_taxonomico = ctrs.combo_grupo_taxo.value()
-
-        # PH mínimo i máximo
         ent.ph_min = ctrs.edit_ph_min.value()
         ent.ph_max = ctrs.edit_ph_max.value()
-
-        # KH mínimo y máximo
         ent.kh_min = ctrs.edit_kh_min.value()
         ent.kh_max = ctrs.edit_kh_max.value()
-
-        # GH mínimo y máximo
         ent.gh_min = ctrs.edit_gh_min.value()
         ent.gh_max = ctrs.edit_gh_max.value()
-
-        # Temperatura
         ent.temp_min = ctrs.edit_temp_min.value()
         ent.temp_max = ctrs.edit_temp_max.value()
-
-        # Origen
         ent.origen = ctrs.edit_origen.value()
-
-        # Tamaño
         ent.tamano_cm = ctrs.edit_tamano.value()
-
-        # Comportamiento
         ent.id_comportamiento = ctrs.combo_comportamiento.value()
-
-        # Dieta
         ent.id_dieta = ctrs.combo_dieta.value()
-
-        # Nivel de nado
         ent.id_nivel_nado = ctrs.combo_nivel_nado.value()
-
-        # Descripción del acuario
         ent.descripcion = ctrs.text_descripcion.value()
 
         return ent
@@ -400,7 +359,7 @@ class EspecieAnimalController(BaseController):
         # Llenas el combo
         for ent in lista.value:
             self._view.frame.combo_grupo_taxo.addItem(
-                ent.grupo_taxonomico, ent.id
+                ent.grupo_taxo, ent.id
             )
 
         # Establecemos el autocompletado

@@ -63,29 +63,17 @@ class AcuarioController(BaseController):
             ent.id = int(self._view.frame.edit_id.text())
         else:
             ent.id = None
-
-        # Proyecto
         ent.id_proyecto = ctrs.combo_proyecto.value()
-
-        # Color
         if ctrs.edit_cod_color.text():
             ent.cod_color = ctrs.edit_cod_color.text()
         else:
             ent.cod_color = None
 
-        # Nombre del acuario
         ent.nombre = ctrs.edit_nombre_acuario.value()
-
-        # Urna
         ent.id_urna = int(ctrs.combo_urna.value())
-
-        # Tipo de acuario
         ent.id_tipo = int(ctrs.combo_tipo_acuario.value())
-
-        # Volumen neto
         ent.volumen_neto = ctrs.edit_vol_neto.value()
 
-        # Fecha de montaje
         f_montaje = ctrs.fecha_montaje.date()
         if f_montaje.isValid():
             time_inicio = QDateTime(f_montaje, QTime(0, 0))
@@ -93,7 +81,6 @@ class AcuarioController(BaseController):
         else:
             ent.fecha_montaje = None
 
-        # Fecha de inicio de ciclado
         f_i_ciclado = ctrs.fecha_inicio_ciclado.date()
         if f_i_ciclado.isValid():
             time_inicio = QDateTime(f_i_ciclado, QTime(0, 0))
@@ -101,7 +88,6 @@ class AcuarioController(BaseController):
         else:
             ent.fecha_inicio_ciclado = None
 
-        # Fecha de inicio de ciclado
         f_f_ciclado = ctrs.fecha_fin_ciclado.date()
         if f_f_ciclado.isValid():
             time_inicio = QDateTime(f_f_ciclado, QTime(0, 0))
@@ -109,7 +95,6 @@ class AcuarioController(BaseController):
         else:
             ent.fecha_fin_ciclado = None
 
-        # Fecha de desmontaje del acuario
         f_desmontaje = ctrs.fecha_desmontaje.date()
         if f_desmontaje.isValid():
             time_inicio = QDateTime(f_desmontaje, QTime(0, 0))
@@ -117,13 +102,8 @@ class AcuarioController(BaseController):
         else:
             ent.fecha_desmontaje = None
 
-        # Motivo del desmontaje
         ent.motivo_desmontaje = ctrs.edit_motivo_desmontaje.value()
-
-        # Ubicación del acuario
         ent.ubicacion_acuario = ctrs.edit_ubicacion_acuario.value()
-
-        # Descripción del acuario
         ent.descripcion = ctrs.text_descripcion.value()
 
         return ent

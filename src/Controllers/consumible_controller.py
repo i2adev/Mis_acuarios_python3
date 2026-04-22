@@ -73,25 +73,12 @@ class ConsumibleController(BaseController):
         else:
             ent.id = None
 
-        # Marca
         ent.id_marca = ctrs.combo_marca.value()
-
-        # Producto
         ent.producto = ctrs.edit_producto.value()
-
-        # Categoría
         ent.id_categoria = ctrs.combo_categoria.value()
-
-        # Formato
         ent.id_formato = ctrs.combo_formato.value()
-
-        # Contenido
         ent.contenido = ctrs.edit_contenido.value()
-
-        # Unidad
         ent.id_unidad = ctrs.combo_unidad.value()
-
-        # Descripción del acuario
         ent.descripcion = ctrs.text_descripcion.value()
 
         return ent
@@ -428,20 +415,12 @@ class ConsumibleController(BaseController):
         self._view.frame.edit_id.setText(
             str(ent.id) if ent.id is not None else ""
         )
-        self._view.frame.combo_marca.setCurrentIndex(
-            self._view.frame.combo_marca.findData(ent.id_marca)
-        )
+        self._view.frame.combo_marca.setValue(ent.id_marca)
         self._view.frame.edit_producto.setValue(ent.producto)
-        self._view.frame.combo_categoria.setCurrentIndex(
-            self._view.frame.combo_categoria.findData(ent.id_categoria)
-        )
-        self._view.frame.combo_formato.setCurrentIndex(
-            self._view.frame.combo_formato.findData(ent.id_formato)
-        )
+        self._view.frame.combo_categoria.setValue(ent.id_categoria)
+        self._view.frame.combo_formato.setValue(ent.id_formato)
         self._view.frame.edit_contenido.setValue(ent.contenido)
-
-        self._view.frame.combo_unidad.setCurrentIndex(
-            self._view.frame.combo_unidad.findData(ent.id_unidad))
+        self._view.frame.combo_unidad.setValue(ent.id_unidad)
         self._view.frame.text_descripcion.setValue(ent.descripcion)
 
         return Result.success(id_ent)

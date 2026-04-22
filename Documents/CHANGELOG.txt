@@ -1,5 +1,7 @@
 ﻿CHANGELOG:
 ================================================================================
+0.40.5  REFACTORIZACIÓN: LOS COMBOS SE ACTUALIZAN AL ESTANDAR NUEVO.
+
 0.40.4  REFACTORIZACIÓN: CARGAR LOS REGISTROS DE LOS DISTINTOS MAESTROS A
         TRAVES DE LA BASE DE DATOS.
 
