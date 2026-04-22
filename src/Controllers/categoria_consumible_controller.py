@@ -221,18 +221,21 @@ class CategoriaConsumibleController(BaseController):
         fila = index.row()
         modelo = self._view.data_table.model()
 
-        # Lee los datos del modelo
-        ide = modelo.index(fila, 0).data()
-        categoria = modelo.index(fila, 2).data()  # La columna 1 es el
-        # número correlativo.
-        observaciones = modelo.index(fila, 3).data()
+        # Obtenemos la entidad
+        id_ent = modelo.index(fila, 0).data()
+
+        val = self._dao.get_entity_by_id(id_ent)
+        if not val.is_success:
+            return val
+
+        ent = val.value
 
         # Cargamos los widgets
         self._view.frame.edit_id.setText(
-            str(ide) if ide is not None else ""
+            str(ent.id) if ent.id is not None else ""
         )
 
-        self._view.frame.edit_categoria_consumible.setValue(categoria)
-        self._view.frame.text_observaciones.setValue(observaciones)
+        self._view.frame.edit_categoria_consumible.setValue(ent.categoria)
+        self._view.frame.text_observaciones.setValue(ent.observaciones)
 
-        return Result.success(ide)
+        return Result.success(ent.id)

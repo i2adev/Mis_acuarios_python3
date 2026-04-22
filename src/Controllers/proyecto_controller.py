@@ -8,6 +8,7 @@ import globals
 from Controllers.base_controller import BaseController
 from Controllers.estado_proyecto_dialog_controller import \
     EstadoProyectoDialogController
+from Model.DAO.base_dao import BaseDAO
 from Model.DAO.estado_proyecto_dao import EstadoProyectoDAO
 from Model.DAO.proyecto_dao import ProyectoDAO
 from Model.Entities.estado_proyecto_entity import EstadoProyectoEntity
@@ -342,39 +343,38 @@ class ProyectoController(BaseController):
                 "ANTES DE CARGAR UN REGISTRO, DEBES "
                 "SELECCIONAR UN REGISTRO EN LA TABLA."
             )
+
         # Configuramos la fila
         index = selection_model.currentIndex()
         fila = index.row()
         modelo = self._view.data_table.model()
 
-        # Lee los datos del modelo
+        # Obtenemos la entidad
         id_ent = modelo.index(fila, 0).data()
-        nombre = modelo.index(fila, 3).data()
-        estado = modelo.index(fila, 4).data()
 
-        fecha_inicio = QDate.fromString(
-            str(modelo.index(fila, 5).data()), "dd/MM/yyyy")
+        val = self._dao.get_entity_by_id(id_ent)
+        if not val.is_success:
+            return val
 
-        fecha_fin = QDate.fromString(
-            str(modelo.index(fila, 6).data()), "dd/MM/yyyy")
-        motivo_cierre = modelo.index(fila, 7).data()
-        descripcion = modelo.index(fila, 8).data()
+        ent = val.value
 
         # Cargamos los widgets
         self._view.frame.edit_id.setText(
-            str(id_ent) if id_ent is not None else ""
+            str(ent.id) if ent.id is not None else ""
         )
-        self._view.frame.edit_nombre_proyecto.setValue(nombre)
+        self._view.frame.edit_nombre_proyecto.setValue(ent.nombre)
         self._view.frame.combo_estado_proyecto.setCurrentIndex(
-            self._view.frame.combo_estado_proyecto.findText(estado)
+            self._view.frame.combo_estado_proyecto.findData(ent.id_estado)
         )
-        self._view.frame.date_inicio.setDate(fecha_inicio)
-        self._view.frame.date_fin.setDate(fecha_fin)
+        self._view.frame.date_inicio.setDate(
+            BaseDAO._seconds_to_date(ent.fecha_inicio))
+        self._view.frame.date_fin.setDate(
+            BaseDAO._seconds_to_date(ent.fecha_fin))
 
-        self._view.frame.edit_motivo_cierre.setValue(motivo_cierre)
-        self._view.frame.text_descripcion.setValue(descripcion)
+        self._view.frame.edit_motivo_cierre.setValue(ent.motivo_cierre)
+        self._view.frame.text_descripcion.setValue(ent.descripcion)
 
-        return Result.success(id_ent)
+        return Result.success(ent.id)
 
     def _load_images(self, id_: int):
         """

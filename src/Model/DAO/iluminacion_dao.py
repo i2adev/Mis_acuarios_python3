@@ -25,6 +25,68 @@ class IluminacionDAO(BaseDAO):
         self.ent = None
 
     # ------------------------------------------------------------------
+    def get_entity_by_id(self, ide: int) -> Result:
+        """
+        Obtiene el registro con el ID pasado como argumento.
+        :param ide: ID de la entidad a recuperar
+        """
+
+        try:
+            sql = (
+                """
+                SELECT *
+                FROM   ILUMINACIONES
+                WHERE  ID_ILUMINACION = :id;
+                """
+            )
+
+            params = {"id": ide, }
+
+            with self.db.conn as con:
+                cur = con.cursor()
+                cur.execute(sql, params)
+                row = cur.fetchone()
+
+                # Configuramos la entidad
+                ent = IluminacionEntity(
+                    id=row[0],
+                    id_tipo_iluminacion=row[1],
+                    id_marca=row[2],
+                    modelo=row[3],
+                    num_serie=row[4],
+                    potencia=row[5],
+                    flujo_luminico=row[6],
+                    temperatura=row[7],
+                    vida_util=row[8],
+                    longitud=row[9],
+                    anchura=row[10],
+                    id_control_iluminacion=row[11],
+                    intensidad_regulable=row[12],
+                    espectro_completo=row[13],
+                    fecha_alta=row[14],
+                    fecha_baja=row[15],
+                    motivo_baja=row[16],
+                    descripcion=row[17],
+                )
+
+                return Result.success(ent)
+
+        except sqlite3.IntegrityError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[INTEGRITY ERROR]\n {e}")
+        except sqlite3.OperationalError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[OPERATIONAL ERROR]\n {e}")
+        except sqlite3.ProgrammingError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[PROGRAMMING ERROR]\n {e}")
+        except sqlite3.DatabaseError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[DATABASE ERROR]\n {e}")
+        except sqlite3.Error as e:
+            # traceback.print_exc()
+            return Result.failure(f"[SQLITE ERROR]\n {e}")
+
     def get_list(self) -> Result:
         """Obtiene el listado completo ordenado por marca-modelo."""
 

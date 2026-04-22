@@ -18,6 +18,9 @@ LOCALE = QLocale(QLocale.Language.Spanish, QLocale.Country.Spain)
 # Rutas
 BASE_PATH = Path(__file__).resolve().parent
 PATH_RESOURCES = BASE_PATH / "Resources"
-PATH_IMAGES = PATH_RESOURCES / "Images" 
+PATH_IMAGES = PATH_RESOURCES / "Images"
 PATH_FONTS = PATH_RESOURCES / "Fonts"
 PATH_STYLES = PATH_RESOURCES / "Styles"
+
+# Valor máximo de un int32
+INT32_MAX_VALUE = 2 ** 32 - 1

@@ -25,7 +25,55 @@ class TipoAcuarioDAO(BaseDAO):
         self.ent = None
 
     # ------------------------------------------------------------------
-    def get_list(self) -> Result(list[TipoAcuarioEntity]):
+    def get_entity_by_id(self, ide: int) -> Result:
+        """
+        Obtiene el registro con el ID pasado como argumento.
+        :param ide: ID de la entidad a recuperar
+        """
+
+        try:
+            sql = (
+                """
+                SELECT *
+                FROM   TIPOS_ACUARIO
+                WHERE  ID_TIPO = :id;
+                """
+            )
+
+            params = {"id": ide, }
+
+            with self.db.conn as con:
+                cur = con.cursor()
+                cur.execute(sql, params)
+                row = cur.fetchone()
+
+                # Configuramos la entidad
+                ent = TipoAcuarioEntity(
+                    id=row[0],
+                    id_categoria_acuario=row[1],
+                    id_subcat_acuario=row[2],
+                    observaciones=row[3],
+                )
+
+                return Result.success(ent)
+
+        except sqlite3.IntegrityError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[INTEGRITY ERROR]\n {e}")
+        except sqlite3.OperationalError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[OPERATIONAL ERROR]\n {e}")
+        except sqlite3.ProgrammingError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[PROGRAMMING ERROR]\n {e}")
+        except sqlite3.DatabaseError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[DATABASE ERROR]\n {e}")
+        except sqlite3.Error as e:
+            # traceback.print_exc()
+            return Result.failure(f"[SQLITE ERROR]\n {e}")
+
+    def get_list(self) -> Result:
         """Obtiene el listado completo ordenado por categoría."""
 
         sql = (

@@ -27,6 +27,53 @@ class EstadoProyectoDAO(BaseDAO):
         self.ent = None
 
     # ------------------------------------------------------------------
+    def get_entity_by_id(self, ide: int) -> Result:
+        """
+        Obtiene el registro con el ID pasado como argumento.
+        :param ide: ID de la entidad a recuperar
+        """
+
+        try:
+            sql = (
+                """
+                SELECT *
+                FROM   ESTADOS_PROYECTO
+                WHERE  ID_ESTADO = :id;
+                """
+            )
+
+            params = {"id": ide, }
+
+            with self.db.conn as con:
+                cur = con.cursor()
+                cur.execute(sql, params)
+                row = cur.fetchone()
+
+                # Configuramos la entidad
+                ent = EstadoProyectoEntity(
+                    id=row[0],
+                    estado=row[1],
+                    descripcion=row[2],
+                )
+
+                return Result.success(ent)
+
+        except sqlite3.IntegrityError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[INTEGRITY ERROR]\n {e}")
+        except sqlite3.OperationalError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[OPERATIONAL ERROR]\n {e}")
+        except sqlite3.ProgrammingError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[PROGRAMMING ERROR]\n {e}")
+        except sqlite3.DatabaseError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[DATABASE ERROR]\n {e}")
+        except sqlite3.Error as e:
+            # traceback.print_exc()
+            return Result.failure(f"[SQLITE ERROR]\n {e}")
+
     def get_list(self) -> Result:
         """Obtiene el listado completo ordenado por estado."""
 

@@ -19,7 +19,7 @@ class IntLineEdit(QLineEdit):
     QLineEdit que solo admite enteros.
     """
 
-    MAX_DIGITS = 8
+    MAX_DIGITS = 12
 
     def __init__(self, control_name: str, min_value: int, max_value: int,
                  units: str | None = None, is_nullable: bool = True,

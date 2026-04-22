@@ -14,6 +14,7 @@ from Controllers.tipo_acuario_dialog_controller import \
     TipoAcuarioDialogController
 from Controllers.urna_dialog_controller import UrnaDialogController
 from Model.DAO.acuario_dao import AcuarioDAO
+from Model.DAO.base_dao import BaseDAO
 from Model.DAO.proyecto_dao import ProyectoDAO
 from Model.DAO.tipo_acuario_dao import TipoAcuarioDAO
 from Model.DAO.urna_dao import UrnaDAO
@@ -489,70 +490,47 @@ class AcuarioController(BaseController):
         fila = index.row()
         modelo = self._view.data_table.model()
 
-        # Lee los datos del modelo
+        # Obtenemos la entidad
         id_ent = modelo.index(fila, 0).data()
-        proyecto = modelo.index(fila, 2).data()
-        cod_color = modelo.index(fila, 3).data()
-        nombre = modelo.index(fila, 4).data()
-        urna = modelo.index(fila, 5).data()
-        tipo = modelo.index(fila, 6).data()
-        volumen = self.brakdown_volumes(modelo.index(fila, 7).data())
-        fecha_montaje = QDate.fromString(
-            str(modelo.index(fila, 8).data()), "dd/MM/yyyy")
-        fecha_inicio_ciclado = QDate.fromString(
-            str(modelo.index(fila, 9).data()), "dd/MM/yyyy")
-        fecha_fin_ciclado = QDate.fromString(
-            str(modelo.index(fila, 10).data()), "dd/MM/yyyy")
-        ubicacion = modelo.index(fila, 12).data()
-        fecha_desmontaje = QDate.fromString(
-            str(modelo.index(fila, 13).data()), "dd/MM/yyyy")
-        motivo_desmontaje = modelo.index(fila, 15).data()
-        descripcion = modelo.index(fila, 16).data()
+
+        val = self._dao.get_entity_by_id(id_ent)
+        if not val.is_success:
+            return val
+
+        ent = val.value
 
         # Cargamos los widgets
         self._view.frame.edit_id.setText(
             str(id_ent) if id_ent is not None else ""
         )
-
-        self._view.frame.combo_proyecto.setCurrentIndex(
-            self._view.frame.combo_proyecto.findText(proyecto)
-        )
-
-        if cod_color:
-            self._view.frame.edit_cod_color.setText(cod_color)
+        self._view.frame.combo_proyecto.setValue(ent.id_proyecto)
+        if ent.cod_color:
+            self._view.frame.edit_cod_color.setText(ent.cod_color)
             self._view.frame.button_color.setStyleSheet(
-                f"background-color: {cod_color};"
+                f"background-color: {ent.cod_color};"
             )
         else:
             self._view.frame.edit_cod_color.setText(None)
             self._view.frame.button_color.setStyleSheet(
                 "background-color: transparent;"
             )
+        self._view.frame.edit_nombre_acuario.setValue(ent.nombre)
+        self._view.frame.combo_urna.setValue(ent.id_urna)
+        self._view.frame.combo_tipo_acuario.setValue(ent.id_tipo)
+        self._view.frame.edit_vol_neto.setValue(ent.volumen_neto)
+        self._view.frame.fecha_montaje.setDate(
+            BaseDAO._seconds_to_date(ent.fecha_montaje))
+        self._view.frame.fecha_inicio_ciclado.setDate(
+            BaseDAO._seconds_to_date(ent.fecha_inicio_ciclado))
+        self._view.frame.fecha_fin_ciclado.setDate(
+            BaseDAO._seconds_to_date(ent.fecha_fin_ciclado))
+        self._view.frame.edit_ubicacion_acuario.setValue(ent.ubicacion_acuario)
+        self._view.frame.fecha_desmontaje.setDate(
+            BaseDAO._seconds_to_date(ent.fecha_desmontaje))
+        self._view.frame.edit_motivo_desmontaje.setValue(ent.motivo_desmontaje)
+        self._view.frame.text_descripcion.setValue(ent.descripcion)
 
-        self._view.frame.edit_nombre_acuario.setValue(nombre)
-        self._view.frame.combo_urna.setCurrentIndex(
-            self._view.frame.combo_urna.findText(urna)
-        )
-        self._view.frame.combo_tipo_acuario.setCurrentIndex(
-            self._view.frame.combo_tipo_acuario.findText(tipo)
-        )
-
-        if volumen:
-            self._view.frame.edit_vol_neto.setValue(int(volumen))
-        else:
-            self._view.frame.edit_vol_neto.setValue(None)
-
-        self._view.frame.fecha_montaje.setDate(fecha_montaje)
-        self._view.frame.fecha_inicio_ciclado.setDate(fecha_inicio_ciclado)
-        self._view.frame.fecha_fin_ciclado.setDate(fecha_fin_ciclado)
-        self._view.frame.edit_ubicacion_acuario.setText(
-            str(ubicacion) if ubicacion is not None else ""
-        )
-        self._view.frame.fecha_desmontaje.setDate(fecha_desmontaje)
-        self._view.frame.edit_motivo_desmontaje.setValue(motivo_desmontaje)
-        self._view.frame.text_descripcion.setValue(descripcion)
-
-        return Result.success(id_ent)
+        return Result.success(ent.id)
 
     def _load_images(self, id_: int):
         """
@@ -588,52 +566,6 @@ class AcuarioController(BaseController):
                 self._view.windowTitle(),
                 "SE LA CANCELADO LA SELECCIÓN DE COLOR"
             )
-
-    # def _open_urna_dialog(self):
-    #     """ Abrimos el diálogo de urna. """
-    #
-    #     # Configuramos el CONTROLADOR
-    #     view = UrnaDialog("INSERTAR URNA")
-    #     dao = UrnaDAO()
-    #     mod = UrnaEntity()
-    #
-    #     ctrl = UrnaDialogController(view, dao, mod)
-    #
-    #     # Muestra el diálogo
-    #     res = ctrl.show_modal()
-    #     if not res.is_success:
-    #         return
-    #
-    #     # Configuramos el combo
-    #     combo = self._view.frame.combo_urna
-    #
-    #     self._fill_combo_urna()
-    #     for i in range(combo.count()):
-    #         if combo.itemData(i) == res.value.id:
-    #             combo.setCurrentIndex(i)
-    #
-    # def _open_tipo_acuario_dialog(self):
-    #     """ Abrimos el diálogo de tipo de acuario. """
-    #
-    #     # Configuramos el CONTROLADOR
-    #     view = TipoAcuarioDialog("INSERTAR TIPO DE ACUARIO")
-    #     dao = TipoAcuarioDAO()
-    #     mod = TipoAcuarioEntity()
-    #
-    #     ctrl = TipoAcuarioDialogController(view, dao, mod)
-    #
-    #     # Muestra el diálogo
-    #     res = ctrl.show_modal()
-    #     if not res.is_success:
-    #         return
-    #
-    #     # Configuramos el combo
-    #     combo = self._view.frame.combo_tipo_acuario
-    #
-    #     self._fill_combo_tipo_acuario()
-    #     for i in range(combo.count()):
-    #         if combo.itemData(i) == res.value.id:
-    #             combo.setCurrentIndex(i)
 
     def brakdown_volumes(self, volumes: str) -> str:
         """

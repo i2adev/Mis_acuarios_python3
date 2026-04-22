@@ -20,7 +20,7 @@ class FiltroEntity(BaseEntity):
     id_marca: int | None = None
     modelo: str | None = None
     num_serie: str | None = None
-    es_thermo: bool | None = None
+    es_thermo: bool = None
     vol_min_acuario: int | None = None
     vol_max_acuario: int | None = None
     caudal: int | None = None

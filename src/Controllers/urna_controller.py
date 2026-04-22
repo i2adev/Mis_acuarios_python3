@@ -377,44 +377,41 @@ class UrnaController(BaseController):
                 "ANTES DE CARGAR UN REGISTRO, DEBES "
                 "SELECCIONAR UN REGISTRO EN LA TABLA."
             )
+
         # Configuramos la fila
         index = selection_model.currentIndex()
         fila = index.row()
         modelo = self._view.data_table.model()
 
-        # Lee los datos del modelo
+        # Obtenemos la entidad
         id_ent = modelo.index(fila, 0).data()
-        marca = modelo.index(fila,
-                             2).data()  # La columna 1 es el nº correlativo.
-        modelo_urna = modelo.index(fila, 3).data()
-        ancho = modelo.index(fila, 4).data()
-        profundo = modelo.index(fila, 5).data()
-        alto = modelo.index(fila, 6).data()
-        grosor = modelo.index(fila, 7).data()
-        volumen = modelo.index(fila, 8).data()
-        material = modelo.index(fila, 9).data()
-        descripcion = modelo.index(fila, 10).data()
+
+        val = self._dao.get_entity_by_id(id_ent)
+        if not val.is_success:
+            return val
+
+        ent = val.value
 
         # Cargamos los widgets
         self._view.frame.edit_id.setText(
-            str(id_ent) if id_ent is not None else ""
+            str(ent.id) if ent.id is not None else ""
         )
         self._view.frame.combo_marca.setCurrentIndex(
-            self._view.frame.combo_marca.findText(marca)
+            self._view.frame.combo_marca.findData(ent.id_marca)
         )
-        self._view.frame.edit_modelo.setValue(modelo_urna)
-        self._view.frame.edit_ancho.setValue(ancho)
-        self._view.frame.edit_profundo.setValue(profundo)
-        self._view.frame.edit_alto.setValue(alto)
-        self._view.frame.edit_grosor.setValue(grosor)
-        self._view.frame.edit_volumen.setValue(volumen)
+        self._view.frame.edit_modelo.setValue(ent.modelo)
+        self._view.frame.edit_ancho.setValue(ent.anchura)
+        self._view.frame.edit_profundo.setValue(ent.profundidad)
+        self._view.frame.edit_alto.setValue(ent.alto)
+        self._view.frame.edit_grosor.setValue(ent.grosor)
+        self._view.frame.edit_volumen.setValue(ent.volumen)
 
         self._view.frame.combo_material.setCurrentIndex(
-            self._view.frame.combo_material.findText(material)
+            self._view.frame.combo_material.findData(ent.id_material)
         )
-        self._view.frame.text_descripcion.setValue(descripcion)
+        self._view.frame.text_descripcion.setValue(ent.descripcion)
 
-        return Result.success(id_ent)
+        return Result.success(ent.id)
 
     def _load_images(self, id_: int):
         """

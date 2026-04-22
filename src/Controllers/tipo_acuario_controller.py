@@ -231,29 +231,33 @@ class TipoAcuarioController(BaseController):
         fila = index.row()
         modelo = self._view.data_table.model()
 
-        # Lee los datos del modelo
-        id_ta = modelo.index(fila, 0).data()
-        categoria = modelo.index(fila, 2).data()  # La columna 1 es el
-        # númer correlativo.
-        subcategoria = modelo.index(fila, 3).data()
-        observaciones = modelo.index(fila, 4).data()
+        # Obtenemos la entidad
+        id_ent = modelo.index(fila, 0).data()
+
+        val = self._dao.get_entity_by_id(id_ent)
+        if not val.is_success:
+            return val
+
+        ent = val.value
 
         # Cargamos los widgets
         self._view.frame.edit_id.setText(
-            str(id_ta) if id_ta is not None else ""
+            str(ent.id) if ent.id is not None else ""
         )
 
         self._view.frame.combo_categoria_acuario.setCurrentIndex(
-            self._view.frame.combo_categoria_acuario.findText(categoria)
+            self._view.frame.combo_categoria_acuario.findData(
+                ent.id_categoria_acuario)
         )
 
         self._view.frame.combo_subcategoria_acuario.setCurrentIndex(
-            self._view.frame.combo_subcategoria_acuario.findText(subcategoria)
+            self._view.frame.combo_subcategoria_acuario.findData(
+                ent.id_subcat_acuario)
         )
 
-        self._view.frame.text_observaciones.setValue(observaciones)
+        self._view.frame.text_observaciones.setValue(ent.observaciones)
 
-        return Result.success(id_ta)
+        return Result.success(ent.id)
 
     def _fill_combos(self):
         """ Llena los combos del formulario"""

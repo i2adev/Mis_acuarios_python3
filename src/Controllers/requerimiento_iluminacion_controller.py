@@ -59,7 +59,7 @@ class RequerimientoIluminacionController(BaseController):
 
         # Descripción
         ent.descripcion = ctrs.text_descripcion.value()
-        
+
         return ent
 
     # INICIO DE CRUD ---------------------------------------------------
@@ -220,16 +220,20 @@ class RequerimientoIluminacionController(BaseController):
         fila = index.row()
         modelo = self._view.data_table.model()
 
-        # Lee los datos del modelo
-        id_cat = modelo.index(fila, 0).data()
-        requerimiento = modelo.index(fila, 2).data()
-        descripcion = modelo.index(fila, 3).data()
+        # Obtenemos la entidad
+        id_ent = modelo.index(fila, 0).data()
+
+        val = self._dao.get_entity_by_id(id_ent)
+        if not val.is_success:
+            return val
+
+        ent = val.value
 
         # Cargamos los widgets
         self._view.frame.edit_id.setText(
-            str(id_cat) if id_cat is not None else ""
+            str(ent.id) if ent.id is not None else ""
         )
-        self._view.frame.edit_requerimiento.setValue(requerimiento)
-        self._view.frame.text_descripcion.setValue(descripcion)
+        self._view.frame.edit_requerimiento.setValue(ent.requerimiento)
+        self._view.frame.text_descripcion.setValue(ent.descripcion)
 
-        return Result.success(id_cat)
+        return Result.success(ent.id)

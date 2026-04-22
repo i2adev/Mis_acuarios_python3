@@ -15,6 +15,7 @@ from Controllers.marca_comercial_dialog_controller import \
     MarcaComercialDialogController
 from Controllers.tipo_iluminacion_dialog_controler import \
     TipoIluminacionDialogController
+from Model.DAO.base_dao import BaseDAO
 from Model.DAO.control_iluminacion_dao import ControlIluminacionDAO
 from Model.DAO.iluminacion_dao import IluminacionDAO
 from Model.DAO.marca_comercial_dao import MarcaComercialDAO
@@ -119,12 +120,12 @@ class IluminacionController(BaseController):
         ent.motivo_baja = ctrs.edit_motivo_baja.value()
 
         # Espectro completo
-        ent.espectro_completo = 1 if (
-            ctrs.check_espectro_completo.isChecked()) else 0
+        ent.espectro_completo = True if (
+            ctrs.check_espectro_completo.isChecked()) else False
 
         # Intensidad regulable
-        ent.intensidad_regulable = 1 if (
-            ctrs.check_intensidad_regulable.isChecked()) else 0
+        ent.intensidad_regulable = True if (
+            ctrs.check_intensidad_regulable.isChecked()) else False
 
         # Descripción
         ent.descripcion = ctrs.text_descripcion.value()
@@ -336,71 +337,91 @@ class IluminacionController(BaseController):
                 "SELECCIONAR UN REGISTRO EN LA TABLA."
             )
 
+        # # Configuramos la fila
+        # index = selection_model.currentIndex()
+        # fila = index.row()
+        # table_model = self._view.data_table.model()
+        #
+        # # Lee los datos del table_model
+        # id_ta = table_model.index(fila, 0).data()
+        # marca = table_model.index(fila, 2).data()
+        # modelo = table_model.index(fila, 3).data()
+        # num_serie = table_model.index(fila, 4).data()
+        # tipo = table_model.index(fila, 5).data()
+        # potencia = table_model.index(fila, 6).data()
+        # flujo_luminico = table_model.index(fila, 7).data()
+        # temperatura = table_model.index(fila, 8).data()
+        # vida_util = table_model.index(fila, 9).data()
+        # longitud = table_model.index(fila, 10).data()
+        # anchura = table_model.index(fila, 11).data()
+        # control = table_model.index(fila, 12).data()
+        # regulable = table_model.index(fila, 13).data()
+        # espectro_completo = table_model.index(fila, 14).data()
+        #
+        # fecha_alta = QDate.fromString(
+        #     str(table_model.index(fila, 15).data()), "dd/MM/yyyy")
+        # fecha_baja = QDate.fromString(
+        #     str(table_model.index(fila, 16).data()), "dd/MM/yyyy")
+        #
+        # motivo_baja = table_model.index(fila, 17).data()
+        # descripcion = table_model.index(fila, 18).data()
+
         # Configuramos la fila
         index = selection_model.currentIndex()
         fila = index.row()
-        table_model = self._view.data_table.model()
+        modelo = self._view.data_table.model()
 
-        # Lee los datos del table_model
-        id_ta = table_model.index(fila, 0).data()
-        marca = table_model.index(fila, 2).data()
-        modelo = table_model.index(fila, 3).data()
-        num_serie = table_model.index(fila, 4).data()
-        tipo = table_model.index(fila, 5).data()
-        potencia = table_model.index(fila, 6).data()
-        flujo_luminico = table_model.index(fila, 7).data()
-        temperatura = table_model.index(fila, 8).data()
-        vida_util = table_model.index(fila, 9).data()
-        longitud = table_model.index(fila, 10).data()
-        anchura = table_model.index(fila, 11).data()
-        control = table_model.index(fila, 12).data()
-        regulable = table_model.index(fila, 13).data()
-        espectro_completo = table_model.index(fila, 14).data()
+        # Obtenemos la entidad
+        id_ent = modelo.index(fila, 0).data()
 
-        fecha_alta = QDate.fromString(
-            str(table_model.index(fila, 15).data()), "dd/MM/yyyy")
-        fecha_baja = QDate.fromString(
-            str(table_model.index(fila, 16).data()), "dd/MM/yyyy")
+        val = self._dao.get_entity_by_id(id_ent)
+        if not val.is_success:
+            return val
 
-        motivo_baja = table_model.index(fila, 17).data()
-        descripcion = table_model.index(fila, 18).data()
+        ent = val.value
 
         # Cargamos los widgets
         self._view.frame.edit_id.setText(
-            str(id_ta) if id_ta is not None else ""
+            str(ent.id) if ent.id is not None else ""
         )
 
         self._view.frame.combo_marca.setCurrentIndex(
-            self._view.frame.combo_marca.findText(marca)
+            self._view.frame.combo_marca.findData(ent.id_marca)
         )
 
-        self._view.frame.edit_modelo.setValue(modelo)
-        self._view.frame.edit_num_serie.setValue(num_serie)
+        self._view.frame.edit_modelo.setValue(ent.modelo)
+        self._view.frame.edit_num_serie.setValue(ent.num_serie)
 
         self._view.frame.combo_tipo_iluminacion.setCurrentIndex(
-            self._view.frame.combo_tipo_iluminacion.findText(tipo)
+            self._view.frame.combo_tipo_iluminacion.findData(
+                ent.id_tipo_iluminacion)
         )
 
-        self._view.frame.edit_potencia.setValue(potencia)
-        self._view.frame.edit_flujo_luminico.setValue(flujo_luminico)
-        self._view.frame.edit_temperatura.setValue(temperatura)
-        self._view.frame.edit_vida_util.setValue(vida_util)
-        self._view.frame.edit_longitud.setValue(longitud)
-        self._view.frame.edit_anchura.setValue(anchura)
-        self._view.frame.check_intensidad_regulable.setChecked(regulable)
-        self._view.frame.check_espectro_completo.setChecked(espectro_completo)
+        self._view.frame.edit_potencia.setValue(ent.potencia)
+        self._view.frame.edit_flujo_luminico.setValue(ent.flujo_luminico)
+        self._view.frame.edit_temperatura.setValue(ent.temperatura)
+        self._view.frame.edit_vida_util.setValue(ent.vida_util)
+        self._view.frame.edit_longitud.setValue(ent.longitud)
+        self._view.frame.edit_anchura.setValue(ent.anchura)
+        self._view.frame.check_intensidad_regulable.setChecked(
+            ent.intensidad_regulable)
+        self._view.frame.check_espectro_completo.setChecked(
+            ent.espectro_completo)
 
-        self._view.frame.fecha_alta.setDate(fecha_alta)
-        self._view.frame.fecha_baja.setDate(fecha_baja)
-        self._view.frame.edit_motivo_baja.setValue(motivo_baja)
+        self._view.frame.fecha_alta.setDate(
+            BaseDAO._seconds_to_date(ent.fecha_alta))
+        self._view.frame.fecha_baja.setDate(
+            BaseDAO._seconds_to_date(ent.fecha_baja))
+        self._view.frame.edit_motivo_baja.setValue(ent.motivo_baja)
 
         self._view.frame.combo_control_iluminacion.setCurrentIndex(
-            self._view.frame.combo_control_iluminacion.findText(control)
+            self._view.frame.combo_control_iluminacion.findData(
+                ent.id_control_iluminacion)
         )
 
-        self._view.frame.text_descripcion.setValue(descripcion)
+        self._view.frame.text_descripcion.setValue(ent.descripcion)
 
-        return Result.success(id_ta)
+        return Result.success(ent.id)
 
     # ********************************
     # CONTINUA CON LA CARGA DE REGISTRO

@@ -29,6 +29,58 @@ class ProyectoDAO(BaseDAO):
         self.ent = None
 
     # ------------------------------------------------------------------
+    def get_entity_by_id(self, ide: int) -> Result:
+        """
+        Obtiene el registro con el ID pasado como argumento.
+        :param ide: ID de la entidad a recuperar
+        """
+
+        try:
+            sql = (
+                """
+                SELECT *
+                FROM   PROYECTOS
+                WHERE  ID_PROYECTO = :id;
+                """
+            )
+
+            params = {"id": ide, }
+
+            with self.db.conn as con:
+                cur = con.cursor()
+                cur.execute(sql, params)
+                row = cur.fetchone()
+
+                # Configuramos la entidad
+                ent = ProyectoEntity(
+                    id=row[0],
+                    id_usuario=row[1],
+                    nombre=row[2],
+                    id_estado=row[3],
+                    fecha_inicio=row[4],
+                    fecha_fin=row[5],
+                    motivo_cierre=row[6],
+                    descripcion=row[7],
+                )
+
+                return Result.success(ent)
+
+        except sqlite3.IntegrityError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[INTEGRITY ERROR]\n {e}")
+        except sqlite3.OperationalError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[OPERATIONAL ERROR]\n {e}")
+        except sqlite3.ProgrammingError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[PROGRAMMING ERROR]\n {e}")
+        except sqlite3.DatabaseError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[DATABASE ERROR]\n {e}")
+        except sqlite3.Error as e:
+            # traceback.print_exc()
+            return Result.failure(f"[SQLITE ERROR]\n {e}")
+
     def get_list(self) -> Result:
         """ Obtiene el listado completo ordenado por fecha de inicio. """
 

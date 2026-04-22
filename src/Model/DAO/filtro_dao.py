@@ -25,6 +25,134 @@ class FiltroDAO(BaseDAO):
         self.ent = None
 
     # ------------------------------------------------------------------
+    def get_entity_by_id(self, ide: int) -> Result:
+        """
+        Obtiene el registro con el ID pasado como argumento.
+        :param ide: ID de la entidad a recuperar
+        """
+
+        try:
+            sql = (
+                """
+                SELECT *
+                FROM   FILTROS
+                WHERE  ID_FILTRO = :id;
+                """
+            )
+
+            params = {"id": ide, }
+
+            with self.db.conn as con:
+                cur = con.cursor()
+                cur.execute(sql, params)
+                row = cur.fetchone()
+
+                # Configuramos la entidad
+                ent = FiltroEntity(
+                    id=row[0],
+                    id_tipo=row[1],
+                    id_marca=row[2],
+                    modelo=row[3],
+                    num_serie=row[4],
+                    es_thermo=row[5],
+                    vol_min_acuario=row[6],
+                    vol_max_acuario=row[7],
+                    caudal=row[8],
+                    altura_bombeo=row[9],
+                    consumo=row[10],
+                    consumo_calentador=row[11],
+                    vol_filtrante=row[12],
+                    ancho=row[13],
+                    fondo=row[14],
+                    alto=row[15],
+                    fecha_instalacion=row[16],
+                    fecha_baja=row[17],
+                    motivo_baja=row[18],
+                    descripcion=row[19],
+                )
+
+                return Result.success(ent)
+
+        except sqlite3.IntegrityError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[INTEGRITY ERROR]\n {e}")
+        except sqlite3.OperationalError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[OPERATIONAL ERROR]\n {e}")
+        except sqlite3.ProgrammingError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[PROGRAMMING ERROR]\n {e}")
+        except sqlite3.DatabaseError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[DATABASE ERROR]\n {e}")
+        except sqlite3.Error as e:
+            # traceback.print_exc()
+            return Result.failure(f"[SQLITE ERROR]\n {e}")
+
+    def get_entity_by_id(self, ide: int) -> Result:
+        """
+        Obtiene el registro con el ID pasado como argumento.
+        :param ide: ID de la entidad a recuperar
+        """
+
+        try:
+            sql = (
+                """
+                SELECT *
+                FROM   FILTROS
+                WHERE  ID_FILTRO = :id;
+                """
+            )
+
+            params = {"id": ide, }
+
+            with self.db.conn as con:
+                cur = con.cursor()
+                cur.execute(sql, params)
+                row = cur.fetchone()
+
+                # Configuramos la entidad
+                ent = FiltroEntity(
+                    id=row[0],
+                    id_tipo=row[1],
+                    id_marca=row[2],
+                    modelo=row[3],
+                    num_serie=row[4],
+                    es_thermo=row[5],
+                    vol_min_acuario=row[6],
+                    vol_max_acuario=row[7],
+                    caudal=row[8],
+                    altura_bombeo=row[9],
+                    consumo=row[10],
+                    consumo_calentador=row[11],
+                    vol_filtrante=row[12],
+                    ancho=row[13],
+                    fondo=row[14],
+                    alto=row[15],
+                    fecha_instalacion=row[16],
+                    fecha_baja=row[17],
+                    motivo_baja=row[18],
+                    descripcion=row[19],
+                )
+
+                return Result.success(ent)
+
+        except sqlite3.IntegrityError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[INTEGRITY ERROR]\n {e}")
+        except sqlite3.OperationalError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[OPERATIONAL ERROR]\n {e}")
+        except sqlite3.ProgrammingError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[PROGRAMMING ERROR]\n {e}")
+        except sqlite3.DatabaseError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[DATABASE ERROR]\n {e}")
+        except sqlite3.Error as e:
+            # traceback.print_exc()
+            return Result.failure(f"[SQLITE ERROR]\n {e}")
+
     def get_list(self) -> Result:
         """Obtiene el listado completo ordenado por categoría."""
 

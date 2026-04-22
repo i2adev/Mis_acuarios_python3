@@ -24,7 +24,7 @@ import os
 import globals
 
 # Versión del programa
-__version__ = "0.40.3"
+__version__ = "0.40.4"
 
 
 def excepthook(exc_type, exc_value, exc_traceback):
@@ -66,7 +66,6 @@ def main():
     print(f"✅ {globals.PATH_RESOURCES}")
     print(f"✅ {globals.PATH_IMAGES}")
     print(f"✅ {globals.PATH_FONTS}")
-    print(f"✅ {globals.PATH_STYLES}")
     print(f"✅ {globals.PATH_STYLES}")
     print()
 

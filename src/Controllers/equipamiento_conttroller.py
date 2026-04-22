@@ -13,6 +13,7 @@ from Controllers.categoria_equipamiento_dialog_controller import \
     CategoriaEquipamientoDialogController
 from Controllers.marca_comercial_dialog_controller import \
     MarcaComercialDialogController
+from Model.DAO.base_dao import BaseDAO
 from Model.DAO.categoria_equipamiento_dao import CategoriaEquipamientoDAO
 from Model.DAO.equipamiento_dao import EquipamientoDAO
 from Model.DAO.marca_comercial_dao import MarcaComercialDAO
@@ -424,37 +425,36 @@ class EquipamientoController(BaseController):
         fila = index.row()
         modelo = self._view.data_table.model()
 
-        # Lee los datos del modelo
+        # Obtenemos la entidad
         id_ent = modelo.index(fila, 0).data()
-        categoria = modelo.index(fila, 2).data()
-        marca = modelo.index(fila, 3).data()
-        modelo_equipo = modelo.index(fila, 4).data()
-        num_serie = modelo.index(fila, 5).data()
-        fecha_alta = QDate.fromString(
-            str(modelo.index(fila, 6).data()), "dd/MM/yyyy")
-        fecha_baja = QDate.fromString(
-            str(modelo.index(fila, 7).data()), "dd/MM/yyyy")
-        motivo_baja = modelo.index(fila, 8).data()
-        descripcion = modelo.index(fila, 9).data()
+
+        val = self._dao.get_entity_by_id(id_ent)
+        if not val.is_success:
+            return val
+
+        ent = val.value
 
         # Cargamos los widgets
         self._view.frame.edit_id.setText(
-            str(id_ent) if id_ent is not None else ""
+            str(ent.id) if ent.id is not None else ""
         )
         self._view.frame.combo_categoria_equipamiento.setCurrentIndex(
-            self._view.frame.combo_categoria_equipamiento.findText(categoria)
+            self._view.frame.combo_categoria_equipamiento.findData(
+                ent.id_categoria)
         )
         self._view.frame.combo_marca.setCurrentIndex(
-            self._view.frame.combo_marca.findText(marca)
+            self._view.frame.combo_marca.findData(ent.id_marca)
         )
-        self._view.frame.edit_modelo.setValue(modelo_equipo)
-        self._view.frame.edit_num_serie.setValue(num_serie)
-        self._view.frame.fecha_alta.setDate(fecha_alta)
-        self._view.frame.fecha_baja.setDate(fecha_baja)
-        self._view.frame.edit_motivo_baja.setValue(motivo_baja)
-        self._view.frame.text_descripcion.setValue(descripcion)
+        self._view.frame.edit_modelo.setValue(ent.modelo)
+        self._view.frame.edit_num_serie.setValue(ent.num_series)
+        self._view.frame.fecha_alta.setDate(BaseDAO._seconds_to_date(
+            ent.fecha_alta))
+        self._view.frame.fecha_baja.setDate(BaseDAO._seconds_to_date(
+            ent.fecha_baja))
+        self._view.frame.edit_motivo_baja.setValue(ent.motivo_baja)
+        self._view.frame.text_descripcion.setValue(ent.descripcion)
 
-        return Result.success(id_ent)
+        return Result.success(ent.id)
 
     def _load_images(self, id_: int):
         """

@@ -10,6 +10,7 @@ from Controllers.marca_comercial_dialog_controller import \
     MarcaComercialDialogController
 from Controllers.tipo_filtro_dialog_controller import \
     TipoFiltroDialogController
+from Model.DAO.base_dao import BaseDAO
 from Model.DAO.filtro_dao import FiltroDAO
 from Model.DAO.marca_comercial_dao import MarcaComercialDAO
 from Model.DAO.tipo_filtro_dao import TipoFiltroDAO
@@ -67,7 +68,7 @@ class FiltroController(BaseController):
         ent.id_tipo = ctrs.combo_tipo_filtro.value()
 
         # Específica sí cuenta con calentador
-        ent.es_thermo = 1 if ctrs.check_termofiltro.isChecked() else 0
+        ent.es_thermo = True if ctrs.check_termofiltro.isChecked() else False
 
         # Marca
         ent.id_marca = ctrs.combo_marca.currentData()
@@ -415,108 +416,126 @@ class FiltroController(BaseController):
                 "SELECCIONAR UNO EN LA TABLA."
             )
 
+        # # Configuramos la fila
+        # index = selection_model.currentIndex()
+        # fila = index.row()
+        # modelo = self._view.data_table.model()
+        #
+        # # Lee los datos del modelo
+        # id_ent = modelo.index(fila, 0).data()
+        # marca = modelo.index(fila, 2).data()
+        # modelo_filtro = modelo.index(fila, 3).data()
+        # tipo_filtro = modelo.index(fila, 4).data()
+        #
+        # index_check = modelo.index(fila, 5)
+        # estado = index_check.data(Qt.ItemDataRole.CheckStateRole)
+        # termofiltro = True if estado == Qt.CheckState.Checked else False
+        #
+        # num_serie = modelo.index(fila, 6).data()
+        #
+        # volumes = self.brakdown_volumes(modelo.index(fila, 7).data())
+        # if volumes and len(volumes) == 2:
+        #     volumen_min_acuario = int(volumes[0])
+        #     volumen_max_acuario = int(volumes[1])
+        # else:
+        #     volumen_min_acuario = None
+        #     volumen_max_acuario = None
+        #
+        # if modelo.index(fila, 8).data():
+        #     caudal = int(modelo.index(fila, 8).data())
+        # else:
+        #     caudal = None
+        #
+        # if modelo.index(fila, 9).data():
+        #     altura_bombeo = float(modelo.index(fila, 9).data())
+        # else:
+        #     altura_bombeo = None
+        #
+        # if modelo.index(fila, 10).data():
+        #     consumo_filtro = int(modelo.index(fila, 10).data())
+        # else:
+        #     consumo_filtro = None
+        #
+        # if modelo.index(fila, 11).data():
+        #     consumo_calentador = int(modelo.index(fila, 11).data())
+        # else:
+        #     consumo_calentador = None
+        #
+        # if modelo.index(fila, 12).data():
+        #     volumen_material = float(modelo.index(fila, 12).data())
+        # else:
+        #     volumen_material = None
+        #
+        # dimensions = self.brakdown_dimensions(modelo.index(fila, 13).data())
+        # if dimensions[0]:
+        #     ancho_filtro = float(dimensions[0])
+        # else:
+        #     ancho_filtro = None
+        # if dimensions[1]:
+        #     fondo_filtro = float(dimensions[1])
+        # else:
+        #     fondo_filtro = None
+        # if dimensions[2]:
+        #     altura_filtro = float(dimensions[2])
+        # else:
+        #     altura_filtro = None
+        #
+        # fecha_instalacion = QDate.fromString(
+        #     str(modelo.index(fila, 14).data()), "dd/MM/yyyy")
+        # fecha_baja = QDate.fromString(
+        #     str(modelo.index(fila, 15).data()), "dd/MM/yyyy")
+        # motivo_baja = modelo.index(fila, 17).data()
+        # descripcion = modelo.index(fila, 18).data()
+
         # Configuramos la fila
         index = selection_model.currentIndex()
         fila = index.row()
         modelo = self._view.data_table.model()
 
-        # Lee los datos del modelo
+        # Obtenemos la entidad
         id_ent = modelo.index(fila, 0).data()
-        marca = modelo.index(fila, 2).data()
-        modelo_filtro = modelo.index(fila, 3).data()
-        tipo_filtro = modelo.index(fila, 4).data()
 
-        index_check = modelo.index(fila, 5)
-        estado = index_check.data(Qt.ItemDataRole.CheckStateRole)
-        termofiltro = True if estado == Qt.CheckState.Checked else False
+        val = self._dao.get_entity_by_id(id_ent)
+        if not val.is_success:
+            return val
 
-        num_serie = modelo.index(fila, 6).data()
-
-        volumes = self.brakdown_volumes(modelo.index(fila, 7).data())
-        if volumes and len(volumes) == 2:
-            volumen_min_acuario = int(volumes[0])
-            volumen_max_acuario = int(volumes[1])
-        else:
-            volumen_min_acuario = None
-            volumen_max_acuario = None
-
-        if modelo.index(fila, 8).data():
-            caudal = int(modelo.index(fila, 8).data())
-        else:
-            caudal = None
-
-        if modelo.index(fila, 9).data():
-            altura_bombeo = float(modelo.index(fila, 9).data())
-        else:
-            altura_bombeo = None
-
-        if modelo.index(fila, 10).data():
-            consumo_filtro = int(modelo.index(fila, 10).data())
-        else:
-            consumo_filtro = None
-
-        if modelo.index(fila, 11).data():
-            consumo_calentador = int(modelo.index(fila, 11).data())
-        else:
-            consumo_calentador = None
-
-        if modelo.index(fila, 12).data():
-            volumen_material = float(modelo.index(fila, 12).data())
-        else:
-            volumen_material = None
-
-        dimensions = self.brakdown_dimensions(modelo.index(fila, 13).data())
-        if dimensions[0]:
-            ancho_filtro = float(dimensions[0])
-        else:
-            ancho_filtro = None
-        if dimensions[1]:
-            fondo_filtro = float(dimensions[1])
-        else:
-            fondo_filtro = None
-        if dimensions[2]:
-            altura_filtro = float(dimensions[2])
-        else:
-            altura_filtro = None
-
-        fecha_instalacion = QDate.fromString(
-            str(modelo.index(fila, 14).data()), "dd/MM/yyyy")
-        fecha_baja = QDate.fromString(
-            str(modelo.index(fila, 15).data()), "dd/MM/yyyy")
-        motivo_baja = modelo.index(fila, 17).data()
-        descripcion = modelo.index(fila, 18).data()
+        ent = val.value
 
         # Cargamos los widgets
         self._view.frame.edit_id.setText(
-            str(id_ent) if id_ent is not None else ""
+            str(ent.id) if ent.id is not None else ""
         )
         self._view.frame.combo_tipo_filtro.setCurrentIndex(
-            self._view.frame.combo_tipo_filtro.findText(tipo_filtro)
+            self._view.frame.combo_tipo_filtro.findData(ent.id_tipo)
         )
 
-        self._view.frame.check_termofiltro.setChecked(termofiltro)
+        self._view.frame.check_termofiltro.setChecked(
+            True if ent.es_thermo == 1 else False)
 
         self._view.frame.combo_marca.setCurrentIndex(
-            self._view.frame.combo_marca.findText(marca)
+            self._view.frame.combo_marca.findData(ent.id_marca)
         )
-        self._view.frame.edit_modelo.setValue(modelo_filtro)
-        self._view.frame.edit_num_serie.setValue(num_serie)
-        self._view.frame.edit_vol_min_acuario.setValue(volumen_min_acuario)
-        self._view.frame.edit_vol_max_acuario.setValue(volumen_max_acuario)
-        self._view.frame.edit_consumo_filtro.setValue(consumo_filtro)
-        self._view.frame.edit_consumo_calentador.setValue(consumo_calentador)
-        self._view.frame.edit_ancho.setValue(ancho_filtro)
-        self._view.frame.edit_fondo.setValue(fondo_filtro)
-        self._view.frame.edit_alto.setValue(altura_filtro)
-        self._view.frame.edit_vol_material.setValue(volumen_material)
-        self._view.frame.edit_altura_max_bombeo.setValue(altura_bombeo)
-        self._view.frame.edit_caudal.setValue(caudal)
-        self._view.frame.fecha_instalacion.setDate(fecha_instalacion)
-        self._view.frame.fecha_baja.setDate(fecha_baja)
-        self._view.frame.edit_motivo_baja.setValue(motivo_baja)
-        self._view.frame.text_descripcion.setValue(descripcion)
+        self._view.frame.edit_modelo.setValue(ent.modelo)
+        self._view.frame.edit_num_serie.setValue(ent.num_serie)
+        self._view.frame.edit_vol_min_acuario.setValue(ent.vol_min_acuario)
+        self._view.frame.edit_vol_max_acuario.setValue(ent.vol_max_acuario)
+        self._view.frame.edit_consumo_filtro.setValue(ent.consumo)
+        self._view.frame.edit_consumo_calentador.setValue(
+            ent.consumo_calentador)
+        self._view.frame.edit_ancho.setValue(ent.ancho)
+        self._view.frame.edit_fondo.setValue(ent.fondo)
+        self._view.frame.edit_alto.setValue(ent.alto)
+        self._view.frame.edit_vol_material.setValue(ent.vol_filtrante)
+        self._view.frame.edit_altura_max_bombeo.setValue(ent.altura_bombeo)
+        self._view.frame.edit_caudal.setValue(ent.caudal)
+        self._view.frame.fecha_instalacion.setDate(
+            BaseDAO._seconds_to_date(ent.fecha_instalacion))
+        self._view.frame.fecha_baja.setDate(
+            BaseDAO._seconds_to_date(ent.fecha_baja))
+        self._view.frame.edit_motivo_baja.setValue(ent.motivo_baja)
+        self._view.frame.text_descripcion.setValue(ent.descripcion)
 
-        return Result.success(id_ent)
+        return Result.success(ent.id)
 
     def _load_images(self, id_: int):
         """

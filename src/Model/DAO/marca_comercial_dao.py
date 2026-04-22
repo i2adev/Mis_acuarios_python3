@@ -7,6 +7,7 @@ Comentarios:
 import sqlite3
 
 from Model.DAO.base_dao import BaseDAO
+from Model.Entities.iluminacion_entity import IluminacionEntity
 from Model.database import DBManager
 from Model.Entities.marca_comercial_entity import MarcaComercialEntity
 from Services.Result.result import Result
@@ -25,7 +26,59 @@ class MarcaComercialDAO(BaseDAO):
         self.ent = None
 
     # ------------------------------------------------------------------
-    def get_list(self) -> Result(list[MarcaComercialEntity]):
+    def get_entity_by_id(self, ide: int) -> Result:
+        """
+        Obtiene el registro con el ID pasado como argumento.
+        :param ide: ID de la entidad a recuperar
+        """
+
+        try:
+            sql = (
+                """
+                SELECT *
+                FROM   MARCAS_COMERCIALES
+                WHERE  ID_MARCA = :id;
+                """
+            )
+
+            params = {"id": ide, }
+
+            with self.db.conn as con:
+                cur = con.cursor()
+                cur.execute(sql, params)
+                row = cur.fetchone()
+
+                # Configuramos la entidad
+                ent = MarcaComercialEntity(
+                    id=row[0],
+                    nombre_marca=row[1],
+                    direccion=row[2],
+                    cod_postal=row[3],
+                    poblacion=row[4],
+                    provincia=row[5],
+                    id_pais=row[6],
+                    observaciones=row[7],
+                )
+
+                return Result.success(ent)
+
+        except sqlite3.IntegrityError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[INTEGRITY ERROR]\n {e}")
+        except sqlite3.OperationalError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[OPERATIONAL ERROR]\n {e}")
+        except sqlite3.ProgrammingError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[PROGRAMMING ERROR]\n {e}")
+        except sqlite3.DatabaseError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[DATABASE ERROR]\n {e}")
+        except sqlite3.Error as e:
+            # traceback.print_exc()
+            return Result.failure(f"[SQLITE ERROR]\n {e}")
+
+    def get_list(self) -> Result:
         """Obtiene el listado completo ordenado por marca."""
 
         sql = (

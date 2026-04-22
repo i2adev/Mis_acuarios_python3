@@ -9,6 +9,7 @@ import sqlite3
 import traceback
 from abc import ABC, abstractmethod
 
+from PyQt6.QtCore import QDate, QDateTime, Qt
 from PyQt6.QtWidgets import QMessageBox
 
 from Model.database import DBManager
@@ -39,6 +40,13 @@ class BaseDAO(ABC):
     @abstractmethod
     def delete(self, id: int) -> Result:
         pass
+
+    @staticmethod
+    def _seconds_to_date(seconds: int) -> QDate:
+        if seconds is None:
+            return None
+
+        return QDateTime.fromSecsSinceEpoch(seconds).date()
 
     @staticmethod
     def get_db_tables(cls) -> Result:

@@ -415,41 +415,34 @@ class ConsumibleController(BaseController):
         fila = index.row()
         modelo = self._view.data_table.model()
 
-        # Lee los datos del modelo
+        # Obtenemos la entidad
         id_ent = modelo.index(fila, 0).data()
-        marca = modelo.index(fila, 2).data()
-        producto = modelo.index(fila, 3).data()
-        categoria = modelo.index(fila, 4).data()
-        formato = modelo.index(fila, 5).data()
-        contenido = modelo.index(fila, 6).data()
-        unidad = modelo.index(fila, 7).data()
-        descripcion = modelo.index(fila, 8).data()
+
+        val = self._dao.get_entity_by_id(id_ent)
+        if not val.is_success:
+            return val
+
+        ent = val.value
 
         # Cargamos los widgets
         self._view.frame.edit_id.setText(
-            str(id_ent) if id_ent is not None else ""
+            str(ent.id) if ent.id is not None else ""
         )
         self._view.frame.combo_marca.setCurrentIndex(
-            self._view.frame.combo_marca.findText(marca)
+            self._view.frame.combo_marca.findData(ent.id_marca)
         )
-        self._view.frame.edit_producto.setValue(producto)
+        self._view.frame.edit_producto.setValue(ent.producto)
         self._view.frame.combo_categoria.setCurrentIndex(
-            self._view.frame.combo_categoria.findText(categoria)
+            self._view.frame.combo_categoria.findData(ent.id_categoria)
         )
         self._view.frame.combo_formato.setCurrentIndex(
-            self._view.frame.combo_formato.findText(formato)
+            self._view.frame.combo_formato.findData(ent.id_formato)
         )
-        self._view.frame.edit_contenido.setValue(contenido)
+        self._view.frame.edit_contenido.setValue(ent.contenido)
 
-        if unidad:
-            self._view.frame.combo_unidad.setCurrentIndex(
-                self._view.frame.combo_unidad.findText(
-                    unidad, flags=QtCore.Qt.MatchFlag.MatchStartsWith)
-            )
-        else:
-            self._view.frame.combo_unidad.setCurrentIndex(-1)
-
-        self._view.frame.text_descripcion.setValue(descripcion)
+        self._view.frame.combo_unidad.setCurrentIndex(
+            self._view.frame.combo_unidad.findData(ent.id_unidad))
+        self._view.frame.text_descripcion.setValue(ent.descripcion)
 
         return Result.success(id_ent)
 

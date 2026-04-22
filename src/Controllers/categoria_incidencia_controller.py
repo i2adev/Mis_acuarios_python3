@@ -214,17 +214,22 @@ class CategoriaIncidenciaController(BaseController):
         fila = index.row()
         modelo = self._view.data_table.model()
 
-        # Lee los datos del modelo
-        id_ci = modelo.index(fila, 0).data()
-        cat_incidencia = modelo.index(fila, 2).data()
-        observaciones = modelo.index(fila, 3).data()
+        # Obtenemos la entidad
+        id_ent = modelo.index(fila, 0).data()
+
+        val = self._dao.get_entity_by_id(id_ent)
+        if not val.is_success:
+            return val
+
+        ent = val.value
 
         # Cargamos los widgets
         self._view.frame.edit_id.setText(
-            str(id_ci) if id_ci is not None else ""
+            str(ent.id) if ent.id is not None else ""
         )
 
-        self._view.frame.edit_categoria_incidencia.setValue(cat_incidencia)
-        self._view.frame.text_observaciones.setValue(observaciones)
+        self._view.frame.edit_categoria_incidencia.setValue(
+            ent.categoria_incidencia)
+        self._view.frame.text_observaciones.setValue(ent.observaciones)
 
-        return Result.success(id_ci)
+        return Result.success(ent.id)

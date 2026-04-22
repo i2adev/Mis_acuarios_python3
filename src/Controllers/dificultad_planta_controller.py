@@ -231,19 +231,21 @@ class DificultadPlantaController(BaseController):
         fila = index.row()
         modelo = self._view.data_table.model()
 
-        # Lee los datos del modelo
-        idc = modelo.index(fila, 0).data()
-        nivel = modelo.index(fila, 2).data()  # La columna 1 es el
-        # númer correlativo.
-        dificultad = modelo.index(fila, 3).data()
-        descripcion = modelo.index(fila, 4).data()
+        # Obtenemos la entidad
+        id_ent = modelo.index(fila, 0).data()
+
+        val = self._dao.get_entity_by_id(id_ent)
+        if not val.is_success:
+            return val
+
+        ent = val.value
 
         # Cargamos los widgets
         self._view.frame.edit_id.setText(
-            str(idc) if idc is not None else ""
+            str(ent.id) if ent.id is not None else ""
         )
-        self._view.frame.edit_nivel.setValue(nivel)
-        self._view.frame.edit_dificultad.setValue(dificultad)
-        self._view.frame.text_descripcion.setValue(descripcion)
+        self._view.frame.edit_nivel.setValue(ent.nivel)
+        self._view.frame.edit_dificultad.setValue(ent.dificultad)
+        self._view.frame.text_descripcion.setValue(ent.descripcion)
 
-        return Result.success(idc)
+        return Result.success(ent.id)

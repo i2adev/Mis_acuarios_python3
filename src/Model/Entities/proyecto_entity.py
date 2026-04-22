@@ -21,6 +21,6 @@ class ProyectoEntity(BaseEntity):
     nombre: str | None = None
     id_estado: int | None = None
     fecha_inicio: int | None = None
-    fecha_fin: datetime | None = None
+    fecha_fin: int | None = None
     motivo_cierre: str | None = None
     descripcion: str | None = None

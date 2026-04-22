@@ -20,7 +20,7 @@ class ComboBox(QComboBox):
         # Se modifica el comportamiento
         self.setEditable(True)
 
-    def setValue(self, value: int):
+    def setValue(self, value: int) -> None:
         """
         Establece el valor del combo pasandole el valor.
         :param value: Valor a seleccionar en el combo

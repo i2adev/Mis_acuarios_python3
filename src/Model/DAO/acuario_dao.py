@@ -26,6 +26,64 @@ class AcuarioDAO(BaseDAO):
         self.ent = None
 
     # ------------------------------------------------------------------
+    def get_entity_by_id(self, ide: int) -> Result:
+        """
+        Obtiene la entidad con el ID pasado como argumento.
+        :param ide: ID de la entidad a recuperar
+        """
+
+        try:
+            sql = (
+                """
+                SELECT *
+                FROM   ACUARIOS
+                WHERE  ID_ACUARIO = :id;
+                """
+            )
+
+            params = {"id": ide, }
+
+            with self.db.conn as con:
+                cur = con.cursor()
+                cur.execute(sql, params)
+                row = cur.fetchone()
+
+                # Configuramos la entidad
+                ent = AcuarioEntity(
+                    id=row[0],
+                    cod_color=row[1],
+                    id_proyecto=row[2],
+                    nombre=row[3],
+                    id_urna=row[4],
+                    id_tipo=row[5],
+                    volumen_neto=row[6],
+                    fecha_montaje=row[7],
+                    fecha_inicio_ciclado=row[8],
+                    fecha_fin_ciclado=row[9],
+                    ubicacion_acuario=row[10],
+                    fecha_desmontaje=row[11],
+                    motivo_desmontaje=row[12],
+                    descripcion=row[13],
+                )
+
+                return Result.success(ent)
+
+        except sqlite3.IntegrityError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[INTEGRITY ERROR]\n {e}")
+        except sqlite3.OperationalError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[OPERATIONAL ERROR]\n {e}")
+        except sqlite3.ProgrammingError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[PROGRAMMING ERROR]\n {e}")
+        except sqlite3.DatabaseError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[DATABASE ERROR]\n {e}")
+        except sqlite3.Error as e:
+            # traceback.print_exc()
+            return Result.failure(f"[SQLITE ERROR]\n {e}")
+
     def get_list(self) -> Result:
         """ Obtiene el listado completo ordenado por fecha de inicio. """
 
