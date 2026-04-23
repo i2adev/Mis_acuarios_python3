@@ -44,13 +44,7 @@ class PeriodoController(BaseController):
         ent = PeriodoEntity()
         ctrs = self._view.frame
 
-        # ID
-        if ctrs.edit_id.text():
-            ent.id = int(ctrs.edit_id.text())
-        else:
-            ent.id = None
-
-        # Comportamiento
+        ent.id = self._view.frame.edit_id.value()
         ent.periodo = ctrs.edit_periodo.value()
 
         return ent
@@ -223,9 +217,7 @@ class PeriodoController(BaseController):
         ent = val.value
 
         # Cargamos los widgets
-        self._view.frame.edit_id.setText(
-            str(ent.id) if ent.id is not None else ""
-        )
+        self._view.frame.edit_id.setValue(ent.id)
         self._view.frame.edit_periodo.setValue(ent.periodo)
 
         return Result.success(ent.id)

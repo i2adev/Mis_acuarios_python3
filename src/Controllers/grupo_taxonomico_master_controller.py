@@ -18,7 +18,7 @@ from Model.TableModel.grupo_taxonomico_table_model import \
 from Views.Masters.grupo_taxonomico_view import GrupoTaxonomicoView
 from Views.table_menu_contextual import TableMenuContextual
 
-import globals
+import globales
 
 
 class GrupoTaxonomicoMasterController(GrupoTaxonomicoController):

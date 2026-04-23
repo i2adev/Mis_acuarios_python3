@@ -17,7 +17,7 @@ from Model.TableModel.tipo_acuario_table_model import TipoAcuarioTableModel
 from Views.Masters.tipo_acuario_view import TipoAcuarioView
 from Views.table_menu_contextual import TableMenuContextual
 
-import globals
+import globales
 
 
 class TipoAcuarioMasterController(TipoAcuarioController):

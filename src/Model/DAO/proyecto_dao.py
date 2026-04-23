@@ -9,7 +9,7 @@ Comentarios:
 import sqlite3
 import traceback
 
-import globals
+import globales
 from Model.DAO.base_dao import BaseDAO
 from Model.database import DBManager
 from Model.Entities.proyecto_entity import ProyectoEntity

@@ -4,7 +4,7 @@ Fecha:  07/10/2025
 Comentarios:
     Controlador base de urna.
 """
-import globals
+import globales
 from Controllers.base_controller import BaseController
 from Controllers.estado_proyecto_dialog_controller import \
     EstadoProyectoDialogController
@@ -53,22 +53,11 @@ class ProyectoController(BaseController):
         ent = ProyectoEntity()
         ctrs = self._view.frame
 
-        # ID
-        if ctrs.edit_id.text():
-            ent.id = int(ctrs.edit_id.text())
-        else:
-            ent.ide = None
-
-        # Usuario
+        ent.id = self._view.frame.edit_id.value()
         ent.id_usuario = globals.CURRENT_USER.id
-
-        # Nombre asignado al proyecto
         ent.nombre = ctrs.edit_nombre_proyecto.value()
-
-        # Estado del proyecto
         ent.id_estado = ctrs.combo_estado_proyecto.value()
 
-        # Fecha de inicio del proyecto
         inicio = ctrs.date_inicio.date()
         if inicio.isValid():
             time_inicio = QDateTime(inicio, QTime(0, 0))
@@ -76,7 +65,6 @@ class ProyectoController(BaseController):
         else:
             ent.fecha_inicio = None
 
-        # Fecha de finalización del proyecto
         fin = ctrs.date_fin.date()
         if fin:
             time_fin = QDateTime(fin, QTime(0, 0))
@@ -84,10 +72,7 @@ class ProyectoController(BaseController):
         else:
             ent.fecha_fin = None
 
-        # Motivo de finalización del proyecto
         ent.motivo_cierre = ctrs.edit_motivo_cierre.value()
-
-        # Descripción del proyecto
         ent.descripcion = ctrs.text_descripcion.value()
 
         return ent
@@ -359,9 +344,7 @@ class ProyectoController(BaseController):
         ent = val.value
 
         # Cargamos los widgets
-        self._view.frame.edit_id.setText(
-            str(ent.id) if ent.id is not None else ""
-        )
+        self._view.frame.edit_id.setValue(ent.id)
         self._view.frame.edit_nombre_proyecto.setValue(ent.nombre)
         self._view.frame.combo_estado_proyecto.setValue(ent.id_estado)
         self._view.frame.date_inicio.setDate(

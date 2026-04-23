@@ -9,7 +9,7 @@ from pathlib import Path
 from PyQt6.QtGui import QAction, QIcon
 from PyQt6.QtWidgets import QComboBox, QMessageBox, QTableView, QWidget
 
-import globals
+import globales
 from Controllers.consumible_controller import ConsumibleController
 from Model.DAO.consumible_dao import ConsumibleDAO
 from Model.DAO.paginator import Paginator
@@ -18,7 +18,7 @@ from Model.TableModel.consumible_table_model import ConsumibleTableModel
 from Views.Masters.consumible_view import ConsumibleView
 from Views.table_menu_contextual import TableMenuContextual
 
-import globals
+import globales
 
 
 class ConsumibleMasterController(ConsumibleController):

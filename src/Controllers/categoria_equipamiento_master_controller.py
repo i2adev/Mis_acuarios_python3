@@ -21,7 +21,7 @@ from Model.TableModel.tipo_equipamiento_table_model import \
 from Views.Masters.categoria_equipamiento_view import CategoriaEquipamientoView
 from Views.table_menu_contextual import TableMenuContextual
 
-import globals
+import globales
 
 
 class CategoriaEquipamientoMasterController(CategoriaEquipamientoController):

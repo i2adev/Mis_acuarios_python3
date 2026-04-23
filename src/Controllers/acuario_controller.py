@@ -8,7 +8,7 @@ from PyQt6.QtCore import QDate, QDateTime, QTime
 from PyQt6.QtGui import QAction
 from PyQt6.QtWidgets import QMessageBox, QPushButton, QColorDialog
 
-import globals
+import globales
 from Controllers.base_controller import BaseController
 from Controllers.tipo_acuario_dialog_controller import \
     TipoAcuarioDialogController
@@ -59,10 +59,7 @@ class AcuarioController(BaseController):
         ent = AcuarioEntity()
         ctrs = self._view.frame
 
-        if ctrs.edit_id.text():
-            ent.id = int(self._view.frame.edit_id.text())
-        else:
-            ent.id = None
+        ent.id = self._view.frame.edit_id.value()
         ent.id_proyecto = ctrs.combo_proyecto.value()
         if ctrs.edit_cod_color.text():
             ent.cod_color = ctrs.edit_cod_color.text()
@@ -480,9 +477,7 @@ class AcuarioController(BaseController):
         ent = val.value
 
         # Cargamos los widgets
-        self._view.frame.edit_id.setText(
-            str(id_ent) if id_ent is not None else ""
-        )
+        self._view.frame.edit_id.setValue(ent.id)
         self._view.frame.combo_proyecto.setValue(ent.id_proyecto)
         if ent.cod_color:
             self._view.frame.edit_cod_color.setText(ent.cod_color)

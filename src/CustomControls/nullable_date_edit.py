@@ -7,7 +7,7 @@ Comentarios:
 """
 
 from pathlib import Path
-import globals
+import globales
 
 from PyQt6.QtCore import QDate, QPoint, QRegularExpression, QSize, Qt, \
     pyqtSignal

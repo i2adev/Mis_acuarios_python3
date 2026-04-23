@@ -46,31 +46,13 @@ class ComercioController(BaseController):
         ent = ComercioEntity()
         ctrs = self._view.frame
 
-        # ID
-        if ctrs.edit_id.text():
-            ent.id = int(ctrs.edit_id.text())
-        else:
-            ent.id = None
-
-        # Nombre del comercio
+        ent.id = self._view.frame.edit_id.value()
         ent.nombre_comercio = ctrs.edit_comercio.value()
-
-        # Dirección del comercio
         ent.direccion = ctrs.edit_direccion.value()
-
-        # Código postal
         ent.cod_postal = ctrs.edit_cod_postal.value()
-
-        # Población
         ent.poblacion = ctrs.edit_poblacion.value()
-
-        # Provincia
         ent.provincia = ctrs.edit_provincia.value()
-
-        # País
         ent.id_pais = int(ctrs.combo_pais.value())
-
-        # Observaciones
         ent.observaciones = ctrs.text_observaciones.value()
 
         return ent
@@ -254,10 +236,7 @@ class ComercioController(BaseController):
         ent = val.value
 
         # Cargamos los widgets
-        self._view.frame.edit_id.setText(
-            str(ent.id) if ent.id is not None else ""
-        )
-
+        self._view.frame.edit_id.setValue(ent.id)
         self._view.frame.edit_comercio.setValue(ent.nombre_comercio)
         self._view.frame.edit_direccion.setValue(ent.direccion)
         self._view.frame.edit_cod_postal.setValue(ent.cod_postal)

@@ -17,7 +17,7 @@ from Model.TableModel.nivel_nado_table_model import NivelNadoTableModel
 from Views.Masters.nivel_nado_view import NivelNadoView
 from Views.table_menu_contextual import TableMenuContextual
 
-import globals
+import globales
 
 
 class NivelNadoMasterController(NivelNadoController):

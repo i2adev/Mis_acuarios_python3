@@ -58,58 +58,23 @@ class FiltroController(BaseController):
         ent = FiltroEntity()
         ctrs = self._view.frame
 
-        # ID
-        if ctrs.edit_id.text():
-            ent.id = int(ctrs.edit_id.text())
-        else:
-            ent.id = None
-
-        # Tipo de filtro
+        ent.id = self._view.frame.edit_id.value()
         ent.id_tipo = ctrs.combo_tipo_filtro.value()
-
-        # Específica sí cuenta con calentador
         ent.es_thermo = True if ctrs.check_termofiltro.isChecked() else False
-
-        # Marca
         ent.id_marca = ctrs.combo_marca.currentData()
-
-        # Modelo
         ent.modelo = ctrs.edit_modelo.value()
-
-        # Número de serie
         ent.num_serie = ctrs.edit_num_serie.value()
-
-        # Volumen mínimo del acuario
         ent.vol_min_acuario = ctrs.edit_vol_min_acuario.value()
-
-        # Volumen máximo del acuario
         ent.vol_max_acuario = ctrs.edit_vol_max_acuario.value()
-
-        # Consumo eléctrico del filtro
         ent.consumo = ctrs.edit_consumo_filtro.value()
-
-        # Consumo eléctrico del calentador del filtro
         ent.consumo_calentador = ctrs.edit_consumo_calentador.value()
-
-        # Dimensiones: Ancho
         ent.ancho = ctrs.edit_ancho.value()
-
-        # Dimensiones: Fondo
         ent.fondo = ctrs.edit_fondo.value()
-
-        # Dimensiones: Alto
         ent.alto = ctrs.edit_alto.value()
-
-        # Capacidad de carga filtrante
         ent.vol_filtrante = ctrs.edit_vol_material.value()
-
-        # Altura máxima de bombeo
         ent.altura_bombeo = ctrs.edit_altura_max_bombeo.value()
-
-        # Caudal del filtro
         ent.caudal = ctrs.edit_caudal.value()
 
-        # Fecha de instalación
         instalacion = ctrs.fecha_instalacion.date()
         if instalacion.isValid():
             time_compra = QDateTime(instalacion, QTime(0, 0))
@@ -117,7 +82,6 @@ class FiltroController(BaseController):
         else:
             ent.fecha_compra = None
 
-        # Fecha de baja
         baja = ctrs.fecha_baja.date()
         if baja.isValid():
             time_baja = QDateTime(baja, QTime(0, 0))
@@ -125,10 +89,7 @@ class FiltroController(BaseController):
         else:
             ent.fecha_baja = None
 
-        # Motivo de la baja
         ent.motivo_baja = ctrs.edit_motivo_baja.value()
-
-        # Descripción
         ent.descripcion = ctrs.text_descripcion.value()
 
         return ent

@@ -12,6 +12,7 @@ from PyQt6.QtGui import QIntValidator, QCursor
 from PyQt6.QtWidgets import QFrame, QLabel, QLineEdit, QPlainTextEdit, \
     QVBoxLayout, QHBoxLayout, QApplication, QComboBox, QPushButton
 
+import globales
 from CustomControls.combo_box import ComboBox
 from CustomControls.int_line_edit import IntLineEdit
 from CustomControls.plain_text_edit import PlainTextEdit
@@ -92,7 +93,11 @@ class UrnaForm(QFrame):
         self.label_descripcion = QLabel("DESCRIPCIÓN")
 
         # Textos
-        self.edit_id = QLineEdit()
+        self.edit_id = IntLineEdit(
+            control_name="ID",
+            min_value=0,
+            max_value=globales.INT32_MAX_VALUE
+        )
         self.edit_id.setFixedWidth(50)
         self.edit_id.setEnabled(False)
         self.edit_id.setObjectName("edit_id")

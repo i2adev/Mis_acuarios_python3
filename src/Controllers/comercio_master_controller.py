@@ -18,7 +18,7 @@ from Model.TableModel.comercio_table_model import ComercioTableModel
 from Views.Masters.comercio_view import ComercioView
 from Views.table_menu_contextual import TableMenuContextual
 
-import globals
+import globales
 
 
 class ComercioMasterController(ComercioController):

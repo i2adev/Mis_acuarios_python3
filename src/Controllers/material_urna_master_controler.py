@@ -18,7 +18,7 @@ from Model.TableModel.material_urna_table_model import MaterialUrnaTableModel
 from Views.Masters.material_urna_view import MaterialUrnaView
 from Views.table_menu_contextual import TableMenuContextual
 
-import globals
+import globales
 
 
 class MaterialUrnaMasterController(MaterialUrnaController):

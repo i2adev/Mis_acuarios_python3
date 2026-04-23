@@ -4,7 +4,7 @@ Fecha:      23/06/2025
 Comentarios:
     Módulo que contiene la clase controladora de la vista principal.
 """
-import globals
+import globales
 from Controllers.acuario_master_controller import AcuarioMasterController
 from Controllers.base_controller import BaseController
 from Controllers.categoria_acuario_master_controller import \

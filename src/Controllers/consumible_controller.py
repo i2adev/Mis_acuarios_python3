@@ -68,11 +68,7 @@ class ConsumibleController(BaseController):
         ent = ConsumibleEntity()
         ctrs = self._view.frame
 
-        if ctrs.edit_id.text():
-            ent.id = int(self._view.frame.edit_id.text())
-        else:
-            ent.id = None
-
+        ent.id = self._view.frame.edit_id.value()
         ent.id_marca = ctrs.combo_marca.value()
         ent.producto = ctrs.edit_producto.value()
         ent.id_categoria = ctrs.combo_categoria.value()
@@ -412,9 +408,7 @@ class ConsumibleController(BaseController):
         ent = val.value
 
         # Cargamos los widgets
-        self._view.frame.edit_id.setText(
-            str(ent.id) if ent.id is not None else ""
-        )
+        self._view.frame.edit_id.setValue(ent.id)
         self._view.frame.combo_marca.setValue(ent.id_marca)
         self._view.frame.edit_producto.setValue(ent.producto)
         self._view.frame.combo_categoria.setValue(ent.id_categoria)

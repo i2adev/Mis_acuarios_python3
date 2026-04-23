@@ -11,7 +11,7 @@ from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QLineEdit, QMessageBox
 
 from Services.Validators.validator import Validator
-from globals import LOCALE
+from globales import LOCALE
 
 
 class IntLineEdit(QLineEdit):

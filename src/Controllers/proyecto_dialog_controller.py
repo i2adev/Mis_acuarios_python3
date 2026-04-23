@@ -5,7 +5,7 @@ Comentarios:
     Controlador del cuadro de diálogo de inserción de urna.
 """
 
-import globals
+import globales
 from Controllers.proyecto_controller import ProyectoController
 from CustomControls.nullable_date_edit import NullableDateEdit
 from Model.DAO.proyecto_dao import ProyectoDAO

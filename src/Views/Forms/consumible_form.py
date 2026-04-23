@@ -7,6 +7,7 @@ Comentarios:
 
 import sys
 
+import globales
 from CustomControls.combo_box import ComboBox
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QCursor
@@ -15,6 +16,7 @@ from PyQt6.QtWidgets import (QApplication, QFrame, QGroupBox, QHBoxLayout,
                              QVBoxLayout)
 
 from CustomControls.double_line_edit import DoubleLineEdit
+from CustomControls.int_line_edit import IntLineEdit
 from CustomControls.plain_text_edit import PlainTextEdit
 from CustomControls.str_line_edit import StrLineEdit
 
@@ -77,7 +79,11 @@ class ConsumibleForm(QFrame):
         self.label_descripcion = QLabel("DESCRIPCIÓN")
 
         # Textos
-        self.edit_id = QLineEdit()
+        self.edit_id = IntLineEdit(
+            control_name="ID",
+            min_value=0,
+            max_value=globales.INT32_MAX_VALUE
+        )
         self.edit_id.setFixedWidth(50)
         self.edit_id.setEnabled(False)
         self.edit_id.setObjectName("edit_id")

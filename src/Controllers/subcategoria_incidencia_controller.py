@@ -52,19 +52,9 @@ class SubcategoriaIncidenciaController(BaseController):
         ent = SubcategoriaIncidenciaEntity()
         ctrs = self._view.frame
 
-        # ID
-        if ctrs.edit_id.text():
-            ent.id = int(ctrs.edit_id.text())
-        else:
-            ent.id = None
-
-        # Categoría de incidencia
+        ent.id = self._view.frame.edit_id.value()
         ent.id_categoria = ctrs.combo_categoria_incidencia.value()
-
-        # Subcategoría de incidencia
         ent.subcategoria = ctrs.edit_subcategoria_incidencia.value()
-
-        # Observaciones
         ent.observaciones = ctrs.text_observaciones.value()
 
         return ent
@@ -247,9 +237,7 @@ class SubcategoriaIncidenciaController(BaseController):
         ent = val.value
 
         # Cargamos los widgets
-        self._view.frame.edit_id.setText(
-            str(ent.id) if ent.id is not None else ""
-        )
+        self._view.frame.edit_id.setValue(ent.id)
         self._view.frame.combo_categoria_incidencia.setValue(ent.id_categoria)
         self._view.frame.edit_subcategoria_incidencia.setValue(
             ent.subcategoria)

@@ -21,7 +21,7 @@ from Model.TableModel.categoria_consumible_table_model import \
 from Views.Masters.categoria_consumible_view import CategoriaConsumibleView
 from Views.table_menu_contextual import TableMenuContextual
 
-import globals
+import globales
 
 
 class CategoriaConsumibleMasterController(CategoriaConsumibleController):

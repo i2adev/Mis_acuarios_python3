@@ -18,7 +18,7 @@ from Model.TableModel.categoria_acuario_table_model import \
 from Views.Masters.categoria_acuario_view import CategoriaAcuarioView
 from Views.table_menu_contextual import TableMenuContextual
 
-import globals
+import globales
 
 
 class CategoriaAcuarioMasterController(CategoriaAcuarioController):

@@ -11,7 +11,7 @@ from Controllers.base_controller import BaseController
 from Controllers.usuario_controller import UsuarioDialogController
 from Model.DAO.usuario_dao import UsuarioDAO
 from Model.Entities.usuario_entity import UsuarioEntity
-import globals
+import globales
 from Services.Result.result import Result
 from Views.Dialogs.login_dialog import LoginDialog
 from Views.Dialogs.usuario_dialog import UsuarioDialog

@@ -54,37 +54,15 @@ class UrnaController(BaseController):
         ent = UrnaEntity()
         ctrs = self._view.frame
 
-        # ID
-        if ctrs.edit_id.text():
-            ent.id = int(ctrs.edit_id.text())
-        else:
-            ent.id = None
-
-        # Marca de la urna
+        ent.id = self._view.frame.edit_id.value()
         ent.id_marca = ctrs.combo_marca.value()
-
-        # Modelo de la urna
         ent.modelo = ctrs.edit_modelo.value()
-
-        # Dimensiones: Anchura
         ent.anchura = ctrs.edit_ancho.value()
-
-        # Dimensiones: Profundidad
         ent.profundidad = ctrs.edit_profundo.value()
-
-        # Dimensiones: Altura
         ent.altura = ctrs.edit_alto.value()
-
-        # Dimensiones: Grososr del cristal
         ent.grosor_cristal = ctrs.edit_grosor.value()
-
-        # Volumen del tanque
         ent.volumen_tanque = ctrs.edit_volumen.value()
-
-        # Material de la urna
         ent.id_material = ctrs.combo_material.value()
-
-        # Descripción
         ent.descripcion = ctrs.text_descripcion.value()
 
         return ent
@@ -393,9 +371,7 @@ class UrnaController(BaseController):
         ent = val.value
 
         # Cargamos los widgets
-        self._view.frame.edit_id.setText(
-            str(ent.id) if ent.id is not None else ""
-        )
+        self._view.frame.edit_id.setValue(ent.id)
         self._view.frame.combo_marca.setValue(ent.id_marca)
         self._view.frame.edit_modelo.setValue(ent.modelo)
         self._view.frame.edit_ancho.setValue(ent.anchura)

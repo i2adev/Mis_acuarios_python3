@@ -19,7 +19,7 @@ from Model.TableModel.tipo_iluminacion_table_model import \
 from Views.Masters.tipo_iluminacion_view import TipoIluminacionView
 from Views.table_menu_contextual import TableMenuContextual
 
-import globals
+import globales
 
 
 class TipoIluminacionMasterController(TipoIluminacionController):

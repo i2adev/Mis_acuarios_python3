@@ -20,7 +20,7 @@ from Model.TableModel.subcategoria_acuario_table_model import \
 from Views.Masters.subcategoria_acuario_view import SubcategoriaAcuarioView
 from Views.table_menu_contextual import TableMenuContextual
 
-import globals
+import globales
 
 
 class SubcategoriaAcuarioMasterController(SubcategoriaAcuarioController):

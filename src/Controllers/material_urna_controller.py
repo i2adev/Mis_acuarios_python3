@@ -42,16 +42,8 @@ class MaterialUrnaController(BaseController):
         ent = MaterialUrnaEntity()
         ctrs = self._view.frame
 
-        # ID
-        if ctrs.edit_id.text():
-            ent.id = int(ctrs.edit_id.text())
-        else:
-            ent.id = None
-
-        # Material de la urna
+        ent.id = self._view.frame.edit_id.value()
         ent.material = ctrs.edit_material.value()
-
-        # Descripción
         ent.descripcion = ctrs.text_descripcion.value()
 
         return ent
@@ -222,10 +214,7 @@ class MaterialUrnaController(BaseController):
         ent = val.value
 
         # Cargamos los widgets
-        self._view.frame.edit_id.setText(
-            str(ent.id) if ent.id is not None else None
-        )
-
+        self._view.frame.edit_id.setValue(ent.id)
         self._view.frame.edit_material.setValue(ent.material)
         self._view.frame.text_descripcion.setValue(ent.descripcion)
 

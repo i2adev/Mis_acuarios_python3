@@ -19,7 +19,7 @@ from Model.TableModel.estado_proyecto_table_model import \
 from Views.Masters.estado_proyecto_view import EstadoProyectoView
 from Views.table_menu_contextual import TableMenuContextual
 
-import globals
+import globales
 
 
 class EstadoProyectoMasterController(EstadoProyectoController):

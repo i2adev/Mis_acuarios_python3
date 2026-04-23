@@ -9,7 +9,7 @@ from pathlib import Path
 from PyQt6.QtGui import QIcon, QAction
 from PyQt6.QtWidgets import QMessageBox, QTableView, QWidget, QComboBox
 
-import globals
+import globales
 from Controllers.sexo_animal_controller import SexoAnimalController
 from Model.DAO.paginator import Paginator
 from Model.DAO.sexo_animal_dao import SexoAnimalDAO

@@ -13,7 +13,7 @@ from PyQt6.QtGui import QIcon, QPixmap, QCursor
 from PyQt6.QtWidgets import QDialog, QSizeGrip, QVBoxLayout, QFrame, \
     QSizePolicy, QHBoxLayout, QPushButton, QLabel, QSpacerItem, QApplication
 
-import globals
+import globales
 
 
 class BaseDialog(QDialog):

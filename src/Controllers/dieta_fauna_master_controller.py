@@ -17,7 +17,7 @@ from Model.TableModel.dieta_fauna_table_model import DietaFaunaTableModel
 from Views.Masters.dieta_fauna_view import DietaFaunaView
 from Views.table_menu_contextual import TableMenuContextual
 
-import globals
+import globales
 
 
 class DietaFaunaMasterController(DietaFaunaController):

@@ -10,7 +10,7 @@ from pathlib import Path
 from PyQt6.QtGui import QIcon, QAction
 from PyQt6.QtWidgets import QMessageBox, QTableView, QWidget, QComboBox
 
-import globals
+import globales
 from Controllers.posicion_planta_acuario_controller import \
     PosicionPlantaAcuarioController
 from Model.DAO.paginator import Paginator

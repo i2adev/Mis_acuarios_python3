@@ -60,12 +60,7 @@ class EquipamientoController(BaseController):
         ent = EquipamientoEntity()
         ctrs = self._view.frame
 
-        # ID
-        if ctrs.edit_id.text():
-            ent.id = int(ctrs.edit_id.text())
-        else:
-            ent.id = None
-
+        ent.id = self._view.frame.edit_id.value()
         ent.id_categoria = ctrs.combo_categoria_equipamiento.value()
         ent.id_marca = int(ctrs.combo_marca.value())
         ent.modelo = ctrs.edit_modelo.value()
@@ -423,9 +418,7 @@ class EquipamientoController(BaseController):
         ent = val.value
 
         # Cargamos los widgets
-        self._view.frame.edit_id.setText(
-            str(ent.id) if ent.id is not None else ""
-        )
+        self._view.frame.edit_id.setValue(ent.id)
         self._view.frame.combo_categoria_equipamiento.setValue(
             ent.id_categoria)
         self._view.frame.combo_marca.setValue(ent.id_marca)

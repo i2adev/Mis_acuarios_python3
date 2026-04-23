@@ -45,16 +45,8 @@ class RequerimientoCO2Controller(BaseController):
         ent = RequerimientoCO2Entity()
         ctrs = self._view.frame
 
-        # ID
-        if ctrs.edit_id.text():
-            ent.id = int(ctrs.edit_id.text())
-        else:
-            ent.id = None
-
-        # Comportamiento
+        ent.id = self._view.frame.edit_id.value()
         ent.requerimiento = ctrs.edit_requerimiento.value()
-
-        # Descripción
         ent.descripcion = ctrs.text_descripcion.value()
 
         return ent
@@ -227,9 +219,7 @@ class RequerimientoCO2Controller(BaseController):
         ent = val.value
 
         # Cargamos los widgets
-        self._view.frame.edit_id.setText(
-            str(ent.id) if ent.id is not None else ""
-        )
+        self._view.frame.edit_id.setValue(ent.id)
         self._view.frame.edit_requerimiento.setValue(ent.requerimiento)
         self._view.frame.text_descripcion.setValue(ent.descripcion)
 

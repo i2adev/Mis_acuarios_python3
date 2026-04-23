@@ -21,7 +21,7 @@ from Views.Masters.subcategoria_incidencia_view import \
     SubcategoriaIncidenciaView
 from Views.table_menu_contextual import TableMenuContextual
 
-import globals
+import globales
 
 
 class SubcategoriaIncidenciaMasterController(SubcategoriaIncidenciaController):

@@ -20,7 +20,7 @@ from Model.TableModel.control_iluminacion_table_model import \
 from Views.Masters.control_iluminacion_view import ControlIluminacionView
 from Views.table_menu_contextual import TableMenuContextual
 
-import globals
+import globales
 
 
 class ControlIluminacionMasterController(ControlIluminacionController):

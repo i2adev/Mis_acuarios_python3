@@ -10,7 +10,7 @@ from pathlib import Path
 from PyQt6.QtGui import QIcon, QAction
 from PyQt6.QtWidgets import QMessageBox, QTableView, QWidget, QComboBox
 
-import globals
+import globales
 from Controllers.tasa_crecimiento_controller import TasaCrecimientoController
 from Model.DAO.paginator import Paginator
 from Model.DAO.tasa_crecimiento_dao import TasaCrecimientoDAO

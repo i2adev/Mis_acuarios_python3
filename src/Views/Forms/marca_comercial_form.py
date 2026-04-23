@@ -15,7 +15,9 @@ from PyQt6.QtWidgets import QFrame, QLabel, QLineEdit, QPlainTextEdit, \
     QSpacerItem, \
     QSizePolicy
 
+import globales
 from CustomControls.combo_box import ComboBox
+from CustomControls.int_line_edit import IntLineEdit
 from CustomControls.plain_text_edit import PlainTextEdit
 from CustomControls.str_line_edit import StrLineEdit
 
@@ -90,7 +92,11 @@ class MarcaComercialForm(QFrame):
         self.label_observaciones = QLabel("OBSERVACIONES")
 
         # Textos
-        self.edit_id = QLineEdit()
+        self.edit_id = IntLineEdit(
+            control_name="ID",
+            min_value=0,
+            max_value=globales.INT32_MAX_VALUE
+        )
         self.edit_id.setEnabled(False)
         self.edit_id.setObjectName("edit_id")
         self.edit_id.setFixedWidth(50)

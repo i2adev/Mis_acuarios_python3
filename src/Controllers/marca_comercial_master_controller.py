@@ -18,7 +18,7 @@ from Model.TableModel.marcas_comercial_table_model import \
 from Views.Masters.marca_comercial_view import MarcaComercialView
 from Views.table_menu_contextual import TableMenuContextual
 
-import globals
+import globales
 
 
 class MarcaComercialMasterController(MarcaComercialController):

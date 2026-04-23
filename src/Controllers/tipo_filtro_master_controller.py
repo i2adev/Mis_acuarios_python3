@@ -18,7 +18,7 @@ from Model.TableModel.tipo_filtro_table_model import TipoFiltroTableModel
 from Views.Masters.tipo_filtro_view import TipoFiltroView
 from Views.table_menu_contextual import TableMenuContextual
 
-import globals
+import globales
 
 
 class TipoFiltroMasterController(TipoFiltroController):

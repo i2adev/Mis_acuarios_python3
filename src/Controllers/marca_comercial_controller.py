@@ -43,31 +43,13 @@ class MarcaComercialController(BaseController):
         ent = MarcaComercialEntity()
         ctrs = self._view.frame
 
-        # ID
-        if ctrs.edit_id.text():
-            ent.id = int(ctrs.edit_id.text())
-        else:
-            ent.id = None
-
-        # Marca
+        ent.id = self._view.frame.edit_id.value()
         ent.nombre_marca = ctrs.edit_marca.value()
-
-        # Dirección
         ent.direccion = ctrs.edit_direccion.value()
-
-        # Código postal
         ent.cod_postal = ctrs.edit_cod_postal.value()
-
-        # Población
         ent.poblacion = ctrs.edit_poblacion.value()
-
-        # Provincia
         ent.provincia = ctrs.edit_provincia.value()
-
-        # País
         ent.id_pais = ctrs.combo_pais.value()
-
-        # Observaciones
         ent.observaciones = ctrs.text_observaciones.value()
 
         return ent
@@ -250,10 +232,7 @@ class MarcaComercialController(BaseController):
         ent = val.value
 
         # Cargamos los widgets
-        self._view.frame.edit_id.setText(
-            str(ent.id) if ent.id is not None else None
-        )
-
+        self._view.frame.edit_id.setValue(ent.id)
         self._view.frame.edit_marca.setValue(ent.nombre_marca)
         self._view.frame.edit_direccion.setValue(ent.direccion)
         self._view.frame.edit_cod_postal.setValue(ent.cod_postal)

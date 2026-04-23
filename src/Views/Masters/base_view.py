@@ -15,7 +15,7 @@ from PyQt6.QtWidgets import (QApplication, QWidget, QLabel, QLineEdit,
                              QSpacerItem, QComboBox, QSizePolicy, QFrame,
                              QTableView, QAbstractItemView)
 
-import globals
+import globales
 
 
 class BaseView(QWidget):

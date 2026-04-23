@@ -77,70 +77,29 @@ class EspecieVegetalController(BaseController):
         ent = EspecieVegetalEntity()
         ctrs = self._view.frame
 
-        if ctrs.edit_id.text():
-            ent.id = int(self._view.frame.edit_id.text())
-        else:
-            ent.id = None
-
-        # Reino
+        ent.id = self._view.frame.edit_id.value()
         ent.reino = ctrs.edit_reino.value()
-
-        # División
         ent.division = ctrs.edit_division.value()
-
-        # Clase
         ent.clase = ctrs.edit_clase.value()
-
-        # Orden
         ent.orden = ctrs.edit_orden.value()
-
-        # Familia
         ent.familia = ctrs.edit_familia.value()
-
-        # Genero
         ent.genero = ctrs.edit_genero.value()
-
-        # Especie
         ent.especie = ctrs.edit_especie.value()
-
-        # Nombre común
         ent.nombre_comun = ctrs.edit_n_comun.value()
-
-        # PH mínimo i máximo
         ent.ph_min = ctrs.edit_ph_min.value()
         ent.ph_max = ctrs.edit_ph_max.value()
-
-        # KH mínimo y máximo
         ent.kh_min = ctrs.edit_kh_min.value()
         ent.kh_max = ctrs.edit_kh_max.value()
-
-        # GH mínimo y máximo
         ent.gh_min = ctrs.edit_gh_min.value()
         ent.gh_max = ctrs.edit_gh_max.value()
-
-        # Temperatura
         ent.temp_min = ctrs.edit_temp_min.value()
         ent.temp_max = ctrs.edit_temp_max.value()
-
-        # Origen
         ent.origen = ctrs.edit_origen.value()
-
-        # Posición en el acuario
         ent.id_posicion_acuario = ctrs.combo_posicion.value()
-
-        # Requerimientos de iluminación
         ent.id_req_iluminacion = ctrs.combo_req_iluminacion.value()
-
-        # Requerimientos de CO2
         ent.id_req_co2 = ctrs.combo_req_co2.value()
-
-        # Tasa de crecimiento
         ent.id_tasa_crecimiento = ctrs.combo_crecimiento.value()
-
-        # Dificultad de mantenimiento
         ent.id_dificultad = ctrs.combo_dificultad.value()
-
-        # Descripción del acuario
         ent.descripcion = ctrs.text_descripcion.value()
 
         return ent

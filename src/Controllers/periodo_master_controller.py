@@ -9,7 +9,7 @@ from pathlib import Path
 from PyQt6.QtGui import QIcon, QAction
 from PyQt6.QtWidgets import QMessageBox, QTableView, QWidget, QComboBox
 
-import globals
+import globales
 from Controllers.periodo_controller import PeriodoController
 from Model.DAO.paginator import Paginator
 from Model.DAO.periodo_dao import PeriodoDAO

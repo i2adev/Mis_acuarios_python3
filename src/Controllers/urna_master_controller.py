@@ -17,7 +17,7 @@ from Model.TableModel.urna_table_model import UrnaTableModel
 from Views.Masters.urna_view import UrnaView
 from Views.table_menu_contextual import TableMenuContextual
 
-import globals
+import globales
 
 
 class UrnaMasterController(UrnaController):

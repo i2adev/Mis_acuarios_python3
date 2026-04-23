@@ -18,7 +18,7 @@ from Model.TableModel.dificultad_planta_table_model import \
 from Views.Masters.dificultad_planta_view import DificultadPlantaView
 from Views.table_menu_contextual import TableMenuContextual
 
-import globals
+import globales
 
 
 class DificultadPlantaMasterController(DificultadPlantaController):

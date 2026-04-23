@@ -11,6 +11,8 @@ import sys
 from PyQt6.QtWidgets import (QFrame, QVBoxLayout, QHBoxLayout, QLabel,
                              QLineEdit, QApplication, QSpacerItem, QSizePolicy)
 
+import globales
+from CustomControls.int_line_edit import IntLineEdit
 from CustomControls.str_line_edit import StrLineEdit
 
 
@@ -46,7 +48,11 @@ class PeriodoForm(QFrame):
         self.label_periodo = QLabel("PERIODO")
 
         # Textos
-        self.edit_id = QLineEdit()
+        self.edit_id = IntLineEdit(
+            control_name="ID",
+            min_value=0,
+            max_value=globales.INT32_MAX_VALUE
+        )
         self.edit_id.setObjectName("edit_id")
         self.edit_id.setFixedWidth(50)
         self.edit_id.setEnabled(False)

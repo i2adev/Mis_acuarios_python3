@@ -46,19 +46,9 @@ class TipoAcuarioController(BaseController):
         ent = TipoAcuarioEntity()
         ctrs = self._view.frame
 
-        # ID
-        if ctrs.edit_id.text():
-            ent.id = int(ctrs.edit_id.text())
-        else:
-            ent.id = None
-
-        # Categoría de acuario
+        ent.id = self._view.frame.edit_id.value()
         ent.id_categoria_acuario = ctrs.combo_categoria_acuario.value()
-
-        # Subcategoría de acuario
         ent.id_subcategoria_acuario = ctrs.combo_subcategoria_acuario.value()
-
-        # Observaciones
         ent.observaciones = ctrs.text_observaciones.value()
 
         return ent
@@ -241,20 +231,11 @@ class TipoAcuarioController(BaseController):
         ent = val.value
 
         # Cargamos los widgets
-        self._view.frame.edit_id.setText(
-            str(ent.id) if ent.id is not None else ""
-        )
-
-        self._view.frame.combo_categoria_acuario.setCurrentIndex(
-            self._view.frame.combo_categoria_acuario.findData(
-                ent.id_categoria_acuario)
-        )
-
-        self._view.frame.combo_subcategoria_acuario.setCurrentIndex(
-            self._view.frame.combo_subcategoria_acuario.findData(
-                ent.id_subcat_acuario)
-        )
-
+        self._view.frame.edit_id.setValue(ent.id)
+        self._view.frame.combo_categoria_acuario.setValue(
+            ent.id_categoria_acuario)
+        self._view.frame.combo_subcategoria_acuario.setValue(
+            ent.id_subcat_acuario)
         self._view.frame.text_observaciones.setValue(ent.observaciones)
 
         return Result.success(ent.id)

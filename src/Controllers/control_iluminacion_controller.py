@@ -43,16 +43,8 @@ class ControlIluminacionController(BaseController):
         ent = ControlIluminacionEntity()
         ctrs = self._view.frame
 
-        # ID
-        if ctrs.edit_id.text():
-            ent.id = int(ctrs.edit_id.text())
-        else:
-            ent.id = None
-
-        # Control de iluminación
+        ent.id = self._view.frame.edit_id.value()
         ent.control_iluminacion = ctrs.edit_control_iluminacion.value()
-
-        # Descripción
         ent.descripcion = ctrs.text_descripcion.value()
 
         return ent
@@ -227,10 +219,7 @@ class ControlIluminacionController(BaseController):
         ent = val.value
 
         # Cargamos los widgets
-        self._view.frame.edit_id.setText(
-            str(ent.id) if ent.id is not None else ""
-        )
-
+        self._view.frame.edit_id.setValue(ent.id)
         self._view.frame.edit_control_iluminacion.setValue(
             ent.control_iluminacion)
         self._view.frame.text_descripcion.setValue(ent.descripcion)

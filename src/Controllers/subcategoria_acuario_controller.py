@@ -49,10 +49,7 @@ class SubcategoriaAcuarioController(BaseController):
         ent = SubcategoriaAcuarioEntity()
         ctrs = self._view.frame
 
-        if ctrs.edit_id.text():
-            ent.id = int(ctrs.edit_id.text())
-        else:
-            ent.id = None
+        ent.id = self._view.frame.edit_id.value()
         ent.id_categoria = ctrs.combo_categoria_acuario.value()
         ent.subcategoria = ctrs.edit_subcategoria_acuario.value()
         ent.observaciones = ctrs.text_observaciones.value()
@@ -237,10 +234,7 @@ class SubcategoriaAcuarioController(BaseController):
         ent = val.value
 
         # Cargamos los widgets
-        self._view.frame.edit_id.setText(
-            str(ent.id) if ent.id is not None else ""
-        )
-
+        self._view.frame.edit_id.setValue(ent.id)
         self._view.frame.combo_categoria_acuario.setValue(ent.id_categoria)
         self._view.frame.edit_subcategoria_acuario.setValue(ent.subcategoria)
         self._view.frame.text_observaciones.setValue(ent.observaciones)

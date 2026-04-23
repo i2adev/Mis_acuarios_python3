@@ -45,16 +45,8 @@ class EstadoProyectoController(BaseController):
         ent = EstadoProyectoEntity()
         ctrs = self._view.frame
 
-        # ID
-        if ctrs.edit_id.text():
-            ent.id = int(ctrs.edit_id.text())
-        else:
-            ent.id = None
-
-        # Estado del proyecto
+        ent.id = self._view.frame.edit_id.value()
         ent.estado = ctrs.edit_estado_proyecto.value()
-
-        # Descripción del estado
         ent.descripcion = ctrs.text_observaciones.value()
 
         return ent
@@ -229,9 +221,7 @@ class EstadoProyectoController(BaseController):
         ent = val.value
 
         # Cargamos los widgets
-        self._view.frame.edit_id.setText(
-            str(ent.id) if ent.id is not None else ""
-        )
+        self._view.frame.edit_id.setValue(ent.id)
         self._view.frame.edit_estado_proyecto.setValue(ent.estado)
         self._view.frame.text_observaciones.setValue(ent.observaciones)
 

@@ -61,46 +61,19 @@ class IluminacionController(BaseController):
         ent = IluminacionEntity()
         ctrs = self._view.frame
 
-        # ID
-        if ctrs.edit_id.text():
-            ent.id = int(ctrs.edit_id.text())
-        else:
-            ent.id = None
-
-        # Marca
+        ent.id = self._view.frame.edit_id.value()
         ent.id_marca = ctrs.combo_marca.value()
-
-        # Modelo
         ent.modelo = ctrs.edit_modelo.value()
-
-        # Número de serie
         ent.num_serie = ctrs.edit_num_serie.value()
-
-        # Tipo de iluminación
         ent.id_tipo_iluminacion = ctrs.combo_tipo_iluminacion.value()
-
-        # Control de la iluminación
         ent.id_control_iluminacion = ctrs.combo_control_iluminacion.value()
-
-        # Potencia de la luminaria
         ent.potencia = ctrs.edit_potencia.value()
-
-        # Flujo luminico
         ent.flujo_luminico = ctrs.edit_flujo_luminico.value()
-
-        # Temperatura de color
         ent.temperatura = ctrs.edit_temperatura.value()
-
-        # Vida útil de la luminaria
         ent.vida_util = ctrs.edit_vida_util.value()
-
-        # Dimensiones: Longitud
         ent.longitud = ctrs.edit_longitud.value()
-
-        # Dimensiones: Anchura
         ent.anchura = ctrs.edit_anchura.value()
 
-        # Fecha de instalación
         instalacion = ctrs.fecha_alta.date()
         if instalacion.isValid():
             time_inicio = QDateTime(instalacion, QTime(0, 0))
@@ -108,7 +81,6 @@ class IluminacionController(BaseController):
         else:
             ent.fecha_alta = None
 
-        # Fecha de baja
         baja = ctrs.fecha_baja.date()
         if baja.isValid():
             time_inicio = QDateTime(baja, QTime(0, 0))
@@ -116,18 +88,11 @@ class IluminacionController(BaseController):
         else:
             ent.fecha_baja = None
 
-        # Motivo de la baja
         ent.motivo_baja = ctrs.edit_motivo_baja.value()
-
-        # Espectro completo
         ent.espectro_completo = True if (
             ctrs.check_espectro_completo.isChecked()) else False
-
-        # Intensidad regulable
         ent.intensidad_regulable = True if (
             ctrs.check_intensidad_regulable.isChecked()) else False
-
-        # Descripción
         ent.descripcion = ctrs.text_descripcion.value()
 
         return ent
@@ -352,14 +317,8 @@ class IluminacionController(BaseController):
         ent = val.value
 
         # Cargamos los widgets
-        self._view.frame.edit_id.setText(
-            str(ent.id) if ent.id is not None else ""
-        )
-
-        self._view.frame.combo_marca.setCurrentIndex(
-            self._view.frame.combo_marca.findData(ent.id_marca)
-        )
-
+        self._view.frame.edit_id.setValue(ent.id)
+        self._view.frame.combo_marca.setValue(ent.id_marca)
         self._view.frame.edit_modelo.setValue(ent.modelo)
         self._view.frame.edit_num_serie.setValue(ent.num_serie)
         self._view.frame.combo_tipo_iluminacion.setValue(

@@ -8,6 +8,7 @@ Comentarios:
 
 import sys
 
+import globales
 from CustomControls.combo_box import ComboBox
 from CustomControls.double_line_edit import DoubleLineEdit
 from CustomControls.int_line_edit import IntLineEdit
@@ -63,7 +64,11 @@ class EspecieVegetalForm(QFrame):
         ## ID
         self.layout_id = QVBoxLayout()
         self.label_id = QLabel("ID")
-        self.edit_id = QLineEdit()
+        self.edit_id = IntLineEdit(
+            control_name="ID",
+            min_value=0,
+            max_value=globales.INT32_MAX_VALUE
+        )
         self.edit_id.setFixedWidth(50)
         self.edit_id.setEnabled(False)
         self.edit_id.setObjectName("edit_id")

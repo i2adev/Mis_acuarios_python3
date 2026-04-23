@@ -21,10 +21,10 @@ from Model.DAO.usuario_dao import UsuarioDAO
 from Model.Entities.usuario_entity import UsuarioEntity
 from Views.Dialogs.login_dialog import LoginDialog
 import os
-import globals
+import globales
 
 # Versión del programa
-__version__ = "0.40.5"
+__version__ = "0.40.6"
 
 
 def excepthook(exc_type, exc_value, exc_traceback):

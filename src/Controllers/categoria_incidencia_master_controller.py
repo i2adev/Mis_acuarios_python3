@@ -14,7 +14,7 @@ from Model.TableModel.categoria_incidencia_table_model import \
 from Views.Masters.categoria_incidencia_view import CategoriaIncidenciaView
 from Views.table_menu_contextual import TableMenuContextual
 
-import globals
+import globales
 
 
 class CategoriaIncidenciaMasterController(CategoriaIncidenciaController):

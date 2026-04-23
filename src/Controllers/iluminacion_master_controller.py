@@ -18,7 +18,7 @@ from Model.TableModel.iluminacion_table_model import IluminacionTableModel
 from Views.Masters.iluminacion_view import IluminacionView
 from Views.table_menu_contextual import TableMenuContextual
 
-import globals
+import globales
 
 
 class IluminacionMasterController(IluminacionController):

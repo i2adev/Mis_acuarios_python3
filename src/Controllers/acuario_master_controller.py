@@ -6,7 +6,7 @@ Comentarios:
 """
 from pathlib import Path
 
-import globals
+import globales
 from Controllers.acuario_controller import AcuarioController
 from CustomControls.nullable_date_edit import NullableDateEdit
 from Model.DAO.acuario_dao import AcuarioDAO

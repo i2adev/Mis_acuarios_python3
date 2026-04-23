@@ -66,11 +66,7 @@ class EspecieAnimalController(BaseController):
         ent = EspecieAnimalEntity()
         ctrs = self._view.frame
 
-        if ctrs.edit_id.text():
-            ent.id = int(self._view.frame.edit_id.text())
-        else:
-            ent.id = None
-
+        ent.id = self._view.frame.edit_id.value()
         ent.reino = ctrs.edit_reino.value()
         ent.filo = ctrs.edit_filo.value()
         ent.clase = ctrs.edit_clase.value()
@@ -515,9 +511,7 @@ class EspecieAnimalController(BaseController):
         ent = val.value
 
         # Cargamos los widgets
-        self._view.frame.edit_id.setText(
-            str(id_ent) if id_ent is not None else ""
-        )
+        self._view.frame.edit_id.setValue(ent.id)
         self._view.frame.edit_reino.setValue(ent.reino)
         self._view.frame.edit_filo.setValue(ent.filo)
         self._view.frame.edit_clase.setValue(ent.clase)

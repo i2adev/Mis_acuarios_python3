@@ -20,7 +20,7 @@ from Model.TableModel.formato_consumible_table_model import \
 from Views.Masters.formato_consumible_view import FormatoConsumibleView
 from Views.table_menu_contextual import TableMenuContextual
 
-import globals
+import globales
 
 
 class FormatoConsumibleMasterController(FormatoConsumibleController):

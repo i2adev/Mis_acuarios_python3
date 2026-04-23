@@ -19,7 +19,7 @@ from Model.TableModel.unidad_contenido_table_model import \
 from Views.Masters.unidad_contenido_master import UnidadContenidoView
 from Views.table_menu_contextual import TableMenuContextual
 
-import globals
+import globales
 
 
 class UnidadContenidoMasterController(UnidadContenidoController):

@@ -46,16 +46,8 @@ class UnidadContenidoController(BaseController):
         ent = UnidadContenidoEntity()
         ctrs = self._view.frame
 
-        # ID
-        if ctrs.edit_id.text():
-            ent.id = int(ctrs.edit_id.text())
-        else:
-            ent.id = None
-
-        # Categoría de consumible
+        ent.id = self._view.frame.edit_id.value()
         ent.unidad = ctrs.edit_unidad_contenido.value()
-
-        # Descripción de la categoría
         ent.descripcion = ctrs.text_descripcion.value()
 
         return ent
@@ -230,10 +222,7 @@ class UnidadContenidoController(BaseController):
         ent = val.value
 
         # Cargamos los widgets
-        self._view.frame.edit_id.setText(
-            str(ent.id) if ent.id is not None else ""
-        )
-
+        self._view.frame.edit_id.setValue(ent.id)
         self._view.frame.edit_unidad_contenido.setValue(ent.unidad_contenido)
         self._view.frame.text_descripcion.setValue(ent.descripcion)
 

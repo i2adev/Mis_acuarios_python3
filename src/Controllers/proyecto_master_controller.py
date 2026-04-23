@@ -6,7 +6,7 @@ Comentarios:
 """
 from pathlib import Path
 
-import globals
+import globales
 from Controllers.proyecto_controller import ProyectoController
 from CustomControls.nullable_date_edit import NullableDateEdit
 from Model.DAO.paginator import Paginator

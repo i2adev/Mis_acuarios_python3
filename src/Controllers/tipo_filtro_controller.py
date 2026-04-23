@@ -42,16 +42,8 @@ class TipoFiltroController(BaseController):
         ent = TipoFiltroEntity()
         ctrs = self._view.frame
 
-        # ID
-        if ctrs.edit_id.text():
-            ent.id = int(ctrs.edit_id.text())
-        else:
-            ent.id = None
-
-        # Tipo de filtro
+        ent.id = self._view.frame.edit_id.value()
         ent.tipo_filtro = ctrs.edit_tipo_filtro.value()
-
-        # Observaciones
         ent.observaciones = ctrs.text_observaciones.value()
 
         return ent
@@ -226,9 +218,7 @@ class TipoFiltroController(BaseController):
         ent = val.value
 
         # Cargamos los widgets
-        self._view.frame.edit_id.setText(
-            str(ent.id) if ent.id is not None else ""
-        )
+        self._view.frame.edit_id.setValue(ent.id)
         self._view.frame.edit_tipo_filtro.setValue(ent.tipo_filtro)
         self._view.frame.text_observaciones.setValue(ent.observaciones)
 

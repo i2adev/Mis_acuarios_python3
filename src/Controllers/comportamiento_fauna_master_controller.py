@@ -19,7 +19,7 @@ from Model.TableModel.comportamiento_fauna_table_model import \
 from Views.Masters.comportamiento_fauna_view import ComportamientoFaunaView
 from Views.table_menu_contextual import TableMenuContextual
 
-import globals
+import globales
 
 
 class ComportamientoFaunaMasterController(ComportamientoFaunaController):

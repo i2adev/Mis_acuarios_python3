@@ -14,7 +14,7 @@ from PyQt6.QtWidgets import (QApplication, QFrame, QHBoxLayout, QLabel,
                              QPushButton, QSizeGrip, QSizePolicy, QSpacerItem,
                              QVBoxLayout, QWidget)
 
-import globals
+import globales
 
 
 class MainView(QWidget):
