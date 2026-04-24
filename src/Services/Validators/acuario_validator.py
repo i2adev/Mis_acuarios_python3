@@ -8,8 +8,8 @@ Comentarios:
 from PyQt6.QtWidgets import QLineEdit, QComboBox
 
 from CustomControls.nullable_date_edit import NullableDateEdit
-from Model.DAO.acuario_dao import AcuarioDAO
-from Model.DAO.urna_dao import UrnaDAO
+from ModuloMaestro.Model.DAO.acuario_dao import AcuarioDAO
+from ModuloMaestro.Model.DAO.urna_dao import UrnaDAO
 from Services.Result.result import Result
 
 

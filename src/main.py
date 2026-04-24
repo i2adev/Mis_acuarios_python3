@@ -12,16 +12,15 @@ import traceback
 from pathlib import Path
 
 from PyQt6.QtGui import QFontDatabase
-from PyQt6.QtWidgets import QApplication, QDialog, QMessageBox
+from PyQt6.QtWidgets import QApplication, QDialog
 
-from Controllers.login_controller import LoginDialogController
-from Controllers.main_view_controller import MainViewController
-from Model.DAO.base_dao import BaseDAO
-from Model.DAO.usuario_dao import UsuarioDAO
-from Model.Entities.usuario_entity import UsuarioEntity
-from Views.Dialogs.login_dialog import LoginDialog
-import os
 import globales
+from Main.Controllers.login_controller import LoginDialogController
+from Main.Controllers.main_view_controller import MainViewController
+from Main.Model.DAO.usuario_dao import UsuarioDAO
+from Main.Model.Entities.usuario_entity import UsuarioEntity
+from Main.Views.login_dialog import LoginDialog
+import os
 
 # Versión del programa
 __version__ = "0.40.6"
@@ -63,14 +62,14 @@ def main():
 
     # Mostramos las rutas de los recursos
     print("\nRutas de recursos:")
-    print(f"✅ {globals.PATH_RESOURCES}")
-    print(f"✅ {globals.PATH_IMAGES}")
-    print(f"✅ {globals.PATH_FONTS}")
-    print(f"✅ {globals.PATH_STYLES}")
+    print(f"✅ {globales.PATH_RESOURCES}")
+    print(f"✅ {globales.PATH_IMAGES}")
+    print(f"✅ {globales.PATH_FONTS}")
+    print(f"✅ {globales.PATH_STYLES}")
     print()
 
     # Carga las fuentes desde el recurso
-    _ = load_directory_fonts(globals.PATH_FONTS)
+    _ = load_directory_fonts(globales.PATH_FONTS)
 
     # # Limpia la base de datos
     # msg = BaseDAO.clean_database()

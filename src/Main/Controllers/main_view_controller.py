@@ -1,0 +1,827 @@
+﻿"""
+Autor:      Inigo Iturriagaetxebarria
+Fecha:      23/06/2025
+Comentarios:
+    Módulo que contiene la clase controladora de la vista principal.
+"""
+import globales
+from ModuloMaestro.Controllers.acuario_master_controller import \
+    AcuarioMasterController
+from Main.Controllers.base_controller import BaseController
+from ModuloMaestro.Controllers.categoria_acuario_master_controller import \
+    CategoriaAcuarioMasterController
+from ModuloMaestro.Controllers.categoria_consumible_master_controller import \
+    CategoriaConsumibleMasterController
+from ModuloMaestro.Controllers.categoria_equipamiento_master_controller import \
+    CategoriaEquipamientoMasterController
+from ModuloMaestro.Controllers.categoria_incidencia_master_controller import \
+    CategoriaIncidenciaMasterController
+from ModuloMaestro.Controllers.comercio_master_controller import \
+    ComercioMasterController
+from ModuloMaestro.Controllers.comportamiento_fauna_master_controller import \
+    ComportamientoFaunaMasterController
+from ModuloMaestro.Controllers.consumible_master_controller import \
+    ConsumibleMasterController
+from ModuloMaestro.Controllers.control_iluminacion_master_controller import \
+    ControlIluminacionMasterController
+from ModuloMaestro.Controllers.dieta_fauna_master_controller import \
+    DietaFaunaMasterController
+from ModuloMaestro.Controllers.dificultad_planta_master_controller import \
+    DificultadPlantaMasterController
+from ModuloMaestro.Controllers.equipamiento_master_controller import \
+    EquipamientoMasterController
+from ModuloMaestro.Controllers.especie_animal_master_controller import \
+    EspecieAnimalMasterController
+from ModuloMaestro.Controllers.especie_vegetal_master_controller import \
+    EspecieVegetalMasterController
+from ModuloMaestro.Controllers.estado_proyecto_master_controller import \
+    EstadoProyectoMasterController
+from ModuloMaestro.Controllers.filtro_master_controller import \
+    FiltroMasterController
+from ModuloMaestro.Controllers.formato_consumible_master_controller import \
+    FormatoConsumibleMasterController
+from ModuloMaestro.Controllers.grupo_taxonomico_master_controller import \
+    GrupoTaxonomicoMasterController
+from ModuloMaestro.Controllers.iluminacion_master_controller import \
+    IluminacionMasterController
+from ModuloMaestro.Controllers.main_reports_controller import \
+    MainReportsController
+from ModuloMaestro.Controllers.marca_comercial_master_controller import \
+    MarcaComercialMasterController
+from ModuloMaestro.Controllers.material_urna_master_controler import \
+    MaterialUrnaMasterController
+from ModuloMaestro.Controllers.nivel_nado_master_controller import \
+    NivelNadoMasterController
+from ModuloMaestro.Controllers.periodo_master_controller import \
+    PeriodoMasterController
+from ModuloMaestro.Controllers.posicion_planta_acuario_master_controller import \
+    PosicionPlantaAcuarioMasterController
+from ModuloMaestro.Controllers.proyecto_master_controller import \
+    ProyectoMasterController
+from ModuloMaestro.Controllers.requerimiento_co2_master_controller import \
+    RequerimientoCO2MasterController
+from ModuloMaestro.Controllers.requerimiento_iluminacion_master_controller import \
+    RequerimientoIluminacionMasterController
+from ModuloMaestro.Controllers.sexo_animal_master_controller import \
+    SexoAnimalMasterController
+from ModuloMaestro.Controllers.subcategoria_acuario_master_controller import \
+    SubcategoriaAcuarioMasterController
+from ModuloMaestro.Controllers.subcategoria_incidencia_master_controller import \
+    SubcategoriaIncidenciaMasterController
+from ModuloMaestro.Controllers.tasa_crecimiento_master_controller import \
+    TasaCrecimientoMasterController
+from ModuloMaestro.Controllers.tipo_acuario_master_controller import \
+    TipoAcuarioMasterController
+from ModuloMaestro.Controllers.tipo_filtro_master_controller import \
+    TipoFiltroMasterController
+from ModuloMaestro.Controllers.tipo_iluminacion_master_controller import \
+    TipoIluminacionMasterController
+from ModuloMaestro.Controllers.unidad_contenido_master_controller import \
+    UnidadContenidoMasterController
+from ModuloMaestro.Controllers.urna_master_controller import \
+    UrnaMasterController
+from ModuloMaestro.Model.DAO.acuario_dao import AcuarioDAO
+from ModuloMaestro.Model.DAO.categoria_acuario_dao import CategoriaAcuarioDAO
+from ModuloMaestro.Model.DAO.categoria_consumible_dao import \
+    CategoriaConsumibleDAO
+from ModuloMaestro.Model.DAO.categoria_equipamiento_dao import \
+    CategoriaEquipamientoDAO
+from ModuloMaestro.Model.DAO.categoria_incidencia_dao import \
+    CategoriaIncidenciaDAO
+from ModuloMaestro.Model.DAO.comercio_dao import ComercioDAO
+from ModuloMaestro.Model.DAO.comportamiento_fauna_dao import \
+    ComportamientoFaunaDAO
+from ModuloMaestro.Model.DAO.consumible_dao import ConsumibleDAO
+from ModuloMaestro.Model.DAO.control_iluminacion_dao import \
+    ControlIluminacionDAO
+from ModuloMaestro.Model.DAO.dieta_fauna_dao import DietaFaunaDAO
+from ModuloMaestro.Model.DAO.dificultad_plantas_dao import DificultadPlantaDAO
+from ModuloMaestro.Model.DAO.equipamiento_dao import EquipamientoDAO
+from ModuloMaestro.Model.DAO.especie_animal_dao import EspecieAnimalDAO
+from ModuloMaestro.Model.DAO.especie_vegetal_dao import EspecieVegetalDAO
+from ModuloMaestro.Model.DAO.estado_proyecto_dao import EstadoProyectoDAO
+from ModuloMaestro.Model.DAO.filtro_dao import FiltroDAO
+from ModuloMaestro.Model.DAO.formato_consumible_dao import FormatoConsumibleDAO
+from ModuloMaestro.Model.DAO.grupo_taxonomico_dao import GrupoTaxonomicoDAO
+from ModuloMaestro.Model.DAO.iluminacion_dao import IluminacionDAO
+from ModuloMaestro.Model.DAO.marca_comercial_dao import MarcaComercialDAO
+from ModuloMaestro.Model.DAO.material_urna_dao import MaterialUrnaDAO
+from ModuloMaestro.Model.DAO.niveles_nado_dao import NivelNadoDAO
+from ModuloMaestro.Model.DAO.periodo_dao import PeriodoDAO
+from ModuloMaestro.Model.DAO.posicion_planta_acuario_dao import \
+    PosicionPlantaAcuarioDAO
+from ModuloMaestro.Model.DAO.proyecto_dao import ProyectoDAO
+from ModuloMaestro.Model.DAO.requerimiento_co2_dao import RequerimientoCO2DAO
+from ModuloMaestro.Model.DAO.requerimiento_iluminacion_dao import \
+    RequerimientoIluminacionDAO
+from ModuloMaestro.Model.DAO.sexo_animal_dao import SexoAnimalDAO
+from ModuloMaestro.Model.DAO.subcategoria_acuario_dao import \
+    SubcategoriaAcuarioDAO
+from ModuloMaestro.Model.DAO.subcategoria_incidencia_dao import \
+    SubcategoriaIncidenciaDAO
+from ModuloMaestro.Model.DAO.tasa_crecimiento_dao import TasaCrecimientoDAO
+from ModuloMaestro.Model.DAO.tipo_acuario_dao import TipoAcuarioDAO
+from ModuloMaestro.Model.DAO.tipo_filtro_dao import TipoFiltroDAO
+from ModuloMaestro.Model.DAO.tipo_iluminacion_dao import TipoIluminacionDAO
+from ModuloMaestro.Model.DAO.unidad_contenido_dao import UnidadContenidoDAO
+from ModuloMaestro.Model.DAO.urna_dao import UrnaDAO
+from ModuloMaestro.Model.Entities.acuario_entity import AcuarioEntity
+from ModuloMaestro.Model.Entities.categoria_acuario_entity import \
+    CategoriaAcuarioEntity
+from ModuloMaestro.Model.Entities.categoria_consumible_entity import \
+    CategoriaConsumibleEntity
+from ModuloMaestro.Model.Entities.categoria_equipamiento_entity import \
+    CategoriaEquipamientoEntity
+from ModuloMaestro.Model.Entities.categoria_incidencia_entity import \
+    CategoriaIncidenciaEntity
+from ModuloMaestro.Model.Entities.comercio_entity import ComercioEntity
+from ModuloMaestro.Model.Entities.comprtamiento_fauna_entity import \
+    ComportamientoFaunaEntity
+from ModuloMaestro.Model.Entities.consumible_entity import ConsumibleEntity
+from ModuloMaestro.Model.Entities.control_iluminacion_entity import \
+    ControlIluminacionEntity
+from ModuloMaestro.Model.Entities.dieta_fauna_entity import DietaFaunaEntity
+from ModuloMaestro.Model.Entities.dificultad_planta_entity import \
+    DificultadPlantaEntity
+from ModuloMaestro.Model.Entities.equipamiento_entity import EquipamientoEntity
+from ModuloMaestro.Model.Entities.especie_animal_entity import \
+    EspecieAnimalEntity
+from ModuloMaestro.Model.Entities.especie_vegetal_entity import \
+    EspecieVegetalEntity
+from ModuloMaestro.Model.Entities.estado_proyecto_entity import \
+    EstadoProyectoEntity
+from ModuloMaestro.Model.Entities.filtro_entity import FiltroEntity
+from ModuloMaestro.Model.Entities.formato_consumible_entity import \
+    FormatoConsumibleEntity
+from ModuloMaestro.Model.Entities.grupo_taxonomico_entity import \
+    GrupoTaxonomicoEntity
+from ModuloMaestro.Model.Entities.iluminacion_entity import IluminacionEntity
+from ModuloMaestro.Model.Entities.marca_comercial_entity import \
+    MarcaComercialEntity
+from ModuloMaestro.Model.Entities.material_urna_entity import \
+    MaterialUrnaEntity
+from ModuloMaestro.Model.Entities.nivel_nado_entity import NivelNadoEntity
+from ModuloMaestro.Model.Entities.periodo_entity import PeriodoEntity
+from ModuloMaestro.Model.Entities.posicion_planta_acuario_entity import \
+    PosicionPlantaAcuarioEntity
+from ModuloMaestro.Model.Entities.proyecto_entity import ProyectoEntity
+from ModuloMaestro.Model.Entities.requerimiento_co2_entity import \
+    RequerimientoCO2Entity
+from ModuloMaestro.Model.Entities.requerimiento_iluminacion_entity import \
+    RequerimientoIluminacionEntity
+from ModuloMaestro.Model.Entities.sexo_animal_entity import SexoAnimalEntity
+from ModuloMaestro.Model.Entities.subcategoria_acuario_entity import \
+    SubcategoriaAcuarioEntity
+from ModuloMaestro.Model.Entities.subcategoria_incidencia_entity import \
+    SubcategoriaIncidenciaEntity
+from ModuloMaestro.Model.Entities.tasa_crecimiento_entity import \
+    TasaCrecimientoEntity
+from ModuloMaestro.Model.Entities.tipo_acuario_entity import TipoAcuarioEntity
+from ModuloMaestro.Model.Entities.tipo_filtro_entity import TipoFiltroEntity
+from ModuloMaestro.Model.Entities.tipo_iluminacion_entity import \
+    TipoIluminacionEntity
+from ModuloMaestro.Model.Entities.unidad_contenido_entity import \
+    UnidadContenidoEntity
+from ModuloMaestro.Model.Entities.urna_entity import UrnaEntity
+from ModuloMaestro.Views.Masters.acuario_view import AcuarioView
+from ModuloMaestro.Views.Masters.categoria_acuario_view import \
+    CategoriaAcuarioView
+from ModuloMaestro.Views.Masters.categoria_consumible_view import \
+    CategoriaConsumibleView
+from ModuloMaestro.Views.Masters.categoria_equipamiento_view import \
+    CategoriaEquipamientoView
+from ModuloMaestro.Views.Masters.categoria_incidencia_view import \
+    CategoriaIncidenciaView
+from ModuloMaestro.Views.Masters.comercio_view import ComercioView
+from ModuloMaestro.Views.Masters.comportamiento_fauna_view import \
+    ComportamientoFaunaView
+from ModuloMaestro.Views.Masters.consumible_view import ConsumibleView
+from ModuloMaestro.Views.Masters.control_iluminacion_view import \
+    ControlIluminacionView
+from ModuloMaestro.Views.Masters.dieta_fauna_view import DietaFaunaView
+from ModuloMaestro.Views.Masters.dificultad_planta_view import \
+    DificultadPlantaView
+from ModuloMaestro.Views.Masters.equipamiento_view import EquipamientoView
+from ModuloMaestro.Views.Masters.especie_animal_view import EspecieAnimalView
+from ModuloMaestro.Views.Masters.especie_vegetal_view import EspecieVegetalView
+from ModuloMaestro.Views.Masters.estado_proyecto_view import EstadoProyectoView
+from ModuloMaestro.Views.Masters.filtro_view import FiltroView
+from ModuloMaestro.Views.Masters.formato_consumible_view import \
+    FormatoConsumibleView
+from ModuloMaestro.Views.Masters.grupo_taxonomico_view import \
+    GrupoTaxonomicoView
+from ModuloMaestro.Views.Masters.iluminacion_view import IluminacionView
+from ModuloMaestro.Views.Masters.marca_comercial_view import MarcaComercialView
+from ModuloMaestro.Views.Masters.material_urna_view import MaterialUrnaView
+from ModuloMaestro.Views.Masters.nivel_nado_view import NivelNadoView
+from ModuloMaestro.Views.Masters.periodo_view import PeriodoView
+from ModuloMaestro.Views.Masters.posicion_pnalta_acuario_view import \
+    PosicionPlantaAcuarioView
+from ModuloMaestro.Views.Masters.proyecto_view import ProyectoView
+from ModuloMaestro.Views.Masters.requerimiento_co2_view import \
+    RequerimientoCO2View
+from ModuloMaestro.Views.Masters.requerimiento_iluminacion_view import \
+    RequerimientoIluminacionView
+from ModuloMaestro.Views.Masters.sexo_animal_view import SexoAnimalView
+from ModuloMaestro.Views.Masters.subcategoria_acuario_view import \
+    SubcategoriaAcuarioView
+from ModuloMaestro.Views.Masters.subcategoria_incidencia_view import \
+    SubcategoriaIncidenciaView
+from ModuloMaestro.Views.Masters.tasa_crecimiento_view import \
+    TasaCrecimientoView
+from ModuloMaestro.Views.Masters.tipo_acuario_view import TipoAcuarioView
+from ModuloMaestro.Views.Masters.tipo_filtro_view import TipoFiltroView
+from ModuloMaestro.Views.Masters.tipo_iluminacion_view import \
+    TipoIluminacionView
+from ModuloMaestro.Views.Masters.unidad_contenido_master import \
+    UnidadContenidoView
+from ModuloMaestro.Views.Masters.urna_view import UrnaView
+from ModuloMaestro.Views.main_reports_view import MainReportsView
+from Main.Views.main_view import MainView
+
+
+class MainViewController(BaseController):
+    """
+    Clase controladora que maneja los eventos de la vista principal.
+    """
+
+    def __init__(self):
+        """ Constructor de clase. """
+
+        # Inicializamos la vista, la entidad y el DAO
+        self._view = MainView("ACUARIOS DE "
+                              f"{globales.CURRENT_USER.nombre.upper()} "
+                              f"{globales.CURRENT_USER.apellido1.upper()}")
+        # TODO: Crear e inicializar el DAO que gestiona el dashboard.
+
+        # Llamamos al constructor base
+        super().__init__(self._view, None, None)
+
+        # Inicializamos los eventos
+        self.init_handlers()
+
+    def init_handlers(self):
+        """ Inicializa los handlers. """
+        # Inicializamos los botónes
+
+        self._view.button_maestro_filtro.clicked.connect(
+            self.filtro_clicked
+        )
+
+        self._view.button_maestro_tipo_filtro.clicked.connect(
+            self.tipo_filtro_clicked
+        )
+        self._view.button_maestro_tipo_acuario.clicked.connect(
+            self.tipo_acuario_clicked
+        )
+        self._view.button_maestro_categoria_acuario.clicked.connect(
+            self.categoria_acuario_clicked
+        )
+
+        self._view.button_maestro_subcategoria_acuario.clicked.connect(
+            self.subcategoria_Acuario_clicked
+        )
+
+        self._view.button_maestro_cat_incidencia.clicked.connect(
+            self.categoria_incidencia_clicked
+        )
+
+        self._view.button_maestro_subcat_incidencia.clicked.connect(
+            self.subcategoria_incidencia_clicked
+        )
+
+        self._view.button_maestro_marca.clicked.connect(
+            self.marca_comercial_clicked
+        )
+
+        self._view.button_maestro_material.clicked.connect(
+            self.material_urna_clicked
+        )
+
+        self._view.button_maestro_urna.clicked.connect(
+            self.urna_clicked
+        )
+
+        self._view.button_maestro_proyecto.clicked.connect(
+            self.proyecto_clicked
+        )
+
+        self._view.button_maestro_estado_proyecto.clicked.connect(
+            self.estado_proyecto_clicked
+        )
+
+        self._view.button_maestro_acuario.clicked.connect(
+            self.acuario_clicked
+        )
+
+        self._view.button_maestro_cat_equipamiento.clicked.connect(
+            self.cat_equipamientto_clicked
+        )
+
+        self._view.button_maestro_equipamiento.clicked.connect(
+            self.equipamiento_clicked
+        )
+
+        self._view.button_maestro_comercio.clicked.connect(
+            self.comercio_clicked
+        )
+
+        self._view.button_maestro_tipo_iluminacion.clicked.connect(
+            self.tipo_iluminacion_clicked
+        )
+
+        self._view.button_maestro_control_iluminacion.clicked.connect(
+            self.control_iluminacion_clicked
+        )
+
+        self._view.button_menu_reportes.clicked.connect(
+            self.reportes_click
+        )
+
+        self._view.button_maestro_iluminacion.clicked.connect(
+            self.iluminacion_click
+        )
+
+        self._view.button_maestro_cat_consumible.clicked.connect(
+            self.categorias_cosumible_click
+        )
+
+        self._view.button_maestro_formato_consumible.clicked.connect(
+            self.formatos_cosumible_click
+        )
+
+        self._view.button_maestro_unidad_contenido.clicked.connect(
+            self.unidad_contenido_click
+        )
+
+        self._view.button_maestro_consumible.clicked.connect(
+            self.consumible_click
+        )
+
+        self._view.button_maestro_comportamiento.clicked.connect(
+            self.comportamiento_click
+        )
+
+        self._view.button_maestro_dieta.clicked.connect(
+            self.dieta_click
+        )
+
+        self._view.button_maestro_dificultad_planta.clicked.connect(
+            self.dificultad_click
+        )
+
+        self._view.button_maestro_nivel_nado.clicked.connect(
+            self.nivel_nado_click
+        )
+        self._view.button_maestro_grupo_taxonomico.clicked.connect(
+            self.grupo_taxonomico_click
+        )
+        self._view.button_maestro_especies_animales.clicked.connect(
+            self.especie_animal_click
+        )
+        self._view.button_maestro_posición_planta.clicked.connect(
+            self.posicion_planta_click
+        )
+        self._view.button_maestro_requerimiento_co2.clicked.connect(
+            self.posicion_requerimiento_co2__click
+        )
+        self._view.button_maestro_requerimiento_iluminacion.clicked.connect(
+            self.requerimiento_iluminacion_click
+        )
+        self._view.button_maestro_sexo.clicked.connect(
+            self.sexo_click
+        )
+        self._view.button_maestro_periodos.clicked.connect(
+            self.periodo_click
+        )
+        self._view.button_maestro_tasa_crecimiento.clicked.connect(
+            self.tasa_crecimiento_click
+        )
+        self._view.button_maestro_especie_vegetal.clicked.connect(
+            self.especie_vegetal_click
+        )
+
+    def reportes_click(self):
+        """ Cuando se pulsa el control de reportes. """
+        view = MainReportsView("REPORTES")
+        ctrl = MainReportsController(view)
+
+        ctrl.show()
+
+    def sexo_click(self):
+        """ Cuando se pulsa el botón del sexo del animal. """
+
+        view = SexoAnimalView("MAESTRO DE SEXOS")
+        dao = SexoAnimalDAO()
+        mod = SexoAnimalEntity()
+
+        ctrl = SexoAnimalMasterController(view, dao, mod)
+        ctrl.show()
+
+    def especie_vegetal_click(self):
+        """ Cuando se pulsa el botón de la especie vegetal. """
+
+        view = EspecieVegetalView("MAESTRO DE ESPECIES VEGETALES")
+        dao = EspecieVegetalDAO()
+        mod = EspecieVegetalEntity()
+
+        ctrl = EspecieVegetalMasterController(view, dao, mod)
+        ctrl.show()
+
+    def tasa_crecimiento_click(self):
+        """ Cuando se pulsa el botón dela tasa de crecimiento. """
+
+        view = TasaCrecimientoView("MAESTRO DE TASAS DE CRECIMIENTO")
+        dao = TasaCrecimientoDAO()
+        mod = TasaCrecimientoEntity()
+
+        ctrl = TasaCrecimientoMasterController(view, dao, mod)
+        ctrl.show()
+
+    def periodo_click(self):
+        """ Cuando se pulsa el botón del periodo. """
+
+        view = PeriodoView("MAESTRO DE PERIODOS")
+        dao = PeriodoDAO()
+        mod = PeriodoEntity()
+
+        ctrl = PeriodoMasterController(view, dao, mod)
+        ctrl.show()
+
+    def requerimiento_iluminacion_click(self):
+        """ Cuando se pulsa el botón de requerimientos de iluminación. """
+
+        view = RequerimientoIluminacionView("MAESTRO DE REQUERIMIENTOS DE "
+                                            "ILUMINACIÓN")
+        dao = RequerimientoIluminacionDAO()
+        mod = RequerimientoIluminacionEntity()
+
+        ctrl = RequerimientoIluminacionMasterController(view, dao, mod)
+        ctrl.show()
+
+    def especie_animal_click(self):
+        """ Cuando se pulsa el botón de fauna. """
+
+        view = EspecieAnimalView("MAESTRO DE ESPECIES ANIMALES")
+        dao = EspecieAnimalDAO()
+        mod = EspecieAnimalEntity()
+
+        ctrl = EspecieAnimalMasterController(view, dao, mod)
+        ctrl.show()
+
+    def posicion_requerimiento_co2__click(self):
+        """ Cuando se pulsa el botón de requerimientos de CO2 """
+
+        view = RequerimientoCO2View("MAESTRO DE REQUERIMIENTOS DE CO2")
+        dao = RequerimientoCO2DAO()
+        mod = RequerimientoCO2Entity()
+
+        ctrl = RequerimientoCO2MasterController(view, dao, mod)
+        ctrl.show()
+
+    def posicion_planta_click(self):
+        """ Cuando se pulsa el botón de posición de planta. """
+
+        view = PosicionPlantaAcuarioView(
+            "MAESTRO DE POSICIONES DE LAS PLANTAS")
+        dao = PosicionPlantaAcuarioDAO()
+        mod = PosicionPlantaAcuarioEntity()
+
+        ctrl = PosicionPlantaAcuarioMasterController(view, dao, mod)
+        ctrl.show()
+
+    def consumible_click(self):
+        """ Cuando se pulsa el botón de sonsumibvles. """
+
+        view = ConsumibleView("MAESTRO DE CONSUMIBLES")
+        dao = ConsumibleDAO()
+        mod = ConsumibleEntity()
+
+        ctrl = ConsumibleMasterController(view, dao, mod)
+        ctrl.show()
+
+    def grupo_taxonomico_click(self):
+        """ Cuando se pulsa el botón de grupo taxonómico. """
+
+        view = GrupoTaxonomicoView("MAESTRO DE GRUPOS TAXONÓMICOS")
+        dao = GrupoTaxonomicoDAO()
+        mod = GrupoTaxonomicoEntity()
+
+        ctrl = GrupoTaxonomicoMasterController(view, dao, mod)
+        ctrl.show()
+
+    def nivel_nado_click(self):
+        """ Cuando se pulsa el botón de nivel de nado. """
+
+        view = NivelNadoView("MAESTRO DE NIVELES DE NADO")
+        dao = NivelNadoDAO()
+        mod = NivelNadoEntity()
+
+        ctrl = NivelNadoMasterController(view, dao, mod)
+        ctrl.show()
+
+    def dificultad_click(self):
+        """ Cuando se pulsa el botón de dificultad de planta. """
+
+        view = DificultadPlantaView("MAESTRO DE DIFICULTAD DE PLANTAS")
+        dao = DificultadPlantaDAO()
+        mod = DificultadPlantaEntity()
+
+        ctrl = DificultadPlantaMasterController(view, dao, mod)
+        ctrl.show()
+
+    def dieta_click(self):
+        """ Cuando se pulsa el botón de dieta. """
+
+        view = DietaFaunaView("MAESTRO DE DIETAS")
+        dao = DietaFaunaDAO()
+        mod = DietaFaunaEntity()
+
+        ctrl = DietaFaunaMasterController(view, dao, mod)
+        ctrl.show()
+
+    def comportamiento_click(self):
+        """ Cuando se pulsa el botón de comportamientos de fauna. """
+
+        view = ComportamientoFaunaView("MAESTRO DE COMPORTAMIENTOS")
+        dao = ComportamientoFaunaDAO()
+        mod = ComportamientoFaunaEntity()
+
+        ctrl = ComportamientoFaunaMasterController(view, dao, mod)
+        ctrl.show()
+
+    def iluminacion_click(self):
+        """ Cuando se pulsa el botón de iluminaciones. """
+
+        view = IluminacionView("MAESTRO DE ILUMINACIÓN")
+        dao = IluminacionDAO()
+        mod = IluminacionEntity()
+
+        ctrl = IluminacionMasterController(view, dao, mod)
+        ctrl.show()
+
+    def unidad_contenido_click(self):
+        """ Cuando se pulsa el botón de unidad de contenido. """
+
+        view = UnidadContenidoView("MAESTRO DE UNIDADES DE CONTENIDO")
+        dao = UnidadContenidoDAO()
+        mod = UnidadContenidoEntity()
+
+        ctrl = UnidadContenidoMasterController(view, dao, mod)
+        ctrl.show()
+
+    def formatos_cosumible_click(self):
+        """ Cuando se pulsa el botón de formatos de consumible. """
+
+        view = FormatoConsumibleView("MAESTRO DE FORMATOS DE CONSUMIBLE")
+        dao = FormatoConsumibleDAO()
+        mod = FormatoConsumibleEntity()
+
+        ctrl = FormatoConsumibleMasterController(view, dao, mod)
+        ctrl.show()
+
+    def categorias_cosumible_click(self):
+        """ Cuando se pulsa el botón de categorías de consumible. """
+
+        view = CategoriaConsumibleView("MAESTRO DE CATEGORÍAS DE CONSUMIBLE")
+        dao = CategoriaConsumibleDAO()
+        mod = CategoriaConsumibleEntity()
+
+        ctrl = CategoriaConsumibleMasterController(view, dao, mod)
+        ctrl.show()
+
+    def control_iluminacion_clicked(self):
+        """ Cuando se pulsa el control de iluminación. """
+
+        view = ControlIluminacionView("MAESTRO DE CONTROLES DE ILUMINACIÓN")
+        dao = ControlIluminacionDAO()
+        mod = ControlIluminacionEntity()
+
+        ctrl = ControlIluminacionMasterController(view, dao, mod)
+        ctrl.show()
+
+    def tipo_iluminacion_clicked(self):
+        """ Cuando se pulsa el tipo de iluminacion. """
+
+        view = TipoIluminacionView("MAESTRO DE TIPOS DE ILUMINACIÓN")
+        dao = TipoIluminacionDAO()
+        mod = TipoIluminacionEntity()
+
+        ctrl = TipoIluminacionMasterController(view, dao, mod)
+        ctrl.show()
+
+    def comercio_clicked(self):
+        """ Cuando se presiona en el botón comercio. """
+
+        view = ComercioView("MAESTRO DE COMERCIOS")
+        dao = ComercioDAO()
+        mod = ComercioEntity()
+
+        ctrl = ComercioMasterController(view, dao, mod)
+        ctrl.show()
+
+    def equipamiento_clicked(self):
+        """ Cuando se presiona en el equipamiento. """
+
+        view = EquipamientoView("MAESTRO DE EQUIPAMIENTOS")
+        dao = EquipamientoDAO()
+        mod = EquipamientoEntity()
+
+        ctrl = EquipamientoMasterController(view, dao, mod)
+        ctrl.show()
+
+    def filtro_clicked(self):
+        """
+        Cuando se presiona en el filtro.
+        Acción: Abre el formulario de filtro.
+        """
+
+        view = FiltroView("MAESTRO DE FILTROS")
+        dao = FiltroDAO()
+        mod = FiltroEntity()
+
+        ctrl = FiltroMasterController(view, dao, mod)
+        ctrl.show()
+
+    def acuario_clicked(self):
+        """
+        Cuando se presiona en el acuario.
+        Acción: Abre el formulario de acuario.
+        """
+
+        view = AcuarioView("MAESTRO DE ACUARIOS")
+        dao = AcuarioDAO()
+        mod = AcuarioEntity()
+
+        ctrl = AcuarioMasterController(view, dao, mod)
+        ctrl.show()
+
+    def proyecto_clicked(self):
+        """
+        Cuando se presiona en el proyecto.
+        Acción: Abre el formulario de proyecto.
+        """
+
+        view = ProyectoView("MAESTRO DE PROYECTOS")
+        dao = ProyectoDAO()
+        mod = ProyectoEntity()
+
+        ctrl = ProyectoMasterController(view, dao, mod)
+        ctrl.show()
+
+    def estado_proyecto_clicked(self):
+        """
+        Cuando se presiona en el estado de proyecto.
+        Acción: Abre el formulario de estado de proyecto.
+        """
+
+        view = EstadoProyectoView("MAESTRO DE ESTADOS DE PROYECTO")
+        dao = EstadoProyectoDAO()
+        mod = EstadoProyectoEntity()
+
+        ctrl = EstadoProyectoMasterController(view, dao, mod)
+        ctrl.show()
+
+    def material_urna_clicked(self):
+        """
+        Cuando se presiona en el maestro de material.
+        Acción: Abre el formulario de material de urna
+        """
+
+        view = MaterialUrnaView("MAESTRO DE MATERIALES DE URNA")
+        dao = MaterialUrnaDAO()
+        mod = MaterialUrnaEntity()
+
+        ctrl = MaterialUrnaMasterController(view, dao, mod)
+        ctrl.show()
+
+    def urna_clicked(self):
+        """
+        Cuando se presiona en el maestro de urna.
+        Acción: Abre el formulario de urna
+        """
+        view = UrnaView("MAESTRO DE URNA")
+        dao = UrnaDAO()
+        mod = UrnaEntity()
+
+        ctrl = UrnaMasterController(view, dao, mod)
+        ctrl.show()
+
+    def tipo_filtro_clicked(self, event):
+        """
+        Cuando se presiona en el maestro de tipo de filtro.
+        Acción: Abre el formulario de tipo de filtro
+        """
+        view = TipoFiltroView("MAESTRO DE TIPO DE FILTRO")
+        dao = TipoFiltroDAO()
+        mod = TipoFiltroEntity()
+
+        ctrl = TipoFiltroMasterController(view, dao, mod)
+        ctrl.show()
+
+    def tipo_acuario_clicked(self, event):
+        """
+        Cuando se presiona en el maestro de tipo de acuario.
+        Acción: Abre el formulario de tipo de acuario
+        """
+        view = TipoAcuarioView(
+            "MAESTRO DE TIPOS DE ACUARIO"
+        )
+        dao = TipoAcuarioDAO()
+        mod = TipoAcuarioEntity()
+
+        ctrl = TipoAcuarioMasterController(view, dao, mod)
+        ctrl.show()
+
+    def categoria_acuario_clicked(self, event):
+        """
+        Cuando se presiona en el maestro de tipo categoría de acuario.
+        Acción: Abre el formulario de categoría de acuario.
+        """
+
+        view = CategoriaAcuarioView(
+            "MAESTRO DE CATEGORÍAS DE ACUARIO"
+        )
+        dao = CategoriaAcuarioDAO()
+        mod = CategoriaAcuarioEntity()
+
+        ctrl = CategoriaAcuarioMasterController(view, dao, mod)
+        ctrl.show()
+
+    def subcategoria_Acuario_clicked(self):
+        """
+        Cuando se presiona en el maestro de subcategoría de acuario.
+        Acción: Abre el formulario de subcategoría de acuario.
+        """
+
+        view = SubcategoriaAcuarioView(
+            "MAESTRO DE SUBCATEGORÍAS DE ACUARIO"
+        )
+        dao = SubcategoriaAcuarioDAO()
+        mod = SubcategoriaAcuarioEntity()
+
+        ctrl = SubcategoriaAcuarioMasterController(view, dao, mod)
+        ctrl.show()
+
+    def categoria_incidencia_clicked(self):
+        """
+        Cuando se presiona en el maestro de categoría de incidencia.
+        Acción: Abre el formulario de subcategoría de acuario.
+        """
+
+        view = CategoriaIncidenciaView("MAESTRO DE CATEGORÍAS DE INCIDENCIAS")
+        dao = CategoriaIncidenciaDAO()
+        mod = CategoriaIncidenciaEntity()
+
+        ctrl = CategoriaIncidenciaMasterController(view, dao, mod)
+        ctrl.show()
+
+    def subcategoria_incidencia_clicked(self):
+        """
+        Cuando se presiona en el maestro de subcategoría de incidencia.
+        Acción: Abre el formulario de subcategoría de acuario.
+        """
+
+        view = SubcategoriaIncidenciaView(
+            "MAESTRO DE SUBCATEGORÍAS DE INCIDENCIA"
+        )
+        dao = SubcategoriaIncidenciaDAO()
+        mod = SubcategoriaIncidenciaEntity()
+
+        ctrl = SubcategoriaIncidenciaMasterController(view, dao, mod)
+        ctrl.show()
+
+    def marca_comercial_clicked(self):
+        """
+        Cuando se presiona en el maestro de marcas comerciales.
+        Acción: Abre el formulario de marcas comerciales.
+        """
+
+        view = MarcaComercialView(
+            "MAESTRO DE MARCAS COMERCIALES"
+        )
+        dao = MarcaComercialDAO()
+        mod = MarcaComercialEntity()
+
+        ctrl = MarcaComercialMasterController(view, dao, mod)
+        ctrl.show()
+
+    def cat_equipamientto_clicked(self):
+        """
+        Cuando se presiona en el maestro de categorías de equipamiento.
+        Acción: Abre el formulario de categorías de equipamiento.
+        """
+
+        view = CategoriaEquipamientoView(
+            "MAESTRO DE CATEGORÍAS DE EQUIPAMIENTO"
+        )
+        dao = CategoriaEquipamientoDAO()
+        mod = CategoriaEquipamientoEntity()
+
+        ctrl = CategoriaEquipamientoMasterController(view, dao, mod)
+        ctrl.show()
+
+    def show(self):
+        """ Abre la vista """
+        self._view.show()
+        # self._view.showMaximized()

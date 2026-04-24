@@ -1,0 +1,388 @@
+﻿"""
+Autor:      Inigo Iturriagaetxebarria
+Fecha:      31/07/2025
+Comentarios:
+    Módulo que contiene el DAO de la URNA.
+"""
+import sqlite3
+
+from Main.Model.DAO.base_dao import BaseDAO
+from Services.Database.database import DBManager
+from ModuloMaestro.Model.Entities.urna_entity import UrnaEntity
+from Services.Result.result import Result
+
+
+class UrnaDAO(BaseDAO):
+    """
+    Clase que gestiona las operaciones en la base de datos de la entidad
+    UrnaEntity.
+    """
+
+    def __init__(self):
+        """ Constructor de clase. """
+
+        self.db = DBManager()
+        self.ent = None
+
+    # ------------------------------------------------------------------
+    def get_entity_by_id(self, ide: int) -> Result:
+        """
+        Obtiene el registro con el ID pasado como argumento.
+        :param ide: ID de la entidad a recuperar
+        """
+
+        try:
+            sql = (
+                """
+                SELECT *
+                FROM   URNAS
+                WHERE  ID_URNA = :id;
+                """
+            )
+
+            params = {"id": ide, }
+
+            with self.db.conn as con:
+                cur = con.cursor()
+                cur.execute(sql, params)
+                row = cur.fetchone()
+
+                # Configuramos la entidad
+                ent = UrnaEntity(
+                    id=row[0],
+                    id_marca=row[1],
+                    modelo=row[2],
+                    anchura=row[3],
+                    profundidad=row[4],
+                    altura=row[5],
+                    grosor_cristal=row[6],
+                    volumen_tanque=row[7],
+                    id_material=row[8],
+                    descripcion=row[26],
+                )
+
+                return Result.success(ent)
+
+        except sqlite3.IntegrityError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[INTEGRITY ERROR]\n {e}")
+        except sqlite3.OperationalError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[OPERATIONAL ERROR]\n {e}")
+        except sqlite3.ProgrammingError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[PROGRAMMING ERROR]\n {e}")
+        except sqlite3.DatabaseError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[DATABASE ERROR]\n {e}")
+        except sqlite3.Error as e:
+            # traceback.print_exc()
+            return Result.failure(f"[SQLITE ERROR]\n {e}")
+
+    def get_list(self) -> Result:
+        """Obtiene el listado completo ordenado por categoría."""
+
+        sql = (
+            """
+            SELECT    A.ID_URNA AS ID,
+                      ROW_NUMBER() OVER (ORDER BY M.MARCA, A.MODELO) AS NUM,
+                      M.MARCA AS MARCA,
+                      A.MODELO AS MODELO,
+                      A.ANCHURA AS ANCHURA,
+                      A.PROFUNDIDAD AS PROFUNDIDAD,
+                      A.ALTURA AS ALTURA,
+                      A.GROSOR_CRISTAL AS GROSOR,
+                      A.VOLUMEN_TANQUE AS VOLUMEN_BRUTO,
+                      T.MATERIAL AS MATERIAL,
+                      A.DESCRIPCION AS DESCRIPCION
+            FROM      URNAS AS A
+            LEFT JOIN MARCAS_COMERCIALES AS M ON A.ID_MARCA = M.ID_MARCA
+            LEFT JOIN MATERIALES_URNA T ON A.ID_MATERIAL = T.ID_MATERIAL;
+            """
+        )
+
+        try:
+            with self.db.conn as con:
+                cur = con.cursor()
+                cur.execute(sql)
+                rows = cur.fetchall()
+
+                valores = [
+                    UrnaEntity(
+                        id=f["ID"],
+                        num=f["NUM"],
+                        id_marca=f["MARCA"],
+                        modelo=f["MODELO"],
+                        anchura=f["ANCHURA"],
+                        profundidad=f["PROFUNDIDAD"],
+                        altura=f["ALTURA"],
+                        grosor_cristal=f["GROSOR"],
+                        volumen_tanque=f["VOLUMEN_BRUTO"],
+                        id_material=f["MATERIAL"],
+                        descripcion=f["DESCRIPCION"]
+                    )
+                    for f in rows
+                ]
+                return Result.success(valores)
+
+        except sqlite3.IntegrityError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[INTEGRITY ERROR]\n {e}")
+        except sqlite3.OperationalError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[OPERATIONAL ERROR]\n {e}")
+        except sqlite3.ProgrammingError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[PROGRAMMING ERROR]\n {e}")
+        except sqlite3.DatabaseError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[DATABASE ERROR]\n {e}")
+        except sqlite3.Error as e:
+            # traceback.print_exc()
+            return Result.failure(f"[SQLITE ERROR]\n {e}")
+
+    # ------------------------------------------------------------------
+    def get_list_combo(self) -> Result:
+        """
+        Obtiene una lista ligera para combos (ID y texto visible).
+        Devuelve entidades con `num=None` y `observaciones=None`.
+        """
+
+        sql = (
+            """
+            SELECT    A.ID_URNA AS ID,
+                      CONCAT(M.MARCA, ' ', A.MODELO) AS VALUE
+            FROM      URNAS AS A
+            LEFT JOIN MARCAS_COMERCIALES AS M
+            ON        A.ID_MARCA = M.ID_MARCA
+            ORDER BY  VALUE;
+            """
+        )
+
+        try:
+            with self.db.conn as con:
+                cur = con.cursor()
+                cur.execute(sql)
+                rows = cur.fetchall()
+                valores = [
+                    UrnaEntity(
+                        id=f["ID"],
+                        num=None,
+                        id_marca=None,
+                        modelo=f["VALUE"],
+                        anchura=None,
+                        profundidad=None,
+                        altura=None,
+                        grosor_cristal=None,
+                        volumen_tanque=None,
+                        id_material=None,
+                        descripcion=None
+                    )
+                    for f in rows
+                ]
+                return Result.success(valores)
+
+        except sqlite3.IntegrityError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[INTEGRITY ERROR]\n {e}")
+        except sqlite3.OperationalError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[OPERATIONAL ERROR]\n {e}")
+        except sqlite3.ProgrammingError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[PROGRAMMING ERROR]\n {e}")
+        except sqlite3.DatabaseError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[DATABASE ERROR]\n {e}")
+        except sqlite3.Error as e:
+            # traceback.print_exc()
+            return Result.failure(f"[SQLITE ERROR]\n {e}")
+
+    # ------------------------------------------------------------------
+    def insert(self, ent: UrnaEntity) -> Result:
+        """
+        Inserta un nuevo registro y devuelve el ID generado.
+        :param ent: Entidad derivada de BaseEntity
+        """
+
+        sql = (
+            """
+            INSERT INTO URNAS 
+                   (ID_MARCA, MODELO, ANCHURA, PROFUNDIDAD,  ALTURA, 
+                    GROSOR_CRISTAL, VOLUMEN_TANQUE, ID_MATERIAL, 
+                    DESCRIPCION)
+            VALUES  (:idm, :modelo, :anch, :prof, :alt, :grosor, :vol, 
+                    :mat, :obs);
+            """
+        )
+
+        params = {
+            "idm": ent.id_marca,
+            "modelo": ent.modelo,
+            "anch": ent.anchura,
+            "prof": ent.profundidad,
+            "alt": ent.altura,
+            "grosor": ent.grosor_cristal,
+            "vol": ent.volumen_tanque,
+            "mat": ent.id_material,
+            "obs": ent.descripcion
+        }
+
+        try:
+            with self.db.conn as con:
+                cur = con.execute(sql, params)
+                return Result.success(cur.lastrowid)
+
+        except sqlite3.IntegrityError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[INTEGRITY ERROR]\n {e}")
+        except sqlite3.OperationalError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[OPERATIONAL ERROR]\n {e}")
+        except sqlite3.ProgrammingError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[PROGRAMMING ERROR]\n {e}")
+        except sqlite3.DatabaseError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[DATABASE ERROR]\n {e}")
+        except sqlite3.Error as e:
+            # traceback.print_exc()
+            return Result.failure(f"[SQLITE ERROR]\n {e}")
+
+    # ------------------------------------------------------------------
+    def update(self, ent: UrnaEntity) -> Result:
+
+        """
+        Actualiza el registro en la base de datos. Devuelve el ID de la entidad
+        modificada.
+        :param ent: Entidad derivada de BaseEntity
+        """
+
+        sql = (
+            """
+                UPDATE  URNAS
+                SET     ID_MARCA = :idm,
+                        MODELO = :modelo,
+                        ANCHURA = :anch,
+                        PROFUNDIDAD = :prof,
+                        ALTURA = :alt,
+                        GROSOR_CRISTAL = :grosor,
+                        VOLUMEN_TANQUE = :vol,
+                        ID_MATERIAL = :mat,
+                        DESCRIPCION = :obs
+                WHERE   ID_URNA = :id;
+            """
+        )
+
+        params = {
+            "id": ent.id,
+            "idm": ent.id_marca,
+            "modelo": ent.modelo,
+            "anch": ent.anchura,
+            "prof": ent.profundidad,
+            "alt": ent.altura,
+            "grosor": ent.grosor_cristal,
+            "vol": ent.volumen_tanque,
+            "mat": ent.id_material,
+            "obs": ent.descripcion
+        }
+
+        try:
+            with self.db.conn as con:
+                cur = con.execute(sql, params)
+                return Result.success(ent.id)
+
+        except sqlite3.IntegrityError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[INTEGRITY ERROR]\n {e}")
+        except sqlite3.OperationalError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[OPERATIONAL ERROR]\n {e}")
+        except sqlite3.ProgrammingError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[PROGRAMMING ERROR]\n {e}")
+        except sqlite3.DatabaseError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[DATABASE ERROR]\n {e}")
+        except sqlite3.Error as e:
+            # traceback.print_exc()
+            return Result.failure(f"[SQLITE ERROR]\n {e}")
+
+    # ------------------------------------------------------------------
+    def delete(self, id_: int) -> Result:
+        """
+        Elimina el registro. Devuelve el ID de la entidad eliminada.
+        :param id_: ID de la entidad a eliminar
+        """
+        sql = (
+            """
+            DELETE FROM URNAS
+            WHERE       ID_URNA = :id;
+            """
+        )
+
+        params = {"id": id_}
+
+        try:
+            with self.db.conn as con:
+                cur = con.execute(sql, params)
+                return Result.success(id_)
+
+        except sqlite3.IntegrityError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[INTEGRITY ERROR]\n {e}")
+        except sqlite3.OperationalError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[OPERATIONAL ERROR]\n {e}")
+        except sqlite3.ProgrammingError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[PROGRAMMING ERROR]\n {e}")
+        except sqlite3.DatabaseError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[DATABASE ERROR]\n {e}")
+        except sqlite3.Error as e:
+            # traceback.print_exc()
+            return Result.failure(f"[SQLITE ERROR]\n {e}")
+
+    def is_mounted(self, id_urna: int) -> Result:
+        """ Determina si una urna esta montada."""
+
+        sql = (
+            """
+            SELECT  CASE
+                        WHEN FECHA_DESMONTAJE IS NULL THEN 1 ELSE 0
+                    END AS MONTADO
+            FROM    ACUARIOS
+            WHERE   ID_URNA = :id;
+            """
+        )
+
+        params = {"id": id_urna}
+
+        try:
+            with self.db.conn as con:
+                cur = con.execute(sql, params)
+                rows = cur.fetchall()
+
+                if rows is None:
+                    return Result.failure(f"NO EXISTE NINGUNA URNA CON EL ID "
+                                          f" {id_urna}")
+
+                is_mounted = any(row[0] == 1 for row in rows)
+                return Result.success(is_mounted)
+
+        except sqlite3.IntegrityError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[INTEGRITY ERROR]\n {e}")
+        except sqlite3.OperationalError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[OPERATIONAL ERROR]\n {e}")
+        except sqlite3.ProgrammingError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[PROGRAMMING ERROR]\n {e}")
+        except sqlite3.DatabaseError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[DATABASE ERROR]\n {e}")
+        except sqlite3.Error as e:
+            # traceback.print_exc()
+            return Result.failure(f"[SQLITE ERROR]\n {e}")

@@ -9,11 +9,11 @@ import pytest
 # Añade la raíz del proyecto al sys.path
 sys.path.append(str(Path(__file__).resolve().parent.parent))
 
-from Model.DAO.proyecto_dao import ProyectoDAO
+from ModuloMaestro.Model.DAO.proyecto_dao import ProyectoDAO
 from Services.Validators.proyecto_validator import ProyectoValidator
-from Views.Masters.proyecto_view import ProyectoView
-from Model.Entities.proyecto_entity import ProyectoEntity
-from Controllers.proyecto_master_controller import ProyectoMasterController
+from ModuloMaestro.Views.Masters.proyecto_view import ProyectoView
+from ModuloMaestro.Model.Entities.proyecto_entity import ProyectoEntity
+from ModuloMaestro.Controllers.proyecto_master_controller import ProyectoMasterController
 
 
 @pytest.fixture

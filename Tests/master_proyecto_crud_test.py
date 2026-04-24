@@ -1,10 +1,10 @@
 ﻿import pytest
 from PyQt6.QtCore import Qt
 
-from Controllers.proyecto_master_controller import ProyectoMasterController
-from Model.DAO.proyecto_dao import ProyectoDAO
-from Model.Entities.proyecto_entity import ProyectoEntity
-from Views.Masters.proyecto_view import ProyectoView
+from ModuloMaestro.Controllers.proyecto_master_controller import ProyectoMasterController
+from ModuloMaestro.Model.DAO.proyecto_dao import ProyectoDAO
+from ModuloMaestro.Model.Entities.proyecto_entity import ProyectoEntity
+from ModuloMaestro.Views.Masters.proyecto_view import ProyectoView
 
 
 @pytest.fixture
@@ -35,7 +35,8 @@ def test_proyecto_insertion(qtbot, app):
     view.raise_()
 
     # Asegurar foco y simular escritura
-    qtbot.mouseClick(view.frame.edit_nombre_proyecto, Qt.MouseButton.LeftButton)
+    qtbot.mouseClick(view.frame.edit_nombre_proyecto,
+                     Qt.MouseButton.LeftButton)
     qtbot.keyClicks(view.frame.edit_nombre_proyecto, "Mi acuario de discos")
 
     # qtbot.mouseClick(view.frame.combo_estado_proyecto,
@@ -74,7 +75,8 @@ def test_proyecto_insert(qtbot, app):
 
     # Casop 1: Insertar todos los campos
     ## Rellenar formulario
-    qtbot.mouseClick(view.frame.edit_nombre_proyecto, Qt.MouseButton.LeftButton)
+    qtbot.mouseClick(view.frame.edit_nombre_proyecto,
+                     Qt.MouseButton.LeftButton)
     qtbot.keyClicks(view.frame.edit_nombre_proyecto, "Mi acuario de discos")
 
     view.frame.combo_estado_proyecto.setCurrentIndex(

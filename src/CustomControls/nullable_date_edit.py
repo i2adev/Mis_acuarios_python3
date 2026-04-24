@@ -50,7 +50,7 @@ class NullableDateEdit(QWidget):
 
         icon_calendar = QIcon()
         icon_calendar.addPixmap(
-            QPixmap(str(Path(globals.PATH_IMAGES) / "calendario.png")),
+            QPixmap(str(Path(globales.PATH_IMAGES) / "calendario.png")),
             QIcon.Mode.Normal,
             QIcon.State.On)
 
