@@ -54,7 +54,7 @@ class TipoFiltroForm(QFrame):
         self.label_id = QLabel("ID")
         self.label_id.setFixedWidth(50)
         self.label_tipo_filtro = QLabel("TIPO FILTRO")
-        self.label_observaciones = QLabel("OBSERVACIONES")
+        self.label_observaciones = QLabel("DESCRIPCIÓN")
 
         # Textos
         self.edit_id = IntLineEdit(

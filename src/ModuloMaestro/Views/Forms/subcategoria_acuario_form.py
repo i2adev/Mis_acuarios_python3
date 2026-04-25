@@ -60,7 +60,7 @@ class SubcategoriaAcuarioForm(QFrame):
         self.label_id.setFixedWidth(50)
         self.label_categoria_acuario = QLabel("CATEGORÍA DE ACUARIO")
         self.label_subcategoria_acuario = QLabel("SUBCATEGORÍA ACUARIO")
-        self.label_observaciones = QLabel("OBSERVACIONES")
+        self.label_observaciones = QLabel("DESCRIPCIÓN")
 
         # Textos
         self.edit_id = IntLineEdit(

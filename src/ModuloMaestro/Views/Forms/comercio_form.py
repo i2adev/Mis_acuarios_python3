@@ -74,7 +74,7 @@ class ComercioForm(QFrame):
         self.label_poblacion = QLabel("POBLACIÓN")
         self.label_provincia = QLabel("PROVINCIA")
         self.label_pais = QLabel("PAÍS")
-        self.label_observaciones = QLabel("OBSERVACIONES")
+        self.label_observaciones = QLabel("DESCRIPCIÓN")
 
         # Textos
         self.edit_id = IntLineEdit(

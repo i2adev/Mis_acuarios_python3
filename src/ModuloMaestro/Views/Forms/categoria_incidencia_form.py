@@ -54,7 +54,7 @@ class CategoriaIncidenciaForm(QFrame):
         self.label_id = QLabel("ID")
         self.label_id.setFixedWidth(50)
         self.label_tipo_incidencia = QLabel("TIPO INCIDENCIA")
-        self.label_observaciones = QLabel("OBSERVACIONES")
+        self.label_observaciones = QLabel("DESCRIPCIÓN")
 
         # Textos
         self.edit_id = IntLineEdit(

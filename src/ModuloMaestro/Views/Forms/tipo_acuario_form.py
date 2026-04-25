@@ -60,7 +60,7 @@ class TipoAcuarioForm(QFrame):
         self.label_id.setFixedWidth(50)
         self.label_tipo_acuario = QLabel("TIPO DE ACUARIO")
         self.label_subtipo_acuario = QLabel("SUBTIPO DE ACUARIO")
-        self.label_observaciones = QLabel("OBSERVACIONES")
+        self.label_observaciones = QLabel("DESCRIPCIÓN")
 
         # Textos
         self.edit_id = IntLineEdit(

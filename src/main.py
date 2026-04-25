@@ -23,7 +23,7 @@ from Main.Views.login_dialog import LoginDialog
 import os
 
 # Versión del programa
-__version__ = "0.40.6"
+__version__ = "0.40.7"
 
 
 def excepthook(exc_type, exc_value, exc_traceback):
