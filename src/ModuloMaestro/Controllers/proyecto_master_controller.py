@@ -35,7 +35,7 @@ class ProyectoMasterController(ProyectoController):
         super().__init__(view, dao, mod)
 
         # Rellena los combos
-        self._fill_combos()
+        self._fill_combos_async()
 
         # Inicializamos el paginador
         self._pag = Paginator("VISTA_PROYECTOS", 5)

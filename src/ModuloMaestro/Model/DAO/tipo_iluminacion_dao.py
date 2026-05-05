@@ -8,6 +8,7 @@ Comentarios:
 import sqlite3
 
 from Main.Model.DAO.base_dao import BaseDAO
+from Main.Model.Entities.combo_data_entity import ComboDataEntity
 from ModuloMaestro.Model.Entities.tipo_iluminacion_entity import \
     TipoIluminacionEntity
 from Services.Database.database import DBManager
@@ -142,9 +143,9 @@ class TipoIluminacionDAO(BaseDAO):
                 cur.execute(sql)
                 rows = cur.fetchall()
                 valores = [
-                    TipoIluminacionEntity(
+                    ComboDataEntity(
                         id=f["ID"],
-                        tipo_iluminacion=f["VALUE"],
+                        value=f["VALUE"],
                     )
                     for f in rows
                 ]

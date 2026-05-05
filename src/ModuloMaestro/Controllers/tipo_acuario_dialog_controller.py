@@ -7,7 +7,8 @@ Comentarios:
 
 from PyQt6.QtWidgets import QWidget, QMessageBox, QComboBox
 
-from ModuloMaestro.Controllers.tipo_acuario_controller import TipoAcuarioController
+from ModuloMaestro.Controllers.tipo_acuario_controller import \
+    TipoAcuarioController
 from ModuloMaestro.Model.DAO.tipo_acuario_dao import TipoAcuarioDAO
 from ModuloMaestro.Model.Entities.tipo_acuario_entity import TipoAcuarioEntity
 from Services.Result.result import Result
@@ -84,7 +85,7 @@ class TipoAcuarioDialogController(TipoAcuarioController):
         self._tipo_acuario_result = TipoAcuarioEntity(
             id=res.value,
             num=None,
-            id_cat_acuario=self._view.frame.combo_categoria_acuario.currentData(),
+            id_categoria_acuario=self._view.frame.combo_categoria_acuario.currentData(),
             id_subcat_acuario=self._view.frame
             .combo_subcategoria_acuario.currentData(),
             observaciones=self._view.frame.text_observaciones.toPlainText()

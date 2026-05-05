@@ -11,6 +11,7 @@ import traceback
 from typing import List
 
 from Main.Model.DAO.base_dao import BaseDAO
+from Main.Model.Entities.combo_data_entity import ComboDataEntity
 from Services.Database.database import DBManager
 from ModuloMaestro.Model.Entities.categoria_acuario_entity import \
     CategoriaAcuarioEntity
@@ -178,9 +179,9 @@ class CategoriaAcuarioDAO(BaseDAO):
                 cur.execute(sql)
                 rows = cur.fetchall()
                 valores = [
-                    CategoriaAcuarioEntity(
+                    ComboDataEntity(
                         id=f["ID"],
-                        categoria=f["VALUE"],
+                        value=f["VALUE"],
                     )
                     for f in rows
                 ]

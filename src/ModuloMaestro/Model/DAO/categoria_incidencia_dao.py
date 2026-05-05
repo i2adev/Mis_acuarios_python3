@@ -163,7 +163,7 @@ class CategoriaIncidenciaDAO(BaseDAO):
             return Result.failure(f"[SQLITE ERROR]\n {e}")
 
     # ------------------------------------------------------------------
-    def get_list_combo(self) -> Result(list[CategoriaIncidenciaEntity]):
+    def get_list_combo(self) -> Result:
         """
         Obtiene una lista ligera para combos (ID y texto visible).
         Devuelve entidades con `num=None` y `observaciones=None`.
@@ -184,11 +184,9 @@ class CategoriaIncidenciaDAO(BaseDAO):
                 cur.execute(sql)
                 rows = cur.fetchall()
                 valores = [
-                    CategoriaIncidenciaEntity(
+                    ComboDataEntity(
                         id=f["ID"],
-                        num=None,
-                        categoria_incidencia=f["VALUE"],
-                        observaciones=None,
+                        value=f["VALUE"]
                     )
                     for f in rows
                 ]

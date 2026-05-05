@@ -10,6 +10,7 @@ import sqlite3
 import traceback
 
 from Main.Model.DAO.base_dao import BaseDAO
+from Main.Model.Entities.combo_data_entity import ComboDataEntity
 from ModuloMaestro.Model.Entities.dieta_fauna_entity import DietaFaunaEntity
 from Services.Database.database import DBManager
 from Services.Result.result import Result
@@ -174,9 +175,9 @@ class DietaFaunaDAO(BaseDAO):
                 cur.execute(sql)
                 rows = cur.fetchall()
                 valores = [
-                    DietaFaunaEntity(
+                    ComboDataEntity(
                         id=f["ID"],
-                        dieta=f["VALUE"],
+                        value=f["VALUE"],
                     )
                     for f in rows
                 ]

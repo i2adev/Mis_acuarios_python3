@@ -6,13 +6,14 @@ Comentarios:
     controladores. Estra clase contiene los comportamientos de los
     elementos comunes a todas las ventanas como la barra de título.
 """
+from CustomControls.combo_box import ComboBox
 from CustomControls.double_line_edit import DoubleLineEdit
 from CustomControls.int_line_edit import IntLineEdit
 from Main.Model.DAO.base_dao import BaseDAO
 from Services.Paginator.paginator import Paginator
 from ModuloMaestro.Model.Entities.base_entity import BaseEntity
 
-from PyQt6.QtCore import QEvent, QObject, Qt
+from PyQt6.QtCore import QEvent, QObject, QThread, QTimer, Qt
 from PyQt6.QtGui import QGuiApplication
 from PyQt6.QtWidgets import (QCheckBox, QComboBox, QCompleter, QHBoxLayout,
                              QHeaderView, QLabel, QLineEdit, QMessageBox,
@@ -20,6 +21,7 @@ from PyQt6.QtWidgets import (QCheckBox, QComboBox, QCompleter, QHBoxLayout,
                              QTextEdit, QVBoxLayout, QWidget)
 from Services.Result.result import Result
 from ModuloMaestro.Views.Forms.image_form import ImageForm
+from Services.Workers.combo_worker import ComboWorker
 
 
 class BaseController(QObject):
@@ -190,29 +192,29 @@ class BaseController(QObject):
         # Establecemos el foco en el control
         control.setFocus()
 
-    def _fill_combo(self, combo: QComboBox, lista: list[BaseEntity],
-                    attr_text: str, attr_data: str):
-        """
-        Llena un QComboBox con una lista de entidades.
-
-        Parámetros:
-        :param combo: El QComboBox que quieres llenar.
-        :param lista: Lista de entidades (pueden ser widgetetos o diccionarios).
-        :param attr_text: Nombre del atributo para el texto visible.
-        :param attr_data: Nombre del atributo para el valor (userData).
-        """
-
-        combo.clear()
-        for item in lista:
-            # Si es diccionario
-            if isinstance(item, dict):
-                texto = item.get(attr_text, "")
-                data = item.get(attr_data, None)
-            else:
-                texto = getattr(item, attr_text, "")
-                data = getattr(item, attr_data, None)
-
-            combo.addItem(texto, data)
+    # def _fill_combo(self, combo: QComboBox, lista: list[BaseEntity],
+    #                 attr_text: str, attr_data: str):
+    #     """
+    #     Llena un QComboBox con una lista de entidades.
+    #
+    #     Parámetros:
+    #     :param combo: El QComboBox que quieres llenar.
+    #     :param lista: Lista de entidades (pueden ser widgetetos o diccionarios).
+    #     :param attr_text: Nombre del atributo para el texto visible.
+    #     :param attr_data: Nombre del atributo para el valor (userData).
+    #     """
+    #
+    #     combo.clear()
+    #     for item in lista:
+    #         # Si es diccionario
+    #         if isinstance(item, dict):
+    #             texto = item.get(attr_text, "")
+    #             data = item.get(attr_data, None)
+    #         else:
+    #             texto = getattr(item, attr_text, "")
+    #             data = getattr(item, attr_data, None)
+    #
+    #         combo.addItem(texto, data)
 
     def _configure_table(self, table: QTableView,
                          columns_hide: list[int] | None = None):
@@ -318,7 +320,7 @@ class BaseController(QObject):
         for i in range(1, self._pag.total_pages + 1):
             self._view.combo_select_page.addItem(str(i), i)
 
-    def _search(self, pattern: str) -> Result(list[BaseEntity]):
+    def _search(self, pattern: str) -> Result:
         """
         Busca los registros.
         :param pattern: Patrón de búsqueda
@@ -433,3 +435,100 @@ class BaseController(QObject):
 
         # Mover la ventana
         self._view.move(x, y)
+
+    # ------------------------------------------------------------------
+    # COMBO LOADING FUNCTIONS.
+    # ------------------------------------------------------------------
+
+    # THREAD LAUNCHER
+    def _load_combo_async(self, worker_fn, callback):
+        """
+        Carga el combo de forma asíncrona. Se ejecuta en un hilo separado.
+        :param worker_fn: La función de carga del combo.
+        :param callback: Es la función que se ejecuta para actualizar la
+        interfaz.
+        """
+
+        thread = QThread()
+        worker = ComboWorker(worker_fn)
+
+        worker.moveToThread(thread)
+
+        # --- conexiones ---
+        thread.started.connect(lambda: QTimer.singleShot(0, worker.run))
+
+        worker.finished.connect(callback)
+        worker.error.connect(self._handle_error)
+
+        worker.finished.connect(thread.quit)
+        worker.finished.connect(worker.deleteLater)
+        thread.finished.connect(thread.deleteLater)
+
+        # --- evitar garbage collection ---
+        if not hasattr(self, "_threads"):
+            self._threads = []
+
+        self._threads.append(thread)
+
+        # limpieza automática
+        thread.finished.connect(lambda: self._threads.remove(thread))
+
+        thread.start()
+
+    # GENERIC COMBO LOADER
+    def _load_combo(self, combo, worker_fn, data: int = None):
+        """
+        Función generica de carga de combos.
+        :param combo: El combo a cargar.
+        :param data: Valor a mostrar tras la carga.
+        """
+
+        combo.clear()
+        combo.addItem("Cargando...")
+        combo.setEnabled(False)
+
+        self._load_combo_async(
+            worker_fn=worker_fn,
+            callback=lambda result, combo=combo, data=data:
+            self._on_combo_loaded(result, combo, data)
+        )
+
+    # UI CALLBACKS (MAIN THREAD)
+    def _on_combo_loaded(self, lista: Result,
+                         combo: ComboBox,
+                         data: int = None):
+        """
+        Función callback.
+        Carga el combo con la lista.
+        :param lista: La lista de los datos para llenar el combo.
+        :param combo: El combo a llenar.
+        :param data: El valor a seleccionar del combo.
+        """
+
+        combo.clear()
+        combo.setEnabled(True)
+
+        if not lista.is_success:
+            combo.addItem("Error al cargar")
+            return
+
+        for ent in lista.value:
+            combo.addItem(ent.value, ent.id)
+
+        self._set_autocomplete(combo)
+
+        if data is not None:
+            combo.setValue(data)
+        else:
+            combo.setCurrentIndex(-1)
+
+        # 🔥 liberar bloqueo
+        combo.loading = False
+
+    # COMBO LOADING ERROR HANDLER
+    def _handle_error(self, error_msg: str):
+        # print("ERROR WORKER:")
+        # print(error_msg)
+
+        # opcional UI
+        QMessageBox.critical(self._view, "Error", error_msg)

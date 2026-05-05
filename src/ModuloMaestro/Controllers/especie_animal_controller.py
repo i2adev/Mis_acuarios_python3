@@ -66,7 +66,7 @@ class EspecieAnimalController(BaseController):
         super().__init__(view, dao, model)
 
         # Llenas los combos
-        self._fill_combos()
+        self._fill_combos_async()
 
     def _entity_configuration(self) -> EspecieAnimalEntity:
         """ Configura la entidad. """
@@ -283,121 +283,28 @@ class EspecieAnimalController(BaseController):
         # Carga las imágenes
         self._view.frame_image.load_images(res_id.value)
 
-    def _fill_combos(self):
+    def _fill_combos_async(self):
         """ Llena los combos del formulario"""
 
-        self._fill_combo_grupo_taxo()
-        self._fill_combo_comportamiento()
-        self._fill_combo_dieta()
-        self._fill_combo_nivel_nado()
+        self._load_combo(
+            combo=self._view.frame.combo_grupo_taxo,
+            worker_fn=lambda: GrupoTaxonomicoDAO().get_list_combo()
+        )
 
-    def _fill_combo_nivel_nado(self):
-        """ Rellena el combo del nivel de nado."""
+        self._load_combo(
+            combo=self._view.frame.combo_comportamiento,
+            worker_fn=lambda: ComportamientoFaunaDAO().get_list_combo()
+        )
 
-        # Vaciamos el combo
-        self._view.frame.combo_nivel_nado.clear()
+        self._load_combo(
+            combo=self._view.frame.combo_dieta,
+            worker_fn=lambda: DietaFaunaDAO().get_list_combo()
+        )
 
-        # Obtenemos los datos
-        dao = NivelNadoDAO()
-        lista = dao.get_list_combo()
-
-        if not lista.is_success:
-            return Result.failure(
-                "NO SE HAN PODIDO OBTENER LOS 'NIVELES DE NADO'."
-            )
-
-        # Llenas el combo
-        for ent in lista.value:
-            self._view.frame.combo_nivel_nado.addItem(
-                ent.nivel_nado, ent.id
-            )
-
-        # Establecemos el autocompletado
-        self._set_autocomplete(self._view.frame.combo_nivel_nado)
-
-        # Deselecciona el valor
-        self._view.frame.combo_nivel_nado.setCurrentIndex(-1)
-
-    def _fill_combo_dieta(self):
-        """ Llena el combo de las dietas. """
-
-        # Vaciamos el combo
-        self._view.frame.combo_dieta.clear()
-
-        # Obtenemos los datos
-        dao = DietaFaunaDAO()
-        lista = dao.get_list_combo()
-
-        if not lista.is_success:
-            return Result.failure(
-                "NO SE HAN PODIDO OBTENER LAS 'DIETAS'."
-            )
-
-        # Llenas el combo
-        for ent in lista.value:
-            self._view.frame.combo_dieta.addItem(
-                ent.dieta, ent.id
-            )
-
-        # Establecemos el autocompletado
-        self._set_autocomplete(self._view.frame.combo_dieta)
-
-        # Deselecciona el valor
-        self._view.frame.combo_dieta.setCurrentIndex(-1)
-
-    def _fill_combo_grupo_taxo(self):
-        """ Llena el combo de del grupo taxonómico. """
-
-        # Vaciamos el combo
-        self._view.frame.combo_grupo_taxo.clear()
-
-        # Obtenemos los datos
-        dao = GrupoTaxonomicoDAO()
-        lista = dao.get_list_combo()
-
-        if not lista.is_success:
-            return Result.failure(
-                "NO SE HAN PODIDO OBTENER LOS 'GRUPOS TAXONÓMICOS'."
-            )
-
-        # Llenas el combo
-        for ent in lista.value:
-            self._view.frame.combo_grupo_taxo.addItem(
-                ent.grupo_taxo, ent.id
-            )
-
-        # Establecemos el autocompletado
-        self._set_autocomplete(self._view.frame.combo_grupo_taxo)
-
-        # Deselecciona el valor
-        self._view.frame.combo_grupo_taxo.setCurrentIndex(-1)
-
-    def _fill_combo_comportamiento(self):
-        """ Llena el combo del comportamiento de la fauna. """
-
-        # Vaciamos el combo
-        self._view.frame.combo_comportamiento.clear()
-
-        # Obtenemos los datos
-        dao = ComportamientoFaunaDAO()
-        lista = dao.get_list_combo()
-
-        if not lista.is_success:
-            return Result.failure(
-                "NO SE HAN PODIDO OBTENER LOS 'COMPORTAMIENTOS'."
-            )
-
-        # Llenas el combo
-        for ent in lista.value:
-            self._view.frame.combo_comportamiento.addItem(
-                ent.comportamiento, ent.id
-            )
-
-        # Establecemos el autocompletado
-        self._set_autocomplete(self._view.frame.combo_comportamiento)
-
-        # Deselecciona el valor
-        self._view.frame.combo_comportamiento.setCurrentIndex(-1)
+        self._load_combo(
+            combo=self._view.frame.combo_nivel_nado,
+            worker_fn=lambda: NivelNadoDAO().get_list_combo()
+        )
 
     def _open_grupo_taxo_dialog(self):
         """ Abrimos el diálogo del grupo taxonómico. """

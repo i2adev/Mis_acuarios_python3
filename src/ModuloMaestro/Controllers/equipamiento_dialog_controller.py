@@ -5,7 +5,8 @@ Comentarios:
     Controlador del cuadro de diálogo de inserción de categoría de 
     equipamiento.
 """
-from ModuloMaestro.Controllers.equipamiento_conttroller import EquipamientoController
+from ModuloMaestro.Controllers.equipamiento_conttroller import \
+    EquipamientoController
 from CustomControls.nullable_date_edit import NullableDateEdit
 from PyQt6.QtWidgets import QComboBox, QMessageBox, QWidget
 
@@ -31,7 +32,7 @@ class EquipamientoDialogController(EquipamientoController):
         super().__init__(view, dao, mod)
 
         # Llena los combos
-        self._fill_combos()
+        self._fill_combos_async()
 
         # Oculta los layouts
         self._hide_layout(self._view.frame.layout_id)

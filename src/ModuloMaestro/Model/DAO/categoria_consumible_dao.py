@@ -10,6 +10,7 @@ import sqlite3
 import traceback
 
 from Main.Model.DAO.base_dao import BaseDAO
+from Main.Model.Entities.combo_data_entity import ComboDataEntity
 from ModuloMaestro.Model.Entities.categoria_consumible_entity import \
     CategoriaConsumibleEntity
 from Services.Database.database import DBManager
@@ -175,11 +176,9 @@ class CategoriaConsumibleDAO(BaseDAO):
                 cur.execute(sql)
                 rows = cur.fetchall()
                 valores = [
-                    CategoriaConsumibleEntity(
+                    ComboDataEntity(
                         id=f["ID"],
-                        num=None,
-                        categoria=f["VALUE"],
-                        observaciones=None
+                        value=f["VALUE"],
                     )
                     for f in rows
                 ]

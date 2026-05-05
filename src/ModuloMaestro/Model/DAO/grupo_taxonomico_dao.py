@@ -10,6 +10,7 @@ import sqlite3
 import traceback
 
 from Main.Model.DAO.base_dao import BaseDAO
+from Main.Model.Entities.combo_data_entity import ComboDataEntity
 from ModuloMaestro.Model.Entities.grupo_taxonomico_entity import \
     GrupoTaxonomicoEntity
 from Services.Database.database import DBManager
@@ -175,9 +176,9 @@ class GrupoTaxonomicoDAO(BaseDAO):
                 cur.execute(sql)
                 rows = cur.fetchall()
                 valores = [
-                    GrupoTaxonomicoEntity(
+                    ComboDataEntity(
                         id=f["ID"],
-                        grupo_taxo=f["VALUE"],
+                        value=f["VALUE"],
                     )
                     for f in rows
                 ]

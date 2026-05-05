@@ -10,6 +10,7 @@ import sqlite3
 import traceback
 
 from Main.Model.DAO.base_dao import BaseDAO
+from Main.Model.Entities.combo_data_entity import ComboDataEntity
 from ModuloMaestro.Model.Entities.posicion_planta_acuario_entity import \
     PosicionPlantaAcuarioEntity
 from Services.Database.database import DBManager
@@ -223,9 +224,9 @@ class PosicionPlantaAcuarioDAO(BaseDAO):
                 cur.execute(sql)
                 rows = cur.fetchall()
                 valores = [
-                    PosicionPlantaAcuarioEntity(
+                    ComboDataEntity(
                         id=f["ID"],
-                        posicion=f["VALUE"],
+                        value=f["VALUE"],
                     )
                     for f in rows
                 ]

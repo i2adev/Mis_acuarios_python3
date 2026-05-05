@@ -30,7 +30,7 @@ class UrnaDialogController(UrnaController):
         super().__init__(view, dao, mod)
 
         # Llena los combos
-        self._fill_combos()
+        self._fill_combos_async()
 
         # Oculta el layout del ID
         self._hide_layout(self._view.frame.layout_id)

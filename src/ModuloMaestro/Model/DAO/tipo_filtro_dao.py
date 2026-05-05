@@ -9,6 +9,7 @@ Comentarios:
 import sqlite3
 
 from Main.Model.DAO.base_dao import BaseDAO
+from Main.Model.Entities.combo_data_entity import ComboDataEntity
 from Services.Database.database import DBManager
 from ModuloMaestro.Model.Entities.tipo_filtro_entity import TipoFiltroEntity
 from Services.Result.result import Result
@@ -141,11 +142,9 @@ class TipoFiltroDAO(BaseDAO):
                 cur.execute(sql)
                 rows = cur.fetchall()
                 valores = [
-                    TipoFiltroEntity(
+                    ComboDataEntity(
                         id=f["ID"],
-                        num=None,
-                        tipo_filtro=f["VALUE"],
-                        observaciones=None
+                        value=f["VALUE"],
                     )
                     for f in rows
                 ]

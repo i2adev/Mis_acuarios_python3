@@ -28,7 +28,8 @@ from Services.Validators.equipamiento_validator import EquipamientoValidator
 from ModuloMaestro.Views.Dialogs.cattegoria_equipamiento_dialog import \
     CategoriaEquipamientoDialog
 from ModuloMaestro.Views.Dialogs.equipamiento_dialog import EquipamientoDialog
-from ModuloMaestro.Views.Dialogs.marca_comercial_dialog import MarcaComercialDialog
+from ModuloMaestro.Views.Dialogs.marca_comercial_dialog import \
+    MarcaComercialDialog
 from ModuloMaestro.Views.Masters.equipamiento_view import EquipamientoView
 
 
@@ -54,7 +55,7 @@ class EquipamientoController(BaseController):
         super().__init__(view, dao, model)
 
         # Llenas los combos
-        self._fill_combos()
+        self._fill_combos_async()
 
     def _entity_configuration(self) -> EquipamientoEntity:
         """ Configura la entidad. """
@@ -283,65 +284,18 @@ class EquipamientoController(BaseController):
         # Carga las imágenes
         self._view.frame_image.load_images(res_id.value)
 
-    def _fill_combos(self):
+    def _fill_combos_async(self):
         """ Llena los combos del formulario"""
 
-        self._fill_combo_categoria()
-        self._fill_combo_marca()
+        self._load_combo(
+            combo=self._view.frame.combo_categoria_equipamiento,
+            worker_fn=lambda: CategoriaEquipamientoDAO().get_list_combo()
+        )
 
-    def _fill_combo_categoria(self):
-        """ Llena el combo de la categoria. """
-
-        # Vaciamos el combo
-        self._view.frame.combo_categoria_equipamiento.clear()
-
-        # Obtenemos los datos
-        dao = CategoriaEquipamientoDAO()
-        lista = dao.get_list_combo()
-
-        if not lista.is_success:
-            return Result.failure(
-                "NO SE HAN PODIDO OBTENER LAS 'CATEGORÍAS'."
-            )
-
-        # Llenas el combo
-        for ent in lista.value:
-            self._view.frame.combo_categoria_equipamiento.addItem(
-                ent.categoria_equipamiento, ent.id
-            )
-
-        # Establecemos el autocompletado
-        self._set_autocomplete(self._view.frame.combo_categoria_equipamiento)
-
-        # montaje el valor
-        self._view.frame.combo_categoria_equipamiento.setCurrentIndex(-1)
-
-    def _fill_combo_marca(self):
-        """ Llena el combo del tipo de acuario. """
-
-        # Vaciamos el combo
-        self._view.frame.combo_marca.clear()
-
-        # Obtenemos los datos
-        dao = MarcaComercialDAO()
-        lista = dao.get_list_combo()
-
-        if not lista.is_success:
-            return Result.failure(
-                "NO SE HAN PODIDO OBTENER LAS 'MARCAS COMERCIALES'."
-            )
-
-        # Llenas el combo
-        for ent in lista.value:
-            self._view.frame.combo_marca.addItem(
-                ent.nombre_marca, ent.id
-            )
-
-        # Establecemos el autocompletado
-        self._set_autocomplete(self._view.frame.combo_marca)
-
-        # montaje el valor
-        self._view.frame.combo_marca.setCurrentIndex(-1)
+        self._load_combo(
+            combo=self._view.frame.combo_marca,
+            worker_fn=lambda: MarcaComercialDAO().get_list_combo()
+        )
 
     def _open_categoria_dialog(self):
         """ Abrimos el diálogo del tipo de filtro. """

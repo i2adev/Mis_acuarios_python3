@@ -7,12 +7,14 @@ Comentarios:
 
 from PyQt6.QtWidgets import QWidget, QMessageBox, QComboBox
 
-from ModuloMaestro.Controllers.especie_vegetal_controller import EspecieVegetalController
+from ModuloMaestro.Controllers.especie_vegetal_controller import \
+    EspecieVegetalController
 from ModuloMaestro.Model.DAO.especie_vegetal_dao import EspecieVegetalDAO
 from ModuloMaestro.Model.Entities.especie_vegetal_entity import \
     EspecieVegetalEntity
 from Services.Result.result import Result
-from ModuloMaestro.Views.Dialogs.especie_vegetal_dialog import EspecieVegetalDialog
+from ModuloMaestro.Views.Dialogs.especie_vegetal_dialog import \
+    EspecieVegetalDialog
 
 
 class EspecieVegetalDialogController(EspecieVegetalController):
@@ -31,7 +33,7 @@ class EspecieVegetalDialogController(EspecieVegetalController):
         super().__init__(view, dao, mod)
 
         # Llena los combos
-        self._fill_combos()
+        self._fill_combos_async()
 
         # Oculta los layouts
         self._hide_layout(self._view.frame.layout_id)

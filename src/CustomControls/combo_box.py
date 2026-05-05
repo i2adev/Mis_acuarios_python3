@@ -16,6 +16,7 @@ class ComboBox(QComboBox):
 
         # Se inicializan las variables
         self.control_name = control_name
+        self.loading = False
 
         # Se modifica el comportamiento
         self.setEditable(True)

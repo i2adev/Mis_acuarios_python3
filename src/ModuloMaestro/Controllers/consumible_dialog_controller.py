@@ -7,7 +7,8 @@ Comentarios:
 
 from PyQt6.QtWidgets import QWidget, QMessageBox, QComboBox
 
-from ModuloMaestro.Controllers.consumible_controller import ConsumibleController
+from ModuloMaestro.Controllers.consumible_controller import \
+    ConsumibleController
 from ModuloMaestro.Model.DAO.consumible_dao import ConsumibleDAO
 from ModuloMaestro.Model.Entities.consumible_entity import ConsumibleEntity
 from Services.Result.result import Result
@@ -30,7 +31,7 @@ class ConsumibleDialogController(ConsumibleController):
         super().__init__(view, dao, mod)
 
         # Llena los combos
-        self._fill_combos()
+        self._fill_combos_async()
 
         # Oculta los layouts
         self._hide_layout(self._view.frame.layout_id)

@@ -10,6 +10,7 @@ from PyQt6.QtCore import QEvent
 from PyQt6.QtGui import QIcon, QAction
 from PyQt6.QtWidgets import QMessageBox, QTableView, QWidget, QComboBox
 
+import globales
 from ModuloMaestro.Controllers.comercio_conttroller import ComercioController
 from ModuloMaestro.Model.DAO.comercio_dao import ComercioDAO
 from ModuloMaestro.Model.Entities.comercio_entity import ComercioEntity

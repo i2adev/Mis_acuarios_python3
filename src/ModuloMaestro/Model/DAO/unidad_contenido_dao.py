@@ -9,6 +9,7 @@ import sqlite3
 import traceback
 
 from Main.Model.DAO.base_dao import BaseDAO
+from Main.Model.Entities.combo_data_entity import ComboDataEntity
 from ModuloMaestro.Model.Entities.unidad_contenido_entity import \
     UnidadContenidoEntity
 from Services.Database.database import DBManager
@@ -175,9 +176,9 @@ class UnidadContenidoDAO(BaseDAO):
                 cur.execute(sql)
                 rows = cur.fetchall()
                 valores = [
-                    UnidadContenidoEntity(
+                    ComboDataEntity(
                         id=f["ID"],
-                        unidad=f["VALUE"],
+                        value=f["VALUE"],
                     )
                     for f in rows
                 ]

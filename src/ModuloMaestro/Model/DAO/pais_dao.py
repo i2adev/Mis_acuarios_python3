@@ -9,6 +9,7 @@ Comentarios:
 import sqlite3
 
 from Main.Model.DAO.base_dao import BaseDAO
+from Main.Model.Entities.combo_data_entity import ComboDataEntity
 from ModuloMaestro.Model.Entities.pais_entity import PaisEntity
 from Services.Result.result import Result
 from Services.Database.database import DBManager
@@ -94,11 +95,9 @@ class PaisDAO(BaseDAO):
                 cur.execute(sql)
                 rows = cur.fetchall()
                 valores = [
-                    PaisEntity(
+                    ComboDataEntity(
                         id=f["ID"],
-                        num=None,
-                        pais=f["VALUE"],
-                        continente=None
+                        value=f["VALUE"],
                     )
                     for f in rows
                 ]

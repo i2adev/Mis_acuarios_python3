@@ -10,6 +10,7 @@ import sqlite3
 import traceback
 
 from Main.Model.DAO.base_dao import BaseDAO
+from Main.Model.Entities.combo_data_entity import ComboDataEntity
 from Services.Database.database import DBManager
 from ModuloMaestro.Model.Entities.proyecto_entity import ProyectoEntity
 from Services.Result.result import Result
@@ -255,9 +256,9 @@ class ProyectoDAO(BaseDAO):
                 cur.execute(sql, params)
                 rows = cur.fetchall()
                 valores = [
-                    ProyectoEntity(
+                    ComboDataEntity(
                         id=f["ID"],
-                        nombre=f["VALUE"]
+                        value=f["VALUE"]
                     )
                     for f in rows
                 ]

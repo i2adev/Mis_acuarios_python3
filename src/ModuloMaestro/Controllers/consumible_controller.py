@@ -67,7 +67,7 @@ class ConsumibleController(BaseController):
         super().__init__(view, dao, model)
 
         # Llenas los combos
-        self._fill_combos()
+        self._fill_combos_async()
 
     def _entity_configuration(self) -> ConsumibleEntity:
         """ Configura la entidad. """
@@ -271,121 +271,30 @@ class ConsumibleController(BaseController):
         # Carga las imágenes
         self._view.frame_image.load_images(res_id.value)
 
-    def _fill_combos(self):
+    def _fill_combos_async(self):
         """ Llena los combos del formulario"""
 
-        self._fill_combo_marca()
-        self._fill_combo_categoria()
-        self._fill_combo_formato()
-        self._fill_combo_unidad()
+        self._load_combo(
+            combo=self._view.frame.combo_marca,
+            worker_fn=lambda: MarcaComercialDAO().get_list_combo()
+        )
 
-    def _fill_combo_formato(self):
-        """ Llena el combo de los formatos. """
+        self._load_combo(
+            combo=self._view.frame.combo_categoria,
+            worker_fn=lambda: CategoriaConsumibleDAO().get_list_combo()
+        )
 
-        # Vaciamos el combo
-        self._view.frame.combo_formato.clear()
+        # self._fill_combo_categoria()
 
-        # Obtenemos los datos
-        dao = FormatoConsumibleDAO()
-        lista = dao.get_list_combo()
+        self._load_combo(
+            combo=self._view.frame.combo_formato,
+            worker_fn=lambda: FormatoConsumibleDAO().get_list_combo()
+        )
 
-        if not lista.is_success:
-            return Result.failure(
-                "NO SE HAN PODIDO OBTENER LOS 'FORMATOS DE CONSUMIBLE'."
-            )
-
-        # Llenas el combo
-        for ent in lista.value:
-            self._view.frame.combo_formato.addItem(
-                ent.formato, ent.id
-            )
-
-        # Establecemos el autocompletado
-        self._set_autocomplete(self._view.frame.combo_formato)
-
-        # Deselecciona el valor
-        self._view.frame.combo_formato.setCurrentIndex(-1)
-
-    def _fill_combo_unidad(self):
-        """ Llena el combo de las unidades de contenido. """
-
-        # Vaciamos el combo
-        self._view.frame.combo_unidad.clear()
-
-        # Obtenemos los datos
-        dao = UnidadContenidoDAO()
-        lista = dao.get_list_combo()
-
-        if not lista.is_success:
-            return Result.failure(
-                "NO SE HAN PODIDO OBTENER LOS 'UNIDADES DE CONTENIDO'."
-            )
-
-        # Llenas el combo
-        for ent in lista.value:
-            self._view.frame.combo_unidad.addItem(
-                ent.unidad, ent.id
-            )
-
-        # Establecemos el autocompletado
-        self._set_autocomplete(self._view.frame.combo_unidad)
-
-        # Deselecciona el valor
-        self._view.frame.combo_unidad.setCurrentIndex(-1)
-
-    def _fill_combo_marca(self):
-        """ Llena el combo de la marca. """
-
-        # Vaciamos el combo
-        self._view.frame.combo_marca.clear()
-
-        # Obtenemos los datos
-        dao = MarcaComercialDAO()
-        lista = dao.get_list_combo()
-
-        if not lista.is_success:
-            return Result.failure(
-                "NO SE HAN PODIDO OBTENER LAS 'MARCAS'."
-            )
-
-        # Llenas el combo
-        for ent in lista.value:
-            self._view.frame.combo_marca.addItem(
-                ent.nombre_marca, ent.id
-            )
-
-        # Establecemos el autocompletado
-        self._set_autocomplete(self._view.frame.combo_marca)
-
-        # Deselecciona el valor
-        self._view.frame.combo_marca.setCurrentIndex(-1)
-
-    def _fill_combo_categoria(self):
-        """ Llena el combo la categoría del consumible. """
-
-        # Vaciamos el combo
-        self._view.frame.combo_categoria.clear()
-
-        # Obtenemos los datos
-        dao = CategoriaConsumibleDAO()
-        lista = dao.get_list_combo()
-
-        if not lista.is_success:
-            return Result.failure(
-                "NO SE HAN PODIDO OBTENER LAS 'CATEGORÍAS DE CONSUMIBLE'."
-            )
-
-        # Llenas el combo
-        for ent in lista.value:
-            self._view.frame.combo_categoria.addItem(
-                ent.categoria, ent.id
-            )
-
-        # Establecemos el autocompletado
-        self._set_autocomplete(self._view.frame.combo_categoria)
-
-        # Deselecciona el valor
-        self._view.frame.combo_categoria.setCurrentIndex(-1)
+        self._load_combo(
+            combo=self._view.frame.combo_unidad,
+            worker_fn=lambda: UnidadContenidoDAO().get_list_combo()
+        )
 
     def _load_data(self) -> Result:
         """ Carga los datos. """

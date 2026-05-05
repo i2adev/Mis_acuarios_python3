@@ -8,6 +8,7 @@ Comentarios:
 import sqlite3
 
 from Main.Model.DAO.base_dao import BaseDAO
+from Main.Model.Entities.combo_data_entity import ComboDataEntity
 from Services.Database.database import DBManager
 from ModuloMaestro.Model.Entities.acuario_entity import AcuarioEntity
 from Services.Result.result import Result
@@ -267,9 +268,9 @@ class AcuarioDAO(BaseDAO):
                 cur.execute(sql, params)
                 rows = cur.fetchall()
                 valores = [
-                    AcuarioEntity(
+                    ComboDataEntity(
                         id=f["ID"],
-                        nombre=f["VALUE"]
+                        value=f["VALUE"],
                     )
                     for f in rows
                 ]

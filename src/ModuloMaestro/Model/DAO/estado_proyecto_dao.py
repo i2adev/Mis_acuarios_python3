@@ -9,6 +9,7 @@ Comentarios:
 import sqlite3
 
 from Main.Model.DAO.base_dao import BaseDAO
+from Main.Model.Entities.combo_data_entity import ComboDataEntity
 from Services.Database.database import DBManager
 from ModuloMaestro.Model.Entities.estado_proyecto_entity import \
     EstadoProyectoEntity
@@ -143,11 +144,9 @@ class EstadoProyectoDAO(BaseDAO):
                 cur.execute(sql)
                 rows = cur.fetchall()
                 valores = [
-                    EstadoProyectoEntity(
+                    ComboDataEntity(
                         id=f["ID"],
-                        num=None,
-                        estado=f["VALUE"],
-                        descripcion=None
+                        value=f["VALUE"]
                     )
                     for f in rows
                 ]

@@ -41,7 +41,7 @@ class EspecieVegetalMasterController(EspecieVegetalController):
         self._setDisabledControl(self._view.frame.layout_n_cientifico, True)
 
         # Rellena los combos
-        self._fill_combos()
+        self._fill_combos_async()
 
         # Inicializamos el paginador
         self._pag = Paginator("VISTA_ESPECIES_VEGETALES", 5)

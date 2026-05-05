@@ -10,6 +10,7 @@ import sqlite3
 import traceback
 
 from Main.Model.DAO.base_dao import BaseDAO
+from Main.Model.Entities.combo_data_entity import ComboDataEntity
 from ModuloMaestro.Model.Entities.dificultad_planta_entity import \
     DificultadPlantaEntity
 from Services.Database.database import DBManager
@@ -178,9 +179,9 @@ class DificultadPlantaDAO(BaseDAO):
                 cur.execute(sql)
                 rows = cur.fetchall()
                 valores = [
-                    DificultadPlantaEntity(
+                    ComboDataEntity(
                         id=f["ID"],
-                        dificultad=f["VALUE"],
+                        value=f["VALUE"],
                     )
                     for f in rows
                 ]

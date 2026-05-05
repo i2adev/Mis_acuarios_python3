@@ -10,6 +10,7 @@ import sqlite3
 import traceback
 
 from Main.Model.DAO.base_dao import BaseDAO
+from Main.Model.Entities.combo_data_entity import ComboDataEntity
 from ModuloMaestro.Model.Entities.requerimiento_co2_entity import \
     RequerimientoCO2Entity
 from Services.Database.database import DBManager
@@ -116,54 +117,6 @@ class RequerimientoCO2DAO(BaseDAO):
         except sqlite3.Error as e:
             return Result.failure(f"[SQLITE ERROR]\n {e}")
 
-    def get_entity_by_id(self, ide: int) -> Result:
-        """
-        Obtiene la entidad con el ID pasado como argumento.
-        :param ide: ID de la entidad a recuperar
-        """
-
-        try:
-            sql = (
-                """
-                SELECT *
-                FROM   REQUERIMIENTOS_CO2
-                WHERE  ID_REQUERIMIENTO_CO2 = :id;
-                """
-            )
-
-            params = {"id": ide, }
-
-            with self.db.conn as con:
-                cur = con.cursor()
-                cur.execute(sql, params)
-                row = cur.fetchone()
-
-                # Configuramos la entidad
-                ent = RequerimientoCO2Entity(
-                    id=row[0],
-                    num=row[1],
-                    requerimiento=row[2],
-                    descripcion=row[3],
-                )
-
-                return Result.success(ent)
-
-        except sqlite3.IntegrityError as e:
-            # traceback.print_exc()
-            return Result.failure(f"[INTEGRITY ERROR]\n {e}")
-        except sqlite3.OperationalError as e:
-            # traceback.print_exc()
-            return Result.failure(f"[OPERATIONAL ERROR]\n {e}")
-        except sqlite3.ProgrammingError as e:
-            # traceback.print_exc()
-            return Result.failure(f"[PROGRAMMING ERROR]\n {e}")
-        except sqlite3.DatabaseError as e:
-            # traceback.print_exc()
-            return Result.failure(f"[DATABASE ERROR]\n {e}")
-        except sqlite3.Error as e:
-            # traceback.print_exc()
-            return Result.failure(f"[SQLITE ERROR]\n {e}")
-
     def get_num_by_id(self, id_: int) -> Result:
         """
         Obtiene el valor NUM de la vista
@@ -222,9 +175,9 @@ class RequerimientoCO2DAO(BaseDAO):
                 cur.execute(sql)
                 rows = cur.fetchall()
                 valores = [
-                    RequerimientoCO2Entity(
+                    ComboDataEntity(
                         id=f["ID"],
-                        requerimiento=f["VALUE"],
+                        value=f["VALUE"],
                     )
                     for f in rows
                 ]

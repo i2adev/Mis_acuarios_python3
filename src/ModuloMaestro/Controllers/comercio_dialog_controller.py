@@ -9,7 +9,7 @@ from PyQt6.QtWidgets import QWidget, QMessageBox, QComboBox
 
 from ModuloMaestro.Controllers.comercio_conttroller import ComercioController
 from ModuloMaestro.Model.DAO.comercio_dao import ComercioDAO
-from ModuloMaestro.Model import ComercioEntity
+from ModuloMaestro.Model.Entities.comercio_entity import ComercioEntity
 from Services.Result.result import Result
 from ModuloMaestro.Views.Dialogs.comercio_dialog import ComercioDialog
 

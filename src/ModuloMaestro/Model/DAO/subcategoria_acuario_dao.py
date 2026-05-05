@@ -7,6 +7,7 @@ Comentarios:
 import sqlite3
 
 from Main.Model.DAO.base_dao import BaseDAO
+from Main.Model.Entities.combo_data_entity import ComboDataEntity
 from Services.Database.database import DBManager
 from ModuloMaestro.Model.Entities.subcategoria_acuario_entity import \
     SubcategoriaAcuarioEntity
@@ -122,7 +123,7 @@ class SubcategoriaAcuarioDAO(BaseDAO):
             return Result.failure(f"[SQLITE ERROR]\n {e}")
 
     # ------------------------------------------------------------------
-    def get_list_combo(self) -> Result(list[SubcategoriaAcuarioEntity]):
+    def get_list_combo(self) -> Result:
         """
         Obtiene una lista ligera para combos (ID y texto visible).
         Devuelve entidades con `num=None` y `observaciones=None`.
@@ -143,8 +144,8 @@ class SubcategoriaAcuarioDAO(BaseDAO):
                 cur.execute(sql)
                 rows = cur.fetchall()
                 valores = [
-                    SubcategoriaAcuarioEntity(
-                        f["ID"], None, None, f["VALUE"]
+                    ComboDataEntity(
+                        id=f["ID"], value=f["VALUE"]
                     )
                     for f in rows
                 ]
@@ -167,8 +168,7 @@ class SubcategoriaAcuarioDAO(BaseDAO):
             return Result.failure(f"[SQLITE ERROR]\n {e}")
 
     # ------------------------------------------------------------------
-    def get_list_combo_by_categoria(self, id_cat: int) \
-            -> Result(list[SubcategoriaAcuarioEntity]):
+    def get_list_combo_by_categoria(self, id_cat: int) -> Result:
         """
         Obtiene una lista ligera para combos (ID y texto visible).
         Lista dependiente de la categoría de acuario.
@@ -193,8 +193,8 @@ class SubcategoriaAcuarioDAO(BaseDAO):
                 cur.execute(sql, params)
                 rows = cur.fetchall()
                 valores = [
-                    SubcategoriaAcuarioEntity(
-                        f["ID"], None, None, f["VALUE"]
+                    ComboDataEntity(
+                        id=f["ID"], value=f["VALUE"]
                     )
                     for f in rows
                 ]

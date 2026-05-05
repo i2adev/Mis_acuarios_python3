@@ -4,6 +4,7 @@ Fecha:  07/10/2025
 Comentarios:
     Controlador base de urna.
 """
+import globales
 from Main.Controllers.base_controller import BaseController
 from ModuloMaestro.Controllers.estado_proyecto_dialog_controller import \
     EstadoProyectoDialogController
@@ -46,7 +47,7 @@ class ProyectoController(BaseController):
         super().__init__(view, dao, model)
 
         # Llena los combos
-        self._fill_combos()
+        self._fill_combos_async()
 
     def _entity_configuration(self) -> ProyectoEntity:
         """ Configura la entidad. """
@@ -262,37 +263,13 @@ class ProyectoController(BaseController):
         # Carga las imágenes
         self._view.frame_image.load_images(res_id.value)
 
-    def _fill_combos(self):
+    def _fill_combos_async(self):
         """ Llena los combos del formulario"""
 
-        self._fill_combo_estado()
-
-    def _fill_combo_estado(self):
-        """ Llena el combo del estado del proyecto. """
-
-        # Vaciamos el combo
-        self._view.frame.combo_estado_proyecto.clear()
-
-        # Obtenemos los datos
-        dao = EstadoProyectoDAO()
-        lista = dao.get_list_combo()
-
-        if not lista.is_success:
-            return Result.failure(
-                "NO SE HAN PODIDO OBTENER LOS 'ESTADOS DE PROYECTO'."
-            )
-
-        # Llenas el combo
-        for ent in lista.value:
-            self._view.frame.combo_estado_proyecto.addItem(
-                ent.estado, ent.id
-            )
-
-        # Establecemos el autocompletado
-        self._set_autocomplete(self._view.frame.combo_estado_proyecto)
-
-        # Deselecciona el valor
-        self._view.frame.combo_estado_proyecto.setCurrentIndex(-1)
+        self._load_combo(
+            combo=self._view.frame.combo_estado_proyecto,
+            worker_fn=lambda: EstadoProyectoDAO().get_list_combo()
+        )
 
     def _open_estado_proyecto_dialog(self):
         """ Abrimos el diálogo del estado del proyecto. """
@@ -312,7 +289,12 @@ class ProyectoController(BaseController):
         # Configuramos el combo
         combo = self._view.frame.combo_marca
 
-        self._fill_combo_estado()
+        self._load_combo(
+            combo=self._view.frame.combo_estado_proyecto,
+            worker_fn=lambda: EstadoProyectoDAO().get_list_combo(),
+            data=res.value.id
+        )
+
         for i in range(combo.count()):
             if combo.itemData(i) == res.value.id:
                 combo.setCurrentIndex(i)

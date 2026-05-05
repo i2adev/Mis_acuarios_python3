@@ -7,6 +7,7 @@ Comentarios:
 import sqlite3
 
 from Main.Model.DAO.base_dao import BaseDAO
+from Main.Model.Entities.combo_data_entity import ComboDataEntity
 from Services.Database.database import DBManager
 from ModuloMaestro.Model.Entities.categoria_equipamiento_entity import \
     CategoriaEquipamientoEntity
@@ -100,7 +101,7 @@ class CategoriaEquipamientoDAO(BaseDAO):
                     CategoriaEquipamientoEntity(
                         id=f["ID"],
                         num=f["NUM"],
-                        categoria=f["CATEGORIA"],
+                        categoria_equipamiento=f["CATEGORIA"],
                         descripcion=f["DESCRIPCION"],
                     )
                     for f in rows
@@ -144,9 +145,9 @@ class CategoriaEquipamientoDAO(BaseDAO):
                 cur.execute(sql)
                 rows = cur.fetchall()
                 valores = [
-                    CategoriaEquipamientoEntity(
+                    ComboDataEntity(
                         id=f["ID"],
-                        categoria_equipamiento=f["VALUE"]
+                        value=f["VALUE"]
                     )
                     for f in rows
                 ]

@@ -7,13 +7,15 @@ Comentarios:
 
 from PyQt6.QtWidgets import QWidget, QMessageBox, QComboBox
 
-from ModuloMaestro.Controllers.marca_comercial_controller import MarcaComercialController
+from ModuloMaestro.Controllers.marca_comercial_controller import \
+    MarcaComercialController
 from ModuloMaestro.Model.DAO.marca_comercial_dao import MarcaComercialDAO
 from ModuloMaestro.Model.DAO.pais_dao import PaisDAO
 from ModuloMaestro.Model.Entities.marca_comercial_entity import \
     MarcaComercialEntity
 from Services.Result.result import Result
-from ModuloMaestro.Views.Dialogs.marca_comercial_dialog import MarcaComercialDialog
+from ModuloMaestro.Views.Dialogs.marca_comercial_dialog import \
+    MarcaComercialDialog
 
 
 class MarcaComercialDialogController(MarcaComercialController):
@@ -32,7 +34,7 @@ class MarcaComercialDialogController(MarcaComercialController):
         super().__init__(view, dao, mod)
 
         # Llena los combos
-        self._fill_combos()
+        self._fill_combos_async()
 
         # Oculta el layout del ID
         self._hide_layout(self._view.frame.layout_id)
@@ -91,7 +93,7 @@ class MarcaComercialDialogController(MarcaComercialController):
 
         self._view.reject()
 
-    def _fill_combos(self):
+    def _fill_combos_async(self):
         """ Llena los combos del formulario"""
 
         self._fill_combo_pais()

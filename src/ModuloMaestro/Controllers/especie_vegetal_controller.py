@@ -42,14 +42,18 @@ from ModuloMaestro.Model.Entities.tasa_crecimiento_entity import \
 from Services.Result.result import Result
 from Services.Validators.especie_vegetal_validator import \
     EspecieVegetalValidator
-from ModuloMaestro.Views.Dialogs.dificultad_planta_dialog import DificultadPlantaDialog
-from ModuloMaestro.Views.Dialogs.especie_vegetal_dialog import EspecieVegetalDialog
+from ModuloMaestro.Views.Dialogs.dificultad_planta_dialog import \
+    DificultadPlantaDialog
+from ModuloMaestro.Views.Dialogs.especie_vegetal_dialog import \
+    EspecieVegetalDialog
 from ModuloMaestro.Views.Dialogs.posicion_planta_acuario_dialog import \
     PosicionPlantaAcuarioDialog
-from ModuloMaestro.Views.Dialogs.requerimiento_co2_dialog import RequerimientoCO2Dialog
+from ModuloMaestro.Views.Dialogs.requerimiento_co2_dialog import \
+    RequerimientoCO2Dialog
 from ModuloMaestro.Views.Dialogs.requerimiento_iluminacon_dialog import \
     RequerimientoIluminacionDialog
-from ModuloMaestro.Views.Dialogs.tasa_crecimiento_dialog import TasaCrecimientoDialog
+from ModuloMaestro.Views.Dialogs.tasa_crecimiento_dialog import \
+    TasaCrecimientoDialog
 from ModuloMaestro.Views.Masters.especie_vegetal_view import EspecieVegetalView
 
 
@@ -75,7 +79,7 @@ class EspecieVegetalController(BaseController):
         super().__init__(view, dao, model)
 
         # Llenas los combos
-        self._fill_combos()
+        self._fill_combos_async()
 
     def _entity_configuration(self) -> EspecieVegetalEntity:
         """ Configura la entidad. """
@@ -281,149 +285,33 @@ class EspecieVegetalController(BaseController):
         # Carga las imágenes
         self._view.frame_image.load_images(res_id.value)
 
-    def _fill_combos(self):
+    def _fill_combos_async(self):
         """ Llena los combos del formulario"""
 
-        self._fill_combo_posicion()
-        self._fill_combo_req_iluminacion()
-        self._fill_combo_req_co2()
-        self._fill_combo_crecimiento()
-        self._fill_combo_dificultad()
+        self._load_combo(
+            combo=self._view.frame.combo_posicion,
+            worker_fn=lambda: PosicionPlantaAcuarioDAO().get_list_combo()
+        )
 
-    def _fill_combo_crecimiento(self):
-        """ Rellena el combo de tasa de crecimiento."""
+        self._load_combo(
+            combo=self._view.frame.combo_req_iluminacion,
+            worker_fn=lambda: RequerimientoIluminacionDAO().get_list_combo()
+        )
 
-        # Vaciamos el combo
-        self._view.frame.combo_crecimiento.clear()
+        self._load_combo(
+            combo=self._view.frame.combo_req_co2,
+            worker_fn=lambda: RequerimientoCO2DAO().get_list_combo()
+        )
 
-        # Obtenemos los datos
-        dao = TasaCrecimientoDAO()
-        lista = dao.get_list_combo()
+        self._load_combo(
+            combo=self._view.frame.combo_crecimiento,
+            worker_fn=lambda: TasaCrecimientoDAO().get_list_combo()
+        )
 
-        if not lista.is_success:
-            return Result.failure(
-                "NO SE HAN PODIDO OBTENER LOS 'NIVELES DE NADO'."
-            )
-
-        # Llenas el combo
-        for ent in lista.value:
-            self._view.frame.combo_crecimiento.addItem(
-                ent.tasa_crecimiento, ent.id
-            )
-
-        # Establecemos el autocompletado
-        self._set_autocomplete(self._view.frame.combo_crecimiento)
-
-        # Deselecciona el valor
-        self._view.frame.combo_crecimiento.setCurrentIndex(-1)
-
-    def _fill_combo_dificultad(self):
-        """ Rellena el combo de la dificultad de la planta. """
-
-        # Vaciamos el combo
-        self._view.frame.combo_dificultad.clear()
-
-        # Obtenemos los datos
-        dao = DificultadPlantaDAO()
-        lista = dao.get_list_combo()
-
-        if not lista.is_success:
-            return Result.failure(
-                "NO SE HAN PODIDO OBTENER LOS 'NIVELES DE NADO'."
-            )
-
-        # Llenas el combo
-        for ent in lista.value:
-            self._view.frame.combo_dificultad.addItem(
-                ent.dificultad, ent.id
-            )
-
-        # Establecemos el autocompletado
-        self._set_autocomplete(self._view.frame.combo_dificultad)
-
-        # Deselecciona el valor
-        self._view.frame.combo_dificultad.setCurrentIndex(-1)
-
-    def _fill_combo_req_co2(self):
-        """ Llena el combo de requerimiento de co2. """
-
-        # Vaciamos el combo
-        self._view.frame.combo_req_co2.clear()
-
-        # Obtenemos los datos
-        dao = RequerimientoCO2DAO()
-        lista = dao.get_list_combo()
-
-        if not lista.is_success:
-            return Result.failure(
-                "NO SE HAN PODIDO OBTENER LOS 'REQUERIMIENTOS DE CO2'."
-            )
-
-        # Llenas el combo
-        for ent in lista.value:
-            self._view.frame.combo_req_co2.addItem(
-                ent.requerimiento, ent.id
-            )
-
-        # Establecemos el autocompletado
-        self._set_autocomplete(self._view.frame.combo_req_co2)
-
-        # Deselecciona el valor
-        self._view.frame.combo_req_co2.setCurrentIndex(-1)
-
-    def _fill_combo_posicion(self):
-        """ Llena el combo de las posiciones en el acuario. """
-
-        # Vaciamos el combo
-        self._view.frame.combo_posicion.clear()
-
-        # Obtenemos los datos
-        dao = PosicionPlantaAcuarioDAO()
-        lista = dao.get_list_combo()
-
-        if not lista.is_success:
-            return Result.failure(
-                "NO SE HAN PODIDO OBTENER LAS 'POSICIONES'."
-            )
-
-        # Llenas el combo
-        for ent in lista.value:
-            self._view.frame.combo_posicion.addItem(
-                ent.posicion, ent.id
-            )
-
-        # Establecemos el autocompletado
-        self._set_autocomplete(self._view.frame.combo_posicion)
-
-        # Deselecciona el valor
-        self._view.frame.combo_posicion.setCurrentIndex(-1)
-
-    def _fill_combo_req_iluminacion(self):
-        """ Llena el combo del requerimiento de iluminación. """
-
-        # Vaciamos el combo
-        self._view.frame.combo_req_iluminacion.clear()
-
-        # Obtenemos los datos
-        dao = RequerimientoIluminacionDAO()
-        lista = dao.get_list_combo()
-
-        if not lista.is_success:
-            return Result.failure(
-                "NO SE HAN PODIDO OBTENER LOS 'REQUERIMIENTOS DE ILUMINACION'."
-            )
-
-        # Llenas el combo
-        for ent in lista.value:
-            self._view.frame.combo_req_iluminacion.addItem(
-                ent.requerimiento, ent.id
-            )
-
-        # Establecemos el autocompletado
-        self._set_autocomplete(self._view.frame.combo_req_iluminacion)
-
-        # Deselecciona el valor
-        self._view.frame.combo_req_iluminacion.setCurrentIndex(-1)
+        self._load_combo(
+            combo=self._view.frame.combo_dificultad,
+            worker_fn=lambda: DificultadPlantaDAO().get_list_combo()
+        )
 
     def _open_posicion_dialog(self):
         """ Abrimos el diálogo de la posición de la planta en el acuario. """

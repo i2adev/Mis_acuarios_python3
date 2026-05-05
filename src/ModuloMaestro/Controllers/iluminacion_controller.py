@@ -30,10 +30,13 @@ from ModuloMaestro.Model.Entities.tipo_iluminacion_entity import \
     TipoIluminacionEntity
 from Services.Result.result import Result
 from Services.Validators.iluminacion_validator import IluminacionValidator
-from ModuloMaestro.Views.Dialogs.control_iluminacion_dialog import ControlIluminacionDialog
+from ModuloMaestro.Views.Dialogs.control_iluminacion_dialog import \
+    ControlIluminacionDialog
 from ModuloMaestro.Views.Dialogs.iluminacion_dialog import IluminacionDialog
-from ModuloMaestro.Views.Dialogs.marca_comercial_dialog import MarcaComercialDialog
-from ModuloMaestro.Views.Dialogs.tipo_iluminacion_dialog import TipoIluminacionDialog
+from ModuloMaestro.Views.Dialogs.marca_comercial_dialog import \
+    MarcaComercialDialog
+from ModuloMaestro.Views.Dialogs.tipo_iluminacion_dialog import \
+    TipoIluminacionDialog
 from ModuloMaestro.Views.Masters.iluminacion_view import IluminacionView
 
 
@@ -57,7 +60,7 @@ class IluminacionController(BaseController):
         super().__init__(view, dao, model)
 
         # Llenas los combos
-        self._fill_combos()
+        self._fill_combos_async()
 
     def _entity_configuration(self) -> IluminacionEntity:
         """ Configura la entidad. """
@@ -350,115 +353,23 @@ class IluminacionController(BaseController):
 
     # ********************************
     # CONTINUA CON LA CARGA DE REGISTRO
-    def _fill_combos(self):
+    def _fill_combos_async(self):
         """ Llena los combos del formulario"""
 
-        self._fill_combo_marca()
-        self._fill_combo_tipo_iluminacion()
-        self._fill_combo_control_iluminacion()
-        self._fill_combo_control_iluminacion()
+        self._load_combo(
+            combo=self._view.frame.combo_marca,
+            worker_fn=lambda: MarcaComercialDAO().get_list_combo()
+        )
 
-    def _fill_combo_marca(self):
-        """ Llena el combo de tipos de acuario. """
+        self._load_combo(
+            combo=self._view.frame.combo_tipo_iluminacion,
+            worker_fn=lambda: TipoIluminacionDAO().get_list_combo()
+        )
 
-        # Vaciamos el combo
-        self._view.frame.combo_marca.clear()
-
-        # Obtenemos los datos
-        dao = MarcaComercialDAO()
-        lista = dao.get_list_combo()
-
-        if not lista.is_success:
-            return Result.failure(
-                "NO SE HAN PODIDO OBTENER LAS 'MARCAS COMERCIALES'."
-            )
-
-        # Llena el combo
-        for ent in lista.value:
-            self._view.frame.combo_marca.addItem(ent.nombre_marca, ent.id)
-
-        # Establecemos el autocompletado
-        self._set_autocomplete(self._view.frame.combo_marca)
-
-        # Deselecciona el valor
-        self._view.frame.combo_marca.setCurrentIndex(-1)
-
-    def _fill_combo_tipo_iluminacion(self):
-        """ Llena el combo del tipo de iluminación. """
-
-        # Vaciamos el combo
-        self._view.frame.combo_tipo_iluminacion.clear()
-
-        # Obtenemos los datos
-        dao = TipoIluminacionDAO()
-        lista = dao.get_list_combo()
-        if not lista.is_success:
-            return Result.failure(
-                "NO SE HAN PODIDO OBTENER LOS 'TIPOS DE ILUMINACIÓN'."
-            )
-
-        # Llenas el combo
-        for ent in lista.value:
-            self._view.frame.combo_tipo_iluminacion.addItem(
-                ent.tipo_iluminacion,
-                ent.id)
-
-        # Establecemos el autocompletado
-        self._set_autocomplete(self._view.frame.combo_tipo_iluminacion)
-
-        # Deselecciona el valor
-        self._view.frame.combo_tipo_iluminacion.setCurrentIndex(-1)
-
-    def _fill_combo_control_iluminacion(self):
-        """ Llena el combo del tipo de iluminación. """
-
-        # Vaciamos el combo
-        self._view.frame.combo_control_iluminacion.clear()
-
-        # Obtenemos los datos
-        dao = ControlIluminacionDAO()
-        lista = dao.get_list_combo()
-        if not lista.is_success:
-            return Result.failure(
-                "NO SE HAN PODIDO OBTENER LOS 'TIPOS DE ILUMINACIÓN'."
-            )
-
-        # Llenas el combo
-        for ent in lista.value:
-            self._view.frame.combo_control_iluminacion.addItem(ent.material,
-                                                               ent.id)
-
-        # Establecemos el autocompletado
-        self._set_autocomplete(self._view.frame.combo_control_iluminacion)
-
-        # Deselecciona el valor
-        self._view.frame.combo_control_iluminacion.setCurrentIndex(-1)
-
-    def _fill_combo_control_iluminacion(self):
-        """ Llena el combo del control de iluminación. """
-
-        # Vaciamos el combo
-        self._view.frame.combo_control_iluminacion.clear()
-
-        # Obtenemos los datos
-        dao = ControlIluminacionDAO()
-        lista = dao.get_list_combo()
-        if not lista.is_success:
-            return Result.failure(
-                "NO SE HAN PODIDO OBTENER LOS 'CONTROLES DE ILUMINACIÓN'."
-            )
-
-        # Llenas el combo
-        for ent in lista.value:
-            self._view.frame.combo_control_iluminacion.addItem(
-                ent.control_iluminacion,
-                ent.id)
-
-        # Establecemos el autocompletado
-        self._set_autocomplete(self._view.frame.combo_control_iluminacion)
-
-        # Deselecciona el valor
-        self._view.frame.combo_control_iluminacion.setCurrentIndex(-1)
+        self._load_combo(
+            combo=self._view.frame.combo_control_iluminacion,
+            worker_fn=lambda: ControlIluminacionDAO().get_list_combo()
+        )
 
     def _open_marca_comercial_dialog(self):
         """ Abrimos el diálogo de marca comercial. """

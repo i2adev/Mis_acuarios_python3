@@ -10,6 +10,7 @@ import sqlite3
 import traceback
 
 from Main.Model.DAO.base_dao import BaseDAO
+from Main.Model.Entities.combo_data_entity import ComboDataEntity
 from ModuloMaestro.Model.Entities.tasa_crecimiento_entity import \
     TasaCrecimientoEntity
 from Services.Database.database import DBManager
@@ -222,9 +223,9 @@ class TasaCrecimientoDAO(BaseDAO):
                 cur.execute(sql)
                 rows = cur.fetchall()
                 valores = [
-                    TasaCrecimientoEntity(
+                    ComboDataEntity(
                         id=f["ID"],
-                        tasa_crecimiento=f["VALUE"],
+                        value=f["VALUE"],
                     )
                     for f in rows
                 ]

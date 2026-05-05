@@ -7,6 +7,7 @@ Comentarios:
 import sqlite3
 
 from Main.Model.DAO.base_dao import BaseDAO
+from Main.Model.Entities.combo_data_entity import ComboDataEntity
 from Services.Database.database import DBManager
 from ModuloMaestro.Model.Entities.urna_entity import UrnaEntity
 from Services.Result.result import Result
@@ -165,18 +166,9 @@ class UrnaDAO(BaseDAO):
                 cur.execute(sql)
                 rows = cur.fetchall()
                 valores = [
-                    UrnaEntity(
+                    ComboDataEntity(
                         id=f["ID"],
-                        num=None,
-                        id_marca=None,
-                        modelo=f["VALUE"],
-                        anchura=None,
-                        profundidad=None,
-                        altura=None,
-                        grosor_cristal=None,
-                        volumen_tanque=None,
-                        id_material=None,
-                        descripcion=None
+                        value=f["VALUE"],
                     )
                     for f in rows
                 ]

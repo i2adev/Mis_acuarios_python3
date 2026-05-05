@@ -7,6 +7,7 @@ Comentarios:
 import sqlite3
 
 from Main.Model.DAO.base_dao import BaseDAO
+from Main.Model.Entities.combo_data_entity import ComboDataEntity
 from Services.Database.database import DBManager
 from ModuloMaestro.Model.Entities.material_urna_entity import \
     MaterialUrnaEntity
@@ -73,7 +74,7 @@ class MaterialUrnaDAO(BaseDAO):
             # traceback.print_exc()
             return Result.failure(f"[SQLITE ERROR]\n {e}")
 
-    def get_list(self) -> Result(list[MaterialUrnaEntity]):
+    def get_list(self) -> Result:
         """Obtiene el listado completo ordenado por categoría."""
 
         sql = (
@@ -120,7 +121,7 @@ class MaterialUrnaDAO(BaseDAO):
             return Result.failure(f"[SQLITE ERROR]\n {e}")
 
     # ------------------------------------------------------------------
-    def get_list_combo(self) -> Result(list[MaterialUrnaEntity]):
+    def get_list_combo(self) -> Result:
         """
         Obtiene una lista ligera para combos (ID y texto visible).
         Devuelve entidades con `num=None` y `observaciones=None`.
@@ -141,11 +142,9 @@ class MaterialUrnaDAO(BaseDAO):
                 cur.execute(sql)
                 rows = cur.fetchall()
                 valores = [
-                    MaterialUrnaEntity(
+                    ComboDataEntity(
                         id=f["ID"],
-                        num=None,
-                        material=f["VALUE"],
-                        descripcion=None,
+                        value=f["VALUE"]
                     )
                     for f in rows
                 ]

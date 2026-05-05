@@ -52,7 +52,7 @@ class AcuarioController(BaseController):
         super().__init__(view, dao, model)
 
         # Llenas los combos
-        self._fill_combos()
+        self._fill_combos_async()
 
     def _entity_configuration(self) -> AcuarioEntity:
         """ Configura la entidad. """
@@ -316,93 +316,25 @@ class AcuarioController(BaseController):
         # Carga las imágenes
         self._view.frame_image.load_images(res_id.value)
 
-    def _fill_combos(self):
-        """ Llena los combos del formulario"""
+    def _fill_combos_async(self):
+        """ Carga los combos asíncronamente. """
 
-        self._fill_combo_urna()
-        self._fill_combo_tipo_acuario()
-        self._fill_combo_proyecto()
-
-    def _fill_combo_proyecto(self):
-        """ Llena el combo de los proyectos. """
-
-        # Vaciamos el combo
-        self._view.frame.combo_proyecto.clear()
-
-        # Obtenemos los datos
-        dao = ProyectoDAO()
-        lista = dao.get_list_combo_by_user(globales.CURRENT_USER.id)
-
-        if not lista.is_success:
-            return Result.failure(
-                "NO SE HAN PODIDO OBTENER LAS 'URNAS'."
+        self._load_combo(
+            self._view.frame.combo_proyecto,
+            lambda: ProyectoDAO().get_list_combo_by_user(
+                globales.CURRENT_USER.id
             )
+        )
 
-        # Llenas el combo
-        for ent in lista.value:
-            self._view.frame.combo_proyecto.addItem(
-                ent.nombre, ent.id
-            )
+        self._load_combo(
+            self._view.frame.combo_urna,
+            lambda: UrnaDAO().get_list_combo()
+        )
 
-        # Establecemos el autocompletado
-        self._set_autocomplete(self._view.frame.combo_proyecto)
-
-        # Deselecciona el valor
-        self._view.frame.combo_proyecto.setCurrentIndex(-1)
-
-    def _fill_combo_urna(self):
-        """ Llena el combo de la urna. """
-
-        # Vaciamos el combo
-        self._view.frame.combo_urna.clear()
-
-        # Obtenemos los datos
-        dao = UrnaDAO()
-        lista = dao.get_list_combo()
-
-        if not lista.is_success:
-            return Result.failure(
-                "NO SE HAN PODIDO OBTENER LAS 'URNAS'."
-            )
-
-        # Llenas el combo
-        for ent in lista.value:
-            self._view.frame.combo_urna.addItem(
-                ent.modelo, ent.id
-            )
-
-        # Establecemos el autocompletado
-        self._set_autocomplete(self._view.frame.combo_urna)
-
-        # Deselecciona el valor
-        self._view.frame.combo_urna.setCurrentIndex(-1)
-
-    def _fill_combo_tipo_acuario(self):
-        """ Llena el combo del tipo de acuario. """
-
-        # Vaciamos el combo
-        self._view.frame.combo_tipo_acuario.clear()
-
-        # Obtenemos los datos
-        dao = TipoAcuarioDAO()
-        lista = dao.get_list_combo()
-
-        if not lista.is_success:
-            return Result.failure(
-                "NO SE HAN PODIDO OBTENER LOS 'TIPOS DE ACUARIO'."
-            )
-
-        # Llenas el combo
-        for ent in lista.value:
-            self._view.frame.combo_tipo_acuario.addItem(
-                ent.observaciones, ent.id
-            )
-
-        # Establecemos el autocompletado
-        self._set_autocomplete(self._view.frame.combo_tipo_acuario)
-
-        # Deselecciona el valor
-        self._view.frame.combo_tipo_acuario.setCurrentIndex(-1)
+        self._load_combo(
+            self._view.frame.combo_tipo_acuario,
+            lambda: TipoAcuarioDAO().get_list_combo()
+        )
 
     def _open_urna_dialog(self):
         """ Abrimos el diálogo de la urna. """
@@ -422,7 +354,11 @@ class AcuarioController(BaseController):
         # Configuramos el combo
         combo = self._view.frame.combo_urna
 
-        self._fill_combo_urna()
+        self._load_combo(
+            combo=combo,
+            worker_fn=lambda: UrnaDAO().get_list_combo(),
+            data=res.value.id
+        )
         for i in range(combo.count()):
             if combo.itemData(i) == res.value.id:
                 combo.setCurrentIndex(i)
@@ -445,10 +381,15 @@ class AcuarioController(BaseController):
         # Configuramos el combo
         combo = self._view.frame.combo_tipo_acuario
 
-        self._fill_combo_tipo_acuario()
+        self._load_combo(
+            combo=combo,
+            worker_fn=lambda: TipoAcuarioDAO().get_list_combo(),
+            data=res.value.id
+        )
         for i in range(combo.count()):
             if combo.itemData(i) == res.value.id:
                 combo.setCurrentIndex(i)
+                return
 
     def _load_data(self) -> Result:
         """ Carga los datos. """

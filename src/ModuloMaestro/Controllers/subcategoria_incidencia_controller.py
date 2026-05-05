@@ -248,36 +248,13 @@ class SubcategoriaIncidenciaController(BaseController):
 
         return Result.success(ent.id)
 
-    def _fill_combos(self):
+    def _fill_combos_async(self):
         """ Llena los combos del formulario"""
 
-        self._fill_categoria_incidencia()
-
-    def _fill_categoria_incidencia(self):
-        """ Llena el combo. """
-
-        # Vaciamos el combo
-        self._view.frame.combo_categoria_incidencia.clear()
-
-        # Obtenemos los datos
-        dao = CategoriaIncidenciaDAO()
-        lista = dao.get_list_combo()
-        if not lista.is_success:
-            return Result.failure(
-                "NO SE HAN PODIDO OBTENER LAS 'CATEGORÍAS DE ACUARIO'."
-            )
-
-        # Llenas el combo
-        for ent in lista.value:
-            self._view.frame.combo_categoria_incidencia.addItem(
-                ent.categoria_incidencia, ent.id
-            )
-
-        # Establecemos el autocompletado
-        self._set_autocomplete(self._view.frame.combo_categoria_incidencia)
-
-        # Deselecciona el valor
-        self._view.frame.combo_categoria_incidencia.setCurrentIndex(-1)
+        self._load_combo(
+            combo=self._view.frame.combo_categoria_incidencia,
+            worker_fn=lambda: CategoriaIncidenciaDAO().get_list_combo()
+        )
 
     def _open_categoria_incidencia_dialog(self):
         """ Abre el diálogo de categoría de acuario. """
@@ -295,28 +272,13 @@ class SubcategoriaIncidenciaController(BaseController):
         # Configuramos el combo
         combo = self._view.frame.combo_categoria_incidencia
 
-        self._fill_combo_categoria()
+        self._load_combo(
+            combo=combo,
+            worker_fn=lambda: CategoriaIncidenciaDAO().get_list_combo(),
+            data=res.value.id
+        )
+
         for i in range(combo.count()):
             if combo.itemData(i) == res.value.id:
                 combo.setCurrentIndex(i)
-
-    def _open_categoria_incidencia_dialog(self):
-        """ Abre el diálogo de categoría de incidencia. """
-
-        view = CategoriaIncidenciaDialog("INSERTAR CATEGORÍA DE INCIDENCIA")
-        mod = CategoriaIncidenciaEntity()
-        dao = CategoriaIncidenciaDAO()
-
-        ctrl = CategoriaIncidenciaDialogController(view, dao, mod)
-        res = ctrl.show_modal()
-
-        if not res.is_success:
-            return
-
-        # Configuramos el combo
-        combo = self._view.frame.combo_categoria_incidencia
-
-        self._fill_categoria_incidencia()
-        for i in range(combo.count()):
-            if combo.itemData(i) == res.value.id:
-                combo.setCurrentIndex(i)
+                return

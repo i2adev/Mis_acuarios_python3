@@ -49,7 +49,7 @@ class UrnaController(BaseController):
         super().__init__(view, dao, model)
 
         # Llena los combos
-        self._fill_combos()
+        self._fill_combos_async()
 
     def _entity_configuration(self) -> UrnaEntity:
         """ Configura la entidad. """
@@ -245,60 +245,18 @@ class UrnaController(BaseController):
         # Carga las imágenes
         self._view.frame_image.load_images(res_id.value)
 
-    def _fill_combos(self):
+    def _fill_combos_async(self):
         """ Llena los combos del formulario"""
 
-        self._fill_combo_marca()
-        self._fill_combo_material()
+        self._load_combo(
+            combo=self._view.frame.combo_marca,
+            worker_fn=lambda: MarcaComercialDAO().get_list_combo()
+        )
 
-    def _fill_combo_marca(self):
-        """ Llena el combo de tipos de acuario. """
-
-        # Vaciamos el combo
-        self._view.frame.combo_marca.clear()
-
-        # Obtenemos los datos
-        dao = MarcaComercialDAO()
-        lista = dao.get_list_combo()
-
-        if not lista.is_success:
-            return Result.failure(
-                "NO SE HAN PODIDO OBTENER LAS 'MARCAS COMERCIALES'."
-            )
-
-        # Llenas el combo
-        for ent in lista.value:
-            self._view.frame.combo_marca.addItem(ent.nombre_marca, ent.id)
-
-        # Establecemos el autocompletado
-        self._set_autocomplete(self._view.frame.combo_marca)
-
-        # Deselecciona el valor
-        self._view.frame.combo_marca.setCurrentIndex(-1)
-
-    def _fill_combo_material(self):
-        """ Llena el combo del material de acuario. """
-
-        # Vaciamos el combo
-        self._view.frame.combo_material.clear()
-
-        # Obtenemos los datos
-        dao = MaterialUrnaDAO()
-        lista = dao.get_list_combo()
-        if not lista.is_success:
-            return Result.failure(
-                "NO SE HAN PODIDO OBTENER LOS 'MATERIALES DE URNA'."
-            )
-
-        # Llenas el combo
-        for ent in lista.value:
-            self._view.frame.combo_material.addItem(ent.material, ent.id)
-
-        # Establecemos el autocompletado
-        self._set_autocomplete(self._view.frame.combo_material)
-
-        # Deselecciona el valor
-        self._view.frame.combo_material.setCurrentIndex(-1)
+        self._load_combo(
+            combo=self._view.frame.combo_material,
+            worker_fn=lambda: MaterialUrnaDAO().get_list_combo()
+        )
 
     def _open_marca_comercial_dialog(self):
         """ Abrimos el diálogo de marca comercial. """
@@ -318,13 +276,18 @@ class UrnaController(BaseController):
         # Configuramos el combo
         combo = self._view.frame.combo_marca
 
-        self._fill_combo_marca()
+        self._load_combo(
+            combo=self._view.frame.combo_marca,
+            worker_fn=lambda: MarcaComercialDAO().get_list_combo(),
+            data=res.value.id
+        )
         for i in range(combo.count()):
             if combo.itemData(i) == res.value.id:
                 combo.setCurrentIndex(i)
+                return
 
     def _open_material_urna_dialog(self):
-        """ Abrimos el diálogo de categoria de acuario. """
+        """ Abrimos el diálogo de categoría de acuario. """
 
         view = MaterialUrnaDialog(
             "INSERTAR MATERIAL DE URNA"
@@ -341,10 +304,16 @@ class UrnaController(BaseController):
         # Configuramos el combo
         combo = self._view.frame.combo_material
 
-        self._fill_combo_material()
+        self._load_combo(
+            combo=self._view.frame.combo_material,
+            worker_fn=lambda: MaterialUrnaDAO().get_list_combo(),
+            data=res.value.id
+        )
+
         for i in range(combo.count()):
             if combo.itemData(i) == res.value.id:
                 combo.setCurrentIndex(i)
+                return
 
     def _load_data(self) -> Result:
         """ Carga los datos. """

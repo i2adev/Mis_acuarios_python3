@@ -7,6 +7,7 @@ Comentarios:
 import sqlite3
 
 from Main.Model.DAO.base_dao import BaseDAO
+from Main.Model.Entities.combo_data_entity import ComboDataEntity
 from Services.Database.database import DBManager
 from ModuloMaestro.Model.Entities.marca_comercial_entity import \
     MarcaComercialEntity
@@ -158,9 +159,9 @@ class MarcaComercialDAO(BaseDAO):
                 cur.execute(sql)
                 rows = cur.fetchall()
                 valores = [
-                    MarcaComercialEntity(
+                    ComboDataEntity(
                         id=f["ID"],
-                        nombre_marca=f["VALUE"]
+                        value=f["VALUE"]
                     )
                     for f in rows
                 ]

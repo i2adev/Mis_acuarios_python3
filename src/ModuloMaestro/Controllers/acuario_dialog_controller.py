@@ -31,7 +31,7 @@ class AcuarioDialogController(AcuarioController):
         super().__init__(view, dao, mod)
 
         # Llena los combos
-        self._fill_combos()
+        self._fill_combos_async()
 
         # Oculta los layouts
         self._hide_layout(self._view.frame.layout_id)

@@ -7,12 +7,14 @@ Comentarios:
 
 from PyQt6.QtWidgets import QWidget, QMessageBox, QComboBox
 
-from ModuloMaestro.Controllers.especie_animal_controller import EspecieAnimalController
+from ModuloMaestro.Controllers.especie_animal_controller import \
+    EspecieAnimalController
 from ModuloMaestro.Model.DAO.especie_animal_dao import EspecieAnimalDAO
 from ModuloMaestro.Model.Entities.especie_animal_entity import \
     EspecieAnimalEntity
 from Services.Result.result import Result
-from ModuloMaestro.Views.Dialogs.especie_animal_dialog import EspecieAnimalDialog
+from ModuloMaestro.Views.Dialogs.especie_animal_dialog import \
+    EspecieAnimalDialog
 
 
 class EspecieAnimalDialogController(EspecieAnimalController):
@@ -31,7 +33,7 @@ class EspecieAnimalDialogController(EspecieAnimalController):
         super().__init__(view, dao, mod)
 
         # Llena los combos
-        self._fill_combos()
+        self._fill_combos_async()
 
         # Oculta los layouts
         self._hide_layout(self._view.frame.layout_id)

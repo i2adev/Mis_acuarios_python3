@@ -38,7 +38,7 @@ class ComercioController(BaseController):
         super().__init__(view, dao, model)
 
         # Llenas los combos
-        self._fill_combos()
+        self._fill_combos_async()
 
     def _entity_configuration(self) -> ComercioEntity:
         """ Configura la entidad. """
@@ -247,34 +247,10 @@ class ComercioController(BaseController):
 
         return Result.success(ent.id)
 
-    def _fill_combos(self):
+    def _fill_combos_async(self):
         """ Llena los combos del formulario"""
 
-        self._fill_combo_pais()
-
-    def _fill_combo_pais(self):
-        """ Llena el combo de paises. """
-
-        # Vaciamos el combo
-        self._view.frame.combo_pais.clear()
-
-        # Obtenemos los datos
-        dao = PaisDAO()
-        lista = dao.get_list_combo()
-
-        if not lista.is_success:
-            return Result.failure(
-                "NO SE HAN PODIDO OBTENER LOS 'PAISES'."
-            )
-
-        # Llenas el combo
-        for ent in lista.value:
-            self._view.frame.combo_pais.addItem(
-                ent.pais, ent.id
-            )
-
-        # Establecemos el autocompletado
-        self._set_autocomplete(self._view.frame.combo_pais)
-
-        # montaje el valor
-        self._view.frame.combo_pais.setCurrentIndex(-1)
+        self._load_combo(
+            combo=self._view.frame.combo_pais,
+            worker_fn=lambda: PaisDAO().get_list_combo()
+        )

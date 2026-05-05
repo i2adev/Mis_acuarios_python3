@@ -24,7 +24,8 @@ from PyQt6.QtWidgets import QMessageBox, QPushButton
 from Services.Result.result import Result
 from Services.Validators.filtro_validator import FiltroValidator
 from ModuloMaestro.Views.Dialogs.filtro_dialog import FiltroDialog
-from ModuloMaestro.Views.Dialogs.marca_comercial_dialog import MarcaComercialDialog
+from ModuloMaestro.Views.Dialogs.marca_comercial_dialog import \
+    MarcaComercialDialog
 from ModuloMaestro.Views.Dialogs.tipo_filtro_dialog import TipoFiltroDialog
 from ModuloMaestro.Views.Masters.filtro_view import FiltroView
 
@@ -51,7 +52,7 @@ class FiltroController(BaseController):
         super().__init__(view, dao, model)
 
         # Llenas los combos
-        self._fill_combos()
+        self._fill_combos_async()
 
     def _entity_configuration(self) -> FiltroEntity:
         """ Configura la entidad. """
@@ -282,65 +283,18 @@ class FiltroController(BaseController):
         # Carga las imágenes
         self._view.frame_image.load_images(res_id.value)
 
-    def _fill_combos(self):
+    def _fill_combos_async(self):
         """ Llena los combos del formulario"""
 
-        self._fill_combo_tipo_filtro()
-        self._fill_combo_marca()
+        self._load_combo(
+            combo=self._view.frame.combo_tipo_filtro,
+            worker_fn=lambda: TipoFiltroDAO().get_list_combo()
+        )
 
-    def _fill_combo_tipo_filtro(self):
-        """ Llena el combo de la urna. """
-
-        # Vaciamos el combo
-        self._view.frame.combo_tipo_filtro.clear()
-
-        # Obtenemos los datos
-        dao = TipoFiltroDAO()
-        lista = dao.get_list_combo()
-
-        if not lista.is_success:
-            return Result.failure(
-                "NO SE HAN PODIDO OBTENER LOS 'TIPOS DE FILTRO'."
-            )
-
-        # Llenas el combo
-        for ent in lista.value:
-            self._view.frame.combo_tipo_filtro.addItem(
-                ent.tipo_filtro, ent.id
-            )
-
-        # Establecemos el autocompletado
-        self._set_autocomplete(self._view.frame.combo_tipo_filtro)
-
-        # montaje el valor
-        self._view.frame.combo_tipo_filtro.setCurrentIndex(-1)
-
-    def _fill_combo_marca(self):
-        """ Llena el combo del tipo de acuario. """
-
-        # Vaciamos el combo
-        self._view.frame.combo_marca.clear()
-
-        # Obtenemos los datos
-        dao = MarcaComercialDAO()
-        lista = dao.get_list_combo()
-
-        if not lista.is_success:
-            return Result.failure(
-                "NO SE HAN PODIDO OBTENER LAS 'MARCAS COMERCIALES'."
-            )
-
-        # Llenas el combo
-        for ent in lista.value:
-            self._view.frame.combo_marca.addItem(
-                ent.nombre_marca, ent.id
-            )
-
-        # Establecemos el autocompletado
-        self._set_autocomplete(self._view.frame.combo_marca)
-
-        # montaje el valor
-        self._view.frame.combo_marca.setCurrentIndex(-1)
+        self._load_combo(
+            combo=self._view.frame.combo_marca,
+            worker_fn=lambda: MarcaComercialDAO().get_list_combo()
+        )
 
     def _open_tipo_acuario_dialog(self):
         """ Abrimos el diálogo del tipo de filtro. """
