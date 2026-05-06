@@ -1,9 +1,40 @@
 ﻿================================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
---/--/2026  REFACTORIZACIÓN:
-            -   POST:   SE CARGAN LOS COMBOS DE FORMA ASIMÉTRICA.
-            -   POST:   SE MUEVEN LOS ARCHIVOS A LA CARPETA DE 'MAESTRO'.
+05/05/2026  SE CREA EL FORMULARIO DEL MÓDULO MAESTRO.
+            -   DONE:   SE CREA EL FORMULARIO
+
+            FUNCIONALIDAD DEL FORMULARIO.
+            -   DONE:   SE OCULTAN LOS PANELES AL ABRIR EL FORMULARIO.
+            -   DONE:   SE DA FUNCIONALIDAD A LOS BOTONES PRINCIPALES DEL MENÚ.
+                -   DONE:   BOTON ACUARIO.
+                -   DONE:   BOTON COMERCIO.
+                -   DONE:   BOTON CONSUMIBLE.
+                -   DONE:   BOTON EQUIPAMIENTO.
+                -   DONE:   BOTON FAUNA.
+                -   DONE:   BOTON FILTRO.
+                -   DONE:   BOTON FLORA.
+                -   DONE:   BOTON ILUMINACION.
+                -   DONE:   BOTON INCIDENCIA.
+                -   DONE:   BOTON MARCA COMERCIAL.
+                -   DONE:   BOTON PROYECTO.
+                -   DONE:   BOTON URNA.
+                -   DONE:   BOTON OTRO.
+
+            -   DONE: PONER ICONO A LOS BOTONES PRINCIPALES DEL MENÚ.Ç
+                -   DONE:   BOTON ACUARIO.
+                -   DONE:   BOTON COMERCIO.
+                -   DONE:   BOTON CONSUMIBLE.
+                -   DONE:   BOTON EQUIPAMIENTO.
+                -   DONE:   BOTON FAUNA.
+                -   DONE:   BOTON FILTRO.
+                -   DONE:   BOTON FLORA.
+                -   DONE:   BOTON ILUMINACION.
+                -   DONE:   BOTON INCIDENCIA.
+                -   DONE:   BOTON MARCA COMERCIAL.
+                -   DONE:   BOTON PROYECTO.
+                -   DONE:   BOTON URNA.
+                -   DONE:   BOTON OTRO.
 
 25/04/2026  REFACTORIZACIÓN: CARGA ASINCRONA DE LOS COMBOS.
 
