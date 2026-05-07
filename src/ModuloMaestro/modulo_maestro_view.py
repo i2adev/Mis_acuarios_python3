@@ -39,7 +39,7 @@ class ModuloMaestroView(QWidget):
         self.create_widgets()
         self.build_layout()
         self.set_tab_order()
-        self.init_handlers()
+        self.init_basic_handlers()
 
     def set_tab_order(self):
         """ Establece el orden de tabulación de los controles. """
@@ -48,7 +48,7 @@ class ModuloMaestroView(QWidget):
         for widget in self.findChildren(QWidget):
             widget.setFocusPolicy(Qt.FocusPolicy.ClickFocus)
 
-    def init_handlers(self):
+    def init_basic_handlers(self):
         """ Inicializamos los eventos de la ventana """
 
         # mover ventana
@@ -97,7 +97,6 @@ class ModuloMaestroView(QWidget):
         self.menu_layout.addWidget(self.urna)
         self.menu_layout.addWidget(self.button_menu_otros)
         self.menu_layout.addWidget(self.otro)
-
         self.menu_layout.addSpacerItem(
             QSpacerItem(20, 20, QSizePolicy.Policy.Minimum,
                         QSizePolicy.Policy.Expanding)
@@ -118,13 +117,33 @@ class ModuloMaestroView(QWidget):
         self.layout_central.addWidget(self.frame_menu)
         self.layout_central.addLayout(self.layout_dashboard)
 
+        self.layout_root = QVBoxLayout(self)
+        self.layout_root.setContentsMargins(0, 0, 0, 0)
+        self.layout_root.setSpacing(0)
+        self.layout_root.addWidget(self.frame_main)
+
         self.layout_main.addWidget(self.frame_title_bar)
         self.layout_main.addLayout(self.layout_central)
-        self.setLayout(self.layout_main)
+        self.setLayout(self.layout_root)
 
     def create_widgets(self):
         """ Crea los elementos del formulario"""
         self.layout_main = QVBoxLayout(self)  # Layout principal
+
+        self.frame_main = QFrame()
+        self.frame_main.setMouseTracking(True)
+        self.frame_main.setObjectName("frame_main")
+        self.frame_main.setSizePolicy(QSizePolicy.Policy.Expanding,
+                                      QSizePolicy.Policy.Expanding)
+        self.frame_main.setLayout(self.layout_main)  # layout_main ya existe
+        self.frame_main.setStyleSheet("""
+            #frame_main {
+                border: 1px solid #4a4a4a;
+                border-radius: 0px;
+                background-color: transparent;
+            }
+        """)
+
         self.layout_central = QVBoxLayout()  # Layout central donde se coloca
         # la barra de título y el dashboard
         self.menu_layout = QVBoxLayout()  # Layout donde se alberga el menú

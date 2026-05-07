@@ -1,6 +1,9 @@
 ﻿================================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
+07/05/2026  REFACTORIZACIÓN:
+            -   DONE:   SE MODIFICA EL FORMULARIO DE INICIO.
+
 05/05/2026  SE CREA EL FORMULARIO DEL MÓDULO MAESTRO.
             -   DONE:   SE CREA EL FORMULARIO
 

@@ -16,14 +16,14 @@ from PyQt6.QtWidgets import QApplication, QDialog
 
 import globales
 from Main.Controllers.login_controller import LoginDialogController
-from Main.Controllers.main_view_controller import MainViewController
+from Main.main_view_controller import MainViewController
 from Main.Model.DAO.usuario_dao import UsuarioDAO
 from Main.Model.Entities.usuario_entity import UsuarioEntity
 from Main.Views.login_dialog import LoginDialog
 import os
 
 # Versión del programa
-__version__ = "0.40.7"
+__version__ = "0.42.0"
 
 
 def excepthook(exc_type, exc_value, exc_traceback):
@@ -130,6 +130,7 @@ def main():
         # Abrir la ventana principal
         ctrl = MainViewController()
         ctrl.show()
+
         sys.exit(app.exec())
     else:
         # Cancelado → salir de la aplicación
