@@ -4,7 +4,8 @@ Fecha:      23/06/2025
 Comentarios:
     Módulo que contiene la clase controladora de la vista principal.
 """
-import globales
+from PyQt6.QtWidgets import QWidget
+
 from ModuloMaestro.Controllers.acuario_master_controller import \
     AcuarioMasterController
 from Main.Controllers.base_controller import BaseController
@@ -44,8 +45,6 @@ from ModuloMaestro.Controllers.grupo_taxonomico_master_controller import \
     GrupoTaxonomicoMasterController
 from ModuloMaestro.Controllers.iluminacion_master_controller import \
     IluminacionMasterController
-from ModuloMaestro.Controllers.main_reports_controller import \
-    MainReportsController
 from ModuloMaestro.Controllers.marca_comercial_master_controller import \
     MarcaComercialMasterController
 from ModuloMaestro.Controllers.material_urna_master_controler import \
@@ -236,23 +235,20 @@ from ModuloMaestro.Views.Masters.tipo_iluminacion_view import \
 from ModuloMaestro.Views.Masters.unidad_contenido_master import \
     UnidadContenidoView
 from ModuloMaestro.Views.Masters.urna_view import UrnaView
-from ModuloMaestro.Views.main_reports_view import MainReportsView
-from Main.Views.main_view import MainView
-from ModuloMaestro.modulo_maestro_controller import ModuloMaestroController
+from ModuloMaestro.modulo_maestro_view import ModuloMaestroView
 
 
-class MainViewController(BaseController):
+class ModuloMaestroController(BaseController):
     """
-    Clase controladora que maneja los eventos de la vista principal.
+    Clase controladora que maneja los eventos del formulario del modulo 
+    maestro.
     """
 
     def __init__(self):
         """ Constructor de clase. """
 
         # Inicializamos la vista, la entidad y el DAO
-        self._view = MainView("ACUARIOS DE "
-                              f"{globales.CURRENT_USER.nombre.upper()} "
-                              f"{globales.CURRENT_USER.apellido1.upper()}")
+        self._view = ModuloMaestroView("MÓDULO MAESTRO")
         # TODO: Crear e inicializar el DAO que gestiona el dashboard.
 
         # Llamamos al constructor base
@@ -264,9 +260,87 @@ class MainViewController(BaseController):
     def init_handlers(self):
         """ Inicializa los handlers. """
 
-        # Botones principales de menú
-        self._view.button_menu_maestro.clicked.connect(
-            self.modulo_maestro_click
+        # Botones de la barra de menú
+        self._view.button_menu_cerrar.clicked.connect(
+            lambda: self._view.close()
+        )
+
+        self._view.button_menu_acuario.clicked.connect(
+            lambda: self.show_panel(self._view.acuario)
+            if self._view.acuario.isHidden()
+            else self.hide_panel(self._view.acuario)
+        )
+
+        self._view.button_menu_comercio.clicked.connect(
+            lambda: self.show_panel(self._view.comercio)
+            if self._view.comercio.isHidden()
+            else self.hide_panel(self._view.comercio)
+        )
+
+        self._view.button_menu_consumible.clicked.connect(
+            lambda: self.show_panel(self._view.consumible)
+            if self._view.consumible.isHidden()
+            else self.hide_panel(self._view.consumible)
+        )
+
+        self._view.button_menu_equipamiento.clicked.connect(
+            lambda: self.show_panel(self._view.equipamiento)
+            if self._view.equipamiento.isHidden()
+            else self.hide_panel(self._view.equipamiento)
+        )
+
+        self._view.button_menu_fauna.clicked.connect(
+            lambda: self.show_panel(self._view.fauna)
+            if self._view.fauna.isHidden()
+            else self.hide_panel(self._view.fauna)
+        )
+
+        self._view.button_menu_filtro.clicked.connect(
+            lambda: self.show_panel(self._view.filtro)
+            if self._view.filtro.isHidden()
+            else self.hide_panel(self._view.filtro)
+        )
+
+        self._view.button_menu_flora.clicked.connect(
+            lambda: self.show_panel(self._view.flora)
+            if self._view.flora.isHidden()
+            else self.hide_panel(self._view.flora)
+        )
+
+        self._view.button_menu_iluminacion.clicked.connect(
+            lambda: self.show_panel(self._view.iluminacion)
+            if self._view.iluminacion.isHidden()
+            else self.hide_panel(self._view.iluminacion)
+        )
+
+        self._view.button_menu_incidencia.clicked.connect(
+            lambda: self.show_panel(self._view.incidencia)
+            if self._view.incidencia.isHidden()
+            else self.hide_panel(self._view.incidencia)
+        )
+
+        self._view.button_menu_marca.clicked.connect(
+            lambda: self.show_panel(self._view.marca)
+            if self._view.marca.isHidden()
+            else self.hide_panel(self._view.marca)
+        )
+
+        self._view.button_menu_proyecto.clicked.connect(
+            lambda: self.show_panel(self._view.proyecto)
+            if self._view.proyecto.isHidden()
+            else self.hide_panel(self._view.proyecto)
+        )
+
+        self._view.button_menu_urna.clicked.connect(
+            lambda: self.show_panel(self._view.urna)
+            if self._view.urna.isHidden()
+            else self.hide_panel(self._view.urna)
+        )
+
+        self._view.button_menu_otros.clicked.connect(
+            lambda: self.show_panel(self._view.otro)
+            if self._view.otro.isHidden()
+            else self.hide_panel(self._view.otro)
         )
 
         # Inicializamos los botónes
@@ -340,9 +414,9 @@ class MainViewController(BaseController):
             self.control_iluminacion_clicked
         )
 
-        self._view.button_menu_reportes.clicked.connect(
-            self.reportes_click
-        )
+        # self._view.button_menu_reportes.clicked.connect(
+        #     self.reportes_click
+        # )
 
         self._view.button_maestro_iluminacion.clicked.connect(
             self.iluminacion_click
@@ -406,19 +480,6 @@ class MainViewController(BaseController):
         self._view.button_maestro_especie_vegetal.clicked.connect(
             self.especie_vegetal_click
         )
-
-    def reportes_click(self):
-        """ Cuando se pulsa el control de reportes. """
-        view = MainReportsView("REPORTES")
-        ctrl = MainReportsController(view)
-
-        ctrl.show()
-
-    def modulo_maestro_click(self):
-        """ Abre el módulo maestro. """
-
-        ctrl = ModuloMaestroController()
-        ctrl.show()
 
     def sexo_click(self):
         """ Cuando se pulsa el botón del sexo del animal. """
@@ -833,7 +894,54 @@ class MainViewController(BaseController):
         ctrl = CategoriaEquipamientoMasterController(view, dao, mod)
         ctrl.show()
 
+    def hide_panels(self):
+        """ Oculta todos los paneles. """
+
+        if not self._view.acuario.isHidden():
+            self._view.acuario.hide()
+        if not self._view.comercio.isHidden():
+            self._view.comercio.hide()
+        if not self._view.consumible.isHidden():
+            self._view.consumible.hide()
+        if not self._view.equipamiento.isHidden():
+            self._view.equipamiento.hide()
+        if not self._view.fauna.isHidden():
+            self._view.fauna.hide()
+        if not self._view.filtro.isHidden():
+            self._view.filtro.hide()
+        if not self._view.flora.isHidden():
+            self._view.flora.hide()
+        if not self._view.marca.isHidden():
+            self._view.marca.hide()
+        if not self._view.iluminacion.isHidden():
+            self._view.iluminacion.hide()
+        if not self._view.incidencia.isHidden():
+            self._view.incidencia.hide()
+        if not self._view.proyecto.isHidden():
+            self._view.proyecto.hide()
+        if not self._view.urna.isHidden():
+            self._view.urna.hide()
+        if not self._view.otro.isHidden():
+            self._view.otro.hide()
+
+    def show_panel(self, panel: QWidget):
+        """
+        Muestra un panel.
+        :param panel: Panel a mostrar.
+        """
+
+        self.hide_panels()
+        panel.show()
+
+    def hide_panel(self, panel: QWidget):
+        """
+        Oculta un panel.
+        :param panel: Panel a ocultar.
+        """
+
+        panel.hide()
+
     def show(self):
         """ Abre la vista """
         self._view.show()
-        # self._view.showMaximized()
+        self.hide_panels()

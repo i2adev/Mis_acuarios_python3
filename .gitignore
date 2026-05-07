@@ -14,4 +14,4 @@ Documents/*
 !Documents/TODO.txt
 
 # Se excluyen los PDFs de la carpeta reportes
-/src/Reports/*.pdf
+/src/ModuloReportes/*.pdf

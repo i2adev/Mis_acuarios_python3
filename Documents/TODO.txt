@@ -36,6 +36,70 @@ FECHA		DESCRIPCIÓN
                 -   DONE:   BOTON URNA.
                 -   DONE:   BOTON OTRO.
 
+            -   DONE: DAR FUNCIONALIDAD A LOS BOTONES DE LOS PANELES.
+                -   DONE:   PANEL ACUARIO.
+                    -   DONE:   BOTÓN ACUARIO.
+                    -   DONE:   BOTÓN TIPOS ACUARIO.
+                    -   DONE:   BOTÓN CATEGORÍAS ACUARIO.
+                    -   DONE:   BOTÓN SUBCATEGORÍAS ACUARIO.
+
+                -   DONE:   PANEL COMERCIO.
+                    -   DONE:   BOTÓN COMERCIO.
+
+                -   DONE:   PANEL CONSUMIBLE.
+                    -   DONE:   BOTÓN CATEGORÍA CONSUMIBLE.
+                    -   DONE:   BOTÓN FORMATO CONSUMIBLE.
+                    -   DONE:   BOTÓN UNIDAD CONSUMIBLE.
+
+                -   DONE:   PANEL EQUIPAMIENTO.
+                    -   DONE:   BOTÓN EQUIPAMIENTO.
+                    -   DONE:   BOTÓN CATEGORÍA EQUIPAMIENTO.
+
+                -   DONE:   PANEL FAUNA.
+                    -   DONE:   BOTÓN ESPECIE ANIMAL.
+                    -   DONE:   BOTÓN COMPORTAMIENTO.
+                    -   DONE:   BOTÓN DIETA.
+                    -   DONE:   BOTÓN NIVEL DE NADO.
+                    -   DONE:   BOTÓN GRUPO TAXONÓMICO.
+                    -   DONE:   BOTÓN SEXO.
+
+                -   DONE:   PANEL FILTRO.
+                    -   DONE:   BOTÓN FILTROS.
+                    -   DONE:   BOTÓN TIPO DE FILTRO.
+
+                -   DONE:   PANEL FLORA.
+                    -   DONE:   BOTÓN ESPECIE VEGETAL.
+                    -   DONE:   BOTÓN DIFICULTAD.
+                    -   DONE:   BOTÓN POSICIÓN.
+                    -   DONE:   BOTÓN REQUERIMIENTO DE CO2.
+                    -   DONE:   BOTÓN REQUERIMIENTO DE ILUMINACIÓN.
+                    -   DONE:   BOTÓN TASA DE CRECIMIENTO.
+
+                -   DONE:   PANEL ILUMINACION.
+                    -   DONE:   BOTÓN ILUMINACIONES.
+                    -   DONE:   BOTÓN TIPOS DE ILUMINACIÓN.
+                    -   DONE:   BOTÓN CONTROLES DE ILUMINACIÓN.
+
+                -   DONE:   PANEL INCIDENCIA.
+                    -   DONE:   BOTÓN CATEGORÍA DE INCIDENCIA.
+                    -   DONE:   BOTÓN SUBCATEGORÍA DE INCIDENCIA.
+
+                -   DONE:   PANEL MARCA COMERCIAL.
+                    -   DONE:   BOTÓN MARCAS COMERCIALES.
+
+                -   DONE:   PANEL PROYECTO.
+                    -   DONE:   BOTÓN PROYECTOS.
+                    -   DONE:   BOTÓN ESTADOS DE PROYECTO.
+
+                -   DONE:   PANEL URNA.
+                    -   DONE:   BOTÓN URNAS.
+                    -   DONE:   BOTÓN MATERIALES DE URNA.
+
+                -   DONE:   PANEL OTRO.
+                    -   DONE:   BOTÓN PERIODOS.
+
+            -   DONE:   SE INTEGRA CON EL FORMULARIO PRINCIPAL.
+
 25/04/2026  REFACTORIZACIÓN: CARGA ASINCRONA DE LOS COMBOS.
 
             -   DONE:   SE CREA LA ENTIDAD DE DATOS DE COMBO.

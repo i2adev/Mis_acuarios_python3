@@ -38,7 +38,6 @@ class ModuloMaestroView(QWidget):
         self.label_window_title = w_title
         self.create_widgets()
         self.build_layout()
-        self.hide_panels()
         self.set_tab_order()
         self.init_handlers()
 
@@ -60,85 +59,6 @@ class ModuloMaestroView(QWidget):
         self.button_tb_maximize.clicked.connect(self.control_bt_maximizar)
         self.button_tb_restore.clicked.connect(self.control_bt_normal)
         self.button_tb_minimize.clicked.connect(self.control_bt_minimizar)
-
-        # Botones de la barra de menú
-        self.button_menu_acuario.clicked.connect(
-            lambda: self.show_panel(self.acuario)
-            if self.acuario.isHidden()
-            else self.hide_panel(self.acuario)
-        )
-
-        self.button_menu_comercio.clicked.connect(
-            lambda: self.show_panel(self.comercio)
-            if self.comercio.isHidden()
-            else self.hide_panel(self.comercio)
-        )
-
-        self.button_menu_consumible.clicked.connect(
-            lambda: self.show_panel(self.consumible)
-            if self.consumible.isHidden()
-            else self.hide_panel(self.consumible)
-        )
-
-        self.button_menu_equipamiento.clicked.connect(
-            lambda: self.show_panel(self.equipamiento)
-            if self.equipamiento.isHidden()
-            else self.hide_panel(self.equipamiento)
-        )
-
-        self.button_menu_fauna.clicked.connect(
-            lambda: self.show_panel(self.fauna)
-            if self.fauna.isHidden()
-            else self.hide_panel(self.fauna)
-        )
-
-        self.button_menu_filtro.clicked.connect(
-            lambda: self.show_panel(self.filtro)
-            if self.filtro.isHidden()
-            else self.hide_panel(self.filtro)
-        )
-
-        self.button_menu_flora.clicked.connect(
-            lambda: self.show_panel(self.flora)
-            if self.flora.isHidden()
-            else self.hide_panel(self.flora)
-        )
-
-        self.button_menu_iluminacion.clicked.connect(
-            lambda: self.show_panel(self.iluminacion)
-            if self.iluminacion.isHidden()
-            else self.hide_panel(self.iluminacion)
-        )
-
-        self.button_menu_incidencia.clicked.connect(
-            lambda: self.show_panel(self.incidencia)
-            if self.incidencia.isHidden()
-            else self.hide_panel(self.incidencia)
-        )
-
-        self.button_menu_marca.clicked.connect(
-            lambda: self.show_panel(self.marca)
-            if self.marca.isHidden()
-            else self.hide_panel(self.marca)
-        )
-
-        self.button_menu_proyecto.clicked.connect(
-            lambda: self.show_panel(self.proyecto)
-            if self.proyecto.isHidden()
-            else self.hide_panel(self.proyecto)
-        )
-
-        self.button_menu_urna.clicked.connect(
-            lambda: self.show_panel(self.urna)
-            if self.urna.isHidden()
-            else self.hide_panel(self.urna)
-        )
-
-        self.button_menu_otros.clicked.connect(
-            lambda: self.show_panel(self.otro)
-            if self.otro.isHidden()
-            else self.hide_panel(self.otro)
-        )
 
     def build_layout(self):
         """ Construye el layout de la ventana """
@@ -182,6 +102,8 @@ class ModuloMaestroView(QWidget):
             QSpacerItem(20, 20, QSizePolicy.Policy.Minimum,
                         QSizePolicy.Policy.Expanding)
         )
+
+        self.menu_layout.addWidget(self.button_menu_cerrar)
 
         # Configuramos la barra del título
         self.layout_title_bar.addWidget(self.label_icon)
@@ -235,6 +157,18 @@ class ModuloMaestroView(QWidget):
         self.layout_title_bar.setContentsMargins(0, 0, 0, 0)
 
         self.layout_dashboard = QHBoxLayout()  # Layout del dashboard
+
+        # SALIR DEL FORMULARIO
+        self.button_menu_cerrar = QPushButton("ACUARIO")
+        self.button_menu_cerrar.setIcon(
+            QIcon(str(globales.PATH_IMAGES / "salir.png"))
+        )
+        self.button_menu_cerrar.setIconSize(QSize(32, 32))
+        self.button_menu_cerrar.setObjectName("button_menu_acuario")
+        self.button_menu_cerrar.setFlat(True)
+        self.button_menu_cerrar.setCursor(
+            QCursor(Qt.CursorShape.PointingHandCursor)
+        )
 
         # ACUARIO
         self.button_menu_acuario = QPushButton("ACUARIO")
@@ -1448,53 +1382,6 @@ class ModuloMaestroView(QWidget):
         if self.drag_position.y() <= 20:
             self.showMaximized()
 
-    def hide_panels(self):
-        """ Oculta todos los paneles. """
-
-        if not self.acuario.isHidden():
-            self.acuario.hide()
-        if not self.comercio.isHidden():
-            self.comercio.hide()
-        if not self.consumible.isHidden():
-            self.consumible.hide()
-        if not self.equipamiento.isHidden():
-            self.equipamiento.hide()
-        if not self.fauna.isHidden():
-            self.fauna.hide()
-        if not self.filtro.isHidden():
-            self.filtro.hide()
-        if not self.flora.isHidden():
-            self.flora.hide()
-        if not self.marca.isHidden():
-            self.marca.hide()
-        if not self.iluminacion.isHidden():
-            self.iluminacion.hide()
-        if not self.incidencia.isHidden():
-            self.incidencia.hide()
-        if not self.proyecto.isHidden():
-            self.proyecto.hide()
-        if not self.urna.isHidden():
-            self.urna.hide()
-        if not self.otro.isHidden():
-            self.otro.hide()
-
-    def show_panel(self, panel: QWidget):
-        """
-        Muestra un panel.
-        :param panel: Panel a mostrar.
-        """
-
-        self.hide_panels()
-        panel.show()
-
-    def hide_panel(self, panel: QWidget):
-        """
-        Oculta un panel.
-        :param panel: Panel a ocultar.
-        """
-
-        panel.hide()
-
 
 # Entrada a la aplicación
 if __name__ == "__main__":
@@ -1503,7 +1390,7 @@ if __name__ == "__main__":
     ventana = ModuloMaestroView("MODULO MAESTRO")
 
     # Cargar el archivo .qss
-    with open("../../Resources/Styles/main_style.qss", "r",
+    with open("../Resources/Styles/main_style.qss", "r",
               encoding="utf-8-sig") as f:
         estilo = f.read()
         app.setStyleSheet(estilo)
