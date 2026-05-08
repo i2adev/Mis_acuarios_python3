@@ -386,6 +386,7 @@ class AcuarioController(BaseController):
             worker_fn=lambda: TipoAcuarioDAO().get_list_combo(),
             data=res.value.id
         )
+
         for i in range(combo.count()):
             if combo.itemData(i) == res.value.id:
                 combo.setCurrentIndex(i)

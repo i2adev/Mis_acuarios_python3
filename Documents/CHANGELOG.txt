@@ -1,5 +1,7 @@
 ﻿CHANGELOG:
 ================================================================================
+0.42.1  TESTEO MANUAL DEL MAESTRO DE ACUARIOS.
+
 0.42.0  REFACTORIZACIÓN: SE MODIFICA EL FORMULARIO MAESTRO.
 
 0.41.0  SE CREA EL FORMULARIO DEL MÓDULO MAESTRO.

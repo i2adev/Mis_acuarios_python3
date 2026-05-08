@@ -1,6 +1,19 @@
 ﻿================================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
+08/05/2026  TESTEO MANUAL DEL MAESTRO DE ACUARIOS:
+            -   DONE:   TEST -> INSERCIÓN.
+            -   DONE:   TEST -> CARGA.
+            -   DONE:   TEST -> MODIFICACIÓN.
+            -   DONE:   TEST -> ELIMINACIÓN.
+            -   DONE:   TEST -> IMAGENES.
+            -   DONE:   TEST -> LIMPIEZA DE FORMULARIO.
+            -   DONE:   TEST -> BÚSQUEDA DE REGISTROS.
+            -   TESTEO DE LOS DIALOGOS:
+                -   DONE:   TEST -> DIALOGO URNA.
+                -   DONE:   TEST -> DIALOGO TIPO DE ACUARIO.
+
+
 07/05/2026  REFACTORIZACIÓN:
             -   DONE:   SE MODIFICA EL FORMULARIO DE INICIO.
 
