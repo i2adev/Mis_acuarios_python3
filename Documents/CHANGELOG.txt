@@ -1,5 +1,7 @@
 ﻿CHANGELOG:
 ================================================================================
+0.44.0  VERSIÓN INICIAL DEL MODULO MAESTRO.
+
 0.43.0  TESTEO MANUAL DE LOS MAESTROS.
 
 0.42.1  TESTEO MANUAL DEL MAESTRO DE ACUARIOS.
