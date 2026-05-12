@@ -15,8 +15,10 @@ from ModuloMaestro.Model.Entities.tipo_iluminacion_entity import \
 from Services.Result.result import Result
 from Services.Validators.tipo_iluminacion_validator import \
     TipoIluminacionValidator
-from ModuloMaestro.Views.Dialogs.tipo_iluminacion_dialog import TipoIluminacionDialog
-from ModuloMaestro.Views.Masters.tipo_iluminacion_view import TipoIluminacionView
+from ModuloMaestro.Views.Dialogs.tipo_iluminacion_dialog import \
+    TipoIluminacionDialog
+from ModuloMaestro.Views.Masters.tipo_iluminacion_view import \
+    TipoIluminacionView
 
 
 class TipoIluminacionController(BaseController):
@@ -165,7 +167,7 @@ class TipoIluminacionController(BaseController):
                                       "TABLA ANTES DE ELIMINARLO.")
 
             # Obtener el ID desde el cuadro de texto id_parent
-            id_row = int(self._view.frame.edit_id.text())
+            id_row = int(self._view.frame.edit_id.value())
             return Result.success(id_row)
         elif control == "QAction":
             # Carga el modelo de la fila seleccionada

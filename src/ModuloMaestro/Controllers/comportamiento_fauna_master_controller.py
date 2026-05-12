@@ -9,6 +9,7 @@ from pathlib import Path
 from PyQt6.QtGui import QIcon, QAction
 from PyQt6.QtWidgets import QMessageBox, QTableView, QWidget, QComboBox
 
+import globales
 from ModuloMaestro.Controllers.comportamiento_fauna_controller import \
     ComportamientoFaunaController
 from ModuloMaestro.Model.DAO.comportamiento_fauna_dao import \

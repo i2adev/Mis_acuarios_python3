@@ -10,6 +10,7 @@ from PyQt6.QtCore import QEvent
 from PyQt6.QtGui import QAction, QIcon
 from PyQt6.QtWidgets import QComboBox, QMessageBox, QTableView, QWidget
 
+import globales
 from ModuloMaestro.Controllers.categoria_equipamiento_controller import \
     CategoriaEquipamientoController
 from ModuloMaestro.Model.DAO.categoria_equipamiento_dao import \

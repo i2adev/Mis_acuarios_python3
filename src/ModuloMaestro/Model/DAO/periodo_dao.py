@@ -137,8 +137,7 @@ class PeriodoDAO(BaseDAO):
                 # Configuramos la entidad
                 ent = PeriodoEntity(
                     id=row[0],
-                    num=row[1],
-                    periodo=row[2],
+                    periodo=row[1],
                 )
 
                 return Result.success(ent)

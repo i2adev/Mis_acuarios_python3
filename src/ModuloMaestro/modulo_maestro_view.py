@@ -178,7 +178,7 @@ class ModuloMaestroView(QWidget):
         self.layout_dashboard = QHBoxLayout()  # Layout del dashboard
 
         # SALIR DEL FORMULARIO
-        self.button_menu_cerrar = QPushButton("ACUARIO")
+        self.button_menu_cerrar = QPushButton("CERRAR MÓDULO")
         self.button_menu_cerrar.setIcon(
             QIcon(str(globales.PATH_IMAGES / "salir.png"))
         )

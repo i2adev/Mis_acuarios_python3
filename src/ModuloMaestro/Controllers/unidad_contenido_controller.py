@@ -15,8 +15,10 @@ from ModuloMaestro.Model.Entities.unidad_contenido_entity import \
 from Services.Result.result import Result
 from Services.Validators.unidad_contenido_validator import \
     UnidadContenidoValidator
-from ModuloMaestro.Views.Dialogs.unidad_contenido_dialog import UnidadContenidoDialog
-from ModuloMaestro.Views.Masters.unidad_contenido_master import UnidadContenidoView
+from ModuloMaestro.Views.Dialogs.unidad_contenido_dialog import \
+    UnidadContenidoDialog
+from ModuloMaestro.Views.Masters.unidad_contenido_master import \
+    UnidadContenidoView
 
 
 class UnidadContenidoController(BaseController):
@@ -168,7 +170,7 @@ class UnidadContenidoController(BaseController):
                                       "TABLA ANTES DE ELIMINARLO.")
 
             # Obtener el ID desde el cuadro de texto id_parent
-            id_row = int(self._view.frame.edit_id.text())
+            id_row = int(self._view.frame.edit_id.value())
             return Result.success(id_row)
         elif control == "QAction":
             # Carga el modelo de la fila seleccionada
@@ -224,7 +226,7 @@ class UnidadContenidoController(BaseController):
 
         # Cargamos los widgets
         self._view.frame.edit_id.setValue(ent.id)
-        self._view.frame.edit_unidad_contenido.setValue(ent.unidad_contenido)
+        self._view.frame.edit_unidad_contenido.setValue(ent.unidad)
         self._view.frame.text_descripcion.setValue(ent.descripcion)
 
         return Result.success(ent.id)

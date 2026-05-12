@@ -250,7 +250,7 @@ class EspecieVegetalController(BaseController):
                                       "TABLA.")
 
             # Obtener el ID desde el cuadro de texto id_parent
-            id_row = int(self._view.frame.edit_id.text())
+            id_row = int(self._view.frame.edit_id.value())
             return Result.success(id_row)
         elif control == "QAction":
             # Carga el modelo de la fila seleccionada
@@ -332,7 +332,11 @@ class EspecieVegetalController(BaseController):
         # Configuramos el combo
         combo = self._view.frame.combo_posicion
 
-        self._fill_combo_posicion()
+        self._load_combo(
+            combo=combo,
+            worker_fn=lambda: PosicionPlantaAcuarioDAO().get_list_combo(),
+            data=res.value.id
+        )
         for i in range(combo.count()):
             if combo.itemData(i) == res.value.id:
                 combo.setCurrentIndex(i)
@@ -356,7 +360,11 @@ class EspecieVegetalController(BaseController):
         # Configuramos el combo
         combo = self._view.frame.combo_req_iluminacion
 
-        self._fill_combo_req_iluminacion()
+        self._load_combo(
+            combo=combo,
+            worker_fn=lambda: RequerimientoIluminacionDAO().get_list_combo(),
+            data=res.value.id
+        )
         for i in range(combo.count()):
             if combo.itemData(i) == res.value.id:
                 combo.setCurrentIndex(i)
@@ -379,7 +387,11 @@ class EspecieVegetalController(BaseController):
         # Configuramos el combo
         combo = self._view.frame.combo_req_co2
 
-        self._fill_combo_req_co2()
+        self._load_combo(
+            combo=combo,
+            worker_fn=lambda: RequerimientoCO2DAO().get_list_combo(),
+            data=res.value.id
+        )
         for i in range(combo.count()):
             if combo.itemData(i) == res.value.id:
                 combo.setCurrentIndex(i)
@@ -402,7 +414,11 @@ class EspecieVegetalController(BaseController):
         # Configuramos el combo
         combo = self._view.frame.combo_crecimiento
 
-        self._fill_combo_crecimiento()
+        self._load_combo(
+            combo=combo,
+            worker_fn=lambda: TasaCrecimientoDAO().get_list_combo(),
+            data=res.value.id
+        )
         for i in range(combo.count()):
             if combo.itemData(i) == res.value.id:
                 combo.setCurrentIndex(i)
@@ -425,7 +441,11 @@ class EspecieVegetalController(BaseController):
         # Configuramos el combo
         combo = self._view.frame.combo_dificultad
 
-        self._fill_combo_dificultad()
+        self._load_combo(
+            combo=combo,
+            worker_fn=lambda: DificultadPlantaDAO().get_list_combo(),
+            data=res.value.id
+        )
         for i in range(combo.count()):
             if combo.itemData(i) == res.value.id:
                 combo.setCurrentIndex(i)
@@ -458,9 +478,7 @@ class EspecieVegetalController(BaseController):
         ent = val.value
 
         # Cargamos los widgets
-        self._view.frame.edit_id.setText(
-            str(id_ent) if id_ent is not None else ""
-        )
+        self._view.frame.edit_id.setValue(ent.id)
         self._view.frame.edit_reino.setValue(ent.reino)
         self._view.frame.edit_division.setValue(ent.division)
         self._view.frame.edit_clase.setValue(ent.clase)

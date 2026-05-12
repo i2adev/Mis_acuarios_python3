@@ -184,7 +184,7 @@ class SubcategoriaAcuarioController(BaseController):
                                       "TABLA ANTES DE ELIMINARLO.")
 
             # Obtener el ID desde el cuadro de texto id_parent
-            id_row = int(self._view.frame.edit_id.text())
+            id_row = int(self._view.frame.edit_id.value())
             return Result.success(id_row)
         elif control == "QAction":
             # Carga el modelo de la fila seleccionada
@@ -246,38 +246,35 @@ class SubcategoriaAcuarioController(BaseController):
 
         return Result.success(ent.id)
 
-    def _fill_combos_async(self):
+    def _fill_combos(self):
         """ Llena los combos del formulario"""
 
-        self._load_combo(
-            combo=self._view.frame.combo_categoria_acuario,
-            worker_fn=lambda: CategoriaAcuarioDAO().get_list_combo()
-        )
+        self._fill_categoria_acuario()
 
-    # def _fill_categoria_acuario(self):
-    #     """ Llena el combo. """
-    #
-    #     # Vaciamos el combo
-    #     self._view.frame.combo_categoria_acuario.clear()
-    #
-    #     # Obtenemos los datos
-    #     dao = CategoriaAcuarioDAO()
-    #     lista = dao.get_list_combo()
-    #     if not lista.is_success:
-    #         return Result.failure(
-    #             "NO SE HAN PODIDO OBTENER LAS 'CATEGORÍAS DE ACUARIO'."
-    #         )
-    #
-    #     # Llenas el combo
-    #     for ent in lista.value:
-    #         self._view.frame.combo_categoria_acuario.addItem(ent.value,
-    #                                                          ent.id)
-    #
-    #     # Establecemos el autocompletado
-    #     self._set_autocomplete(self._view.frame.combo_categoria_acuario)
-    #
-    #     # Deselecciona el valor
-    #     self._view.frame.combo_categoria_acuario.setCurrentIndex(-1)
+    def _fill_categoria_acuario(self):
+        """ Llena el combo. """
+
+        # Vaciamos el combo
+        self._view.frame.combo_categoria_acuario.clear()
+
+        # Obtenemos los datos
+        dao = CategoriaAcuarioDAO()
+        lista = dao.get_list_combo()
+        if not lista.is_success:
+            return Result.failure(
+                "NO SE HAN PODIDO OBTENER LAS 'CATEGORÍAS DE ACUARIO'."
+            )
+
+        # Llenas el combo
+        for ent in lista.value:
+            self._view.frame.combo_categoria_acuario.addItem(ent.categoria,
+                                                             ent.id)
+
+        # Establecemos el autocompletado
+        self._set_autocomplete(self._view.frame.combo_categoria_acuario)
+
+        # Deselecciona el valor
+        self._view.frame.combo_categoria_acuario.setCurrentIndex(-1)
 
     def _open_categoria_acuario_dialog(self):
         """ Abre el diálogo de categoría de acuario. """
@@ -295,12 +292,34 @@ class SubcategoriaAcuarioController(BaseController):
         # Configuramos el combo
         combo = self._view.frame.combo_categoria_acuario
 
-        self._load_combo(
-            combo=combo,
-            worker_fn=lambda: CategoriaAcuarioDAO().get_list_combo(),
-            data=res.value.id
-        )
-
+        self._fill_combo_categoria()
         for i in range(combo.count()):
             if combo.itemData(i) == res.value.id:
                 combo.setCurrentIndex(i)
+
+    def _fill_combos(self):
+        """ Llena los combos del formulario"""
+
+        self._fill_combo_categoria()
+
+    def _fill_combo_categoria(self):
+        """ Llena el combo de tipos de acuario. """
+
+        # Vaciamos el combo
+        self._view.frame.combo_categoria_acuario.clear()
+
+        # Obtenemos los datos
+        dao = CategoriaAcuarioDAO()
+        lista = dao.get_list_combo()
+        if not lista.is_success:
+            return Result.failure(
+                "NO SE HAN PODIDO OBTENER LOS 'CATEGORÍAS DE INCIDENCIA'."
+            )
+
+        # Llenas el combo
+        for ent in lista.value:
+            self._view.frame.combo_categoria_acuario.addItem(
+                ent.value, ent.id)
+
+        # Vaciamos el combo
+        self._view.frame.combo_categoria_acuario.setCurrentIndex(-1)

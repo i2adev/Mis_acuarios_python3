@@ -10,6 +10,7 @@ from pathlib import Path
 from PyQt6.QtGui import QIcon, QAction
 from PyQt6.QtWidgets import QMessageBox, QTableView, QWidget
 
+import globales
 from ModuloMaestro.Controllers.requerimiento_iluminacion_controller import \
     RequerimientoIluminacionController
 from ModuloMaestro.Model.TableModel.requerimiento_iluminacion_table_model import \

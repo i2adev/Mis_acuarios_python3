@@ -9,6 +9,7 @@ from pathlib import Path
 from PyQt6.QtGui import QAction, QIcon
 from PyQt6.QtWidgets import QComboBox, QMessageBox, QTableView, QWidget
 
+import globales
 from ModuloMaestro.Controllers.equipamiento_conttroller import \
     EquipamientoController
 from CustomControls.nullable_date_edit import NullableDateEdit

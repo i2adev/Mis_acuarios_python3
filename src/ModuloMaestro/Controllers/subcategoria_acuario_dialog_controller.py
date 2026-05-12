@@ -35,7 +35,7 @@ class SubcategoriaAcuarioDialogController(SubcategoriaAcuarioController):
         super().__init__(view, dao, mod)
 
         # Llena los combos
-        self._fill_combos_async()
+        self._fill_combos()
         self._view.frame.combo_categoria_acuario.setCurrentIndex(id_sa)
 
         # Oculta el layout del ID

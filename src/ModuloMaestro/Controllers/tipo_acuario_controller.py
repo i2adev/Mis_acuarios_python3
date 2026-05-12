@@ -180,7 +180,7 @@ class TipoAcuarioController(BaseController):
                                       "TABLA ANTES DE ELIMINARLO.")
 
             # Obtener el ID desde el cuadro de texto id_parent
-            id_row = int(self._view.frame.edit_id.text())
+            id_row = int(self._view.frame.edit_id.value())
             return Result.success(id_row)
         elif control == "QAction":
             # Carga el modelo de la fila seleccionada
@@ -244,32 +244,82 @@ class TipoAcuarioController(BaseController):
 
         return Result.success(ent.id)
 
-    def _fill_combos_async(self):
+    def _fill_combos(self):
         """ Llena los combos del formulario"""
 
-        combo = self._view.frame.combo_categoria_acuario
-        combo.loading = True
+        self._fill_combo_categoria_acuario()
 
-        self._load_combo(
-            combo=combo,
-            worker_fn=lambda: CategoriaAcuarioDAO().get_list_combo()
-        )
+    def _fill_combo_categoria_acuario(self):
+        """ Llena el combo de tipos de acuario. """
+
+        # Vaciamos el combo
+        self._view.frame.combo_categoria_acuario.clear()
+
+        # Obtenemos los datos
+        dao = CategoriaAcuarioDAO()
+        lista = dao.get_list_combo()
+        if not lista.is_success:
+            return Result.failure(
+                "NO SE HAN PODIDO OBTENER LOS 'TIPOS DE FILTRO'."
+            )
+
+        # Llenas el combo
+        for ent in lista.value:
+            self._view.frame.combo_categoria_acuario.addItem(ent.value,
+                                                             ent.id)
+
+        # Establecemos el autocompletado
+        self._set_autocomplete(self._view.frame.combo_categoria_acuario)
+
+        # Deselecciona el valor
+        self._view.frame.combo_categoria_acuario.setCurrentIndex(-1)
+
+    def _fill_combo_subcategoria_acuario(self, id_ta: int):
+        """ Llena el combo de subcategoría de acuario. """
+
+        # Vaciamos el combo
+        self._view.frame.combo_subcategoria_acuario.clear()
+
+        # Condiciones de salida
+        if id_ta == -1:
+            return
+
+        # Obtenemos los datos
+        dao = SubcategoriaAcuarioDAO()
+        lista = dao.get_list_combo_by_categoria(id_ta)
+        if not lista.is_success:
+            return Result.failure(
+                "NO SE HAN PODIDO OBTENER LOS 'SUBCATEGORÍAS DE ACUARIO'."
+            )
+
+        # Llenas el combo
+        for ent in lista.value:
+            self._view.frame.combo_subcategoria_acuario.addItem(
+                ent.value, ent.id)
+
+        # Establecemos el autocompletado
+        self._set_autocomplete(self._view.frame.combo_categoria_acuario)
+
+        # Deselecciona el valor
+        self._view.frame.combo_subcategoria_acuario.setCurrentIndex(-1)
+
+        # Establecemos el autocompletado
+        self._set_autocomplete(self._view.frame.combo_subcategoria_acuario)
 
     def _combo_categoria_indexchanged(self):
         """ Se ejecuta cuando el índice del combo cambia. """
 
-        if self._view.frame.combo_categoria_acuario.loading:
+        # Cuando en el combo categoría se limpia, se limpia a su vez el combo de
+        # subcategoría
+        if self._view.frame.combo_categoria_acuario.currentIndex() == -1:
+            self._view.frame.combo_subcategoria_acuario.clear()
             return
 
         # Obtenemos el dato a cargar
         data = self._view.frame.combo_categoria_acuario.currentData()
 
         # Cargamos el combo subcategoría
-        self._load_combo(
-            combo=self._view.frame.combo_subcategoria_acuario,
-            worker_fn=lambda: SubcategoriaAcuarioDAO().get_list_combo_by_categoria(
-                data)
-        )
+        self._fill_combo_subcategoria_acuario(data)
 
     def _open_categoria_acuario_dialog(self):
         """ Abre el diálogo de categoría de acuario. """
@@ -289,12 +339,7 @@ class TipoAcuarioController(BaseController):
         # Configuramos el combo
         combo = self._view.frame.combo_categoria_acuario
 
-        self._load_combo(
-            combo=combo,
-            worker_fn=lambda: CategoriaAcuarioDAO().get_list_combo(),
-            data=res.value.id
-        )
-        
+        self._fill_combos()
         for i in range(combo.count()):
             if combo.itemData(i) == res.value.id:
                 combo.setCurrentIndex(i)
@@ -331,15 +376,7 @@ class TipoAcuarioController(BaseController):
         # Configuramos el combo
         combo = self._view.frame.combo_subcategoria_acuario
 
-        # Configuramos el combo
-        combo = self._view.frame.combo_subcategoria_acuario
-
-        self._load_combo(
-            combo=combo,
-            worker_fn=lambda: SubcategoriaAcuarioDAO().get_list_combo(),
-            data=res.value.id
-        )
-
+        self._fill_combo_subcategoria_acuario(data)
         for i in range(combo.count()):
             if combo.itemData(i) == res.value.id:
                 combo.setCurrentIndex(i)

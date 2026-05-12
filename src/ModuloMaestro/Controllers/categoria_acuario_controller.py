@@ -14,8 +14,10 @@ from ModuloMaestro.Model.Entities.categoria_acuario_entity import \
 from Services.Result.result import Result
 from Services.Validators.categoria_acuario_validator import \
     CategoriaAcuarioValidator
-from ModuloMaestro.Views.Dialogs.categoria_acuario_dialog import CategoriaAcuarioDialog
-from ModuloMaestro.Views.Masters.categoria_acuario_view import CategoriaAcuarioView
+from ModuloMaestro.Views.Dialogs.categoria_acuario_dialog import \
+    CategoriaAcuarioDialog
+from ModuloMaestro.Views.Masters.categoria_acuario_view import \
+    CategoriaAcuarioView
 
 
 class CategoriaAcuarioController(BaseController):
@@ -161,8 +163,8 @@ class CategoriaAcuarioController(BaseController):
                 return Result.failure("DEBES SELECCIONAR UN REGISTRO DE LA "
                                       "TABLA ANTES DE ELIMINARLO.")
 
-            # Obtener el ID desde el cuadro de texto id_parent
-            id_row = int(self._view.frame.edit_id.text())
+            # Obtener el ID desde el cuadro de texto id_parent1
+            id_row = int(self._view.frame.edit_id.value())
             return Result.success(id_row)
         elif control == "QAction":
             # Carga el modelo de la fila seleccionada

@@ -9,6 +9,7 @@ from pathlib import Path
 from PyQt6.QtGui import QIcon, QAction
 from PyQt6.QtWidgets import QMessageBox, QTableView, QWidget, QComboBox
 
+import globales
 from ModuloMaestro.Controllers.urna_controller import UrnaController
 from ModuloMaestro.Model.Entities.urna_entity import UrnaEntity
 from Services.Paginator.paginator import Paginator

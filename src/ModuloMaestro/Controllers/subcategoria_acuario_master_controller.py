@@ -9,6 +9,7 @@ from pathlib import Path
 from PyQt6.QtGui import QIcon, QAction
 from PyQt6.QtWidgets import QMessageBox, QTableView, QWidget, QComboBox
 
+import globales
 from ModuloMaestro.Controllers.subcategoria_acuario_controller import \
     SubcategoriaAcuarioController
 from ModuloMaestro.Model.Entities.subcategoria_acuario_entity import \
@@ -40,7 +41,7 @@ class SubcategoriaAcuarioMasterController(SubcategoriaAcuarioController):
         super().__init__(view, dao, mod)
 
         # Rellena los combos
-        self._fill_combos_async()
+        self._fill_combos()
 
         # Inicializamos el paginador
         self._pag = Paginator("VISTA_SUBCATEGORIAS_ACUARIO", 5)

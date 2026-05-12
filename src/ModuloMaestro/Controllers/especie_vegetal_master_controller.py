@@ -9,6 +9,7 @@ from pathlib import Path
 from PyQt6.QtGui import QAction, QIcon
 from PyQt6.QtWidgets import QComboBox, QMessageBox, QTableView, QWidget
 
+import globales
 from ModuloMaestro.Controllers.especie_vegetal_controller import \
     EspecieVegetalController
 from ModuloMaestro.Model.DAO.especie_vegetal_dao import EspecieVegetalDAO

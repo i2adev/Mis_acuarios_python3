@@ -9,6 +9,7 @@ from pathlib import Path
 from PyQt6.QtGui import QIcon, QAction
 from PyQt6.QtWidgets import QMessageBox, QTableView, QWidget
 
+import globales
 from ModuloMaestro.Controllers.periodo_controller import PeriodoController
 from ModuloMaestro.Model.TableModel.periodo_table_model import \
     PeriodoTableModel

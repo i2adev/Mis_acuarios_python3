@@ -81,7 +81,7 @@ class UsuarioDialogController(BaseController):
         ent = UsuarioEntity()
 
         # if self._view.frame.edit_id.text():
-        #     ent.id = int(self._view.frame.edit_id.text())
+        #     ent.id = int(self._view.frame.edit_id.value())
         # else:
         #     ent.id = None
 

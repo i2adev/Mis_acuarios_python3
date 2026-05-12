@@ -14,8 +14,10 @@ from ModuloMaestro.Model.Entities.dificultad_planta_entity import \
 from Services.Result.result import Result
 from Services.Validators.dificultad_planta_validator import \
     DificultadPlantaValidator
-from ModuloMaestro.Views.Dialogs.dificultad_planta_dialog import DificultadPlantaDialog
-from ModuloMaestro.Views.Masters.dificultad_planta_view import DificultadPlantaView
+from ModuloMaestro.Views.Dialogs.dificultad_planta_dialog import \
+    DificultadPlantaDialog
+from ModuloMaestro.Views.Masters.dificultad_planta_view import \
+    DificultadPlantaView
 
 
 class DificultadPlantaController(BaseController):
@@ -177,7 +179,7 @@ class DificultadPlantaController(BaseController):
                                       "TABLA ANTES DE ELIMINARLO.")
 
             # Obtener el ID desde el cuadro de texto id_parent
-            id_row = int(self._view.frame.edit_id.text())
+            id_row = int(self._view.frame.edit_id.value())
             return Result.success(id_row)
         elif control == "QAction":
             # Carga el modelo de la fila seleccionada

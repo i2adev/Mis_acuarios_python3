@@ -114,7 +114,7 @@ class MarcaComercialDialogController(MarcaComercialController):
 
         # Llenas el combo
         for ent in lista.value:
-            self._view.frame.combo_pais.addItem(ent.pais, ent.id)
+            self._view.frame.combo_pais.addItem(ent.value, ent.id)
 
         # Establecemos el autocompletado
         self._set_autocomplete(self._view.frame.combo_pais)

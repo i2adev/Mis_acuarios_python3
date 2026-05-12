@@ -10,6 +10,7 @@ from PyQt6.QtCore import QEvent
 from PyQt6.QtGui import QIcon, QAction
 from PyQt6.QtWidgets import QMessageBox, QTableView, QWidget, QComboBox
 
+import globales
 from ModuloMaestro.Controllers.material_urna_controller import \
     MaterialUrnaController
 from ModuloMaestro.Model.DAO.material_urna_dao import MaterialUrnaDAO

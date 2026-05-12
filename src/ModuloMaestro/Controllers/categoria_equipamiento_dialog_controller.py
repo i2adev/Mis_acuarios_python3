@@ -73,7 +73,7 @@ class CategoriaEquipamientoDialogController(CategoriaEquipamientoController):
         self._cat_equipamiento_result = CategoriaEquipamientoEntity(
             id=res.value,
             num=None,
-            categoria=self._view.frame.edit_categoria_equipamiento.text(),
+            categoria_equipamiento=self._view.frame.edit_categoria_equipamiento.text(),
             descripcion=self._view.frame.text_descripcion.toPlainText()
             if self._view.frame.text_descripcion.toPlainText()
             else None

@@ -236,7 +236,7 @@ class ConsumibleController(BaseController):
                                       "TABLA.")
 
             # Obtener el ID desde el cuadro de texto id_parent
-            id_row = int(self._view.frame.edit_id.text())
+            id_row = int(self._view.frame.edit_id.value())
             return Result.success(id_row)
         elif control == "QAction":
             # Carga el modelo de la fila seleccionada
@@ -371,7 +371,11 @@ class ConsumibleController(BaseController):
         # Configuramos el combo
         combo = self._view.frame.combo_marca
 
-        self._fill_combo_marca()
+        self._load_combo(
+            combo=self._view.frame.combo_marca,
+            worker_fn=lambda: MarcaComercialDAO().get_list_combo(),
+            data=res.value.id
+        )
         for i in range(combo.count()):
             if combo.itemData(i) == res.value.id:
                 combo.setCurrentIndex(i)
@@ -394,10 +398,15 @@ class ConsumibleController(BaseController):
         # Configuramos el combo
         combo = self._view.frame.combo_categoria
 
-        self._fill_combo_categoria()
+        self._load_combo(
+            combo=combo,
+            worker_fn=lambda: CategoriaConsumibleDAO().get_list_combo(),
+            data=res.value.id
+        )
         for i in range(combo.count()):
             if combo.itemData(i) == res.value.id:
                 combo.setCurrentIndex(i)
+                return
 
     def _open_formato_dialog(self):
         """ Abrimos el diálogo de formato de consumible. """
@@ -417,10 +426,15 @@ class ConsumibleController(BaseController):
         # Configuramos el combo
         combo = self._view.frame.combo_formato
 
-        self._fill_combo_formato()
+        self._load_combo(
+            combo=combo,
+            worker_fn=lambda: FormatoConsumibleDAO().get_list_combo(),
+            data=res.value.id
+        )
         for i in range(combo.count()):
             if combo.itemData(i) == res.value.id:
                 combo.setCurrentIndex(i)
+                return
 
     def _open_unidad_dialog(self):
         """ Abrimos el diálogo de unidad de contenido. """
@@ -440,7 +454,12 @@ class ConsumibleController(BaseController):
         # Configuramos el combo
         combo = self._view.frame.combo_unidad
 
-        self._fill_combo_unidad()
+        self._load_combo(
+            combo=combo,
+            worker_fn=lambda: UnidadContenidoDAO().get_list_combo(),
+            data=res.value.id
+        )
         for i in range(combo.count()):
             if combo.itemData(i) == res.value.id:
                 combo.setCurrentIndex(i)
+                return

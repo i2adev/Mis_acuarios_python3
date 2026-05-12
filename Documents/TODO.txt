@@ -1,6 +1,329 @@
 ﻿================================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
+12/05/2026  TESTEO MANUAL DE PERIODICIDADES:
+            -   DONE:   TEST -> INSERCIÓN.
+            -   DONE:   TEST -> CARGA.
+            -   DONE:   TEST -> MODIFICACIÓN.
+            -   DONE:   TEST -> ELIMINACIÓN.
+            -   N.A.:   TEST -> IMAGENES.
+            -   DONE:   TEST -> LIMPIEZA DE FORMULARIO.
+            -   DONE:   TEST -> BÚSQUEDA DE REGISTROS.
+
+12/05/2026  TESTEO MANUAL DE MATERIALES DE URNAS:
+            -   DONE:   TEST -> INSERCIÓN.
+            -   DONE:   TEST -> CARGA.
+            -   DONE:   TEST -> MODIFICACIÓN.
+            -   DONE:   TEST -> ELIMINACIÓN.
+            -   N.A.:   TEST -> IMAGENES.
+            -   DONE:   TEST -> LIMPIEZA DE FORMULARIO.
+            -   DONE:   TEST -> BÚSQUEDA DE REGISTROS.
+
+12/05/2026  TESTEO MANUAL DE URNAS:
+            -   DONE:   TEST -> INSERCIÓN.
+            -   DONE:   TEST -> CARGA.
+            -   DONE:   TEST -> MODIFICACIÓN.
+            -   DONE:   TEST -> ELIMINACIÓN.
+            -   DONE:   TEST -> IMAGENES.
+            -   DONE:   TEST -> LIMPIEZA DE FORMULARIO.
+            -   DONE:   TEST -> BÚSQUEDA DE REGISTROS.
+
+12/05/2026  TESTEO MANUAL DE ESTADOS DE PROYECTOS:
+            -   DONE:   TEST -> INSERCIÓN.
+            -   DONE:   TEST -> CARGA.
+            -   DONE:   TEST -> MODIFICACIÓN.
+            -   DONE:   TEST -> ELIMINACIÓN.
+            -   N.A.:   TEST -> IMAGENES.
+            -   DONE:   TEST -> LIMPIEZA DE FORMULARIO.
+            -   DONE:   TEST -> BÚSQUEDA DE REGISTROS.
+
+12/05/2026  TESTEO MANUAL DE PROYECTOS:
+            -   DONE:   TEST -> INSERCIÓN.
+            -   DONE:   TEST -> CARGA.
+            -   DONE:   TEST -> MODIFICACIÓN.
+            -   DONE:   TEST -> ELIMINACIÓN.
+            -   N.A.:   TEST -> IMAGENES.
+            -   DONE:   TEST -> LIMPIEZA DE FORMULARIO.
+            -   DONE:   TEST -> BÚSQUEDA DE REGISTROS.
+
+12/05/2026  TESTEO MANUAL DE LAS MARCAS COMERCIALES:
+            -   DONE:   TEST -> INSERCIÓN.
+            -   DONE:   TEST -> CARGA.
+            -   DONE:   TEST -> MODIFICACIÓN.
+            -   DONE:   TEST -> ELIMINACIÓN.
+            -   N.A.:   TEST -> IMAGENES.
+            -   DONE:   TEST -> LIMPIEZA DE FORMULARIO.
+            -   DONE:   TEST -> BÚSQUEDA DE REGISTROS.
+
+12/05/2026  TESTEO MANUAL DEL SUBCATEGORÍAS DE INCIDENCIA:
+            -   DONE:   TEST -> INSERCIÓN.
+            -   DONE:   TEST -> CARGA.
+            -   DONE:   TEST -> MODIFICACIÓN.
+            -   DONE:   TEST -> ELIMINACIÓN.
+            -   N.A.:   TEST -> IMAGENES.
+            -   DONE:   TEST -> LIMPIEZA DE FORMULARIO.
+            -   DONE:   TEST -> BÚSQUEDA DE REGISTROS.
+
+12/05/2026  TESTEO MANUAL DEL CATEGORÍAS DE INCIDENCIA:
+            -   DONE:   TEST -> INSERCIÓN.
+            -   DONE:   TEST -> CARGA.
+            -   DONE:   TEST -> MODIFICACIÓN.
+            -   DONE:   TEST -> ELIMINACIÓN.
+            -   N.A.:   TEST -> IMAGENES.
+            -   DONE:   TEST -> LIMPIEZA DE FORMULARIO.
+            -   DONE:   TEST -> BÚSQUEDA DE REGISTROS.
+
+12/05/2026  TESTEO MANUAL DEL CONTROL DE ILUMINACIÓN:
+            -   DONE:   TEST -> INSERCIÓN.
+            -   DONE:   TEST -> CARGA.
+            -   DONE:   TEST -> MODIFICACIÓN.
+            -   DONE:   TEST -> ELIMINACIÓN.
+            -   N.A.:   TEST -> IMAGENES.
+            -   DONE:   TEST -> LIMPIEZA DE FORMULARIO.
+            -   DONE:   TEST -> BÚSQUEDA DE REGISTROS.
+
+12/05/2026  TESTEO MANUAL DEL TIPO DE ILUMINACIÓN:
+            -   DONE:   TEST -> INSERCIÓN.
+            -   DONE:   TEST -> CARGA.
+            -   DONE:   TEST -> MODIFICACIÓN.
+            -   DONE:   TEST -> ELIMINACIÓN.
+            -   N.A.:   TEST -> IMAGENES.
+            -   DONE:   TEST -> LIMPIEZA DE FORMULARIO.
+            -   DONE:   TEST -> BÚSQUEDA DE REGISTROS.
+
+12/05/2026  TESTEO MANUAL DEL MAESTRO DE LUMINARIAS:
+            -   DONE:   TEST -> INSERCIÓN.
+            -   DONE:   TEST -> CARGA.
+            -   DONE:   TEST -> MODIFICACIÓN.
+            -   DONE:   TEST -> ELIMINACIÓN.
+            -   DONE:   TEST -> IMAGENES.
+            -   DONE:   TEST -> LIMPIEZA DE FORMULARIO.
+            -   DONE:   TEST -> BÚSQUEDA DE REGISTROS.
+
+            -   TESTEO DE LOS DIALOGOS:
+                -   DONE:   TEST -> DIALOGO MARCA.
+                -   DONE:   TEST -> DIALOGO TIPO DE ILUMINACION.
+                -   DONE:   TEST -> DIALOGO CONTROL DE ILUMINACIÓN.
+
+12/05/2026  TESTEO MANUAL DEL MAESTRO DE TASAS DE CRECIMIENTO:
+            -   DONE:   TEST -> INSERCIÓN.
+            -   DONE:   TEST -> CARGA.
+            -   DONE:   TEST -> MODIFICACIÓN.
+            -   DONE:   TEST -> ELIMINACIÓN.
+            -   N.A.:   TEST -> IMAGENES.
+            -   DONE:   TEST -> LIMPIEZA DE FORMULARIO.
+            -   DONE:   TEST -> BÚSQUEDA DE REGISTROS.
+
+12/05/2026  TESTEO MANUAL DEL MAESTRO DE REQUERIMIENTO DE ILUMINACIÓN:
+            -   DONE:   TEST -> INSERCIÓN.
+            -   DONE:   TEST -> CARGA.
+            -   DONE:   TEST -> MODIFICACIÓN.
+            -   DONE:   TEST -> ELIMINACIÓN.
+            -   N.A.:   TEST -> IMAGENES.
+            -   DONE:   TEST -> LIMPIEZA DE FORMULARIO.
+            -   DONE:   TEST -> BÚSQUEDA DE REGISTROS.
+
+12/05/2026  TESTEO MANUAL DEL MAESTRO DE REQUERIMIENTO DE CO2:
+            -   DONE:   TEST -> INSERCIÓN.
+            -   DONE:   TEST -> CARGA.
+            -   DONE:   TEST -> MODIFICACIÓN.
+            -   DONE:   TEST -> ELIMINACIÓN.
+            -   N.A.:   TEST -> IMAGENES.
+            -   DONE:   TEST -> LIMPIEZA DE FORMULARIO.
+            -   DONE:   TEST -> BÚSQUEDA DE REGISTROS.
+
+12/05/2026  TESTEO MANUAL DEL MAESTRO DE POSICIÓN EN EL ACUARIO:
+            -   DONE:   TEST -> INSERCIÓN.
+            -   DONE:   TEST -> CARGA.
+            -   DONE:   TEST -> MODIFICACIÓN.
+            -   DONE:   TEST -> ELIMINACIÓN.
+            -   N.A.:   TEST -> IMAGENES.
+            -   DONE:   TEST -> LIMPIEZA DE FORMULARIO.
+            -   DONE:   TEST -> BÚSQUEDA DE REGISTROS.
+
+12/05/2026  TESTEO MANUAL DEL MAESTRO DE DIFICULTAD DE PLANTAS:
+            -   DONE:   TEST -> INSERCIÓN.
+            -   DONE:   TEST -> CARGA.
+            -   DONE:   TEST -> MODIFICACIÓN.
+            -   DONE:   TEST -> ELIMINACIÓN.
+            -   N.A.:   TEST -> IMAGENES.
+            -   DONE:   TEST -> LIMPIEZA DE FORMULARIO.
+            -   DONE:   TEST -> BÚSQUEDA DE REGISTROS.
+
+12/05/2026  TESTEO MANUAL DEL MAESTRO DE ESPECIES VEGETAL:
+            -   DONE:   TEST -> INSERCIÓN.
+            -   DONE:   TEST -> CARGA.
+            -   DONE:   TEST -> MODIFICACIÓN.
+            -   DONE:   TEST -> ELIMINACIÓN.
+            -   DONE:   TEST -> IMAGENES.
+            -   DONE:   TEST -> LIMPIEZA DE FORMULARIO.
+            -   DONE:   TEST -> BÚSQUEDA DE REGISTROS.
+
+            -   TESTEO DE LOS DIALOGOS:
+                -   DONE:   TEST -> DIALOGO POSICIÓN.
+                -   DONE:   TEST -> DIALOGO REQUERIMIENTOS ILUMINACIÓN.
+                -   DONE:   TEST -> DIALOGO REQUERIMIENTOS CO2.
+                -   DONE:   TEST -> DIALOGO TASAS DE CRECIMIENTO.
+                -   DONE:   TEST -> DIALOGO DIFICULTAD.
+
+11/05/2026  TESTEO MANUAL DEL MAESTRO DE FILTRO:
+            -   DONE:   TEST -> INSERCIÓN.
+            -   DONE:   TEST -> CARGA.
+            -   DONE:   TEST -> MODIFICACIÓN.
+            -   DONE:   TEST -> ELIMINACIÓN.
+            -   N.A.:   TEST -> IMAGENES.
+            -   DONE:   TEST -> LIMPIEZA DE FORMULARIO.
+            -   DONE:   TEST -> BÚSQUEDA DE REGISTROS.
+
+            -   TESTEO DE LOS DIALOGOS:
+                -   DONE:   TEST -> DIALOGO TIPO DE FILTRO.
+                -   DONE:   TEST -> DIALOGO MARCA.
+
+11/05/2026  TESTEO MANUAL DEL MAESTRO DE SEXO:
+            -   DONE:   TEST -> INSERCIÓN.
+            -   DONE:   TEST -> CARGA.
+            -   DONE:   TEST -> MODIFICACIÓN.
+            -   DONE:   TEST -> ELIMINACIÓN.
+            -   N.A.:   TEST -> IMAGENES.
+            -   DONE:   TEST -> LIMPIEZA DE FORMULARIO.
+            -   DONE:   TEST -> BÚSQUEDA DE REGISTROS.
+
+11/05/2026  TESTEO MANUAL DEL MAESTRO DE GRUPOS TAXONÓMICOS:
+            -   DONE:   TEST -> INSERCIÓN.
+            -   DONE:   TEST -> CARGA.
+            -   DONE:   TEST -> MODIFICACIÓN.
+            -   DONE:   TEST -> ELIMINACIÓN.
+            -   N.A.:   TEST -> IMAGENES.
+            -   DONE:   TEST -> LIMPIEZA DE FORMULARIO.
+            -   DONE:   TEST -> BÚSQUEDA DE REGISTROS.
+
+11/05/2026  TESTEO MANUAL DEL MAESTRO DE NIVELES DE NADO:
+            -   DONE:   TEST -> INSERCIÓN.
+            -   DONE:   TEST -> CARGA.
+            -   DONE:   TEST -> MODIFICACIÓN.
+            -   DONE:   TEST -> ELIMINACIÓN.
+            -   N.A.:   TEST -> IMAGENES.
+            -   DONE:   TEST -> LIMPIEZA DE FORMULARIO.
+            -   DONE:   TEST -> BÚSQUEDA DE REGISTROS.
+
+11/05/2026  TESTEO MANUAL DEL MAESTRO DE DIETAS:
+            -   DONE:   TEST -> INSERCIÓN.
+            -   DONE:   TEST -> CARGA.
+            -   DONE:   TEST -> MODIFICACIÓN.
+            -   DONE:   TEST -> ELIMINACIÓN.
+            -   N.A.:   TEST -> IMAGENES.
+            -   DONE:   TEST -> LIMPIEZA DE FORMULARIO.
+            -   DONE:   TEST -> BÚSQUEDA DE REGISTROS.
+
+11/05/2026  TESTEO MANUAL DEL MAESTRO DE COMPORTAMIENTO:
+            -   DONE:   TEST -> INSERCIÓN.
+            -   DONE:   TEST -> CARGA.
+            -   DONE:   TEST -> MODIFICACIÓN.
+            -   DONE:   TEST -> ELIMINACIÓN.
+            -   N.A.:   TEST -> IMAGENES.
+            -   DONE:   TEST -> LIMPIEZA DE FORMULARIO.
+            -   DONE:   TEST -> BÚSQUEDA DE REGISTROS.
+
+11/05/2026  TESTEO MANUAL DEL MAESTRO DE ESPECIE ANIMAL:
+            -   DONE:   TEST -> INSERCIÓN.
+            -   DONE:   TEST -> CARGA.
+            -   DONE:   TEST -> MODIFICACIÓN.
+            -   DONE:   TEST -> ELIMINACIÓN.
+            -   DONE:   TEST -> IMAGENES.
+            -   DONE:   TEST -> LIMPIEZA DE FORMULARIO.
+            -   DONE:   TEST -> BÚSQUEDA DE REGISTROS.
+
+            -   TESTEO DE LOS DIALOGOS:
+                -   DONE:   TEST -> DIALOGO GRUPO TAXONÓMICO.
+                -   DONE:   TEST -> DIALOGO COMPORTAMIENTO.
+                -   DONE:   TEST -> DIALOGO DIETA.
+                -   DONE:   TEST -> DIALOGO NIVEL NADO.
+
+11/05/2026  TESTEO MANUAL DEL MAESTRO DE CATEGORÍA DE EQUIPAMIENTO:
+            -   DONE:   TEST -> INSERCIÓN.
+            -   DONE:   TEST -> CARGA.
+            -   DONE:   TEST -> MODIFICACIÓN.
+            -   DONE:   TEST -> ELIMINACIÓN.
+            -   N.A.:   TEST -> IMAGENES.
+            -   DONE:   TEST -> LIMPIEZA DE FORMULARIO.
+            -   DONE:   TEST -> BÚSQUEDA DE REGISTROS.
+
+11/05/2026  TESTEO MANUAL DEL MAESTRO EQUIPAMIENTOS:
+            -   DONE:   TEST -> INSERCIÓN.
+            -   DONE:   TEST -> CARGA.
+            -   DONE:   TEST -> MODIFICACIÓN.
+            -   DONE:   TEST -> ELIMINACIÓN.
+            -   DONE:   TEST -> IMAGENES.
+            -   DONE:   TEST -> LIMPIEZA DE FORMULARIO.
+            -   DONE:   TEST -> BÚSQUEDA DE REGISTROS.
+
+            -   TESTEO DE LOS DIALOGOS:
+                -   DONE:   TEST -> DIALOGO MARCA.
+                -   DONE:   TEST -> DIALOGO CATEGORÍA EQUIPAMIENTO.
+
+11/05/2026  TESTEO MANUAL DEL MAESTRO UNIDAD DE CONTENIDO:
+            -   DONE:   TEST -> INSERCIÓN.
+            -   DONE:   TEST -> CARGA.
+            -   DONE:   TEST -> MODIFICACIÓN.
+            -   DONE:   TEST -> ELIMINACIÓN.
+            -   N.A.:   TEST -> IMAGENES.
+            -   DONE:   TEST -> LIMPIEZA DE FORMULARIO.
+            -   DONE:   TEST -> BÚSQUEDA DE REGISTROS.
+
+11/05/2026  TESTEO MANUAL DEL MAESTRO FORMATOS DE CONSUMIBLE:
+            -   DONE:   TEST -> INSERCIÓN.
+            -   DONE:   TEST -> CARGA.
+            -   DONE:   TEST -> MODIFICACIÓN.
+            -   DONE:   TEST -> ELIMINACIÓN.
+            -   N.A.:   TEST -> IMAGENES.
+            -   DONE:   TEST -> LIMPIEZA DE FORMULARIO.
+            -   DONE:   TEST -> BÚSQUEDA DE REGISTROS.
+
+11/05/2026  TESTEO MANUAL DEL MAESTRO CATEGORÍAS DE CONSUMIBLE:
+            -   DONE:   TEST -> INSERCIÓN.
+            -   DONE:   TEST -> CARGA.
+            -   DONE:   TEST -> MODIFICACIÓN.
+            -   DONE:   TEST -> ELIMINACIÓN.
+            -   N.A.:   TEST -> IMAGENES.
+            -   DONE:   TEST -> LIMPIEZA DE FORMULARIO.
+            -   DONE:   TEST -> BÚSQUEDA DE REGISTROS.
+
+11/05/2026  TESTEO MANUAL DEL MAESTRO DE CONSUMIBLES:
+            -   DONE:   TEST -> INSERCIÓN.
+            -   DONE:   TEST -> CARGA.
+            -   DONE:   TEST -> MODIFICACIÓN.
+            -   DONE:   TEST -> ELIMINACIÓN.
+            -   N.A.:   TEST -> IMAGENES.
+            -   DONE:   TEST -> LIMPIEZA DE FORMULARIO.
+            -   DONE:   TEST -> BÚSQUEDA DE REGISTROS.
+
+            -   TESTEO DE LOS DIALOGOS:
+                -   DONE:   TEST -> DIALOGO MARCA.
+                -   DONE:   TEST -> DIALOGO CATEGORÍA CONSUMIBLE.
+                -   DONE:   TEST -> DIALOGO FORMATO DE PRODUCTO.
+                -   DONE:   TEST -> DIALOGO UNIDAD DE CONTENIDO.
+
+11/05/2026  TESTEO MANUAL DEL MAESTRO DE COMERCIOS:
+            -   DONE:   TEST -> INSERCIÓN.
+            -   DONE:   TEST -> CARGA.
+            -   DONE:   TEST -> MODIFICACIÓN.
+            -   DONE:   TEST -> ELIMINACIÓN.
+            -   N.A.:   TEST -> IMAGENES.
+            -   DONE:   TEST -> LIMPIEZA DE FORMULARIO.
+            -   DONE:   TEST -> BÚSQUEDA DE REGISTROS.
+
+11/05/2026  TESTEO MANUAL DEL MAESTRO DE SUBCATEGORÍAS DE ACUARIOS:
+            -   DONE:   TEST -> INSERCIÓN.
+            -   DONE:   TEST -> CARGA.
+            -   DONE:   TEST -> MODIFICACIÓN.
+            -   DONE:   TEST -> ELIMINACIÓN.
+            -   N.A.:   TEST -> IMAGENES.
+            -   DONE:   TEST -> LIMPIEZA DE FORMULARIO.
+            -   DONE:   TEST -> BÚSQUEDA DE REGISTROS.
+
+            -   TESTEO DE LOS DIALOGOS:
+                -   DONE:   TEST -> DIALOGO SUBCATEGORÍA DE ACUARIO.
+
 08/05/2026  TESTEO MANUAL DEL MAESTRO DE ACUARIOS:
             -   DONE:   TEST -> INSERCIÓN.
             -   DONE:   TEST -> CARGA.
@@ -9,10 +332,36 @@ FECHA		DESCRIPCIÓN
             -   DONE:   TEST -> IMAGENES.
             -   DONE:   TEST -> LIMPIEZA DE FORMULARIO.
             -   DONE:   TEST -> BÚSQUEDA DE REGISTROS.
+
             -   TESTEO DE LOS DIALOGOS:
                 -   DONE:   TEST -> DIALOGO URNA.
                 -   DONE:   TEST -> DIALOGO TIPO DE ACUARIO.
 
+08/05/2026  TESTEO MANUAL DEL MAESTRO DE TIPOS DE ACUARIOS:
+            -   DONE:   TEST -> INSERCIÓN.
+            -   DONE:   TEST -> CARGA.
+            -   DONE:   TEST -> MODIFICACIÓN.
+            -   DONE:   TEST -> ELIMINACIÓN.
+            -   N.A.:   TEST -> IMAGENES.
+            -   DONE:   TEST -> LIMPIEZA DE FORMULARIO.
+            -   DONE:   TEST -> BÚSQUEDA DE REGISTROS.
+
+            -   TESTEO DE LOS DIALOGOS:
+                -   DONE:   TEST -> DIALOGO TIPO DE ACUARIO.
+                -   DONE:   TEST -> DIALOGO SUBTIPO DE ACUARIO.
+
+            CORRECCIONES:
+            -   DONE:   NO CARGA CORRECTAMENTE LA SUBCATEGORÍA. DE MOMENTO SE
+                        SUPRIME LA CARGA ASINCRTONA DE LOS COMBOS.
+
+11/05/2026  TESTEO MANUAL DEL MAESTRO DE CATEGORÍAS DE ACUARIOS:
+            -   DONE:   TEST -> INSERCIÓN.
+            -   DONE:   TEST -> CARGA.
+            -   DONE:   TEST -> MODIFICACIÓN.
+            -   DONE:   TEST -> ELIMINACIÓN.
+            -   N.A.:   TEST -> IMAGENES.
+            -   DONE:   TEST -> LIMPIEZA DE FORMULARIO.
+            -   DONE:   TEST -> BÚSQUEDA DE REGISTROS.
 
 07/05/2026  REFACTORIZACIÓN:
             -   DONE:   SE MODIFICA EL FORMULARIO DE INICIO.

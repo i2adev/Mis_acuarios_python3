@@ -248,7 +248,7 @@ class FiltroController(BaseController):
                                       "TABLA.")
 
             # Obtener el ID desde el cuadro de texto id_parent
-            id_row = int(self._view.frame.edit_id.text())
+            id_row = int(self._view.frame.edit_id.value())
             return Result.success(id_row)
         elif control == "QAction":
             # Carga el modelo de la fila seleccionada
@@ -347,9 +347,7 @@ class FiltroController(BaseController):
         ent = val.value
 
         # Cargamos los widgets
-        self._view.frame.edit_id.setText(
-            str(ent.id) if ent.id is not None else ""
-        )
+        self._view.frame.edit_id.setValue(ent.id)
         self._view.frame.combo_tipo_filtro.setValue(ent.id_tipo)
         self._view.frame.check_termofiltro.setChecked(
             True if ent.es_thermo else False)
@@ -412,7 +410,11 @@ class FiltroController(BaseController):
         # Configuramos el combo
         combo = self._view.frame.combo_marca
 
-        self._fill_combo_marca()
+        self._load_combo(
+            combo=combo,
+            worker_fn=lambda: MarcaComercialDAO().get_list_combo(),
+            data=res.value.id
+        )
         for i in range(combo.count()):
             if combo.itemData(i) == res.value.id:
                 combo.setCurrentIndex(i)
@@ -434,9 +436,13 @@ class FiltroController(BaseController):
             return
 
         # Configuramos el combo
-        combo = self._view.frame.combo_marca
+        combo = self._view.frame.combo_tipo_filtro
 
-        self._fill_combo_tipo_filtro()
+        self._load_combo(
+            combo=combo,
+            worker_fn=lambda: TipoFiltroDAO().get_list_combo(),
+            data=res.value.id
+        )
         for i in range(combo.count()):
             if combo.itemData(i) == res.value.id:
                 combo.setCurrentIndex(i)

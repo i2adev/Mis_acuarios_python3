@@ -9,6 +9,7 @@ from pathlib import Path
 from PyQt6.QtGui import QIcon, QAction
 from PyQt6.QtWidgets import QMessageBox, QTableView, QWidget, QComboBox
 
+import globales
 from ModuloMaestro.Controllers.nivel_nado_controller import NivelNadoController
 from ModuloMaestro.Model.DAO.niveles_nado_dao import NivelNadoDAO
 from Services.Paginator.paginator import Paginator

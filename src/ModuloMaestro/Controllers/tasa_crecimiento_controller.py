@@ -14,8 +14,10 @@ from ModuloMaestro.Model.Entities.tasa_crecimiento_entity import \
 from Services.Result.result import Result
 from Services.Validators.tasa_crecimiento_validator import \
     TasaCrecimientoValidator
-from ModuloMaestro.Views.Dialogs.tasa_crecimiento_dialog import TasaCrecimientoDialog
-from ModuloMaestro.Views.Masters.tasa_crecimiento_view import TasaCrecimientoView
+from ModuloMaestro.Views.Dialogs.tasa_crecimiento_dialog import \
+    TasaCrecimientoDialog
+from ModuloMaestro.Views.Masters.tasa_crecimiento_view import \
+    TasaCrecimientoView
 
 
 class TasaCrecimientoController(BaseController):
@@ -165,7 +167,7 @@ class TasaCrecimientoController(BaseController):
                                       "TABLA ANTES DE ELIMINARLO.")
 
             # Obtener el ID desde el cuadro de texto id_parent
-            id_row = int(self._view.frame.edit_id.text())
+            id_row = int(self._view.frame.edit_id.value())
             return Result.success(id_row)
         elif control == "QAction":
             # Carga el modelo de la fila seleccionada

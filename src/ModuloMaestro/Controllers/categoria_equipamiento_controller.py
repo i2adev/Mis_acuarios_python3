@@ -18,7 +18,8 @@ from Services.Validators.categoria_equipamiento_validator import \
     CategoriaEquipamientoValidator
 from ModuloMaestro.Views.Dialogs.cattegoria_equipamiento_dialog import \
     CategoriaEquipamientoDialog
-from ModuloMaestro.Views.Masters.categoria_equipamiento_view import CategoriaEquipamientoView
+from ModuloMaestro.Views.Masters.categoria_equipamiento_view import \
+    CategoriaEquipamientoView
 
 
 class CategoriaEquipamientoController(BaseController):
@@ -170,7 +171,7 @@ class CategoriaEquipamientoController(BaseController):
                                       "TABLA ANTES DE ELIMINARLO.")
 
             # Obtener el ID desde el cuadro de texto id_parent
-            id_row = int(self._view.frame.edit_id.text())
+            id_row = int(self._view.frame.edit_id.value())
             return Result.success(id_row)
         elif control == "QAction":
             # Carga el modelo de la fila seleccionada

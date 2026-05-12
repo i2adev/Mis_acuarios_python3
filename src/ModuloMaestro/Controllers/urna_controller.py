@@ -209,7 +209,7 @@ class UrnaController(BaseController):
                                       "TABLA ANTES DE ELIMINARLO.")
 
             # Obtener el ID desde el cuadro de texto id_parent
-            id_row = int(self._view.frame.edit_id.text())
+            id_row = int(self._view.frame.edit_id.value())
             return Result.success(id_row)
         elif control == "QAction":
             # Carga el modelo de la fila seleccionada
@@ -348,9 +348,9 @@ class UrnaController(BaseController):
         self._view.frame.edit_modelo.setValue(ent.modelo)
         self._view.frame.edit_ancho.setValue(ent.anchura)
         self._view.frame.edit_profundo.setValue(ent.profundidad)
-        self._view.frame.edit_alto.setValue(ent.alto)
-        self._view.frame.edit_grosor.setValue(ent.grosor)
-        self._view.frame.edit_volumen.setValue(ent.volumen)
+        self._view.frame.edit_alto.setValue(ent.altura)
+        self._view.frame.edit_grosor.setValue(ent.grosor_cristal)
+        self._view.frame.edit_volumen.setValue(ent.volumen_tanque)
         self._view.frame.combo_material.setValue(ent.id_material)
         self._view.frame.text_descripcion.setValue(ent.descripcion)
 

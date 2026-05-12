@@ -9,6 +9,7 @@ from pathlib import Path
 from PyQt6.QtGui import QIcon, QAction
 from PyQt6.QtWidgets import QMessageBox, QTableView, QWidget, QComboBox
 
+import globales
 from ModuloMaestro.Controllers.marca_comercial_controller import \
     MarcaComercialController
 from ModuloMaestro.Model.DAO.marca_comercial_dao import MarcaComercialDAO

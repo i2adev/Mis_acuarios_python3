@@ -9,6 +9,7 @@ from pathlib import Path
 from PyQt6.QtGui import QIcon, QAction
 from PyQt6.QtWidgets import QMessageBox, QTableView, QWidget, QComboBox
 
+import globales
 from ModuloMaestro.Controllers.tipo_acuario_controller import \
     TipoAcuarioController
 from ModuloMaestro.Model.TableModel.tipo_acuario_table_model import \
@@ -37,7 +38,7 @@ class TipoAcuarioMasterController(TipoAcuarioController):
         super().__init__(view, dao, mod)
 
         # Rellena los combos
-        self._fill_combos_async()
+        self._fill_combos()
 
         # Inicializamos el paginador
         self._pag = Paginator("VISTA_TIPOS_ACUARIO", 5)

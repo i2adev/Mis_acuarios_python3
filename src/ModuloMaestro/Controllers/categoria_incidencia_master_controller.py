@@ -3,6 +3,7 @@
 from PyQt6.QtGui import QIcon, QAction
 from PyQt6.QtWidgets import QMessageBox, QTableView, QWidget, QComboBox
 
+import globales
 from ModuloMaestro.Controllers.categoria_incidencia_controller import \
     CategoriaIncidenciaController
 from ModuloMaestro.Model.DAO.categoria_incidencia_dao import \

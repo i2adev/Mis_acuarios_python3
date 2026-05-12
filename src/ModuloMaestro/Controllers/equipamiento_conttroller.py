@@ -249,7 +249,7 @@ class EquipamientoController(BaseController):
                                       "TABLA.")
 
             # Obtener el ID desde el cuadro de texto id_parent
-            id_row = int(self._view.frame.edit_id.text())
+            id_row = int(self._view.frame.edit_id.value())
             return Result.success(id_row)
         elif control == "QAction":
             # Carga el modelo de la fila seleccionada
@@ -316,7 +316,11 @@ class EquipamientoController(BaseController):
         # Configuramos el combo
         combo = self._view.frame.combo_categoria_equipamiento
 
-        self._fill_combo_categoria()
+        self._load_combo(
+            combo=self._view.frame.combo_categoria_equipamiento,
+            worker_fn=lambda: CategoriaEquipamientoDAO().get_list_combo(),
+            data=res.value.id
+        )
         for i in range(combo.count()):
             if combo.itemData(i) == res.value.id:
                 combo.setCurrentIndex(i)
@@ -340,7 +344,11 @@ class EquipamientoController(BaseController):
         # Configuramos el combo
         combo = self._view.frame.combo_marca
 
-        self._fill_combo_marca()
+        self._load_combo(
+            combo=self._view.frame.combo_marca,
+            worker_fn=lambda: MarcaComercialDAO().get_list_combo(),
+            data=res.value.id
+        )
         for i in range(combo.count()):
             if combo.itemData(i) == res.value.id:
                 combo.setCurrentIndex(i)
@@ -379,7 +387,7 @@ class EquipamientoController(BaseController):
             ent.id_categoria)
         self._view.frame.combo_marca.setValue(ent.id_marca)
         self._view.frame.edit_modelo.setValue(ent.modelo)
-        self._view.frame.edit_num_serie.setValue(ent.num_series)
+        self._view.frame.edit_num_serie.setValue(ent.numero_serie)
         self._view.frame.fecha_alta.setDate(BaseDAO._seconds_to_date(
             ent.fecha_alta))
         self._view.frame.fecha_baja.setDate(BaseDAO._seconds_to_date(

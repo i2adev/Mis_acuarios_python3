@@ -161,7 +161,7 @@ class NivelNadoController(BaseController):
                                       "TABLA ANTES DE ELIMINARLO.")
 
             # Obtener el ID desde el cuadro de texto id_parent
-            id_row = int(self._view.frame.edit_id.text())
+            id_row = int(self._view.frame.edit_id.value())
             return Result.success(id_row)
         elif control == "QAction":
             # Carga el modelo de la fila seleccionada
@@ -217,7 +217,7 @@ class NivelNadoController(BaseController):
 
         # Cargamos los widgets
         self._view.frame.edit_id.setValue(ent.id)
-        self._view.frame.edit_nivel.setValue(ent.nivel)
+        self._view.frame.edit_nivel.setValue(ent.nivel_nado)
         self._view.frame.text_descripcion.setValue(ent.descripcion)
 
         return Result.success(ent.id)

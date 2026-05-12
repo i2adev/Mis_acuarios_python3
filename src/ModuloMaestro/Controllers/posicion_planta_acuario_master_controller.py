@@ -10,6 +10,7 @@ from pathlib import Path
 from PyQt6.QtGui import QIcon, QAction
 from PyQt6.QtWidgets import QMessageBox, QTableView, QWidget
 
+import globales
 from ModuloMaestro.Controllers.posicion_planta_acuario_controller import \
     PosicionPlantaAcuarioController
 from Services.Paginator.paginator import Paginator

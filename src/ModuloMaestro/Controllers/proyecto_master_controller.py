@@ -6,6 +6,7 @@ Comentarios:
 """
 from pathlib import Path
 
+import globales
 from ModuloMaestro.Controllers.proyecto_controller import ProyectoController
 from Services.Paginator.paginator import Paginator
 from ModuloMaestro.Model.DAO.proyecto_dao import ProyectoDAO

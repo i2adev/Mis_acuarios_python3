@@ -15,8 +15,10 @@ from ModuloMaestro.Model.Entities.formato_consumible_entity import \
 from Services.Result.result import Result
 from Services.Validators.formato_consumible_validator import \
     FormatoConsumibleValidator
-from ModuloMaestro.Views.Dialogs.formato_consumible_dialog import FormatoConsumibleDialog
-from ModuloMaestro.Views.Masters.formato_consumible_view import FormatoConsumibleView
+from ModuloMaestro.Views.Dialogs.formato_consumible_dialog import \
+    FormatoConsumibleDialog
+from ModuloMaestro.Views.Masters.formato_consumible_view import \
+    FormatoConsumibleView
 
 
 class FormatoConsumibleController(BaseController):
@@ -168,7 +170,7 @@ class FormatoConsumibleController(BaseController):
                                       "TABLA ANTES DE ELIMINARLO.")
 
             # Obtener el ID desde el cuadro de texto id_parent
-            id_row = int(self._view.frame.edit_id.text())
+            id_row = int(self._view.frame.edit_id.value())
             return Result.success(id_row)
         elif control == "QAction":
             # Carga el modelo de la fila seleccionada

@@ -59,7 +59,7 @@ class UrnaDAO(BaseDAO):
                     grosor_cristal=row[6],
                     volumen_tanque=row[7],
                     id_material=row[8],
-                    descripcion=row[26],
+                    descripcion=row[9],
                 )
 
                 return Result.success(ent)

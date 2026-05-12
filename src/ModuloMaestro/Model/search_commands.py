@@ -317,7 +317,7 @@ class SearchCmd:
     SEARCH_FILTRO = """
     SELECT  ID, NUM, MARCA, MODELO, TIPO_FILTRO, TERMOFILTRO, NUMERO_SERIE, 
             VOLUMEN_ACUARIO, CAUDAL, ALTURA_BOMBEO, CONSUMO, CONSUMO_CALENTADOR,
-            VOLUMEN_FILTRANTE, DIMENSIONES, FECHA_COMPRA, FECHA_BAJA, 
+            VOLUMEN_FILTRANTE, DIMENSIONES, FECHA_INSTALACION, FECHA_BAJA, 
             MOTIVO_BAJA, DESCRIPCION
     FROM
     (
@@ -335,7 +335,7 @@ class SearchCmd:
                   F.CONSUMO_CALENTADOR AS CONSUMO_CALENTADOR,
                   F.VOLUMEN_FILTRANTE AS VOLUMEN_FILTRANTE,
                   F.ANCHO || 'x' || F.FONDO || 'x' || F.ALTO AS DIMENSIONES,
-                  IFNULL(strftime('%d/%m/%Y', F.FECHA_COMPRA, 'unixepoch', 'localtime'), '') AS FECHA_COMPRA,
+                  IFNULL(strftime('%d/%m/%Y', F.FECHA_INSTALACION, 'unixepoch', 'localtime'), '') AS FECHA_INSTALACION,
                   IFNULL(strftime('%d/%m/%Y', F.FECHA_BAJA, 'unixepoch', 'localtime'), '') AS FECHA_BAJA,
                   F.MOTIVO_BAJA AS MOTIVO_BAJA,
                   F.DESCRIPCION AS DESCRIPCION,

@@ -248,7 +248,7 @@ class EspecieAnimalController(BaseController):
                                       "TABLA.")
 
             # Obtener el ID desde el cuadro de texto id_parent
-            id_row = int(self._view.frame.edit_id.text())
+            id_row = int(self._view.frame.edit_id.value())
             return Result.success(id_row)
         elif control == "QAction":
             # Carga el modelo de la fila seleccionada
@@ -324,7 +324,11 @@ class EspecieAnimalController(BaseController):
         # Configuramos el combo
         combo = self._view.frame.combo_grupo_taxo
 
-        self._fill_combo_grupo_taxo()
+        self._load_combo(
+            combo=combo,
+            worker_fn=lambda: GrupoTaxonomicoDAO().get_list_combo(),
+            data=res.value.id
+        )
         for i in range(combo.count()):
             if combo.itemData(i) == res.value.id:
                 combo.setCurrentIndex(i)
@@ -347,7 +351,11 @@ class EspecieAnimalController(BaseController):
         # Configuramos el combo
         combo = self._view.frame.combo_comportamiento
 
-        self._fill_combo_comportamiento()
+        self._load_combo(
+            combo=combo,
+            worker_fn=lambda: ComportamientoFaunaDAO().get_list_combo(),
+            data=res.value.id
+        )
         for i in range(combo.count()):
             if combo.itemData(i) == res.value.id:
                 combo.setCurrentIndex(i)
@@ -370,7 +378,11 @@ class EspecieAnimalController(BaseController):
         # Configuramos el combo
         combo = self._view.frame.combo_dieta
 
-        self._fill_combo_dieta()
+        self._load_combo(
+            combo=combo,
+            worker_fn=lambda: DietaFaunaDAO().get_list_combo(),
+            data=res.value.id
+        )
         for i in range(combo.count()):
             if combo.itemData(i) == res.value.id:
                 combo.setCurrentIndex(i)
@@ -393,7 +405,11 @@ class EspecieAnimalController(BaseController):
         # Configuramos el combo
         combo = self._view.frame.combo_nivel_nado
 
-        self._fill_combo_nivel_nado()
+        self._load_combo(
+            combo=combo,
+            worker_fn=lambda: NivelNadoDAO().get_list_combo(),
+            data=res.value.id
+        )
         for i in range(combo.count()):
             if combo.itemData(i) == res.value.id:
                 combo.setCurrentIndex(i)

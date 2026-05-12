@@ -9,6 +9,7 @@ from pathlib import Path
 from PyQt6.QtGui import QIcon, QAction
 from PyQt6.QtWidgets import QMessageBox, QTableView, QWidget, QComboBox
 
+import globales
 from ModuloMaestro.Controllers.dificultad_planta_controller import \
     DificultadPlantaController
 from ModuloMaestro.Model.DAO.dificultad_plantas_dao import DificultadPlantaDAO

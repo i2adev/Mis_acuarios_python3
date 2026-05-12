@@ -10,6 +10,7 @@ from pathlib import Path
 from PyQt6.QtGui import QIcon, QAction
 from PyQt6.QtWidgets import QMessageBox, QTableView, QWidget
 
+import globales
 from ModuloMaestro.Controllers.requerimiento_co2_controller import \
     RequerimientoCO2Controller
 from ModuloMaestro.Model.TableModel.requerimiento_co2_table_model import \

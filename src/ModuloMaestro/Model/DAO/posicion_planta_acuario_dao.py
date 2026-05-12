@@ -100,9 +100,8 @@ class PosicionPlantaAcuarioDAO(BaseDAO):
                 # Configuramos la entidad
                 ent = PosicionPlantaAcuarioEntity(
                     id=row[0],
-                    num=row[1],
-                    posicion=row[2],
-                    descripcion=row[3],
+                    posicion=row[1],
+                    descripcion=row[2],
                 )
 
                 return Result.success(ent)

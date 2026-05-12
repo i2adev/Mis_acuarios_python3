@@ -142,9 +142,8 @@ class TasaCrecimientoDAO(BaseDAO):
                 # Configuramos la entidad
                 ent = TasaCrecimientoEntity(
                     id=row[0],
-                    num=row[1],
-                    tasa_crecimiento=row[2],
-                    descripcion=row[3],
+                    tasa_crecimiento=row[1],
+                    descripcion=row[2],
                 )
 
                 return Result.success(ent)

@@ -6,6 +6,7 @@ Comentarios:
 """
 from pathlib import Path
 
+import globales
 from ModuloMaestro.Controllers.filtro_controller import FiltroController
 from CustomControls.nullable_date_edit import NullableDateEdit
 from ModuloMaestro.Model.DAO.filtro_dao import FiltroDAO

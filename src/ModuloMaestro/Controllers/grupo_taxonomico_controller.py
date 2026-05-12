@@ -14,8 +14,10 @@ from ModuloMaestro.Model.Entities.grupo_taxonomico_entity import \
 from Services.Result.result import Result
 from Services.Validators.grupo_taxonomico_validator import \
     GrupoTaxonomicoValidator
-from ModuloMaestro.Views.Dialogs.grupo_taxonomico_dialog import GrupoTaxonomicoDialog
-from ModuloMaestro.Views.Masters.grupo_taxonomico_view import GrupoTaxonomicoView
+from ModuloMaestro.Views.Dialogs.grupo_taxonomico_dialog import \
+    GrupoTaxonomicoDialog
+from ModuloMaestro.Views.Masters.grupo_taxonomico_view import \
+    GrupoTaxonomicoView
 
 
 class GrupoTaxonomicoController(BaseController):
@@ -163,7 +165,7 @@ class GrupoTaxonomicoController(BaseController):
                                       "TABLA ANTES DE ELIMINARLO.")
 
             # Obtener el ID desde el cuadro de texto id_parent
-            id_row = int(self._view.frame.edit_id.text())
+            id_row = int(self._view.frame.edit_id.value())
             return Result.success(id_row)
         elif control == "QAction":
             # Carga el modelo de la fila seleccionada
@@ -219,7 +221,7 @@ class GrupoTaxonomicoController(BaseController):
 
         # Cargamos los widgets
         self._view.frame.edit_id.setValue(ent.id)
-        self._view.frame.edit_grupo.setValue(ent.grupo_taxonomico)
+        self._view.frame.edit_grupo.setValue(ent.grupo_taxo)
         self._view.frame.text_descripcion.setValue(ent.descripcion)
 
         return Result.success(ent.id)

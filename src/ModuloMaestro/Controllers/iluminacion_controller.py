@@ -146,8 +146,10 @@ class IluminacionController(BaseController):
         if not res.is_success:
             return Result.failure(res.error_msg)
 
-        # Limpiamos el formulario
-        self._clean_view(self._view.frame.combo_control_iluminacion)
+        # Actualizamos las fotografías
+        res_foto = self._view.frame_image.insert_images(res.value)
+        if not res_foto.is_success:
+            return res_foto
 
         return Result.success(ent.id)
 
@@ -260,7 +262,7 @@ class IluminacionController(BaseController):
                                       "TABLA ANTES DE ELIMINARLO.")
 
             # Obtener el ID desde el cuadro de texto id_parent
-            id_row = int(self._view.frame.edit_id.text())
+            id_row = int(self._view.frame.edit_id.value())
             return Result.success(id_row)
         elif control == "QAction":
             # Carga el table_model de la fila seleccionada
@@ -389,7 +391,11 @@ class IluminacionController(BaseController):
         # Configuramos el combo
         combo = self._view.frame.combo_marca
 
-        self._fill_combo_marca()
+        self._load_combo(
+            combo=combo,
+            worker_fn=lambda: MarcaComercialDAO().get_list_combo(),
+            data=res.value.id
+        )
         for i in range(combo.count()):
             if combo.itemData(i) == res.value.id:
                 combo.setCurrentIndex(i)
@@ -412,7 +418,11 @@ class IluminacionController(BaseController):
         # Configuramos el combo
         combo = self._view.frame.combo_tipo_iluminacion
 
-        self._fill_combo_tipo_iluminacion()
+        self._load_combo(
+            combo=combo,
+            worker_fn=lambda: TipoIluminacionDAO().get_list_combo(),
+            data=res.value.id
+        )
         for i in range(combo.count()):
             if combo.itemData(i) == res.value.id:
                 combo.setCurrentIndex(i)
@@ -435,7 +445,11 @@ class IluminacionController(BaseController):
         # Configuramos el combo
         combo = self._view.frame.combo_control_iluminacion
 
-        self._fill_combo_control_iluminacion()
+        self._load_combo(
+            combo=combo,
+            worker_fn=lambda: ControlIluminacionDAO().get_list_combo(),
+            data=res.value.id
+        )
         for i in range(combo.count()):
             if combo.itemData(i) == res.value.id:
                 combo.setCurrentIndex(i)

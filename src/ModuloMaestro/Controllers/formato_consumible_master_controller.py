@@ -10,6 +10,7 @@ from PyQt6.QtCore import QEvent
 from PyQt6.QtGui import QIcon, QAction
 from PyQt6.QtWidgets import QMessageBox, QTableView, QWidget, QComboBox
 
+import globales
 from ModuloMaestro.Controllers.formato_consumible_controller import \
     FormatoConsumibleController
 from ModuloMaestro.Model.DAO.formato_consumible_dao import FormatoConsumibleDAO

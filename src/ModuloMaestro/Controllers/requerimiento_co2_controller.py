@@ -14,8 +14,10 @@ from ModuloMaestro.Model.Entities.requerimiento_co2_entity import \
 from Services.Result.result import Result
 from Services.Validators.requerimiento_co2_validator import \
     RequerimientoCO2Validator
-from ModuloMaestro.Views.Dialogs.requerimiento_co2_dialog import RequerimientoCO2Dialog
-from ModuloMaestro.Views.Masters.requerimiento_co2_view import RequerimientoCO2View
+from ModuloMaestro.Views.Dialogs.requerimiento_co2_dialog import \
+    RequerimientoCO2Dialog
+from ModuloMaestro.Views.Masters.requerimiento_co2_view import \
+    RequerimientoCO2View
 
 
 class RequerimientoCO2Controller(BaseController):
@@ -165,7 +167,7 @@ class RequerimientoCO2Controller(BaseController):
                                       "TABLA ANTES DE ELIMINARLO.")
 
             # Obtener el ID desde el cuadro de texto id_parent
-            id_row = int(self._view.frame.edit_id.text())
+            id_row = int(self._view.frame.edit_id.value())
             return Result.success(id_row)
         elif control == "QAction":
             # Carga el modelo de la fila seleccionada

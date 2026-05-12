@@ -9,6 +9,7 @@ from pathlib import Path
 from PyQt6.QtGui import QIcon, QAction
 from PyQt6.QtWidgets import QMessageBox, QTableView, QWidget
 
+import globales
 from ModuloMaestro.Controllers.sexo_animal_controller import \
     SexoAnimalController
 from ModuloMaestro.Model.TableModel.sexo_animal_table_view import \

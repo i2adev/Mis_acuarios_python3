@@ -8,6 +8,7 @@ import sqlite3
 import traceback
 
 from Main.Model.DAO.base_dao import BaseDAO
+from Main.Model.Entities.combo_data_entity import ComboDataEntity
 from Services.Database.database import DBManager
 from ModuloMaestro.Model.Entities.categoria_incidencia_entity import \
     CategoriaIncidenciaEntity

@@ -9,6 +9,7 @@ from pathlib import Path
 from PyQt6.QtGui import QIcon, QAction
 from PyQt6.QtWidgets import QMessageBox, QTableView, QWidget, QComboBox
 
+import globales
 from ModuloMaestro.Controllers.subcategoria_incidencia_controller import \
     SubcategoriaIncidenciaController
 from Services.Paginator.paginator import Paginator
