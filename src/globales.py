@@ -10,7 +10,7 @@ from PyQt6.QtCore import QLocale
 
 # Declaramos el usuario y proyecto
 CURRENT_USER = None
-CURRENT_PROYECT = None
+CURRENT_PROJECT = None
 
 # Establecemos la configuración local
 LOCALE = QLocale(QLocale.Language.Spanish, QLocale.Country.Spain)

@@ -1,6 +1,9 @@
 ﻿================================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
+13/05/2026  SE CREA EL FORMULARIO DEL MODULO PROYECTO:
+            -   DONE:   SE CREA LE FORMULARIO.
+
 12/05/2026  TESTEO MANUAL DE PERIODICIDADES:
             -   DONE:   TEST -> INSERCIÓN.
             -   DONE:   TEST -> CARGA.

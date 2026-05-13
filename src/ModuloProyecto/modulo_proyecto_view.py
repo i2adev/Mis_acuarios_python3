@@ -1,8 +1,8 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
-Fecha:      05/05/2025
+Fecha:      13/05/2025
 Comentarios:
-    Módulo que contiene el formulario del modulo maestro.
+    Módulo que contiene el formulario del modulo proyecto.
 """
 
 import sys
@@ -17,8 +17,8 @@ from PyQt6.QtWidgets import (QApplication, QFrame, QHBoxLayout, QLabel,
 import globales
 
 
-class ModuloMaestroView(QWidget):
-    """ Formulario de tipo de filtro """
+class ModuloProyectoView(QWidget):
+    """ Formulario del módulo de proyecto """
 
     def __init__(self, w_title: str):
         """ Constructor de clase """
@@ -71,32 +71,32 @@ class ModuloMaestroView(QWidget):
         self.setWindowFlags(Qt.WindowType.FramelessWindowHint)
 
         # Configuramos el menú lateral
-        self.menu_layout.addWidget(self.button_menu_acuario)
-        self.menu_layout.addWidget(self.acuario)
-        self.menu_layout.addWidget(self.button_menu_comercio)
-        self.menu_layout.addWidget(self.comercio)
-        self.menu_layout.addWidget(self.button_menu_consumible)
-        self.menu_layout.addWidget(self.consumible)
-        self.menu_layout.addWidget(self.button_menu_equipamiento)
-        self.menu_layout.addWidget(self.equipamiento)
-        self.menu_layout.addWidget(self.button_menu_fauna)
-        self.menu_layout.addWidget(self.fauna)
-        self.menu_layout.addWidget(self.button_menu_filtro)
-        self.menu_layout.addWidget(self.filtro)
-        self.menu_layout.addWidget(self.button_menu_flora)
-        self.menu_layout.addWidget(self.flora)
-        self.menu_layout.addWidget(self.button_menu_iluminacion)
-        self.menu_layout.addWidget(self.iluminacion)
-        self.menu_layout.addWidget(self.button_menu_incidencia)
-        self.menu_layout.addWidget(self.incidencia)
-        self.menu_layout.addWidget(self.button_menu_marca)
-        self.menu_layout.addWidget(self.marca)
+        # self.menu_layout.addWidget(self.button_menu_comercio)
+        # self.menu_layout.addWidget(self.comercio)
+        # self.menu_layout.addWidget(self.button_menu_consumible)
+        # self.menu_layout.addWidget(self.consumible)
+        # self.menu_layout.addWidget(self.button_menu_equipamiento)
+        # self.menu_layout.addWidget(self.equipamiento)
+        # self.menu_layout.addWidget(self.button_menu_fauna)
+        # self.menu_layout.addWidget(self.fauna)
+        # self.menu_layout.addWidget(self.button_menu_filtro)
+        # self.menu_layout.addWidget(self.filtro)
+        # self.menu_layout.addWidget(self.button_menu_flora)
+        # self.menu_layout.addWidget(self.flora)
+        # self.menu_layout.addWidget(self.button_menu_iluminacion)
+        # self.menu_layout.addWidget(self.iluminacion)
+        # self.menu_layout.addWidget(self.button_menu_incidencia)
+        # self.menu_layout.addWidget(self.incidencia)
+        # self.menu_layout.addWidget(self.button_menu_marca)
+        # self.menu_layout.addWidget(self.marca)
         self.menu_layout.addWidget(self.button_menu_proyecto)
         self.menu_layout.addWidget(self.proyecto)
-        self.menu_layout.addWidget(self.button_menu_urna)
-        self.menu_layout.addWidget(self.urna)
-        self.menu_layout.addWidget(self.button_menu_otros)
-        self.menu_layout.addWidget(self.otro)
+        self.menu_layout.addWidget(self.button_menu_acuario)
+        self.menu_layout.addWidget(self.acuario)
+        # self.menu_layout.addWidget(self.button_menu_urna)
+        # self.menu_layout.addWidget(self.urna)
+        # self.menu_layout.addWidget(self.button_menu_otros)
+        # self.menu_layout.addWidget(self.otro)
         self.menu_layout.addSpacerItem(
             QSpacerItem(20, 20, QSizePolicy.Policy.Minimum,
                         QSizePolicy.Policy.Expanding)
@@ -150,6 +150,7 @@ class ModuloMaestroView(QWidget):
         # lateral
         self.maestro_layout = QVBoxLayout()
         self.frame_menu = QFrame()
+        self.frame_menu.setFixedWidth(250)  # Para eliminar después
         self.frame_menu.setStyleSheet(
             """
             QFrame {
@@ -204,8 +205,8 @@ class ModuloMaestroView(QWidget):
         self.layout_acuario = QVBoxLayout(self.acuario)
         self.layout_acuario.setContentsMargins(35, 0, 0, 0)
 
-        self.button_maestro_acuario = QPushButton("ACUARIOS")
-        self.button_maestro_acuario.setStyleSheet(
+        self.button_acuarios = QPushButton("ACUARIOS")
+        self.button_acuarios.setStyleSheet(
             """
             QPushButton {
                 background-color: transparent;
@@ -216,18 +217,18 @@ class ModuloMaestroView(QWidget):
             }
             """
         )
-        self.button_maestro_acuario.setObjectName(
-            "button_maestro_acuario"
+        self.button_acuarios.setObjectName(
+            "button_acuarios"
         )
-        self.button_maestro_acuario.setFlat(True)
-        self.button_maestro_acuario.setCursor(
+        self.button_acuarios.setFlat(True)
+        self.button_acuarios.setCursor(
             QCursor(Qt.CursorShape.PointingHandCursor)
         )
 
-        self.button_maestro_tipo_acuario = QPushButton(
-            "TIPOS DE ACUARIO"
+        self.button_historico_acuario = QPushButton(
+            "HISTÓRICO DE ACUARIO"
         )
-        self.button_maestro_tipo_acuario.setStyleSheet(
+        self.button_historico_acuario.setStyleSheet(
             """
             QPushButton {
                 background-color: transparent;
@@ -238,18 +239,18 @@ class ModuloMaestroView(QWidget):
             }
             """
         )
-        self.button_maestro_tipo_acuario.setObjectName(
-            "button_maestro_tipo_acuario"
+        self.button_historico_acuario.setObjectName(
+            "button_historico_acuario"
         )
-        self.button_maestro_tipo_acuario.setFlat(True)
-        self.button_maestro_tipo_acuario.setCursor(
+        self.button_historico_acuario.setFlat(True)
+        self.button_historico_acuario.setCursor(
             QCursor(Qt.CursorShape.PointingHandCursor)
         )
 
-        self.button_maestro_categoria_acuario = QPushButton(
-            "CATEGORÍAS DE ACUARIO"
+        self.button_equipamiento_acuario = QPushButton(
+            "EQUIPAMIENTO DE ACUARIO"
         )
-        self.button_maestro_categoria_acuario.setStyleSheet(
+        self.button_equipamiento_acuario.setStyleSheet(
             """
             QPushButton {
                 background-color: transparent;
@@ -260,18 +261,18 @@ class ModuloMaestroView(QWidget):
             }
             """
         )
-        self.button_maestro_categoria_acuario.setObjectName(
-            "button_maestro_categoria_acuario"
+        self.button_equipamiento_acuario.setObjectName(
+            "button_equipamiento_acuario"
         )
-        self.button_maestro_categoria_acuario.setFlat(True)
-        self.button_maestro_categoria_acuario.setCursor(
+        self.button_equipamiento_acuario.setFlat(True)
+        self.button_equipamiento_acuario.setCursor(
             QCursor(Qt.CursorShape.PointingHandCursor)
         )
 
-        self.button_maestro_subcategoria_acuario = QPushButton(
-            "SUBCATEGORÍAS DE ACUARIO"
+        self.button_sustrato_acuario = QPushButton(
+            "SUSTRATO DE ACUARIO"
         )
-        self.button_maestro_subcategoria_acuario.setStyleSheet(
+        self.button_sustrato_acuario.setStyleSheet(
             """
             QPushButton {
                 background-color: transparent;
@@ -282,18 +283,110 @@ class ModuloMaestroView(QWidget):
             }
             """
         )
-        self.button_maestro_subcategoria_acuario.setObjectName(
-            "button_maestro_subcategoria_acuario"
+        self.button_sustrato_acuario.setObjectName(
+            "button_sustrato_acuario"
         )
-        self.button_maestro_subcategoria_acuario.setFlat(True)
-        self.button_maestro_subcategoria_acuario.setCursor(
+        self.button_sustrato_acuario.setFlat(True)
+        self.button_sustrato_acuario.setCursor(
             QCursor(Qt.CursorShape.PointingHandCursor)
         )
 
-        self.layout_acuario.addWidget(self.button_maestro_acuario)
-        self.layout_acuario.addWidget(self.button_maestro_tipo_acuario)
-        self.layout_acuario.addWidget(self.button_maestro_categoria_acuario)
-        self.layout_acuario.addWidget(self.button_maestro_subcategoria_acuario)
+        self.button_hardscape_acuario = QPushButton(
+            "HARDSCAPE DE ACUARIO"
+        )
+        self.button_hardscape_acuario.setStyleSheet(
+            """
+            QPushButton {
+                background-color: transparent;
+                text-align: left;
+                margin-bottom: 0;
+                font-family: 'Roboto'; 
+                font-size: 14px;
+            }
+            """
+        )
+        self.button_hardscape_acuario.setObjectName(
+            "button_hardscape_acuario"
+        )
+        self.button_hardscape_acuario.setFlat(True)
+        self.button_hardscape_acuario.setCursor(
+            QCursor(Qt.CursorShape.PointingHandCursor)
+        )
+
+        self.button_fauna_acuario = QPushButton(
+            "FAUNA DE ACUARIO"
+        )
+        self.button_fauna_acuario.setStyleSheet(
+            """
+            QPushButton {
+                background-color: transparent;
+                text-align: left;
+                margin-bottom: 0;
+                font-family: 'Roboto'; 
+                font-size: 14px;
+            }
+            """
+        )
+        self.button_fauna_acuario.setObjectName(
+            "button_fauna_acuario"
+        )
+        self.button_fauna_acuario.setFlat(True)
+        self.button_fauna_acuario.setCursor(
+            QCursor(Qt.CursorShape.PointingHandCursor)
+        )
+
+        self.button_flora_acuario = QPushButton(
+            "FLORA DE ACUARIO"
+        )
+        self.button_flora_acuario.setStyleSheet(
+            """
+            QPushButton {
+                background-color: transparent;
+                text-align: left;
+                margin-bottom: 0;
+                font-family: 'Roboto'; 
+                font-size: 14px;
+            }
+            """
+        )
+        self.button_flora_acuario.setObjectName(
+            "button_flora_acuario"
+        )
+        self.button_flora_acuario.setFlat(True)
+        self.button_flora_acuario.setCursor(
+            QCursor(Qt.CursorShape.PointingHandCursor)
+        )
+
+        self.button_alimentación_acuario = QPushButton(
+            "ALIMENTACIÓN"
+        )
+        self.button_alimentación_acuario.setStyleSheet(
+            """
+            QPushButton {
+                background-color: transparent;
+                text-align: left;
+                margin-bottom: 0;
+                font-family: 'Roboto'; 
+                font-size: 14px;
+            }
+            """
+        )
+        self.button_alimentación_acuario.setObjectName(
+            "button_alimentación_acuario"
+        )
+        self.button_alimentación_acuario.setFlat(True)
+        self.button_alimentación_acuario.setCursor(
+            QCursor(Qt.CursorShape.PointingHandCursor)
+        )
+
+        self.layout_acuario.addWidget(self.button_acuarios)
+        self.layout_acuario.addWidget(self.button_historico_acuario)
+        self.layout_acuario.addWidget(self.button_equipamiento_acuario)
+        self.layout_acuario.addWidget(self.button_sustrato_acuario)
+        self.layout_acuario.addWidget(self.button_hardscape_acuario)
+        self.layout_acuario.addWidget(self.button_fauna_acuario)
+        self.layout_acuario.addWidget(self.button_flora_acuario)
+        self.layout_acuario.addWidget(self.button_alimentación_acuario)
 
         # COMERCIO
         self.button_menu_comercio = QPushButton(
@@ -1124,10 +1217,10 @@ class ModuloMaestroView(QWidget):
         self.layout_proyecto = QVBoxLayout(self.proyecto)
         self.layout_proyecto.setContentsMargins(35, 0, 0, 0)
 
-        self.button_maestro_proyecto = QPushButton(
+        self.button_proyectos = QPushButton(
             "PROYECTOS"
         )
-        self.button_maestro_proyecto.setStyleSheet(
+        self.button_proyectos.setStyleSheet(
             """
             QPushButton {
                 background-color: transparent;
@@ -1138,18 +1231,18 @@ class ModuloMaestroView(QWidget):
             }
             """
         )
-        self.button_maestro_proyecto.setObjectName(
-            "button_maestro_proyecto"
+        self.button_proyectos.setObjectName(
+            "button_proyectos"
         )
-        self.button_maestro_proyecto.setFlat(True)
-        self.button_maestro_proyecto.setCursor(
+        self.button_proyectos.setFlat(True)
+        self.button_proyectos.setCursor(
             QCursor(Qt.CursorShape.PointingHandCursor)
         )
 
-        self.button_maestro_estado_proyecto = QPushButton(
-            "ESTADOS PROYECTOS"
+        self.button_historico_proyecto = QPushButton(
+            "HISTÓRICO DE  PROYECTO"
         )
-        self.button_maestro_estado_proyecto.setStyleSheet(
+        self.button_historico_proyecto.setStyleSheet(
             """
             QPushButton {
                 background-color: transparent;
@@ -1160,16 +1253,16 @@ class ModuloMaestroView(QWidget):
             }
             """
         )
-        self.button_maestro_estado_proyecto.setObjectName(
-            "button_maestro_estado_proyecto"
+        self.button_historico_proyecto.setObjectName(
+            "button_historico_proyecto"
         )
-        self.button_maestro_estado_proyecto.setFlat(True)
-        self.button_maestro_estado_proyecto.setCursor(
+        self.button_historico_proyecto.setFlat(True)
+        self.button_historico_proyecto.setCursor(
             QCursor(Qt.CursorShape.PointingHandCursor)
         )
 
-        self.layout_proyecto.addWidget(self.button_maestro_proyecto)
-        self.layout_proyecto.addWidget(self.button_maestro_estado_proyecto)
+        self.layout_proyecto.addWidget(self.button_proyectos)
+        self.layout_proyecto.addWidget(self.button_historico_proyecto)
 
         # URNA
         self.button_menu_urna = QPushButton("URNA")
@@ -1405,7 +1498,7 @@ class ModuloMaestroView(QWidget):
 if __name__ == "__main__":
     app = QApplication(sys.argv)
 
-    ventana = ModuloMaestroView("MODULO MAESTRO")
+    ventana = ModuloProyectoView("MODULO PROYECTO")
 
     # Cargar el archivo .qss
     with open("../Resources/Styles/main_style.qss", "r",

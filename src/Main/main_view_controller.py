@@ -16,6 +16,7 @@ from ModuloMaestro.Controllers.main_reports_controller import \
 from ModuloMaestro.Views.main_reports_view import MainReportsView
 from Main.main_view import MainView
 from ModuloMaestro.modulo_maestro_controller import ModuloMaestroController
+from ModuloProyecto.modulo_proyecto_controller import ModuloProyectoController
 
 
 class MainViewController(BaseController):
@@ -45,8 +46,8 @@ class MainViewController(BaseController):
         self._view.button_modulo_maestro.clicked.connect(
             self.modulo_maestro_click
         )
-        self._view.button_modulo_acuario.clicked.connect(
-            lambda: self.en_construccion("ACUARIO")
+        self._view.button_modulo_proyecto.clicked.connect(
+            self.modulo_proyecto_click
         )
         self._view.button_modulo_mantenimiento.clicked.connect(
             lambda: self.en_construccion("MANTENIMIENTO")
@@ -78,6 +79,12 @@ class MainViewController(BaseController):
         """ Abre el módulo maestro. """
 
         ctrl = ModuloMaestroController()
+        ctrl.show()
+
+    def modulo_proyecto_click(self):
+        """ Abre el módulo proyecto. """
+
+        ctrl = ModuloProyectoController()
         ctrl.show()
 
     def en_construccion(self, modulo: str):

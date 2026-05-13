@@ -71,7 +71,7 @@ class MainView(QWidget):
         self.setWindowFlags(Qt.WindowType.FramelessWindowHint)
 
         # Configuramos el menú lateral
-        self.menu_layout.addWidget(self.button_modulo_acuario)
+        self.menu_layout.addWidget(self.button_modulo_proyecto)
         self.menu_layout.addWidget(self.button_modulo_mantenimiento)
         self.menu_layout.addWidget(self.button_modulo_compras)
         self.menu_layout.addWidget(self.button_modulo_inventario)
@@ -182,14 +182,14 @@ class MainView(QWidget):
         )
 
         ## Módulo acuario
-        self.button_modulo_acuario = QPushButton("ACUARIO")
-        self.button_modulo_acuario.setIcon(
-            QIcon(str(globales.PATH_IMAGES / "acuario.png"))
+        self.button_modulo_proyecto = QPushButton("PROYECTO")
+        self.button_modulo_proyecto.setIcon(
+            QIcon(str(globales.PATH_IMAGES / "proyecto.png"))
         )
-        self.button_modulo_acuario.setIconSize(QSize(32, 32))
-        self.button_modulo_acuario.setObjectName("button_modulo_acuario")
-        self.button_modulo_acuario.setFlat(True)
-        self.button_modulo_acuario.setCursor(
+        self.button_modulo_proyecto.setIconSize(QSize(32, 32))
+        self.button_modulo_proyecto.setObjectName("button_modulo_proyecto")
+        self.button_modulo_proyecto.setFlat(True)
+        self.button_modulo_proyecto.setCursor(
             QCursor(Qt.CursorShape.PointingHandCursor)
         )
 

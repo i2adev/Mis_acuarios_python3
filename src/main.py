@@ -24,7 +24,7 @@ from Main.Views.login_dialog import LoginDialog
 import os
 
 # Versión del programa
-__version__ = "0.44.0"
+__version__ = "0.45.0"
 
 
 def excepthook(exc_type, exc_value, exc_traceback):
@@ -72,29 +72,29 @@ def main():
     # Carga las fuentes desde el recurso
     _ = load_directory_fonts(globales.PATH_FONTS)
 
-    # Limpia la base de datos
-    msg = BaseDAO.clean_database()
-    if msg.is_success:
-        res = BaseDAO.fill_essential_info()
-        if not res.is_success:
-            QMessageBox.information(
-                None,
-                "LIMPIEZA DE BASE DE DATOS",
-                res.error_msg
-            )
-            return
-
-        QMessageBox.information(
-            None,
-            "LIMPIEZA DE BASE DE DATOS",
-            msg.value
-        )
-    else:
-        QMessageBox.warning(
-            None,
-            "LIMPIEZA DE BASE DE DATOS",
-            msg.error_msg
-        )
+    # # Limpia la base de datos
+    # msg = BaseDAO.clean_database()
+    # if msg.is_success:
+    #     res = BaseDAO.fill_essential_info()
+    #     if not res.is_success:
+    #         QMessageBox.information(
+    #             None,
+    #             "LIMPIEZA DE BASE DE DATOS",
+    #             res.error_msg
+    #         )
+    #         return
+    #
+    #     QMessageBox.information(
+    #         None,
+    #         "LIMPIEZA DE BASE DE DATOS",
+    #         msg.value
+    #     )
+    # else:
+    #     QMessageBox.warning(
+    #         None,
+    #         "LIMPIEZA DE BASE DE DATOS",
+    #         msg.error_msg
+    #     )
 
     # # Se implementa la copia de la base de datos a fiche sql
     # origen = str(Path(__file__).resolve().parent /
