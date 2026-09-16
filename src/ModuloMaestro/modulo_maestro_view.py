@@ -77,6 +77,8 @@ class ModuloMaestroView(QWidget):
         self.menu_layout.addWidget(self.comercio)
         self.menu_layout.addWidget(self.button_menu_consumible)
         self.menu_layout.addWidget(self.consumible)
+        self.menu_layout.addWidget(self.button_menu_control_temperatura)
+        self.menu_layout.addWidget(self.control_temperatura)
         self.menu_layout.addWidget(self.button_menu_equipamiento)
         self.menu_layout.addWidget(self.equipamiento)
         self.menu_layout.addWidget(self.button_menu_fauna)
@@ -452,6 +454,76 @@ class ModuloMaestroView(QWidget):
         self.layout_consumible.addWidget(
             self.button_maestro_formato_consumible)
         self.layout_consumible.addWidget(self.button_maestro_unidad_contenido)
+
+        # CONTROL DE TEMPERATURA
+        self.button_menu_control_temperatura = QPushButton("CONTROL DE "
+                                                           "TEMPERATURA")
+        self.button_menu_control_temperatura.setIcon(
+            QIcon(str(globales.PATH_IMAGES / "control-de-temperatura.png"))
+        )
+        self.button_menu_control_temperatura.setIconSize(QSize(32, 32))
+        self.button_menu_control_temperatura.setObjectName(
+            "button_menu_control_temperatura"
+        )
+        self.button_menu_control_temperatura.setFlat(True)
+        self.button_menu_control_temperatura.setCursor(
+            QCursor(Qt.CursorShape.PointingHandCursor)
+        )
+
+        self.control_temperatura = QWidget()
+        self.layout_control_temperatura = QVBoxLayout(self.control_temperatura)
+        self.layout_control_temperatura.setContentsMargins(35, 0, 0, 0)
+
+        self.button_maestro_eq_ctrl_temperatura = QPushButton("EQUIPO DE "
+                                                              "CONTROL DE "
+                                                              "TEMPERATURA")
+        self.button_maestro_eq_ctrl_temperatura.setStyleSheet(
+            """
+            QPushButton {
+                background-color: transparent;
+                text-align: left;
+                margin-bottom: 0;
+                font-family: 'Roboto'; 
+                font-size: 14px;
+            }
+            """
+        )
+        self.button_maestro_eq_ctrl_temperatura.setObjectName(
+            "button_maestro_eq_ctrl_temperatura"
+        )
+        self.button_maestro_eq_ctrl_temperatura.setFlat(True)
+        self.button_maestro_eq_ctrl_temperatura.setCursor(
+            QCursor(Qt.CursorShape.PointingHandCursor)
+        )
+
+        self.button_maestro_tipo_ctrl_temperatura = QPushButton("TIPO DE "
+                                                                "CONTROL DE "
+                                                                "TEMPERATURA")
+        self.button_maestro_tipo_ctrl_temperatura.setStyleSheet(
+            """
+            QPushButton {
+                background-color: transparent;
+                text-align: left;
+                margin-bottom: 0;
+                font-family: 'Roboto'; 
+                font-size: 14px;
+            }
+            """
+        )
+        self.button_maestro_tipo_ctrl_temperatura.setObjectName(
+            "button_maestro_tipo_ctrl_temperatura"
+        )
+        self.button_maestro_tipo_ctrl_temperatura.setFlat(True)
+        self.button_maestro_tipo_ctrl_temperatura.setCursor(
+            QCursor(Qt.CursorShape.PointingHandCursor)
+        )
+
+        self.layout_control_temperatura.addWidget(
+            self.button_menu_control_temperatura)
+        self.layout_control_temperatura.addWidget(
+            self.button_maestro_eq_ctrl_temperatura)
+        self.layout_control_temperatura.addWidget(
+            self.button_maestro_tipo_ctrl_temperatura)
 
         # EQUIPAMIENTO
         self.button_menu_equipamiento = QPushButton("EQUIPAMIENTO")

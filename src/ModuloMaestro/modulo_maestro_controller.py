@@ -71,6 +71,8 @@ from ModuloMaestro.Controllers.tasa_crecimiento_master_controller import \
     TasaCrecimientoMasterController
 from ModuloMaestro.Controllers.tipo_acuario_master_controller import \
     TipoAcuarioMasterController
+from ModuloMaestro.Controllers.tipo_control_temperatura_master_controller import \
+    TipoControlTemperaturaMasterController
 from ModuloMaestro.Controllers.tipo_filtro_master_controller import \
     TipoFiltroMasterController
 from ModuloMaestro.Controllers.tipo_iluminacion_master_controller import \
@@ -120,6 +122,8 @@ from ModuloMaestro.Model.DAO.subcategoria_incidencia_dao import \
     SubcategoriaIncidenciaDAO
 from ModuloMaestro.Model.DAO.tasa_crecimiento_dao import TasaCrecimientoDAO
 from ModuloMaestro.Model.DAO.tipo_acuario_dao import TipoAcuarioDAO
+from ModuloMaestro.Model.DAO.tipo_control_temperatura_dao import \
+    TipoControlTemperaturaDAO
 from ModuloMaestro.Model.DAO.tipo_filtro_dao import TipoFiltroDAO
 from ModuloMaestro.Model.DAO.tipo_iluminacion_dao import TipoIluminacionDAO
 from ModuloMaestro.Model.DAO.unidad_contenido_dao import UnidadContenidoDAO
@@ -176,6 +180,8 @@ from ModuloMaestro.Model.Entities.subcategoria_incidencia_entity import \
 from ModuloMaestro.Model.Entities.tasa_crecimiento_entity import \
     TasaCrecimientoEntity
 from ModuloMaestro.Model.Entities.tipo_acuario_entity import TipoAcuarioEntity
+from ModuloMaestro.Model.Entities.tipo_control_temperatura_entity import \
+    TipoControlTemperaturaEntity
 from ModuloMaestro.Model.Entities.tipo_filtro_entity import TipoFiltroEntity
 from ModuloMaestro.Model.Entities.tipo_iluminacion_entity import \
     TipoIluminacionEntity
@@ -229,6 +235,8 @@ from ModuloMaestro.Views.Masters.subcategoria_incidencia_view import \
 from ModuloMaestro.Views.Masters.tasa_crecimiento_view import \
     TasaCrecimientoView
 from ModuloMaestro.Views.Masters.tipo_acuario_view import TipoAcuarioView
+from ModuloMaestro.Views.Masters.tipo_control_temperatura_view import \
+    TipoControlTemperaturaView
 from ModuloMaestro.Views.Masters.tipo_filtro_view import TipoFiltroView
 from ModuloMaestro.Views.Masters.tipo_iluminacion_view import \
     TipoIluminacionView
@@ -281,6 +289,12 @@ class ModuloMaestroController(BaseController):
             lambda: self.show_panel(self._view.consumible)
             if self._view.consumible.isHidden()
             else self.hide_panel(self._view.consumible)
+        )
+
+        self._view.button_menu_control_temperatura.clicked.connect(
+            lambda: self.show_panel(self._view.control_temperatura)
+            if self._view.control_temperatura.isHidden()
+            else self.hide_panel(self._view.control_temperatura)
         )
 
         self._view.button_menu_equipamiento.clicked.connect(
@@ -479,6 +493,9 @@ class ModuloMaestroController(BaseController):
         )
         self._view.button_maestro_especie_vegetal.clicked.connect(
             self.especie_vegetal_click
+        )
+        self._view.button_maestro_tipo_ctrl_temperatura.clicked.connect(
+            self.tipo_control_temperatura_click
         )
 
     def sexo_click(self):
@@ -894,6 +911,21 @@ class ModuloMaestroController(BaseController):
         ctrl = CategoriaEquipamientoMasterController(view, dao, mod)
         ctrl.show()
 
+    def tipo_control_temperatura_click(self):
+        """
+        Cuando se presiona en el maestro de tipo de control temperatura.
+        Acción: Abre el formulario de tipos de control de temperatura.
+        """
+
+        view = TipoControlTemperaturaView(
+            "MAESTRO DE TIPOS DE CONTROL DE TEMPERATURA"
+        )
+        dao = TipoControlTemperaturaDAO()
+        mod = TipoControlTemperaturaEntity()
+
+        ctrl = TipoControlTemperaturaMasterController(view, dao, mod)
+        ctrl.show()
+
     def hide_panels(self):
         """ Oculta todos los paneles. """
 
@@ -903,6 +935,8 @@ class ModuloMaestroController(BaseController):
             self._view.comercio.hide()
         if not self._view.consumible.isHidden():
             self._view.consumible.hide()
+        if not self._view.control_temperatura.isHidden():
+            self._view.control_temperatura.hide()
         if not self._view.equipamiento.isHidden():
             self._view.equipamiento.hide()
         if not self._view.fauna.isHidden():

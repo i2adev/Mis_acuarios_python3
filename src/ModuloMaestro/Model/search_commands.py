@@ -970,3 +970,20 @@ class SearchCmd:
     )
     WHERE FIELD LIKE '%' || :pattern || '%';
     """
+
+    SEARCH_TIPO_CONTROL_TEMPERATURA = """
+    SELECT ID, NUM, CONTROL_TEMPERATURA, DESCRIPCION
+    FROM
+    (
+        SELECT ID_TIPO_CONTROL_TEMPERATURA AS ID,
+               ROW_NUMBER() OVER(ORDER BY TIPO_CONTROL_TEMPERATURA) AS NUM,
+               TIPO_CONTROL_TEMPERATURA AS CONTROL_TEMPERATURA,
+               DESCRIPCION AS DESCRIPCION,
+               UPPER(
+                   IFNULL(TIPO_CONTROL_TEMPERATURA, '')
+                   || IFNULL(DESCRIPCION, '')
+               ) AS FIELD
+        FROM   TIPOS_CONTROL_TEMPERATURA
+    )
+    WHERE    FIELD LIKE '%' || :pattern || '%';
+    """

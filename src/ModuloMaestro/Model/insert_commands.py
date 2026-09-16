@@ -604,3 +604,35 @@ class InsertCmd:
     ('Veces al mes'),
     ('Veces al año');
     """
+
+    # Inserta los tipos de control de la temperatura
+    INSERT_TIPO_CONTROL_TEMPERATURA = """
+    INSERT INTO TIPOS_CONTROL_TEMPERATURA
+    (TIPO_CONTROL_TEMPERATURA, DESCRIPCION)
+    VALUES
+    ('Calentador', 'Dispositivo destinado a aumentar y mantener la temperatura del agua.'),
+    ('Enfriador', 'Dispositivo destinado a reducir la temperatura del agua del acuario.'),
+    ('Ventilador', 'Sistema de ventilación para favorecer la evaporación y disminuir la temperatura.'),
+    ('Controlador térmico', 'Dispositivo electrónico que regula automáticamente sistemas de calefacción y refrigeración.'),
+    ('Termómetro', 'Dispositivo utilizado para medir y monitorizar la temperatura del agua.');
+    """
+
+    # Inserta las unidades de temperatura
+    INSERT_UNIDADES_TEMPERATURA = """
+    INSERT INTO UNIDADES_TEMPERATURA
+    (UNIDAD_TEMPERATURA, SIMBOLO, DESCRIPCION)
+    VALUES
+    ('Grado Celsius', '°C', 'Unidad de temperatura utilizada habitualmente en acuariofilia.'),
+    ('Grado Fahrenheit', '°F', 'Unidad de temperatura utilizada principalmente en países anglosajones.'),
+    ('Kelvin', 'K', 'Unidad absoluta de temperatura utilizada en ámbitos científicos.');
+    """
+
+    # Inserta las unidades de potencia
+    INSERT_UNIDADES_POTENCIA = """
+    INSERT INTO UNIDADES_POTENCIA
+    (UNIDAD_POTENCIA, SIMBOLO, DESCRIPCION)
+    VALUES
+    ('Vatio', 'W', 'Unidad de potencia eléctrica utilizada habitualmente en dispositivos de acuariofilia.'),
+    ('Kilovatio', 'kW', 'Unidad de potencia equivalente a 1000 vatios.'),
+    ('Caballo de potencia', 'HP', 'Unidad utilizada ocasionalmente en enfriadores y bombas de gran potencia.'); 
+    """

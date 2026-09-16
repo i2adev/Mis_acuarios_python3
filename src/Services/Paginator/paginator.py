@@ -39,6 +39,8 @@ from ModuloMaestro.Model.Entities.requerimiento_iluminacion_entity import \
 from ModuloMaestro.Model.Entities.sexo_animal_entity import SexoAnimalEntity
 from ModuloMaestro.Model.Entities.tasa_crecimiento_entity import \
     TasaCrecimientoEntity
+from ModuloMaestro.Model.Entities.tipo_control_temperatura_entity import \
+    TipoControlTemperaturaEntity
 from ModuloMaestro.Model.Entities.tipo_iluminacion_entity import \
     TipoIluminacionEntity
 from ModuloMaestro.Model.Entities.unidad_contenido_entity import \
@@ -870,6 +872,18 @@ class Paginator:
             )
                 for f in rows
             ]
+        elif self.procedure == "VISTA_TIPOS_CONTROL_TEMPERATURA":
+            data_list = [TipoControlTemperaturaEntity(
+                id=f["ID"],
+                num=f["NUM"],
+                tipo_control_temperatura=f["CONTROL_TEMPERATURA"],
+                descripcion=f["DESCRIPCION"],
+            )
+                for f in rows
+            ]
+        else:
+            raise NotImplementedError(f"LA TABLA A LA QUE QUIERES ACCEDER NO "
+                                      f"ESTÁ IMPLEMENTADA:\n{self.procedure}")
 
         return data_list
 
@@ -968,6 +982,11 @@ class Paginator:
             return SearchCmd.SEARCH_ESPECIE_VEGETAL
         elif self.procedure == "VISTA_TASAS_CRECIMIENTO":
             return SearchCmd.SEARCH_TASA_CRECIMIENTO
+        elif self.procedure == "VISTA_TIPOS_CONTROL_TEMPERATURA":
+            return SearchCmd.SEARCH_TIPO_CONTROL_TEMPERATURA
+        else:
+            raise NotImplementedError(f"LA TABLA A LA QUE QUIERES ACCEDER NO "
+                                      f"ESTÁ IMPLEMENTADA:\n{self.procedure}")
 
     def __str__(self):
         """ Muestra el objeto en forma de texto. """

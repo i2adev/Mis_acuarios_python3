@@ -171,6 +171,9 @@ class BaseDAO(ABC):
                 cursor.execute(InsertCmd.INSERTAR_UNIDAD_CONTENIDO)
                 cursor.execute(InsertCmd.INSERT_DIFICULTAD_PLANTAS)
                 cursor.execute(InsertCmd.INSERT_PERIODICIDADES)
+                cursor.execute(InsertCmd.INSERT_TIPO_CONTROL_TEMPERATURA)
+                cursor.execute(InsertCmd.INSERT_UNIDADES_TEMPERATURA)
+                cursor.execute(InsertCmd.INSERT_UNIDADES_POTENCIA)
                 db.conn.commit()
                 return Result.success(0)
 
