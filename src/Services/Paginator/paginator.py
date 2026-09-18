@@ -16,6 +16,8 @@ from ModuloMaestro.Model.Entities.comprtamiento_fauna_entity import \
 from ModuloMaestro.Model.Entities.consumible_entity import ConsumibleEntity
 from ModuloMaestro.Model.Entities.control_iluminacion_entity import \
     ControlIluminacionEntity
+from ModuloMaestro.Model.Entities.control_temperatura_entity import \
+    ControladorTemperaturaEntity
 from ModuloMaestro.Model.Entities.dieta_fauna_entity import DietaFaunaEntity
 from ModuloMaestro.Model.Entities.dificultad_planta_entity import \
     DificultadPlantaEntity
@@ -881,6 +883,23 @@ class Paginator:
             )
                 for f in rows
             ]
+
+        elif self.procedure == "VISTA_CONTROLADORES_TEMPERATURA":
+            data_list = [ControladorTemperaturaEntity(
+                id=f["ID"],
+                num=f["NUM"],
+                id_tipo_control_temperatura=f["TIPO_CONTROL"],
+                id_marca=f["MARCA"],
+                modelo=f["MODELO"],
+                numero_serie=f["NUMERO_SERIE"],
+                fecha_alta=f["FECHA_ALTA"],
+                fecha_baja=f["FECHA_BAJA"],
+                motivo_baja=f["MOTIVO_BAJA"],
+                descripcion=f["DESCRIPCION"],
+            )
+                for f in rows
+            ]
+
         else:
             raise NotImplementedError(f"LA TABLA A LA QUE QUIERES ACCEDER NO "
                                       f"ESTÁ IMPLEMENTADA:\n{self.procedure}")
@@ -984,6 +1003,8 @@ class Paginator:
             return SearchCmd.SEARCH_TASA_CRECIMIENTO
         elif self.procedure == "VISTA_TIPOS_CONTROL_TEMPERATURA":
             return SearchCmd.SEARCH_TIPO_CONTROL_TEMPERATURA
+        elif self.procedure == "VISTA_CONTROLADORES_TEMPERATURA":
+            return SearchCmd.SEARCH_CONTROLADOR_TEMPERATURA
         else:
             raise NotImplementedError(f"LA TABLA A LA QUE QUIERES ACCEDER NO "
                                       f"ESTÁ IMPLEMENTADA:\n{self.procedure}")

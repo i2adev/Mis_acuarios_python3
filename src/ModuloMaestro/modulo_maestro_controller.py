@@ -25,6 +25,8 @@ from ModuloMaestro.Controllers.consumible_master_controller import \
     ConsumibleMasterController
 from ModuloMaestro.Controllers.control_iluminacion_master_controller import \
     ControlIluminacionMasterController
+from ModuloMaestro.Controllers.controlador_temperatura_master_controller import \
+    ControladorTemperaturaMasterController
 from ModuloMaestro.Controllers.dieta_fauna_master_controller import \
     DietaFaunaMasterController
 from ModuloMaestro.Controllers.dificultad_planta_master_controller import \
@@ -95,6 +97,8 @@ from ModuloMaestro.Model.DAO.comportamiento_fauna_dao import \
 from ModuloMaestro.Model.DAO.consumible_dao import ConsumibleDAO
 from ModuloMaestro.Model.DAO.control_iluminacion_dao import \
     ControlIluminacionDAO
+from ModuloMaestro.Model.DAO.controlador_temperatura_dao import \
+    ControladorTemperaturaDAO
 from ModuloMaestro.Model.DAO.dieta_fauna_dao import DietaFaunaDAO
 from ModuloMaestro.Model.DAO.dificultad_plantas_dao import DificultadPlantaDAO
 from ModuloMaestro.Model.DAO.equipamiento_dao import EquipamientoDAO
@@ -143,6 +147,8 @@ from ModuloMaestro.Model.Entities.comprtamiento_fauna_entity import \
 from ModuloMaestro.Model.Entities.consumible_entity import ConsumibleEntity
 from ModuloMaestro.Model.Entities.control_iluminacion_entity import \
     ControlIluminacionEntity
+from ModuloMaestro.Model.Entities.control_temperatura_entity import \
+    ControladorTemperaturaEntity
 from ModuloMaestro.Model.Entities.dieta_fauna_entity import DietaFaunaEntity
 from ModuloMaestro.Model.Entities.dificultad_planta_entity import \
     DificultadPlantaEntity
@@ -203,6 +209,8 @@ from ModuloMaestro.Views.Masters.comportamiento_fauna_view import \
 from ModuloMaestro.Views.Masters.consumible_view import ConsumibleView
 from ModuloMaestro.Views.Masters.control_iluminacion_view import \
     ControlIluminacionView
+from ModuloMaestro.Views.Masters.controlador_temperatura_view import \
+    ControladorTemperaturaView
 from ModuloMaestro.Views.Masters.dieta_fauna_view import DietaFaunaView
 from ModuloMaestro.Views.Masters.dificultad_planta_view import \
     DificultadPlantaView
@@ -924,6 +932,22 @@ class ModuloMaestroController(BaseController):
         mod = TipoControlTemperaturaEntity()
 
         ctrl = TipoControlTemperaturaMasterController(view, dao, mod)
+        ctrl.show()
+
+    def equipo_controlador_temperatura_click(self):
+        """
+        Cuando se presiona en el maestro de los equipos de controladores
+        de temperatura.
+        Acción: Abre el formulario de tipos de control de temperatura.
+        """
+
+        view = ControladorTemperaturaView(
+            "MAESTRO DE LOS EQUIPOS DE CONTROL DE TEMPERATURA"
+        )
+        dao = ControladorTemperaturaDAO()
+        mod = ControladorTemperaturaEntity()
+
+        ctrl = ControladorTemperaturaMasterController(view, dao, mod)
         ctrl.show()
 
     def hide_panels(self):

@@ -987,3 +987,35 @@ class SearchCmd:
     )
     WHERE    FIELD LIKE '%' || :pattern || '%';
     """
+
+    SEARCH_CONTROLADOR_TEMPERATURA = """
+    SELECT  ID, NUM, TIPO_CONTROL, MARCA, MODELO, NUMERO_SERIE, FECHA_ALTA, 
+            FECHA_BAJA, MOTIVO_BAJA, DESCRIPCION
+    FROM
+    (
+        SELECT  E.ID_CONTROL_TEMPERATURA AS ID,
+                ROW_NUMBER() OVER(ORDER BY E.ID_MARCA, E.MODELO) AS NUM,
+                C.TIPO_CONTROL_TEMPERATURA AS TIPO_CONTROL,
+                M.MARCA AS MARCA,
+                E.MODELO AS MODELO,
+                E.NUMERO_SERIE AS NUMERO_SERIE,
+                IFNULL(strftime('%d/%m/%Y', E.FECHA_ALTA, 'unixepoch', 'localtime'), '') AS FECHA_ALTA, 
+                IFNULL(strftime('%d/%m/%Y', E.FECHA_BAJA, 'unixepoch', 'localtime'), '') AS FECHA_BAJA,
+                E.MOTIVO_BAJA AS MOTIVO_BAJA,
+                E.DESCRIPCION AS DESCRIPCION,
+                UPPER(
+                  IFNULL( C.TIPO_CONTROL_TEMPERATURA, '')
+                  || IFNULL(M.MARCA, '')
+                  || IFNULL(E.MODELO, '')
+                  || IFNULL(E.NUMERO_SERIE, '')
+                  || IFNULL(E.MOTIVO_BAJA, '')
+                  || IFNULL(E.DESCRIPCION, '')
+               ) AS FIELD
+        FROM    CONTROLADORES_TEMPERATURA E
+        LEFT JOIN TIPOS_CONTROL_TEMPERATURA C 
+            ON E.ID_TIPO_CONTROL_TEMPERATURA = C.ID_TIPO_CONTROL_TEMPERATURA
+        LEFT JOIN MARCAS_COMERCIALES M ON 
+            E.ID_MARCA = M.ID_MARCA
+    )
+    WHERE   FIELD LIKE'%' || :pattern || '%';
+    """

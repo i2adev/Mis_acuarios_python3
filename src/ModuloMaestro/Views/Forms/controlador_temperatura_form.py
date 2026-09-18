@@ -1,8 +1,9 @@
 ﻿"""
 Autor:      Inigo Iturriagaetxebarria
-Fecha:      17/12/2025
+Fecha:      17/09/2026
 Comentarios:
-    Módulo que contiene los controles del formulario de la entidad ACUARIO.
+    Módulo que contiene los controles del formulario de la entidad
+    CONTROLADOR DE TEMPERATURA.
 """
 
 import sys
@@ -20,9 +21,10 @@ from CustomControls.plain_text_edit import PlainTextEdit
 from CustomControls.str_line_edit import StrLineEdit
 
 
-class EquipamientoForm(QFrame):
+class ControladorTemperaturaForm(QFrame):
     """
-    Clase que contiene los controles de edición de la entidad EQUIPAMIENTO.
+    Clase que contiene los controles de edición de la entidad
+    CONTROLADOR DE TTEMPERATURA.
     """
 
     def __init__(self):
@@ -46,8 +48,8 @@ class EquipamientoForm(QFrame):
         self.layout_id = QVBoxLayout()
 
         ### Categoría de equipamiento
-        self.layout_categoria_equipamiento = QVBoxLayout()
-        self.layout_combo_categoria_equipamiento = QHBoxLayout()
+        self.layout_tipo_controlador = QVBoxLayout()
+        self.layout_combo_tipo_controlador = QHBoxLayout()
 
         ### Marca del equipo
         self.layout_marca = QVBoxLayout()
@@ -81,7 +83,7 @@ class EquipamientoForm(QFrame):
         # Etiquetas
         self.label_id = QLabel("ID")
         self.label_id.setFixedWidth(50)
-        self.label_categoria_equipamiento = QLabel("CATEGORÍA")
+        self.label_tipo_controlador = QLabel("TIPO DE CONTROLADOR")
         self.label_marca = QLabel("MARCA")
         self.label_modelo = QLabel("MODELO")
         self.label_num_serie = QLabel("NÚMERO DE SERIE")
@@ -108,9 +110,9 @@ class EquipamientoForm(QFrame):
         self.edit_modelo.setObjectName("edit_modelo")
         self.edit_modelo.setToolTip(
             """
-            <h2>Modelo deL equipo</h2><br>
-            En este campo se inserta el modelo del equipo. Este es un campo 
-            <b>obligatorio</b>.
+            <h2>Modelo deL controlador de temperatura</h2><br>
+            En este campo se inserta el modelo del controlador de 
+            temperatura. Este es un campo <b>obligatorio</b>.
             """
         )
 
@@ -123,8 +125,8 @@ class EquipamientoForm(QFrame):
         self.edit_num_serie.setToolTip(
             """
             <h2>Número de serie</h2><br>
-            En este campo se inserta el número de serie del equipo. Este es un 
-            campo <b>obligatorio</b>.
+            En este campo se inserta el número de serie del controlador 
+            de temperatura. Este es un campo <b>obligatorio</b>.
             """
         )
 
@@ -137,9 +139,9 @@ class EquipamientoForm(QFrame):
             """
             <h2>Motivo baja del equipo</h2>
             En este campo se inserta el motivo por el que se le ha dado de 
-            baja al equipo. En caso de que se encuentre en tono rojo, 
-            el control está deshabilitado porque no se ha insertado una 
-            fecha de baja.
+            baja al controlador de temperatura. En caso de que se 
+            encuentre en tono rojo, el control está deshabilitado porque
+            no se ha insertado una fecha de baja.
             """
         )
 
@@ -148,23 +150,24 @@ class EquipamientoForm(QFrame):
         self.text_descripcion.setMinimumHeight(75)
         self.text_descripcion.setToolTip(
             """
-            <h2>Descripción del equipo</h2>
-            En este campo se inserta la descripción del equipo, asi como las 
-            carácteristicas mas relevantes.
+            <h2>Descripción del controlador de temperatura</h2>
+            En este campo se inserta la descripción del controlador de 
+            temperatura, asi como las carácteristicas mas relevantes.
             """
         )
 
         # Combos
-        self.combo_categoria_equipamiento = ComboBox("CATEGORÍA")
-        self.combo_categoria_equipamiento.setObjectName(
-            "combo_categoria_equipamiento")
-        self.combo_categoria_equipamiento.setMinimumWidth(250)
-        self.combo_categoria_equipamiento.setEditable(True)
-        self.combo_categoria_equipamiento.setToolTip(
+        self.combo_tipo_controlador = ComboBox("TIPO COMTROLADOR")
+        self.combo_tipo_controlador.setObjectName(
+            "combo_tipo_controlador")
+        self.combo_tipo_controlador.setMinimumWidth(250)
+        self.combo_tipo_controlador.setEditable(True)
+        self.combo_tipo_controlador.setToolTip(
             """
-            <h2>Categoría de equipamiento</h2>
-            En este campo se selecciona la categoría a la que pertenece este 
-            equipo. Este es un campo <b>obligatorio<b>.
+            <h2>Categoría de controlador de temperatura</h2>
+            En este campo se selecciona la categoría a la que pertenece 
+            este controlador de temperatura. Este es un campo 
+            <b>obligatorio<b>.
             """
         )
 
@@ -174,11 +177,12 @@ class EquipamientoForm(QFrame):
         self.combo_marca.setEditable(True)
         self.combo_marca.setToolTip(
             """
-            <h2>Marca del equipo</h2>
-            En este campo se selecciona la marca del equipo (EHEIM, JBL, 
-            Aquael, etc). Si la marca del equipo no se encuentra en la 
-            lista, puedes insertar uno pulsando en el botón de la 
-            derecha. Este es un campo <b>obligatorio<b>.
+            <h2>Marca del controlador de temperatura</h2>
+            En este campo se selecciona la marca del controlador de 
+            temperatura (EHEIM, JBL, Aquael, etc). Si la marca del 
+            equipo no se encuentra en la lista, puedes insertar uno 
+            pulsando en el botón de la derecha. Este es un campo 
+            <b>obligatorio<b>.
             """
         )
 
@@ -189,7 +193,7 @@ class EquipamientoForm(QFrame):
             """
             <h2>Fecha de alta</h2>
             En este campo se inserta la fecha den la que se da de alta el 
-            equipo. Este es un campo <b>obligatorio<b>.
+            controlador de temperatura. Este es un campo <b>obligatorio<b>.
             """
         )
 
@@ -199,16 +203,16 @@ class EquipamientoForm(QFrame):
             """
             <h2>Fecha de baja</h2>
             En este campo se inserta la fecha en la que se da de baja al 
-            equipo.
+            controlador de temperatura.
             """
         )
 
         # Botones
-        self.button_insert_cat_equipamiento = QPushButton("<")
-        self.button_insert_cat_equipamiento.setObjectName(
-            "button_insert_cat_equipamiento")
-        self.button_insert_cat_equipamiento.setFixedWidth(30)
-        self.button_insert_cat_equipamiento.setCursor(
+        self.button_insert_tipo_controlador = QPushButton("<")
+        self.button_insert_tipo_controlador.setObjectName(
+            "button_insert_tipo_controlador")
+        self.button_insert_tipo_controlador.setFixedWidth(30)
+        self.button_insert_tipo_controlador.setCursor(
             QCursor(Qt.CursorShape.PointingHandCursor)
         )
 
@@ -232,14 +236,14 @@ class EquipamientoForm(QFrame):
         self.layout_id.addWidget(self.edit_id)
 
         ## Categoría del equipamiento
-        self.layout_combo_categoria_equipamiento.addWidget(
-            self.combo_categoria_equipamiento)
-        self.layout_combo_categoria_equipamiento.addWidget(
-            self.button_insert_cat_equipamiento)
-        self.layout_categoria_equipamiento.addWidget(
-            self.label_categoria_equipamiento)
-        self.layout_categoria_equipamiento.addLayout(
-            self.layout_combo_categoria_equipamiento)
+        self.layout_combo_tipo_controlador.addWidget(
+            self.combo_tipo_controlador)
+        self.layout_combo_tipo_controlador.addWidget(
+            self.button_insert_tipo_controlador)
+        self.layout_tipo_controlador.addWidget(
+            self.label_tipo_controlador)
+        self.layout_tipo_controlador.addLayout(
+            self.layout_combo_tipo_controlador)
 
         ## Marca comercial
         self.layout_combo_marca.addWidget(self.combo_marca)
@@ -253,7 +257,7 @@ class EquipamientoForm(QFrame):
 
         ## Montamos la primera linea
         self.layout_first_line.addLayout(self.layout_id)
-        self.layout_first_line.addLayout(self.layout_categoria_equipamiento)
+        self.layout_first_line.addLayout(self.layout_tipo_controlador)
         self.layout_first_line.addLayout(self.layout_marca)
         self.layout_first_line.addLayout(self.layout_marca)
         self.layout_first_line.addLayout(self.layout_modelo)
@@ -301,7 +305,7 @@ class EquipamientoForm(QFrame):
 if __name__ == "__main__":
     app = QApplication(sys.argv)
 
-    ventana = EquipamientoForm()
+    ventana = ControladorTemperaturaForm()
     ventana.show()
 
     sys.exit(app.exec())
