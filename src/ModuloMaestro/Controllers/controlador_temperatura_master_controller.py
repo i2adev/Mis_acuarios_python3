@@ -83,7 +83,7 @@ class ControladorTemperaturaMasterController(ControladorTemperaturaController):
 
         # Inicializa los botónes
         self._view.frame.button_insert_tipo_controlador.clicked.connect(
-            self._open_tipo_control_temperatura_dialog()
+            self._open_tipo_control_temperatura_dialog
         )
         self._view.frame.button_insert_marca.clicked.connect(
             self._open_marca_dialog
@@ -93,7 +93,7 @@ class ControladorTemperaturaMasterController(ControladorTemperaturaController):
         self._view.button_load.clicked.connect(self.button_load_click)
         self._view.button_delete.clicked.connect(self.delete_click)
         self._view.button_clean.clicked.connect(lambda: self._clean_view(
-            self._view.frame.combo_categoria_equipamiento
+            self._view.frame.combo_tipo_controlador
         ))
         self._view.button_next.clicked.connect(self._next_page)
         self._view.button_prev.clicked.connect(self._previous_page)
@@ -133,7 +133,7 @@ class ControladorTemperaturaMasterController(ControladorTemperaturaController):
             # Cargamos la tabla
             self._fill_tableview(self._view.data_table, self._pag._total_data)
             self._configure_table(self._view.data_table)
-            self._clean_view(self._view.frame.combo_categoria_equipamiento)
+            self._clean_view(self._view.frame.combo_tipo_controlador)
             self._view.label_total_pages.setText(str(self._pag.total_pages))
 
             # Configuramos la tabla
@@ -171,7 +171,7 @@ class ControladorTemperaturaMasterController(ControladorTemperaturaController):
         # Cargamos la tabla
         self._fill_tableview(self._view.data_table, self._pag._total_data)
         self._configure_table(self._view.data_table)
-        self._clean_view(self._view.frame.combo_categoria_equipamiento)
+        self._clean_view(self._view.frame.combo_tipo_controlador)
 
         self._view.button_filter.setIcon(
             QIcon(str(Path(globales.PATH_IMAGES) / "filtered.png")))
@@ -233,7 +233,14 @@ class ControladorTemperaturaMasterController(ControladorTemperaturaController):
     def action_cargar(self, event):
         """ Carga un registro desde el menú contextual. """
 
-        self._load_record()
+        res = self._load_record()
+
+        if not res.is_success:
+            QMessageBox.warning(
+                self._view,
+                self._view.window_title,
+                res.error_msg
+            )
 
     def delete_click(self):
         """ Controla el clic en el botón eliminar. """
@@ -264,7 +271,7 @@ class ControladorTemperaturaMasterController(ControladorTemperaturaController):
             return
 
         # Limpiamos el formulario
-        self._clean_view(self._view.frame.combo_categoria_equipamiento)
+        self._clean_view(self._view.frame.combo_tipo_controlador)
 
         # Configurar paginator
         self._pag.initialize_paginator()
@@ -298,7 +305,7 @@ class ControladorTemperaturaMasterController(ControladorTemperaturaController):
             return
 
         # Limpiamos el formulario
-        self._clean_view(self._view.frame.combo_categoria_equipamiento)
+        self._clean_view(self._view.frame.combo_tipo_controlador)
 
         # Obtenemos los datos de paginación actuales
         paginator_pages = self._pag.total_pages
@@ -333,7 +340,7 @@ class ControladorTemperaturaMasterController(ControladorTemperaturaController):
             return
 
         # Limpiamos el formulario
-        self._clean_view(self._view.frame.combo_categoria_equipamiento)
+        self._clean_view(self._view.frame.combo_tipo_controlador)
 
         # Configuramos el paginador
         self._pag.initialize_paginator()

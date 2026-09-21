@@ -31,6 +31,8 @@ from ModuloMaestro.Views.Dialogs.marca_comercial_dialog import \
     MarcaComercialDialog
 from ModuloMaestro.Views.Dialogs.tipo_control_temperatura_dialog import \
     TipoControlTemperaturaDialog
+from ModuloMaestro.Views.Masters.controlador_temperatura_view import \
+    ControladorTemperaturaView
 from Services.Result.result import Result
 from Services.Validators.controlador_temperatura_validator import \
     ControladorTemperaturaValidator
@@ -197,11 +199,11 @@ class ControladorTemperaturaController(BaseController):
 
         # Válida el tipo de controlador
         res = ControladorTemperaturaValidator.validate_tipo_controlador(
-            self._view.frame.combo_categoria_equipamiento
+            self._view.frame.combo_tipo_controlador
         )
 
         if not res.is_success:
-            self._view.frame.combo_categoria_equipamiento.setFocus()
+            self._view.frame.combo_tipo_controlador.setFocus()
             return res
 
         # Válida la marca del equipo
@@ -286,8 +288,13 @@ class ControladorTemperaturaController(BaseController):
         # Carga los datos del registro
         res_id = self._load_data()
 
+        if not res_id.success:
+            return res_id
+
         # Carga las imágenes
         self._view.frame_image.load_images(res_id.value)
+        
+        return res_id
 
     def _fill_combos_async(self):
         """ Llena los combos del formulario"""
@@ -319,10 +326,10 @@ class ControladorTemperaturaController(BaseController):
             return
 
         # Configuramos el combo
-        combo = self._view.frame.combo_categoria_equipamiento
+        combo = self._view.frame.combo_tipo_controlador
 
         self._load_combo(
-            combo=self._view.frame.combo_categoria_equipamiento,
+            combo=self._view.frame.combo_tipo_controlador,
             worker_fn=lambda: ControladorTemperaturaDAO().get_list_combo(),
             data=res.value.id
         )

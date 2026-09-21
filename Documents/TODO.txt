@@ -1,6 +1,33 @@
 ﻿================================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
+18/09/2026  TESTEO MANUAL DEL MAESTRO DE CONTROLADOR DE TEMPERATURA:
+            -   DONE:   TEST -> APERTURA DE FORMULARIO
+            -   DONE:   TEST -> INSERCIÓN.
+            -   DONE:   TEST -> CARGA.
+            -   DONE:   TEST -> MODIFICACIÓN.
+            -   DONE:   TEST -> ELIMINACIÓN.
+            -   DONE:   TEST -> IMAGENES.
+            -   DONE:   TEST -> LIMPIEZA DE FORMULARIO.
+            -   DONE:   TEST -> BÚSQUEDA DE REGISTROS.
+
+            CRRECCIONES:
+                APERTURA DE FORMULARIO:
+                -   DONE:   CONECTAR EL BOTÓN CON SU EVENTO.
+                INSERCION DE REGISTRO:
+                -   DONE:   CORREGIR ERROR DE CARGA DE LA FECHA EN EL DATAGRID.
+                CARGA DE REGISTRO:
+                -   DONE:   NO CARGA EL REGISTRO EN EL FORMULARIO.
+
+                OTROS BUGS:
+                -   DONE:   SE HA ENCONTRADO UN BUG QUE AFECTA AL CAMPO
+                            'MOTIVO DE BAJA'. NO SE VACIA EL CONTROL CUANDO
+                            INBSERTA UN REGISTRO CON ESTE CAMPO ACTIVO. LA
+                            SIGUIEWNTE INSERCION INSERTA ESTE CAMPO AUNQUE EL
+                            CONTROL ESTE VACÍO. SE CAMBIA LA SENTENCIA....
+                            widget.clear() POR...
+                            widget.setValue(None)
+
 16/09/2026  SE AÑADE LA LÓGICA DE EQUIPO DE CONTROL DE TEMPERATURA DEL ACUARIO.
             1.  BASE DE DATOS.
             -   N.A.:   SE CREA LA TABLA DE TIPO DE CONTROL DE TEMPERATURA.

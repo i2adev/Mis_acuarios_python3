@@ -9,6 +9,7 @@ Comentarios:
 from CustomControls.combo_box import ComboBox
 from CustomControls.double_line_edit import DoubleLineEdit
 from CustomControls.int_line_edit import IntLineEdit
+from CustomControls.str_line_edit import StrLineEdit
 from Main.Model.DAO.base_dao import BaseDAO
 from Services.Paginator.paginator import Paginator
 from ModuloMaestro.Model.Entities.base_entity import BaseEntity
@@ -355,8 +356,9 @@ class BaseController(QObject):
 
             if widget is not None:  # Solo widgets reales
                 if disabled:
-                    if isinstance(widget, QLineEdit):
-                        widget.clear()
+                    if isinstance(widget, StrLineEdit):
+                        widget.setValue(None)
+                        # widget.clear()
 
                     widget.setEnabled(False)
                     widget.setStyleSheet("""
@@ -370,6 +372,9 @@ class BaseController(QObject):
                     }
                     """)
                 else:
+                    if isinstance(widget, StrLineEdit):
+                        widget.clear()
+
                     widget.setEnabled(True)
                     widget.setStyleSheet("""
                     QLabel {

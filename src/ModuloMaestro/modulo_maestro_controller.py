@@ -475,35 +475,49 @@ class ModuloMaestroController(BaseController):
         self._view.button_maestro_nivel_nado.clicked.connect(
             self.nivel_nado_click
         )
+
         self._view.button_maestro_grupo_taxonomico.clicked.connect(
             self.grupo_taxonomico_click
         )
+
         self._view.button_maestro_especies_animales.clicked.connect(
             self.especie_animal_click
         )
+
         self._view.button_maestro_posición_planta.clicked.connect(
             self.posicion_planta_click
         )
+
         self._view.button_maestro_requerimiento_co2.clicked.connect(
             self.posicion_requerimiento_co2__click
         )
+
         self._view.button_maestro_requerimiento_iluminacion.clicked.connect(
             self.requerimiento_iluminacion_click
         )
+
         self._view.button_maestro_sexo.clicked.connect(
             self.sexo_click
         )
+
         self._view.button_maestro_periodos.clicked.connect(
             self.periodo_click
         )
+
         self._view.button_maestro_tasa_crecimiento.clicked.connect(
             self.tasa_crecimiento_click
         )
+
         self._view.button_maestro_especie_vegetal.clicked.connect(
             self.especie_vegetal_click
         )
+
         self._view.button_maestro_tipo_ctrl_temperatura.clicked.connect(
             self.tipo_control_temperatura_click
+        )
+
+        self._view.button_maestro_eq_ctrl_temperatura.clicked.connect(
+            self.equipo_controlador_temperatura_click
         )
 
     def sexo_click(self):

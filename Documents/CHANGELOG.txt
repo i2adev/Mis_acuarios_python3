@@ -1,5 +1,7 @@
 ﻿CHANGELOG:
 ================================================================================
+0.47.1  TESTEO MANUAL DEL MAESTRO DE CONTROLADORES DE TEMPERATURA.
+
 0.47.0  SE AÑADE LA LÓGICA DE EQUIPO DE CONTROL DE TEMPERATURA. TANTO PARA
         CALENTAR, COMO PARA ENFRIAR.
 

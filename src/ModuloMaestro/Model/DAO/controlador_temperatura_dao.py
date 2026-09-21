@@ -46,7 +46,7 @@ class ControladorTemperaturaDAO(BaseDAO):
                        TEMPERATURA_MINIMA,
                        TEMPERATURA_MAXIMA,
                        CONSUMO,
-                       FECHA_INSTALACION,
+                       FECHA_ALTA,
                        FECHA_BAJA,
                        MOTIVO_BAJA,
                        DESCRIPCION
@@ -65,18 +65,18 @@ class ControladorTemperaturaDAO(BaseDAO):
                 # Configuramos la entidad
                 ent = ControladorTemperaturaEntity(
                     id=row[0],
-                    id_marca=row[2],
-                    id_tipo_control_temperatura=row[3],
-                    modelo=row[4],
-                    numero_serie=row[5],
-                    potencia=row[6],
-                    temperatura_minima=row[7],
-                    temperatura_maxima=row[8],
-                    consumo=row[9],
-                    fecha_alta=row[10],
-                    fecha_baja=row[11],
-                    motivo_baja=row[12],
-                    descripcion=row[13],
+                    id_marca=row[1],
+                    id_tipo_control_temperatura=row[2],
+                    modelo=row[3],
+                    numero_serie=row[4],
+                    potencia=row[5],
+                    temperatura_minima=row[6],
+                    temperatura_maxima=row[7],
+                    consumo=row[8],
+                    fecha_alta=row[9],
+                    fecha_baja=row[10],
+                    motivo_baja=row[11],
+                    descripcion=row[12],
                 )
 
                 return Result.success(ent)
