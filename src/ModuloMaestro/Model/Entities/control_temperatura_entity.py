@@ -20,7 +20,6 @@ class ControladorTemperaturaEntity(BaseEntity):
     descripcion: str | None = None
     modelo: str | None = None
     numero_serie: str | None = None
-    potencia: float | None = None
     temperatura_minima: float | None = None
     temperatura_maxima: float | None = None
     consumo: float | None = None

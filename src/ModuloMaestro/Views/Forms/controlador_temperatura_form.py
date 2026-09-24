@@ -15,6 +15,7 @@ from PyQt6.QtWidgets import QFrame, QLabel, QVBoxLayout, QHBoxLayout, \
 
 import globales
 from CustomControls.combo_box import ComboBox
+from CustomControls.double_line_edit import DoubleLineEdit
 from CustomControls.int_line_edit import IntLineEdit
 from CustomControls.nullable_date_edit import NullableDateEdit
 from CustomControls.plain_text_edit import PlainTextEdit
@@ -68,6 +69,15 @@ class ControladorTemperaturaForm(QFrame):
         ### Número de serie
         self.layout_num_serie = QVBoxLayout()
 
+        ### Temperatura mínima
+        self.layout_temp_min = QVBoxLayout()
+
+        ### Temperatura máxima
+        self.layout_temp_max = QVBoxLayout()
+
+        ### Consumo
+        self.layout_consumo = QVBoxLayout()
+
         ### Fecha alta
         self.layout_fecha_alta = QVBoxLayout()
 
@@ -87,6 +97,10 @@ class ControladorTemperaturaForm(QFrame):
         self.label_marca = QLabel("MARCA")
         self.label_modelo = QLabel("MODELO")
         self.label_num_serie = QLabel("NÚMERO DE SERIE")
+        self.label_temperatura_minima = QLabel("MINIMA")
+        self.label_temperatura_máxima = QLabel("MÁXIMA")
+        self.label_consumo = QLabel("CONSUMO")
+
         self.label_fecha_alta = QLabel("ALTA")
         self.label_fecha_baja = QLabel("BAJA")
         self.label_motivo_baja = QLabel("MOTIVO DE LA BAJA")
@@ -129,6 +143,57 @@ class ControladorTemperaturaForm(QFrame):
             de temperatura. Este es un campo <b>obligatorio</b>.
             """
         )
+
+        self.edit_temperatura_minima = DoubleLineEdit(
+            control_name="TEMPERATURA MÍNIMA",
+            min_value=0.0,
+            max_value=40.0,
+            units="°C",
+            is_nullable=True
+        )
+        self.edit_temperatura_minima.setObjectName("edit_temperatura_minima")
+        self.edit_temperatura_minima.setToolTip(
+            """
+            <h2>Temperatura mínima</h2>
+            En este campo se inserta la temperatura mínima que puede abarcar el 
+            controlador de temperatura.  
+            """
+        )
+        self.edit_temperatura_minima.setMaximumWidth(75)
+
+        self.edit_temperatura_maxima = DoubleLineEdit(
+            control_name="TEMPERATURA MÁXIMA",
+            min_value=0.0,
+            max_value=40.0,
+            units="°C",
+            is_nullable=True
+        )
+        self.edit_temperatura_maxima.setObjectName("edit_temperatura_maxima")
+        self.edit_temperatura_maxima.setToolTip(
+            """
+            <h2>Temperatura máxima</h2>
+            En este campo se inserta la temperatura máxima que puede abarcar el 
+            controlador de temperatura.  
+            """
+        )
+        self.edit_temperatura_maxima.setMaximumWidth(75)
+
+        self.edit_consumo = DoubleLineEdit(
+            control_name="CONSUMO ENERGÉTICO",
+            min_value=0.0,
+            max_value=1000.0,
+            units="w",
+            is_nullable=True
+        )
+        self.edit_consumo.setObjectName("edit_consumo")
+        self.edit_consumo.setToolTip(
+            """
+            <h2>Consumo energético del dispositivo</h2>
+            En este campo se inserta el consumo energético del controlador 
+            de temperatura.
+            """
+        )
+        self.edit_consumo.setMaximumWidth(100)
 
         self.edit_motivo_baja = StrLineEdit(
             control_name="MOTIVO DE LA BAJA",
@@ -226,6 +291,8 @@ class ControladorTemperaturaForm(QFrame):
 
         # GroupBox
         self.group_fechas = QGroupBox("FECHAS")
+        self.group_temperaturas = QGroupBox("TEMPERATURAS")
+        self.group_temperaturas.setMaximumWidth(150)
 
     def build_layout(self):
         """ Construye el layout del frame. """
@@ -255,19 +322,35 @@ class ControladorTemperaturaForm(QFrame):
         self.layout_modelo.addWidget(self.label_modelo)
         self.layout_modelo.addWidget(self.edit_modelo)
 
-        ## Montamos la primera linea
+        ## Número de serie
+        self.layout_num_serie.addWidget(self.label_num_serie)
+        self.layout_num_serie.addWidget(self.edit_num_serie)
+
+        ## Montamos la primera línea
         self.layout_first_line.addLayout(self.layout_id)
         self.layout_first_line.addLayout(self.layout_tipo_controlador)
         self.layout_first_line.addLayout(self.layout_marca)
         self.layout_first_line.addLayout(self.layout_marca)
         self.layout_first_line.addLayout(self.layout_modelo)
+        self.layout_first_line.addLayout(self.layout_num_serie)
 
         # Segunda línea
         self.layout_fechas = QHBoxLayout()
+        self.layout_temperaturas = QHBoxLayout()
 
-        ## Número de serie
-        self.layout_num_serie.addWidget(self.label_num_serie)
-        self.layout_num_serie.addWidget(self.edit_num_serie)
+        ## Consumo
+        self.layout_consumo.addWidget(self.label_consumo)
+        self.layout_consumo.addWidget(self.edit_consumo)
+
+        ## Tempraturas
+        self.layout_temp_min.addWidget(self.label_temperatura_minima)
+        self.layout_temp_min.addWidget(self.edit_temperatura_minima)
+
+        self.layout_temp_max.addWidget(self.label_temperatura_máxima)
+        self.layout_temp_max.addWidget(self.edit_temperatura_maxima)
+
+        self.layout_temperaturas.addLayout(self.layout_temp_min)
+        self.layout_temperaturas.addLayout(self.layout_temp_max)
 
         ## Fecha de alta
         self.layout_fecha_alta.addWidget(self.label_fecha_alta)
@@ -282,10 +365,11 @@ class ControladorTemperaturaForm(QFrame):
         self.layout_motivo_baja.addWidget(self.edit_motivo_baja)
 
         ## Montamos la segunda línea
-        self.layout_second_line.addLayout(self.layout_num_serie)
-
+        self.layout_second_line.addLayout(self.layout_consumo)
         self.layout_fechas.addLayout(self.layout_fecha_alta)
         self.layout_fechas.addLayout(self.layout_fecha_baja)
+        self.group_temperaturas.setLayout(self.layout_temperaturas)
+        self.layout_second_line.addWidget(self.group_temperaturas)
         self.group_fechas.setLayout(self.layout_fechas)
         self.layout_second_line.addWidget(self.group_fechas)
         self.layout_second_line.addLayout(self.layout_motivo_baja)

@@ -42,7 +42,6 @@ class ControladorTemperaturaDAO(BaseDAO):
                        ID_TIPO_CONTROL_TEMPERATURA,
                        MODELO,
                        NUMERO_SERIE,
-                       POTENCIA,
                        TEMPERATURA_MINIMA,
                        TEMPERATURA_MAXIMA,
                        CONSUMO,
@@ -69,14 +68,13 @@ class ControladorTemperaturaDAO(BaseDAO):
                     id_tipo_control_temperatura=row[2],
                     modelo=row[3],
                     numero_serie=row[4],
-                    potencia=row[5],
-                    temperatura_minima=row[6],
-                    temperatura_maxima=row[7],
-                    consumo=row[8],
-                    fecha_alta=row[9],
-                    fecha_baja=row[10],
-                    motivo_baja=row[11],
-                    descripcion=row[12],
+                    temperatura_minima=row[5],
+                    temperatura_maxima=row[6],
+                    consumo=row[7],
+                    fecha_alta=row[8],
+                    fecha_baja=row[9],
+                    motivo_baja=row[10],
+                    descripcion=row[11],
                 )
 
                 return Result.success(ent)
@@ -102,25 +100,26 @@ class ControladorTemperaturaDAO(BaseDAO):
 
         sql = (
             """
-            SELECT C.ID_CONTROL_TEMPERATURA AS ID,
-                   ROW_NUMBER() OVER (ORDER BY M.MARCA, C.MODELO) AS NUM,
-                   M.MARCA AS MARCA,
-                   T.TIPO_CONTROL_TEMPERATURA AS TIPO_CONTROL,
-                   C.MODELO AS MODELO,
-                   C.NUMERO_SERIE AS NUMERO_SERIE,
-                   C.POTENCIA AS POTENCIA,
-                   C.TEMPERATURA_MINIMA AS T_MIN,
-                   C.TEMPERATURA_MAXIMA AS T_MAX,
-                   C.FECHA_ALTA AS FECHA_ALTA,
-                   C.FECHA_BAJA AS FECHA_BAJA,
-                   C.MOTIVO_BAJA AS MOTIVO_BAJA,
-                   C.DESCRIPCION AS DESCRIPCION
-            FROM   CONTROLADORES_TEMPERATURA C
-                   LEFT JOIN MARCAS_COMERCIALES M 
-                    ON C.ID_MARCA = M.ID_MARCA
-                   LEFT JOIN TIPOS_CONTROL_TEMPERATURA T 
-                    ON C.ID_TIPO_CONTROL_TEMPERATURA = 
-                    T.ID_TIPO_CONTROL_TEMPERATURA;
+            SELECT  C.ID_CONTROL_TEMPERATURA AS ID, 
+                    ROW_NUMBER()  OVER (ORDER BY C.ID_CONTROL_TEMPERATURA) AS NUM, 
+                    M.MARCA AS MARCA, 
+                    T.TIPO_CONTROL_TEMPERATURA AS TIPO_CONTROL, 
+                    C.MODELO AS MODELO, 
+                    C.NUMERO_SERIE AS NUMERO_SERIE, 
+                    C.TEMPERATURA_MINIMA AS T_MIN, 
+                    C.TEMPERATURA_MAXIMA AS T_MAX, 
+                    C.CONSUMO AS CONSUMO,
+                    IFNULL(strftime('%d/%m/%Y', C.FECHA_ALTA, 'unixepoch', 
+                        'localtime'), '') AS FECHA_ALTA, 
+                    IFNULL(strftime('%d/%m/%Y', C.FECHA_BAJA, 'unixepoch', 
+                        'localtime'), '') AS FECHA_BAJA,
+                    C.MOTIVO_BAJA AS MOTIVO_BAJA, 
+                    C.DESCRIPCION AS DESCRIPCION 
+            FROM CONTROLADORES_TEMPERATURA C 
+            LEFT JOIN MARCAS_COMERCIALES M 
+                ON C.ID_MARCA = M.ID_MARCA 
+            LEFT JOIN TIPOS_CONTROL_TEMPERATURA T 
+                ON C.ID_TIPO_CONTROL_TEMPERATURA = T.ID_TIPO_CONTROL_TEMPERATURA
             """
         )
 
@@ -138,14 +137,13 @@ class ControladorTemperaturaDAO(BaseDAO):
                         id_tipo_control_temperatura=f[3],
                         modelo=f[4],
                         numero_serie=f[5],
-                        potencia=f[6],
-                        temperatura_minima=f[7],
-                        temperatura_maxima=f[8],
-                        consumo=f[9],
-                        fecha_alta=f[10],
-                        fecha_baja=f[11],
-                        motivo_baja=f[12],
-                        descripcion=f[13],
+                        temperatura_minima=f[6],
+                        temperatura_maxima=f[7],
+                        consumo=f[8],
+                        fecha_alta=f[9],
+                        fecha_baja=f[10],
+                        motivo_baja=f[11],
+                        descripcion=f[12],
                     )
                     for f in rows
                 ]
@@ -228,12 +226,12 @@ class ControladorTemperaturaDAO(BaseDAO):
             """
             INSERT INTO CONTROLADORES_TEMPERATURA 
                 (ID_MARCA, ID_TIPO_CONTROL_TEMPERATURA, MODELO, NUMERO_SERIE, 
-                POTENCIA, TEMPERATURA_MINIMA, TEMPERATURA_MAXIMA, CONSUMO, 
+                TEMPERATURA_MINIMA, TEMPERATURA_MAXIMA, CONSUMO, 
                 FECHA_ALTA, FECHA_BAJA,  MOTIVO_BAJA,DESCRIPCION)
             VALUES 
-                (:id_marca, :id_tipo, :modelo, :numero_serie, :potencia,
-                :temp_min, :temp_max, :consumo, :fecha_alta, :fecha_baja,
-                :motivo_baja, :descripcion);
+                (:id_marca, :id_tipo, :modelo, :numero_serie, :temp_min, 
+                :temp_max, :consumo, :fecha_alta, :fecha_baja, :motivo_baja, 
+                :descripcion);
             """
         )
         params = {
@@ -241,7 +239,6 @@ class ControladorTemperaturaDAO(BaseDAO):
             "id_tipo": ent.id_tipo_control_temperatura,
             "modelo": ent.modelo,
             "numero_serie": ent.numero_serie,
-            "potencia": ent.potencia,
             "temp_min": ent.temperatura_minima,
             "temp_max": ent.temperatura_maxima,
             "consumo": ent.consumo,
@@ -287,7 +284,6 @@ class ControladorTemperaturaDAO(BaseDAO):
                    ID_TIPO_CONTROL_TEMPERATURA = :id_tipo,
                    MODELO = :modelo,
                    NUMERO_SERIE = :numero_serie,
-                   POTENCIA = :potencia,
                    TEMPERATURA_MINIMA = :temp_min,
                    TEMPERATURA_MAXIMA = :temp_max,
                    CONSUMO = :consumo,
@@ -304,7 +300,6 @@ class ControladorTemperaturaDAO(BaseDAO):
             "id_tipo": ent.id_tipo_control_temperatura,
             "modelo": ent.modelo,
             "numero_serie": ent.numero_serie,
-            "potencia": ent.potencia,
             "temp_min": ent.temperatura_minima,
             "temp_max": ent.temperatura_maxima,
             "consumo": ent.consumo,

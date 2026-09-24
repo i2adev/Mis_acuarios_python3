@@ -1,6 +1,22 @@
 ﻿================================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
+24/09/2026  SE TESTEAN LAS ÚLTIMAS MODIFICACIONES REALIZADAS AL MAESTRO DE
+            CONTROLADOR DE TEMPERATURA.
+            -   DONE:   INSERCION DE REGISTRO.
+            -   DONE:   MODIFICACION DE REGISTRO.
+            -   DONE:   ELIMINACION DE REGISTRO.
+            -   DONE:   CARGA DE REGISTRO.
+            -   DONE:   LIMPIEZA DE FORMULARIO.
+            -   DONE:   GESTIÓN DE IMÁGENES.
+
+23/09/026   MODIFICACIÓN DEL MAESTRO DE CONTROLADOR DE TEMPERATURA_
+            -   DONE:   SE MODIFICA EL FORMULARIO DEL CONTROLADORES DE
+                        TEMPERATURA.
+            -   DONE:   SE MODIFICA EL DAO.
+            -   DONE:   SE MODIFICAN LOS CONTROLADORES.
+            -   DONE:   SE MODIFICA EL MODELO DE TABLA.
+
 18/09/2026  TESTEO MANUAL DEL MAESTRO DE CONTROLADOR DE TEMPERATURA:
             -   DONE:   TEST -> APERTURA DE FORMULARIO
             -   DONE:   TEST -> INSERCIÓN.

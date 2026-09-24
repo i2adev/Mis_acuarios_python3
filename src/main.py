@@ -11,7 +11,7 @@ import sys
 import traceback
 from pathlib import Path
 
-from PyQt6.QtGui import QFontDatabase
+from PyQt6.QtGui import QFontDatabase, QIcon
 from PyQt6.QtWidgets import QApplication, QDialog, QMessageBox
 
 import globales
@@ -24,7 +24,7 @@ from Main.Views.login_dialog import LoginDialog
 import os
 
 # Versión del programa
-__version__ = "0.47.1"
+__version__ = "0.47.2"
 
 
 def excepthook(exc_type, exc_value, exc_traceback):
@@ -49,6 +49,9 @@ def main():
     os.environ["QT_QPA_PLATFORM"] = "windows:nodirectwrite"
 
     app = QApplication(sys.argv)
+    app.setWindowIcon(
+        QIcon(str(Path(globales.PATH_IMAGES) / "Window_icon.png"))
+    )
 
     def resource_path(relative_path):
         """Devuelve la ruta absoluta al recurso, compatible con PyInstaller."""

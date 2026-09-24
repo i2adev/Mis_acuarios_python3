@@ -75,6 +75,9 @@ class ControladorTemperaturaController(BaseController):
         ent.id_marca = int(ctrs.combo_marca.value())
         ent.modelo = ctrs.edit_modelo.value()
         ent.numero_serie = ctrs.edit_num_serie.value()
+        ent.temperatura_minima = ctrs.edit_temperatura_minima.value()
+        ent.temperatura_maxima = ctrs.edit_temperatura_maxima.value()
+        ent.consumo = ctrs.edit_consumo.value()
 
         alta = ctrs.fecha_alta.date()
         if alta.isValid():
@@ -293,7 +296,7 @@ class ControladorTemperaturaController(BaseController):
 
         # Carga las imágenes
         self._view.frame_image.load_images(res_id.value)
-        
+
         return res_id
 
     def _fill_combos_async(self):
@@ -400,6 +403,11 @@ class ControladorTemperaturaController(BaseController):
         self._view.frame.combo_marca.setValue(ent.id_marca)
         self._view.frame.edit_modelo.setValue(ent.modelo)
         self._view.frame.edit_num_serie.setValue(ent.numero_serie)
+        self._view.frame.edit_temperatura_minima.setValue(
+            ent.temperatura_minima)
+        self._view.frame.edit_temperatura_maxima.setValue(
+            ent.temperatura_maxima)
+        self._view.frame.edit_consumo.setValue(ent.consumo)
         self._view.frame.fecha_alta.setDate(BaseDAO._seconds_to_date(
             ent.fecha_alta))
         self._view.frame.fecha_baja.setDate(BaseDAO._seconds_to_date(

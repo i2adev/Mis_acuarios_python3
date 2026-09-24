@@ -25,7 +25,8 @@ class ControladorTemperaturaTableModel(QAbstractTableModel):
 
         self._headers = ([
             "ID", "#", "TIPO CONTROL", "MARCA", "MODELO", "NUM. SERIE",
-            "ALTTA", "BAJA", "MOTIVO DE LA BAJA", "DESCRIPCIÓN"
+            "T. MIN.", "T. MAX.", "CONSUMO", "ALTA", "BAJA",
+            "MOTIVO BAJA", "DESCRIPCIÓN"
         ])
 
     def rowCount(self, parent=QModelIndex()):
@@ -64,13 +65,19 @@ class ControladorTemperaturaTableModel(QAbstractTableModel):
             return entidad.modelo
         elif column == 5:  # Número de serie
             return entidad.numero_serie
-        elif column == 6:  # Fecha de alta del controlador de temperatura
+        elif column == 6:  # Temperatura mínima
+            return entidad.temperatura_minima
+        elif column == 7:  # Temperatura máxima
+            return entidad.temperatura_maxima
+        elif column == 8:  # Consumo
+            return entidad.consumo
+        elif column == 9:  # Fecha de alta del controlador de temperatura
             return entidad.fecha_alta
-        elif column == 7:  # Fecha de baja del controlador de temperatura
+        elif column == 10:  # Fecha de baja del controlador de temperatura
             return entidad.fecha_baja
-        elif column == 8:  # Motivo de la baja del controlador de temperatura
+        elif column == 11:  # Motivo de la baja del controlador de temperatura
             return entidad.motivo_baja
-        elif column == 9:  # Descripción del controlador de temperatura
+        elif column == 12:  # Descripción del controlador de temperatura
             return entidad.descripcion
         else:
             return None
@@ -107,20 +114,35 @@ class ControladorTemperaturaTableModel(QAbstractTableModel):
                 Este campo muestra el <b>numero de serie</b> del controlador de temperatura.
                 """,
                 6: """
+                <h2>Temperatura mínima</h2>
+                Esta campo muestra la temperatura minima del controlador de 
+                temperatura.
+                """,
+                7: """
+                <h2>Temperatura máxima</h2>
+                Esta campo muestra la temperatura máxima del controlador de 
+                temperatura.
+                """,
+                8: """
+                <h2>Consumo</h2>
+                Esta campo muestra el consumo que tiene el controlador de 
+                temperatura.
+                """,
+                9: """
                 <h2>Fecha de alta</h2>
                 Este campo muestra la fecha en la que se ha dado de alta el 
                 controlador de temperatura. 
                 """,
-                7: """
+                10: """
                 <h2>Fecha de baja</h2>
                 Este campo muestra la fecha en la que se ha dado de baja al 
                 controlador de temperatura.
                 """,
-                8: """
+                11: """
                 <h2>Motivo de baja</h2>
                 Este campo muestra el motivo de la baja del controlador de temperatura.
                 """,
-                9: """
+                12: """
                 <h2>Descripción</h2>
                 Este campo muestra la descripción general del controlador de temperatura.
                 """

@@ -989,8 +989,9 @@ class SearchCmd:
     """
 
     SEARCH_CONTROLADOR_TEMPERATURA = """
-    SELECT  ID, NUM, TIPO_CONTROL, MARCA, MODELO, NUMERO_SERIE, FECHA_ALTA, 
-            FECHA_BAJA, MOTIVO_BAJA, DESCRIPCION
+    SELECT  ID, NUM, TIPO_CONTROL, MARCA, MODELO, NUMERO_SERIE, 
+            T_MIN, T_MAX, CONSUMO, FECHA_ALTA, FECHA_BAJA, MOTIVO_BAJA, 
+            DESCRIPCION
     FROM
     (
         SELECT  E.ID_CONTROL_TEMPERATURA AS ID,
@@ -999,6 +1000,9 @@ class SearchCmd:
                 M.MARCA AS MARCA,
                 E.MODELO AS MODELO,
                 E.NUMERO_SERIE AS NUMERO_SERIE,
+                E.TEMPERATURA_MINIMA AS T_MIN, 
+                E.TEMPERATURA_MAXIMA AS T_MAX, 
+                E.CONSUMO AS CONSUMO,
                 IFNULL(strftime('%d/%m/%Y', E.FECHA_ALTA, 'unixepoch', 'localtime'), '') AS FECHA_ALTA, 
                 IFNULL(strftime('%d/%m/%Y', E.FECHA_BAJA, 'unixepoch', 'localtime'), '') AS FECHA_BAJA,
                 E.MOTIVO_BAJA AS MOTIVO_BAJA,
@@ -1008,6 +1012,9 @@ class SearchCmd:
                   || IFNULL(M.MARCA, '')
                   || IFNULL(E.MODELO, '')
                   || IFNULL(E.NUMERO_SERIE, '')
+                  || IFNULL(E.TEMPERATURA_MINIMA, '')
+                  || IFNULL(E.TEMPERATURA_MAXIMA, '')
+                  || IFNULL(E.CONSUMO, '')
                   || IFNULL(E.MOTIVO_BAJA, '')
                   || IFNULL(E.DESCRIPCION, '')
                ) AS FIELD
