@@ -72,12 +72,12 @@ class ControladorTemperaturaDialog(BaseDialog):
         self.setTabOrder(self.frame.edit_modelo,
                          self.frame.edit_num_serie)
         self.setTabOrder(self.frame.edit_num_serie,
+                         self.frame.edit_consumo)
+        self.setTabOrder(self.frame.edit_consumo,
                          self.frame.edit_temperatura_minima)
         self.setTabOrder(self.frame.edit_temperatura_minima,
                          self.frame.edit_temperatura_maxima)
         self.setTabOrder(self.frame.edit_temperatura_maxima,
-                         self.frame.edit_consumo)
-        self.setTabOrder(self.frame.edit_consumo,
                          self.frame.fecha_alta.edit_date)
         self.setTabOrder(self.frame.fecha_alta.edit_date,
                          self.frame.fecha_baja.edit_date)

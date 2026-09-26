@@ -163,8 +163,6 @@ class ControladorTemperaturaMasterController(ControladorTemperaturaController):
             )
             return
 
-        print(f"SEARCH: {pattern}, {user}")
-
         # Obtiene los datos
         self._pag.get_filtered_list_by_id(pattern, user)
 

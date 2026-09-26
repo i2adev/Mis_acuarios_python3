@@ -26,12 +26,12 @@ class AcuarioView(BaseView):
 
         # Configuramos el formulario
         self.frame = AcuarioForm()
-        # self.frame.setMinimumWidth(1050)
         self.frame_image = ImageForm(self, "FOTOGRAFIAS_ACUARIO")
         self.frame_image.setFixedWidth(450)
         self.layout_form_data.addWidget(self.frame)
         self.layout_form_data.addWidget(self.frame_image)
 
+        # Establecemos el orden de tabulación
         self.set_tab_order()
 
         # Asigna atajos de teclado

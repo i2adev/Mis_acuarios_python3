@@ -1,6 +1,52 @@
 ﻿================================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
+24/09/2026  ARREGLO DE DETALLES:
+            -   DONE:   ESTABLECER EL FOCO AL PRIMER CONTROL AL ABRIR UNA
+                        VENTANA.
+                -   DONE:   ACUARIOS.
+                -   DONE:   TIPOS DE ACUARIO.
+                -   DONE:   CATEGORÍAS DE ACUARIO.
+                -   DONE:   SUBCATEGORÍAS DE ACUARIO.
+                -   DONE:   COMERCIO.
+                -   DONE:   CONSUMIBLES.
+                -   DONE:   CATEGORÍAS DE CONSUMIBLE.
+                -   DONE:   FORMATOS DE CONSUMIBLE.
+                -   DONE:   UNIDAD DE CONTENIDO.
+                -   DONE:   EQUIPAMIENTO DE CONTROL DE TEMPERATURA.
+                -   DONE:   TIPO DE CONTROL DE TEMPERATURA.
+                -   DONE:   EQUIPAMIENTO.
+                -   DONE:   CATEGORÍA DE EQUIPAMIENTO.
+                -   DONE:   ESPECIES ANIMALES.
+                -   DONE:   COMPORTAMIENTO.
+                -   DONE:   DIETA.
+                -   DONE:   NIVEL DE NADO.
+                -   DONE:   GRUPO TAXONÓMICO.
+                -   DONE:   SEXO.
+                -   DONE:   FILTRO.
+                -   DONE:   TIPO DE FILTRO.
+                -   DONE:   ESPECIE VEGETAL.
+                -   DONE:   DIFICULTAD DE LAS PLANTAS.
+                -   DONE:   POSICIÓN EN EL ACUARIO.
+                -   DONE:   REQUERIMIENTOS DE CO2.
+                -   DONE:   TASAS DE CRECIMIENTO DE LAS PLANTAS.
+                -   DONE:   TASAS DE CRECIMIENTO DE LAS PLANTAS.
+                -   DONE:   ILUMINACIONES/LUMINARIAS.
+                -   DONE:   TIPOS DE ILUMINACIÓN.
+                -   DONE:   CONTROLES DE ILUMINACIÓN.
+                -   DONE:   CATEGORÍAS DE INCIDENCIAS.
+                -   DONE:   SUBCATEGORÍAS DE INCIDENCIAS.
+                -   DONE:   MARCAS COMERCIALES.
+                -   DONE:   PROYECTOS.
+                -   DONE:   ESTADOS DE PROYECTO.
+                -   DONE:   URNAS.
+                -   DONE:   MATERIALES DE URNA.
+                -   DONE:   PERIODOS.
+
+            BUGS:
+            -   DONE:   SE CORRIGE EL ORDEN DE TABULACIÓN DEL MAESTRO DE
+                        CONTROLADORES DE TEMPERATURA.
+
 24/09/2026  SE TESTEAN LAS ÚLTIMAS MODIFICACIONES REALIZADAS AL MAESTRO DE
             CONTROLADOR DE TEMPERATURA.
             -   DONE:   INSERCION DE REGISTRO.

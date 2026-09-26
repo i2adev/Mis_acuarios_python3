@@ -61,9 +61,6 @@ class ControladorTemperaturaForm(QFrame):
 
         ## Segunda línea
         self.layout_second_line = QHBoxLayout()
-        self.layout_volumenes_acuario_filtro = QHBoxLayout()
-        self.layout_consumos_acuario_filtro = QHBoxLayout()
-        self.layout_dimensiones_filtro = QHBoxLayout()
         self.layout_second_line.setContentsMargins(0, 0, 0, 20)
 
         ### Número de serie
@@ -349,9 +346,6 @@ class ControladorTemperaturaForm(QFrame):
         self.layout_temp_max.addWidget(self.label_temperatura_máxima)
         self.layout_temp_max.addWidget(self.edit_temperatura_maxima)
 
-        self.layout_temperaturas.addLayout(self.layout_temp_min)
-        self.layout_temperaturas.addLayout(self.layout_temp_max)
-
         ## Fecha de alta
         self.layout_fecha_alta.addWidget(self.label_fecha_alta)
         self.layout_fecha_alta.addWidget(self.fecha_alta)
@@ -368,6 +362,8 @@ class ControladorTemperaturaForm(QFrame):
         self.layout_second_line.addLayout(self.layout_consumo)
         self.layout_fechas.addLayout(self.layout_fecha_alta)
         self.layout_fechas.addLayout(self.layout_fecha_baja)
+        self.layout_temperaturas.addLayout(self.layout_temp_min)
+        self.layout_temperaturas.addLayout(self.layout_temp_max)
         self.group_temperaturas.setLayout(self.layout_temperaturas)
         self.layout_second_line.addWidget(self.group_temperaturas)
         self.group_fechas.setLayout(self.layout_fechas)

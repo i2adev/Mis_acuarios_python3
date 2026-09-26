@@ -479,9 +479,9 @@ class AcuarioController(BaseController):
                 f"background-color: {color.name()};"
             )
         else:
-            QMessageBox(
+            QMessageBox.information(
                 self._view,
-                self._view.windowTitle(),
+                self._view.window_title,
                 "SE LA CANCELADO LA SELECCIÓN DE COLOR"
             )
 

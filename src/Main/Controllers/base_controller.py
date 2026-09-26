@@ -456,7 +456,6 @@ class BaseController(QObject):
 
         thread = QThread()
         worker = ComboWorker(worker_fn)
-
         worker.moveToThread(thread)
 
         # --- conexiones ---
@@ -467,7 +466,6 @@ class BaseController(QObject):
 
         worker.finished.connect(thread.quit)
         worker.finished.connect(worker.deleteLater)
-        thread.finished.connect(thread.deleteLater)
 
         # --- evitar garbage collection ---
         if not hasattr(self, "_threads"):
@@ -490,7 +488,7 @@ class BaseController(QObject):
 
         combo.clear()
         combo.addItem("Cargando...")
-        combo.setEnabled(False)
+        combo.loading = True
 
         self._load_combo_async(
             worker_fn=worker_fn,
@@ -511,7 +509,6 @@ class BaseController(QObject):
         """
 
         combo.clear()
-        combo.setEnabled(True)
 
         if not lista.is_success:
             combo.addItem("Error al cargar")

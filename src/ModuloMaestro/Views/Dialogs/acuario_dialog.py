@@ -29,6 +29,7 @@ class AcuarioDialog(BaseDialog):
         self.layout_form_data.addWidget(self.frame)
         self.layout_form_data.addWidget(self.frame_image)
         self.set_tab_order()
+        self.frame.combo_proyecto.setFocus()
 
     def set_tab_order(self):
         """ Establece el orden de tabulación de los controles. """

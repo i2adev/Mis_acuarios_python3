@@ -10,8 +10,8 @@ import sys
 
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QCursor
-from PyQt6.QtWidgets import QFrame, QLabel, QLineEdit, QPlainTextEdit, \
-    QVBoxLayout, QHBoxLayout, QApplication, QComboBox, QPushButton
+from PyQt6.QtWidgets import (QFrame, QLabel, QVBoxLayout, QHBoxLayout,
+                             QApplication, QPushButton)
 
 import globales
 from CustomControls.combo_box import ComboBox
