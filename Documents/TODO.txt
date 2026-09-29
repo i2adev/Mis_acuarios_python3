@@ -1,6 +1,28 @@
 ﻿================================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
+26/09/2026  SE MODIFICA LA LÓGICA DE LOS CAMPOS DE NÚMEROS DE SERIE DE LOS
+            FORMULARIOS QUE LOS CONTEMPLAN PARA AÑADIRLES LA OPCIÓN DE INSERTAR
+            UN NÚMERO INDETERMINADO.
+            -   DONE:   SE MODIFICA EL DAO BASE PARA INTEGRAR LA FUNCIÓN QUE
+                        DEVUELVE UN NUEVO NÚMERO DE SERIE IINDETERMINADO.
+            -   DONE:   CONTROLADOR DE TEMPERATURA.
+                -   DONE:   SE MODIFICA EL FORMULARIO.
+                -   DONE:   SE LE DA FUNCIONALIDAD AL BOTÓN DE GENERACIÓN DE
+                            GENERACIÓN DE NÚMERO DE SERIE.
+            -   DONE:   EQUIPAMIENTO.
+                -   DONE:   SE MODIFICA EL FORMULARIO.
+                -   DONE:   SE LE DA FUNCIONALIDAD AL BOTÓN DE GENERACIÓN DE
+                            GENERACIÓN DE NÚMERO DE SERIE.
+            -   DONE:   FILTRO.
+                -   DONE:   SE MODIFICA EL FORMULARIO.
+                -   DONE:   SE LE DA FUNCIONALIDAD AL BOTÓN DE GENERACIÓN DE
+                            GENERACIÓN DE NÚMERO DE SERIE.
+            -   DONE:   ILUMINACIONES.
+                -   DONE:   SE MODIFICA EL FORMULARIO.
+                -   DONE:   SE LE DA FUNCIONALIDAD AL BOTÓN DE GENERACIÓN DE
+                            GENERACIÓN DE NÚMERO DE SERIE.
+
 24/09/2026  ARREGLO DE DETALLES:
             -   DONE:   ESTABLECER EL FOCO AL PRIMER CONTROL AL ABRIR UNA
                         VENTANA.

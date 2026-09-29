@@ -67,6 +67,9 @@ class EquipamientoDialogController(EquipamientoController):
         self._view.frame.button_insert_marca.clicked.connect(
             self._open_marca_dialog()
         )
+        self._view.frame.button_generate_sn.clicked.connect(
+            self._generate_serial_number
+        )
         self._view.button_accept.clicked.connect(self.dialog_accept)
         self._view.button_cancel.clicked.connect(self.dialog_cancel)
 

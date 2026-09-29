@@ -465,3 +465,26 @@ class IluminacionController(BaseController):
         else:
             self._setDisabledControl(
                 self._view.frame.layout_motivo_baja, True)
+
+    def _generate_serial_number(self):
+        """
+        Se ejecuta cuando se pulsa botón de generar un número de serie.
+        """
+
+        # Si el control contiene texto
+        if self._view.frame.edit_num_serie.text():
+            QMessageBox.information(
+                self._view,
+                self._view.window_title,
+                "EL CAMPO 'NÚMERO DE SERIE' NO ESTÁ VACÍO."
+            )
+            return
+
+        # Obtenemos el número de serie
+        sn = BaseDAO.get_undetermined_serial_number(
+            tabla="ILUMINACIONES",
+            campo="NUMERO_SERIE",
+            prefijo="I"
+        )
+
+        self._view.frame.edit_num_serie.setText(sn.value)

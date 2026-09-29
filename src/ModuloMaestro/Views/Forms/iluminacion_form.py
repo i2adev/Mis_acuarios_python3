@@ -331,6 +331,20 @@ class IluminacionForm(QFrame):
         )
 
         ## Botones
+        self.button_generate_sn = QPushButton("<")
+        self.button_generate_sn.setObjectName("button_generate_sn")
+        self.button_generate_sn.setFixedWidth(30)
+        self.button_generate_sn.setCursor(
+            QCursor(Qt.CursorShape.PointingHandCursor)
+        )
+        self.button_generate_sn.setToolTip(
+            """
+            <h2>Generar número de serie</h2>
+            Este botón genera un número de serie indeterminado. El campo 
+            'NÚMERO DE SERIE' ha de estar vacío.
+            """
+        )
+
         self.button_insert_marca = QPushButton("<")
         self.button_insert_marca.setObjectName(
             "button_insert_marca")
@@ -382,6 +396,8 @@ class IluminacionForm(QFrame):
         self.layout_first_line.addLayout(self.layout_marca)
         self.layout_first_line.addLayout(self.layout_modelo)
         self.layout_first_line.addLayout(self.layout_num_serie)
+        self.layout_first_line.addWidget(self.button_generate_sn,
+                                         alignment=Qt.AlignmentFlag.AlignBottom)
 
         # Segunda línea
         ## Tipo de iluminación

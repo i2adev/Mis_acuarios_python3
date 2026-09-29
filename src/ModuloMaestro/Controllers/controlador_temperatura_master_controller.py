@@ -88,6 +88,9 @@ class ControladorTemperaturaMasterController(ControladorTemperaturaController):
         self._view.frame.button_insert_marca.clicked.connect(
             self._open_marca_dialog
         )
+        self._view.frame.button_generate_sn.clicked.connect(
+            self._generate_serial_number
+        )
         self._view.button_insert.clicked.connect(self.button_insert_click)
         self._view.button_update.clicked.connect(self.button_update_click)
         self._view.button_load.clicked.connect(self.button_load_click)

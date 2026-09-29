@@ -9,8 +9,7 @@ Comentarios:
 import sys
 
 from PyQt6.QtWidgets import QFrame, QVBoxLayout, QHBoxLayout, QLabel, \
-    QLineEdit, \
-    QPlainTextEdit, QApplication, QSpacerItem, QSizePolicy
+    QApplication, QSpacerItem, QSizePolicy
 
 import globales
 from CustomControls.int_line_edit import IntLineEdit

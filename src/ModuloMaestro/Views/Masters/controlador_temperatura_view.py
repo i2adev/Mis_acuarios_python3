@@ -9,8 +9,10 @@ Comentarios:
 import sys
 
 from PyQt6.QtCore import Qt
-from PyQt6.QtWidgets import QApplication, QWidget
+from PyQt6.QtWebSockets import QMaskGenerator
+from PyQt6.QtWidgets import QApplication, QMessageBox, QWidget
 
+from Main.Model.DAO.base_dao import BaseDAO
 from ModuloMaestro.Views.Forms.controlador_temperatura_form import \
     ControladorTemperaturaForm
 from ModuloMaestro.Views.Forms.image_form import ImageForm
@@ -37,7 +39,7 @@ class ControladorTemperaturaView(BaseView):
         self.layout_form_data.addWidget(self.frame_image)
 
         self.set_tab_order()
-
+        
         # Asigna atajos de teclado
         self.button_insert.setShortcut("Ctrl+I")
 

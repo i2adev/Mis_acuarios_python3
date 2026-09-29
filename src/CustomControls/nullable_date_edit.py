@@ -102,7 +102,7 @@ class NullableDateEdit(QWidget):
         layout.addWidget(self.button_calendar)
         layout.addWidget(self.button_clear)
 
-        # ───────────────────────────────
+        # ──────────—────────────────────
         # Estado interno
         # ───────────────────────────────
         self._current_date = QDate()
@@ -110,7 +110,7 @@ class NullableDateEdit(QWidget):
         self._calendar_visible = False
         self._has_focus = False
 
-        # ───────────────────────────────
+        # ──────—────────────────────────
         # Calendario emergente
         # ───────────────────────────────
         self.calendar_popup = QFrame(self, Qt.WindowType.Popup)
@@ -293,8 +293,7 @@ if __name__ == "__main__":
             else:
                 self.status_label.setText("Fecha: NULA")
 
-
-    app = QApplication(sys.argv)
-    dlg = ExampleDialog()
-    dlg.show()
-    sys.exit(app.exec())
+    # app = QApplication(sys.argv)
+    # dlg = ExampleDialog()
+    # dlg.show()
+    # sys.exit(app.exec())

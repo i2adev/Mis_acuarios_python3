@@ -7,7 +7,8 @@ Comentarios:
 
 from PyQt6.QtWidgets import QWidget, QMessageBox, QComboBox
 
-from ModuloMaestro.Controllers.iluminacion_controller import IluminacionController
+from ModuloMaestro.Controllers.iluminacion_controller import \
+    IluminacionController
 from CustomControls.nullable_date_edit import NullableDateEdit
 from ModuloMaestro.Model.DAO.iluminacion_dao import IluminacionDAO
 from ModuloMaestro.Model.Entities.iluminacion_entity import IluminacionEntity
@@ -68,6 +69,9 @@ class IluminacionDialogController(IluminacionController):
         )
         self._view.frame.button_control_iluminacion.clicked.connect(
             self._open_control_iluminacion_dialog
+        )
+        self._view.frame.button_generate_sn.clicked.connect(
+            self._generate_serial_number
         )
 
     def dialog_accept(self):

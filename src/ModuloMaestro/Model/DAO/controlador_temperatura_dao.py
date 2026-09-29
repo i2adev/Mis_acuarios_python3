@@ -364,3 +364,52 @@ class ControladorTemperaturaDAO(BaseDAO):
         except sqlite3.Error as e:
             # traceback.print_exc()
             return Result.failure(f"[SQLITE ERROR]\n {e}")
+
+    # # ------------------------------------------------------------------
+    # def get_undetermined_serial_number(self) -> Result:
+    #     """
+    #     Devuelve un número de serie indeterminado.
+    #     """
+    #     sql = (
+    #         """
+    #         SELECT  IFNULL(
+    #                     MAX(NUMERO_SERIE),
+    #                     'CT0001') AS NUMERO_SERIE
+    #         FROM    CONTROLADORES_TEMPERATURA
+    #         WHERE   NUMERO_SERIE LIKE 'CT' || '%';
+    #         """
+    #     )
+    #
+    #     try:
+    #         with self.db.conn as con:
+    #             # Obtiene el último número de serie indeterminado
+    #             cur = con.execute(sql)
+    #             row = cur.fetchone()
+    #             last_sn = row["NUMERO_SERIE"]
+    #
+    #             # Lo convierte a entero
+    #             numero = int("".join(filter(str.isdigit, last_sn)))
+    #
+    #             # En caso de que el número sea mayor que 1, le suma una
+    #             # unidad
+    #             if numero > 1:
+    #                 numero += 1
+    #
+    #             # Devuelve el número de serie formateado
+    #             return Result.success(f"CT{numero:06d}")
+    #
+    #     except sqlite3.IntegrityError as e:
+    #         # traceback.print_exc()
+    #         return Result.failure(f"[INTEGRITY ERROR]\n {e}")
+    #     except sqlite3.OperationalError as e:
+    #         # traceback.print_exc()
+    #         return Result.failure(f"[OPERATIONAL ERROR]\n {e}")
+    #     except sqlite3.ProgrammingError as e:
+    #         # traceback.print_exc()
+    #         return Result.failure(f"[PROGRAMMING ERROR]\n {e}")
+    #     except sqlite3.DatabaseError as e:
+    #         # traceback.print_exc()
+    #         return Result.failure(f"[DATABASE ERROR]\n {e}")
+    #     except sqlite3.Error as e:
+    #         # traceback.print_exc()
+    #         return Result.failure(f"[SQLITE ERROR]\n {e}")

@@ -133,7 +133,7 @@ class EquipamientoForm(QFrame):
             control_name="MOTIVO DE LA BAJA",
             max_length=32,
         )
-        
+
         self.edit_motivo_baja.setObjectName("edit_motivo_baja")
         self.edit_motivo_baja.setToolTip(
             """
@@ -206,6 +206,20 @@ class EquipamientoForm(QFrame):
         )
 
         # Botones
+        self.button_generate_sn = QPushButton("<")
+        self.button_generate_sn.setObjectName("button_generate_sn")
+        self.button_generate_sn.setFixedWidth(30)
+        self.button_generate_sn.setCursor(
+            QCursor(Qt.CursorShape.PointingHandCursor)
+        )
+        self.button_generate_sn.setToolTip(
+            """
+            <h2>Generar número de serie</h2>
+            Este botón genera un número de serie indeterminado. El campo 
+            'NÚMERO DE SERIE' ha de estar vacío.
+            """
+        )
+
         self.button_insert_cat_equipamiento = QPushButton("<")
         self.button_insert_cat_equipamiento.setObjectName(
             "button_insert_cat_equipamiento")
@@ -281,7 +295,8 @@ class EquipamientoForm(QFrame):
 
         ## Montamos la segunda línea
         self.layout_second_line.addLayout(self.layout_num_serie)
-
+        self.layout_second_line.addWidget(self.button_generate_sn,
+                                          alignment=Qt.AlignmentFlag.AlignBottom)
         self.layout_fechas.addLayout(self.layout_fecha_alta)
         self.layout_fechas.addLayout(self.layout_fecha_baja)
         self.group_fechas.setLayout(self.layout_fechas)

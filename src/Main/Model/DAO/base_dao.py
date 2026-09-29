@@ -379,3 +379,58 @@ class BaseDAO(ABC):
         except Exception as e:
             print(f"Error al exportar la base de datos: {e}")
             return False
+
+    @staticmethod
+    def get_undetermined_serial_number(tabla: str, campo: str,
+                                       prefijo: str) -> Result:
+        """
+        Devuelve un número de serie indeterminado.
+        :param tabla: Tabla de la que hay que obtener el número de serie.
+        :param campo: Campo de la tabla de la que hay que obtener el número
+        de serie.
+        :param prefijo: Prefijo del número de serie.
+        """
+
+        sql = (
+            f"""
+            SELECT  IFNULL(
+                        MAX({campo}),
+                        '{prefijo}000001') AS NUMERO_SERIE
+            FROM    {tabla}
+            WHERE   NUMERO_SERIE LIKE '{prefijo}' || '%';
+            """
+        )
+
+        try:
+            with DBManager().get_connection() as con:
+                # Obtiene el último número de serie indeterminado
+                cur = con.execute(sql)
+                row = cur.fetchone()
+                last_sn = row["NUMERO_SERIE"]
+
+                # Lo convierte a entero
+                numero = int("".join(filter(str.isdigit, last_sn)))
+
+                # En caso de que el número sea mayor que 1, le suma una
+                # unidad
+                if numero > 1:
+                    numero += 1
+
+                # Devuelve el número de serie formateado
+                return Result.success(f"{prefijo}{numero:06d}")
+
+        except sqlite3.IntegrityError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[INTEGRITY ERROR]\n {e}")
+        except sqlite3.OperationalError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[OPERATIONAL ERROR]\n {e}")
+        except sqlite3.ProgrammingError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[PROGRAMMING ERROR]\n {e}")
+        except sqlite3.DatabaseError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[DATABASE ERROR]\n {e}")
+        except sqlite3.Error as e:
+            # traceback.print_exc()
+            return Result.failure(f"[SQLITE ERROR]\n {e}")

@@ -33,6 +33,7 @@ from ModuloMaestro.Views.Dialogs.tipo_control_temperatura_dialog import \
     TipoControlTemperaturaDialog
 from ModuloMaestro.Views.Masters.controlador_temperatura_view import \
     ControladorTemperaturaView
+from Services.Database.database import DBManager
 from Services.Result.result import Result
 from Services.Validators.controlador_temperatura_validator import \
     ControladorTemperaturaValidator
@@ -446,3 +447,26 @@ class ControladorTemperaturaController(BaseController):
         else:
             self._setDisabledControl(
                 self._view.frame.layout_motivo_baja, True)
+
+    def _generate_serial_number(self):
+        """
+        Se ejecuta cuando se pulsa botón de generar un número de serie.
+        """
+
+        # Si el control contiene texto
+        if self._view.frame.edit_num_serie.text():
+            QMessageBox.information(
+                self._view,
+                self._view.window_title,
+                "EL CAMPO 'NÚMERO DE SERIE' NO ESTÁ VACÍO."
+            )
+            return
+
+        # Obtenemos el número de serie
+        sn = BaseDAO.get_undetermined_serial_number(
+            tabla="CONTROLADORES_TEMPERATURA",
+            campo="NUMERO_SERIE",
+            prefijo="CT"
+        )
+
+        self._view.frame.edit_num_serie.setText(sn.value)

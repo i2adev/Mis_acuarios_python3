@@ -106,6 +106,9 @@ class IluminacionMasterController(IluminacionController):
         self._view.frame.button_control_iluminacion.clicked.connect(
             self._open_control_iluminacion_dialog
         )
+        self._view.frame.button_generate_sn.clicked.connect(
+            self._generate_serial_number
+        )
 
         # Inicializamos los combos
         self._view.combo_select_page.currentIndexChanged.connect(
