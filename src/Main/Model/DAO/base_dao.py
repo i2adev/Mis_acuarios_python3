@@ -174,6 +174,7 @@ class BaseDAO(ABC):
                 cursor.execute(InsertCmd.INSERT_TIPO_CONTROL_TEMPERATURA)
                 cursor.execute(InsertCmd.INSERT_UNIDADES_TEMPERATURA)
                 cursor.execute(InsertCmd.INSERT_UNIDADES_POTENCIA)
+                cursor.execute(InsertCmd.INSERT_UNIDADES_DISTANCIA)
                 db.conn.commit()
                 return Result.success(0)
 

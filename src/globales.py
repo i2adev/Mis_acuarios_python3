@@ -8,9 +8,17 @@ Comentarios:
 from pathlib import Path
 from PyQt6.QtCore import QLocale
 
+from Main.Model.Entities.dimension_configuration_entity import \
+    DimensionConfigurationEntity
+from Main.Model.Entities.usuario_entity import UsuarioEntity
+
 # Declaramos el usuario y proyecto
-CURRENT_USER = None
-CURRENT_PROJECT = None
+CURRENT_USER: UsuarioEntity | None = None
+CURRENT_PROJECT_ID: int | None = None
+CURRENT_ACUARIUM_ID: int | None = None
+
+# Configuración de la aplicacion
+CONF_UNIDADES_DIMENSIONES: DimensionConfigurationEntity | None = None
 
 # Establecemos la configuración local
 LOCALE = QLocale(QLocale.Language.Spanish, QLocale.Country.Spain)
@@ -21,6 +29,12 @@ PATH_RESOURCES = BASE_PATH / "Resources"
 PATH_IMAGES = PATH_RESOURCES / "Images"
 PATH_FONTS = PATH_RESOURCES / "Fonts"
 PATH_STYLES = PATH_RESOURCES / "Styles"
+
+# Colores de los estados de proyecto
+COLOR_PLANIFICACION = "#f2e605"
+COLOR_EN_CURSO = "#169100"
+COLOR_FINALIZADO = "#0540f2"
+COLOR_CANCELADO = "#f20505"
 
 # Valor máximo de un int32
 INT32_MAX_VALUE = 2 ** 32 - 1

@@ -337,7 +337,7 @@ class MainView(QWidget):
 
         ## Icono de la ventana
         self.label_icon = QLabel()
-        icon5 = QPixmap(":/Images/Window_icon.png")
+        icon5 = QPixmap(str(Path(globales.PATH_IMAGES) / "Window_icon.png"))
         self.label_icon.setPixmap(icon5)
 
     """

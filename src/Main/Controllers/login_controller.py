@@ -111,7 +111,12 @@ class LoginDialogController(BaseController):
             )
             self._clean_view(self._view.edit_nick)
             return
+
         globales.CURRENT_USER = res.value
+        # Estas dos variables se deben de asignarse dinámicamente
+        globales.CURRENT_PROJECT_ID = 10001
+        globales.CURRENT_ACUARIUM_ID = 10001
+
         self._view.accept()
 
     def button_crear_usuario_click(self):

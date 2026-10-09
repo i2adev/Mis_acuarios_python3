@@ -636,3 +636,15 @@ class InsertCmd:
     ('Kilovatio', 'kW', 'Unidad de potencia equivalente a 1000 vatios.'),
     ('Caballo de potencia', 'HP', 'Unidad utilizada ocasionalmente en enfriadores y bombas de gran potencia.'); 
     """
+
+    # Insertamos las unidades de distancia
+    INSERT_UNIDADES_DISTANCIA = """
+    INSERT INTO UNIDADES_DISTANCIA (UNIDAD_DISTANCIA, SIMBOLO, DESCRIPCION)
+    VALUES  
+    ('Milímetro', 'mm', 'Unidad métrica equivalente a una milésima de metro.'),
+    ('Centímetro', 'cm', 'Unidad métrica equivalente a una centésima de metro.'),
+    ('Metro', 'm', 'Unidad básica de longitud del Sistema Internacional.'),
+    ('Pulgada', 'in', 'Unidad anglosajona equivalente a 25,4 milímetros.'),
+    ('Pie', 'ft', 'Unidad anglosajona equivalente a 12 pulgadas o 30, 
+    48 centímetros.');
+    """

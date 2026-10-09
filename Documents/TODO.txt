@@ -1,6 +1,31 @@
-﻿================================================================================
+﻿/===============================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
+29/09/2026  CREACIÓN DE LA LÓGICA DE PROYECTO:
+            -   DONE:   FORMULARIO DE PROYECTO (VERSIÓN INICIAL).
+                -   DONE:   SE CREA EL CONTROL PERSONALIZADO TARJETA DEL
+                            ACUARIO.
+                    -   DONE:   SE CREA LA ENTIDAD.
+                    -   DONE:   SE CREA EL DAO.
+                    -   DONE:   SE CREA EL FRAME CON LA MAQUETACIÓN DE LA
+                                TARJETA.
+                -   DONE:   SE CREA EL CONTROL PERSONALIZADO TARJETA DEL
+                            PROYECTO.
+                    -   DONE:   SE CREA LA ENTIDAD.
+                    -   DONE:   SE CREA EL DAO.
+                    -   DONE:   SE CREA EL FRAME CON LA MAQUETACIÓN DE LA
+                                TARJETA.
+
+            OTRAS TAREAS:
+            -   DONE:   SE CREA LA TABLA DE UNIDADES DE DISTANCIA.
+            -   DONE:   SE CREA LA CLASE DE CONFIGURACIÓN DE LAS UNIDADES DE
+                        MEDIDAS DE DISTANCIA.
+
+            BUG FIXES:
+            -   DONE:   SE CORRIGE EL BUG DEL ICONO DE LA VENTANA EN LOS
+                        MODULOS DE PROYECTO Y MAESTRO.
+            -   DONE:   CORREGIDO ERROR DE CARGA DE ACUARIOS POR PROYECTO.
+
 26/09/2026  SE MODIFICA LA LÓGICA DE LOS CAMPOS DE NÚMEROS DE SERIE DE LOS
             FORMULARIOS QUE LOS CONTEMPLAN PARA AÑADIRLES LA OPCIÓN DE INSERTAR
             UN NÚMERO INDETERMINADO.

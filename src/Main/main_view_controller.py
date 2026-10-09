@@ -85,7 +85,7 @@ class MainViewController(BaseController):
         """ Abre el módulo proyecto. """
 
         ctrl = ModuloProyectoController()
-        ctrl.show()
+        ctrl.show(globales.CURRENT_PROJECT_ID, globales.CURRENT_ACUARIUM_ID)
 
     def en_construccion(self, modulo: str):
         """
