@@ -39,6 +39,36 @@ QLineEdit:focus, QTextEdit:focus, QPlainTextEdit:focus {
 	padding: 2px;
 }
 
+/* Connfigura el QTabWidget */
+QTabWidget {
+    background-color: transparent;
+}
+
+QTabWidget::pane {
+    border: 1px solid #444444;
+    border-radius: 5px;
+    background-color: #232323;
+}
+
+QTabBar::tab {
+    background-color: #333333;
+    color: #CCCCCC;
+    padding: 8px 16px;
+    border: 1px solid #444444;
+    border-bottom: none;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+QTabBar::tab:selected {
+    background-color: #232323;
+    color: white;
+}
+
+QTabBar::tab:hover:!selected {
+    background-color: #454545;
+}
+
 /* Estilo de los botónes */
 QPushButton {
 	 /* border: none; */
@@ -57,16 +87,16 @@ QLabel {
 }
 
 /* Estilo de tabla */
-QTableView::header {
+QTableView:header {
     text-align: left;
 }
 
-QTableView::item:hover {
+QTableView:item:hover {
     background-color: #264f78;
     color: #ffffff;
 }
 
-QHeaderView::section {
+QHeaderView:section {
     text-align: left;
     background-color: #3c3c3c;
     color: #ffffff;
@@ -75,7 +105,7 @@ QHeaderView::section {
     border: 0px solid #2a2a2a;
 }
 
-QTableView::item:selected {
+QTableView:item:selected {
     background-color: #264f78;  /* Color de fondo cuando se selecciona (azul ejemplo) */
     color: white;               /* Color del texto al estar seleccionado */
 }

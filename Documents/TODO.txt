@@ -1,6 +1,10 @@
 ﻿/===============================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
+23/10/026   SE CREA EL FORMULARIO DE LAS OPCCIONES:
+            -   DONE:   SE CREA EL FORMULARIO DE CONFIGURACIÓN:
+                -   DONE:   SE CREA EL FRAME.
+
 29/09/2026  CREACIÓN DE LA LÓGICA DE PROYECTO:
             -   DONE:   FORMULARIO DE PROYECTO (VERSIÓN INICIAL).
                 -   DONE:   SE CREA EL CONTROL PERSONALIZADO TARJETA DEL
