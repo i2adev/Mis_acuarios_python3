@@ -25,8 +25,11 @@ class UsuarioFOrm(QFrame):
 
         # Layouts
         self.layout_main = QHBoxLayout()
+        self.layout_main.setContentsMargins(0, 0, 0, 0)
         self.layout_personal = QVBoxLayout()
+        self.layout_personal.setContentsMargins(0, 0, 0, 0)
         self.layout_cuenta = QVBoxLayout()
+        self.layout_cuenta.setContentsMargins(0, 0, 0, 0)
 
         # Frames
         self.frame_personal = QFrame()
@@ -136,8 +139,8 @@ if __name__ == "__main__":
     app = QApplication(sys.argv)
 
     ventana = UsuarioFOrm()
-    ventana.setFixedWidth(400)
-    ventana.setFixedHeight(600)
+    # ventana.setFixedWidth(400)
+    # ventana.setFixedHeight(600)
     ventana.show()
 
     sys.exit(app.exec())

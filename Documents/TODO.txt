@@ -1,6 +1,78 @@
 ﻿/===============================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
+04/11/026   SE MODDIFICA EL FORMULARIO DE OPCIONES:
+            -   DONE:   SE CREA EL CONTROL PERSONALIZADO DE BOTÓN DE MENÚ
+                        LAERAL.
+            -   DONE:   SE CREA EL FRAME DE LA CUENTA.
+            -   DONE:   SE CREA EL FRAME DE LAS UNIDADES:
+
+                -   DONE:   DOMENSIONNALES.
+                    -   DONE:   SE IMPLEMENTA EL CONTROL.
+                    -   DONE:   SE IMPLEMENTA LA TABLA Y LOS DATOS INICIALES.
+
+                -   DONE:   VOLUMEN.
+                    -   DONE:   SE IMPLEMENTA EL CONTROL.
+                    -   DONE:   SE IMPLEMENTA LA TABLA Y LOS DATOS INICIALES.
+
+                -   DONE:   MASA.
+                    -   DONE:   SE IMPLEMENTA EL CONTROL.
+                    -   DONE:   SE IMPLEMENTA LA TABLA Y LOS DATOS INICIALES.
+
+                -   DONE:   POTENCIA Y ENERGIA.
+                    -   DONE:   SE IMPLEMENTA EL CONTROL.
+                    -   DONE:   SE IMPLEMENTA LA TABLA Y LOS DATOS INICIALES.
+
+                -   DONE:   ENERGIA.
+                    -   DONE:   SE IMPLEMENTA EL CONTROL.
+                    -   DONE:   SE IMPLEMENTA LA TABLA Y LOS DATOS INICIALES.
+
+                -   DONE:   TEMPERATURA.
+                    -   DONE:   SE IMPLEMENTA EL CONTROL.
+                    -   DONE:   SE IMPLEMENTA LA TABLA Y LOS DATOS INICIALES.
+
+                -   DONE:   CAUDAL.
+                    -   DONE:   SE IMPLEMENTA EL CONTROL.
+                    -   DONE:   SE IMPLEMENTA LA TABLA Y LOS DATOS INICIALES.
+
+                -   DONE:   PRESIÓN.
+                    -   DONE:   SE IMPLEMENTA EL CONTROL.
+                    -   DONE:   SE IMPLEMENTA LA TABLA Y LOS DATOS INICIALES.
+
+                -   DONE:   ILUMINACIÓN.
+                    -   DONE:   SE IMPLEMENTA EL CONTROL.
+                    -   DONE:   SE IMPLEMENTA LA TABLA Y LOS DATOS INICIALES.
+
+                -   DONE:   CONCENTRACIÓN.
+                    -   DONE:   SE IMPLEMENTA EL CONTROL.
+                    -   DONE:   SE IMPLEMENTA LA TABLA Y LOS DATOS INICIALES.
+
+                -   DONE:   KH.
+                    -   DONE:   SE IMPLEMENTA EL CONTROL.
+                    -   DONE:   SE IMPLEMENTA LA TABLA Y LOS DATOS INICIALES..
+
+                -   DONE:   GH.
+                    -   DONE:   SE IMPLEMENTA EL CONTROL.
+                    -   DONE:   SE IMPLEMENTA LA TABLA Y LOS DATOS INICIALES.
+
+                -   DONE:   CONDUCTIVIDAD.
+                    -   DONE:   SE IMPLEMENTA EL CONTROL.
+                    -   DONE:   SE IMPLEMENTA LA TABLA Y LOS DATOS INICIALES.
+
+                -   DONE:   SALIDNIDAD.
+                    -   DONE:   SE IMPLEMENTA EL CONTROL.
+                    -   DONE:   SE IMPLEMENTA LA TABLA Y LOS DATOS INICIALES.
+
+                -   DONE:   DENSIDAD DEL AGUA.
+                    -   DONE:   SE IMPLEMENTA EL CONTROL.
+                    -   DONE:   SE IMPLEMENTA LA TABLA Y LOS DATOS INICIALES.
+
+            -   DONE:   SE CREA EL FORMULARIO DE OPCIONES.
+            -   DONE:   SE CREA LA ENTIDAD DE LA CONFIGURACIÓN.
+            -   DONE:   SE CREA EL DAO DE LA CONFIGURACIÓN.
+            -   DONE:   SE CREA EL CONTTROLADOR DE LAS OPCIONES.
+            -   DONE:   INTEGRAR EL FORMULARIO EN LA VISTA GENERAL.
+
 23/10/026   SE CREA EL FORMULARIO DE LAS OPCCIONES:
             -   DONE:   SE CREA EL FORMULARIO DE CONFIGURACIÓN:
                 -   DONE:   SE CREA EL FRAME.

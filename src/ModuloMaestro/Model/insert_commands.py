@@ -15,14 +15,18 @@ class InsertCmd:
 
     # Unidad del contenido
     INSERTAR_UNIDAD_CONTENIDO = """
-    INSERT INTO UNIDADES_CONTENIDO (UNIDAD, DESCRIPCION) VALUES
-    ('ml',  'Mililitros'),
-    ('l',   'Litros'),
-    ('g',   'Gramos'),
-    ('kg',  'Kilogramos'),
-    ('uds', 'Unidades'),
-    ('tabs','Pastillas'),
-    ('tiras','Tiras reactivas');
+    INSERT INTO UNIDADES_CONTENIDO (UNIDAD_CONTENIDO, SIMBOLO, DESCRIPCION) VALUES
+    ('Mililitro', 'ml', 'Unidad de volumen equivalente a una milésima de litro.'),
+    ('Litro', 'L', 'Unidad de volumen equivalente a un decímetro cúbico.'),
+    ('Gramo', 'g', 'Unidad de masa equivalente a una milésima de kilogramo.'),
+    ('Kilogramo', 'kg', 'Unidad básica de masa del Sistema Internacional.'),
+    ('Miligramo', 'mg', 'Unidad de masa equivalente a una milésima de gramo.'),
+    ('Microgramo', 'µg', 'Unidad de masa equivalente a una millonésima de gramo.'),
+    ('Unidad', 'ud', 'Cantidad expresada en unidades individuales de producto.'),
+    ('Cápsula', 'cáps.', 'Cantidad expresada en cápsulas individuales.'),
+    ('Comprimido', 'comp.', 'Cantidad expresada en comprimidos individuales.'),
+    ('Sobre', 'sobre', 'Cantidad expresada en sobres individuales.'),
+    ('Pastilla', 'past.', 'Cantidad expresada en pastillas individuales.');
     """
 
     # Formato de consumible
@@ -647,4 +651,113 @@ class InsertCmd:
     ('Pulgada', 'in', 'Unidad anglosajona equivalente a 25,4 milímetros.'),
     ('Pie', 'ft', 'Unidad anglosajona equivalente a 12 pulgadas o 30, 
     48 centímetros.');
+    """
+
+    # Unidades de energía
+    INSERT_UNIDADES_ENERGIA = """
+    INSERT INTO UNIDADES_ENERGIA (UNIDAD_ENERGIA, SIMBOLO, DESCRIPCION) VALUES
+    ('Julio', 'J', 'Unidad de energía del Sistema Internacional.'),
+    ('Kilojulio', 'kJ', 'Unidad de energía equivalente a mil julios.'),
+    ('Vatio-hora', 'Wh', 'Energía consumida por un dispositivo de un vatio durante una hora.'),
+    ('Kilovatio-hora', 'kWh', 'Unidad de energía equivalente a mil vatios-hora. Habitual en facturación eléctrica.'),
+    ('Caloría', 'cal', 'Unidad de energía equivalente aproximadamente a 4,184 julios.'),
+    ('Kilocaloría', 'kcal', 'Unidad de energía equivalente a mil calorías.'),
+    ('Kilovatio-segundo', 'kWs', 'Unidad de energía equivalente a mil julios.');
+    """
+
+    # Unidades de caudal
+    INSERT_UNIDADES_CAUDAL = """
+    INSERT INTO UNIDADES_CAUDAL (UNIDAD_CAUDAL, SIMBOLO, DESCRIPCION) VALUES
+    ('Litro por hora', 'L/h', 'Caudal equivalente al desplazamiento de un litro de fluido por hora.'),
+    ('Litro por minuto', 'L/min', 'Caudal equivalente al desplazamiento de un litro de fluido por minuto.'),
+    ('Litro por segundo', 'L/s', 'Caudal equivalente al desplazamiento de un litro de fluido por segundo.'),
+    ('Metro cúbico por hora', 'm³/h', 'Caudal equivalente al desplazamiento de un metro cúbico de fluido por hora.'),
+    ('Metro cúbico por segundo', 'm³/s', 'Caudal equivalente al desplazamiento de un metro cúbico de fluido por segundo.'),
+    ('Mililitro por minuto', 'ml/min', 'Caudal equivalente al desplazamiento de un mililitro de fluido por minuto.'),
+    ('Galón estadounidense por hora', 'US gal/h', 'Caudal equivalente al desplazamiento de un galón estadounidense por hora.'),
+    ('Galón estadounidense por minuto', 'US gal/min', 'Caudal equivalente al desplazamiento de un galón estadounidense por minuto.'),
+    ('Galón imperial por hora', 'Imp gal/h', 'Caudal equivalente al desplazamiento de un galón imperial por hora.'),
+    ('Galón imperial por minuto', 'Imp gal/min', 'Caudal equivalente al desplazamiento de un galón imperial por minuto.');
+    """
+
+    # Unidades de presión
+    INSERT_UNIDADES_PRESION = """
+    INSERT INTO UNIDADES_PRESION (UNIDAD_PRESION, SIMBOLO, DESCRIPCION) VALUES
+    ('Pascal', 'Pa', 'Unidad de presión del Sistema Internacional.'),
+    ('Kilopascal', 'kPa', 'Unidad de presión equivalente a mil pascales.'),
+    ('Megapascal', 'MPa', 'Unidad de presión equivalente a un millón de pascales.'),
+    ('Bar', 'bar', 'Unidad de presión equivalente a 100 000 pascales.'),
+    ('Milibar', 'mbar', 'Unidad de presión equivalente a una milésima de bar.'),
+    ('Atmósfera', 'atm', 'Unidad de presión equivalente a 101 325 pascales.'),
+    ('Milímetro de mercurio', 'mmHg', 'Unidad de presión equivalente a la presión ejercida por una columna de mercurio de un milímetro.'),
+    ('Libra por pulgada cuadrada', 'psi', 'Unidad de presión anglosajona equivalente aproximadamente a 6 894,76 pascales.'),
+    ('Metro de columna de agua', 'mH₂O', 'Unidad de presión equivalente a la presión ejercida por una columna de agua de un metro.'),
+    ('Centímetro de columna de agua', 'cmH₂O', 'Unidad de presión equivalente a la presión ejercida por una columna de agua de un centímetro.');
+    """
+
+    # Iluminación
+    INSERT_UNIDADES_IULUMINACION = """
+    INSERT INTO UNIDADES_ILUMINACION (UNIDAD_ILUMINACION, SIMBOLO, DESCRIPCION) VALUES
+    ('Lumen', 'lm', 'Unidad de flujo luminoso emitido por una fuente de luz.'),
+    ('Lux', 'lx', 'Unidad de iluminancia equivalente a un lumen por metro cuadrado.'),
+    ('Candela', 'cd', 'Unidad de intensidad luminosa del Sistema Internacional.'),
+    ('Vatio por metro cuadrado', 'W/m²', 'Densidad de potencia luminosa incidente sobre una superficie.'),
+    ('Micromol por metro cuadrado y segundo', 'µmol/m²/s', 'Unidad de densidad de flujo de fotones fotosintéticos (PPFD), utilizada para evaluar la luz disponible para las plantas.'),
+    ('Mol por metro cuadrado y día', 'mol/m²/día', 'Unidad de integral diaria de luz (DLI), que expresa la cantidad de fotones fotosintéticos recibidos durante un día.'),
+    ('Kelvin', 'K', 'Unidad de temperatura de color correlacionada de una fuente luminosa.'),
+    ('Nanómetro', 'nm', 'Unidad utilizada para expresar la longitud de onda de la luz.');
+    """
+
+    # kH
+    INSERT_UNIDAD_KH = """
+    INSERT INTO UNIDADES_KH (UNIDAD_KH, SIMBOLO, DESCRIPCION) VALUES
+    ('Grado alemán de dureza de carbonatos', '°dKH', 'Unidad habitual en acuariofilia. 1 °dKH equivale a 17,848 mg/L de CaCO3.'),
+    ('Miligramos por litro de CaCO3', 'mg/L CaCO3', 'Unidad de concentración equivalente de carbonato cálcico.'),
+    ('Partes por millón de CaCO3', 'ppm CaCO3', 'Unidad equivalente aproximadamente a mg/L de CaCO3 en agua.'),
+    ('Miliequivalentes por litro', 'meq/L', 'Unidad de concentración equivalente. 1 °dKH equivale aproximadamente a 0,357 meq/L.'),
+    ('Milimoles por litro de CaCO3', 'mmol/L CaCO3', 'Unidad molar equivalente. 1 °dKH equivale aproximadamente a 0,1783 mmol/L de CaCO3.');
+    """
+
+    # GH
+    INSERT_UNIDADES_GH = """
+    INSERT INTO UNIDADES_GH (UNIDAD, SIMBOLO, DESCRIPCION) VALUES
+    ('Grado alemán', '°dGH', 'Grado de dureza alemán. 1 °dGH = 17,848 mg/L CaCO3.'),
+    ('Grado francés', '°fH', 'Grado de dureza francés. 1 °fH = 10 mg/L CaCO3.'),
+    ('Grado inglés', '°eH', 'Grado de dureza inglés o Clark. 1 °eH ≈ 14,254 mg/L CaCO3.'),
+    ('Granos por galón', 'gpg', 'Grains per gallon. 1 gpg ≈ 17,118 mg/L CaCO3.'),
+    ('Miligramos por litro', 'mg/L', 'Concentración equivalente de CaCO3.'),
+    ('Partes por millón', 'ppm', 'En agua diluida equivale aproximadamente a mg/L.'),
+    ('Milimoles por litro', 'mmol/L', '1 mmol/L = 100,09 mg/L CaCO3.'),
+    ('Miliequivalentes por litro', 'mEq/L', '1 mEq/L = 50,04 mg/L CaCO3.');
+    """
+
+    # Conductividad
+    INSERT_UNIDADES_CONDUCTIVIDAD = """
+    INSERT INTO UNIDADES_CONDUCTIVIDAD (UNIDAD, SIMBOLO, DESCRIPCION) VALUES
+    ('Microsiemens por centímetro', 'µS/cm', 'Unidad habitual para medir la conductividad del agua en acuariofilia.'),
+    ('Milisiemens por centímetro', 'mS/cm', 'Unidad de conductividad eléctrica. 1 mS/cm = 1000 µS/cm.'),
+    ('Siemens por metro', 'S/m', 'Unidad del Sistema Internacional. 1 S/m = 10000 µS/cm.'),
+    ('Milisiemens por metro', 'mS/m', 'Unidad de conductividad eléctrica. 1 mS/m = 10 µS/cm.'),
+    ('Microsiemens por metro', 'µS/m', 'Unidad de conductividad eléctrica. 1 µS/m = 0,01 µS/cm.');
+    """
+
+    # Salinidad
+    INSERT_UNIDADES_SALINIDAD = """
+    INSERT INTO UNIDADES_SALINIDAD (UNIDAD, SIMBOLO, DESCRIPCION) VALUES
+    ('Partes por mil', 'ppt', 'Partes de sal por cada mil partes de solución. Unidad habitual en acuariofilia marina.'),
+    ('Gramos por kilogramo', 'g/kg', 'Masa de sales disueltas por kilogramo de agua de mar.'),
+    ('Partes por millón', 'ppm', 'Partes de sal por millón de partes de solución.'),
+    ('Porcentaje', '%', 'Proporción de sal expresada en porcentaje.'),
+    ('Practical Salinity Unit', 'PSU', 'Escala práctica de salinidad basada en la relación de conductividad. Es adimensional.'),
+    ('Gramos por litro', 'g/L', 'Concentración de sales disueltas expresada en gramos por litro de solución.');
+    """
+
+    # Densidad del agua
+    INSERT_UNIDADES_DENSIDAD = """
+    INSERT INTO UNIDADES_DENSIDAD (UNIDAD, SIMBOLO, DESCRIPCION) VALUES
+    ('Kilogramos por metro cúbico', 'kg/m³', 'Unidad del Sistema Internacional para expresar la densidad.'),
+    ('Gramos por centímetro cúbico', 'g/cm³', 'Unidad habitual en mediciones de densidad de líquidos.'),
+    ('Gramos por mililitro', 'g/mL', 'Masa en gramos por mililitro de solución.'),
+    ('Kilogramos por litro', 'kg/L', 'Masa en kilogramos por litro de solución.'),
+    ('Gravedad específica', 'SG', 'Relación entre la densidad de la muestra y la densidad del agua de referencia. Adimensional.');
     """

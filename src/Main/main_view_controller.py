@@ -11,6 +11,13 @@ from PyQt6.QtWidgets import QMessageBox
 import globales
 
 from Main.Controllers.base_controller import BaseController
+from ModuloConsigfuracion.Controllers.configuracion_controller import \
+    ConfiguracionController
+from ModuloConsigfuracion.Models.DAO.configuracion_dao import ConfiguracionDAO
+from ModuloConsigfuracion.Models.Entities.configuracion_entity import \
+    ConfiguracionEntity
+from ModuloConsigfuracion.Views.Masters.modulo_configuracion_view import \
+    ModuloConfiguracionView
 from ModuloMaestro.Controllers.main_reports_controller import \
     MainReportsController
 from ModuloMaestro.Views.main_reports_view import MainReportsView
@@ -62,7 +69,7 @@ class MainViewController(BaseController):
             lambda: self.en_construccion("REPORTES")
         )
         self._view.button_modulo_configuracion.clicked.connect(
-            lambda: self.en_construccion("CONFIGURACIÓN")
+            self.modulo_configuracion_click
         )
         self._view.button_salir_aplicacion.clicked.connect(
             lambda: sys.exit(0)
@@ -86,6 +93,15 @@ class MainViewController(BaseController):
 
         ctrl = ModuloProyectoController()
         ctrl.show(globales.CURRENT_PROJECT_ID, globales.CURRENT_ACUARIUM_ID)
+
+    def modulo_configuracion_click(self):
+        """ Abre el módulo configuración. """
+
+        view = ModuloConfiguracionView("MODULO CONFIGURACIÓN")
+        dao = ConfiguracionDAO()
+        entity = ConfiguracionEntity()
+        ctrl = ConfiguracionController(view, dao, entity)
+        ctrl.show()
 
     def en_construccion(self, modulo: str):
         """
