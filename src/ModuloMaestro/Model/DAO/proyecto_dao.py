@@ -55,32 +55,31 @@ class ProyectoDAO(BaseDAO):
                 # Configuramos la entidad
                 ent = ProyectoEntity(
                     id=row[0],
-                    id_usuario=row[1],
-                    nombre=row[2],
-                    id_estado=row[3],
-                    fecha_inicio=row[4],
-                    fecha_fin=row[5],
-                    motivo_cierre=row[6],
-                    descripcion=row[7],
+                    nombre=row[1],
+                    id_estado=row[2],
+                    fecha_inicio=row[3],
+                    fecha_fin=row[4],
+                    motivo_cierre=row[5],
+                    descripcion=row[6],
                 )
 
                 return Result.success(ent)
 
         except sqlite3.IntegrityError as e:
-            # traceback.print_exc()
-            return Result.failure(f"[INTEGRITY ERROR]\n {e}")
+            traceback.print_exc()
+            # return Result.failure(f"[INTEGRITY ERROR]\n {e}")
         except sqlite3.OperationalError as e:
-            # traceback.print_exc()
-            return Result.failure(f"[OPERATIONAL ERROR]\n {e}")
+            traceback.print_exc()
+            # return Result.failure(f"[OPERATIONAL ERROR]\n {e}")
         except sqlite3.ProgrammingError as e:
-            # traceback.print_exc()
-            return Result.failure(f"[PROGRAMMING ERROR]\n {e}")
+            traceback.print_exc()
+            # return Result.failure(f"[PROGRAMMING ERROR]\n {e}")
         except sqlite3.DatabaseError as e:
-            # traceback.print_exc()
-            return Result.failure(f"[DATABASE ERROR]\n {e}")
+            traceback.print_exc()
+            # return Result.failure(f"[DATABASE ERROR]\n {e}")
         except sqlite3.Error as e:
-            # traceback.print_exc()
-            return Result.failure(f"[SQLITE ERROR]\n {e}")
+            traceback.print_exc()
+            # return Result.failure(f"[SQLITE ERROR]\n {e}")
 
     def get_list(self) -> Result:
         """ Obtiene el listado completo ordenado por fecha de inicio. """
@@ -89,7 +88,6 @@ class ProyectoDAO(BaseDAO):
             """
             SELECT P.ID_PROYECTO AS ID,
                    ROW_NUMBER() OVER(ORDER BY P.ID_PROYECTO) AS NUM,
-                   P.ID_USUARIO AS ID_USUARIO,
                    P.NOMBRE AS NOMBRE,
                    E.NOMBRE_ESTADO AS ESTADO,
                    IFNULL(
@@ -126,7 +124,6 @@ class ProyectoDAO(BaseDAO):
                     ProyectoEntity(
                         id=f["ID"],
                         num=f["NUM"],
-                        id_usuario=f["ID_USUARIO"],
                         nombre=f["NOMBRE"],
                         id_estado=f["ESTADO"],
                         fecha_inicio=f["FECHA_INICIO"],
@@ -139,147 +136,146 @@ class ProyectoDAO(BaseDAO):
                 return Result.success(valores)
 
         except sqlite3.IntegrityError as e:
-            # traceback.print_exc()
-            return Result.failure(f"[INTEGRITY ERROR]\n {e}")
+            traceback.print_exc()
+            # return Result.failure(f"[INTEGRITY ERROR]\n {e}")
         except sqlite3.OperationalError as e:
-            # traceback.print_exc()
-            return Result.failure(f"[OPERATIONAL ERROR]\n {e}")
+            traceback.print_exc()
+            # return Result.failure(f"[OPERATIONAL ERROR]\n {e}")
         except sqlite3.ProgrammingError as e:
-            # traceback.print_exc()
-            return Result.failure(f"[PROGRAMMING ERROR]\n {e}")
+            traceback.print_exc()
+            # return Result.failure(f"[PROGRAMMING ERROR]\n {e}")
         except sqlite3.DatabaseError as e:
-            # traceback.print_exc()
-            return Result.failure(f"[DATABASE ERROR]\n {e}")
+            traceback.print_exc()
+            # return Result.failure(f"[DATABASE ERROR]\n {e}")
         except sqlite3.Error as e:
-            # traceback.print_exc()
-            return Result.failure(f"[SQLITE ERROR]\n {e}")
+            traceback.print_exc()
+            # return Result.failure(f"[SQLITE ERROR]\n {e}")
 
     # ------------------------------------------------------------------
-    def get_list_by_user(self, id_user: int) -> Result:
-        """ Obtiene el listado por usuario. """
-
-        sql = (
-            """
-            SELECT  P.ID_PROYECTO AS ID,
-                    ROW_NUMBER() OVER(ORDER BY P.ID_PROYECTO) AS NUM,
-                    P.ID_USUARIO AS ID_USUARIO,
-                    P.NOMBRE AS NOMBRE,
-                    E.NOMBRE_ESTADO AS ESTADO,
-                    IFNULL(
-                           strftime(
-                                   '%Y-%m-%d', P.FECHA_INICIO, 
-                                   'unixepoch', 
-                                   'localtime'
-                           ), 
-                           ''
-                    ) AS FECHA_INICIO,
-                    IFNULL(
-                           strftime(
-                                   '%Y-%m-%d', P.FECHA_CIERRE, 
-                                   'unixepoch', 
-                                   'localtime'
-                           ), 
-                           ''
-                    ) AS FECHA_FIN,
-                    P.MOTIVO_CIERRE AS MOTIVO_CIERRE,
-                    P.DESCRIPCION AS DESCRIPCION
-            FROM    PROYECTOS P
-            LEFT JOIN ESTADOS_PROYECTO E
-            ON      P.ID_ESTADO = E.ID_ESTADO
-            WHERE   P.ID_USUARIO = :id_user;
-            """
-        )
-        params = {"id_usuario": id_user}
-
-        try:
-            with self.db.conn as con:
-                cur = con.cursor()
-                cur.execute(sql, params)
-                rows = cur.fetchall()
-
-                valores = [
-                    ProyectoEntity(
-                        id=f["ID"],
-                        num=f["NUM"],
-                        id_usuario=f["ID_USUARIO"],
-                        nombre=f["NOMBRE"],
-                        id_estado=f["ESTADO"],
-                        fecha_inicio=f["FECHA_INICIO"],
-                        fecha_fin=f["FECHA_FIN"],
-                        motivo_cierre=f["MOTIVO_CIERRE"],
-                        descripcion=f["DESCRIPCION"]
-                    )
-                    for f in rows
-                ]
-                return Result.success(valores)
-
-        except sqlite3.IntegrityError as e:
-            # traceback.print_exc()
-            return Result.failure(f"[INTEGRITY ERROR]\n {e}")
-        except sqlite3.OperationalError as e:
-            # traceback.print_exc()
-            return Result.failure(f"[OPERATIONAL ERROR]\n {e}")
-        except sqlite3.ProgrammingError as e:
-            # traceback.print_exc()
-            return Result.failure(f"[PROGRAMMING ERROR]\n {e}")
-        except sqlite3.DatabaseError as e:
-            # traceback.print_exc()
-            return Result.failure(f"[DATABASE ERROR]\n {e}")
-        except sqlite3.Error as e:
-            # traceback.print_exc()
-            return Result.failure(f"[SQLITE ERROR]\n {e}")
+    # def get_list_by_user(self, id_user: int) -> Result:
+    #     """ Obtiene el listado por usuario. """
+    #
+    #     sql = (
+    #         """
+    #         SELECT  P.ID_PROYECTO AS ID,
+    #                 ROW_NUMBER() OVER(ORDER BY P.ID_PROYECTO) AS NUM,
+    #                 P.ID_USUARIO AS ID_USUARIO,
+    #                 P.NOMBRE AS NOMBRE,
+    #                 E.NOMBRE_ESTADO AS ESTADO,
+    #                 IFNULL(
+    #                        strftime(
+    #                                '%Y-%m-%d', P.FECHA_INICIO,
+    #                                'unixepoch',
+    #                                'localtime'
+    #                        ),
+    #                        ''
+    #                 ) AS FECHA_INICIO,
+    #                 IFNULL(
+    #                        strftime(
+    #                                '%Y-%m-%d', P.FECHA_CIERRE,
+    #                                'unixepoch',
+    #                                'localtime'
+    #                        ),
+    #                        ''
+    #                 ) AS FECHA_FIN,
+    #                 P.MOTIVO_CIERRE AS MOTIVO_CIERRE,
+    #                 P.DESCRIPCION AS DESCRIPCION
+    #         FROM    PROYECTOS P
+    #         LEFT JOIN ESTADOS_PROYECTO E
+    #         ON      P.ID_ESTADO = E.ID_ESTADO
+    #         WHERE   P.ID_USUARIO = :id_user;
+    #         """
+    #     )
+    #     params = {"id_usuario": id_user}
+    #
+    #     try:
+    #         with self.db.conn as con:
+    #             cur = con.cursor()
+    #             cur.execute(sql, params)
+    #             rows = cur.fetchall()
+    #
+    #             valores = [
+    #                 ProyectoEntity(
+    #                     id=f["ID"],
+    #                     num=f["NUM"],
+    #                     nombre=f["NOMBRE"],
+    #                     id_estado=f["ESTADO"],
+    #                     fecha_inicio=f["FECHA_INICIO"],
+    #                     fecha_fin=f["FECHA_FIN"],
+    #                     motivo_cierre=f["MOTIVO_CIERRE"],
+    #                     descripcion=f["DESCRIPCION"]
+    #                 )
+    #                 for f in rows
+    #             ]
+    #             return Result.success(valores)
+    #
+    #     except sqlite3.IntegrityError as e:
+    #         traceback.print_exc()
+    #         # return Result.failure(f"[INTEGRITY ERROR]\n {e}")
+    #     except sqlite3.OperationalError as e:
+    #         traceback.print_exc()
+    #         # return Result.failure(f"[OPERATIONAL ERROR]\n {e}")
+    #     except sqlite3.ProgrammingError as e:
+    #         traceback.print_exc()
+    #         # return Result.failure(f"[PROGRAMMING ERROR]\n {e}")
+    #     except sqlite3.DatabaseError as e:
+    #         traceback.print_exc()
+    #         # return Result.failure(f"[DATABASE ERROR]\n {e}")
+    #     except sqlite3.Error as e:
+    #         traceback.print_exc()
+    #         # return Result.failure(f"[SQLITE ERROR]\n {e}")
 
     # ------------------------------------------------------------------
     def get_list_combo(self, ) -> Result:
         pass
 
     # ------------------------------------------------------------------
-    def get_list_combo_by_user(self, id_usuario: int) -> Result:
-        """
-        Obtiene una lista ligera para combos (ID y texto visible) por usuario.
-        """
-
-        sql = (
-            """
-            SELECT      ID_PROYECTO AS ID,
-                        NOMBRE AS VALUE,
-                        ID_USUARIO AS ID_USUARIO
-            FROM        PROYECTOS
-            WHERE       ID_USUARIO = :id_usuario
-            ORDER BY    NOMBRE;
-            """
-        )
-        params = {"id_usuario": id_usuario}
-
-        try:
-            with self.db.conn as con:
-                cur = con.cursor()
-                cur.execute(sql, params)
-                rows = cur.fetchall()
-                valores = [
-                    ComboDataEntity(
-                        id=f["ID"],
-                        value=f["VALUE"]
-                    )
-                    for f in rows
-                ]
-                return Result.success(valores)
-
-        except sqlite3.IntegrityError as e:
-            # traceback.print_exc()
-            return Result.failure(f"[INTEGRITY ERROR]\n {e}")
-        except sqlite3.OperationalError as e:
-            # traceback.print_exc()
-            return Result.failure(f"[OPERATIONAL ERROR]\n {e}")
-        except sqlite3.ProgrammingError as e:
-            # traceback.print_exc()
-            return Result.failure(f"[PROGRAMMING ERROR]\n {e}")
-        except sqlite3.DatabaseError as e:
-            # traceback.print_exc()
-            return Result.failure(f"[DATABASE ERROR]\n {e}")
-        except sqlite3.Error as e:
-            # traceback.print_exc()
-            return Result.failure(f"[SQLITE ERROR]\n {e}")
+    # def get_list_combo_by_user(self, id_usuario: int) -> Result:
+    #     """
+    #     Obtiene una lista ligera para combos (ID y texto visible) por usuario.
+    #     """
+    #
+    #     sql = (
+    #         """
+    #         SELECT      ID_PROYECTO AS ID,
+    #                     NOMBRE AS VALUE,
+    #                     ID_USUARIO AS ID_USUARIO
+    #         FROM        PROYECTOS
+    #         WHERE       ID_USUARIO = :id_usuario
+    #         ORDER BY    NOMBRE;
+    #         """
+    #     )
+    #     params = {"id_usuario": id_usuario}
+    #
+    #     try:
+    #         with self.db.conn as con:
+    #             cur = con.cursor()
+    #             cur.execute(sql, params)
+    #             rows = cur.fetchall()
+    #             valores = [
+    #                 ComboDataEntity(
+    #                     id=f["ID"],
+    #                     value=f["VALUE"]
+    #                 )
+    #                 for f in rows
+    #             ]
+    #             return Result.success(valores)
+    #
+    #     except sqlite3.IntegrityError as e:
+    #         # traceback.print_exc()
+    #         return Result.failure(f"[INTEGRITY ERROR]\n {e}")
+    #     except sqlite3.OperationalError as e:
+    #         # traceback.print_exc()
+    #         return Result.failure(f"[OPERATIONAL ERROR]\n {e}")
+    #     except sqlite3.ProgrammingError as e:
+    #         # traceback.print_exc()
+    #         return Result.failure(f"[PROGRAMMING ERROR]\n {e}")
+    #     except sqlite3.DatabaseError as e:
+    #         # traceback.print_exc()
+    #         return Result.failure(f"[DATABASE ERROR]\n {e}")
+    #     except sqlite3.Error as e:
+    #         # traceback.print_exc()
+    #         return Result.failure(f"[SQLITE ERROR]\n {e}")
 
     # ------------------------------------------------------------------
     def insert(self, ent: ProyectoEntity) -> Result:
@@ -290,15 +286,14 @@ class ProyectoDAO(BaseDAO):
 
         sql = (
             """
-            INSERT INTO PROYECTOS (ID_USUARIO, NOMBRE, ID_ESTADO, FECHA_INICIO,
+            INSERT INTO PROYECTOS (NOMBRE, ID_ESTADO, FECHA_INICIO,
                         FECHA_FIN, MOTIVO_CIERRE, DESCRIPCION)
-            VALUES (:id_usuario, :nombre, :id_estado, :fecha_inicio,
+            VALUES (:nombre, :id_estado, :fecha_inicio,
                     :fecha_fin, :motivo_cierre, :descripcion);
             """
         )
 
         params = {
-            "id_usuario": globales.CURRENT_USER.id,
             "nombre": ent.nombre,
             "id_estado": ent.id_estado,
             "fecha_inicio": ent.fecha_inicio,
@@ -313,20 +308,20 @@ class ProyectoDAO(BaseDAO):
                 return Result.success(cur.lastrowid)
 
         except sqlite3.IntegrityError as e:
-            # traceback.print_exc()
-            return Result.failure(f"[INTEGRITY ERROR]\n {e}")
+            traceback.print_exc()
+            # return Result.failure(f"[INTEGRITY ERROR]\n {e}")
         except sqlite3.OperationalError as e:
-            # traceback.print_exc()
-            return Result.failure(f"[OPERATIONAL ERROR]\n {e}")
+            traceback.print_exc()
+            # return Result.failure(f"[OPERATIONAL ERROR]\n {e}")
         except sqlite3.ProgrammingError as e:
-            # traceback.print_exc()
-            return Result.failure(f"[PROGRAMMING ERROR]\n {e}")
+            traceback.print_exc()
+            # return Result.failure(f"[PROGRAMMING ERROR]\n {e}")
         except sqlite3.DatabaseError as e:
-            # traceback.print_exc()
-            return Result.failure(f"[DATABASE ERROR]\n {e}")
+            traceback.print_exc()
+            # return Result.failure(f"[DATABASE ERROR]\n {e}")
         except sqlite3.Error as e:
-            # traceback.print_exc()
-            return Result.failure(f"[SQLITE ERROR]\n {e}")
+            traceback.print_exc()
+            # return Result.failure(f"[SQLITE ERROR]\n {e}")
 
     # ------------------------------------------------------------------
     def update(self, ent: ProyectoEntity) -> Result:
@@ -339,8 +334,7 @@ class ProyectoDAO(BaseDAO):
         sql = (
             """
             UPDATE  PROYECTOS
-            SET     ID_USUARIO = :id_usuario,
-                    NOMBRE = :nombre,
+            SET     NOMBRE = :nombre,
                     ID_ESTADO = :id_estado,
                     FECHA_INICIO = :fecha_inicio,
                     FECHA_FIN = :fecha_fin,
@@ -352,7 +346,6 @@ class ProyectoDAO(BaseDAO):
 
         params = {
             "id": ent.id,
-            "id_usuario": globales.CURRENT_USER.id,
             "nombre": ent.nombre,
             "id_estado": ent.id_estado,
             "fecha_inicio": ent.fecha_inicio,
@@ -368,19 +361,19 @@ class ProyectoDAO(BaseDAO):
 
         except sqlite3.IntegrityError as e:
             traceback.print_exc()
-            return Result.failure(f"[INTEGRITY ERROR]\n {e}")
+            # return Result.failure(f"[INTEGRITY ERROR]\n {e}")
         except sqlite3.OperationalError as e:
             traceback.print_exc()
-            return Result.failure(f"[OPERATIONAL ERROR]\n {e}")
+            # return Result.failure(f"[OPERATIONAL ERROR]\n {e}")
         except sqlite3.ProgrammingError as e:
             traceback.print_exc()
-            return Result.failure(f"[PROGRAMMING ERROR]\n {e}")
+            # return Result.failure(f"[PROGRAMMING ERROR]\n {e}")
         except sqlite3.DatabaseError as e:
             traceback.print_exc()
-            return Result.failure(f"[DATABASE ERROR]\n {e}")
+            # return Result.failure(f"[DATABASE ERROR]\n {e}")
         except sqlite3.Error as e:
             traceback.print_exc()
-            return Result.failure(f"[SQLITE ERROR]\n {e}")
+            # return Result.failure(f"[SQLITE ERROR]\n {e}")
 
     # ------------------------------------------------------------------
     def delete(self, id_: int) -> Result:
@@ -398,21 +391,21 @@ class ProyectoDAO(BaseDAO):
 
         try:
             with self.db.conn as con:
-                cur = con.execute(sql, params)
+                _ = con.execute(sql, params)
                 return Result.success(id_)
 
         except sqlite3.IntegrityError as e:
-            # traceback.print_exc()
-            return Result.failure(f"[INTEGRITY ERROR]\n {e}")
+            traceback.print_exc()
+            # return Result.failure(f"[INTEGRITY ERROR]\n {e}")
         except sqlite3.OperationalError as e:
-            # traceback.print_exc()
-            return Result.failure(f"[OPERATIONAL ERROR]\n {e}")
+            traceback.print_exc()
+            # return Result.failure(f"[OPERATIONAL ERROR]\n {e}")
         except sqlite3.ProgrammingError as e:
-            # traceback.print_exc()
-            return Result.failure(f"[PROGRAMMING ERROR]\n {e}")
+            traceback.print_exc()
+            # return Result.failure(f"[PROGRAMMING ERROR]\n {e}")
         except sqlite3.DatabaseError as e:
-            # traceback.print_exc()
-            return Result.failure(f"[DATABASE ERROR]\n {e}")
+            traceback.print_exc()
+            # return Result.failure(f"[DATABASE ERROR]\n {e}")
         except sqlite3.Error as e:
-            # traceback.print_exc()
-            return Result.failure(f"[SQLITE ERROR]\n {e}")
+            traceback.print_exc()
+            # return Result.failure(f"[SQLITE ERROR]\n {e}")

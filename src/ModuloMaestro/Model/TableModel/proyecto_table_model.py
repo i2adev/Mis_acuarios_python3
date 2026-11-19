@@ -25,7 +25,7 @@ class ProyectoTableModel(QAbstractTableModel):
 
         super().__init__()
         self.data = data
-        self._headers = ["ID", "ID_USUARIO", "#", "NOMBRE", "ESTADO",
+        self._headers = ["ID", "#", "NOMBRE", "ESTADO",
                          "F. INICIO", "F. CIERRE", "MOTIVO CIERRE",
                          "DESCRIPTION"]
 
@@ -56,20 +56,18 @@ class ProyectoTableModel(QAbstractTableModel):
         if columna == 0:
             return entidad.id
         elif columna == 1:
-            return entidad.id_usuario
-        elif columna == 2:
             return entidad.num
-        elif columna == 3:
+        elif columna == 2:
             return entidad.nombre
-        elif columna == 4:
+        elif columna == 3:
             return entidad.id_estado
-        elif columna == 5:
+        elif columna == 4:
             return entidad.fecha_inicio
-        elif columna == 6:
+        elif columna == 5:
             return entidad.fecha_fin
-        elif columna == 7:
+        elif columna == 6:
             return entidad.motivo_cierre
-        elif columna == 8:
+        elif columna == 7:
             return entidad.descripcion
 
     def headerData(self, section, orientation,
@@ -86,39 +84,35 @@ class ProyectoTableModel(QAbstractTableModel):
                 Este campo muestra el <b>ID</b> del proyecto.
                 """,
                 1: """
-                <h2>Identificador del usuario</h2>
-                Este campo muestra el <b>ID</b> del usuario.
-                """,
-                2: """
                 <h2>Número correlativo del proyecto</h2>
                 Este campo muestra el <b>número correlativo</b> del proyecto
                 """,
-                3: """
+                2: """
                 <h2>Nombre del proyecto</h2>
                 Este campo muestra el <b>nombre</b> que se le ha asignado al 
                 proyecto.
                 """,
-                4: """
+                3: """
                 <h2>Estado de proyecto</h2>
                 Este campo muestra el <b>estado </b> en el que se encuentra 
                 el proyecto.
                 """,
-                5: """
+                4: """
                 <h2>Fecha de inicio del proyecto</h2>
                 Este campo muestra la <b>fecha</b> en la que se da inicio al 
                 proyecto.
                 """,
-                6: """
+                5: """
                 <h2>Fecha de cierre del proyecto</h2>
                 Este campo muestra la <b>fecha</b> en la que se 
                 cierra/cancela al proyecto.
                 """,
-                7: """
+                6: """
                 <h2>Motivo de cierre</h2>
                 Este campo muestra el <b>motivo</b> por el que se 
                 cierra/cancela al proyecto.
                 """,
-                8: """
+                7: """
                 <h2>Descripción</h2>
                 Este campo muestra la <b>descripción</b> del proyecto.
                 """,

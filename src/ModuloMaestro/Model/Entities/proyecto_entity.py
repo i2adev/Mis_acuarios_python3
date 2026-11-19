@@ -16,7 +16,6 @@ class ProyectoEntity(BaseEntity):
     # Anotaciones de tipo (atributos con sus tipos esperados)
     id: int | None = None
     num: int | None = None
-    id_usuario: int | None = None
     nombre: str | None = None
     id_estado: int | None = None
     fecha_inicio: int | None = None

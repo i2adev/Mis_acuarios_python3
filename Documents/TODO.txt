@@ -1,7 +1,15 @@
 ﻿/===============================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
-04/11/026   SE MODDIFICA EL FORMULARIO DE OPCIONES:
+19/11/2026  SE ELIMINA LA LÓGICA DE USUARIOS.
+            -   DONE:   SE ELIMINA EL CAMPO EN LA TABLA PROYECTO.
+            -   DONE:   SE ELIMINA EL CAMPO ID_USUARIO DE LA ENTIDAD USUARIO.
+            -   DONE:   SE MODIFICA EL DAO DE PROYECTO.
+            -   DONE:   SE MODIFICA EL CONTROLADOR DE PROYECTO.
+            -   DONE:   SE MODIFICA EL TABLEMODEL DEL PROYECTO.
+            -   DONE:   SE MODIFICA EL PAGINADOR.
+
+04/11/2026  SE MODDIFICA EL FORMULARIO DE OPCIONES:
             -   DONE:   SE CREA EL CONTROL PERSONALIZADO DE BOTÓN DE MENÚ
                         LAERAL.
             -   DONE:   SE CREA EL FRAME DE LA CUENTA.

@@ -56,7 +56,6 @@ class ProyectoController(BaseController):
         ctrs = self._view.frame
 
         ent.id = self._view.frame.edit_id.value()
-        ent.id_usuario = globales.CURRENT_USER.id
         ent.nombre = ctrs.edit_nombre_proyecto.value()
         ent.id_estado = ctrs.combo_estado_proyecto.value()
 

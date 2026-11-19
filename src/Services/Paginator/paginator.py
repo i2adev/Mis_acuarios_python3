@@ -563,7 +563,6 @@ class Paginator:
             data_list = [ProyectoEntity(
                 id=f["ID"],
                 num=f["NUM"],
-                id_usuario=f["ID_USUARIO"],
                 nombre=f["NOMBRE"],
                 id_estado=f["ESTADO"],
                 fecha_inicio=f["FECHA_INICIO"],
