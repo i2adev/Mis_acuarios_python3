@@ -35,9 +35,11 @@ class MainViewController(BaseController):
         """ Constructor de clase. """
 
         # Inicializamos la vista, la entidad y el DAO
-        self._view = MainView("ACUARIOS DE "
-                              f"{globales.CURRENT_USER.nombre.upper()} "
-                              f"{globales.CURRENT_USER.apellido1.upper()}")
+        # self._view = MainView("ACUARIOS DE "
+        #                       f"{globales.CURRENT_USER.nombre.upper()} "
+        #                       f"{globales.CURRENT_USER.apellido1.upper()}")
+
+        self._view = MainView("MIS ACUARIOS")
         # TODO: Crear e inicializar el DAO que gestiona el dashboard.
 
         # Llamamos al constructor base

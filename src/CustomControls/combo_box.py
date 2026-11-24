@@ -15,7 +15,7 @@ class ComboBox(QComboBox):
         super(ComboBox, self).__init__(parent)
 
         # Se inicializan las variables
-        self.control_name = control_name
+        self.setObjectName(control_name)
         self.loading = False
 
         # Se modifica el comportamiento

@@ -11,11 +11,14 @@ from PyQt6.QtCore import QLocale
 from Main.Model.Entities.dimension_configuration_entity import \
     DimensionConfigurationEntity
 from Main.Model.Entities.usuario_entity import UsuarioEntity
+from Services.ConfigManager.config_manager import ConfigManager
 
 # Declaramos el usuario y proyecto
 CURRENT_USER: UsuarioEntity | None = None
 CURRENT_PROJECT_ID: int | None = None
 CURRENT_ACUARIUM_ID: int | None = None
+
+CONFIG_MANAGER: ConfigManager | None = None
 
 # Configuración de la aplicacion
 CONF_UNIDADES_DIMENSIONES: DimensionConfigurationEntity | None = None

@@ -479,7 +479,7 @@ class BaseController(QObject):
         thread.start()
 
     # GENERIC COMBO LOADER
-    def _load_combo(self, combo, worker_fn, data: int = None):
+    def _load_combo(self, combo, worker_fn, data: int | str = None):
         """
         Función generica de carga de combos.
         :param combo: El combo a cargar.
@@ -499,7 +499,7 @@ class BaseController(QObject):
     # UI CALLBACKS (MAIN THREAD)
     def _on_combo_loaded(self, lista: Result,
                          combo: ComboBox,
-                         data: int = None):
+                         data: int | str = None):
         """
         Función callback.
         Carga el combo con la lista.

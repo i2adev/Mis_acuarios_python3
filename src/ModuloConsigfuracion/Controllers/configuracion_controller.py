@@ -4,11 +4,39 @@ Fecha:  11/11/2026
 Comentarios:
     Controlador del módulo de configuración.
 """
-from PyQt6.QtWidgets import QFrame, QWidget
+from PyQt6.QtWidgets import QFrame
 
+import globales
 from CustomControls.boton_lateral import BotonLateral
 from Main.Controllers.base_controller import BaseController
+from ModuloConsigfuracion.Models.DAO.unidad_kh_dao import UnidadesKHDAO
+from ModuloConsigfuracion.Models.DAO.unidades_caudal_dao import \
+    UnidadesCaudalDAO
+from ModuloConsigfuracion.Models.DAO.unidades_concentracion_dao import \
+    UnidadesConcentracionDAO
+from ModuloConsigfuracion.Models.DAO.unidades_conductividad_dao import \
+    UnidadesConductividadDAO
+from ModuloConsigfuracion.Models.DAO.unidades_densidad_dao import \
+    UnidadesDensidadDAO
+from ModuloConsigfuracion.Models.DAO.unidades_distancia_dao import \
+    UnidadesDistanciaDAO
 from ModuloConsigfuracion.Models.DAO.configuracion_dao import ConfiguracionDAO
+from ModuloConsigfuracion.Models.DAO.unidades_energia_dao import \
+    UnidadesEnergiaDAO
+from ModuloConsigfuracion.Models.DAO.unidades_gh_dao import UnidadesGHDAO
+from ModuloConsigfuracion.Models.DAO.unidades_iluminacion_dao import \
+    UnidadesIluminacionDAO
+from ModuloConsigfuracion.Models.DAO.unidades_masa_dao import UnidadesMasaDAO
+from ModuloConsigfuracion.Models.DAO.unidades_potencia_dao import \
+    UnidadesPotenciaDAO
+from ModuloConsigfuracion.Models.DAO.unidades_presion_dao import \
+    UnidadesPresionDAO
+from ModuloConsigfuracion.Models.DAO.unidades_salinidad_dao import \
+    UnidadesSalinidadDAO
+from ModuloConsigfuracion.Models.DAO.unidades_temperatura_dao import \
+    UnidadesTemperaturaDAO
+from ModuloConsigfuracion.Models.DAO.unidades_volumen_dao import \
+    UnidadesVolumenDAO
 from ModuloConsigfuracion.Models.Entities.configuracion_entity import \
     ConfiguracionEntity
 from ModuloConsigfuracion.Views.Masters.modulo_configuracion_view import \
@@ -24,8 +52,33 @@ class ConfiguracionController(BaseController):
         # Llama al constructor base
         super().__init__(view, dao, entity)
 
+        # Inicializa las variables
+        # self._combos_loaded = 0
+        # self._total_combos = 0
+
+        self._combos_unidades = (
+            self._view.frame_unidades.combo_dimensiones,
+            self._view.frame_unidades.combo_volumen,
+            self._view.frame_unidades.combo_masa,
+            self._view.frame_unidades.combo_temp,
+            self._view.frame_unidades.combo_potencia,
+            self._view.frame_unidades.combo_energia,
+            self._view.frame_unidades.combo_caudal,
+            self._view.frame_unidades.combo_presion,
+            self._view.frame_unidades.combo_iluminacion,
+            self._view.frame_unidades.combo_concentracion,
+            self._view.frame_unidades.combo_kh,
+            self._view.frame_unidades.combo_gh,
+            self._view.frame_unidades.combo_cond,
+            self._view.frame_unidades.combo_sal,
+            self._view.frame_unidades.combo_densidad
+        )
+
         # Selecciona el primer frame
         self.select_secction(self._view.section_list[0][0].objectName())
+
+        # Llenar los combos asincronamente
+        self.load_combos_async()
 
         # Inicializa los handlers
         self.init_handlers()
@@ -79,6 +132,168 @@ class ConfiguracionController(BaseController):
         ):
             button.set_active()
             frame.show()
+
+    def load_combos_async(self):
+        """ Carga todos los combos de unidades de forma asíncrona. """
+
+        self._combos_loaded = 0
+        self._total_combos = len(self._combos_unidades)
+
+        for combo in self._combos_unidades:
+            print("------------------------------------")
+            print(combo.objectName())
+            print("------------------------------------")
+
+            match combo.objectName():
+                case "combo_dimensiones":
+                    self._load_combo(
+                        combo=combo,
+                        worker_fn=lambda: UnidadesDistanciaDAO().get_list_combo(),
+                        data=globales.CONFIG_MANAGER.get_value(
+                            "unidades",
+                            "dimension"
+                        )
+                    )
+                case "combo_volumen":
+                    self._load_combo(
+                        combo=combo,
+                        worker_fn=lambda: UnidadesVolumenDAO().get_list_combo(),
+                        data=globales.CONFIG_MANAGER.get_value(
+                            "unidades",
+                            "volumen"
+                        )
+                    )
+                case "combo_masa":
+                    self._load_combo(
+                        combo=combo,
+                        worker_fn=lambda: UnidadesMasaDAO().get_list_combo(),
+                        data=globales.CONFIG_MANAGER.get_value(
+                            "unidades",
+                            "masa"
+                        )
+                    )
+                case "combo_temp":
+                    self._load_combo(
+                        combo=combo,
+                        worker_fn=lambda: UnidadesTemperaturaDAO().get_list_combo(),
+                        data=globales.CONFIG_MANAGER.get_value(
+                            "unidades",
+                            "temperatura"
+                        )
+                    )
+                case "combo_potencia":
+                    self._load_combo(
+                        combo=combo,
+                        worker_fn=lambda: UnidadesPotenciaDAO(
+
+                        ).get_list_combo(),
+                        data=globales.CONFIG_MANAGER.get_value(
+                            "unidades",
+                            "potencia"
+                        )
+                    )
+                case "combo_energia":
+                    self._load_combo(
+                        combo=combo,
+                        worker_fn=lambda: UnidadesEnergiaDAO(
+
+                        ).get_list_combo(),
+                        data=globales.CONFIG_MANAGER.get_value(
+                            "unidades",
+                            "energia"
+                        )
+                    )
+                case "combo_caudal":
+                    self._load_combo(
+                        combo=combo,
+                        worker_fn=lambda: UnidadesCaudalDAO(
+
+                        ).get_list_combo(),
+                        data=globales.CONFIG_MANAGER.get_value(
+                            "unidades",
+                            "caudal"
+                        )
+                    )
+                case "combo_presion":
+                    self._load_combo(
+                        combo=combo,
+                        worker_fn=lambda: UnidadesPresionDAO(
+
+                        ).get_list_combo(),
+                        data=globales.CONFIG_MANAGER.get_value(
+                            "unidades",
+                            "presion"
+                        )
+                    )
+                case "combo_iluminacion":
+                    self._load_combo(
+                        combo=combo,
+                        worker_fn=lambda: UnidadesIluminacionDAO()
+                        .get_list_combo(),
+                        data=globales.CONFIG_MANAGER.get_value(
+                            "unidades",
+                            "iluminacion"
+                        )
+                    )
+                case "combo_concentracion":
+                    self._load_combo(
+                        combo=combo,
+                        worker_fn=lambda: UnidadesConcentracionDAO()
+                        .get_list_combo(),
+                        data=globales.CONFIG_MANAGER.get_value(
+                            "unidades",
+                            "concentracion"
+                        )
+                    )
+                case "combo_kh":
+                    self._load_combo(
+                        combo=combo,
+                        worker_fn=lambda: UnidadesKHDAO()
+                        .get_list_combo(),
+                        data=globales.CONFIG_MANAGER.get_value(
+                            "unidades",
+                            "dureza_carbonatos"
+                        )
+                    )
+                case "combo_gh":
+                    self._load_combo(
+                        combo=combo,
+                        worker_fn=lambda: UnidadesGHDAO().get_list_combo(),
+                        data=globales.CONFIG_MANAGER.get_value(
+                            "unidades",
+                            "dureza_general"
+                        )
+                    )
+                case "combo_cond":
+                    self._load_combo(
+                        combo=combo,
+                        worker_fn=lambda: UnidadesConductividadDAO()
+                        .get_list_combo(),
+                        data=globales.CONFIG_MANAGER.get_value(
+                            "unidades",
+                            "conductividad"
+                        )
+                    )
+                case "combo_sal":
+                    self._load_combo(
+                        combo=combo,
+                        worker_fn=lambda: UnidadesSalinidadDAO()
+                        .get_list_combo(),
+                        data=globales.CONFIG_MANAGER.get_value(
+                            "unidades",
+                            "salinidad"
+                        )
+                    )
+                case "combo_densidad":
+                    self._load_combo(
+                        combo=combo,
+                        worker_fn=lambda: UnidadesDensidadDAO()
+                        .get_list_combo(),
+                        data=globales.CONFIG_MANAGER.get_value(
+                            "unidades",
+                            "densidad"
+                        )
+                    )
 
     def show(self):
         """ Abre la vista """

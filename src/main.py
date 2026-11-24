@@ -24,7 +24,9 @@ from Main.Views.login_dialog import LoginDialog
 import os
 
 # Versión del programa
-__version__ = "0.50.0"
+__version__ = "0.51.0"
+
+from Services.ConfigManager.config_manager import ConfigManager
 
 
 def excepthook(exc_type, exc_value, exc_traceback):
@@ -57,6 +59,9 @@ def main():
         """Devuelve la ruta absoluta al recurso, compatible con PyInstaller."""
         base_path = getattr(sys, '_MEIPASS', Path(__file__).parent)
         return Path(base_path) / relative_path
+
+    # Carga la configuración
+    globales.CONFIG_MANAGER = ConfigManager()
 
     # Cargar el estilo
     qss_path = resource_path("Resources/Styles/main_style.qss")
@@ -124,21 +129,28 @@ def main():
     #     )
 
     # Arranque inicial
-    view = LoginDialog()
-    dao = UsuarioDAO()
-    mod = UsuarioEntity()
-    ctrl = LoginDialogController(view, dao, mod)
-    res = ctrl.show_modal()
+    # view = LoginDialog()
+    # dao = UsuarioDAO()
+    # mod = UsuarioEntity()
+    # ctrl = LoginDialogController(view, dao, mod)
+    # res = ctrl.show_modal()
 
-    if res == QDialog.DialogCode.Accepted:
-        # Abrir la ventana principal
-        ctrl = MainViewController()
-        ctrl.show()
+    # res = QDialog.DialogCode.Accepted
+    #
+    # if res == QDialog.DialogCode.Accepted:
+    #     # Abrir la ventana principal
+    #     ctrl = MainViewController()
+    #     ctrl.show()
+    #
+    #     sys.exit(app.exec())
+    # else:
+    #     # Cancelado → salir de la aplicación
+    #     sys.exit(0)
 
-        sys.exit(app.exec())
-    else:
-        # Cancelado → salir de la aplicación
-        sys.exit(0)
+    ctrl = MainViewController()
+    ctrl.show()
+
+    sys.exit(app.exec())
 
 
 def load_directory_fonts(dir_path: str) -> list:
