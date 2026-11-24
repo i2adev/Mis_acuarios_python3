@@ -4,7 +4,7 @@ Fecha:  11/11/2026
 Comentarios:
     Controlador del módulo de configuración.
 """
-from PyQt6.QtWidgets import QFrame
+from PyQt6.QtWidgets import QFrame, QMessageBox
 
 import globales
 from CustomControls.boton_lateral import BotonLateral
@@ -41,6 +41,8 @@ from ModuloConsigfuracion.Models.Entities.configuracion_entity import \
     ConfiguracionEntity
 from ModuloConsigfuracion.Views.Masters.modulo_configuracion_view import \
     ModuloConfiguracionView
+from ModuloMaestro.Model.DAO.acuario_dao import AcuarioDAO
+from ModuloMaestro.Model.DAO.proyecto_dao import ProyectoDAO
 
 
 class ConfiguracionController(BaseController):
@@ -53,10 +55,9 @@ class ConfiguracionController(BaseController):
         super().__init__(view, dao, entity)
 
         # Inicializa las variables
-        # self._combos_loaded = 0
-        # self._total_combos = 0
-
-        self._combos_unidades = (
+        self._combos_config = (
+            self._view.frame_cuenta.combo_proyecto,
+            self._view.frame_cuenta.combo_acuario,
             self._view.frame_unidades.combo_dimensiones,
             self._view.frame_unidades.combo_volumen,
             self._view.frame_unidades.combo_masa,
@@ -71,7 +72,7 @@ class ConfiguracionController(BaseController):
             self._view.frame_unidades.combo_gh,
             self._view.frame_unidades.combo_cond,
             self._view.frame_unidades.combo_sal,
-            self._view.frame_unidades.combo_densidad
+            self._view.frame_unidades.combo_densidad,
         )
 
         # Selecciona el primer frame
@@ -91,15 +92,37 @@ class ConfiguracionController(BaseController):
             lambda: self._view.close()
         )
 
+        # Botones de las secciones
         self._view.button_cuenta.boton.clicked.connect(
             lambda: self.section_click())
         self._view.button_unidades.boton.clicked.connect(
             lambda: self.section_click())
 
+        # Eventos de los combos
+        self._view.frame_cuenta.combo_proyecto.currentIndexChanged.connect(
+            self.on_proyecto_changed)
+
+    def on_proyecto_changed(self, index: int):
+        """ Se ejecuta cuando se cambia el valor del proyecto por defecto. """
+        if index == -1:
+            return
+
+        combo = self._view.frame_cuenta.combo_acuario
+        valor = int(self._view.frame_cuenta.combo_proyecto.value())
+        data = globales.CONFIG_MANAGER.get_value(
+            section="cuenta",
+            key="acuario_por_defecto"
+        )
+
+        self._load_combo(
+            combo=combo,
+            worker_fn=lambda: AcuarioDAO().get_list_combo_by_project(valor),
+            data=data
+        )
+
     def section_click(self):
         """
-        Cuando se pulsa en una de las secciones a traves del menú
-        lateral.
+        Cuando se pulsa en una de las secciones a traves del menú lateral.
         """
 
         button = self.sender()
@@ -134,16 +157,12 @@ class ConfiguracionController(BaseController):
             frame.show()
 
     def load_combos_async(self):
-        """ Carga todos los combos de unidades de forma asíncrona. """
+        """ Carga todos los combos de forma asíncrona. """
 
         self._combos_loaded = 0
-        self._total_combos = len(self._combos_unidades)
+        self._total_combos = len(self._combos_config)
 
-        for combo in self._combos_unidades:
-            print("------------------------------------")
-            print(combo.objectName())
-            print("------------------------------------")
-
+        for combo in self._combos_config:
             match combo.objectName():
                 case "combo_dimensiones":
                     self._load_combo(
@@ -184,9 +203,8 @@ class ConfiguracionController(BaseController):
                 case "combo_potencia":
                     self._load_combo(
                         combo=combo,
-                        worker_fn=lambda: UnidadesPotenciaDAO(
-
-                        ).get_list_combo(),
+                        worker_fn=lambda: UnidadesPotenciaDAO()
+                        .get_list_combo(),
                         data=globales.CONFIG_MANAGER.get_value(
                             "unidades",
                             "potencia"
@@ -292,6 +310,16 @@ class ConfiguracionController(BaseController):
                         data=globales.CONFIG_MANAGER.get_value(
                             "unidades",
                             "densidad"
+                        )
+                    )
+                case "combo_proyecto":
+                    self._load_combo(
+                        combo=combo,
+                        worker_fn=lambda: ProyectoDAO()
+                        .get_list_combo(),
+                        data=globales.CONFIG_MANAGER.get_value(
+                            "cuenta",
+                            "proyecto_por_defecto"
                         )
                     )
 

@@ -244,7 +244,7 @@ class AcuarioDAO(BaseDAO):
         pass
 
     # ------------------------------------------------------------------
-    def get_list_combo_by_proyect(self, id_usuario: int) -> Result:
+    def get_list_combo_by_project(self, id_proyecto: int) -> Result:
         """
         Obtiene una lista ligera para combos (ID y texto visible) por usuario.
         """
@@ -260,7 +260,7 @@ class AcuarioDAO(BaseDAO):
             WHERE       A.ID_PROYECTO = :id_proyecto;
             """
         )
-        params = {"id_usuario": id_usuario}
+        params = {"id_proyecto": id_proyecto}
 
         try:
             with self.db.conn as con:

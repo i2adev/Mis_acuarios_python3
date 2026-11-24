@@ -1,6 +1,9 @@
 ﻿/===============================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
+24/11/206   DONE:   SE CONFIGURA LA CARGA ASINCRONA DE LOS COMBOS DE PROYECTO Y
+                    ACUARIO
+
 22/11/2026  SE CONFIGURA LA CARGA ASINCRONA DE LOS COMBOS.
             -   DONE:   SE CREA EL DAO DE UNIDADES DE DISTANCIA.
             -   DONE:   SE CREA EL DAO DE UNIDADES DE VOLUMEN.

@@ -6,6 +6,7 @@ Comentarios:
     controladores. Estra clase contiene los comportamientos de los
     elementos comunes a todas las ventanas como la barra de título.
 """
+
 from CustomControls.combo_box import ComboBox
 from CustomControls.double_line_edit import DoubleLineEdit
 from CustomControls.int_line_edit import IntLineEdit
@@ -192,30 +193,6 @@ class BaseController(QObject):
 
         # Establecemos el foco en el control
         control.setFocus()
-
-    # def _fill_combo(self, combo: QComboBox, lista: list[BaseEntity],
-    #                 attr_text: str, attr_data: str):
-    #     """
-    #     Llena un QComboBox con una lista de entidades.
-    #
-    #     Parámetros:
-    #     :param combo: El QComboBox que quieres llenar.
-    #     :param lista: Lista de entidades (pueden ser widgetetos o diccionarios).
-    #     :param attr_text: Nombre del atributo para el texto visible.
-    #     :param attr_data: Nombre del atributo para el valor (userData).
-    #     """
-    #
-    #     combo.clear()
-    #     for item in lista:
-    #         # Si es diccionario
-    #         if isinstance(item, dict):
-    #             texto = item.get(attr_text, "")
-    #             data = item.get(attr_data, None)
-    #         else:
-    #             texto = getattr(item, attr_text, "")
-    #             data = getattr(item, attr_data, None)
-    #
-    #         combo.addItem(texto, data)
 
     def _configure_table(self, table: QTableView,
                          columns_hide: list[int] | None = None):
@@ -481,7 +458,7 @@ class BaseController(QObject):
     # GENERIC COMBO LOADER
     def _load_combo(self, combo, worker_fn, data: int | str = None):
         """
-        Función generica de carga de combos.
+        Función genérica de carga de combos.
         :param combo: El combo a cargar.
         :param data: Valor a mostrar tras la carga.
         """
@@ -529,8 +506,5 @@ class BaseController(QObject):
 
     # COMBO LOADING ERROR HANDLER
     def _handle_error(self, error_msg: str):
-        # print("ERROR WORKER:")
-        # print(error_msg)
-
         # opcional UI
         QMessageBox.critical(self._view, "Error", error_msg)

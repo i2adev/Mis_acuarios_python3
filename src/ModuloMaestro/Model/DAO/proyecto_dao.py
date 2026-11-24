@@ -227,55 +227,48 @@ class ProyectoDAO(BaseDAO):
 
     # ------------------------------------------------------------------
     def get_list_combo(self, ) -> Result:
-        pass
+        """
+        Obtiene una lista ligera para combos.
+        """
 
-    # ------------------------------------------------------------------
-    # def get_list_combo_by_user(self, id_usuario: int) -> Result:
-    #     """
-    #     Obtiene una lista ligera para combos (ID y texto visible) por usuario.
-    #     """
-    #
-    #     sql = (
-    #         """
-    #         SELECT      ID_PROYECTO AS ID,
-    #                     NOMBRE AS VALUE,
-    #                     ID_USUARIO AS ID_USUARIO
-    #         FROM        PROYECTOS
-    #         WHERE       ID_USUARIO = :id_usuario
-    #         ORDER BY    NOMBRE;
-    #         """
-    #     )
-    #     params = {"id_usuario": id_usuario}
-    #
-    #     try:
-    #         with self.db.conn as con:
-    #             cur = con.cursor()
-    #             cur.execute(sql, params)
-    #             rows = cur.fetchall()
-    #             valores = [
-    #                 ComboDataEntity(
-    #                     id=f["ID"],
-    #                     value=f["VALUE"]
-    #                 )
-    #                 for f in rows
-    #             ]
-    #             return Result.success(valores)
-    #
-    #     except sqlite3.IntegrityError as e:
-    #         # traceback.print_exc()
-    #         return Result.failure(f"[INTEGRITY ERROR]\n {e}")
-    #     except sqlite3.OperationalError as e:
-    #         # traceback.print_exc()
-    #         return Result.failure(f"[OPERATIONAL ERROR]\n {e}")
-    #     except sqlite3.ProgrammingError as e:
-    #         # traceback.print_exc()
-    #         return Result.failure(f"[PROGRAMMING ERROR]\n {e}")
-    #     except sqlite3.DatabaseError as e:
-    #         # traceback.print_exc()
-    #         return Result.failure(f"[DATABASE ERROR]\n {e}")
-    #     except sqlite3.Error as e:
-    #         # traceback.print_exc()
-    #         return Result.failure(f"[SQLITE ERROR]\n {e}")
+        sql = (
+            """
+            SELECT      ID_PROYECTO AS ID,
+                        NOMBRE AS VALUE
+            FROM        PROYECTOS
+            ORDER BY    NOMBRE;
+            """
+        )
+
+        try:
+            with self.db.conn as con:
+                cur = con.cursor()
+                cur.execute(sql)
+                rows = cur.fetchall()
+                valores = [
+                    ComboDataEntity(
+                        id=f["ID"],
+                        value=f["VALUE"]
+                    )
+                    for f in rows
+                ]
+                return Result.success(valores)
+
+        except sqlite3.IntegrityError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[INTEGRITY ERROR]\n {e}")
+        except sqlite3.OperationalError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[OPERATIONAL ERROR]\n {e}")
+        except sqlite3.ProgrammingError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[PROGRAMMING ERROR]\n {e}")
+        except sqlite3.DatabaseError as e:
+            # traceback.print_exc()
+            return Result.failure(f"[DATABASE ERROR]\n {e}")
+        except sqlite3.Error as e:
+            # traceback.print_exc()
+            return Result.failure(f"[SQLITE ERROR]\n {e}")
 
     # ------------------------------------------------------------------
     def insert(self, ent: ProyectoEntity) -> Result:
