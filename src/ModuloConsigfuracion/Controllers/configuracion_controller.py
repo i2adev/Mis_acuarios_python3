@@ -87,11 +87,6 @@ class ConfiguracionController(BaseController):
     def init_handlers(self):
         """ Inicializa los eventos de la vista. """
 
-        # Botones de la barra de menú
-        self._view.button_menu_cerrar.clicked.connect(
-            lambda: self._view.close()
-        )
-
         # Botones de las secciones
         self._view.button_cuenta.boton.clicked.connect(
             lambda: self.section_click())

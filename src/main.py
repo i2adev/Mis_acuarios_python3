@@ -24,7 +24,7 @@ from Main.Views.login_dialog import LoginDialog
 import os
 
 # Versión del programa
-__version__ = "0.51.1"
+__version__ = "0.51.2"
 
 from Services.ConfigManager.config_manager import ConfigManager
 

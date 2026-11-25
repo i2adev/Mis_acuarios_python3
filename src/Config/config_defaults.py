@@ -14,8 +14,8 @@ DEFAULT_CONFIG = {
     },
 
     "cuenta": {
-        "proyecto_por_defecto": 10001,
-        "acuario_por_defecto": 10003
+        "proyecto_por_defecto": None,
+        "acuario_por_defecto": None
     },
 
     "unidades": {

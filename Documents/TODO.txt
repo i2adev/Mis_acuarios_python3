@@ -1,7 +1,12 @@
 ﻿/===============================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
-24/11/206   DONE:   SE CONFIGURA LA CARGA ASINCRONA DE LOS COMBOS DE PROYECTO Y
+25/11/2026  SE MODIFICA EL FORMULARIO DE CONFIGURACIÓN.
+            -   DONE:   SE AÑADE EL BOTÓN DE ACEPTAR.
+            -   DONE:   SE AÑADE EL BOTÓN DE CANCELAR.
+            -   DONE:   SE SE QUITA EL BOTÓN DE SALIR DEL MÓDULO.
+
+24/11/2066  DONE:   SE CONFIGURA LA CARGA ASINCRONA DE LOS COMBOS DE PROYECTO Y
                     ACUARIO
 
 22/11/2026  SE CONFIGURA LA CARGA ASINCRONA DE LOS COMBOS.

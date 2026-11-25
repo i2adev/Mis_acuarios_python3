@@ -82,11 +82,10 @@ class ModuloConfiguracionView(QWidget):
                         QSizePolicy.Policy.Expanding)
         )
 
-        self.menu_layout.addWidget(self.button_menu_cerrar)
-
         # Configura el layout de los controles
         self.layout_controls.addWidget(self.frame_cuenta)
         self.layout_controls.addWidget(self.frame_unidades)
+        self.layout_controls.addLayout(self.layout_pie)
 
         # Configuramos la barra del título
         self.layout_title_bar.addWidget(self.label_icon)
@@ -96,6 +95,10 @@ class ModuloConfiguracionView(QWidget):
         self.layout_title_bar.addWidget(self.button_tb_restore)
         self.layout_title_bar.addWidget(self.button_tb_maximize)
         self.layout_title_bar.addWidget(self.button_tb_close)
+
+        # Configura el pie del formulario
+        self.layout_pie.addWidget(self.button_accept)
+        self.layout_pie.addWidget(self.button_cancel)
 
         # Cargamos los layout en la ventana
         self.layout_central.addWidget(self.frame_menu)
@@ -113,6 +116,9 @@ class ModuloConfiguracionView(QWidget):
     def create_widgets(self):
         """ Crea los elementos del formulario"""
         self.layout_main = QVBoxLayout(self)  # Layout principal
+
+        self.layout_pie = QHBoxLayout()
+        self.layout_pie.setAlignment(Qt.AlignmentFlag.AlignRight)
 
         self.frame_main = QFrame()
         self.frame_main.setMouseTracking(True)
@@ -165,18 +171,6 @@ class ModuloConfiguracionView(QWidget):
         self.layout_controls = QVBoxLayout()  # Layout donde se colocan los
         # controles
         self.layout_controls.setAlignment(Qt.AlignmentFlag.AlignLeft)
-
-        # SALIR DEL FORMULARIO
-        self.button_menu_cerrar = QPushButton("CERRAR MÓDULO")
-        self.button_menu_cerrar.setIcon(
-            QIcon(str(globales.PATH_IMAGES / "salir.png"))
-        )
-        self.button_menu_cerrar.setIconSize(QSize(32, 32))
-        self.button_menu_cerrar.setObjectName("button_menu_acuario")
-        self.button_menu_cerrar.setFlat(True)
-        self.button_menu_cerrar.setCursor(
-            QCursor(Qt.CursorShape.PointingHandCursor)
-        )
 
         # Cuenta
         self.button_cuenta = BotonLateral(
@@ -270,6 +264,18 @@ class ModuloConfiguracionView(QWidget):
                                      QSizePolicy.Policy.Minimum)
 
         self.label_window_title = QLabel(self.window_title)
+
+        ## Botón Aceptar
+        self.button_accept = QPushButton("&ACEPTAR")
+        self.button_accept.setFlat(True)
+        self.button_accept.setCursor(
+            QCursor(Qt.CursorShape.PointingHandCursor))
+
+        ## Botón Cancelar
+        self.button_cancel = QPushButton("&&CANCELAR")
+        self.button_cancel.setFlat(True)
+        self.button_cancel.setCursor(
+            QCursor(Qt.CursorShape.PointingHandCursor))
 
         ## Icono de la ventana
         self.label_icon = QLabel()
