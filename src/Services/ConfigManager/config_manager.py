@@ -34,6 +34,7 @@ class ConfigManager:
 
         # Directorio de configuración
         if config_dir is None:
+
             if getattr(sys, "frozen", False):
                 base_path = Path(sys.executable).resolve().parent
             else:
@@ -87,6 +88,7 @@ class ConfigManager:
             return True
 
         try:
+
             with self.config_file.open(
                     "r",
                     encoding="utf-8"
@@ -215,16 +217,23 @@ class ConfigManager:
 
                 # bool debe comprobarse antes que int
                 if isinstance(default_value, bool):
+
                     valid = isinstance(value, bool)
 
-                elif isinstance(default_value, int):
+                # int y str aceptan ambos tipos
+                elif isinstance(default_value, (int, str)):
+
                     valid = (
-                            isinstance(value, int)
+                            isinstance(value, (int, str))
                             and not isinstance(value, bool)
                     )
 
                 else:
-                    valid = isinstance(value, type(default_value))
+
+                    valid = isinstance(
+                        value,
+                        type(default_value)
+                    )
 
                 if not valid:
                     raise ValueError(
@@ -233,11 +242,12 @@ class ConfigManager:
                     )
 
             elif value is not None and (
-                    not isinstance(value, int)
+                    not isinstance(value, (int, str))
                     or isinstance(value, bool)
             ):
+
                 raise ValueError(
-                    f"{current_path} DEBE SER ENTERO O 'None'."
+                    f"{current_path} DEBE SER ENTERO, CADENA O None."
                 )
 
     # ---------------------------------------------------------
@@ -280,6 +290,7 @@ class ConfigManager:
     # ---------------------------------------------------------
     # MODIFICACIÓN DE CONFIGURACIÓN
     # ---------------------------------------------------------
+
     def set_value(self, section, key, value):
         """
         Modifica un parámetro en memoria.
@@ -366,9 +377,7 @@ class ConfigManager:
             )
 
             # Archivo temporal
-            temp_file = self.config_file.with_suffix(
-                ".tmp"
-            )
+            temp_file = self.config_file.with_suffix(".tmp")
 
             with temp_file.open(
                     "w",
@@ -383,9 +392,7 @@ class ConfigManager:
                 )
 
                 file.write("\n")
-
                 file.flush()
-
                 os.fsync(file.fileno())
 
             # Sustituir archivo original
@@ -421,6 +428,7 @@ class ConfigManager:
     # ---------------------------------------------------------
     # RESTAURAR VALORES PREDETERMINADOS
     # ---------------------------------------------------------
+
     def reset(self):
         """
         Restablece la configuración a los valores predeterminados.

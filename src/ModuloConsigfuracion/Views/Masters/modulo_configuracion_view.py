@@ -97,8 +97,8 @@ class ModuloConfiguracionView(QWidget):
         self.layout_title_bar.addWidget(self.button_tb_close)
 
         # Configura el pie del formulario
-        self.layout_pie.addWidget(self.button_accept)
-        self.layout_pie.addWidget(self.button_cancel)
+        self.layout_pie.addWidget(self.button_save)
+        self.layout_pie.addWidget(self.button_cerrar)
 
         # Cargamos los layout en la ventana
         self.layout_central.addWidget(self.frame_menu)
@@ -266,15 +266,15 @@ class ModuloConfiguracionView(QWidget):
         self.label_window_title = QLabel(self.window_title)
 
         ## Botón Aceptar
-        self.button_accept = QPushButton("&ACEPTAR")
-        self.button_accept.setFlat(True)
-        self.button_accept.setCursor(
+        self.button_save = QPushButton("&GUARDAR")
+        self.button_save.setFlat(True)
+        self.button_save.setCursor(
             QCursor(Qt.CursorShape.PointingHandCursor))
 
         ## Botón Cancelar
-        self.button_cancel = QPushButton("&&CANCELAR")
-        self.button_cancel.setFlat(True)
-        self.button_cancel.setCursor(
+        self.button_cerrar = QPushButton("&CERRAR")
+        self.button_cerrar.setFlat(True)
+        self.button_cerrar.setCursor(
             QCursor(Qt.CursorShape.PointingHandCursor))
 
         ## Icono de la ventana

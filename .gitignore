@@ -15,3 +15,6 @@ Documents/*
 
 # Se excluyen los PDFs de la carpeta reportes
 /src/ModuloReportes/*.pdf
+
+# Se excluye el archivo de configuracionmes
+/src/Config/config.json
