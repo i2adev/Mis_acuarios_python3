@@ -142,8 +142,8 @@ class AcuarioForm(QFrame):
                                          max_value=2_000)
         self.edit_vol_neto.setObjectName("edit_vol_neto")
         self.edit_vol_neto.setToolTip(
-            """
-            <h2>Volumen del neto</h2><br>
+            f"""
+            <h2>Volumen del neto en {self.unidad_volumen}</h2><br>
             Volumen de agua del acuario en litros una vez descontados la 
             grava del fondo y los elementos decorativos (troncos, piedras, 
             etc).

@@ -184,8 +184,8 @@ class IluminacionForm(QFrame):
         )
         self.edit_potencia.setObjectName("edit_potencia")
         self.edit_potencia.setToolTip(
-            """
-            <h2>Potencia de la luminaria</h2><br>
+            f"""
+            <h2>Potencia de la luminaria en {self.u_potencia}</h2><br>
             En este campo se inserta la potencia de la luminaria en vatios (w).
             """
         )
@@ -198,8 +198,8 @@ class IluminacionForm(QFrame):
         )
         self.edit_flujo_luminico.setObjectName("edit_flujo_luminico")
         self.edit_flujo_luminico.setToolTip(
-            """
-            <h2>Flujo lumínico de la luminaria</h2><br>
+            f"""
+            <h2>Flujo lumínico de la luminaria en {self.u_iluminacion}</h2><br>
             En este campo se inserta el flujo lumínico que ofrece la luminaria.
             """
         )
@@ -212,8 +212,8 @@ class IluminacionForm(QFrame):
         )
         self.edit_temperatura.setObjectName("edit_temperatura")
         self.edit_temperatura.setToolTip(
-            """
-            <h2>Temperatura de color</h2><br>
+            f"""
+            <h2>Temperatura de color en {self.u_temperatura}</h2><br>
             En este campo se inserta la temperatura de color que ofrece la 
             luminaria en grados kelvin (K).
             """
@@ -228,7 +228,7 @@ class IluminacionForm(QFrame):
         self.edit_vida_util.setObjectName("edit_vida_util")
         self.edit_vida_util.setToolTip(
             """
-            <h2>Vida util</h2><br>
+            <h2>Vida util en horas</h2><br>
             En este campo se inserta la vida util en horas de la luminaria. 
             """
         )
@@ -241,8 +241,8 @@ class IluminacionForm(QFrame):
         )
         self.edit_longitud.setObjectName("edit_longitud")
         self.edit_longitud.setToolTip(
-            """
-            <h2>Longitud de la luminaria</h2><br>
+            f"""
+            <h2>Longitud de la luminaria en {self.u_dimension}</h2><br>
             En este campo se inserta la longitud en cms de la luminaria.
             """
         )
@@ -256,8 +256,8 @@ class IluminacionForm(QFrame):
 
         self.edit_anchura.setObjectName("edit_anchura")
         self.edit_anchura.setToolTip(
-            """
-            <h2>Anchura de la luminaria</h2><br>
+            f"""
+            <h2>Anchura de la luminaria en {self.u_dimension}</h2><br>
             En este campo se inserta la anchura en cms de la luminaria.
             """
         )

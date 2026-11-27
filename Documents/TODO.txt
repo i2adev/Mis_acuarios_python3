@@ -1,6 +1,48 @@
 ﻿/===============================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
+27/11/2026  SE MODIFICAN LOS TIPS DE LOS CONTROLES PARA ESPECIFICAR LAS
+            UNIDADES.
+
+            -   DONE:   FORMULARIO ACUARIO.
+                -   DONE: LABEL VOLUMEN NETO.
+
+            -   DONE:   FORMULARIO EQUIPO DE CONTROL DE TEMPERATURA.
+                -   DONE: LABEL CONSUMO.
+                -   DONE: LABEL TEMPERATURAS.
+
+            -   DONE:   FORMULARIO ESPECIE ANIMAL.
+                -   DONE: LABEL TAMAÑO.
+                -   DONE: LABEL KH.
+                -   DONE: LABEL GH.
+                -   DONE: LABEL TEMPERATURA.
+
+            -   DONE:   FORMULARIO FILTRO.
+                -   DONE:   LABEL VOLUMEN ACUARIO.
+                -   DONE:   LABEL CONSUMO.
+                -   DONE:   LABEL DIMENSIONES.
+                -   DONE:   LABEL CAUDAL.
+
+            -   DONE:   FORMULARIO ESPECIE VEGETAL.
+                -   DONE: LABEL KH.
+                -   DONE: LABEL GH.
+                -   DONE: LABEL TEMPERATURA.
+
+            -   DONE:   FORMULARIO ILUMINACION.
+                -   DONE: LABEL TEMPERATURA DE POTENCIA.
+                -   DONE: LABEL TEMPERATURA DE FLUJO LUMINOSO.
+                -   DONE: LABEL TEMPERATURA DE COLOR.
+                -   DONE: LABEL VIDA UTIL.
+                -   DONE: LABEL LONGITUD.
+                -   DONE: LABEL ANCHURA.
+
+            -   DONE:   FORMULARIO URNA.
+                -   DONE: LABEL ANCHO.
+                -   DONE: LABEL PROFUNDIDAD.
+                -   DONE: LABEL ALTO.
+                -   DONE: LABEL GROSOR CRISTAL.
+                -   DONE: LABEL VOLUMEN BRUTO.
+
 25/11/206   SE MODIFICAN LAS EQTIQUETAS DE LOS CAMPOS DE MAGNITUDES PARA QUE
             APAREZCA LA UNIDAD.
 

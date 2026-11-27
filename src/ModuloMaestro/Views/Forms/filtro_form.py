@@ -190,8 +190,8 @@ class FiltroForm(QFrame):
             max_value=2_000)
         self.edit_vol_min_acuario.setObjectName("edit_vol_min_acuario")
         self.edit_vol_min_acuario.setToolTip(
-            """
-            <h2>Volumen mínimo de acuario</h2><br>
+            f"""
+            <h2>Volumen mínimo de acuario en {self.u_volumen}</h2><br>
             En este campo se inserta el volumen mínimo del acuario 
             recomendado por el fabricante para instalación del filtro.
             """
@@ -205,7 +205,7 @@ class FiltroForm(QFrame):
         self.edit_vol_max_acuario.setObjectName("edit_vol_max_acuario")
         self.edit_vol_max_acuario.setToolTip(
             """
-            <h2>Volumen máximo de acuario</h2><br>
+            <h2>Volumen máximo de acuario en {self.u_volumen}</h2><br>
             En este campo se inserta el volumen máximo del acuario 
             recomendado por el fabricante para instalación del filtro.
             """
@@ -218,8 +218,8 @@ class FiltroForm(QFrame):
             max_value=80)
         self.edit_consumo_filtro.setObjectName("edit_consumo_filtro")
         self.edit_consumo_filtro.setToolTip(
-            """
-            <h2>Consumo del filtro</h2><br>
+            f"""
+            <h2>Consumo del filtro en {self.u_potencia}</h2><br>
             En este campo se inserta el consumo de la bomba del filtro en 
             <b>vatios</b>.
             """
@@ -232,8 +232,8 @@ class FiltroForm(QFrame):
             max_value=800)
         self.edit_consumo_calentador.setObjectName("edit_consumo_calentador")
         self.edit_consumo_calentador.setToolTip(
-            """
-            <h2>Consumo del calentador del filtro</h2><br>
+            f"""
+            <h2>Consumo del calentador del filtro en {self.u_potencia}</h2><br>
             En caso de que filtro cuente con calentador, en este campo se 
             inserta el consumo del mismo en <b>vatios</b>.
             """
@@ -247,8 +247,8 @@ class FiltroForm(QFrame):
         self.edit_vol_material.setObjectName("edit_vol_material")
         # self.edit_vol_material.setFixedWidth(80)
         self.edit_vol_material.setToolTip(
-            """
-            <h2>Volumen de material filtrante</h2>
+            f"""
+            <h2>Volumen de material filtrante en {self.u_volumen}</h2>
             En este campo se inserta el volumen para material filtrante con 
             el que cuenta el filtro en <b>litros</b>.
             """
@@ -262,8 +262,8 @@ class FiltroForm(QFrame):
         self.edit_altura_max_bombeo.setObjectName("edit_altura_max_bombeo")
         # self.edit_altura_max_bombeo.setFixedWidth(80)
         self.edit_altura_max_bombeo.setToolTip(
-            """
-            <h2>Altura máxima de bombeo del filtro</h2>
+            f"""
+            <h2>Altura máxima de bombeo del filtro en {self.u_dimension}</h2>
             En este campo se inserta la altura máxima que puede bombear el 
             filtro en <b>metros</b>.
             """
@@ -277,8 +277,8 @@ class FiltroForm(QFrame):
         self.edit_caudal.setObjectName("edit_caudal")
         # self.edit_caudal.setFixedWidth(80)
         self.edit_caudal.setToolTip(
-            """
-            <h2>Caudal del filtro</h2>
+            f"""
+            <h2>Caudal del filtro en {self.u_caudal}</h2>
             En este campo se inserta el caudal máximo que puede mover el 
             filtro en <b>litros/hora</b>.
             """
@@ -292,8 +292,8 @@ class FiltroForm(QFrame):
         )
         self.edit_ancho.setObjectName("edit_ancho")
         self.edit_ancho.setToolTip(
-            """
-            <h2>Anchura del filtro</h2>
+            f"""
+            <h2>Anchura del filtro en {self.u_dimension}</h2>
             En este campo se inserta la anchura del filtro. La anchura se 
             expresa en <b>cm</b>.
             """
@@ -307,8 +307,8 @@ class FiltroForm(QFrame):
         )
         self.edit_fondo.setObjectName("edit_fondo")
         self.edit_fondo.setToolTip(
-            """
-            <h2>Fondo del filtro</h2>
+            f"""
+            <h2>Fondo del filtro en {self.u_dimension}</h2>
             En este campo se inserta El fondo con la que cuenta el 
             filtro. El fondo se expresa en <b>cm</b>.
             """
@@ -322,8 +322,8 @@ class FiltroForm(QFrame):
         )
         self.edit_alto.setObjectName("edit_alto")
         self.edit_alto.setToolTip(
-            """
-            <h2>Altura del filtro</h2>
+            f"""
+            <h2>Altura del filtro en {self.u_dimension}</h2>
             En este campo se inserta la altura con la que cuenta el 
             filtro. La altura se expresa en <b>cm</b>.
             """

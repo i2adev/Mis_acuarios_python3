@@ -23,10 +23,9 @@ class TarjetaProyectoDAO:
         self.db = DBManager()
         self.ent = None
 
-    def get_proyectos_by_user(self, idu: int) -> Result:
+    def get_proyectos(self) -> Result:
         """
         Obtiene las tarjetas de proyecto.
-        :param idu: Id del proyecto des cuál se obtienen los acuarios.
         :return: Lista de tarjetas de proyecto.
         """
 
@@ -34,7 +33,6 @@ class TarjetaProyectoDAO:
             """
             SELECT     P.ID_PROYECTO AS ID,
                        ROW_NUMBER() OVER(ORDER BY P.ID_PROYECTO) AS NUM,
-                       P.ID_USUARIO AS ID_USUARIO,
                        P.NOMBRE AS NOMBRE,
                        E.NOMBRE_ESTADO AS ESTADO,
                        IFNULL(strftime('%d/%m/%Y', P.FECHA_INICIO, 'unixepoch', 'localtime'), '') AS FECHA_INICIO,
@@ -50,31 +48,25 @@ class TarjetaProyectoDAO:
                         ) AS FOTO
             FROM       PROYECTOS P
             LEFT JOIN  ESTADOS_PROYECTO E
-                ON     P.ID_ESTADO = E.ID_ESTADO
-            WHERE      P.ID_USUARIO = :idu;
+                ON     P.ID_ESTADO = E.ID_ESTADO;
             """
         )
-
-        params = {
-            "idu": idu,
-        }
 
         try:
             with self.db.conn as con:
                 cur = con.cursor()
-                cur.execute(sql, params)
+                cur.execute(sql)
                 rows = cur.fetchall()
 
                 valores = [
                     TarjetaProyectoEntity(
                         id=f[0],
                         num=f[1],
-                        id_usuario=f[2],
-                        nombre=f[3],
-                        estado=f[4],
-                        fecha_inicio=f[5],
-                        fecha_fin=f[6],
-                        fotografia=f[9],
+                        nombre=f[2],
+                        estado=f[3],
+                        fecha_inicio=f[4],
+                        fecha_fin=f[5],
+                        fotografia=f[6],
                     )
                     for f in rows
                 ]

@@ -304,8 +304,8 @@ class EspecieVegetalForm(QFrame):
         self.edit_kh_min.setObjectName("edit_kh_min")
         self.edit_kh_min.setFixedWidth(50)
         self.edit_kh_min.setToolTip(
-            """
-            <h1>KH mínimo</h1>
+            f"""
+            <h1>KH mínimo en {self.u_kh}</h1>
             En este campo se inserta el <b>KH mínimo</b> que tolera la especie.
             """
         )
@@ -324,8 +324,8 @@ class EspecieVegetalForm(QFrame):
         self.edit_kh_max.setObjectName("edit_kh_max")
         self.edit_kh_max.setFixedWidth(50)
         self.edit_kh_max.setToolTip(
-            """
-            <h1>KH máximo</h1>
+            f"""
+            <h1>KH máximo en {self.u_kh}</h1>
             En este campo se inserta el <b>KH máximo</b> que tolera la especie.
             """
         )
@@ -344,8 +344,8 @@ class EspecieVegetalForm(QFrame):
         self.edit_gh_min.setObjectName("label_gh_min")
         self.edit_gh_min.setFixedWidth(50)
         self.edit_gh_min.setToolTip(
-            """
-            <h1>GH mínimo</h1>
+            f"""
+            <h1>GH mínimo en {self.u_gh}</h1>
             En este campo se inserta el <b>GH mínimo</b> que tolera la especie.
             """
         )
@@ -364,8 +364,8 @@ class EspecieVegetalForm(QFrame):
         self.edit_gh_max.setObjectName("edit_kh_max")
         self.edit_gh_max.setFixedWidth(50)
         self.edit_gh_max.setToolTip(
-            """
-            <h1>GH máximo</h1>
+            f"""
+            <h1>GH máximo en {self.u_gh}</h1>
             En este campo se inserta el <b>GH máximo</b> que tolera la especie.
             """
         )
@@ -384,8 +384,8 @@ class EspecieVegetalForm(QFrame):
         self.edit_temp_min.setObjectName("edit_kh_max")
         self.edit_temp_min.setFixedWidth(50)
         self.edit_temp_min.setToolTip(
-            """
-            <h1>Temperatura mínima</h1>
+            f"""
+            <h1>Temperatura mínima en {self.u_temp}</h1>
             En este campo se inserta la <b>temperatura mínima</b> que tolera 
             la especie.
             """
@@ -405,8 +405,8 @@ class EspecieVegetalForm(QFrame):
         self.edit_temp_max.setObjectName("edit_kh_max")
         self.edit_temp_max.setFixedWidth(50)
         self.edit_temp_max.setToolTip(
-            """
-            <h1>Temperatura máxima</h1>
+            f"""
+            <h1>Temperatura máxima en {self.u_temp}</h1>
             En este campo se inserta la <b>temperatura máxima</b> que tolera 
             la especie.
             """

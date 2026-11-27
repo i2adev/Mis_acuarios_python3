@@ -161,7 +161,7 @@ class ControladorTemperaturaForm(QFrame):
         self.edit_temperatura_minima.setObjectName("edit_temperatura_minima")
         self.edit_temperatura_minima.setToolTip(
             """
-            <h2>Temperatura mínima</h2>
+            <h2>Temperatura mínima en {self.u_temperatura}</h2>
             En este campo se inserta la temperatura mínima que puede abarcar el 
             controlador de temperatura.  
             """
@@ -177,8 +177,8 @@ class ControladorTemperaturaForm(QFrame):
         )
         self.edit_temperatura_maxima.setObjectName("edit_temperatura_maxima")
         self.edit_temperatura_maxima.setToolTip(
-            """
-            <h2>Temperatura máxima</h2>
+            f"""
+            <h2>Temperatura máxima en {self.u_temperatura}</h2>
             En este campo se inserta la temperatura máxima que puede abarcar el 
             controlador de temperatura.  
             """
@@ -194,8 +194,8 @@ class ControladorTemperaturaForm(QFrame):
         )
         self.edit_consumo.setObjectName("edit_consumo")
         self.edit_consumo.setToolTip(
-            """
-            <h2>Consumo energético del dispositivo</h2>
+            f"""
+            <h2>Consumo energético del dispositivo en {self.u_consumo}</h2>
             En este campo se inserta el consumo energético del controlador 
             de temperatura.
             """

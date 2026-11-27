@@ -131,8 +131,8 @@ class UrnaForm(QFrame):
         )
         self.edit_ancho.setObjectName("edit_ancho")
         self.edit_ancho.setToolTip(
-            """
-            <h2>Anchura de la urna</h2>
+            f"""
+            <h2>Anchura de la urna en {self.u_dimension}</h2>
             En este campo se inserta la anchura con la que cuenta la 
             urna. La anchura se refiere a la distancia en entre 
             las caras laterales. La anchura se expresa en <b>cm</b>.
@@ -147,8 +147,8 @@ class UrnaForm(QFrame):
         )
         self.edit_profundo.setObjectName("edit_profundo")
         self.edit_profundo.setToolTip(
-            """
-            <h2>Fondo de la urna</h2>
+            f"""
+            <h2>Fondo de la urna en {self.u_dimension}</h2>
             En este campo se inserta El fondo con la que cuenta la 
             urna. El fondo se refiere a la distancia en entre la cara 
             frontal y la trasera. El fondo se expresa en <b>cm</b>.
@@ -163,8 +163,8 @@ class UrnaForm(QFrame):
         )
         self.edit_alto.setObjectName("edit_alto")
         self.edit_alto.setToolTip(
-            """
-            <h2>Altura de la urna</h2>
+            f"""
+            <h2>Altura de la urna en {self.u_dimension}</h2>
             En este campo se inserta la altura con la que cuenta la 
             urna. La altura se refiere a la distancia entre la base 
             del acuario y la tapa (en caso de que la urna cuente con 
@@ -180,8 +180,8 @@ class UrnaForm(QFrame):
         )
         self.edit_grosor.setObjectName("edit_grosor")
         self.edit_grosor.setToolTip(
-            """
-            <h2>Grosor del cristal</h2>
+            f"""
+            <h2>Grosor del cristal en {self.u_dimension}</h2>
             En este campo se inserta el grosor del cristal de la urna.
             """
         )
@@ -194,8 +194,8 @@ class UrnaForm(QFrame):
         )
         self.edit_volumen.setObjectName("edit_volumen")
         self.edit_volumen.setToolTip(
-            """
-            <h2>Volumen bruto de la urna</h2>
+            f"""
+            <h2>Volumen bruto de la urna en {self.u_volumen}</h2>
             En este campo se inserta el volumen de la urna. El volumen total 
             del tanque, sin grava ni ningún tipo de decoración.
             """

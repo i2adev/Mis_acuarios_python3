@@ -32,7 +32,7 @@ class ModuloProyectoController(BaseController):
         self._view = ModuloProyectoView("MÓDULO PROYECTO")
 
         self._daoTarjetaProyecto = TarjetaProyectoDAO()
-        proyectos = (self._daoTarjetaProyecto.get_proyectos_by_user(10001)
+        proyectos = (self._daoTarjetaProyecto.get_proyectos()
                      .value)
         self.proyecto_frames = (self.crear_tarjetas_proyecto(proyectos))
 
