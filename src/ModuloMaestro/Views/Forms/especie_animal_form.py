@@ -31,6 +31,24 @@ class EspecieAnimalForm(QFrame):
     def __init__(self):
         super().__init__()
 
+        # Iniciamos las variable
+        self.u_talla = globales.CONFIG_MANAGER.get_value(
+            section="unidades",
+            key="dimension",
+        )
+        self.u_kh = globales.CONFIG_MANAGER.get_value(
+            section="unidades",
+            key="dureza_carbonatos",
+        )
+        self.u_gh = globales.CONFIG_MANAGER.get_value(
+            section="unidades",
+            key="dureza_general",
+        )
+        self.u_temp = globales.CONFIG_MANAGER.get_value(
+            section="unidades",
+            key="temperatura",
+        )
+
         self.create_widgets()
         self.build_layout()
 
@@ -74,6 +92,7 @@ class EspecieAnimalForm(QFrame):
         self.edit_id.setObjectName("edit_id")
         self.layout_id.addWidget(self.label_id)
         self.layout_id.addWidget(self.edit_id)
+
         ## Reino
         self.layout_reino = QVBoxLayout()
         self.label_reino = QLabel("REINO")
@@ -478,26 +497,26 @@ class EspecieAnimalForm(QFrame):
         self.layout_temp_max.addWidget(self.label_temp_max)
         self.layout_temp_max.addWidget(self.edit_temp_max)
 
-        ## Tamaño
-        self.layout_tamano = QVBoxLayout()
-        self.label_tamano = QLabel("TAMAÑO")
-        self.edit_tamano = IntLineEdit(
-            control_name="TAMAÑO",
+        ## Talla
+        self.layout_talla = QVBoxLayout()
+        self.label_talla = QLabel(f"TALLA ({self.u_talla})")
+        self.edit_talla = IntLineEdit(
+            control_name="TALLA",
             min_value=1,
             max_value=200,
             units="CMS"
         )
-        self.edit_tamano.setObjectName("edit_tamano")
-        self.edit_tamano.setFixedWidth(50)
-        self.edit_tamano.setToolTip(
+        self.edit_talla.setObjectName("edit_talla")
+        # self.edit_talla.setFixedWidth(50)
+        self.edit_talla.setToolTip(
             """
             <h1>Tamaño</h1>
             En este campo se inserta el <b>tamaño máximo</b> que que alcanza 
             la especie cuando llega a edad adulta.
             """
         )
-        self.layout_tamano.addWidget(self.label_tamano)
-        self.layout_tamano.addWidget(self.edit_tamano)
+        self.layout_talla.addWidget(self.label_talla)
+        self.layout_talla.addWidget(self.edit_talla)
 
         ## Comportamiento
         self.layout_comportamiento = QVBoxLayout()
@@ -607,13 +626,13 @@ class EspecieAnimalForm(QFrame):
         self.group_ph = QGroupBox("PH")
         self.group_ph.setLayout(self.layout_ph)
 
-        self.group_kh = QGroupBox("KH")
+        self.group_kh = QGroupBox(f"KH ({self.u_kh})")
         self.group_kh.setLayout(self.layout_kh)
 
-        self.group_gh = QGroupBox("GH")
+        self.group_gh = QGroupBox(f"GH ({self.u_gh})")
         self.group_gh.setLayout(self.layout_gh)
 
-        self.group_temperatura = QGroupBox("TEMPERATURA")
+        self.group_temperatura = QGroupBox(f"TEMPERATURA ({self.u_temp})")
         self.group_temperatura.setLayout(self.layout_temperatura)
 
         self.group_parametros = QGroupBox("PARÁMETROS FÍSICO-QUÍMICOS")
@@ -693,7 +712,7 @@ class EspecieAnimalForm(QFrame):
         ## Montamos la tercera línea
         self.layout_third_line.addLayout(self.layout_origen)
         self.layout_third_line.addSpacerItem(horizontal_spacer)
-        self.layout_third_line.addLayout(self.layout_tamano)
+        self.layout_third_line.addLayout(self.layout_talla)
         self.layout_third_line.addSpacerItem(horizontal_spacer)
         self.layout_third_line.addLayout(self.layout_comportamiento)
         self.layout_third_line.addSpacerItem(horizontal_spacer)

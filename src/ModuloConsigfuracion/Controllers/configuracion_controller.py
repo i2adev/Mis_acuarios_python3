@@ -71,6 +71,7 @@ class ConfiguracionController(BaseController):
             self._view.frame_unidades.combo_caudal,
             self._view.frame_unidades.combo_presion,
             self._view.frame_unidades.combo_iluminacion,
+            self._view.frame_unidades.combo_temp_color,
             self._view.frame_unidades.combo_concentracion,
             self._view.frame_unidades.combo_kh,
             self._view.frame_unidades.combo_gh,
@@ -163,6 +164,12 @@ class ConfiguracionController(BaseController):
             lambda index: self.change_config_value(
                 section="unidades",
                 key="iluminacion")
+        ))
+        (self._view.frame_unidades.combo_temp_color.currentIndexChanged
+        .connect(
+            lambda index: self.change_config_value(
+                section="unidades",
+                key="temperatura_color")
         ))
         (self._view.frame_unidades.combo_concentracion.currentIndexChanged
         .connect(
@@ -414,6 +421,16 @@ class ConfiguracionController(BaseController):
                         data=globales.CONFIG_MANAGER.get_value(
                             "unidades",
                             "iluminacion"
+                        )
+                    )
+                case "combo_temp_color":
+                    self._load_combo(
+                        combo=combo,
+                        worker_fn=lambda: UnidadesTemperaturaDAO()
+                        .get_list_combo(),
+                        data=globales.CONFIG_MANAGER.get_value(
+                            "unidades",
+                            "temperatura_color"
                         )
                     )
                 case "combo_concentracion":

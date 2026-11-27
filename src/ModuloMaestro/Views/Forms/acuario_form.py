@@ -28,6 +28,12 @@ class AcuarioForm(QFrame):
     def __init__(self):
         super().__init__()
 
+        # Inicializamos las variables
+        self.unidad_volumen = globales.CONFIG_MANAGER.get_value(
+            section="unidades",
+            key="volumen",
+        )
+
         self.create_widgets()
         self.build_layout()
 
@@ -92,7 +98,8 @@ class AcuarioForm(QFrame):
         self.label_nombre = QLabel("NOMBRE")
         self.label_urna = QLabel("URNA")
         self.label_tipo_acuario = QLabel("TIPO ACUARIO")
-        self.label_volumen_neto = QLabel("VOLUMEN NETO")
+        self.label_volumen_neto = QLabel(
+            f"VOLUMEN NETO ({self.unidad_volumen})")
         self.label_fecha_montaje = QLabel("MONTAJE")
         self.label_fecha_inicio_ciclado = QLabel("INICIO CICLADO")
         self.label_fecha_fin_ciclado = QLabel("FIN CICLADO")

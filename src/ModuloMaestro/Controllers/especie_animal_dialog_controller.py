@@ -117,7 +117,7 @@ class EspecieAnimalDialogController(EspecieAnimalController):
             temp_min=self._view.frame.edit_temp_min.value(),
             temp_max=self._view.frame.edit_temp_max.value(),
             origen=self._view.frame.edit_origen.value(),
-            tamano_cm=self._view.frame.edit_tamano.value(),
+            tamano_cm=self._view.frame.edit_talla.value(),
             id_comportamiento=self._view.frame.combo_comportamiento.value(),
             id_dieta=self._view.frame.combo_dieta.value(),
             id_nivel_nado=self._view.frame.combo_nivel_nado.value(),

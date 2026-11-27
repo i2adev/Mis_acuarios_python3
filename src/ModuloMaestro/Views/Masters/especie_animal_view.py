@@ -66,7 +66,7 @@ class EspecieAnimalView(BaseView):
         self.frame.edit_temp_min.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
         self.frame.edit_temp_max.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
         self.frame.edit_origen.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
-        self.frame.edit_tamano.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
+        self.frame.edit_talla.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
         self.frame.combo_comportamiento.setFocusPolicy(
             Qt.FocusPolicy.StrongFocus)
         self.frame.combo_dieta.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
@@ -94,8 +94,8 @@ class EspecieAnimalView(BaseView):
         self.setTabOrder(self.frame.edit_gh_max, self.frame.edit_temp_min)
         self.setTabOrder(self.frame.edit_temp_min, self.frame.edit_temp_max)
         self.setTabOrder(self.frame.edit_temp_max, self.frame.edit_origen)
-        self.setTabOrder(self.frame.edit_origen, self.frame.edit_tamano)
-        self.setTabOrder(self.frame.edit_tamano,
+        self.setTabOrder(self.frame.edit_origen, self.frame.edit_talla)
+        self.setTabOrder(self.frame.edit_talla,
                          self.frame.combo_comportamiento)
         self.setTabOrder(self.frame.combo_comportamiento,
                          self.frame.combo_dieta)

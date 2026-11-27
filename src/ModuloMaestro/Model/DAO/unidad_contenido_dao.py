@@ -82,7 +82,7 @@ class UnidadContenidoDAO(BaseDAO):
             """
             SELECT ID_UNIDAD_CONTENIDO AS ID,
                    ROW_NUMBER() OVER(ORDER BY ID_UNIDAD_CONTENIDO) AS NUM,
-                   UNIDAD AS UNIDAD,
+                   UNIDAD_CONTENIDO AS UNIDAD,
                    DESCRIPCION AS DESCRIPCION
             FROM   UNIDADES_CONTENIDO;
             """
@@ -164,7 +164,7 @@ class UnidadContenidoDAO(BaseDAO):
         sql = (
             """
             SELECT    ID_UNIDAD_CONTENIDO AS ID,
-                      UNIDAD || ' (' || DESCRIPCION || ')' AS VALUE
+                      UNIDAD_CONTENIDO || ' (' || SIMBOLO || ')' AS VALUE
             FROM      UNIDADES_CONTENIDO
             ORDER BY  ID_UNIDAD_CONTENIDO;
             """
@@ -206,7 +206,7 @@ class UnidadContenidoDAO(BaseDAO):
 
         sql = (
             """
-            INSERT INTO UNIDADES_CONTENIDO (UNIDAD, DESCRIPCION)
+            INSERT INTO UNIDADES_CONTENIDO (UNIDAD_CONTENIDO, DESCRIPCION)
             VALUES (:unidad, :descripcion);
             """
         )
@@ -240,7 +240,7 @@ class UnidadContenidoDAO(BaseDAO):
         sql = (
             """
             UPDATE  UNIDADES_CONTENIDO
-            SET     UNIDAD = :unidad,
+            SET     UNIDAD_CONTENIDO = :unidad,
                     DESCRIPCION = :descripcion
             WHERE   ID_UNIDAD_CONTENIDO = :id;
             """

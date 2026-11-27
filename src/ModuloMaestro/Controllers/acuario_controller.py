@@ -321,9 +321,7 @@ class AcuarioController(BaseController):
 
         self._load_combo(
             self._view.frame.combo_proyecto,
-            lambda: ProyectoDAO().get_list_combo_by_user(
-                globales.CURRENT_USER.id
-            )
+            lambda: ProyectoDAO().get_list_combo()
         )
 
         self._load_combo(

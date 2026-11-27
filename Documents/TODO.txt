@@ -1,6 +1,60 @@
 ﻿/===============================================================================
 FECHA		DESCRIPCIÓN
 ----------  --------------------------------------------------------------------
+25/11/206   SE MODIFICAN LAS EQTIQUETAS DE LOS CAMPOS DE MAGNITUDES PARA QUE
+            APAREZCA LA UNIDAD.
+
+            -   DONE:   FORMULARIO ACUARIO.
+                -   DONE: LABEL VOLUMEN NETO.
+
+            -   DONE:   FORMULARIO EQUIPO DE CONTROL DE TEMPERATURA.
+                -   DONE: LABEL CONSUMO.
+                -   DONE: LABEL TEMPERATURAS.
+
+            -   DONE:   FORMULARIO ESPECIE ANIMAL.
+                -   DONE: LABEL TAMAÑO.
+                -   DONE: LABEL KH.
+                -   DONE: LABEL GH.
+                -   DONE: LABEL TEMPERATURA.
+
+            -   DONE:   FORMULARIO FILTRO.
+                -   DONE:   LABEL VOLUMEN ACUARIO.
+                -   DONE:   LABEL CONSUMO.
+                -   DONE:   LABEL DIMENSIONES.
+                -   DONE:   LABEL CAUDAL.
+
+            -   DONE:   FORMULARIO ESPECIE VEGETAL.
+                -   DONE: LABEL KH.
+                -   DONE: LABEL GH.
+                -   DONE: LABEL TEMPERATURA.
+
+            -   DONE:   FORMULARIO ILUMINACION.
+                -   DONE: LABEL TEMPERATURA DE POTENCIA.
+                -   DONE: LABEL TEMPERATURA DE FLUJO LUMINOSO.
+                -   DONE: LABEL TEMPERATURA DE COLOR.
+                -   DONE: LABEL VIDA UTIL.
+                -   DONE: LABEL LONGITUD.
+                -   DONE: LABEL ANCHURA.
+
+            -   DONE:   FORMULARIO URNA.
+                -   DONE: LABEL ANCHO.
+                -   DONE: LABEL PROFUNDIDAD.
+                -   DONE: LABEL ALTO.
+                -   DONE: LABEL GROSOR CRISTAL.
+                -   DONE: LABEL VOLUMEN BRUTO.
+
+            SE AÑADE EL CAMPO 'TEMPERATURA DE COLOR' A LAS CONFIGURACION.
+            -   DONE:   SE AÑADE EL CAMPO AL ARCHICO DE PARÁMETROS POR DEFECTO.
+            -   DONE:   SE MODIFICA EL FORMULARIO PARA AÑADIR EL CONTROL.
+            -   DONE:   SE MODIFICA LA CARGA DE LOS COMBOS PARA AÑADIR LA
+                        'TEMPERATURA DE COLOR''.
+
+            BUG FIXES:
+            -   DONE:   SE CORRIGE EL ERROR DE CARGA DEL COMBO DE PROYECTOS EN
+                        EL FORMULARIO DE ACUARIOS.
+            -   DONE:   SE CORRIGE EL ERROR DE CARGA DEL DATABRID EN FORMULARIO
+                        DE CONSUMIBLES.
+
 25/11/2026  SE MODIFICA EL FORMULARIO DE CONFIGURACIÓN.
             -   DONE:   SE AÑADE EL BOTÓN DE ACEPTAR.
             -   DONE:   SE AÑADE EL BOTÓN DE CANCELAR.

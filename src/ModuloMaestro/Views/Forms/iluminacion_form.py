@@ -30,6 +30,24 @@ class IluminacionForm(QFrame):
     def __init__(self):
         super().__init__()
 
+        # Inicializa las variables
+        self.u_temperatura = globales.CONFIG_MANAGER.get_value(
+            section="unidades",
+            key="temperatura_color",
+        )
+        self.u_dimension = globales.CONFIG_MANAGER.get_value(
+            section="unidades",
+            key="dimension",
+        )
+        self.u_potencia = globales.CONFIG_MANAGER.get_value(
+            section="unidades",
+            key="potencia",
+        )
+        self.u_iluminacion = globales.CONFIG_MANAGER.get_value(
+            section="unidades",
+            key="iluminacion",
+        )
+
         self.create_widgets()
         self.build_layout()
 
@@ -102,15 +120,16 @@ class IluminacionForm(QFrame):
         self.label_num_serie = QLabel("NÚMERO DE SERIE")
         self.label_tipo_iluminacion = QLabel("TIPO")
         self.label_control_iluminacion = QLabel("CONTROL")
-        self.label_potencia = QLabel("POTENCIA")
-        self.label_flujo_luminico = QLabel("FL. LUMÍNICO")
-        self.label_temperatura = QLabel("TEMPERATURA")
-        self.label_vida_util = QLabel("VIDA UTIL")
-        self.label_longitud = QLabel("LONGITUD")
+        self.label_potencia = QLabel(f"POTENCIA ({self.u_potencia})")
+        self.label_flujo_luminico = QLabel(
+            f"FL. LUMÍNICO ({self.u_iluminacion})")
+        self.label_temperatura = QLabel(f"TEMPERATURA (´{self.u_temperatura})")
+        self.label_vida_util = QLabel("VIDA UTIL (h)")
+        self.label_longitud = QLabel(f"LONGITUD ({self.u_dimension})")
         self.label_fecha_alta = QLabel("FECHA ALTA")
         self.label_fecha_baja = QLabel("FECHA BAJA")
         self.label_motivo_baja = QLabel("MOTIVO DE BAJA")
-        self.label_anchura = QLabel("ANCHURA")
+        self.label_anchura = QLabel(f"ANCHURA ({self.u_dimension})")
         self.label_descripcion = QLabel("DESCRICION")
 
         ## Check boxes

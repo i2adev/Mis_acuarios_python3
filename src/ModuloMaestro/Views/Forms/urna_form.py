@@ -27,7 +27,15 @@ class UrnaForm(QFrame):
     def __init__(self):
         super().__init__()
 
-        # self.setFixedHeight(275)
+        # Inicializa las variables
+        self.u_dimension = globales.CONFIG_MANAGER.get_value(
+            section="unidades",
+            key="dimension"
+        )
+        self.u_volumen = globales.CONFIG_MANAGER.get_value(
+            section="unidades",
+            key="volumen"
+        )
 
         self.create_widgets()
         self.build_layout()
@@ -84,11 +92,11 @@ class UrnaForm(QFrame):
         self.label_id.setFixedWidth(50)
         self.label_marca = QLabel("MARCA")
         self.label_modelo = QLabel("MODELO")
-        self.label_ancho = QLabel("ANCHO")
-        self.label_profundo = QLabel("PROFUNDIDAD")
-        self.label_alto = QLabel("ALTO")
-        self.label_grosor = QLabel("GROSOR CRISTAL")
-        self.label_volumen = QLabel("VOLUMEN TANQUE")
+        self.label_ancho = QLabel(f"ANCHO ({self.u_dimension})")
+        self.label_profundo = QLabel(f"PROFUNDO ({self.u_dimension})")
+        self.label_alto = QLabel(f"ALTO ({self.u_dimension})")
+        self.label_grosor = QLabel(f"GROSOR CRISTAL ({self.u_dimension})")
+        self.label_volumen = QLabel(f"VOLUMEN TANQUE ({self.u_volumen})")
         self.label_material = QLabel("MATERIAL DE LA URNA")
         self.label_descripcion = QLabel("DESCRIPCIÓN")
 

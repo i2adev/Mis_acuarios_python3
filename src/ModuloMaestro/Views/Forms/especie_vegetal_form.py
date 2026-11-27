@@ -31,6 +31,20 @@ class EspecieVegetalForm(QFrame):
     def __init__(self):
         super().__init__()
 
+        # Inicializamos las variables
+        self.u_kh = globales.CONFIG_MANAGER.get_value(
+            section="unidades",
+            key="dureza_carbonatos",
+        )
+        self.u_gh = globales.CONFIG_MANAGER.get_value(
+            section="unidades",
+            key="dureza_general",
+        )
+        self.u_temp = globales.CONFIG_MANAGER.get_value(
+            section="unidades",
+            key="temperatura",
+        )
+
         self.create_widgets()
         self.build_layout()
 
@@ -83,7 +97,7 @@ class EspecieVegetalForm(QFrame):
             max_length=32
         )
         self.edit_reino.setObjectName("edit_reino")
-        self.edit_reino.setFixedWidth(150)
+        # self.edit_reino.setFixedWidth(150)
         self.edit_reino.setToolTip(
             """
             <h1>Reino</h1>
@@ -101,7 +115,7 @@ class EspecieVegetalForm(QFrame):
             max_length=32
         )
         self.edit_division.setObjectName("edit_division")
-        self.edit_division.setFixedWidth(150)
+        # self.edit_division.setFixedWidth(150)
         self.edit_division.setToolTip(
             """
             <h1>División</h1>
@@ -119,7 +133,7 @@ class EspecieVegetalForm(QFrame):
             max_length=32
         )
         self.edit_clase.setObjectName("edit_clase")
-        self.edit_clase.setFixedWidth(150)
+        # self.edit_clase.setFixedWidth(150)
         self.edit_clase.setToolTip(
             """
             <h1>Clase</h1>
@@ -137,7 +151,7 @@ class EspecieVegetalForm(QFrame):
             max_length=32
         )
         self.edit_orden.setObjectName("edit_orden")
-        self.edit_orden.setFixedWidth(150)
+        # self.edit_orden.setFixedWidth(150)
         self.edit_orden.setToolTip(
             """
             <h1>Clase</h1>
@@ -155,7 +169,7 @@ class EspecieVegetalForm(QFrame):
             max_length=32
         )
         self.edit_familia.setObjectName("edit_familia")
-        self.edit_familia.setFixedWidth(150)
+        # self.edit_familia.setFixedWidth(150)
         self.edit_familia.setToolTip(
             """
             <h1>Familia</h1>
@@ -173,7 +187,7 @@ class EspecieVegetalForm(QFrame):
             max_length=32
         )
         self.edit_genero.setObjectName("edit_genero")
-        self.edit_genero.setFixedWidth(150)
+        # self.edit_genero.setFixedWidth(150)
         self.edit_genero.setToolTip(
             """
             <h1>Género</h1>
@@ -191,7 +205,7 @@ class EspecieVegetalForm(QFrame):
             max_length=32
         )
         self.edit_especie.setObjectName("edit_genero")
-        self.edit_especie.setFixedWidth(150)
+        # self.edit_especie.setFixedWidth(150)
         self.edit_especie.setToolTip(
             """
             <h1>Especie</h1>
@@ -209,7 +223,7 @@ class EspecieVegetalForm(QFrame):
             max_length=32
         )
         self.edit_n_cientifico.setObjectName("edit_n_cientifico")
-        self.edit_n_cientifico.setFixedWidth(300)
+        # self.edit_n_cientifico.setFixedWidth(300)
         self.edit_n_cientifico.setToolTip(
             """
             <h1>Nombre científico</h1>
@@ -227,7 +241,7 @@ class EspecieVegetalForm(QFrame):
             max_length=32
         )
         self.edit_n_comun.setObjectName("edit_n_comun")
-        self.edit_n_comun.setFixedWidth(200)
+        # self.edit_n_comun.setFixedWidth(200)
         self.edit_n_comun.setToolTip(
             """
             <h1>Nombre común</h1>
@@ -585,13 +599,13 @@ class EspecieVegetalForm(QFrame):
         self.group_ph = QGroupBox("PH")
         self.group_ph.setLayout(self.layout_ph)
 
-        self.group_kh = QGroupBox("KH")
+        self.group_kh = QGroupBox(f"KH ({self.u_kh})")
         self.group_kh.setLayout(self.layout_kh)
 
-        self.group_gh = QGroupBox("GH")
+        self.group_gh = QGroupBox(f"GH ({self.u_gh})")
         self.group_gh.setLayout(self.layout_gh)
 
-        self.group_temperatura = QGroupBox("TEMPERATURA")
+        self.group_temperatura = QGroupBox(f"TEMPERATURA ({self.u_temp})")
         self.group_temperatura.setLayout(self.layout_temperatura)
 
         self.group_parametros = QGroupBox("PARÁMETROS FÍSICO-QUÍMICOS")

@@ -28,6 +28,7 @@ DEFAULT_CONFIG = {
         "caudal": "L/h",
         "presion": "bar",
         "iluminacion": "lm",
+        "temperatura_color": "K",
         "concentracion": "mg/L",
         "dureza_general": "°dGH",
         "dureza_carbonatos": "°dKH",

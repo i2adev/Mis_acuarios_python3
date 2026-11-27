@@ -71,7 +71,7 @@ class UnidadesForm(QFrame):
 
         # Grupo de unidades de iluminación
         self.unidades_ilum_group_box = QGroupBox("UNIDADES DE ILUMINACIÓN")
-        self.layout_gr_unidades_ilum = QVBoxLayout(
+        self.layout_gr_unidades_ilum = QHBoxLayout(
             self.unidades_ilum_group_box)
         self.layout_gr_unidades_ilum.setAlignment(Qt.AlignmentFlag.AlignTop)
 
@@ -254,6 +254,16 @@ class UnidadesForm(QFrame):
         )
         self.layout_iluminacion = QVBoxLayout()
 
+        self.label_temp_color = QLabel("TEMPERATURA")
+        self.combo_temp_color = ComboBox("combo_temp_color")
+        self.combo_temp_color.setToolTip(
+            """
+            <h2>Unidad de temperatura de color</h2>
+            En este campo se selecciona la unidad de temperatura de color.
+            """
+        )
+        self.layout_temp_color = QVBoxLayout()
+
     def build_layout(self):
         """Monta el layout del formulario."""
 
@@ -295,8 +305,12 @@ class UnidadesForm(QFrame):
         self.layout_iluminacion.addWidget(self.label_iluminacion)
         self.layout_iluminacion.addWidget(self.combo_iluminacion)
 
+        self.layout_temp_color.addWidget(self.label_temp_color)
+        self.layout_temp_color.addWidget(self.combo_temp_color)
+
         # Añadir el layout de unidades de iluminación
         self.layout_gr_unidades_ilum.addLayout(self.layout_iluminacion)
+        self.layout_gr_unidades_ilum.addLayout(self.layout_temp_color)
 
         # Unidades de masa
         self.layout_masa.addWidget(self.label_masa)
@@ -369,7 +383,7 @@ class UnidadesForm(QFrame):
         self.layout_form.addWidget(self.unidades_temp_group_box, 1, 1)
         self.layout_form.addWidget(self.unidades_pot_group_box, 2, 0, 1, 2)
         self.layout_form.addWidget(self.unidades_caudal_group_box, 3, 0, 1, 2)
-        self.layout_form.addWidget(self.unidades_ilum_group_box, 4, 0)
+        self.layout_form.addWidget(self.unidades_ilum_group_box, 4, 0, 1, 2)
         self.layout_form.addWidget(self.unidades_quimica_group_box, 5, 0, 1, 2)
 
 

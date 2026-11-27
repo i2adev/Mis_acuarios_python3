@@ -31,6 +31,16 @@ class ControladorTemperaturaForm(QFrame):
     def __init__(self):
         super().__init__()
 
+        # Inicializamos las variables
+        self.u_consumo = globales.CONFIG_MANAGER.get_value(
+            section="unidades",
+            key="energia"
+        )
+        self.u_temperatura = globales.CONFIG_MANAGER.get_value(
+            section="unidades",
+            key="temperatura"
+        )
+
         self.create_widgets()
         self.build_layout()
 
@@ -96,7 +106,7 @@ class ControladorTemperaturaForm(QFrame):
         self.label_num_serie = QLabel("NÚMERO DE SERIE")
         self.label_temperatura_minima = QLabel("MINIMA")
         self.label_temperatura_máxima = QLabel("MÁXIMA")
-        self.label_consumo = QLabel("CONSUMO")
+        self.label_consumo = QLabel(f"CONSUMO ({self.u_consumo})")
 
         self.label_fecha_alta = QLabel("ALTA")
         self.label_fecha_baja = QLabel("BAJA")
@@ -190,7 +200,7 @@ class ControladorTemperaturaForm(QFrame):
             de temperatura.
             """
         )
-        self.edit_consumo.setMaximumWidth(100)
+        self.edit_consumo.setMaximumWidth(150)
 
         self.edit_motivo_baja = StrLineEdit(
             control_name="MOTIVO DE LA BAJA",
@@ -302,8 +312,9 @@ class ControladorTemperaturaForm(QFrame):
 
         # GroupBox
         self.group_fechas = QGroupBox("FECHAS")
-        self.group_temperaturas = QGroupBox("TEMPERATURAS")
-        self.group_temperaturas.setMaximumWidth(150)
+        self.group_temperaturas = QGroupBox(
+            f"TEMPERATURAS ({self.u_temperatura})")
+        self.group_temperaturas.setMaximumWidth(175)
 
     def build_layout(self):
         """ Construye el layout del frame. """

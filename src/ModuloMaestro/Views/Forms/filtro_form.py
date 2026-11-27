@@ -30,6 +30,24 @@ class FiltroForm(QFrame):
     def __init__(self):
         super().__init__()
 
+        # Inicializa las variables
+        self.u_dimension = globales.CONFIG_MANAGER.get_value(
+            section="unidades",
+            key="dimension",
+        )
+        self.u_volumen = globales.CONFIG_MANAGER.get_value(
+            section="unidades",
+            key="volumen",
+        )
+        self.u_potencia = globales.CONFIG_MANAGER.get_value(
+            section="unidades",
+            key="potencia",
+        )
+        self.u_caudal = globales.CONFIG_MANAGER.get_value(
+            section="unidades",
+            key="caudal",
+        )
+
         self.create_widgets()
         self.build_layout()
 
@@ -118,9 +136,9 @@ class FiltroForm(QFrame):
         self.label_ancho = QLabel("ANCHO")
         self.label_fondo = QLabel("FONDO")
         self.label_Alto = QLabel("ALTO")
-        self.label_vol_material = QLabel("VOL. MAT.")
-        self.label_altura_maxima = QLabel("ALT. MAX.")
-        self.label_caudal = QLabel("CAUDAL")
+        self.label_vol_material = QLabel(f"VOL. MAT. ({self.u_volumen})")
+        self.label_altura_maxima = QLabel(f"ALT. MAX. ({self.u_dimension})")
+        self.label_caudal = QLabel(f"CAUDAL ({self.u_caudal})")
         self.label_fecha_instalacion = QLabel("FECHA INSTALACION")
         self.label_fecha_baja = QLabel("FECHA BAJA")
         self.label_motivo_baja = QLabel("MOTIVO BAJA")
@@ -227,7 +245,7 @@ class FiltroForm(QFrame):
             min_value=1,
             max_value=50)
         self.edit_vol_material.setObjectName("edit_vol_material")
-        self.edit_vol_material.setFixedWidth(80)
+        # self.edit_vol_material.setFixedWidth(80)
         self.edit_vol_material.setToolTip(
             """
             <h2>Volumen de material filtrante</h2>
@@ -242,7 +260,7 @@ class FiltroForm(QFrame):
             min_value=1,
             max_value=50)
         self.edit_altura_max_bombeo.setObjectName("edit_altura_max_bombeo")
-        self.edit_altura_max_bombeo.setFixedWidth(80)
+        # self.edit_altura_max_bombeo.setFixedWidth(80)
         self.edit_altura_max_bombeo.setToolTip(
             """
             <h2>Altura máxima de bombeo del filtro</h2>
@@ -257,7 +275,7 @@ class FiltroForm(QFrame):
             min_value=50,
             max_value=8_000)
         self.edit_caudal.setObjectName("edit_caudal")
-        self.edit_caudal.setFixedWidth(80)
+        # self.edit_caudal.setFixedWidth(80)
         self.edit_caudal.setToolTip(
             """
             <h2>Caudal del filtro</h2>
@@ -432,9 +450,11 @@ class FiltroForm(QFrame):
         )
 
         # GroupBox
-        self.group_volumen = QGroupBox("VOLUMEN DE ACUARIOS (Litros)")
-        self.group_consumo = QGroupBox("CONSUMOS (w)")
-        self.group_dimensiones = QGroupBox("DIMENSIONES DEL FILTRO (cm)")
+        self.group_volumen = QGroupBox(
+            f"VOLUMEN DE ACUARIOS ({self.u_volumen})")
+        self.group_consumo = QGroupBox(f"CONSUMOS ({self.u_potencia})")
+        self.group_dimensiones = QGroupBox(f"DIMENSIONES DEL FILTRO ("
+                                           f"{self.u_dimension})")
 
     def build_layout(self):
         """ Construye el layout del frame. """
